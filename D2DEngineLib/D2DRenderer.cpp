@@ -90,17 +90,29 @@ void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& pBitmap) const
 	m_pD2DDeviceContext->DrawBitmap(pBitmap.Get());
 }
 
-void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& pBitmap, const D2D1_RECT_F& destRect) const
+void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& pBitmap, const D2D1_RECT_F& destinationRect) const
 {
 	m_pD2DDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
-	m_pD2DDeviceContext->DrawBitmap(pBitmap.Get(), destRect);
+	m_pD2DDeviceContext->DrawBitmap(pBitmap.Get(), destinationRect);
 }
 
-void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& pBitmap, const D2D1_RECT_F& destRect, const D2D1_RECT_F& srcRect,
+void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& pBitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect,
 	float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
 {
 	m_pD2DDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
-	m_pD2DDeviceContext->DrawBitmap(pBitmap.Get(), destRect, opacitiy, interpolationMode, srcRect);
+	m_pD2DDeviceContext->DrawBitmap(pBitmap.Get(), destinationRect, opacitiy, interpolationMode, sourceRect);
+}
+
+void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& pBitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect, const D2D1_MATRIX_3X2_F& transform, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
+{
+	m_pD2DDeviceContext->SetTransform(transform);
+	m_pD2DDeviceContext->DrawBitmap(pBitmap.Get(), destinationRect, opacitiy, interpolationMode, sourceRect);
+}
+
+void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& pBitmap, const D2D1_MATRIX_3X2_F& transform, const D2D1_RECT_F* offset, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
+{
+	m_pD2DDeviceContext->SetTransform(transform);
+	m_pD2DDeviceContext->DrawBitmap(pBitmap.Get(), offset, opacitiy, interpolationMode);
 }
 
 const ComPtr<ID2D1DeviceContext7>& D2DRenderer::GetDeviceContext() const

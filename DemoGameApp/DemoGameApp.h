@@ -23,4 +23,11 @@ public:
 
 private:
 	HRESULT CreateBitmapFromFile(const std::wstring& path, ID2D1Bitmap1** outBitmap);
+
+private:
+	void DrawOriginal();
+	void DrawDestApplied();
+	void DrawDestSrcApplied();
+	void DrawTransformApplied();
+	D2D1_RECT_F MakeCenteredRect();
 };

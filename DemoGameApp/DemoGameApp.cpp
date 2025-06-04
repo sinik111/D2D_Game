@@ -1,7 +1,7 @@
 #include "../D2DEngineLib/framework.h"
 #include "DemoGameApp.h"
 
-#include <cassert>
+#include <assert.h>
 
 #pragma comment(lib,"windowscodecs.lib")
 
@@ -47,14 +47,17 @@ void DemoGameApp::Render()
 {
 	m_pRenderer->BeginDraw(D2D1::ColorF::DarkOliveGreen);
 
-	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile);
+	// 0,0 위치에 비트맵 그대로 그리기
+	DrawOriginal();
 
-	D2D1_SIZE_F size = m_pD2DBitmapFromFile->GetSize();
+	// 원하는 영역에 그리기
+	DrawDestApplied();
 
-	D2D1_VECTOR_2F destPos1{ 100.0f, 0.0f };
-	D2D1_RECT_F destRect1{ destPos1.x, destPos1.y, destPos1.x + size.width - 1, destPos1.y + size.height - 1 };
+	// 원하는 영역에 원하는 부분 그리기
+	DrawDestSrcApplied();
 
-	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile, destRect1);
+	// 변환행렬 적용
+	DrawTransformApplied();
 
 	m_pRenderer->EndDraw();
 }
@@ -129,4 +132,68 @@ HRESULT DemoGameApp::CreateBitmapFromFile(const std::wstring& path, ID2D1Bitmap1
 	hr = m_pRenderer->GetDeviceContext()->CreateBitmapFromWicBitmap(converter.Get(), &bmpProps, outBitmap);
 
 	return hr;
+}
+
+void DemoGameApp::DrawOriginal()
+{
+	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile);
+}
+
+void DemoGameApp::DrawDestApplied()
+{
+	D2D1_SIZE_F size = m_pD2DBitmapFromFile->GetSize();
+
+	D2D1_VECTOR_2F destPos{ 100.0f, 0.0f };
+	D2D1_RECT_F destRect{ destPos.x, destPos.y, destPos.x + size.width - 1, destPos.y + size.height - 1 };
+
+	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile, destRect);
+}
+
+void DemoGameApp::DrawDestSrcApplied()
+{
+	D2D1_SIZE_F size = m_pD2DBitmapFromFile->GetSize();
+
+	D2D1_VECTOR_2F srcPos{ size.width / 2, size.width / 2 };
+	D2D1_RECT_F srcRect{ srcPos.x, srcPos.y, srcPos.x + size.width / 2 - 1, srcPos.y + size.height / 2 - 1 };
+
+	D2D1_VECTOR_2F destPos{ 200.0f, 200.0f };
+	D2D1_RECT_F destRect{ destPos.x, destPos.y, destPos.x + size.width / 2 - 1, destPos.y + size.height / 2 - 1 };
+
+	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile, destRect, srcRect);
+}
+
+void DemoGameApp::DrawTransformApplied()
+{
+	D2D1_MATRIX_3X2_F transform{};
+
+	transform = D2D1::Matrix3x2F::Scale(3.0f, 3.0f) *
+		D2D1::Matrix3x2F::Rotation(90.0f) *
+		D2D1::Matrix3x2F::Translation(300.0f, 400.0f);
+
+	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile, transform);
+
+	// 이미지 중앙 기준으로 변환하기
+	D2D1_RECT_F centeredRect{ MakeCenteredRect() };
+
+	transform = D2D1::Matrix3x2F::Scale(2.0f, 2.0f) *
+		D2D1::Matrix3x2F::Rotation(-45.0f) *
+		D2D1::Matrix3x2F::Translation(700.0f, 500.0f);
+
+	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile, transform, &centeredRect);
+
+	// 중점 확인용
+	transform = D2D1::Matrix3x2F::Scale(1.0f, 1.0f) *
+		D2D1::Matrix3x2F::Rotation(0.0f) *
+		D2D1::Matrix3x2F::Translation(700.0f, 500.0f);
+
+	m_pRenderer->DrawBitmap(m_pD2DBitmapFromFile, transform, &centeredRect);
+}
+
+D2D1_RECT_F DemoGameApp::MakeCenteredRect()
+{
+	D2D1_SIZE_F size = m_pD2DBitmapFromFile->GetSize();
+
+	D2D1_VECTOR_2F centeredPos{ -size.width / 2, -size.height / 2 };
+
+	return { centeredPos.x, centeredPos.y, centeredPos.x + size.width - 1, centeredPos.y + size.height - 1 };
 }
