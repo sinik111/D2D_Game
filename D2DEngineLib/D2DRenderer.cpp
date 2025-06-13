@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "D2DRenderer.h"
 
+#include "Matrix3x2.h"
+
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -71,8 +73,8 @@ void D2DRenderer::Initialize()
 		&bmpProps, m_d2dBitmapTarget.GetAddressOf());
 	m_d2dDeviceContext->SetTarget(m_d2dBitmapTarget.Get());
 
-	m_unityMatrix = D2D1::Matrix3x2F::Scale(1.0f, -1.0f) *
-		D2D1::Matrix3x2F::Translation((float)m_width / 2, (float)m_height / 2);
+	m_unityMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+		Matrix3x2::Translation((float)m_width / 2, (float)m_height / 2);
 }
 
 void D2DRenderer::BeginDraw(const D2D1::ColorF& color) const
@@ -106,15 +108,15 @@ void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT
 	m_d2dDeviceContext->DrawBitmap(bitmap.Get(), destinationRect, opacitiy, interpolationMode, sourceRect);
 }
 
-void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect, const D2D1_MATRIX_3X2_F& transform, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
+void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect, const Matrix3x2& transform, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
 {
-	m_d2dDeviceContext->SetTransform(transform);
+	m_d2dDeviceContext->SetTransform(transform.AsD2D1Matrix());
 	m_d2dDeviceContext->DrawBitmap(bitmap.Get(), destinationRect, opacitiy, interpolationMode, sourceRect);
 }
 
-void D2DRenderer::DrawBitmap(ID2D1Bitmap1* bitmap, const D2D1_MATRIX_3X2_F& transform, const D2D1_RECT_F* offset, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
+void D2DRenderer::DrawBitmap(ID2D1Bitmap1* bitmap, const Matrix3x2& transform, const D2D1_RECT_F* offset, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
 {
-	m_d2dDeviceContext->SetTransform(transform);
+	m_d2dDeviceContext->SetTransform(transform.AsD2D1Matrix());
 	m_d2dDeviceContext->DrawBitmap(bitmap, offset, opacitiy, interpolationMode);
 }
 
@@ -123,7 +125,7 @@ const ComPtr<ID2D1DeviceContext7>& D2DRenderer::GetDeviceContext() const
 	return m_d2dDeviceContext;
 }
 
-D2D1::Matrix3x2F D2DRenderer::GetUnityMatrix() const
+Matrix3x2 D2DRenderer::GetUnityMatrix() const
 {
 	return m_unityMatrix;
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Matrix3x2.h"
+
 class D2DRenderer
 {
 private:
@@ -13,7 +15,7 @@ private:
 	UINT m_width;
 	UINT m_height;
 
-	D2D1::Matrix3x2F m_unityMatrix;
+	Matrix3x2 m_unityMatrix;
 
 public:
 	D2DRenderer(HWND hWnd, UINT width, UINT height);
@@ -31,13 +33,13 @@ public:
 	void DrawBitmap(const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect,
 		float opacitiy = 1.0f, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode = D2D1_BITMAP_INTERPOLATION_MODE_LINEAR) const;
 	void DrawBitmap(const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect,
-		const D2D1_MATRIX_3X2_F& transform, float opacitiy = 1.0f,
+		const Matrix3x2& transform, float opacitiy = 1.0f,
 		D2D1_BITMAP_INTERPOLATION_MODE interpolationMode = D2D1_BITMAP_INTERPOLATION_MODE_LINEAR) const;
 
-	void DrawBitmap(ID2D1Bitmap1* bitmap, const D2D1_MATRIX_3X2_F& transform, const D2D1_RECT_F* offset = nullptr
+	void DrawBitmap(ID2D1Bitmap1* bitmap, const Matrix3x2& transform, const D2D1_RECT_F* offset = nullptr
 		, float opacitiy = 1.0f, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode = D2D1_BITMAP_INTERPOLATION_MODE_LINEAR) const;
 
 public:
 	const Microsoft::WRL::ComPtr<ID2D1DeviceContext7>& GetDeviceContext() const;
-	D2D1::Matrix3x2F GetUnityMatrix() const;
+	Matrix3x2 GetUnityMatrix() const;
 };

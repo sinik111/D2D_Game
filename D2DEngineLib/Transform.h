@@ -1,14 +1,15 @@
 #pragma once
 
-#include <d2d1_1.h>
+#include "Matrix3x2.h"
+#include "Vector2.h"
 
 class Transform
 {
 private:
 	Transform* m_parent;
-	D2D1_VECTOR_2F m_position;
+	Vector2 m_position;
 	float m_rotation;
-	D2D1_VECTOR_2F m_scale;
+	Vector2 m_scale;
 
 	bool m_isDirty;
 
@@ -16,18 +17,18 @@ public:
 	Transform();
 
 public:
-	D2D1_VECTOR_2F GetPosition() const;
+	Vector2 GetPosition() const;
 	float GetRotation() const;
-	D2D1_VECTOR_2F GetScale() const;
-	D2D1::Matrix3x2F GetMatrix() const;
+	Vector2 GetScale() const;
+	Matrix3x2 GetWorldMatrix() const;
 	Transform* GetParent() const;
 
 public:
 	void SetPosition(float x, float y);
-	void SetPosition(D2D1_VECTOR_2F position);
+	void SetPosition(Vector2 position);
 	void SetRotation(float angle);
 	void SetScale(float x, float y);
-	void SetScale(D2D1_VECTOR_2F scale);
+	void SetScale(Vector2 scale);
 	void SetParent(Transform* parent);
 
 public:
@@ -35,6 +36,6 @@ public:
 
 public:
 	void Translate(float x, float y);
-	void Translate(D2D1_VECTOR_2F movement);
+	void Translate(Vector2 movement);
 	void Rotate(float angle);
 };

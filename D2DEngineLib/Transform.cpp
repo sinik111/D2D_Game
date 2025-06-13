@@ -10,7 +10,7 @@ Transform::Transform()
 {
 }
 
-D2D1_VECTOR_2F Transform::GetPosition() const
+Vector2 Transform::GetPosition() const
 {
 	return m_position;
 }
@@ -20,24 +20,24 @@ float Transform::GetRotation() const
 	return m_rotation;
 }
 
-D2D1_VECTOR_2F Transform::GetScale() const
+Vector2 Transform::GetScale() const
 {
 	return m_scale;
 }
 
-D2D1::Matrix3x2F Transform::GetMatrix() const
+Matrix3x2 Transform::GetWorldMatrix() const
 {
 	if (m_parent != nullptr)
 	{
-		return D2D1::Matrix3x2F::Scale(m_scale.x, m_scale.y) *
-			D2D1::Matrix3x2F::Rotation(m_rotation) *
-			D2D1::Matrix3x2F::Translation(m_position.x, m_position.y) *
-			m_parent->GetMatrix();
+		return Matrix3x2::Scale(m_scale) *
+			Matrix3x2::Rotation(m_rotation) *
+			Matrix3x2::Translation(m_position) *
+			m_parent->GetWorldMatrix();
 	}
 
-	return D2D1::Matrix3x2F::Scale(m_scale.x, m_scale.y) *
-		D2D1::Matrix3x2F::Rotation(m_rotation) *
-		D2D1::Matrix3x2F::Translation(m_position.x, m_position.y);
+	return Matrix3x2::Scale(m_scale) *
+		Matrix3x2::Rotation(m_rotation) *
+		Matrix3x2::Translation(m_position);
 }
 
 Transform* Transform::GetParent() const
@@ -47,11 +47,10 @@ Transform* Transform::GetParent() const
 
 void Transform::SetPosition(float x, float y)
 {
-	m_position.x = x;
-	m_position.y = y;
+	m_position = Vector2(x, y);
 }
 
-void Transform::SetPosition(D2D1_VECTOR_2F position)
+void Transform::SetPosition(Vector2 position)
 {
 	m_position = position;
 }
@@ -63,11 +62,10 @@ void Transform::SetRotation(float angle)
 
 void Transform::SetScale(float x, float y)
 {
-	m_scale.x = x;
-	m_scale.y = y;
+	m_scale = Vector2(x, y);
 }
 
-void Transform::SetScale(D2D1_VECTOR_2F scale)
+void Transform::SetScale(Vector2 scale)
 {
 	m_scale = scale;
 }
@@ -86,11 +84,10 @@ void Transform::Reset()
 
 void Transform::Translate(float x, float y)
 {
-	m_position.x += x;
-	m_position.y += y;
+	m_position += Vector2(x, y);
 }
 
-void Transform::Translate(D2D1_VECTOR_2F movement)
+void Transform::Translate(Vector2 movement)
 {
 	m_position += movement;
 }

@@ -30,10 +30,10 @@ void SpaceObject::Render()
 {
 	D2D1_SIZE_F size = m_image->GetSize();
 
-	D2D1::Matrix3x2F renderMatrix = D2D1::Matrix3x2F::Scale(1.0f, -1.0f) *
-		D2D1::Matrix3x2F::Translation(-size.width / 2, size.height / 2);
+	Matrix3x2 renderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+		Matrix3x2::Translation(-size.width / 2, size.height / 2);
 
-	D2D1::Matrix3x2F finalMatrix = renderMatrix * m_transform->GetMatrix() *
+	Matrix3x2 finalMatrix = renderMatrix * m_transform->GetWorldMatrix() *
 		m_camera->GetInvertedMatrix() * m_renderer->GetUnityMatrix();
 
 	m_renderer->DrawBitmap(*m_image->GetBitmap(), finalMatrix);

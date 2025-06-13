@@ -143,9 +143,11 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Matrix3x2.h" />
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector2.h" />
     <ClInclude Include="WinApp.h" />
   </ItemGroup>
   <ItemGroup>
