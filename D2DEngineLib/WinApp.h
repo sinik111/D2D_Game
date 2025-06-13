@@ -11,26 +11,26 @@ protected:
 	HCURSOR m_hCursor;
 	HICON m_hIconSmall;
 
-	std::wstring m_ClassName;
-	std::wstring m_WindowName;
-	std::wstring m_ModulePath;
-	std::wstring m_WorkingPath;
+	std::wstring m_className;
+	std::wstring m_windowName;
+	std::wstring m_modulePath;
+	std::wstring m_workingPath;
 
-	std::unique_ptr<D2DRenderer> m_pRenderer;
+	D2DRenderer* m_renderer;
 
-	UINT m_ClassStyle;
-	UINT m_X;
-	UINT m_Y;
-	UINT m_Width;
-	UINT m_Height;
+	UINT m_classStyle;
+	UINT m_x;
+	UINT m_y;
+	UINT m_width;
+	UINT m_height;
 
-	DWORD m_WindowStyle;
+	DWORD m_windowStyle;
 
-	bool m_IsRunning;
+	bool m_isRunning;
 
 public:
 	WinApp();
-	virtual ~WinApp() = default;
+	virtual ~WinApp();
 
 public:
 	virtual void Initialize();
@@ -40,7 +40,7 @@ public:
 	bool IsRunning();
 
 private:
-	void Update();
+	virtual void Update();
 	virtual void Render();
 
 protected:
