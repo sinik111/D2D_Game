@@ -25,10 +25,10 @@ public:
 
 public:
 	void SetPosition(float x, float y);
-	void SetPosition(Vector2 position);
+	void SetPosition(const Vector2& position);
 	void SetRotation(float angle);
 	void SetScale(float x, float y);
-	void SetScale(Vector2 scale);
+	void SetScale(const Vector2& scale);
 	void SetParent(Transform* parent);
 
 public:
@@ -36,6 +36,6 @@ public:
 
 public:
 	void Translate(float x, float y);
-	void Translate(Vector2 movement);
+	void Translate(const Vector2& movement);
 	void Rotate(float angle);
 };

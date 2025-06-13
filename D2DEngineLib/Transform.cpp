@@ -50,7 +50,7 @@ void Transform::SetPosition(float x, float y)
 	m_position = Vector2(x, y);
 }
 
-void Transform::SetPosition(Vector2 position)
+void Transform::SetPosition(const Vector2& position)
 {
 	m_position = position;
 }
@@ -65,7 +65,7 @@ void Transform::SetScale(float x, float y)
 	m_scale = Vector2(x, y);
 }
 
-void Transform::SetScale(Vector2 scale)
+void Transform::SetScale(const Vector2& scale)
 {
 	m_scale = scale;
 }
@@ -87,7 +87,7 @@ void Transform::Translate(float x, float y)
 	m_position += Vector2(x, y);
 }
 
-void Transform::Translate(Vector2 movement)
+void Transform::Translate(const Vector2& movement)
 {
 	m_position += movement;
 }
