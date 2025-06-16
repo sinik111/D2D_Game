@@ -6,8 +6,8 @@
 class Camera;
 class D2DRenderer;
 
-class SpaceObject
-	: public GameObject
+class SpaceObject :
+	public GameObject
 {
 private:
 	Image* m_image;
@@ -23,6 +23,6 @@ public:
 	Image* GetImage();
 
 public:
-	void Update() override;
-	void Render() override;
+	void Update();
+	void Render();
 };

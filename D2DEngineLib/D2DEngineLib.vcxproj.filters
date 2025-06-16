@@ -13,57 +13,138 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\ComponentSystem">
+      <UniqueIdentifier>{9af6bb9e-e018-4ca0-93fd-068287628ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ComponentSystem">
+      <UniqueIdentifier>{2a43d5bf-3358-4da7-8ea3-76e4e01c2df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Component">
+      <UniqueIdentifier>{4d54e44b-f7f7-470c-9969-f0d3b982fa12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Component">
+      <UniqueIdentifier>{bc625e84-564b-4d05-9f5c-f2cb78265dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Utility">
+      <UniqueIdentifier>{1098108c-1442-4e7e-aef6-916c97561bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Utility">
+      <UniqueIdentifier>{d3215c62-2859-44e6-8c33-5e0c30baf71a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ComponentSystem\Systems">
+      <UniqueIdentifier>{06b2f68c-ae28-43c3-9d1b-adb34ebaf7ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\ComponentSystem\Systems">
+      <UniqueIdentifier>{84b421c1-74d7-41ad-8612-2096ca5b54eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Scene">
+      <UniqueIdentifier>{7cee3d7e-8a02-4965-9d90-a26ba7549b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Scene">
+      <UniqueIdentifier>{ca9581f1-7ed3-4357-9712-37086e37c0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObject">
+      <UniqueIdentifier>{addad49a-addf-4787-ba53-b31c7f368f52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\GameObject">
+      <UniqueIdentifier>{353c64f8-c7e9-414c-9922-ca793af368e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="WinApp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MyMath.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Transform.h">
+      <Filter>헤더 파일\Component</Filter>
     </ClInclude>
     <ClInclude Include="Matrix3x2.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMath.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerUtility.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformSystem.h">
+      <Filter>헤더 파일\ComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptSystem.h">
+      <Filter>헤더 파일\ComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSystem.h">
+      <Filter>헤더 파일\ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>헤더 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>헤더 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>헤더 파일\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="WinApp.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="Image.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSystem.cpp">
+      <Filter>소스 파일\ComponentSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>소스 파일\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>소스 파일\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformSystem.cpp">
+      <Filter>소스 파일\ComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptSystem.cpp">
+      <Filter>소스 파일\ComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>소스 파일\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

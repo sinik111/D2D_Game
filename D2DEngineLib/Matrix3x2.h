@@ -92,4 +92,9 @@ public: // 유틸리티 함수
 
         return Matrix3x2(DirectX::XMMatrixInverse(&determinant, m_rawMatrix));
     }
+
+    static Matrix3x2 Identity()
+    {
+        return Matrix3x2(DirectX::XMMatrixIdentity());
+    }
 };

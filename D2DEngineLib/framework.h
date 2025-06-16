@@ -10,3 +10,5 @@
 #include <dxgi1_6.h>
 #include <wincodec.h>
 #include <wrl.h>
+#include <vector>
+#include <unordered_map>

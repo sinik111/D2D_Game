@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
@@ -146,11 +148,19 @@
     <ClInclude Include="Matrix3x2.h" />
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Script.h" />
+    <ClInclude Include="ScriptSystem.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="TransformSystem.h" />
+    <ClInclude Include="ContainerUtility.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="WinApp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -160,7 +170,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Script.cpp" />
+    <ClCompile Include="ScriptSystem.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="TransformSystem.cpp" />
     <ClCompile Include="WinApp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -23,7 +23,7 @@ Image* SpaceObject::GetImage()
 
 void SpaceObject::Update()
 {
-	m_transform->Rotate(m_speed);
+	GetTransform()->Rotate(m_speed);
 }
 
 void SpaceObject::Render()
@@ -33,7 +33,7 @@ void SpaceObject::Render()
 	Matrix3x2 renderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 		Matrix3x2::Translation(-size.width / 2, size.height / 2);
 
-	Matrix3x2 finalMatrix = renderMatrix * m_transform->GetWorldMatrix() *
+	Matrix3x2 finalMatrix = renderMatrix * GetTransform()->GetWorldMatrix() *
 		m_camera->GetInvertedMatrix() * m_renderer->GetUnityMatrix();
 
 	m_renderer->DrawBitmap(*m_image->GetBitmap(), finalMatrix);

@@ -37,9 +37,9 @@ void Camera::ProcessInput()
         vertical -= 3.0f;
     }
 
-    m_transform->Translate(Vector2(horizontal, vertical));
+    GetTransform()->Translate(Vector2(horizontal, vertical));
 
-    m_invertedMatrix = m_transform->GetWorldMatrix().Inverse();
+    m_invertedMatrix = GetTransform()->GetWorldMatrix().Inverse();
 }
 
 Matrix3x2 Camera::GetInvertedMatrix()

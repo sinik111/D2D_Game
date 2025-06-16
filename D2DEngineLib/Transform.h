@@ -3,24 +3,35 @@
 #include "Matrix3x2.h"
 #include "Vector2.h"
 
-class Transform
+#include "Component.h"
+
+class Transform :
+	public Component
 {
 private:
-	Transform* m_parent;
 	Vector2 m_position;
 	float m_rotation;
 	Vector2 m_scale;
 
-	bool m_isDirty;
+	Matrix3x2 m_cachedLocal;
+	Matrix3x2 m_cachedWorld;
+
+	Transform* m_parent;
+	std::vector<Transform*> m_children;
+
+	bool m_isLocalDirty;
+	bool m_isWorldDirty;
 
 public:
 	Transform();
+	~Transform() override;
 
 public:
-	Vector2 GetPosition() const;
+	const Vector2& GetPosition() const;
 	float GetRotation() const;
-	Vector2 GetScale() const;
-	Matrix3x2 GetWorldMatrix() const;
+	const Vector2& GetScale() const;
+	const Matrix3x2& GetLocalMatrix();
+	const Matrix3x2& GetWorldMatrix();
 	Transform* GetParent() const;
 
 public:
@@ -38,4 +49,9 @@ public:
 	void Translate(float x, float y);
 	void Translate(const Vector2& movement);
 	void Rotate(float angle);
+
+private:
+	void MarkWorldDirty();
+	void AddChild(Transform* child);
+	void RemoveChild(Transform* child);
 };

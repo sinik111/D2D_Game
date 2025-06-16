@@ -10,8 +10,8 @@ private:
 	Matrix3x2 m_invertedMatrix;
 
 public:
-	void Update() override;
-	void Render() override;
+	void Update();
+	void Render();
 
 	void ProcessInput();
 	Matrix3x2 GetInvertedMatrix();
