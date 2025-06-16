@@ -7,60 +7,60 @@
 void ScriptSystem::Register(Script* script)
 {
 	m_scripts.push_back(script);
-	m_startScripts.push_back(script);
-	m_updateScripts.push_back(script);
-	m_lateUpdateScripts.push_back(script);
+	m_scriptsForStart.push_back(script);
+	m_scriptsForUpdate.push_back(script);
+	m_scriptsForLateUpdate.push_back(script);
 }
 
 void ScriptSystem::Unregister(Script* script)
 {
-	OptimizedErase(m_scripts, script);
-	OptimizedErase(m_startScripts, script);
-	OptimizedErase(m_updateScripts, script);
-	OptimizedErase(m_lateUpdateScripts, script);
+	Util::OptimizedErase(m_scripts, script);
+	Util::OptimizedErase(m_scriptsForStart, script);
+	Util::OptimizedErase(m_scriptsForUpdate, script);
+	Util::OptimizedErase(m_scriptsForLateUpdate, script);
 }
 
 void ScriptSystem::UnregisterUpdate(Script* script)
 {
-	OptimizedErase(m_updateScripts, script);
+	Util::OptimizedErase(m_scriptsForUpdate, script);
 }
 
 void ScriptSystem::UnregisterLateUpdate(Script* script)
 {
-	OptimizedErase(m_lateUpdateScripts, script);
+	Util::OptimizedErase(m_scriptsForLateUpdate, script);
 }
 
 void ScriptSystem::UpdateSystem()
 {
-	StartScripts();
-	UpdateScripts();
-	LateUpdateScripts();
+	CallStart();
+	CallUpdate();
+	CallLateUpdate();
 }
 
-void ScriptSystem::StartScripts()
+void ScriptSystem::CallStart()
 {
-	if (!m_startScripts.empty())
+	if (!m_scriptsForStart.empty())
 	{
-		for (auto script : m_startScripts)
+		for (auto script : m_scriptsForStart)
 		{
 			script->Start();
 		}
 
-		m_startScripts.clear();
+		m_scriptsForStart.clear();
 	}
 }
 
-void ScriptSystem::UpdateScripts()
+void ScriptSystem::CallUpdate()
 {
-	for (auto script : m_updateScripts)
+	for (auto script : m_scriptsForUpdate)
 	{
 		script->Update();
 	}
 }
 
-void ScriptSystem::LateUpdateScripts()
+void ScriptSystem::CallLateUpdate()
 {
-	for (auto script : m_lateUpdateScripts)
+	for (auto script : m_scriptsForLateUpdate)
 	{
 		script->LateUpdate();
 	}

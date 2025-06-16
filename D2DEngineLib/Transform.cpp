@@ -174,5 +174,5 @@ void Transform::AddChild(Transform* child)
 
 void Transform::RemoveChild(Transform* child)
 {
-	StableErase(m_children, child);
+	Util::StableErase(m_children, child);
 }

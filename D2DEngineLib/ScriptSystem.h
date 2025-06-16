@@ -7,9 +7,9 @@ class ScriptSystem
 private:
 	std::vector<Script*> m_scripts;
 
-	std::vector<Script*> m_startScripts;
-	std::vector<Script*> m_updateScripts;
-	std::vector<Script*> m_lateUpdateScripts;
+	std::vector<Script*> m_scriptsForStart;
+	std::vector<Script*> m_scriptsForUpdate;
+	std::vector<Script*> m_scriptsForLateUpdate;
 
 public:
 	void Register(Script* script);
@@ -22,7 +22,7 @@ public:
 	void UpdateSystem();
 
 private:
-	void StartScripts();
-	void UpdateScripts();
-	void LateUpdateScripts();
+	void CallStart();
+	void CallUpdate();
+	void CallLateUpdate();
 };

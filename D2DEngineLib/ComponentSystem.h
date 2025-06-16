@@ -19,6 +19,7 @@ private:
 	ComponentSystem& operator=(ComponentSystem&&) = delete;
 	~ComponentSystem() = default;
 
+private:
 	static ComponentSystem& Get();
 
 public:

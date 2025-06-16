@@ -11,5 +11,5 @@ void TransformSystem::Register(Transform* transform)
 
 void TransformSystem::Unregister(Transform* transform)
 {
-	OptimizedErase(m_transforms, transform);
+	Util::OptimizedErase(m_transforms, transform);
 }
