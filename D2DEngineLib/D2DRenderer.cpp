@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "D2DRenderer.h"
 
+#include <algorithm>
+
 #include "Matrix3x2.h"
 
 #pragma comment(lib, "d3d11.lib")
@@ -12,11 +14,12 @@ using Microsoft::WRL::ComPtr;
 D2DRenderer::D2DRenderer(HWND hWnd, UINT width, UINT height)
 	: m_hWnd(hWnd), m_width(width), m_height(height)
 {
+
 }
 
 D2DRenderer::~D2DRenderer()
 {
-	int a = 0;
+	
 }
 
 void D2DRenderer::Initialize()
@@ -77,6 +80,11 @@ void D2DRenderer::Initialize()
 		Matrix3x2::Translation((float)m_width / 2, (float)m_height / 2);
 }
 
+void D2DRenderer::Shutdown()
+{
+
+}
+
 void D2DRenderer::BeginDraw(const D2D1::ColorF& color) const
 {
 	m_d2dDeviceContext->BeginDraw();
@@ -89,37 +97,6 @@ void D2DRenderer::EndDraw() const
 	m_dxgiSwapChain->Present(1, 0);
 }
 
-void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& bitmap) const
-{
-	m_d2dDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
-	m_d2dDeviceContext->DrawBitmap(bitmap.Get());
-}
-
-void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT_F& destinationRect) const
-{
-	m_d2dDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
-	m_d2dDeviceContext->DrawBitmap(bitmap.Get(), destinationRect);
-}
-
-void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect,
-	float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
-{
-	m_d2dDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
-	m_d2dDeviceContext->DrawBitmap(bitmap.Get(), destinationRect, opacitiy, interpolationMode, sourceRect);
-}
-
-void D2DRenderer::DrawBitmap(const ComPtr<ID2D1Bitmap1>& bitmap, const D2D1_RECT_F& destinationRect, const D2D1_RECT_F& sourceRect, const Matrix3x2& transform, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
-{
-	m_d2dDeviceContext->SetTransform(transform.AsD2D1Matrix());
-	m_d2dDeviceContext->DrawBitmap(bitmap.Get(), destinationRect, opacitiy, interpolationMode, sourceRect);
-}
-
-void D2DRenderer::DrawBitmap(ID2D1Bitmap1* bitmap, const Matrix3x2& transform, const D2D1_RECT_F* offset, float opacitiy, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode) const
-{
-	m_d2dDeviceContext->SetTransform(transform.AsD2D1Matrix());
-	m_d2dDeviceContext->DrawBitmap(bitmap, offset, opacitiy, interpolationMode);
-}
-
 const ComPtr<ID2D1DeviceContext7>& D2DRenderer::GetDeviceContext() const
 {
 	return m_d2dDeviceContext;
@@ -128,4 +105,57 @@ const ComPtr<ID2D1DeviceContext7>& D2DRenderer::GetDeviceContext() const
 Matrix3x2 D2DRenderer::GetUnityMatrix() const
 {
 	return m_unityMatrix;
+}
+
+void D2DRenderer::AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand)
+{
+	m_renderCommands.push_back(std::move(renderCommand));
+}
+
+void D2DRenderer::PrepareRenderCommands()
+{
+	std::sort(m_renderCommands.begin(), m_renderCommands.end(),
+		[](const std::unique_ptr<IRenderCommand>& a, const std::unique_ptr<IRenderCommand>& b)
+		{
+			return a->GetSortOrder() < b->GetSortOrder();
+		});
+
+	// frustum culling 추가
+}
+
+void D2DRenderer::ExecuteRenderCommands()
+{
+	PrepareRenderCommands();
+
+	for (const auto& command : m_renderCommands)
+	{
+		switch (command->GetType())
+		{
+		case RenderCommandType::Bitmap:
+		{
+			BitmapRenderCommand* bitmapCmd = static_cast<BitmapRenderCommand*>(command.get());
+
+			m_d2dDeviceContext->SetTransform(bitmapCmd->transform.AsD2D1Matrix());
+			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get());
+			break;
+		}
+		case RenderCommandType::Text:
+		{
+			// 구현
+			break;
+		}
+
+		default:
+		{
+			break;
+		}
+		}
+	}
+
+	ClearCommands();
+}
+
+void D2DRenderer::ClearCommands()
+{
+	m_renderCommands.clear();
 }

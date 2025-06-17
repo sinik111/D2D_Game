@@ -1,10 +1,15 @@
 #include "pch.h"
 #include "WinApp.h"
 
+#include "SceneManager.h"
+#include "ComponentSystem.h"
+#include "D2DRenderer.h"
+#include "ResourceManager.h"
+
 WinApp::WinApp()
 	: m_hWnd(nullptr), m_hInstance(nullptr), m_width(0), m_height(0),
 	m_classStyle(0), m_hIcon(nullptr), m_hCursor(nullptr), m_hIconSmall(nullptr),
-	m_windowStyle(0), m_x(0), m_y(0), m_isRunning(false), m_renderer(nullptr)
+	m_windowStyle(0), m_x(0), m_y(0), m_isRunning(false), m_d2dRenderer(nullptr)
 {
 	
 }
@@ -105,14 +110,19 @@ void WinApp::Initialize()
 	UpdateWindow(m_hWnd);
 
 	HRESULT hr = CoInitialize(nullptr);
+	assert(SUCCEEDED(hr));
 
-	m_renderer = new D2DRenderer(m_hWnd, m_width, m_height);
-	m_renderer->Initialize();
+	m_d2dRenderer = std::make_unique<D2DRenderer>(m_hWnd, m_width, m_height);
+	m_d2dRenderer->Initialize();
+
+	ComponentSystem::BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
 }
 
 void WinApp::Shutdown()
 {
-	delete m_renderer;
+	SceneManager::Shutdown();
+	ResourceManager::Release();
+	m_d2dRenderer->Shutdown();
 
 	CoUninitialize();
 }
@@ -146,10 +156,16 @@ bool WinApp::IsRunning()
 
 void WinApp::Update()
 {
+	ComponentSystem::Script().UpdateSystem();
 
+	SceneManager::Update();
+
+	ComponentSystem::BitmapRenderer().UpdateSystem();
 }
 
 void WinApp::Render()
 {
-	
+	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
+	m_d2dRenderer->ExecuteRenderCommands();
+	m_d2dRenderer->EndDraw();
 }

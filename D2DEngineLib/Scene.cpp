@@ -15,11 +15,9 @@ Scene::~Scene()
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
 {
-	auto newGameObject = std::make_unique<GameObject>();
+	m_pendingCreatedGameObjects.push_back(std::make_unique<GameObject>(name));
 
-	m_pendingCreatedGameObjects.push_back(std::move(newGameObject));
-
-	return newGameObject.get();
+	return m_pendingCreatedGameObjects.back().get();
 }
 
 void Scene::Enter()
@@ -45,9 +43,7 @@ void Scene::Update()
 
 	for (size_t i = 0; i < m_gameObjects.size(); )
 	{
-		//m_gameObjects[i]->Update();
-
-		if (m_gameObjects[i])
+		if (m_gameObjects[i]->IsDestroyed())
 		{
 			std::swap(m_gameObjects[i], m_gameObjects.back());
 

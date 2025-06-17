@@ -132,17 +132,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="DemoGameApp.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SolarSystem.cpp" />
     <ClCompile Include="SpaceObject.cpp" />
-    <ClCompile Include="SpaceObjectRotation.cpp" />
+    <ClCompile Include="Sun.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraController.h" />
     <ClInclude Include="DemoGameApp.h" />
+    <ClInclude Include="SolarSystem.h" />
     <ClInclude Include="SpaceObject.h" />
-    <ClInclude Include="SpaceObjectRotation.h" />
+    <ClInclude Include="Sun.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

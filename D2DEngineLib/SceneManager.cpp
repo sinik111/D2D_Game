@@ -2,61 +2,63 @@
 #include "SceneManager.h"
 
 SceneManager::SceneManager()
-	: m_pCurrentScene(nullptr), m_pNextScene(nullptr)
+	: m_currentScene{ nullptr }, m_nextScene{ nullptr }
 {
+}
+
+SceneManager& SceneManager::Get()
+{
+	static SceneManager s_instance;
+
+	return s_instance;
 }
 
 void SceneManager::Shutdown()
 {
-	m_Scenes.clear();
+	Get().m_scenes.clear();
 }
 
 void SceneManager::Update()
 {
 	CheckSceneChanged();
 
-	m_pCurrentScene->Update();
+	Get().m_currentScene->Update();
 }
 
 void SceneManager::ChangeScene(const std::wstring& name)
 {
-	/*if (m_Scenes.find(name) == m_Scenes.end())
+	std::unordered_map<std::wstring, std::unique_ptr<Scene>>& scenes = Get().m_scenes;
+
+	if (scenes.find(name) == scenes.end())
 	{
 		return;
 	}
 
-	m_pNextScene = m_Scenes[name];*/
+	Get().m_nextScene = scenes[name].get();
 }
 
 Scene* SceneManager::GetCurrentScene()
 {
-	return m_pCurrentScene;
+	return Get().m_currentScene;
 }
 
-void SceneManager::CheckSceneChanged()
+void SceneManager::CheckSceneChanged() // 예외처리 추가 필요
 {
-	//if (m_pNextScene != nullptr)
-	//{
-	//	if (ResultCode::OK != m_pNextScene->Load())
-	//	{
-	//		m_pNextScene->Unload();
+	if (Get().m_nextScene != nullptr)
+	{	
+		Get().m_nextScene->Load();
 
-	//		Debug::Log("Scene load failed - SceneManager::CheckSceneChanged");
+		if (Get().m_currentScene != nullptr)
+		{
+			Get().m_currentScene->Exit();
 
-	//		m_pNextScene = nullptr;
+			Get().m_currentScene->Unload();
+		}
+		
+		Get().m_currentScene = Get().m_nextScene;
 
-	//		return;
-	//	}
+		Get().m_nextScene = nullptr;
 
-	//	if (m_pCurrentScene != nullptr)
-	//	{
-	//		m_pCurrentScene->Exit();
-	//		m_pCurrentScene->Unload();
-	//	}
-
-	//	m_pCurrentScene = m_pNextScene;
-	//	m_pNextScene = nullptr;
-
-	//	m_pCurrentScene->Enter();
-	//}
+		Get().m_currentScene->Enter();
+	}
 }

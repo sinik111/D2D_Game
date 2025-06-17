@@ -2,6 +2,7 @@
 #include "Script.h"
 
 #include "ComponentSystem.h"
+#include "SceneManager.h"
 
 Script::Script()
 {
@@ -11,6 +12,11 @@ Script::Script()
 Script::~Script()
 {
 	ComponentSystem::Script().Unregister(this);
+}
+
+GameObject* Script::CreateGameObject(const std::wstring& name)
+{
+	return SceneManager::GetCurrentScene()->CreateGameObject(name);
 }
 
 void Script::Start()

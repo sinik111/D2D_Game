@@ -1,17 +1,21 @@
 #include "pch.h"
 #include "Component.h"
 
+#include "GameObject.h"
+
 Component::Component()
 	: m_owner{ nullptr }
 {
 }
 
-void Component::OnEnable()
+GameObject* Component::GetGameObject()
 {
+	return m_owner;
 }
 
-void Component::OnDestroy()
+Transform* Component::GetTransform()
 {
+	return m_owner->GetTransform();
 }
 
 void Component::SetOwner(GameObject* gameObject)

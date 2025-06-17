@@ -5,41 +5,46 @@
 class SceneManager
 {
 private:
-	std::unordered_map<std::wstring, std::unique_ptr<Scene>> m_Scenes;
+	std::unordered_map<std::wstring, std::unique_ptr<Scene>> m_scenes;
 
-	Scene* m_pCurrentScene;
-	Scene* m_pNextScene;
+	Scene* m_currentScene;
+	Scene* m_nextScene;
 
 private:
 	SceneManager();
+	SceneManager(const SceneManager&) = delete;
+	SceneManager& operator=(const SceneManager&) = delete;
+	SceneManager(SceneManager&&) = delete;
+	SceneManager& operator=(SceneManager&&) = delete;
 	~SceneManager() = default;
 
-public:
-	void Shutdown();
+private:
+	static SceneManager& Get();
 
 public:
-	void Update();
-	//void Render();
+	static void Shutdown();
 
 public:
-	void ChangeScene(const std::wstring& name);
-	Scene* GetCurrentScene();
+	static void Update();
+
+public:
+	static void ChangeScene(const std::wstring& name);
+	static Scene* GetCurrentScene();
 
 private:
-	void CheckSceneChanged();
+	static void CheckSceneChanged();
 
 public:
 	template<typename T>
-	T* CreateScene(const std::wstring& name)
+	static void CreateScene(const std::wstring& name)
 	{
-		if (m_Scenes.find(name) != m_Scenes.end())
+		std::unordered_map<std::wstring, std::unique_ptr<Scene>>& scenes = Get().m_scenes;
+
+		if (scenes.find(name) != scenes.end())
 		{
-			return nullptr;
+			return;
 		}
 
-		T* pScene = new T();
-		m_Scenes.emplace(name, pScene);
-
-		return pScene;
+		scenes.emplace(name, std::make_unique<T>());
 	}
 };

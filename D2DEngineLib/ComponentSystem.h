@@ -2,14 +2,14 @@
 
 #include <memory>
 
-#include "TransformSystem.h"
 #include "ScriptSystem.h"
+#include "BitmapRendererSystem.h"
 
 class ComponentSystem
 {
 private:
-	std::unique_ptr<TransformSystem> m_transformSystem;
 	std::unique_ptr<ScriptSystem> m_scriptSystem;
+	std::unique_ptr<BitmapRendererSystem> m_bitmapRendererSystem;
 
 private:
 	ComponentSystem();
@@ -23,9 +23,6 @@ private:
 	static ComponentSystem& Get();
 
 public:
-	static TransformSystem& Transform();
 	static ScriptSystem& Script();
-
-public:
-	void UpdateSystems();
+	static BitmapRendererSystem& BitmapRenderer();
 };

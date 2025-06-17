@@ -8,8 +8,6 @@ void ScriptSystem::Register(Script* script)
 {
 	m_scripts.push_back(script);
 	m_scriptsForStart.push_back(script);
-	m_scriptsForUpdate.push_back(script);
-	m_scriptsForLateUpdate.push_back(script);
 }
 
 void ScriptSystem::Unregister(Script* script)
@@ -44,6 +42,9 @@ void ScriptSystem::CallStart()
 		for (auto script : m_scriptsForStart)
 		{
 			script->Start();
+
+			m_scriptsForUpdate.push_back(script);
+			m_scriptsForLateUpdate.push_back(script);
 		}
 
 		m_scriptsForStart.clear();

@@ -29,7 +29,7 @@ public:
         : m_rawMatrix{
             d2d1Matrix._11, d2d1Matrix._12, 0.0f, 0.0f,
             d2d1Matrix._21, d2d1Matrix._22, 0.0f, 0.0f,
-            0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f          , 0.0f          , 1.0f, 0.0f,
             d2d1Matrix._31, d2d1Matrix._32, 0.0f, 1.0f }
 	{
 

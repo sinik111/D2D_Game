@@ -21,13 +21,16 @@
     <ClCompile Include="Main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="CameraController.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SpaceObject.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SpaceObjectRotation.cpp">
+    <ClCompile Include="SolarSystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Sun.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +38,16 @@
     <ClInclude Include="DemoGameApp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="CameraController.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SpaceObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="SpaceObjectRotation.h">
+    <ClInclude Include="SolarSystem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

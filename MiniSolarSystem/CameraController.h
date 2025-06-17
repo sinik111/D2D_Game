@@ -1,18 +1,17 @@
 #pragma once
 
 #include "../D2DEngineLib/Script.h"
+#include "../D2DEngineLib/Matrix3x2.h"
 
-class SpaceObject :
-	public Script
+class CameraController
+	: public Script
 {
 private:
 	float m_speed;
 
-public:
-	SpaceObject(float speed = 0.0f);
-	~SpaceObject() override = default;
-
 private:
 	void Start() override;
 	void Update() override;
+
+	void ProcessInput();
 };

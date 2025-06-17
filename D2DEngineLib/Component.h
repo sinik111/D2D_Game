@@ -1,6 +1,7 @@
 #pragma once
 
 class GameObject;
+class Transform;
 
 class Component
 {
@@ -12,8 +13,8 @@ public:
 	virtual ~Component() = default;
 
 public:
-	void OnEnable();
-	void OnDestroy();
+	GameObject* GetGameObject();
+	Transform* GetTransform();
 
 private:
 	void SetOwner(GameObject* gameObject);

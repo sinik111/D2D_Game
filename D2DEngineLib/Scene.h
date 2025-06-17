@@ -15,6 +15,7 @@ public:
 	Scene();
 	virtual ~Scene();
 
+public:
 	GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 
 public:
@@ -24,7 +25,7 @@ public:
 	virtual void Unload() = 0;
 
 public:
-	virtual void Update();
+	void Update();
 
 private:
 	void Clear();

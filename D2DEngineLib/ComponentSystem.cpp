@@ -2,8 +2,8 @@
 #include "ComponentSystem.h"
 
 ComponentSystem::ComponentSystem()
-	: m_transformSystem{ std::make_unique<TransformSystem>() },
-	m_scriptSystem{ std::make_unique<ScriptSystem>() }
+	: m_scriptSystem{ std::make_unique<ScriptSystem>() },
+	m_bitmapRendererSystem{ std::make_unique<BitmapRendererSystem>() }
 {
 	
 }
@@ -15,18 +15,12 @@ ComponentSystem& ComponentSystem::Get()
 	return s_instance;
 }
 
-TransformSystem& ComponentSystem::Transform()
-{
-	return *Get().m_transformSystem.get();
-}
-
 ScriptSystem& ComponentSystem::Script()
 {
 	return *Get().m_scriptSystem.get();
 }
 
-void ComponentSystem::UpdateSystems()
+BitmapRendererSystem& ComponentSystem::BitmapRenderer()
 {
-	//m_transformSystem
-	m_scriptSystem->UpdateSystem();
+	return *Get().m_bitmapRendererSystem.get();
 }

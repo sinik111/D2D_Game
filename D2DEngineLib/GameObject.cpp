@@ -3,20 +3,35 @@
 
 #include "Component.h"
 
-GameObject::GameObject()
-	: m_transform{ std::make_unique<Transform>() }
+GameObject::GameObject(const std::wstring& name)
+	: m_transform{ std::make_unique<Transform>() },
+	m_isDestroyed{ false },
+	m_name{ name }
 {
+
 }
 
 GameObject::~GameObject()
 {
-	for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
-	{
-		(*iter)->OnDestroy();
-	}
+
 }
 
 Transform* GameObject::GetTransform()
 {
 	return m_transform.get();
+}
+
+const std::wstring& GameObject::GetName()
+{
+	return m_name;
+}
+
+void GameObject::Destroy()
+{
+	m_isDestroyed = true;
+}
+
+bool GameObject::IsDestroyed()
+{
+	return m_isDestroyed;
 }

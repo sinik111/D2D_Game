@@ -9,6 +9,9 @@ public:
 	Script();
 	~Script() override;
 
+public:
+	GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
+
 private:
 	virtual void Start();
 	virtual void Update();

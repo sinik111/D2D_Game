@@ -10,35 +10,39 @@ private:
 	std::unique_ptr<Transform> m_transform;
 	std::vector<std::unique_ptr<Component>> m_components;
 
+    bool m_isDestroyed;
+
 public:
-	GameObject();
+	GameObject(const std::wstring& name);
 	virtual ~GameObject();
 
 public:
 	Transform* GetTransform();
+    const std::wstring& GetName();
+    void Destroy();
+    bool IsDestroyed();
 
+public:
     // Class T를 생성하는 함수 , 인자까지 전달한다.
     template<typename T, typename... Args>
     T* AddComponent(Args&&... args)
     {
         if (typeid(Transform) == typeid(T))
         {
-            return m_transform;
+            return (T*)m_transform.get();
         }
 
         // 컴파일 시점에 T가 Component를 상속받은 클래스 인지 확인
         static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
         // 인자까지 전달하면서 생성
-        T* component = new T(std::forward<Args>(args)...);
+        std::unique_ptr<T> component = std::make_unique<T>(std::forward<Args>(args)...);
 
         component->SetOwner(this);
 
-        m_components.push_back(component);
+        m_components.push_back(std::move(component));
 
-        component->OnEnable();
-
-        return component;
+        return static_cast<T*>(m_components.back().get());
     }
 
     template<typename T>
@@ -83,9 +87,8 @@ public:
         {
             if (iter->get() == target) //완전히 동일한 타입만
             {
-                (*iter)->OnDestroy();
-
                 m_components.erase(iter);
+
                 return true;
             }
         }

@@ -16,7 +16,7 @@ protected:
 	std::wstring m_modulePath;
 	std::wstring m_workingPath;
 
-	D2DRenderer* m_renderer;
+	std::unique_ptr<D2DRenderer> m_d2dRenderer;
 
 	UINT m_classStyle;
 	UINT m_x;
@@ -40,8 +40,8 @@ public:
 	bool IsRunning();
 
 private:
-	virtual void Update();
-	virtual void Render();
+	void Update();
+	void Render();
 
 protected:
 	virtual void MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

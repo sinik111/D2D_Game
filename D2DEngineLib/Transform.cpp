@@ -12,13 +12,11 @@ Transform::Transform()
 {
 	m_cachedLocal = Matrix3x2::Identity();
 	m_cachedWorld = Matrix3x2::Identity();
-
-	ComponentSystem::Transform().Register(this);
 }
 
 Transform::~Transform()
 {
-	ComponentSystem::Transform().Unregister(this);
+	
 }
 
 const Vector2& Transform::GetPosition() const
@@ -52,7 +50,7 @@ const Matrix3x2& Transform::GetWorldMatrix()
 {
 	if (m_isWorldDirty || m_isLocalDirty)
 	{
-		m_cachedWorld = m_parent != nullptr ? m_parent->GetWorldMatrix() : GetLocalMatrix();
+		m_cachedWorld = m_parent != nullptr ? GetLocalMatrix() * m_parent->GetWorldMatrix() : GetLocalMatrix();
 
 		m_isWorldDirty = false;
 	}
@@ -137,11 +135,17 @@ void Transform::Reset()
 void Transform::Translate(float x, float y)
 {
 	m_position += Vector2(x, y);
+
+	m_isLocalDirty = true;
+	MarkWorldDirty();
 }
 
 void Transform::Translate(const Vector2& movement)
 {
 	m_position += movement;
+
+	m_isLocalDirty = true;
+	MarkWorldDirty();
 }
 
 void Transform::Rotate(float angle)
@@ -152,6 +156,9 @@ void Transform::Rotate(float angle)
 	{
 		m_rotation -= 360.0f;
 	}
+
+	m_isLocalDirty = true;
+	MarkWorldDirty();
 }
 
 void Transform::MarkWorldDirty()

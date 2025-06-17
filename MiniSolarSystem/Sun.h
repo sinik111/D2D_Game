@@ -2,15 +2,17 @@
 
 #include "../D2DEngineLib/Script.h"
 
-class SpaceObject :
+class GameObject;
+
+class Sun :
 	public Script
 {
 private:
-	float m_speed;
+	std::list<GameObject*> m_earths;
 
 public:
-	SpaceObject(float speed = 0.0f);
-	~SpaceObject() override = default;
+	Sun();
+	~Sun() override = default;
 
 private:
 	void Start() override;
