@@ -1,70 +1,10 @@
 #pragma once
 
 #include "Matrix3x2.h"
+#include "RenderCommand.h"
 
 class D2DRenderer
 {
-public:
-	enum class RenderCommandType
-	{
-		Bitmap,
-		Text
-	};
-
-	class IRenderCommand
-	{
-	public:
-		virtual ~IRenderCommand() = default;
-		virtual RenderCommandType GetType() const = 0;
-		virtual int GetSortOrder() const = 0;
-	};
-
-	struct BitmapRenderCommand :
-		public IRenderCommand
-	{
-		Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap;
-		Matrix3x2 transform;
-		// 필요시 추가
-		// float opacity;
-		// D2D1_RECT_F sourceRect;
-		// D2D1_RECT_F destinationRect;
-		int sortOrder;
-
-		BitmapRenderCommand(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap,
-			const Matrix3x2& transform,
-			int sortOrder = 0)
-			: bitmap{ std::move(bitmap) }, transform{ transform }, sortOrder{ sortOrder }
-		{
-
-		}
-
-		RenderCommandType GetType() const override
-		{
-			return RenderCommandType::Bitmap;
-		}
-
-		int GetSortOrder() const override
-		{
-			return sortOrder;
-		}
-	};
-
-	struct TextRenderCommand :
-		public IRenderCommand
-	{
-		int sortOrder = 0;
-
-		RenderCommandType GetType() const override
-		{
-			return RenderCommandType::Bitmap;
-		}
-
-		int GetSortOrder() const override
-		{
-			return sortOrder;
-		}
-	};
-
 private:
 	HWND m_hWnd;
 	
@@ -72,6 +12,12 @@ private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> m_dxgiSwapChain;
 	Microsoft::WRL::ComPtr<ID2D1DeviceContext7> m_d2dDeviceContext;
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_d2dBitmapTarget;
+
+	// DWrite
+	Microsoft::WRL::ComPtr<IDWriteFactory> m_dWriteFactory;
+
+	// Brush
+	Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> m_d2dSolidColorBrush;
 
 	std::vector<std::unique_ptr<IRenderCommand>> m_renderCommands;
 
@@ -96,6 +42,10 @@ public:
 	const Microsoft::WRL::ComPtr<ID2D1DeviceContext7>& GetDeviceContext() const;
 	Matrix3x2 GetUnityMatrix() const;
 
+public:
+	Microsoft::WRL::ComPtr<IDWriteTextFormat> CreateTextFormat(float fontSize);
+
+public:
 	void AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand);
 	void ExecuteRenderCommands();
 

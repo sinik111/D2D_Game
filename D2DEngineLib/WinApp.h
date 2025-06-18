@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CoInitializer.h"
 #include "D2DRenderer.h"
 
 class WinApp
@@ -16,6 +17,7 @@ protected:
 	std::wstring m_modulePath;
 	std::wstring m_workingPath;
 
+	CoInitializer m_coInitializer;
 	std::unique_ptr<D2DRenderer> m_d2dRenderer;
 
 	UINT m_classStyle;

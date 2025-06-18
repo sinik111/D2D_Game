@@ -8,11 +8,12 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "dwrite.lib")
 
 using Microsoft::WRL::ComPtr;
 
 D2DRenderer::D2DRenderer(HWND hWnd, UINT width, UINT height)
-	: m_hWnd(hWnd), m_width(width), m_height(height)
+	: m_hWnd{ hWnd }, m_width{ width }, m_height{ height }
 {
 
 }
@@ -33,8 +34,7 @@ void D2DRenderer::Initialize()
 
 	// D2D 팩토리 및 디바이스
 	ComPtr<ID2D1Factory8> d2dFactory;
-	D2D1_FACTORY_OPTIONS options =
-	{
+	D2D1_FACTORY_OPTIONS options{
 #ifdef _DEBUG
 		D2D1_DEBUG_LEVEL_INFORMATION
 #endif // _DEBUG
@@ -47,7 +47,8 @@ void D2DRenderer::Initialize()
 
 	ComPtr<ID2D1Device7> d2dDevice;
 	d2dFactory->CreateDevice(dxgiDevice.Get(), d2dDevice.GetAddressOf());
-	d2dDevice->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE, m_d2dDeviceContext.GetAddressOf());
+	d2dDevice->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE,
+		m_d2dDeviceContext.GetAddressOf());
 
 	ComPtr<IDXGIFactory7> dxgiFactory;
 	CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
@@ -76,6 +77,18 @@ void D2DRenderer::Initialize()
 		&bmpProps, m_d2dBitmapTarget.GetAddressOf());
 	m_d2dDeviceContext->SetTarget(m_d2dBitmapTarget.Get());
 
+	// DWrite Factory
+	DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(m_dWriteFactory),
+		reinterpret_cast<IUnknown**>(m_dWriteFactory.GetAddressOf()));
+
+	// DWrite Text Format
+
+
+	// Brush
+	m_d2dDeviceContext->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Black),
+		m_d2dSolidColorBrush.GetAddressOf());
+
+	// Unity 스타일 좌표계용 Matrix
 	m_unityMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 		Matrix3x2::Translation((float)m_width / 2, (float)m_height / 2);
 }
@@ -107,6 +120,24 @@ Matrix3x2 D2DRenderer::GetUnityMatrix() const
 	return m_unityMatrix;
 }
 
+ComPtr<IDWriteTextFormat> D2DRenderer::CreateTextFormat(float fontSize)
+{
+	ComPtr<IDWriteTextFormat> newDWriteTextFormat;
+
+	m_dWriteFactory->CreateTextFormat(
+		L"",
+		nullptr,
+		DWRITE_FONT_WEIGHT_NORMAL,
+		DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL,
+		fontSize,
+		L"",
+		newDWriteTextFormat.GetAddressOf()
+	);
+
+	return newDWriteTextFormat;
+}
+
 void D2DRenderer::AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand)
 {
 	m_renderCommands.push_back(std::move(renderCommand));
@@ -127,6 +158,7 @@ void D2DRenderer::ExecuteRenderCommands()
 {
 	PrepareRenderCommands();
 
+	// screen, world 분리 필요
 	for (const auto& command : m_renderCommands)
 	{
 		switch (command->GetType())
@@ -141,7 +173,20 @@ void D2DRenderer::ExecuteRenderCommands()
 		}
 		case RenderCommandType::Text:
 		{
-			// 구현
+			TextRenderCommand* textCmd = static_cast<TextRenderCommand*>(command.get());
+
+			D2D1_RECT_F layoutRect
+			{
+				textCmd->point.x,
+				textCmd->point.y,
+				textCmd->point.x + textCmd->size.width,
+				textCmd->point.y + textCmd->size.height
+			};
+
+			m_d2dSolidColorBrush->SetColor(textCmd->color);
+			m_d2dDeviceContext->SetTransform(textCmd->transform.AsD2D1Matrix());
+			m_d2dDeviceContext->DrawTextW(textCmd->text.c_str(), static_cast<UINT32>(textCmd->text.size()),
+				textCmd->textFormat.Get(), layoutRect, m_d2dSolidColorBrush.Get());
 			break;
 		}
 

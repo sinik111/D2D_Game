@@ -15,5 +15,5 @@ public:
 
 public:
 	void SetD2DRenderer(D2DRenderer* d2dRenderer);
-	void UpdateSystem();
+	void MakeRenderCommands();
 };

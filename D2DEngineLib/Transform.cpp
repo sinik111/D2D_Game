@@ -151,10 +151,14 @@ void Transform::Translate(const Vector2& movement)
 void Transform::Rotate(float angle)
 {
 	m_rotation += angle;
-	
+
 	if (m_rotation > 360.0f)
 	{
 		m_rotation -= 360.0f;
+	}
+	else if (m_rotation < 0.0f)
+	{
+		m_rotation += 360.0f;
 	}
 
 	m_isLocalDirty = true;

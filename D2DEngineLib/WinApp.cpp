@@ -7,9 +7,9 @@
 #include "ResourceManager.h"
 
 WinApp::WinApp()
-	: m_hWnd(nullptr), m_hInstance(nullptr), m_width(0), m_height(0),
-	m_classStyle(0), m_hIcon(nullptr), m_hCursor(nullptr), m_hIconSmall(nullptr),
-	m_windowStyle(0), m_x(0), m_y(0), m_isRunning(false), m_d2dRenderer(nullptr)
+	: m_hWnd{}, m_hInstance{}, m_width{}, m_height{},
+	m_classStyle{}, m_hIcon{}, m_hCursor{}, m_hIconSmall{},
+	m_windowStyle(), m_x{}, m_y{}, m_isRunning{}, m_d2dRenderer{}
 {
 	
 }
@@ -109,13 +109,11 @@ void WinApp::Initialize()
 	ShowWindow(m_hWnd, SW_SHOW);
 	UpdateWindow(m_hWnd);
 
-	HRESULT hr = CoInitialize(nullptr);
-	assert(SUCCEEDED(hr));
-
 	m_d2dRenderer = std::make_unique<D2DRenderer>(m_hWnd, m_width, m_height);
 	m_d2dRenderer->Initialize();
 
 	ComponentSystem::BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
 }
 
 void WinApp::Shutdown()
@@ -123,8 +121,6 @@ void WinApp::Shutdown()
 	SceneManager::Shutdown();
 	ResourceManager::Release();
 	m_d2dRenderer->Shutdown();
-
-	CoUninitialize();
 }
 
 void WinApp::Run()
@@ -160,7 +156,8 @@ void WinApp::Update()
 
 	SceneManager::Update();
 
-	ComponentSystem::BitmapRenderer().UpdateSystem();
+	ComponentSystem::BitmapRenderer().MakeRenderCommands();
+	ComponentSystem::TextRenderer().MakeRenderCommands();
 }
 
 void WinApp::Render()

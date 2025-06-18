@@ -5,13 +5,13 @@
 class BitmapRenderer :
 	public Component
 {
-public:
-	BitmapRenderer();
-	~BitmapRenderer() override;
-
 private:
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_bitmap;
 	int m_sortOrder;
+
+public:
+	BitmapRenderer();
+	~BitmapRenderer() override;
 
 public:
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetBitmap();

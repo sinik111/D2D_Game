@@ -6,6 +6,8 @@
 #include "SpaceObject.h"
 #include "CameraController.h"
 #include "Sun.h"
+#include "Earth.h"
+#include "Moon.h"
 
 SolarSystem::~SolarSystem()
 {
@@ -30,9 +32,9 @@ void SolarSystem::Enter()
 	moon->GetTransform()->SetParent(earth->GetTransform());
 	earth->GetTransform()->SetParent(sun->GetTransform());
 
-	sun->AddComponent<SpaceObject>(0.3f);
-	earth->AddComponent<SpaceObject>(0.6f);
-	moon->AddComponent<SpaceObject>(0.9f);
+	sun->AddComponent<Sun>();
+	earth->AddComponent<Earth>();
+	moon->AddComponent<Moon>();
 
 	sun->AddComponent<Sun>();
 }

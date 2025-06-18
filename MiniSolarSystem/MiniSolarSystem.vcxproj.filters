@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Scripts">
+      <UniqueIdentifier>{a0396846-3d06-4297-8c7d-5ad432db6940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Scripts">
+      <UniqueIdentifier>{46a0b516-d033-40aa-8e5b-b5d996d64e2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DemoGameApp.cpp">
@@ -30,7 +36,13 @@
     <ClCompile Include="SolarSystem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Earth.cpp">
+      <Filter>소스 파일\Scripts</Filter>
+    </ClCompile>
     <ClCompile Include="Sun.cpp">
+      <Filter>소스 파일\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Moon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,7 +59,13 @@
     <ClInclude Include="SolarSystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Earth.h">
+      <Filter>헤더 파일\Scripts</Filter>
+    </ClInclude>
     <ClInclude Include="Sun.h">
+      <Filter>헤더 파일\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Moon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

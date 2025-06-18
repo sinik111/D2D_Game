@@ -12,3 +12,4 @@
 #include <wrl.h>
 #include <vector>
 #include <unordered_map>
+#include <dwrite_3.h>

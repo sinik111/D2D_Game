@@ -135,6 +135,12 @@
     <ClInclude Include="TextRenderer.h">
       <Filter>헤더 파일\03_Component\Components</Filter>
     </ClInclude>
+    <ClInclude Include="CoInitializer.h">
+      <Filter>헤더 파일\00_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderCommand.h">
+      <Filter>헤더 파일\00_Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -187,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="TextRendererSystem.cpp">
       <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderCommand.cpp">
+      <Filter>소스 파일\00_Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -142,6 +142,7 @@
     <ClInclude Include="BitmapRenderer.h" />
     <ClInclude Include="BitmapRendererSystem.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CoInitializer.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="D2DRenderer.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Matrix3x2.h" />
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
@@ -176,6 +178,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RenderCommand.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />

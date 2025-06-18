@@ -3,7 +3,8 @@
 
 ComponentSystem::ComponentSystem()
 	: m_scriptSystem{ std::make_unique<ScriptSystem>() },
-	m_bitmapRendererSystem{ std::make_unique<BitmapRendererSystem>() }
+	m_bitmapRendererSystem{ std::make_unique<BitmapRendererSystem>() },
+	m_textRendererSystem{ std::make_unique<TextRendererSystem>() }
 {
 	
 }
@@ -23,4 +24,9 @@ ScriptSystem& ComponentSystem::Script()
 BitmapRendererSystem& ComponentSystem::BitmapRenderer()
 {
 	return *Get().m_bitmapRendererSystem.get();
+}
+
+TextRendererSystem& ComponentSystem::TextRenderer()
+{
+	return *Get().m_textRendererSystem.get();
 }
