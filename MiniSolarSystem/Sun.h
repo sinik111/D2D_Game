@@ -9,7 +9,6 @@ private:
 	float m_speed;
 
 public:
-	Sun() = default;
 	~Sun() override = default;
 
 private:

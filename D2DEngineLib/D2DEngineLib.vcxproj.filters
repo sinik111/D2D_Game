@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="헤더 파일\00_Core">
-      <UniqueIdentifier>{eb30cc25-ab93-4150-9651-ed9e403fd2bd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\03_Component">
       <UniqueIdentifier>{4d54e44b-f7f7-470c-9969-f0d3b982fa12}</UniqueIdentifier>
     </Filter>
@@ -58,14 +55,23 @@
     <Filter Include="소스 파일\01_Scene">
       <UniqueIdentifier>{7cee3d7e-8a02-4965-9d90-a26ba7549b1b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\00_Core">
-      <UniqueIdentifier>{de1f95be-d1ef-4bcc-8842-33d7bf6b06d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\99_Utility\Manager">
       <UniqueIdentifier>{52b84b9e-5d7d-44c2-8db6-5bd3f9933d4b}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더 파일\99_Utility\Manager">
       <UniqueIdentifier>{4b946914-d3fe-4107-8c52-79c83a56e7fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99_Utility\PCH">
+      <UniqueIdentifier>{bc3f0eb4-4684-427e-8410-14a04216a2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\99_Utility\PCH">
+      <UniqueIdentifier>{73288dd7-486b-402a-b02e-1b9cfd5087d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00_App">
+      <UniqueIdentifier>{de1f95be-d1ef-4bcc-8842-33d7bf6b06d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\00_App">
+      <UniqueIdentifier>{eb30cc25-ab93-4150-9651-ed9e403fd2bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,9 +85,6 @@
       <Filter>헤더 파일\99_Utility</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
-      <Filter>헤더 파일\99_Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
       <Filter>헤더 파일\99_Utility</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
@@ -121,10 +124,10 @@
       <Filter>헤더 파일\03_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
-      <Filter>헤더 파일\00_Core</Filter>
+      <Filter>헤더 파일\00_App</Filter>
     </ClInclude>
     <ClInclude Include="WinApp.h">
-      <Filter>헤더 파일\00_Core</Filter>
+      <Filter>헤더 파일\00_App</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>헤더 파일\99_Utility\Manager</Filter>
@@ -136,16 +139,19 @@
       <Filter>헤더 파일\03_Component\Components</Filter>
     </ClInclude>
     <ClInclude Include="CoInitializer.h">
-      <Filter>헤더 파일\00_Core</Filter>
+      <Filter>헤더 파일\00_App</Filter>
     </ClInclude>
     <ClInclude Include="RenderCommand.h">
-      <Filter>헤더 파일\00_Core</Filter>
+      <Filter>헤더 파일\00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일\99_Utility\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>헤더 파일\99_Utility\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일\99_Utility</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentSystem.cpp">
       <Filter>소스 파일\03_Component\ComponentSystem</Filter>
     </ClCompile>
@@ -174,7 +180,7 @@
       <Filter>소스 파일\03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
-      <Filter>소스 파일\00_Core</Filter>
+      <Filter>소스 파일\00_App</Filter>
     </ClCompile>
     <ClCompile Include="BitmapRenderer.cpp">
       <Filter>소스 파일\03_Component\Components</Filter>
@@ -183,7 +189,7 @@
       <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="WinApp.cpp">
-      <Filter>소스 파일\00_Core</Filter>
+      <Filter>소스 파일\00_App</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>소스 파일\99_Utility\Manager</Filter>
@@ -195,7 +201,13 @@
       <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="RenderCommand.cpp">
-      <Filter>소스 파일\00_Core</Filter>
+      <Filter>소스 파일\00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일\99_Utility\PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>소스 파일\99_Utility\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,11 +3,12 @@
 
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/Camera.h"
-#include "SpaceObject.h"
 #include "CameraController.h"
 #include "Sun.h"
 #include "Earth.h"
 #include "Moon.h"
+#include "Title.h"
+#include "InfoViewer.h"
 
 SolarSystem::~SolarSystem()
 {
@@ -37,6 +38,16 @@ void SolarSystem::Enter()
 	moon->AddComponent<Moon>();
 
 	sun->AddComponent<Sun>();
+
+	GameObject* title = CreateGameObject(L"Title");
+	title->AddComponent<Title>();
+
+	GameObject* infoViewer = CreateGameObject(L"InfoViewer");
+	infoViewer->AddComponent<InfoViewer>();
+
+	// GetComponent Å×½ºÆ®
+	InfoViewer* comp = infoViewer->GetComponent<InfoViewer>();
+	comp->SetSpaceObjects(std::vector<GameObject*>{ sun, earth, moon });
 }
 
 void SolarSystem::Exit()

@@ -1,7 +1,7 @@
 #include "../D2DEngineLib/framework.h"
 #include "CameraController.h"
 
-#include "../D2DEngineLib/Transform.h"
+#include "../D2DEngineLib/Input.h"
 
 void CameraController::Start()
 {
@@ -18,22 +18,22 @@ void CameraController::ProcessInput()
     float horizontal = 0.0f;
     float vertical = 0.0f;
 
-    if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+    if (Input::IsKeyDown(VK_LEFT))
     {
         horizontal -= m_speed;
     }
 
-    if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+    if (Input::IsKeyDown(VK_RIGHT))
     {
         horizontal += m_speed;
     }
 
-    if (GetAsyncKeyState(VK_UP) & 0x8000)
+    if (Input::IsKeyDown(VK_UP))
     {
         vertical += m_speed;
     }
 
-    if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+    if (Input::IsKeyDown(VK_DOWN))
     {
         vertical -= m_speed;
     }

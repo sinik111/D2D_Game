@@ -2,16 +2,12 @@
 
 #include "..\D2DEngineLib\Script.h"
 
-class Earth :
+class Title :
     public Script
 {
-private:
-    float m_speed;
-
 public:
-    ~Earth() override = default;
+    ~Title() override = default;
 
 private:
     void Start() override;
-    void Update() override;
 };

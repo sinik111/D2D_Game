@@ -5,7 +5,7 @@ class Transform;
 
 class Component
 {
-protected:
+private:
 	GameObject* m_owner;
 
 public:

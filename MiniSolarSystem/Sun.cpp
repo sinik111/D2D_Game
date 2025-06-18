@@ -1,15 +1,13 @@
 #include "../D2DEngineLib/framework.h"
 #include "Sun.h"
 
-#include "../D2DEngineLib/GameObject.h"
-#include "SpaceObject.h"
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
 
 void Sun::Start()
 {
-    TextRenderer* textRenderer = m_owner->AddComponent<TextRenderer>();
+    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
     
     textRenderer->SetText(L"еб╬Г");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
@@ -20,9 +18,10 @@ void Sun::Start()
     textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
     textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
 
-    BitmapRenderer* bitmapRenderer = m_owner->AddComponent<BitmapRenderer>();
+    BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>();
 
     bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Sun"));
+
     GetTransform()->SetPosition(Vector2(0.0f, 0.0f));
     GetTransform()->SetScale(Vector2(0.2f, 0.2f));
 

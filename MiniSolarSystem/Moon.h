@@ -9,7 +9,6 @@ private:
     float m_speed;
 
 public:
-    Moon() = default;
     ~Moon() override = default;
 
 private:

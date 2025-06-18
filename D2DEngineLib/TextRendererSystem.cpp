@@ -26,8 +26,7 @@ void TextRendererSystem::MakeRenderCommands()
 {
 	const Matrix3x2 unityMatrix = m_d2dRenderer->GetUnityMatrix();
 	const Matrix3x2 viewMatrix = Camera::s_mainCamera->GetViewMatrix();
-
-	
+	D2D1_POINT_2F point;
 
 	for (auto textRenderer : m_textRenderers)
 	{
@@ -42,6 +41,9 @@ void TextRendererSystem::MakeRenderCommands()
 
 			finalMatrix = renderMatrix * unityMatrix;
 
+			point = textRenderer->GetPoint();
+			point.y = -point.y;
+
 			break;
 		}
 		case TextRenderer::SpaceType::World:
@@ -52,7 +54,9 @@ void TextRendererSystem::MakeRenderCommands()
 				Matrix3x2::Translation(-size.width / 2, size.height / 2);
 
 			finalMatrix = renderMatrix * textRenderer->GetTransform()->GetWorldMatrix() *
-				unityMatrix;
+				viewMatrix * unityMatrix;
+
+			point = textRenderer->GetPoint();
 
 			break;
 		}
@@ -62,7 +66,7 @@ void TextRendererSystem::MakeRenderCommands()
 			textRenderer->GetTextFormat(),
 			textRenderer->GetText(),
 			finalMatrix,
-			textRenderer->GetPoint(),
+			point,
 			textRenderer->GetRectSize(),
 			textRenderer->GetColor(),
 			textRenderer->GetSortOrder()
