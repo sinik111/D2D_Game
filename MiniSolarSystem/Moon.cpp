@@ -11,8 +11,8 @@ void Moon::Start()
 
     textRenderer->SetText(L"До");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
-    textRenderer->SetFontSize(250.0f);
-    textRenderer->SetRectSize({ 300.0f, 300.0f });
+    textRenderer->SetFontSize(60.0f);
+    textRenderer->SetRectSize({ 60.0f, 60.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
     textRenderer->SetSortOrder(2);
     textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
@@ -22,8 +22,7 @@ void Moon::Start()
 
     bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Moon"));
 
-    GetTransform()->SetPosition(Vector2(400.0f, 0.0f));
-    GetTransform()->SetScale(Vector2(0.5f, 0.5f));
+    GetTransform()->SetPosition(Vector2(100.0f, 0.0f));
 
     m_speed = 0.5f;
 }

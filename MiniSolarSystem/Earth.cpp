@@ -11,8 +11,8 @@ void Earth::Start()
 
     textRenderer->SetText(L"Áö±¸");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
-    textRenderer->SetFontSize(150.0f);
-    textRenderer->SetRectSize({ 300.0f, 300.0f });
+    textRenderer->SetFontSize(30.0f);
+    textRenderer->SetRectSize({ 100.0f, 100.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
     textRenderer->SetSortOrder(2);
     textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
@@ -22,8 +22,7 @@ void Earth::Start()
 
     bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Earth"));
 
-    GetTransform()->SetPosition(Vector2(800.0f, 0.0f));
-    GetTransform()->SetScale(Vector2(1.0f, 1.0f));
+    GetTransform()->SetPosition(Vector2(200.0f, 0.0f));
 
     m_speed = 0.3f;
 }

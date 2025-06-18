@@ -37,16 +37,11 @@ void SolarSystem::Enter()
 	earth->AddComponent<Earth>();
 	moon->AddComponent<Moon>();
 
-	sun->AddComponent<Sun>();
-
 	GameObject* title = CreateGameObject(L"Title");
 	title->AddComponent<Title>();
 
 	GameObject* infoViewer = CreateGameObject(L"InfoViewer");
-	infoViewer->AddComponent<InfoViewer>();
-
-	// GetComponent Å×½ºÆ®
-	InfoViewer* comp = infoViewer->GetComponent<InfoViewer>();
+	InfoViewer* comp = infoViewer->AddComponent<InfoViewer>();
 	comp->SetSpaceObjects(std::vector<GameObject*>{ sun, earth, moon });
 }
 

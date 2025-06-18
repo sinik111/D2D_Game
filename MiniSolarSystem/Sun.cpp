@@ -11,9 +11,9 @@ void Sun::Start()
     
     textRenderer->SetText(L"еб╬Г");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
-    textRenderer->SetFontSize(150.0f);
-    textRenderer->SetRectSize({ 300.0f, 300.0f });
-    textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Aquamarine));
+    textRenderer->SetFontSize(20.0f);
+    textRenderer->SetRectSize({ 60.0f, 60.0f });
+    textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Blue));
     textRenderer->SetSortOrder(2);
     textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
     textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
@@ -23,9 +23,8 @@ void Sun::Start()
     bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Sun"));
 
     GetTransform()->SetPosition(Vector2(0.0f, 0.0f));
-    GetTransform()->SetScale(Vector2(0.2f, 0.2f));
 
-    m_speed = 0.1f;
+    m_speed = 0.2f;
 }
 
 void Sun::Update()
