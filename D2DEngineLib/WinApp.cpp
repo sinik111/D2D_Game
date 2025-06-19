@@ -5,7 +5,7 @@
 #include "ComponentSystem.h"
 #include "D2DRenderer.h"
 #include "ResourceManager.h"
-#include "Input.h"
+//#include "Input.h"
 
 WinApp::WinApp()
 	: m_hWnd{}, m_hInstance{}, m_width{}, m_height{},
@@ -115,8 +115,7 @@ void WinApp::Initialize()
 
 	ComponentSystem::BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
 	ComponentSystem::TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
-
-	Input::SetWindow(m_hWnd);
+	ComponentSystem::PlayerInput().SetWindow(m_hWnd);
 }
 
 void WinApp::Shutdown()
@@ -155,7 +154,8 @@ bool WinApp::IsRunning()
 
 void WinApp::Update()
 {
-	Input::Update();
+	ComponentSystem::PlayerInput().Update();
+	ComponentSystem::PlayerInput().ProcessInput();
 
 	ComponentSystem::Script().UpdateSystem();
 

@@ -1,42 +1,53 @@
 #include "../D2DEngineLib/framework.h"
 #include "CameraController.h"
 
-#include "../D2DEngineLib/Input.h"
+#include "../D2DEngineLib/PlayerInput.h"
+
+#include "../D2DEngineLib/Camera.h"
 
 void CameraController::Start()
 {
     m_speed = 3.0f;
+
+    PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
+
+    auto directionAction = PlayerInput::MakeDirectionAction(&CameraController::MakeDirection, this);
+    auto zoomInAction = PlayerInput::MakeAction(&CameraController::ZoomIn, this);
+    auto zoomOutAction = PlayerInput::MakeAction(&CameraController::ZoomOut, this);
+
+    playerInput->RegisterDirectionAction(PlayerInput::DirectionInputType::Arrow, directionAction);
+    playerInput->RegisterActionOnKey('Q', PlayerInput::InputCheckType::Down, zoomInAction);
+    playerInput->RegisterActionOnKey('W', PlayerInput::InputCheckType::Down, zoomOutAction);
+
+    GetTransform()->SetScale(3.0f, 3.0f);
 }
 
 void CameraController::Update()
 {
-    ProcessInput();
+    GetTransform()->Translate(m_direction * m_speed);
+
+    m_direction = Vector2(0.0f, 0.0f);
 }
 
-void CameraController::ProcessInput()
+void CameraController::MakeDirection(Vector2 input)
 {
-    float horizontal = 0.0f;
-    float vertical = 0.0f;
+    m_direction = input;
+}
 
-    if (Input::IsKeyDown(VK_LEFT))
-    {
-        horizontal -= m_speed;
-    }
+void CameraController::ZoomIn()
+{
+    float zoom = Camera::s_mainCamera->GetZoom();
 
-    if (Input::IsKeyDown(VK_RIGHT))
-    {
-        horizontal += m_speed;
-    }
+    zoom -= 0.01f;
 
-    if (Input::IsKeyDown(VK_UP))
-    {
-        vertical += m_speed;
-    }
+    Camera::s_mainCamera->SetZoom(zoom);
+}
 
-    if (Input::IsKeyDown(VK_DOWN))
-    {
-        vertical -= m_speed;
-    }
+void CameraController::ZoomOut()
+{
+    float zoom = Camera::s_mainCamera->GetZoom();
 
-    GetTransform()->Translate(Vector2(horizontal, vertical));
+    zoom += 0.01f;
+
+    Camera::s_mainCamera->SetZoom(zoom);
 }

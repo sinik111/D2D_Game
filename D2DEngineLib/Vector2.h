@@ -186,6 +186,14 @@ public: // 유틸리티 함수
 	{
 		return Vector2(DirectX::XMVector2Reflect(dir.m_rawVector, normal.m_rawVector));
 	}
+
+public:
+	static const Vector2 Zero;
+	static const Vector2 One;
+	static const Vector2 Up;
+	static const Vector2 Down;
+	static const Vector2 Right;
+	static const Vector2 Left;
 };
 
 inline Vector2 operator*(float scalar, const Vector2& v)

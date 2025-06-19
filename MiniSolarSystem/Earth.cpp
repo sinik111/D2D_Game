@@ -22,6 +22,7 @@ void Earth::Start()
 
     bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Earth"));
 
+    GetTransform()->SetScale(Vector2(0.5f, 0.5f));
     GetTransform()->SetPosition(Vector2(200.0f, 0.0f));
 
     m_speed = 0.3f;

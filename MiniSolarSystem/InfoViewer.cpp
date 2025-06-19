@@ -13,7 +13,7 @@ void InfoViewer::Start()
     textRenderer->SetText(text);
     textRenderer->SetSpaceType(TextRenderer::SpaceType::Screen);
     textRenderer->SetFontSize(15.0f);
-    textRenderer->SetPoint({ -380.0f, -200.0f });
+    textRenderer->SetPoint({ -380.0f, -170.0f });
     textRenderer->SetRectSize({ 400.0f, 400.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     textRenderer->SetSortOrder(3);
@@ -24,13 +24,15 @@ void InfoViewer::Start()
 void InfoViewer::LateUpdate()
 {
     Vector2 cameraPosition = Camera::s_mainCamera->GetTransform()->GetPosition();
+    float cameraZoom = Camera::s_mainCamera->GetZoom();
 
     float sunRotation = m_spaceObjects[0]->GetTransform()->GetRotation();
     float earthRotation = m_spaceObjects[1]->GetTransform()->GetRotation();
     float moonRotation = m_spaceObjects[2]->GetTransform()->GetRotation();
 
-    std::wstring text = L"카메라 Position: " + std::to_wstring(cameraPosition.GetX()) + L", " 
-        + std::to_wstring(cameraPosition.GetY())
+    std::wstring text = L"카메라 Position [ ← ↑ ↓ → ]: " + std::to_wstring(cameraPosition.GetX()) + L", " 
+        + std::to_wstring(cameraPosition.GetY()) +
+        L"\n카메라 Zoom [ Q / W ]: " + std::to_wstring(cameraZoom) +
         + L"\n태양 Rotation: " + std::to_wstring(sunRotation) +
         L"\n지구 Rotation: " + std::to_wstring(earthRotation) + 
         L"\n달 Rotation: " + std::to_wstring(moonRotation);

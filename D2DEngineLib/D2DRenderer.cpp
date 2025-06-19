@@ -167,7 +167,7 @@ void D2DRenderer::ExecuteRenderCommands()
 		{
 			BitmapRenderCommand* bitmapCmd = static_cast<BitmapRenderCommand*>(command.get());
 
-			m_d2dDeviceContext->SetTransform(bitmapCmd->transform.AsD2D1Matrix());
+			m_d2dDeviceContext->SetTransform((D2D1_MATRIX_3X2_F)bitmapCmd->transform);
 			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get());
 			break;
 		}
@@ -184,7 +184,7 @@ void D2DRenderer::ExecuteRenderCommands()
 			};
 
 			m_d2dSolidColorBrush->SetColor(textCmd->color);
-			m_d2dDeviceContext->SetTransform(textCmd->transform.AsD2D1Matrix());
+			m_d2dDeviceContext->SetTransform((D2D1_MATRIX_3X2_F)textCmd->transform);
 			m_d2dDeviceContext->DrawTextW(textCmd->text.c_str(), static_cast<UINT32>(textCmd->text.size()),
 				textCmd->textFormat.Get(), layoutRect, m_d2dSolidColorBrush.Get());
 			break;

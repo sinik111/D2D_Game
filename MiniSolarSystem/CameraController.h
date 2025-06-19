@@ -6,6 +6,7 @@ class CameraController
 	: public Script
 {
 private:
+	Vector2 m_direction;
 	float m_speed;
 
 public:
@@ -15,5 +16,8 @@ private:
 	void Start() override;
 	void Update() override;
 
-	void ProcessInput();
+	void MakeDirection(Vector2 input);
+
+	void ZoomIn();
+	void ZoomOut();
 };

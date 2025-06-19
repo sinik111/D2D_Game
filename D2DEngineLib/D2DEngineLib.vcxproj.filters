@@ -147,8 +147,11 @@
     <ClInclude Include="pch.h">
       <Filter>헤더 파일\99_Utility\PCH</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>헤더 파일\99_Utility\Manager</Filter>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>헤더 파일\03_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInputSystem.h">
+      <Filter>헤더 파일\03_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,8 +209,11 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일\99_Utility\PCH</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>소스 파일\99_Utility\Manager</Filter>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>소스 파일\03_Component\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInputSystem.cpp">
+      <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
