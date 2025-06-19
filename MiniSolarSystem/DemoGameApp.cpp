@@ -1,16 +1,10 @@
 #include "../D2DEngineLib/framework.h"
 #include "DemoGameApp.h"
 
-#include <cassert>
-
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/SceneManager.h"
 #include "SolarSystem.h"
 #include "MainTitle.h"
-
-#pragma comment(lib,"windowscodecs.lib")
-
-using Microsoft::WRL::ComPtr;
 
 void DemoGameApp::Initialize()
 {
