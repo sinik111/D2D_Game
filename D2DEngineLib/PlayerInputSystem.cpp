@@ -78,14 +78,16 @@ void PlayerInputSystem::ProcessInput()
                 playerInput->CallActionOnDown(i);
             }
         }
-        else if (IsKeyPressed(i))
+        
+        if (IsKeyPressed(i))
         {
             for (const auto& playerInput : m_playerInputs)
             {
                 playerInput->CallActionOnPressed(i);
             }
         }
-        else if (IsKeyReleased(i))
+        
+        if (IsKeyReleased(i))
         {
             for (const auto& playerInput : m_playerInputs)
             {

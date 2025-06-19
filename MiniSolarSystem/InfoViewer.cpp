@@ -13,7 +13,7 @@ void InfoViewer::Start()
     textRenderer->SetText(text);
     textRenderer->SetSpaceType(TextRenderer::SpaceType::Screen);
     textRenderer->SetFontSize(15.0f);
-    textRenderer->SetPoint({ -380.0f, -170.0f });
+    textRenderer->SetPoint({ -380.0f, -150.0f });
     textRenderer->SetRectSize({ 400.0f, 400.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     textRenderer->SetSortOrder(3);
@@ -30,7 +30,9 @@ void InfoViewer::LateUpdate()
     float earthRotation = m_spaceObjects[1]->GetTransform()->GetRotation();
     float moonRotation = m_spaceObjects[2]->GetTransform()->GetRotation();
 
-    std::wstring text = std::wstring(L"Scene을 변경하려면 '1'을 누르세요\n") + L"카메라 Position [ ← ↑ ↓ → ]: " + std::to_wstring(cameraPosition.GetX()) + L", "
+    std::wstring text = std::wstring(L"Scene을 변경하려면 '1'을 누르세요\n") +
+        std::wstring(L"지구 생성/삭제하기 [ A / S ]\n") +
+        L"카메라 Position [ ← ↑ ↓ → ]: " + std::to_wstring(cameraPosition.GetX()) + L", "
         + std::to_wstring(cameraPosition.GetY()) +
         L"\n카메라 Zoom [ Q / W ]: " + std::to_wstring(cameraZoom) +
         + L"\n태양 Rotation: " + std::to_wstring(sunRotation) +

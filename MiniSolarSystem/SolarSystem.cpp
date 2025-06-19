@@ -37,6 +37,8 @@ void SolarSystem::Enter()
 	earth->AddComponent<Earth>();
 	moon->AddComponent<Moon>();
 
+	earth->GetTransform()->SetPosition(Vector2(200.0f, 0.0f));
+
 	GameObject* title = CreateGameObject(L"Title");
 	title->AddComponent<Title>();
 
