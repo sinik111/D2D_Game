@@ -3,10 +3,13 @@
 class ResourceManager
 {
 private:
+	using Bitmaps = std::unordered_map<std::wstring, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>;
+	using BitmapGroups = std::unordered_map<std::wstring, Bitmaps>;
+
 	Microsoft::WRL::ComPtr<ID2D1DeviceContext7> m_d2d1DeviceContext;
 	Microsoft::WRL::ComPtr<IWICImagingFactory> m_wicImagingFactory;
 
-	std::unordered_map<std::wstring, Microsoft::WRL::ComPtr<ID2D1Bitmap1>> m_bitmaps;
+	BitmapGroups m_bitmapGroups;
 
 	std::wstring m_resourcePath;
 
@@ -18,19 +21,19 @@ private:
 	ResourceManager& operator=(ResourceManager&&) = delete;
 	~ResourceManager() = default;
 
-private:
+public:
 	static ResourceManager& Get();
 
 public:
-	static void Initialize(Microsoft::WRL::ComPtr<ID2D1DeviceContext7> deviceContext,
+	void Initialize(Microsoft::WRL::ComPtr<ID2D1DeviceContext7> deviceContext,
 		const std::wstring& modulePath,
 		const std::wstring& binaryFolderName,
 		const std::wstring& resourceFolderName);
-	static void Release();
+	void Release();
 
-	static void ReleaseResources();
+	void ReleaseResources(const std::wstring group);
 
 public:
-	static HRESULT LoadBitmapFromFile(const std::wstring name, const std::wstring& fileName);
-	static Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetBitmap(const std::wstring name);
+	HRESULT LoadBitmapFromFile(const std::wstring group, const std::wstring name, const std::wstring& fileName);
+	Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetBitmap(const std::wstring group, const std::wstring name);
 };

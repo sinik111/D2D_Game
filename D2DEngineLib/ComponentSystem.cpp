@@ -19,20 +19,20 @@ ComponentSystem& ComponentSystem::Get()
 
 ScriptSystem& ComponentSystem::Script()
 {
-	return *Get().m_scriptSystem.get();
+	return *m_scriptSystem.get();
 }
 
 BitmapRendererSystem& ComponentSystem::BitmapRenderer()
 {
-	return *Get().m_bitmapRendererSystem.get();
+	return *m_bitmapRendererSystem.get();
 }
 
 TextRendererSystem& ComponentSystem::TextRenderer()
 {
-	return *Get().m_textRendererSystem.get();
+	return *m_textRendererSystem.get();
 }
 
 PlayerInputSystem& ComponentSystem::PlayerInput()
 {
-	return *Get().m_playerInputSystem.get();
+	return *m_playerInputSystem.get();
 }

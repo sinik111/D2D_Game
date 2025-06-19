@@ -6,12 +6,12 @@
 BitmapRenderer::BitmapRenderer()
 	: m_sortOrder{ 0 }
 {
-	ComponentSystem::BitmapRenderer().Register(this);
+	ComponentSystem::Get().BitmapRenderer().Register(this);
 }
 
 BitmapRenderer::~BitmapRenderer()
 {
-	ComponentSystem::BitmapRenderer().Unregister(this);
+	ComponentSystem::Get().BitmapRenderer().Unregister(this);
 }
 
 Microsoft::WRL::ComPtr<ID2D1Bitmap1> BitmapRenderer::GetBitmap()

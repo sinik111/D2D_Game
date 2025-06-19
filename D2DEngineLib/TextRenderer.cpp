@@ -9,14 +9,14 @@ TextRenderer::TextRenderer()
 	m_sortOrder{}, m_fontSize{ 10.0f }, m_horizontalAlignment{ HorizontlAlignment::Left },
 	m_verticalAlignment{ VerticalAlignment::Top }
 {
-	ComponentSystem::TextRenderer().Register(this);
+	ComponentSystem::Get().TextRenderer().Register(this);
 
-	m_textFormat = ComponentSystem::TextRenderer().CreateTextFormat(m_fontSize);
+	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
 }
 
 TextRenderer::~TextRenderer()
 {
-	ComponentSystem::TextRenderer().Unregister(this);
+	ComponentSystem::Get().TextRenderer().Unregister(this);
 }
 
 void TextRenderer::SetText(const std::wstring& text)
@@ -53,7 +53,7 @@ void TextRenderer::SetFontSize(float size)
 {
 	m_fontSize = size;
 
-	m_textFormat = ComponentSystem::TextRenderer().CreateTextFormat(m_fontSize);
+	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
 
 	SetVerticalAlignment(m_verticalAlignment);
 	SetHorizontalAlignment(m_horizontalAlignment);

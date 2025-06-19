@@ -20,7 +20,7 @@ void Earth::Start()
 
     BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>();
 
-    bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Earth"));
+    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Earth"));
 
     GetTransform()->SetScale(Vector2(0.5f, 0.5f));
     GetTransform()->SetPosition(Vector2(200.0f, 0.0f));

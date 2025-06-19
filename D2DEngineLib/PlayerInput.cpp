@@ -6,7 +6,7 @@
 PlayerInput::PlayerInput()
 	: m_directionInputType{ DirectionInputType::Both }
 {
-	ComponentSystem::PlayerInput().Register(this);
+	ComponentSystem::Get().PlayerInput().Register(this);
 
 	m_directionActions.resize(2);
 	m_actionsOnKeyReleased.resize(256);
@@ -16,7 +16,7 @@ PlayerInput::PlayerInput()
 
 PlayerInput::~PlayerInput()
 {
-	ComponentSystem::PlayerInput().Unregister(this);
+	ComponentSystem::Get().PlayerInput().Unregister(this);
 }
 
 void PlayerInput::RegisterActionOnKey(short vKey, InputCheckType checkType, std::function<void()> func)

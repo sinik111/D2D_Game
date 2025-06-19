@@ -18,25 +18,25 @@ private:
 	SceneManager& operator=(SceneManager&&) = delete;
 	~SceneManager() = default;
 
-private:
+public:
 	static SceneManager& Get();
 
 public:
-	static void Shutdown();
+	void Shutdown();
 
 public:
-	static void Update();
+	void Update();
 
 public:
-	static void ChangeScene(const std::wstring& name);
-	static Scene* GetCurrentScene();
+	void ChangeScene(const std::wstring& name);
+	Scene* GetCurrentScene();
 
 private:
-	static void CheckSceneChanged();
+	void CheckSceneChanged();
 
 public:
 	template<typename T>
-	static void CreateScene(const std::wstring& name)
+	void CreateScene(const std::wstring& name)
 	{
 		std::unordered_map<std::wstring, std::unique_ptr<Scene>>& scenes = Get().m_scenes;
 

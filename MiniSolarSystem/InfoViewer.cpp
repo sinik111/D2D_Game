@@ -30,7 +30,7 @@ void InfoViewer::LateUpdate()
     float earthRotation = m_spaceObjects[1]->GetTransform()->GetRotation();
     float moonRotation = m_spaceObjects[2]->GetTransform()->GetRotation();
 
-    std::wstring text = L"카메라 Position [ ← ↑ ↓ → ]: " + std::to_wstring(cameraPosition.GetX()) + L", " 
+    std::wstring text = std::wstring(L"Scene을 변경하려면 '1'을 누르세요\n") + L"카메라 Position [ ← ↑ ↓ → ]: " + std::to_wstring(cameraPosition.GetX()) + L", "
         + std::to_wstring(cameraPosition.GetY()) +
         L"\n카메라 Zoom [ Q / W ]: " + std::to_wstring(cameraZoom) +
         + L"\n태양 Rotation: " + std::to_wstring(sunRotation) +

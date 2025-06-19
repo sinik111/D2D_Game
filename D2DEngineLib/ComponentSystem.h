@@ -23,12 +23,12 @@ private:
 	ComponentSystem& operator=(ComponentSystem&&) = delete;
 	~ComponentSystem() = default;
 
-private:
+public:
 	static ComponentSystem& Get();
 
 public:
-	static ScriptSystem& Script();
-	static BitmapRendererSystem& BitmapRenderer();
-	static TextRendererSystem& TextRenderer();
-	static PlayerInputSystem& PlayerInput();
+	ScriptSystem& Script();
+	BitmapRendererSystem& BitmapRenderer();
+	TextRendererSystem& TextRenderer();
+	PlayerInputSystem& PlayerInput();
 };

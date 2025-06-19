@@ -113,15 +113,15 @@ void WinApp::Initialize()
 	m_d2dRenderer = std::make_unique<D2DRenderer>(m_hWnd, m_width, m_height);
 	m_d2dRenderer->Initialize();
 
-	ComponentSystem::BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
-	ComponentSystem::TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
-	ComponentSystem::PlayerInput().SetWindow(m_hWnd);
+	ComponentSystem::Get().BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::Get().TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
 }
 
 void WinApp::Shutdown()
 {
-	SceneManager::Shutdown();
-	ResourceManager::Release();
+	SceneManager::Get().Shutdown();
+	ResourceManager::Get().Release();
 	m_d2dRenderer->Shutdown();
 }
 
@@ -154,15 +154,15 @@ bool WinApp::IsRunning()
 
 void WinApp::Update()
 {
-	ComponentSystem::PlayerInput().Update();
-	ComponentSystem::PlayerInput().ProcessInput();
+	ComponentSystem::Get().PlayerInput().Update();
+	ComponentSystem::Get().PlayerInput().ProcessInput();
 
-	ComponentSystem::Script().UpdateSystem();
+	ComponentSystem::Get().Script().UpdateSystem();
 
-	SceneManager::Update();
+	SceneManager::Get().Update();
 
-	ComponentSystem::BitmapRenderer().MakeRenderCommands();
-	ComponentSystem::TextRenderer().MakeRenderCommands();
+	ComponentSystem::Get().BitmapRenderer().MakeRenderCommands();
+	ComponentSystem::Get().TextRenderer().MakeRenderCommands();
 }
 
 void WinApp::Render()

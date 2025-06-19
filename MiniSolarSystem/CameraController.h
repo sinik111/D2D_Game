@@ -20,4 +20,5 @@ private:
 
 	void ZoomIn();
 	void ZoomOut();
+	void ChangeScene();
 };

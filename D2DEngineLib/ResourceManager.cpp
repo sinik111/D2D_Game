@@ -24,14 +24,14 @@ void ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 	const std::wstring& binaryFolderName,
 	const std::wstring& resourceFolderName)
 {
-	Get().m_d2d1DeviceContext = deviceContext;
+	m_d2d1DeviceContext = deviceContext;
 
 	CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER,
-		__uuidof(Get().m_wicImagingFactory), (void**)Get().m_wicImagingFactory.GetAddressOf());
+		__uuidof(m_wicImagingFactory), (void**)m_wicImagingFactory.GetAddressOf());
 
 	bool wrongDirectory = true;
 
-	std::wstring& resourcePath = Get().m_resourcePath;
+	std::wstring& resourcePath = m_resourcePath;
 
 	resourcePath = modulePath;
 
@@ -66,18 +66,25 @@ void ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 
 void ResourceManager::Release()
 {
-	Get().m_wicImagingFactory = nullptr;
-	Get().m_d2d1DeviceContext = nullptr;
+	for (auto& bitmaps : m_bitmapGroups)
+	{
+		bitmaps.second.clear();
+	}
+
+	m_bitmapGroups.clear();
+
+	m_wicImagingFactory = nullptr;
+	m_d2d1DeviceContext = nullptr;
 }
 
-void ResourceManager::ReleaseResources()
+void ResourceManager::ReleaseResources(const std::wstring group)
 {
-	Get().m_bitmaps.clear();
+	m_bitmapGroups[group].clear();
 }
 
-HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring name, const std::wstring& fileName)
+HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring group, const std::wstring name, const std::wstring& fileName)
 {
-	std::unordered_map<std::wstring, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>& bitmaps = Get().m_bitmaps;
+	Bitmaps& bitmaps = m_bitmapGroups[group];
 
 	if (bitmaps.find(name) != bitmaps.end())
 	{
@@ -86,12 +93,12 @@ HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring name, const std::
 		return E_FAIL;
 	}
 
-	ComPtr<IWICImagingFactory>& imagingFactory = Get().m_wicImagingFactory;
+	ComPtr<IWICImagingFactory>& imagingFactory = m_wicImagingFactory;
 	ComPtr<IWICBitmapDecoder> decoder;
 	ComPtr<IWICBitmapFrameDecode> frame;
 	ComPtr<IWICFormatConverter> converter;
 
-	std::wstring path = Get().m_resourcePath + fileName;
+	std::wstring path = m_resourcePath + fileName;
 
 	// 디코더 생성
 	HRESULT hr = imagingFactory->CreateDecoderFromFilename(
@@ -138,7 +145,7 @@ HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring name, const std::
 	ComPtr<ID2D1Bitmap1> bitmap;
 
 	// DeviceContext에서 WIC 비트맵으로부터 D2D1Bitmap1 생성
-	hr = Get().m_d2d1DeviceContext->CreateBitmapFromWicBitmap(converter.Get(), &bmpProps, bitmap.GetAddressOf());
+	hr = m_d2d1DeviceContext->CreateBitmapFromWicBitmap(converter.Get(), &bmpProps, bitmap.GetAddressOf());
 	if (FAILED(hr))
 	{
 		return hr;
@@ -149,9 +156,9 @@ HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring name, const std::
 	return hr;
 }
 
-ComPtr<ID2D1Bitmap1> ResourceManager::GetBitmap(const std::wstring name)
+ComPtr<ID2D1Bitmap1> ResourceManager::GetBitmap(const std::wstring group, const std::wstring name)
 {
-	std::unordered_map<std::wstring, Microsoft::WRL::ComPtr<ID2D1Bitmap1>>& bitmaps = Get().m_bitmaps;
+	Bitmaps& bitmaps = m_bitmapGroups[group];
 
 	if (bitmaps.find(name) == bitmaps.end())
 	{

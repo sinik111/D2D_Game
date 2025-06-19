@@ -4,6 +4,7 @@
 #include "../D2DEngineLib/PlayerInput.h"
 
 #include "../D2DEngineLib/Camera.h"
+#include "../D2DEngineLib/SceneManager.h"
 
 void CameraController::Start()
 {
@@ -14,10 +15,12 @@ void CameraController::Start()
     auto directionAction = PlayerInput::MakeDirectionAction(&CameraController::MakeDirection, this);
     auto zoomInAction = PlayerInput::MakeAction(&CameraController::ZoomIn, this);
     auto zoomOutAction = PlayerInput::MakeAction(&CameraController::ZoomOut, this);
+    auto changeScene = PlayerInput::MakeAction(&CameraController::ChangeScene, this);
 
     playerInput->RegisterDirectionAction(PlayerInput::DirectionInputType::Arrow, directionAction);
     playerInput->RegisterActionOnKey('Q', PlayerInput::InputCheckType::Down, zoomInAction);
     playerInput->RegisterActionOnKey('W', PlayerInput::InputCheckType::Down, zoomOutAction);
+    playerInput->RegisterActionOnKey('1', PlayerInput::InputCheckType::Released, changeScene);
 
     GetTransform()->SetScale(3.0f, 3.0f);
 }
@@ -50,4 +53,9 @@ void CameraController::ZoomOut()
     zoom += 0.01f;
 
     Camera::s_mainCamera->SetZoom(zoom);
+}
+
+void CameraController::ChangeScene()
+{
+    SceneManager::Get().ChangeScene(L"Title");
 }

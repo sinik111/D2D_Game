@@ -15,50 +15,50 @@ SceneManager& SceneManager::Get()
 
 void SceneManager::Shutdown()
 {
-	Get().m_scenes.clear();
+	m_scenes.clear();
 }
 
 void SceneManager::Update()
 {
 	CheckSceneChanged();
 
-	Get().m_currentScene->Update();
+	m_currentScene->Update();
 }
 
 void SceneManager::ChangeScene(const std::wstring& name)
 {
-	std::unordered_map<std::wstring, std::unique_ptr<Scene>>& scenes = Get().m_scenes;
+	std::unordered_map<std::wstring, std::unique_ptr<Scene>>& scenes = m_scenes;
 
 	if (scenes.find(name) == scenes.end())
 	{
 		return;
 	}
 
-	Get().m_nextScene = scenes[name].get();
+	m_nextScene = scenes[name].get();
 }
 
 Scene* SceneManager::GetCurrentScene()
 {
-	return Get().m_currentScene;
+	return m_currentScene;
 }
 
 void SceneManager::CheckSceneChanged() // 예외처리 추가 필요
 {
-	if (Get().m_nextScene != nullptr)
+	if (m_nextScene != nullptr)
 	{	
-		Get().m_nextScene->Load();
+		m_nextScene->Load();
 
-		if (Get().m_currentScene != nullptr)
+		if (m_currentScene != nullptr)
 		{
-			Get().m_currentScene->Exit();
+			m_currentScene->Exit();
 
-			Get().m_currentScene->Unload();
+			m_currentScene->Unload();
 		}
 		
-		Get().m_currentScene = Get().m_nextScene;
+		m_currentScene = m_nextScene;
 
-		Get().m_nextScene = nullptr;
+		m_nextScene = nullptr;
 
-		Get().m_currentScene->Enter();
+		m_currentScene->Enter();
 	}
 }

@@ -47,16 +47,17 @@ void SolarSystem::Enter()
 
 void SolarSystem::Exit()
 {
+	Scene::Exit();
 }
 
 void SolarSystem::Unload()
 {
-	ResourceManager::ReleaseResources();
+	ResourceManager::Get().ReleaseResources(L"SolarSystem");
 }
 
 void SolarSystem::LoadResources()
 {
-	ResourceManager::LoadBitmapFromFile(L"Sun", L"Sun.png");
-	ResourceManager::LoadBitmapFromFile(L"Earth", L"Earth.png");
-	ResourceManager::LoadBitmapFromFile(L"Moon", L"Moon.png");
+	ResourceManager::Get().LoadBitmapFromFile(L"SolarSystem", L"Sun", L"Sun.png");
+	ResourceManager::Get().LoadBitmapFromFile(L"SolarSystem", L"Earth", L"Earth.png");
+	ResourceManager::Get().LoadBitmapFromFile(L"SolarSystem", L"Moon", L"Moon.png");
 }

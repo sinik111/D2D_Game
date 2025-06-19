@@ -20,7 +20,7 @@ void Moon::Start()
 
     BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>();
 
-    bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Moon"));
+    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Moon"));
 
     GetTransform()->SetPosition(Vector2(100.0f, 0.0f));
 

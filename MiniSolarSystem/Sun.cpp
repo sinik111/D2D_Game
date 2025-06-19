@@ -20,7 +20,7 @@ void Sun::Start()
 
     BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>();
 
-    bitmapRenderer->SetBitmap(ResourceManager::GetBitmap(L"Sun"));
+    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Sun"));
 
     GetTransform()->SetPosition(Vector2(0.0f, 0.0f));
 

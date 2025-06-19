@@ -6,6 +6,7 @@
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/SceneManager.h"
 #include "SolarSystem.h"
+#include "MainTitle.h"
 
 #pragma comment(lib,"windowscodecs.lib")
 
@@ -28,11 +29,13 @@ void DemoGameApp::Initialize()
 
 	__super::Initialize();
 
-	ResourceManager::Initialize(m_d2dRenderer->GetDeviceContext(),
+	ResourceManager::Get().Initialize(m_d2dRenderer->GetDeviceContext(),
 		m_modulePath, L"x64", L"MiniSolarSystem/Resource");
 
-	SceneManager::CreateScene<SolarSystem>(L"SolarSystem");
-	SceneManager::ChangeScene(L"SolarSystem");
+	SceneManager::Get().CreateScene<MainTitle>(L"Title");
+	SceneManager::Get().CreateScene<SolarSystem>(L"SolarSystem");
+
+	SceneManager::Get().ChangeScene(L"Title");
 
 	m_isRunning = true;
 }

@@ -153,6 +153,9 @@
     <ClInclude Include="PlayerInputSystem.h">
       <Filter>헤더 파일\03_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>헤더 파일\99_Utility\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -214,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="PlayerInputSystem.cpp">
       <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>소스 파일\99_Utility\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

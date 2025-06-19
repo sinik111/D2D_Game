@@ -2,6 +2,7 @@
 #include "PlayerInputSystem.h"
 
 #include "PlayerInput.h"
+#include "ContainerUtility.h"
 
 PlayerInputSystem::PlayerInputSystem()
     :m_hWnd{ nullptr }, m_mousePoint{}
@@ -16,7 +17,7 @@ void PlayerInputSystem::Register(PlayerInput* playerInput)
 
 void PlayerInputSystem::Unregister(PlayerInput* playerInput)
 {
-
+    Util::OptimizedErase(m_playerInputs, playerInput);
 }
 
 void PlayerInputSystem::SetWindow(HWND hWnd)
