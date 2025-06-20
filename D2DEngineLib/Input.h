@@ -2,6 +2,7 @@
 
 class Input
 {
+public:
 	// 키가 눌려진 상태인지 확인
 	static bool IsKeyDown(int vKey);
 

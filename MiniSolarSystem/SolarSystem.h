@@ -6,7 +6,6 @@ class SolarSystem :
 	public Scene
 {
 public:
-	SolarSystem() = default;
 	~SolarSystem() override;
 
 public:

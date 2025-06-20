@@ -66,7 +66,7 @@ void WinApp::Initialize()
 {
 	Debug::CreateConsole();
 
-	wchar_t szPath[MAX_PATH] = {};
+	wchar_t szPath[MAX_PATH]{};
 
 	GetModuleFileNameW(NULL, szPath, MAX_PATH);
 	m_modulePath = szPath;
@@ -79,8 +79,7 @@ void WinApp::Initialize()
 
 	m_hInstance = GetModuleHandleW(NULL);
 
-	WNDCLASSEX wc = {};
-
+	WNDCLASSEX wc{};
 	wc.cbSize = sizeof(WNDCLASSEXW);
 	wc.style = m_classStyle;
 	wc.lpfnWndProc = WindowProc;
@@ -93,8 +92,8 @@ void WinApp::Initialize()
 
 	RegisterClassExW(&wc);
 
-	SIZE clientSize = { (LONG)m_width, (LONG)m_height };
-	RECT clientRect = { 0, 0, clientSize.cx, clientSize.cy };
+	RECT clientRect{ 0, 0, (LONG)m_width, (LONG)m_height };
+
 	AdjustWindowRect(&clientRect, m_windowStyle, FALSE);
 
 	m_hWnd = CreateWindowExW(
@@ -133,7 +132,7 @@ void WinApp::Shutdown()
 
 void WinApp::Run()
 {
-	MSG msg = {};
+	MSG msg{};
 
 	while (m_isRunning)
 	{
@@ -151,11 +150,6 @@ void WinApp::Run()
 		Update();
 		Render();
 	}
-}
-
-bool WinApp::IsRunning()
-{
-	return m_isRunning;
 }
 
 void WinApp::Update()

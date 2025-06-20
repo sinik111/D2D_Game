@@ -6,7 +6,6 @@ class MainTitle :
 	public Scene
 {
 public:
-	MainTitle() = default;
 	~MainTitle() override;
 
 public:

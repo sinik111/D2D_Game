@@ -39,7 +39,6 @@ public:
 	virtual void Shutdown();
 
 	void Run();
-	bool IsRunning();
 
 private:
 	void Update();

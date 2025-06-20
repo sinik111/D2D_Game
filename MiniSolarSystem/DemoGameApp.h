@@ -6,8 +6,7 @@ class DemoGameApp :
 	public WinApp
 {
 public:
-	DemoGameApp() = default;
-	~DemoGameApp() = default;
+	~DemoGameApp() override = default;
 
 public:
 	void Initialize();
