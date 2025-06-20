@@ -29,20 +29,20 @@ public:
 	void Update();
 
 	// 키가 눌려진 상태인지 확인
-	bool IsKeyDown(int vkey);
+	bool IsKeyDown(int vkey) const;
 
 	// 이번 루프에 키가 눌려졌는지 확인
-	bool IsKeyPressed(int vkey);
+	bool IsKeyPressed(int vkey) const;
 
 	// 이번 루프에 키가 놓아졌는지 확인
-	bool IsKeyReleased(int vkey);
+	bool IsKeyReleased(int vkey) const;
 
-	POINT GetCursorPoint();
+	POINT GetCursorPoint() const;
 
 public:
-	void ProcessInput();
+	void ProcessInput() const;
 	
 private:
-	void ProcessArrowInput();
-	void ProcessWASDInput();
+	void ProcessArrowInput() const;
+	void ProcessWASDInput() const;
 };

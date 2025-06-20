@@ -5,7 +5,9 @@
 #include "ComponentSystem.h"
 #include "D2DRenderer.h"
 #include "ResourceManager.h"
-//#include "Input.h"
+#include "Debug.h"
+#include "MyTime.h"
+#include "MyTimeSystem.h"
 
 WinApp::WinApp()
 	: m_hWnd{}, m_hInstance{}, m_width{}, m_height{},
@@ -62,6 +64,8 @@ void WinApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void WinApp::Initialize()
 {
+	Debug::CreateConsole();
+
 	wchar_t szPath[MAX_PATH] = {};
 
 	GetModuleFileNameW(NULL, szPath, MAX_PATH);
@@ -120,6 +124,8 @@ void WinApp::Initialize()
 
 void WinApp::Shutdown()
 {
+	Debug::ReleaseConsole();
+
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
 	m_d2dRenderer->Shutdown();
@@ -154,6 +160,9 @@ bool WinApp::IsRunning()
 
 void WinApp::Update()
 {
+	MyTimeSystem::Get().Update();
+	Debug::UpdateFPS(true);
+
 	ComponentSystem::Get().PlayerInput().Update();
 	ComponentSystem::Get().PlayerInput().ProcessInput();
 

@@ -28,7 +28,7 @@ void TextRendererSystem::MakeRenderCommands()
 	const Matrix3x2 viewMatrix = Camera::s_mainCamera->GetViewMatrix();
 	D2D1_POINT_2F point;
 
-	for (auto textRenderer : m_textRenderers)
+	for (const auto& textRenderer : m_textRenderers)
 	{
 		Matrix3x2 renderMatrix;
 		Matrix3x2 finalMatrix;

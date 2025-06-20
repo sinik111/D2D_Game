@@ -18,4 +18,7 @@ private:
 
 	void CreateEarth();
 	void DeleteEarth();
+
+public:
+	size_t GetEarthCount() const;
 };

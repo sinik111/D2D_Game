@@ -3,6 +3,7 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Camera.h"
+#include "Sun.h"
 
 void InfoViewer::Start()
 {
@@ -30,9 +31,12 @@ void InfoViewer::LateUpdate()
     float earthRotation = m_spaceObjects[1]->GetTransform()->GetRotation();
     float moonRotation = m_spaceObjects[2]->GetTransform()->GetRotation();
 
+    const Sun* sun = m_spaceObjects[0]->GetComponent<Sun>();
+    size_t earthCount = sun->GetEarthCount();
+
     std::wstring text = std::wstring(L"Scene을 변경하려면 '1'을 누르세요\n") +
-        std::wstring(L"지구 생성/삭제하기 [ A / S ]\n") +
-        L"카메라 Position [ ← ↑ ↓ → ]: " + std::to_wstring(cameraPosition.GetX()) + L", "
+        std::wstring(L"지구 생성/삭제하기 [ A / S ] 지구 개수: ") + std::to_wstring(earthCount) +
+        L"\n카메라 Position [ ← ↑ ↓ → ]: " + std::to_wstring(cameraPosition.GetX()) + L", "
         + std::to_wstring(cameraPosition.GetY()) +
         L"\n카메라 Zoom [ Q / W ]: " + std::to_wstring(cameraZoom) +
         + L"\n태양 Rotation: " + std::to_wstring(sunRotation) +

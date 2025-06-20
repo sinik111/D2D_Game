@@ -27,14 +27,12 @@ void SceneManager::Update()
 
 void SceneManager::ChangeScene(const std::wstring& name)
 {
-	std::unordered_map<std::wstring, std::unique_ptr<Scene>>& scenes = m_scenes;
-
-	if (scenes.find(name) == scenes.end())
+	if (m_scenes.find(name) == m_scenes.end())
 	{
 		return;
 	}
 
-	m_nextScene = scenes[name].get();
+	m_nextScene = m_scenes[name].get();
 }
 
 Scene* SceneManager::GetCurrentScene()

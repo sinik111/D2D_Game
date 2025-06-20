@@ -107,7 +107,7 @@ void D2DRenderer::BeginDraw(const D2D1::ColorF& color) const
 void D2DRenderer::EndDraw() const
 {
 	m_d2dDeviceContext->EndDraw();
-	m_dxgiSwapChain->Present(1, 0);
+	m_dxgiSwapChain->Present(0, 0);
 }
 
 const ComPtr<ID2D1DeviceContext7>& D2DRenderer::GetDeviceContext() const

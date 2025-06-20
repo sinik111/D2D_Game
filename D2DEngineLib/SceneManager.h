@@ -38,13 +38,11 @@ public:
 	template<typename T>
 	void CreateScene(const std::wstring& name)
 	{
-		std::unordered_map<std::wstring, std::unique_ptr<Scene>>& scenes = Get().m_scenes;
-
-		if (scenes.find(name) != scenes.end())
+		if (m_scenes.find(name) != m_scenes.end())
 		{
 			return;
 		}
 
-		scenes.emplace(name, std::make_unique<T>());
+		m_scenes.emplace(name, std::make_unique<T>());
 	}
 };

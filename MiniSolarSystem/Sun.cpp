@@ -62,3 +62,8 @@ void Sun::DeleteEarth()
         m_earths.pop_front();
     }
 }
+
+size_t Sun::GetEarthCount() const
+{
+    return m_earths.size();
+}

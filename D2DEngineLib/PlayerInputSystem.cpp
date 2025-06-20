@@ -5,7 +5,7 @@
 #include "ContainerUtility.h"
 
 PlayerInputSystem::PlayerInputSystem()
-    :m_hWnd{ nullptr }, m_mousePoint{}
+    : m_hWnd{ nullptr }, m_mousePoint{}
 {
 
 }
@@ -39,27 +39,27 @@ void PlayerInputSystem::Update()
     ScreenToClient(m_hWnd, &m_mousePoint);
 }
 
-bool PlayerInputSystem::IsKeyDown(int vkey)
+bool PlayerInputSystem::IsKeyDown(int vkey) const
 {
     return m_currentKeyState[vkey];
 }
 
-bool PlayerInputSystem::IsKeyPressed(int vkey)
+bool PlayerInputSystem::IsKeyPressed(int vkey) const
 {
     return !m_previousKeyState[vkey] && m_currentKeyState[vkey];
 }
 
-bool PlayerInputSystem::IsKeyReleased(int vkey)
+bool PlayerInputSystem::IsKeyReleased(int vkey) const
 {
     return m_previousKeyState[vkey] && !m_currentKeyState[vkey];
 }
 
-POINT PlayerInputSystem::GetCursorPoint()
+POINT PlayerInputSystem::GetCursorPoint() const
 {
     return m_mousePoint;
 }
 
-void PlayerInputSystem::ProcessInput()
+void PlayerInputSystem::ProcessInput() const
 {
     for (const auto& playerInput : m_playerInputs)
     {
@@ -97,7 +97,7 @@ void PlayerInputSystem::ProcessInput()
     }
 }
 
-void PlayerInputSystem::ProcessArrowInput()
+void PlayerInputSystem::ProcessArrowInput() const
 {
     bool isDown = false;
     float horizontal = 0.0f;
@@ -140,7 +140,7 @@ void PlayerInputSystem::ProcessArrowInput()
     }
 }
 
-void PlayerInputSystem::ProcessWASDInput()
+void PlayerInputSystem::ProcessWASDInput() const
 {
     bool isDown = false;
     float horizontal = 0.0f;

@@ -41,12 +41,19 @@ public: // 연산자 오버로딩
         return Matrix3x2(DirectX::XMMatrixMultiply(m_rawMatrix, other.m_rawMatrix));
     }
 
+    Matrix3x2& operator*=(const Matrix3x2& other)
+    {
+        m_rawMatrix = DirectX::XMMatrixMultiply(m_rawMatrix, other.m_rawMatrix);
+
+        return *this;
+    }
+
 public: // Get, Set, As
     D2D1_MATRIX_3X2_F AsD2D1Matrix() const
     {
-        DirectX::XMVECTOR r0 = m_rawMatrix.r[0];
-        DirectX::XMVECTOR r1 = m_rawMatrix.r[1];
-        DirectX::XMVECTOR r3 = m_rawMatrix.r[3];
+        DirectX::XMVECTOR r0(m_rawMatrix.r[0]);
+        DirectX::XMVECTOR r1(m_rawMatrix.r[1]);
+        DirectX::XMVECTOR r3(m_rawMatrix.r[3]);
 
         return D2D1::Matrix3x2F(
             DirectX::XMVectorGetX(r0), DirectX::XMVectorGetY(r0),
@@ -62,9 +69,9 @@ public: // Get, Set, As
 
     explicit operator D2D1_MATRIX_3X2_F() const
     {
-        DirectX::XMVECTOR r0 = m_rawMatrix.r[0];
-        DirectX::XMVECTOR r1 = m_rawMatrix.r[1];
-        DirectX::XMVECTOR r3 = m_rawMatrix.r[3];
+        DirectX::XMVECTOR r0(m_rawMatrix.r[0]);
+        DirectX::XMVECTOR r1(m_rawMatrix.r[1]);
+        DirectX::XMVECTOR r3(m_rawMatrix.r[3]);
 
         return D2D1::Matrix3x2F(
             DirectX::XMVectorGetX(r0), DirectX::XMVectorGetY(r0),

@@ -49,7 +49,7 @@ void ScriptSystem::CallStart()
 
 		if (!m_scriptsForStart.empty())
 		{
-			for (auto script : m_scriptsForStart)
+			for (const auto& script : m_scriptsForStart)
 			{
 				script->Start();
 
@@ -64,14 +64,14 @@ void ScriptSystem::CallStart()
 
 void ScriptSystem::CallUpdate()
 {
-	for (auto script : m_scriptsForUpdate)
+	for (const auto& script : m_scriptsForUpdate)
 	{
 		script->Update();
 	}
 
 	if (!m_pendingUnregisterForUpdate.empty())
 	{
-		for (auto script : m_pendingUnregisterForUpdate)
+		for (const auto& script : m_pendingUnregisterForUpdate)
 		{
 			Util::OptimizedErase(m_scriptsForUpdate, script);
 		}
@@ -82,14 +82,14 @@ void ScriptSystem::CallUpdate()
 
 void ScriptSystem::CallLateUpdate()
 {
-	for (auto script : m_scriptsForLateUpdate)
+	for (const auto& script : m_scriptsForLateUpdate)
 	{
 		script->LateUpdate();
 	}
 
 	if (!m_pendingUnregisterForLateUpdate.empty())
 	{
-		for (auto script : m_pendingUnregisterForLateUpdate)
+		for (const auto& script : m_pendingUnregisterForLateUpdate)
 		{
 			Util::OptimizedErase(m_scriptsForLateUpdate, script);
 		}

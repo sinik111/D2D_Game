@@ -171,7 +171,7 @@ void Transform::MarkWorldDirty()
 	{
 		m_isWorldDirty = true;
 
-		for (auto child : m_children)
+		for (const auto& child : m_children)
 		{
 			child->MarkWorldDirty();
 		}
