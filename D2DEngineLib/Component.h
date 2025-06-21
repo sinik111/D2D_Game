@@ -6,10 +6,9 @@ class Transform;
 class Component
 {
 private:
-	GameObject* m_owner;
+	GameObject* m_owner = nullptr;
 
 public:
-	Component();
 	virtual ~Component() = default;
 
 public:

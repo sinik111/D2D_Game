@@ -4,7 +4,6 @@
 #include "ComponentSystem.h"
 
 BitmapRenderer::BitmapRenderer()
-	: m_sortOrder{ 0 }
 {
 	ComponentSystem::Get().BitmapRenderer().Register(this);
 }

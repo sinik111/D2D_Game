@@ -4,12 +4,6 @@
 #include "PlayerInput.h"
 #include "ContainerUtility.h"
 
-PlayerInputSystem::PlayerInputSystem()
-    : m_hWnd{ nullptr }, m_mousePoint{}
-{
-
-}
-
 void PlayerInputSystem::Register(PlayerInput* playerInput)
 {
     m_playerInputs.push_back(playerInput);

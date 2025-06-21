@@ -3,11 +3,6 @@
 
 #include "GameObject.h"
 
-Component::Component()
-	: m_owner{ nullptr }
-{
-}
-
 GameObject* Component::GetGameObject()
 {
 	return m_owner;

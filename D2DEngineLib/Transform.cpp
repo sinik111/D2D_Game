@@ -6,12 +6,9 @@
 #include "ComponentSystem.h"
 
 Transform::Transform()
-	: m_parent{ nullptr }, m_position{ 0.0f, 0.0f },
-	m_rotation{ 0.0f }, m_scale{ 1.0f, 1.0f },
-	m_isLocalDirty{ true }, m_isWorldDirty{ true }
+
 {
-	m_cachedLocal = Matrix3x2::Identity();
-	m_cachedWorld = Matrix3x2::Identity();
+
 }
 
 Transform::~Transform()

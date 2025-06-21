@@ -10,17 +10,17 @@ private:
 	std::unique_ptr<Transform> m_transform;
 	std::vector<std::unique_ptr<Component>> m_components;
 
-    bool m_isDestroyed;
+    bool m_isDestroyed = false;
 
 public:
-	GameObject(const std::wstring& name);
-	virtual ~GameObject();
+	GameObject(const std::wstring& name = L"GameObject");
+	virtual ~GameObject() = default;
 
 public:
-	Transform* GetTransform();
-    const std::wstring& GetName();
+	Transform* GetTransform() const;
+    const std::wstring& GetName() const;
     void Destroy();
-    bool IsDestroyed();
+    bool IsDestroyed() const;
 
 public:
     // Class T를 생성하는 함수 , 인자까지 전달한다.
@@ -36,7 +36,7 @@ public:
         static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
         // 인자까지 전달하면서 생성
-        std::unique_ptr<T> component = std::make_unique<T>(std::forward<Args>(args)...);
+        std::unique_ptr<T> component{ std::make_unique<T>(std::forward<Args>(args)...) };
 
         component->SetOwner(this);
 
@@ -85,7 +85,7 @@ public:
     {
         for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
         {
-            if (iter->get() == target) //완전히 동일한 타입만
+            if (iter->get() == target)
             {
                 m_components.erase(iter);
 

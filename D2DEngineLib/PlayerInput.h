@@ -29,7 +29,7 @@ private:
 	std::vector<std::vector<std::function<void()>>> m_actionsOnKeyPressed;
 	std::vector<std::vector<std::function<void()>>> m_actionsOnKeyDown;
 
-	DirectionInputType m_directionInputType;
+	DirectionInputType m_directionInputType = DirectionInputType::Both;
 	Vector2 m_mousePosition;
 
 public:

@@ -10,7 +10,7 @@ public:
 	static Camera* s_mainCamera; // 수정 필요, CameraManager 등등
 
 private:
-	float m_zoomFactor;
+	float m_zoomFactor = 1.0f;
 
 public:
 	Camera();

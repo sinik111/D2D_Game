@@ -2,7 +2,7 @@
 #include "MyTimeSystem.h"
 
 MyTimeSystem::MyTimeSystem()
-    : m_previousTime{ Clock::now() }, m_currentTime{ Clock::now() }, m_deltaTime{}
+    : m_previousTime{ Clock::now() }, m_currentTime{ Clock::now() }
 {
 
 }

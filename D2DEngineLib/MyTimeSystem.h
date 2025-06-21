@@ -12,7 +12,7 @@ private:
     TimePoint m_previousTime;
     TimePoint m_currentTime;
 
-    float m_deltaTime;
+    float m_deltaTime{};
 
 private:
     MyTimeSystem();

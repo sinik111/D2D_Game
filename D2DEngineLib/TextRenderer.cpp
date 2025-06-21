@@ -4,10 +4,6 @@
 #include "ComponentSystem.h"
 
 TextRenderer::TextRenderer()
-	: m_text{ L"text" }, m_point{}, m_color{ 0.0f, 0.0f, 0.0f, 1.0f },
-	m_rectSize{ 50.0f, 20.0f }, m_spaceType{ SpaceType::Screen },
-	m_sortOrder{}, m_fontSize{ 10.0f }, m_horizontalAlignment{ HorizontlAlignment::Left },
-	m_verticalAlignment{ VerticalAlignment::Top }
 {
 	ComponentSystem::Get().TextRenderer().Register(this);
 
@@ -147,5 +143,5 @@ D2D1_SIZE_F TextRenderer::GetRectSize()
 
 float TextRenderer::GetFontSize()
 {
-	return 0.0f;
+	return m_fontSize;
 }

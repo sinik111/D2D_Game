@@ -14,7 +14,7 @@ private:
 	std::wstring m_resourcePath;
 
 private:
-	ResourceManager();
+	ResourceManager() = default;
 	ResourceManager(const ResourceManager&) = delete;
 	ResourceManager& operator=(const ResourceManager&) = delete;
 	ResourceManager(ResourceManager&&) = delete;

@@ -9,18 +9,18 @@ class Transform :
 	public Component
 {
 private:
-	Vector2 m_position;
-	float m_rotation;
-	Vector2 m_scale;
+	Vector2 m_position{ 0.0f, 0.0f };
+	float m_rotation{ 0.0f };
+	Vector2 m_scale{ 1.0f, 1.0f };
 
-	Matrix3x2 m_cachedLocal;
-	Matrix3x2 m_cachedWorld;
+	Matrix3x2 m_cachedLocal{ Matrix3x2::Identity() };
+	Matrix3x2 m_cachedWorld{ Matrix3x2::Identity() };
 
-	Transform* m_parent;
+	Transform* m_parent{ nullptr };
 	std::vector<Transform*> m_children;
 
-	bool m_isLocalDirty;
-	bool m_isWorldDirty;
+	bool m_isLocalDirty{ true };
+	bool m_isWorldDirty{ true };
 
 public:
 	Transform();

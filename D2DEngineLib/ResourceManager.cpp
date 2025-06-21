@@ -5,13 +5,6 @@
 
 using Microsoft::WRL::ComPtr;
 
-ResourceManager::ResourceManager()
-	: m_d2d1DeviceContext{ nullptr },
-	m_wicImagingFactory{ nullptr }
-{
-
-}
-
 ResourceManager& ResourceManager::Get()
 {
 	static ResourceManager s_instance;
@@ -29,37 +22,35 @@ void ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 	CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER,
 		__uuidof(m_wicImagingFactory), (void**)m_wicImagingFactory.GetAddressOf());
 
-	bool wrongDirectory = true;
+	bool isWrongDirectory = true;
 
-	std::wstring& resourcePath = m_resourcePath;
+	m_resourcePath = modulePath;
 
-	resourcePath = modulePath;
-
-	size_t pos = resourcePath.length();
+	size_t pos = m_resourcePath.length();
 
 	while (pos != std::wstring::npos)
 	{
-		pos = resourcePath.rfind(L'\\', pos - 1);
+		pos = m_resourcePath.rfind(L'\\', pos - 1);
 		if (pos != std::wstring::npos)
 		{
-			std::wstring folderName = resourcePath.substr(pos + 1);
+			std::wstring folderName = m_resourcePath.substr(pos + 1);
 			if (folderName == binaryFolderName)
 			{
-				resourcePath = resourcePath.substr(0, pos); // 폴더 이름 제거
-				wrongDirectory = false;
+				m_resourcePath = m_resourcePath.substr(0, pos); // 폴더 이름 제거
+				isWrongDirectory = false;
 				break;
 			}
 
-			resourcePath = resourcePath.substr(0, pos);
+			m_resourcePath = m_resourcePath.substr(0, pos);
 		}
 	}
 
-	if (wrongDirectory)
+	if (isWrongDirectory)
 	{
 		return;
 	}
 
-	resourcePath += std::wstring(L"\\" + resourceFolderName + L"\\");
+	m_resourcePath += std::wstring(L"\\" + resourceFolderName + L"\\");
 
 	return;
 }
@@ -93,16 +84,16 @@ HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring group, const std:
 		return E_FAIL;
 	}
 
-	ComPtr<IWICImagingFactory>& imagingFactory = m_wicImagingFactory;
 	ComPtr<IWICBitmapDecoder> decoder;
 	ComPtr<IWICBitmapFrameDecode> frame;
 	ComPtr<IWICFormatConverter> converter;
 
-	std::wstring path = m_resourcePath + fileName;
+	HRESULT hr;
 
 	// 디코더 생성
-	HRESULT hr = imagingFactory->CreateDecoderFromFilename(
-		path.c_str(), nullptr, GENERIC_READ, WICDecodeMetadataCacheOnLoad, &decoder);
+	hr = m_wicImagingFactory->CreateDecoderFromFilename(std::wstring(m_resourcePath + fileName).c_str(),
+		nullptr,
+		GENERIC_READ, WICDecodeMetadataCacheOnLoad, &decoder);
 	if (FAILED(hr))
 	{
 		return hr;
@@ -116,7 +107,7 @@ HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring group, const std:
 	}
 
 	// 포맷 변환기 생성
-	hr = imagingFactory->CreateFormatConverter(&converter);
+	hr = m_wicImagingFactory->CreateFormatConverter(&converter);
 	if (FAILED(hr))
 	{
 		return hr;
@@ -137,10 +128,13 @@ HRESULT ResourceManager::LoadBitmapFromFile(const std::wstring group, const std:
 	}
 
 	// Direct2D 비트맵 속성 (premultiplied alpha, B8G8R8A8_UNORM)
-	D2D1_BITMAP_PROPERTIES1 bmpProps = D2D1::BitmapProperties1(
-		D2D1_BITMAP_OPTIONS_NONE,
-		D2D1::PixelFormat(DXGI_FORMAT_B8G8R8A8_UNORM, D2D1_ALPHA_MODE_PREMULTIPLIED)
-	);
+	D2D1_BITMAP_PROPERTIES1 bmpProps{
+		D2D1::BitmapProperties1(
+			D2D1_BITMAP_OPTIONS_NONE,
+			D2D1::PixelFormat(
+				DXGI_FORMAT_B8G8R8A8_UNORM,
+				D2D1_ALPHA_MODE_PREMULTIPLIED))
+	};
 
 	ComPtr<ID2D1Bitmap1> bitmap;
 

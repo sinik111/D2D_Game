@@ -4,7 +4,6 @@
 #include "ComponentSystem.h"
 
 PlayerInput::PlayerInput()
-	: m_directionInputType{ DirectionInputType::Both }
 {
 	ComponentSystem::Get().PlayerInput().Register(this);
 

@@ -7,7 +7,7 @@
 #include "MyTime.h"
 
 DebugSystem::DebugSystem()
-    : m_lastTimestamp{ Clock::now() }, m_lastFPS{}, m_frameCount{}, m_isConsoleOn{}
+    : m_lastTimestamp{ Clock::now() }
 {
     
 }

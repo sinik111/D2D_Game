@@ -6,7 +6,7 @@ class TextRenderer;
 class TextRendererSystem
 {
 private:
-	D2DRenderer* m_d2dRenderer;
+	D2DRenderer* m_d2dRenderer{};
 	std::vector<TextRenderer*> m_textRenderers;
 
 public:

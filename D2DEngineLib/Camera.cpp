@@ -6,7 +6,6 @@
 Camera* Camera::s_mainCamera = nullptr;
 
 Camera::Camera()
-	: m_zoomFactor{ 1.0f }
 {
 	s_mainCamera = this;
 }
