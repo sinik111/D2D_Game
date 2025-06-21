@@ -9,17 +9,120 @@
 #include "MyTime.h"
 #include "MyTimeSystem.h"
 
-WinApp::WinApp()
-	: m_hWnd{}, m_hInstance{}, m_width{}, m_height{},
-	m_classStyle{}, m_hIcon{}, m_hCursor{}, m_hIconSmall{},
-	m_windowStyle(), m_x{}, m_y{}, m_isRunning{}
+LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+void WinApp::Initialize()
 {
-	
+	Debug::CreateConsole();
+
+	wchar_t szPath[MAX_PATH]{};
+
+	GetModuleFileNameW(nullptr, szPath, MAX_PATH);
+	m_modulePath = szPath;
+
+	GetCurrentDirectoryW(MAX_PATH, szPath);
+	m_workingPath = szPath;
+
+	Debug::Log(m_modulePath);
+	Debug::Log(m_workingPath);
+
+	m_hInstance = GetModuleHandleW(nullptr);
+	m_hCursor = m_hCursor != nullptr ? m_hCursor : LoadCursorW(NULL, IDC_ARROW);
+
+	WNDCLASSEX wc{};
+	wc.cbSize = sizeof(WNDCLASSEXW);
+	wc.style = m_classStyle;
+	wc.lpfnWndProc = WindowProc;
+	wc.hInstance = m_hInstance;
+	wc.lpszClassName = m_className.c_str();
+	wc.hCursor = m_hCursor;
+	wc.hIcon = m_hIcon;
+	wc.hCursor = m_hCursor;
+	wc.hIconSm = m_hIconSmall;
+
+	RegisterClassExW(&wc);
+
+	RECT clientRect{ 0, 0, (LONG)m_width, (LONG)m_height };
+
+	AdjustWindowRect(&clientRect, m_windowStyle, FALSE);
+
+	m_hWnd = CreateWindowExW(
+		0,
+		m_className.c_str(),
+		m_windowName.c_str(),
+		m_windowStyle,
+		m_x, m_y,
+		clientRect.right - clientRect.left, // 너비
+		clientRect.bottom - clientRect.top, // 높이
+		nullptr,
+		nullptr,
+		m_hInstance,
+		this // 인스턴스 주소를 NCREATESTRUCT의 lpCreateParams에 저장
+	);
+
+	ShowWindow(m_hWnd, SW_SHOW);
+	UpdateWindow(m_hWnd);
+
+	m_d2dRenderer = std::make_unique<D2DRenderer>(m_hWnd, m_width, m_height);
+	m_d2dRenderer->Initialize();
+
+	ComponentSystem::Get().BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::Get().TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
 }
 
-WinApp::~WinApp()
+void WinApp::Shutdown()
 {
+	Debug::ReleaseConsole();
 
+	SceneManager::Get().Shutdown();
+	ResourceManager::Get().Release();
+	m_d2dRenderer->Shutdown();
+}
+
+void WinApp::Run()
+{
+	MSG msg{};
+
+	while (true)
+	{
+		if (PeekMessageW(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				break;
+			}
+
+			TranslateMessage(&msg);
+			DispatchMessageW(&msg);
+		}
+
+		Update();
+		Render();
+	}
+}
+
+void WinApp::Update()
+{
+	MyTimeSystem::Get().Update();
+	Debug::UpdateFPS(true);
+
+	ComponentSystem::Get().PlayerInput().Update();
+	ComponentSystem::Get().PlayerInput().ProcessInput();
+
+	ComponentSystem::Get().Script().UpdateSystem();
+
+	SceneManager::Get().Update();
+
+	ComponentSystem::Get().BitmapRenderer().MakeRenderCommands();
+	ComponentSystem::Get().TextRenderer().MakeRenderCommands();
+}
+
+void WinApp::Render()
+{
+	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
+	m_d2dRenderer->ExecuteRenderCommands();
+	m_d2dRenderer->EndDraw();
 }
 
 // 윈도우를 생성할때 설정한 클래스 인스턴스는 각각 다를수 있다.
@@ -60,117 +163,4 @@ void WinApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	}
-}
-
-void WinApp::Initialize()
-{
-	Debug::CreateConsole();
-
-	wchar_t szPath[MAX_PATH]{};
-
-	GetModuleFileNameW(NULL, szPath, MAX_PATH);
-	m_modulePath = szPath;
-
-	GetCurrentDirectoryW(MAX_PATH, szPath);
-	m_workingPath = szPath;
-
-	OutputDebugStringW(std::wstring(m_modulePath + L"\n").c_str());
-	OutputDebugStringW(std::wstring(m_workingPath + L"\n").c_str());
-
-	m_hInstance = GetModuleHandleW(NULL);
-
-	WNDCLASSEX wc{};
-	wc.cbSize = sizeof(WNDCLASSEXW);
-	wc.style = m_classStyle;
-	wc.lpfnWndProc = WindowProc;
-	wc.hInstance = m_hInstance;
-	wc.lpszClassName = m_className.c_str();
-	wc.hCursor = m_hCursor;
-	wc.hIcon = m_hIcon;
-	wc.hCursor = m_hCursor;
-	wc.hIconSm = m_hIconSmall;
-
-	RegisterClassExW(&wc);
-
-	RECT clientRect{ 0, 0, (LONG)m_width, (LONG)m_height };
-
-	AdjustWindowRect(&clientRect, m_windowStyle, FALSE);
-
-	m_hWnd = CreateWindowExW(
-		0,
-		m_className.c_str(),
-		m_windowName.c_str(),
-		m_windowStyle,
-		m_x, m_y,
-		clientRect.right - clientRect.left, // 너비
-		clientRect.bottom - clientRect.top, // 높이
-		NULL,
-		NULL,
-		m_hInstance,
-		this // 인스턴스 주소를 NCREATESTRUCT의 lpCreateParams에 저장
-	);
-
-	ShowWindow(m_hWnd, SW_SHOW);
-	UpdateWindow(m_hWnd);
-
-	m_d2dRenderer = std::make_unique<D2DRenderer>(m_hWnd, m_width, m_height);
-	m_d2dRenderer->Initialize();
-
-	ComponentSystem::Get().BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
-	ComponentSystem::Get().TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
-	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
-}
-
-void WinApp::Shutdown()
-{
-	Debug::ReleaseConsole();
-
-	SceneManager::Get().Shutdown();
-	ResourceManager::Get().Release();
-	m_d2dRenderer->Shutdown();
-}
-
-void WinApp::Run()
-{
-	MSG msg{};
-
-	while (m_isRunning)
-	{
-		if (PeekMessageW(&msg, NULL, 0, 0, PM_REMOVE))
-		{
-			if (msg.message == WM_QUIT)
-			{
-				break;
-			}
-
-			TranslateMessage(&msg);
-			DispatchMessageW(&msg);
-		}
-
-		Update();
-		Render();
-	}
-}
-
-void WinApp::Update()
-{
-	MyTimeSystem::Get().Update();
-	Debug::UpdateFPS(true);
-
-	ComponentSystem::Get().PlayerInput().Update();
-	ComponentSystem::Get().PlayerInput().ProcessInput();
-
-	ComponentSystem::Get().Script().UpdateSystem();
-
-	SceneManager::Get().Update();
-
-	ComponentSystem::Get().BitmapRenderer().MakeRenderCommands();
-	ComponentSystem::Get().TextRenderer().MakeRenderCommands();
-}
-
-void WinApp::Render()
-{
-	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
-	m_d2dRenderer->ExecuteRenderCommands();
-	m_d2dRenderer->EndDraw();
 }

@@ -3,11 +3,6 @@
 
 #include "GameObject.h"
 
-Scene::Scene()
-{
-
-}
-
 Scene::~Scene()
 {
 	Clear();

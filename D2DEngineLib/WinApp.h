@@ -6,37 +6,34 @@
 class WinApp
 {
 protected:
-	HWND m_hWnd;
-	HINSTANCE m_hInstance;
-	HICON m_hIcon;
-	HCURSOR m_hCursor;
-	HICON m_hIconSmall;
+	HWND m_hWnd{};
+	HINSTANCE m_hInstance{};
+	HICON m_hIcon{};
+	HCURSOR m_hCursor{};
+	HICON m_hIconSmall{};
 
-	std::wstring m_className;
-	std::wstring m_windowName;
+	std::wstring m_className{ L"DefaultClassName" };
+	std::wstring m_windowName{ L"DefaultWindowName" };
 	std::wstring m_modulePath;
 	std::wstring m_workingPath;
 
 	CoInitializer m_coInitializer;
 	std::unique_ptr<D2DRenderer> m_d2dRenderer;
 
-	UINT m_classStyle;
-	UINT m_x;
-	UINT m_y;
-	UINT m_width;
-	UINT m_height;
+	UINT m_classStyle{ CS_HREDRAW | CS_VREDRAW };
+	DWORD m_windowStyle{ WS_OVERLAPPEDWINDOW };
+	int m_x{ CW_USEDEFAULT };
+	int m_y{ CW_USEDEFAULT };
+	int m_width{ 800 };
+	int m_height{ 600 };
 
-	DWORD m_windowStyle;
-
-	bool m_isRunning;
 
 public:
-	WinApp();
-	virtual ~WinApp();
+	virtual ~WinApp() = default;
 
 public:
 	virtual void Initialize();
-	virtual void Shutdown();
+	void Shutdown();
 
 	void Run();
 
@@ -46,5 +43,5 @@ private:
 
 protected:
 	virtual void MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	friend LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);
+	friend LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);	
 };

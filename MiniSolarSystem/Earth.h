@@ -6,7 +6,7 @@ class Earth :
     public Script
 {
 private:
-    float m_speed;
+    float m_speed{};
 
 public:
     ~Earth() override = default;

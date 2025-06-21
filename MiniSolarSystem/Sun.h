@@ -7,7 +7,7 @@ class Sun :
 {
 private:
 	std::list<GameObject*> m_earths;
-	float m_speed;
+	float m_speed{};
 
 public:
 	~Sun() override = default;

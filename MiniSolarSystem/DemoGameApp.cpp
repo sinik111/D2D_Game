@@ -8,15 +8,7 @@
 
 void DemoGameApp::Initialize()
 {
-	m_classStyle = CS_HREDRAW | CS_VREDRAW;
 	m_windowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU;
-
-	m_hCursor = LoadCursorW(NULL, IDC_ARROW);
-
-	m_x = CW_USEDEFAULT;
-	m_y = CW_USEDEFAULT;
-	m_width = 800;
-	m_height = 600;
 
 	m_className = L"D2DGame";
 	m_windowName = L"MiniSolarSystem";
@@ -30,13 +22,6 @@ void DemoGameApp::Initialize()
 	SceneManager::Get().CreateScene<SolarSystem>(L"SolarSystem");
 
 	SceneManager::Get().ChangeScene(L"Title");
-
-	m_isRunning = true;
-}
-
-void DemoGameApp::Shutdown()
-{
-	__super::Shutdown();
 }
 
 void DemoGameApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -51,7 +36,7 @@ void DemoGameApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	case WM_KEYUP:
 		if (wParam == VK_ESCAPE)
 		{
-			m_isRunning = false;
+			PostQuitMessage(0);
 		}
 		break;
 	}

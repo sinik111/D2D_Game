@@ -6,11 +6,8 @@ class DemoGameApp :
 	public WinApp
 {
 public:
-	~DemoGameApp() override = default;
+	void Initialize() override;
 
-public:
-	void Initialize();
-	void Shutdown() override;
-
+private:
 	void MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 };

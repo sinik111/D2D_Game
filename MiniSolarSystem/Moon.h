@@ -6,7 +6,7 @@ class Moon :
     public Script
 {
 private:
-    float m_speed;
+    float m_speed{};
 
 public:
     ~Moon() override = default;

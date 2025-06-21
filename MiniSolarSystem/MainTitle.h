@@ -11,6 +11,5 @@ public:
 public:
 	void Load() override;
 	void Enter() override;
-	void Exit() override;
 	void Unload() override;
 };

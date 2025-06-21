@@ -47,11 +47,6 @@ void SolarSystem::Enter()
 	comp->SetSpaceObjects(std::vector<GameObject*>{ sun, earth, moon });
 }
 
-void SolarSystem::Exit()
-{
-	Scene::Exit();
-}
-
 void SolarSystem::Unload()
 {
 	ResourceManager::Get().ReleaseResources(L"SolarSystem");

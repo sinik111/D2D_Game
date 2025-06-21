@@ -2,8 +2,6 @@
 
 #include "GameObject.h"
 
-class Transform;
-
 class Scene
 {
 protected:
@@ -12,7 +10,6 @@ protected:
 	std::vector<std::unique_ptr<GameObject>> m_pendingDestroyedGameObjects;
 
 public:
-	Scene();
 	virtual ~Scene();
 
 public:

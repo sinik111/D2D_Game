@@ -24,11 +24,6 @@ void MainTitle::Enter()
 	go->AddComponent<TitleSceneChange>();
 }
 
-void MainTitle::Exit()
-{
-	Scene::Exit();
-}
-
 void MainTitle::Unload()
 {
 	ResourceManager::Get().ReleaseResources(L"Title");
