@@ -5,15 +5,19 @@
 #include "ContainerUtility.h"
 #include "ComponentSystem.h"
 
-Transform::Transform()
-
-{
-
-}
+static constexpr float MaxDegree = 360.0f;
 
 Transform::~Transform()
 {
-	
+	if (m_parent != nullptr)
+	{
+		m_parent->RemoveChild(this);
+	}
+
+	for (const auto& child : m_children)
+	{
+		child->SetParent(nullptr);
+	}
 }
 
 const Vector2& Transform::GetPosition() const
@@ -58,6 +62,11 @@ const Matrix3x2& Transform::GetWorldMatrix()
 Transform* Transform::GetParent() const
 {
 	return m_parent;
+}
+
+const std::vector<Transform*>& Transform::GetChildren()
+{
+	return m_children;
 }
 
 void Transform::SetPosition(float x, float y)
@@ -149,13 +158,13 @@ void Transform::Rotate(float angle)
 {
 	m_rotation += angle;
 
-	if (m_rotation > 360.0f)
+	if (m_rotation > MaxDegree)
 	{
-		m_rotation -= 360.0f;
+		m_rotation -= MaxDegree;
 	}
 	else if (m_rotation < 0.0f)
 	{
-		m_rotation += 360.0f;
+		m_rotation += MaxDegree;
 	}
 
 	m_isLocalDirty = true;

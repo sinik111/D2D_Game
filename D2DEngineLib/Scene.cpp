@@ -65,3 +65,23 @@ void Scene::Clear()
 	m_gameObjects.clear();
 	m_pendingDestroyedGameObjects.clear();
 }
+
+GameObject* Scene::Find(const std::wstring& name)
+{
+	auto find = std::find_if
+	(
+		m_gameObjects.begin(),
+		m_gameObjects.end(),
+		[name](const std::unique_ptr<GameObject>& gameObject) -> bool
+		{
+			return gameObject->GetName() == name;
+		}
+	);
+
+	if (find != m_gameObjects.end())
+	{
+		return find->get();
+	}
+
+	return nullptr;
+}

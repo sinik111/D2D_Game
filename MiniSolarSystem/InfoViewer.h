@@ -7,9 +7,8 @@ class InfoViewer :
 {
 private:
 	std::vector<GameObject*> m_spaceObjects;
-
-public:
-	~InfoViewer() override = default;
+	float m_earthRotation;
+	float m_moonRotation;
 
 private:
 	void Start() override;
@@ -17,4 +16,6 @@ private:
 
 public:
 	void SetSpaceObjects(std::vector<GameObject*> spaceObjects);
+	void SetEarthRotation(float rotation);
+	void SetMoonRotation(float rotation);
 };

@@ -1,255 +1,240 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일\03_Component">
-      <UniqueIdentifier>{4d54e44b-f7f7-470c-9969-f0d3b982fa12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\03_Component\Components">
-      <UniqueIdentifier>{c1b3b494-90c3-4128-9c1a-2b2b95477057}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\03_Component\ComponentSystem">
-      <UniqueIdentifier>{9af6bb9e-e018-4ca0-93fd-068287628ecc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\03_Component\ComponentSystem\Systems">
-      <UniqueIdentifier>{84b421c1-74d7-41ad-8612-2096ca5b54eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\01_Scene">
-      <UniqueIdentifier>{ca9581f1-7ed3-4357-9712-37086e37c0d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\02_GameObject">
-      <UniqueIdentifier>{353c64f8-c7e9-414c-9922-ca793af368e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\99_Utility">
-      <UniqueIdentifier>{1098108c-1442-4e7e-aef6-916c97561bde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\99_Utility">
-      <UniqueIdentifier>{d3215c62-2859-44e6-8c33-5e0c30baf71a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03_Component">
-      <UniqueIdentifier>{bc625e84-564b-4d05-9f5c-f2cb78265dc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03_Component\Components">
-      <UniqueIdentifier>{b8f4aaf3-a0a6-47f6-ad2e-5ded0f5c095a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03_Component\ComponentSystem">
-      <UniqueIdentifier>{2a43d5bf-3358-4da7-8ea3-76e4e01c2df4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03_Component\ComponentSystem\Systems">
-      <UniqueIdentifier>{06b2f68c-ae28-43c3-9d1b-adb34ebaf7ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02_GameObject">
-      <UniqueIdentifier>{addad49a-addf-4787-ba53-b31c7f368f52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01_Scene">
-      <UniqueIdentifier>{7cee3d7e-8a02-4965-9d90-a26ba7549b1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\99_Utility\Manager">
-      <UniqueIdentifier>{52b84b9e-5d7d-44c2-8db6-5bd3f9933d4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\99_Utility\Manager">
-      <UniqueIdentifier>{4b946914-d3fe-4107-8c52-79c83a56e7fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\99_Utility\PCH">
-      <UniqueIdentifier>{bc3f0eb4-4684-427e-8410-14a04216a2fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\99_Utility\PCH">
-      <UniqueIdentifier>{73288dd7-486b-402a-b02e-1b9cfd5087d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\00_App">
+    <Filter Include="00_App">
       <UniqueIdentifier>{de1f95be-d1ef-4bcc-8842-33d7bf6b06d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\00_App">
-      <UniqueIdentifier>{eb30cc25-ab93-4150-9651-ed9e403fd2bd}</UniqueIdentifier>
+    <Filter Include="01_Scene">
+      <UniqueIdentifier>{7cee3d7e-8a02-4965-9d90-a26ba7549b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_GameObject">
+      <UniqueIdentifier>{addad49a-addf-4787-ba53-b31c7f368f52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Component">
+      <UniqueIdentifier>{bc625e84-564b-4d05-9f5c-f2cb78265dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Component\Components">
+      <UniqueIdentifier>{b8f4aaf3-a0a6-47f6-ad2e-5ded0f5c095a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Component\ComponentSystem">
+      <UniqueIdentifier>{2a43d5bf-3358-4da7-8ea3-76e4e01c2df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Component\ComponentSystem\Systems">
+      <UniqueIdentifier>{06b2f68c-ae28-43c3-9d1b-adb34ebaf7ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility">
+      <UniqueIdentifier>{d3215c62-2859-44e6-8c33-5e0c30baf71a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\Manager">
+      <UniqueIdentifier>{52b84b9e-5d7d-44c2-8db6-5bd3f9933d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\PCH">
+      <UniqueIdentifier>{bc3f0eb4-4684-427e-8410-14a04216a2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\Delegate">
+      <UniqueIdentifier>{fb0035d4-51dd-4f85-ae64-e3cba25f66f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\Math">
+      <UniqueIdentifier>{845b7863-ec7c-48da-8b14-61ce493eb403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\Debug">
+      <UniqueIdentifier>{a1ebb4ba-37af-4a65-aa5b-fab782c11d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\System">
+      <UniqueIdentifier>{91157cb0-1255-455e-a1e9-955e3d18a21a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Matrix3x2.h">
-      <Filter>헤더 파일\99_Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="MyMath.h">
-      <Filter>헤더 파일\99_Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ContainerUtility.h">
-      <Filter>헤더 파일\99_Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>헤더 파일\99_Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일\99_Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>헤더 파일\03_Component</Filter>
-    </ClInclude>
-    <ClInclude Include="ScriptSystem.h">
-      <Filter>헤더 파일\03_Component\ComponentSystem\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentSystem.h">
-      <Filter>헤더 파일\03_Component\ComponentSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>헤더 파일\01_Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>헤더 파일\01_Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>헤더 파일\02_GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>헤더 파일\03_Component\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Script.h">
-      <Filter>헤더 파일\03_Component\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>헤더 파일\03_Component\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="BitmapRenderer.h">
-      <Filter>헤더 파일\03_Component\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="BitmapRendererSystem.h">
-      <Filter>헤더 파일\03_Component\ComponentSystem\Systems</Filter>
+    <ClInclude Include="CoInitializer.h">
+      <Filter>00_App</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
-      <Filter>헤더 파일\00_App</Filter>
-    </ClInclude>
-    <ClInclude Include="WinApp.h">
-      <Filter>헤더 파일\00_App</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>헤더 파일\99_Utility\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="TextRendererSystem.h">
-      <Filter>헤더 파일\03_Component\ComponentSystem\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="TextRenderer.h">
-      <Filter>헤더 파일\03_Component\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CoInitializer.h">
-      <Filter>헤더 파일\00_App</Filter>
+      <Filter>00_App</Filter>
     </ClInclude>
     <ClInclude Include="RenderCommand.h">
-      <Filter>헤더 파일\00_App</Filter>
+      <Filter>00_App</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>헤더 파일\99_Utility\PCH</Filter>
+    <ClInclude Include="WinApp.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>02_GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapRenderer.h">
+      <Filter>03_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>03_Component\Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInput.h">
-      <Filter>헤더 파일\03_Component\Components</Filter>
+      <Filter>03_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>03_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>03_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>03_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapRendererSystem.h">
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInputSystem.h">
-      <Filter>헤더 파일\03_Component\ComponentSystem\Systems</Filter>
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>헤더 파일\99_Utility\Manager</Filter>
+    <ClInclude Include="ScriptSystem.h">
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRendererSystem.h">
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSystem.h">
+      <Filter>03_Component\ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>03_Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>99_Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>99_Utility\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>99_Utility\Delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>99_Utility\Delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>99_Utility\Math</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
-      <Filter>헤더 파일\99_Utility</Filter>
+      <Filter>99_Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3x2.h">
+      <Filter>99_Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMath.h">
+      <Filter>99_Utility\Math</Filter>
     </ClInclude>
     <ClInclude Include="Debug.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>99_Utility\Debug</Filter>
     </ClInclude>
     <ClInclude Include="DebugSystem.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>99_Utility\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerUtility.h">
+      <Filter>99_Utility\System</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>99_Utility\System</Filter>
     </ClInclude>
     <ClInclude Include="MyTime.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>99_Utility\System</Filter>
     </ClInclude>
     <ClInclude Include="MyTimeSystem.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>99_Utility\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>99_Utility\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
-      <Filter>소스 파일\03_Component\ComponentSystem</Filter>
+      <Filter>03_Component\ComponentSystem</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>소스 파일\03_Component</Filter>
+      <Filter>03_Component</Filter>
     </ClCompile>
     <ClCompile Include="ScriptSystem.cpp">
-      <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>소스 파일\01_Scene</Filter>
+      <Filter>01_Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>소스 파일\01_Scene</Filter>
+      <Filter>01_Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>소스 파일\02_GameObject</Filter>
+      <Filter>02_GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>소스 파일\03_Component\Components</Filter>
+      <Filter>03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp">
-      <Filter>소스 파일\03_Component\Components</Filter>
+      <Filter>03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>소스 파일\03_Component\Components</Filter>
+      <Filter>03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
-      <Filter>소스 파일\00_App</Filter>
+      <Filter>00_App</Filter>
     </ClCompile>
     <ClCompile Include="BitmapRenderer.cpp">
-      <Filter>소스 파일\03_Component\Components</Filter>
+      <Filter>03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="BitmapRendererSystem.cpp">
-      <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="WinApp.cpp">
-      <Filter>소스 파일\00_App</Filter>
+      <Filter>00_App</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>소스 파일\99_Utility\Manager</Filter>
+      <Filter>99_Utility\Manager</Filter>
     </ClCompile>
     <ClCompile Include="TextRenderer.cpp">
-      <Filter>소스 파일\03_Component\Components</Filter>
+      <Filter>03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="TextRendererSystem.cpp">
-      <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="RenderCommand.cpp">
-      <Filter>소스 파일\00_App</Filter>
+      <Filter>00_App</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>소스 파일\99_Utility\PCH</Filter>
+      <Filter>99_Utility\PCH</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInput.cpp">
-      <Filter>소스 파일\03_Component\Components</Filter>
+      <Filter>03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInputSystem.cpp">
-      <Filter>소스 파일\03_Component\ComponentSystem\Systems</Filter>
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>소스 파일\99_Utility\Manager</Filter>
+    <ClCompile Include="Delegate.cpp">
+      <Filter>99_Utility\Delegate</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>99_Utility\Delegate</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
-      <Filter>소스 파일\99_Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="MyTimeSystem.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MyTime.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugSystem.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>99_Utility\Math</Filter>
     </ClCompile>
     <ClCompile Include="Debug.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>99_Utility\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugSystem.cpp">
+      <Filter>99_Utility\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTime.cpp">
+      <Filter>99_Utility\System</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTimeSystem.cpp">
+      <Filter>99_Utility\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>99_Utility\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>99_Utility\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

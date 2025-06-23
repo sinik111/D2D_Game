@@ -45,4 +45,7 @@ public:
 
 		m_scenes.emplace(name, std::make_unique<T>());
 	}
+
+public:
+	GameObject* Find(const std::wstring& name);
 };

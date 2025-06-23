@@ -10,12 +10,12 @@ bool Input::IsKeyDown(int vKey)
 
 bool Input::IsKeyPressed(int vKey)
 {
-	return ComponentSystem::Get().PlayerInput().IsKeyDown(vKey);
+	return ComponentSystem::Get().PlayerInput().IsKeyPressed(vKey);
 }
 
 bool Input::IsKeyReleased(int vKey)
 {
-	return ComponentSystem::Get().PlayerInput().IsKeyDown(vKey);
+	return ComponentSystem::Get().PlayerInput().IsKeyReleased(vKey);
 }
 
 POINT Input::GetCursorPoint()

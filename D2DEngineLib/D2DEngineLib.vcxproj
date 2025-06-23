@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="BitmapRenderer.h" />
     <ClInclude Include="BitmapRendererSystem.h" />
     <ClInclude Include="Camera.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugSystem.h" />
+    <ClInclude Include="Delegate.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="WinApp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="BitmapRenderer.cpp" />
     <ClCompile Include="BitmapRendererSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -181,6 +184,7 @@
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
+    <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="MyTime.cpp" />
@@ -203,6 +207,7 @@
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="TextRendererSystem.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="WinApp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

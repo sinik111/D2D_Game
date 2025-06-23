@@ -26,4 +26,7 @@ public:
 
 private:
 	void Clear();
+
+public:
+	GameObject* Find(const std::wstring& name);
 };

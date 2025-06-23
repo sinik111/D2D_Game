@@ -23,7 +23,6 @@ private:
 	bool m_isWorldDirty{ true };
 
 public:
-	Transform();
 	~Transform() override;
 
 public:
@@ -33,6 +32,7 @@ public:
 	const Matrix3x2& GetLocalMatrix();
 	const Matrix3x2& GetWorldMatrix();
 	Transform* GetParent() const;
+	const std::vector<Transform*>& GetChildren();
 
 public:
 	void SetPosition(float x, float y);

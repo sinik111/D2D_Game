@@ -28,8 +28,6 @@ void InfoViewer::LateUpdate()
     float cameraZoom = Camera::s_mainCamera->GetZoom();
 
     float sunRotation = m_spaceObjects[0]->GetTransform()->GetRotation();
-    float earthRotation = m_spaceObjects[1]->GetTransform()->GetRotation();
-    float moonRotation = m_spaceObjects[2]->GetTransform()->GetRotation();
 
     const Sun* sun = m_spaceObjects[0]->GetComponent<Sun>();
     size_t earthCount = sun->GetEarthCount();
@@ -40,8 +38,8 @@ void InfoViewer::LateUpdate()
         + std::to_wstring(cameraPosition.GetY()) +
         L"\n카메라 Zoom [ Q / W ]: " + std::to_wstring(cameraZoom) +
         + L"\n태양 Rotation: " + std::to_wstring(sunRotation) +
-        L"\n지구 Rotation: " + std::to_wstring(earthRotation) + 
-        L"\n달 Rotation: " + std::to_wstring(moonRotation);
+        L"\n지구 Rotation: " + std::to_wstring(m_earthRotation) +
+        L"\n달 Rotation: " + std::to_wstring(m_moonRotation);
 
     TextRenderer* textRenderer = GetGameObject()->GetComponent<TextRenderer>();
     textRenderer->SetText(text);
@@ -50,4 +48,14 @@ void InfoViewer::LateUpdate()
 void InfoViewer::SetSpaceObjects(std::vector<GameObject*> spaceObjects)
 {
 	m_spaceObjects = spaceObjects;
+}
+
+void InfoViewer::SetEarthRotation(float rotation)
+{
+    m_earthRotation = rotation;
+}
+
+void InfoViewer::SetMoonRotation(float rotation)
+{
+    m_moonRotation = rotation;
 }

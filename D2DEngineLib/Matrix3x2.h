@@ -2,10 +2,8 @@
 
 #include <d2d1_1.h>
 #include <DirectXMath.h>
-#include <cassert>
 
 #include "Vector2.h"
-#include "MyMath.h"
 
 struct Matrix3x2
 {

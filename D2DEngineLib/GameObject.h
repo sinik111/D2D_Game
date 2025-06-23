@@ -95,4 +95,7 @@ public:
 
         return false;
     }
+
+public:
+    static GameObject* Find(const std::wstring name);
 };

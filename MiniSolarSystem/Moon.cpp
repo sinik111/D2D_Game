@@ -4,6 +4,19 @@
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
+#include "../D2DEngineLib/Input.h"
+#include "Health.h"
+
+Moon::~Moon()
+{
+    m_onRotationChange.Invoke(0.0f);
+
+    GameObject* go = GameObject::Find(L"MoonHpViewer");
+    if (go != nullptr)
+    {
+        go->Destroy();
+    }
+}
 
 void Moon::Start()
 {
@@ -24,10 +37,26 @@ void Moon::Start()
 
     GetTransform()->SetPosition(Vector2(100.0f, 0.0f));
 
+    m_health = GetGameObject()->GetComponent<Health>();
+
+    m_health->SetHp(100, 100);
+
     m_speed = 0.5f;
 }
 
 void Moon::Update()
 {
+    if (Input::IsKeyPressed('Y'))
+    {
+        m_health->TakeDamage(10);
+    }
+
     GetTransform()->Rotate(m_speed);
+
+    m_onRotationChange.Invoke(GetTransform()->GetRotation());
+}
+
+Delegate<float>& Moon::GetOnRotationChange()
+{
+    return m_onRotationChange;
 }

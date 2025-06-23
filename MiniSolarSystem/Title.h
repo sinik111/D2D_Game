@@ -5,9 +5,6 @@
 class Title :
     public Script
 {
-public:
-    ~Title() override = default;
-
 private:
     void Start() override;
 };

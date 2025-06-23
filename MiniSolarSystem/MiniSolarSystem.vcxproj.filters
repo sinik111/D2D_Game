@@ -1,108 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="소스 파일\00_App">
+    <Filter Include="00_App">
       <UniqueIdentifier>{3bed4ac3-34ab-4646-a184-827938b501e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\00_App">
-      <UniqueIdentifier>{9a016e56-83a9-45af-aebe-40427137d807}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01_Scene">
+    <Filter Include="01_Scene">
       <UniqueIdentifier>{2e45be38-c36b-4ebb-b02e-3a7ff8cfc93d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\01_Scene">
-      <UniqueIdentifier>{e610bbda-bfed-4c13-89b1-f3cba02706b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02_Script">
+    <Filter Include="02_Script">
       <UniqueIdentifier>{a0396846-3d06-4297-8c7d-5ad432db6940}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\02_Script">
-      <UniqueIdentifier>{46a0b516-d033-40aa-8e5b-b5d996d64e2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\02_Script\SolarSystem">
-      <UniqueIdentifier>{046b870d-12ce-46bf-83b7-99a1298a8e18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02_Script\SolarSystem">
+    <Filter Include="02_Script\SolarSystem">
       <UniqueIdentifier>{a0b81d89-0d3f-43f0-8314-f73d39ae67fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Health">
+      <UniqueIdentifier>{c4da00e8-eaa9-439b-b6d9-3022ac487259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainTitle">
+      <UniqueIdentifier>{35256866-8e2d-41ff-b8ee-52b019e6c300}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SolarSystem.cpp">
-      <Filter>소스 파일\01_Scene</Filter>
+      <Filter>01_Scene</Filter>
     </ClCompile>
     <ClCompile Include="DemoGameApp.cpp">
-      <Filter>소스 파일\00_App</Filter>
+      <Filter>00_App</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>소스 파일\00_App</Filter>
+      <Filter>00_App</Filter>
     </ClCompile>
     <ClCompile Include="CameraController.cpp">
-      <Filter>소스 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClCompile>
     <ClCompile Include="Earth.cpp">
-      <Filter>소스 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClCompile>
     <ClCompile Include="InfoViewer.cpp">
-      <Filter>소스 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClCompile>
     <ClCompile Include="Moon.cpp">
-      <Filter>소스 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClCompile>
     <ClCompile Include="Sun.cpp">
-      <Filter>소스 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
-      <Filter>소스 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClCompile>
     <ClCompile Include="MainTitle.cpp">
-      <Filter>소스 파일\01_Scene</Filter>
+      <Filter>01_Scene</Filter>
     </ClCompile>
     <ClCompile Include="TitleSceneChange.cpp">
-      <Filter>소스 파일\02_Script</Filter>
+      <Filter>02_Script\MainTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>02_Script\Health</Filter>
+    </ClCompile>
+    <ClCompile Include="HpViewer.cpp">
+      <Filter>02_Script\Health</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SolarSystem.h">
-      <Filter>헤더 파일\01_Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="DemoGameApp.h">
-      <Filter>헤더 파일\00_App</Filter>
-    </ClInclude>
     <ClInclude Include="CameraController.h">
-      <Filter>헤더 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClInclude>
     <ClInclude Include="Earth.h">
-      <Filter>헤더 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClInclude>
     <ClInclude Include="InfoViewer.h">
-      <Filter>헤더 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClInclude>
     <ClInclude Include="Moon.h">
-      <Filter>헤더 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClInclude>
     <ClInclude Include="Sun.h">
-      <Filter>헤더 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>헤더 파일\02_Script\SolarSystem</Filter>
+      <Filter>02_Script\SolarSystem</Filter>
     </ClInclude>
     <ClInclude Include="MainTitle.h">
-      <Filter>헤더 파일\01_Scene</Filter>
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SolarSystem.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoGameApp.h">
+      <Filter>00_App</Filter>
     </ClInclude>
     <ClInclude Include="TitleSceneChange.h">
-      <Filter>헤더 파일\02_Script</Filter>
+      <Filter>02_Script\MainTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>02_Script\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="HpViewer.h">
+      <Filter>02_Script\Health</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

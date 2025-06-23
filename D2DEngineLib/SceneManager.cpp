@@ -60,3 +60,8 @@ void SceneManager::CheckSceneChanged() // 예외처리 추가 필요
 		m_currentScene->Enter();
 	}
 }
+
+GameObject* SceneManager::Find(const std::wstring& name)
+{
+	return m_currentScene->Find(name);
+}
