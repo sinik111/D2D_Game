@@ -6,6 +6,7 @@
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/Random.h"
+#include "../D2DEngineLib/MyTime.h"
 
 #include "Earth.h"
 
@@ -36,18 +37,19 @@ void Sun::Start()
     playerInput->RegisterActionOnKey('A', PlayerInput::InputCheckType::Down, createEarth);
     playerInput->RegisterActionOnKey('S', PlayerInput::InputCheckType::Down, deleteEarth);
 
-    m_speed = 0.2f;
+    m_speed = 45.0f;
 }
 
 void Sun::Update()
 {
-    GetTransform()->Rotate(m_speed);
+    GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 }
 
 void Sun::CreateEarth()
 {
     GameObject* newEarth = CreateGameObject(L"Earth");
-    newEarth->AddComponent<Earth>();
+    BitmapRenderer* bitmapRenderer = newEarth->AddComponent<BitmapRenderer>();
+    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Earth"));
     newEarth->GetTransform()->SetPosition(Random::Float(-300.0f, 300.0f), Random::Float(-200.0f, 200.0f));
 
     m_earths.push_back(newEarth);

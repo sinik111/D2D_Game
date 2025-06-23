@@ -4,10 +4,11 @@
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/Camera.h"
 #include "../D2DEngineLib/SceneManager.h"
+#include "../D2DEngineLib/MyTime.h"
 
 void CameraController::Start()
 {
-    m_speed = 3.0f;
+    m_speed = 200.0f;
 
     PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
@@ -26,7 +27,7 @@ void CameraController::Start()
 
 void CameraController::Update()
 {
-    GetTransform()->Translate(m_direction * m_speed);
+    GetTransform()->Translate(m_direction * m_speed * MyTime::DeltaTime());
 
     m_direction = Vector2(0.0f, 0.0f);
 }
@@ -40,7 +41,7 @@ void CameraController::ZoomIn()
 {
     float zoom = Camera::s_mainCamera->GetZoom();
 
-    zoom -= 0.01f;
+    zoom -= 1.0f * MyTime::DeltaTime();
 
     Camera::s_mainCamera->SetZoom(zoom);
 }
@@ -49,7 +50,7 @@ void CameraController::ZoomOut()
 {
     float zoom = Camera::s_mainCamera->GetZoom();
 
-    zoom += 0.01f;
+    zoom += 1.0f * MyTime::DeltaTime();
 
     Camera::s_mainCamera->SetZoom(zoom);
 }

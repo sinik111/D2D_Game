@@ -2,11 +2,14 @@
 
 #include "..\D2DEngineLib\Script.h"
 
+class TextRenderer;
+
 class InfoViewer :
 	public Script
 {
 private:
-	std::vector<GameObject*> m_spaceObjects;
+	GameObject* m_sun;
+	TextRenderer* m_textRenderer;
 	float m_earthRotation;
 	float m_moonRotation;
 
@@ -15,7 +18,7 @@ private:
 	void LateUpdate() override;
 
 public:
-	void SetSpaceObjects(std::vector<GameObject*> spaceObjects);
+	void SetSpaceObjects(GameObject* sun);
 	void SetEarthRotation(float rotation);
 	void SetMoonRotation(float rotation);
 };

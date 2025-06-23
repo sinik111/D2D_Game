@@ -24,14 +24,11 @@ public:
 
 	void Remove(void* instance)
 	{
-		m_callbackInfos.erase
-		(
-			std::remove_if
-			(
+		m_callbackInfos.erase(
+			std::remove_if(
 				m_callbackInfos.begin(),
 				m_callbackInfos.end(),
-				[instance](const CallbackInfo& info)
-				{
+				[instance](const CallbackInfo& info) {
 					return info.instance == instance;
 				}
 			),

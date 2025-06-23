@@ -90,7 +90,7 @@ void D2DRenderer::Initialize()
 
 	// Unity 스타일 좌표계용 Matrix
 	m_unityMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-		Matrix3x2::Translation((float)m_width / 2, (float)m_height / 2);
+		Matrix3x2::Translation(m_width / 2.0f, m_height / 2.0f);
 }
 
 void D2DRenderer::Shutdown()
@@ -145,11 +145,13 @@ void D2DRenderer::AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand
 
 void D2DRenderer::PrepareRenderCommands()
 {
-	std::sort(m_renderCommands.begin(), m_renderCommands.end(),
-		[](const std::unique_ptr<IRenderCommand>& a, const std::unique_ptr<IRenderCommand>& b)
-		{
+	std::sort(
+		m_renderCommands.begin(),
+		m_renderCommands.end(),
+		[](const std::unique_ptr<IRenderCommand>& a, const std::unique_ptr<IRenderCommand>& b) {
 			return a->GetSortOrder() < b->GetSortOrder();
-		});
+		}
+	);
 
 	// frustum culling 추가
 }
@@ -167,7 +169,7 @@ void D2DRenderer::ExecuteRenderCommands()
 		{
 			BitmapRenderCommand* bitmapCmd = static_cast<BitmapRenderCommand*>(command.get());
 
-			m_d2dDeviceContext->SetTransform((D2D1_MATRIX_3X2_F)bitmapCmd->transform);
+			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(bitmapCmd->transform));
 			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get());
 			break;
 		}
@@ -184,7 +186,7 @@ void D2DRenderer::ExecuteRenderCommands()
 			};
 
 			m_d2dSolidColorBrush->SetColor(textCmd->color);
-			m_d2dDeviceContext->SetTransform((D2D1_MATRIX_3X2_F)textCmd->transform);
+			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(textCmd->transform));
 			m_d2dDeviceContext->DrawTextW(textCmd->text.c_str(), static_cast<UINT32>(textCmd->text.size()),
 				textCmd->textFormat.Get(), layoutRect, m_d2dSolidColorBrush.Get());
 			break;

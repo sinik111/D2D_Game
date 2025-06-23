@@ -31,9 +31,6 @@
     <Filter Include="99_Utility\PCH">
       <UniqueIdentifier>{bc3f0eb4-4684-427e-8410-14a04216a2fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99_Utility\Delegate">
-      <UniqueIdentifier>{fb0035d4-51dd-4f85-ae64-e3cba25f66f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="99_Utility\Math">
       <UniqueIdentifier>{845b7863-ec7c-48da-8b14-61ce493eb403}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="99_Utility\System">
       <UniqueIdentifier>{91157cb0-1255-455e-a1e9-955e3d18a21a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\Delegate">
+      <UniqueIdentifier>{fb0035d4-51dd-4f85-ae64-e3cba25f66f7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -208,12 +208,6 @@
     </ClCompile>
     <ClCompile Include="PlayerInputSystem.cpp">
       <Filter>03_Component\ComponentSystem\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Delegate.cpp">
-      <Filter>99_Utility\Delegate</Filter>
-    </ClCompile>
-    <ClCompile Include="Action.cpp">
-      <Filter>99_Utility\Delegate</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>99_Utility\Math</Filter>

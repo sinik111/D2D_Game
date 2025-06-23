@@ -5,6 +5,8 @@
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/Input.h"
+#include "../D2DEngineLib/MyTime.h"
+
 #include "Health.h"
 
 Moon::~Moon()
@@ -41,7 +43,7 @@ void Moon::Start()
 
     m_health->SetHp(100, 100);
 
-    m_speed = 0.5f;
+    m_speed = 35.0f;
 }
 
 void Moon::Update()
@@ -51,7 +53,7 @@ void Moon::Update()
         m_health->TakeDamage(10);
     }
 
-    GetTransform()->Rotate(m_speed);
+    GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
     m_onRotationChange.Invoke(GetTransform()->GetRotation());
 }

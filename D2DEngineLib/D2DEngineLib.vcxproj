@@ -175,7 +175,6 @@
     <ClInclude Include="WinApp.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Action.cpp" />
     <ClCompile Include="BitmapRenderer.cpp" />
     <ClCompile Include="BitmapRendererSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -184,7 +183,6 @@
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
-    <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="MyTime.cpp" />

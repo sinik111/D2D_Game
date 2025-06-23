@@ -36,15 +36,15 @@ void SolarSystem::Enter()
 
 	GameObject* earth = CreateGameObject(L"Earth");
 	Earth* earthComp = earth->AddComponent<Earth>();
+	Health* earthHp = earth->AddComponent<Health>();
 	earth->GetTransform()->SetParent(sun->GetTransform());
 	earth->GetTransform()->SetPosition(Vector2(200.0f, 0.0f));
-	Health* earthHp = earth->AddComponent<Health>();
 
 
 	GameObject* moon = CreateGameObject(L"Moon");
 	Moon* moonComp = moon->AddComponent<Moon>();
-	moon->GetTransform()->SetParent(earth->GetTransform());
 	Health* moonHp = moon->AddComponent<Health>();
+	moon->GetTransform()->SetParent(earth->GetTransform());
 
 
 	GameObject* title = CreateGameObject(L"Title");
@@ -53,26 +53,24 @@ void SolarSystem::Enter()
 
 	GameObject* infoViewer = CreateGameObject(L"InfoViewer");
 	InfoViewer* infoViewerComp = infoViewer->AddComponent<InfoViewer>();
-	infoViewerComp->SetSpaceObjects(std::vector<GameObject*>{ sun, earth, moon });
+	infoViewerComp->SetSpaceObjects(sun);
 	earthComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetEarthRotation);
 	moonComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetMoonRotation);
 
 
 	GameObject* earthHpViewer = CreateGameObject(L"EarthHpViewer");
 	HpViewer* earthHpViewerComp = earthHpViewer->AddComponent<HpViewer>();
-	earthHpViewerComp->SetTargetName(L"지구");
 	TextRenderer* earthHpText = earthHpViewer->AddComponent<TextRenderer>();
+	earthHpViewerComp->SetTargetName(L"지구");
 	earthHpText->SetPoint({ -100.0f, 300.0f });
-
 	earthHp->GetOnChangeHp().Add(earthHpViewerComp, &HpViewer::ChangeHpText);
 
 
 	GameObject* moonHpViewer = CreateGameObject(L"MoonHpViewer");
 	HpViewer* moonHpViewerComp = moonHpViewer->AddComponent<HpViewer>();
-	moonHpViewerComp->SetTargetName(L"달");
 	TextRenderer* moonHpText = moonHpViewer->AddComponent<TextRenderer>();
+	moonHpViewerComp->SetTargetName(L"달");
 	moonHpText->SetPoint({ 100.0f, 300.0f });
-
 	moonHp->GetOnChangeHp().Add(moonHpViewerComp, &HpViewer::ChangeHpText);
 }
 

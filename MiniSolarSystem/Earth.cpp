@@ -5,6 +5,8 @@
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/Input.h"
+#include "../D2DEngineLib/MyTime.h"
+
 #include "Health.h"
 
 Earth::~Earth()
@@ -44,7 +46,7 @@ void Earth::Start()
         m_health->SetHp(100, 100);
     }
 
-    m_speed = 0.3f;
+    m_speed = 60.0f;
 }
 
 void Earth::Update()
@@ -57,7 +59,7 @@ void Earth::Update()
         }
     }
 
-    GetTransform()->Rotate(m_speed);
+    GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
     m_onRotationChange.Invoke(GetTransform()->GetRotation());
 }

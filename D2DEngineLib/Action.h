@@ -13,7 +13,7 @@ public:
 
 	template<typename Func>
 	Action(Func&& func)
-		: m_func(std::forward<Func>(func))
+		: m_func{ std::forward<Func>(func) }
 	{
 
 	}
@@ -21,8 +21,7 @@ public:
 	template<typename T>
 	Action(T* instance, void (T::*func)(Args...))
 	{
-		m_func = [instance, func](Args... args)
-			{
+		m_func = [instance, func](Args... args) {
 				(instance->*func)(std::forward<Args>(args)...);
 			};
 	}
