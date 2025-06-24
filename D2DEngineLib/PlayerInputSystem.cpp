@@ -33,7 +33,7 @@ void PlayerInputSystem::Update()
     ScreenToClient(m_hWnd, &m_mousePoint);
 }
 
-bool PlayerInputSystem::IsKeyDown(int vkey) const
+bool PlayerInputSystem::IsKeyHeld(int vkey) const
 {
     return m_currentKeyState[vkey];
 }
@@ -63,69 +63,47 @@ void PlayerInputSystem::ProcessInput() const
     ProcessArrowInput();
     ProcessWASDInput();
 
-    for (int i = 0; i < 256; ++i)
+    for (const auto& playerInput : m_playerInputs)
     {
-        if (IsKeyDown(i))
-        {
-            for (const auto& playerInput : m_playerInputs)
-            {
-                playerInput->CallActionOnDown(i);
-            }
-        }
-        
-        if (IsKeyPressed(i))
-        {
-            for (const auto& playerInput : m_playerInputs)
-            {
-                playerInput->CallActionOnPressed(i);
-            }
-        }
-        
-        if (IsKeyReleased(i))
-        {
-            for (const auto& playerInput : m_playerInputs)
-            {
-                playerInput->CallActionOnReleased(i);
-            }
-        }
+        playerInput->CallActions();
     }
 }
 
 void PlayerInputSystem::ProcessArrowInput() const
 {
-    bool isDown = false;
-    float horizontal = 0.0f;
-    float vertical = 0.0f;
+    bool isHeld{ false };
+    float horizontal{ 0.0f };
+    float vertical{ 0.0f };
 
-    if (IsKeyDown(VK_UP) || IsKeyPressed(VK_UP))
+    if (IsKeyHeld(VK_UP))
     {
         vertical += 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (IsKeyDown(VK_DOWN) || IsKeyPressed(VK_DOWN))
+    if (IsKeyHeld(VK_DOWN))
     {
         vertical -= 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (IsKeyDown(VK_RIGHT) || IsKeyPressed(VK_LEFT))
+    if (IsKeyHeld(VK_RIGHT))
     {
         horizontal += 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (IsKeyDown(VK_LEFT) || IsKeyPressed(VK_LEFT))
+    if (IsKeyHeld(VK_LEFT))
     {
         horizontal -= 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (isDown)
+    if (isHeld && (vertical != 0.0f || horizontal != 0.0f))
     {
         for (const auto& playerInput : m_playerInputs)
         {
@@ -136,39 +114,39 @@ void PlayerInputSystem::ProcessArrowInput() const
 
 void PlayerInputSystem::ProcessWASDInput() const
 {
-    bool isDown = false;
-    float horizontal = 0.0f;
-    float vertical = 0.0f;
+    bool isHeld{ false };
+    float horizontal{ 0.0f };
+    float vertical{ 0.0f };
 
-    if (IsKeyDown('W') || IsKeyPressed('W'))
+    if (IsKeyHeld('W'))
     {
         vertical += 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (IsKeyDown('S') || IsKeyPressed('S'))
+    if (IsKeyHeld('S'))
     {
         vertical -= 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (IsKeyDown('D') || IsKeyPressed('D'))
+    if (IsKeyHeld('D'))
     {
         horizontal += 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (IsKeyDown('A') || IsKeyPressed('A'))
+    if (IsKeyHeld('A'))
     {
         horizontal -= 1.0f;
 
-        isDown = true;
+        isHeld = true;
     }
 
-    if (isDown)
+    if (isHeld && (vertical != 0.0f || horizontal != 0.0f))
     {
         for (const auto& playerInput : m_playerInputs)
         {

@@ -10,8 +10,8 @@ class InfoViewer :
 private:
 	GameObject* m_sun;
 	TextRenderer* m_textRenderer;
-	float m_earthRotation;
-	float m_moonRotation;
+	std::wstring m_earthRotation;
+	std::wstring m_moonRotation;
 
 private:
 	void Start() override;
@@ -19,6 +19,6 @@ private:
 
 public:
 	void SetSpaceObjects(GameObject* sun);
-	void SetEarthRotation(float rotation);
-	void SetMoonRotation(float rotation);
+	void SetEarthRotation(const std::wstring& rotationString);
+	void SetMoonRotation(const std::wstring& rotationString);
 };

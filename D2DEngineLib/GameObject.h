@@ -98,4 +98,5 @@ public:
 
 public:
     static GameObject* Find(const std::wstring name);
+    static bool IsValid(GameObject* gameObject);
 };

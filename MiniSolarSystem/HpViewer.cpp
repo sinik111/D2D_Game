@@ -1,6 +1,8 @@
 #include "../D2DEngineLib/framework.h"
 #include "HpViewer.h"
 
+#include <sstream>
+
 #include "../D2DEngineLib/TextRenderer.h"
 
 void HpViewer::Start()
@@ -23,13 +25,14 @@ void HpViewer::SetTargetName(const std::wstring& targetName)
 
 void HpViewer::ChangeHpText(int prevHp, int currHp, int maxHp)
 {
-    std::wstring text = m_targetName + L" HP: " + std::to_wstring(currHp) + 
-        L" / " + std::to_wstring(maxHp);
-
     if (m_textRenderer == nullptr)
     {
         m_textRenderer = GetGameObject()->GetComponent<TextRenderer>();
     }
 
-    m_textRenderer->SetText(text);
+    std::wstringstream ss;
+
+    ss << m_targetName << L" HP: " << currHp << L" / " << maxHp;
+
+    m_textRenderer->SetText(ss.str());
 }

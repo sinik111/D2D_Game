@@ -12,7 +12,7 @@
 
 void Sun::Start()
 {
-    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+    TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
     
     textRenderer->SetText(L"еб╬Г");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
@@ -23,19 +23,16 @@ void Sun::Start()
     textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
     textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
 
-    BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>();
+    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
 
     bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Sun"));
 
-    GetTransform()->SetPosition(Vector2(0.0f, 0.0f));
+    GetTransform()->SetPosition({ 0.0f, 0.0f });
 
-    PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
+    PlayerInput* playerInput{ GetGameObject()->AddComponent<PlayerInput>() };
 
-    auto createEarth = PlayerInput::MakeAction(&Sun::CreateEarth, this);
-    auto deleteEarth = PlayerInput::MakeAction(&Sun::DeleteEarth, this);
-
-    playerInput->RegisterActionOnKey('A', PlayerInput::InputCheckType::Down, createEarth);
-    playerInput->RegisterActionOnKey('S', PlayerInput::InputCheckType::Down, deleteEarth);
+    playerInput->RegisterActionOnKey('A', PlayerInput::InputCheckType::Held, this, &Sun::CreateEarth);
+    playerInput->RegisterActionOnKey('S', PlayerInput::InputCheckType::Held, this, &Sun::DeleteEarth);
 
     m_speed = 45.0f;
 }
@@ -47,8 +44,8 @@ void Sun::Update()
 
 void Sun::CreateEarth()
 {
-    GameObject* newEarth = CreateGameObject(L"Earth");
-    BitmapRenderer* bitmapRenderer = newEarth->AddComponent<BitmapRenderer>();
+    GameObject* newEarth{ CreateGameObject(L"Earth") };
+    BitmapRenderer* bitmapRenderer{ newEarth->AddComponent<BitmapRenderer>() };
     bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Earth"));
     newEarth->GetTransform()->SetPosition(Random::Float(-300.0f, 300.0f), Random::Float(-200.0f, 200.0f));
 

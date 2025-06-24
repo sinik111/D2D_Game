@@ -5,7 +5,7 @@
 
 void Title::Start()
 {
-    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+    TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
 
     textRenderer->SetText(L"еб╬Г╟Х");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::Screen);

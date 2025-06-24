@@ -47,5 +47,6 @@ public:
 	}
 
 public:
-	GameObject* Find(const std::wstring& name);
+	GameObject* Find(const std::wstring& name) const;
+	bool IsValid(GameObject* gameObject) const;
 };

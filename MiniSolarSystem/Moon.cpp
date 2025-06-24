@@ -11,10 +11,10 @@
 
 Moon::~Moon()
 {
-    m_onRotationChange.Invoke(0.0f);
+    m_onRotationChange.Invoke(L"ÆÄ±«µÊ");
 
-    GameObject* go = GameObject::Find(L"MoonHpViewer");
-    if (go != nullptr)
+    GameObject* go{ GameObject::Find(L"MoonHpViewer") };
+    if (GameObject::IsValid(go))
     {
         go->Destroy();
     }
@@ -22,7 +22,7 @@ Moon::~Moon()
 
 void Moon::Start()
 {
-    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+    TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
 
     textRenderer->SetText(L"´Þ");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
@@ -33,11 +33,11 @@ void Moon::Start()
     textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
     textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
 
-    BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>();
+    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
 
     bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Moon"));
 
-    GetTransform()->SetPosition(Vector2(100.0f, 0.0f));
+    GetTransform()->SetPosition({ 100.0f, 0.0f });
 
     m_health = GetGameObject()->GetComponent<Health>();
 
@@ -55,10 +55,10 @@ void Moon::Update()
 
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
-    m_onRotationChange.Invoke(GetTransform()->GetRotation());
+    m_onRotationChange.Invoke(std::to_wstring(GetTransform()->GetRotation()));
 }
 
-Delegate<float>& Moon::GetOnRotationChange()
+Delegate<const std::wstring&>& Moon::GetOnRotationChange()
 {
     return m_onRotationChange;
 }

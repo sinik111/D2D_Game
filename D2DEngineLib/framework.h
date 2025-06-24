@@ -13,3 +13,8 @@
 #include <vector>
 #include <unordered_map>
 #include <dwrite_3.h>
+#include <unordered_set>
+
+
+#include "Vector2.h"
+#include "Matrix3x2.h"

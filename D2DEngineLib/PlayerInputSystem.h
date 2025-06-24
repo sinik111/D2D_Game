@@ -25,7 +25,7 @@ public:
 	void Update();
 
 	// 키가 눌려진 상태인지 확인
-	bool IsKeyDown(int vkey) const;
+	bool IsKeyHeld(int vkey) const;
 
 	// 이번 루프에 키가 눌려졌는지 확인
 	bool IsKeyPressed(int vkey) const;

@@ -39,3 +39,13 @@ GameObject* GameObject::Find(const std::wstring name)
 {
 	return SceneManager::Get().Find(name);
 }
+
+bool GameObject::IsValid(GameObject* gameObject)
+{
+	if (gameObject == nullptr)
+	{
+		return false;
+	}
+
+	return SceneManager::Get().IsValid(gameObject);
+}

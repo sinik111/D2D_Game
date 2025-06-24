@@ -24,13 +24,18 @@ void InfoViewer::Start()
 
 void InfoViewer::LateUpdate()
 {
-    Vector2 cameraPosition = Camera::s_mainCamera->GetTransform()->GetPosition();
-    float cameraZoom = Camera::s_mainCamera->GetZoom();
+    Vector2 cameraPosition{ Camera::s_mainCamera->GetTransform()->GetPosition() };
+    float cameraZoom{ Camera::s_mainCamera->GetZoom() };
 
-    float sunRotation = m_sun->GetTransform()->GetRotation();
+    float sunRotation{ 0.0f };
+    size_t earthCount{ 0 };
+    if (GameObject::IsValid(m_sun))
+    {
+        sunRotation = m_sun->GetTransform()->GetRotation();
 
-    const Sun* sun = m_sun->GetComponent<Sun>();
-    size_t earthCount = sun->GetEarthCount();
+        Sun* sun{ m_sun->GetComponent<Sun>() };
+        earthCount = sun->GetEarthCount();
+    }
 
     std::wstringstream ss;
     ss << std::fixed << std::setprecision(2);
@@ -38,7 +43,7 @@ void InfoViewer::LateUpdate()
         << L"지구/달에 피해 10 주기 [ T / Y ]\n"
         << L"지구 생성/삭제하기 [ A / S ] 지구 개수: " << earthCount
         << L"\n카메라 Position [ ← ↑ ↓ → ]: " << cameraPosition.GetX() << L", " << cameraPosition.GetY()
-        << L"\n카메라 Zoom [ Q / W ]: " << cameraZoom
+        << L"\n카메라 Zoom [ CTRL + Q / CTRL + W ]: " << cameraZoom
         << L"\n태양 Rotation: " << sunRotation
         << L"\n지구 Rotation: " << m_earthRotation
         << L"\n달 Rotation: " << m_moonRotation;
@@ -51,12 +56,12 @@ void InfoViewer::SetSpaceObjects(GameObject* sun)
 	m_sun = sun;
 }
 
-void InfoViewer::SetEarthRotation(float rotation)
+void InfoViewer::SetEarthRotation(const std::wstring& rotationString)
 {
-    m_earthRotation = rotation;
+    m_earthRotation = rotationString;
 }
 
-void InfoViewer::SetMoonRotation(float rotation)
+void InfoViewer::SetMoonRotation(const std::wstring& rotationString)
 {
-    m_moonRotation = rotation;
+    m_moonRotation = rotationString;
 }

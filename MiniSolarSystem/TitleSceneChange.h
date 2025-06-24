@@ -5,9 +5,6 @@
 class TitleSceneChange :
 	public Script
 {
-public:
-    ~TitleSceneChange() override = default;
-
 private:
     void Start() override;
 

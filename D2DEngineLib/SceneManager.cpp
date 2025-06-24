@@ -61,7 +61,12 @@ void SceneManager::CheckSceneChanged() // 예외처리 추가 필요
 	}
 }
 
-GameObject* SceneManager::Find(const std::wstring& name)
+GameObject* SceneManager::Find(const std::wstring& name) const
 {
 	return m_currentScene->Find(name);
+}
+
+bool SceneManager::IsValid(GameObject* gameObject) const
+{
+	return m_currentScene->IsValid(gameObject);
 }

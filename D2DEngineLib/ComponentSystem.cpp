@@ -36,3 +36,24 @@ PlayerInputSystem& ComponentSystem::PlayerInput()
 {
 	return *m_playerInputSystem.get();
 }
+
+void ComponentSystem::RegisterValidCheck(Component* component)
+{
+	m_validComponents.insert(component);
+}
+
+void ComponentSystem::UnregisterValidCheck(Component* component)
+{
+	m_validComponents.erase(component);
+}
+
+bool ComponentSystem::IsValid(Component* component) const
+{
+	const auto& find = m_validComponents.find(component);
+	if (find == m_validComponents.end())
+	{
+		return false;
+	}
+
+	return true;
+}

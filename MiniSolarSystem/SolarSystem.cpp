@@ -38,7 +38,7 @@ void SolarSystem::Enter()
 	Earth* earthComp = earth->AddComponent<Earth>();
 	Health* earthHp = earth->AddComponent<Health>();
 	earth->GetTransform()->SetParent(sun->GetTransform());
-	earth->GetTransform()->SetPosition(Vector2(200.0f, 0.0f));
+	earth->GetTransform()->SetPosition({ 200.0f, 0.0f });
 
 
 	GameObject* moon = CreateGameObject(L"Moon");

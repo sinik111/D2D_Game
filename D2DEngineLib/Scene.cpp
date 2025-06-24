@@ -8,13 +8,6 @@ Scene::~Scene()
 	Clear();
 }
 
-GameObject* Scene::CreateGameObject(const std::wstring& name)
-{
-	m_pendingCreatedGameObjects.push_back(std::make_unique<GameObject>(name));
-
-	return m_pendingCreatedGameObjects.back().get();
-}
-
 void Scene::Enter()
 {
 	
@@ -54,6 +47,11 @@ void Scene::Update()
 
 	if (!m_pendingDestroyedGameObjects.empty())
 	{
+		for (const auto& gameObject : m_pendingDestroyedGameObjects)
+		{
+			m_validGameObjects.erase(gameObject.get());
+		}
+
 		m_pendingDestroyedGameObjects.clear();
 	}
 }
@@ -66,14 +64,25 @@ void Scene::Clear()
 	m_pendingDestroyedGameObjects.clear();
 }
 
-GameObject* Scene::Find(const std::wstring& name)
+GameObject* Scene::CreateGameObject(const std::wstring& name)
 {
-	auto find = std::find_if
-	(
+	std::unique_ptr<GameObject> gameObject{ std::make_unique<GameObject>(name) };
+
+	GameObject* gameObjectPtr{ gameObject.get() };
+
+	m_pendingCreatedGameObjects.push_back(std::move(gameObject));
+
+	m_validGameObjects.insert(gameObjectPtr);
+
+	return gameObjectPtr;
+}
+
+GameObject* Scene::Find(const std::wstring& name) const
+{
+	const auto& find = std::find_if(
 		m_gameObjects.begin(),
 		m_gameObjects.end(),
-		[name](const std::unique_ptr<GameObject>& gameObject) -> bool
-		{
+		[name](const std::unique_ptr<GameObject>& gameObject) -> bool {
 			return gameObject->GetName() == name;
 		}
 	);
@@ -84,4 +93,15 @@ GameObject* Scene::Find(const std::wstring& name)
 	}
 
 	return nullptr;
+}
+
+bool Scene::IsValid(GameObject* gameObject) const
+{
+	const auto& find = m_validGameObjects.find(gameObject);
+	if (find == m_validGameObjects.end())
+	{
+		return false;
+	}
+
+	return true;
 }

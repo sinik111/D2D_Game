@@ -11,7 +11,7 @@ class Earth :
 private:
     float m_speed{};
     Health* m_health;
-    Delegate<float> m_onRotationChange;
+    Delegate<const std::wstring&> m_onRotationChange;
 
 public:
     ~Earth() override;
@@ -21,5 +21,5 @@ private:
     void Update() override;
 
 public:
-    Delegate<float>& GetOnRotationChange();
+    Delegate<const std::wstring&>& GetOnRotationChange();
 };

@@ -3,9 +3,9 @@
 
 #include "ComponentSystem.h"
 
-bool Input::IsKeyDown(int vKey)
+bool Input::IsKeyHeld(int vKey)
 {
-	return ComponentSystem::Get().PlayerInput().IsKeyDown(vKey);
+	return ComponentSystem::Get().PlayerInput().IsKeyHeld(vKey);
 }
 
 bool Input::IsKeyPressed(int vKey)

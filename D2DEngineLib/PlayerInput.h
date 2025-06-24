@@ -4,6 +4,8 @@
 
 #include "Component.h"
 #include "Vector2.h"
+#include "Action.h"
+#include "Delegate.h"
 
 class PlayerInput :
 	public Component
@@ -20,54 +22,80 @@ public:
 	{
 		Released,
 		Pressed,
-		Down
+		Held
 	};
 
 private:
-	std::vector<std::function<void(Vector2)>> m_directionActions;
-	std::vector<std::vector<std::function<void()>>> m_actionsOnKeyReleased;
-	std::vector<std::vector<std::function<void()>>> m_actionsOnKeyPressed;
-	std::vector<std::vector<std::function<void()>>> m_actionsOnKeyDown;
+	struct SingleKeyActionData
+	{
+		short vKey;
+		InputCheckType checkType;
+		void* instance;
+		Action<> action;
+	};
 
-	DirectionInputType m_directionInputType = DirectionInputType::Both;
+	struct CombinedKeyActionData
+	{
+		std::vector<short> vKeys;
+		InputCheckType checkType; // 마지막 키
+		void* instance;
+		Action<> action;
+	};
+
+private:
+	Delegate<Vector2> m_directionDelegateWASD;
+	Delegate<Vector2> m_directionDelegateArrow;
+	std::vector<SingleKeyActionData> m_singleKeyActions;
+	std::vector<CombinedKeyActionData> m_combinedKeyActions;
+
 	Vector2 m_mousePosition;
+	DirectionInputType m_directionInputType{ DirectionInputType::Both };
 
 public:
 	PlayerInput();
 	~PlayerInput() override;
 
 public:
-	void RegisterActionOnKey(short vKey, InputCheckType checkType, std::function<void()> func);
-	void UnregisterActionsOnKey(short vKey, InputCheckType checkType);
+	template<typename T>
+	void RegisterActionOnKey(short vKey, InputCheckType checkType, T* instance, void (T::* func)())
+	{
+		m_singleKeyActions.push_back({ vKey, checkType, instance, Action<>(instance, func) });
+	}
 
-	void RegisterDirectionAction(DirectionInputType type, std::function<void(Vector2)> func);
-	void UnregisterDirectionActions();
+	template<typename T>
+	void RegisterActionOnCombinedKey(const std::vector<short>& vKeys, InputCheckType checkType, T* instance, void (T::* func)())
+	{
+		m_combinedKeyActions.push_back({ vKeys, checkType, instance, Action<>(instance, func) });
+	}
+
+	template<typename T>
+	void RegisterDirectionAction(DirectionInputType type, T* instance, void (T::* func)(Vector2))
+	{
+		m_directionInputType = type;
+
+		if (type == DirectionInputType::WASD || type == DirectionInputType::Both)
+		{
+			m_directionDelegateWASD.Add(instance, func);
+		}
+
+		if (type == DirectionInputType::Arrow || type == DirectionInputType::Both)
+		{
+			m_directionDelegateArrow.Add(instance, func);
+		}
+	}
+
+	void UnregisterActionOnKey(short vKey, void* instance);
+	void UnregisterActionOnKey(short vKey, InputCheckType checkType, void* instance);
+	void UnregisterCombinedAction(const std::vector<short>& vKeys, void* instance);
+	void UnregisterCombinedAction(const std::vector<short>& vKeys, InputCheckType checkType, void* instance);
+	void UnregisterDirectionActions(void* instance);
 
 	Vector2 GetMousePosition() const;
 
-public:
-	template<typename T>
-	static std::function<void(Vector2)> MakeDirectionAction(void (T::* func)(Vector2), T* comp)
-	{
-		static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
-
-		return std::bind(func, comp, std::placeholders::_1);
-	}
-
-	template<typename T>
-	static std::function<void()> MakeAction(void (T::* func)(), T* comp)
-	{
-		static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
-
-		return std::bind(func, comp);
-	}
-
 private:
-	void CallWASDAction(float horizontal, float vertical);
+	void CallActions();
 	void CallArrowAction(float horizontal, float vertical);
-	void CallActionOnReleased(short vKey);
-	void CallActionOnPressed(short vKey);
-	void CallActionOnDown(short vKey);
+	void CallWASDAction(float horizontal, float vertical);
 	void SetMousePosition(float x, float y);
 
 	friend class PlayerInputSystem;

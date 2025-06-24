@@ -35,25 +35,17 @@ const Vector2& Transform::GetScale() const
 	return m_scale;
 }
 
-const Matrix3x2& Transform::GetLocalMatrix()
-{
-	if (m_isLocalDirty)
-	{
-		m_cachedLocal = Matrix3x2::Scale(m_scale) * Matrix3x2::Rotation(m_rotation) * Matrix3x2::Translation(m_position);
-
-		m_isLocalDirty = false;
-	}
-
-	return m_cachedLocal;
-}
-
 const Matrix3x2& Transform::GetWorldMatrix()
 {
-	if (m_isWorldDirty || m_isLocalDirty)
+	if (m_isDirty)
 	{
-		m_cachedWorld = m_parent != nullptr ? GetLocalMatrix() * m_parent->GetWorldMatrix() : GetLocalMatrix();
+		Matrix3x2 localMatrix{ MakeLocalMatrix() };
 
-		m_isWorldDirty = false;
+		m_cachedWorld = m_parent != nullptr ? 
+			localMatrix * m_parent->GetWorldMatrix() : 
+			localMatrix;
+
+		m_isDirty = false;
 	}
 
 	return m_cachedWorld;
@@ -73,40 +65,35 @@ void Transform::SetPosition(float x, float y)
 {
 	m_position = Vector2(x, y);
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::SetPosition(const Vector2& position)
 {
 	m_position = position;
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::SetRotation(float angle)
 {
 	m_rotation = angle;
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::SetScale(float x, float y)
 {
 	m_scale = Vector2(x, y);
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::SetScale(const Vector2& scale)
 {
 	m_scale = scale;
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::SetParent(Transform* parent)
@@ -128,7 +115,7 @@ void Transform::SetParent(Transform* parent)
 		m_parent->AddChild(this);
 	}
 
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::Reset()
@@ -142,16 +129,14 @@ void Transform::Translate(float x, float y)
 {
 	m_position += Vector2(x, y);
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::Translate(const Vector2& movement)
 {
 	m_position += movement;
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
 void Transform::Rotate(float angle)
@@ -167,19 +152,25 @@ void Transform::Rotate(float angle)
 		m_rotation += MaxDegree;
 	}
 
-	m_isLocalDirty = true;
-	MarkWorldDirty();
+	MarkDirty();
 }
 
-void Transform::MarkWorldDirty()
+Matrix3x2 Transform::MakeLocalMatrix()
 {
-	if (!m_isWorldDirty)
+	return Matrix3x2::Scale(m_scale) * 
+		Matrix3x2::Rotation(m_rotation) * 
+		Matrix3x2::Translation(m_position);
+}
+
+void Transform::MarkDirty()
+{
+	if (!m_isDirty)
 	{
-		m_isWorldDirty = true;
+		m_isDirty = true;
 
 		for (const auto& child : m_children)
 		{
-			child->MarkWorldDirty();
+			child->MarkDirty();
 		}
 	}
 }

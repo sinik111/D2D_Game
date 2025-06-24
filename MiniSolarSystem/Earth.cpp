@@ -11,10 +11,10 @@
 
 Earth::~Earth()
 {
-    m_onRotationChange.Invoke(0.0f);
+    m_onRotationChange.Invoke(L"ÆÄ±«µÊ");
 
     GameObject* go = GameObject::Find(L"EarthHpViewer");
-    if (go != nullptr)
+    if (GameObject::IsValid(go))
     {
         go->Destroy();
     }
@@ -22,7 +22,7 @@ Earth::~Earth()
 
 void Earth::Start()
 {
-    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+    TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
 
     textRenderer->SetText(L"Áö±¸");
     textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
@@ -33,15 +33,15 @@ void Earth::Start()
     textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
     textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
 
-    BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>();
+    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
 
     bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Earth"));
 
-    GetTransform()->SetScale(Vector2(0.5f, 0.5f));
+    GetTransform()->SetScale({ 0.5f, 0.5f });
     
     m_health = GetGameObject()->GetComponent<Health>();
 
-    if (m_health != nullptr)
+    if (Component::IsValid(m_health))
     {
         m_health->SetHp(100, 100);
     }
@@ -51,7 +51,7 @@ void Earth::Start()
 
 void Earth::Update()
 {
-    if (m_health != nullptr)
+    if (Component::IsValid(m_health))
     {
         if (Input::IsKeyPressed('T'))
         {
@@ -61,10 +61,10 @@ void Earth::Update()
 
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
-    m_onRotationChange.Invoke(GetTransform()->GetRotation());
+    m_onRotationChange.Invoke(std::to_wstring(GetTransform()->GetRotation()));
 }
 
-Delegate<float>& Earth::GetOnRotationChange()
+Delegate<const std::wstring&>& Earth::GetOnRotationChange()
 {
     return m_onRotationChange;
 }
