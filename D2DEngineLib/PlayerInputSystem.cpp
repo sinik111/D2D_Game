@@ -23,7 +23,7 @@ void PlayerInputSystem::Update()
 {
     m_previousKeyState = m_currentKeyState;
 
-    for (int i = 0; i < 256; ++i)
+    for (int i{ 0 }; i < 256; ++i)
     {
         m_currentKeyState[i] = (GetAsyncKeyState(i) & 0x8000) != 0;
     }

@@ -24,53 +24,54 @@ void TextRendererSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
 
 void TextRendererSystem::MakeRenderCommands()
 {
-	const Matrix3x2 unityMatrix = m_d2dRenderer->GetUnityMatrix();
-	const Matrix3x2 viewMatrix = Camera::s_mainCamera->GetViewMatrix();
-	D2D1_POINT_2F point;
+	const Matrix3x2& unityMatrix{ m_d2dRenderer->GetUnityMatrix() };
+	const Matrix3x2& viewMatrix{ Camera::s_mainCamera->GetViewMatrix() };
 
 	for (const auto& textRenderer : m_textRenderers)
 	{
-		Matrix3x2 renderMatrix;
-		Matrix3x2 finalMatrix;
-
 		switch (textRenderer->GetSpaceType())
 		{
 		case TextRenderer::SpaceType::Screen:
 		{
-			renderMatrix = Matrix3x2::Scale(1.0f, -1.0f);
-
-			finalMatrix = renderMatrix * unityMatrix;
-
-			point = textRenderer->GetPoint();
+			D2D1_POINT_2F point{ textRenderer->GetPoint() };
 			point.y = -point.y;
 
+			const Matrix3x2& finalMatrix{ Matrix3x2::Scale(1.0f, -1.0f) * unityMatrix };
+
+			m_d2dRenderer->AddRenderCommand(std::make_unique<TextRenderCommand>(
+				textRenderer->GetTextFormat(),
+				textRenderer->GetText(),
+				finalMatrix,
+				point,
+				textRenderer->GetRectSize(),
+				textRenderer->GetColor(),
+				textRenderer->GetSortOrder()
+			));
 			break;
 		}
 		case TextRenderer::SpaceType::World:
 		{
-			D2D1_SIZE_F size = textRenderer->GetRectSize();
+			D2D1_SIZE_F size{ textRenderer->GetRectSize() };
+			D2D1_POINT_2F point{ textRenderer->GetPoint() };
 
-			renderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-				Matrix3x2::Translation(-size.width / 2, size.height / 2);
+			const Matrix3x2& renderMatrix{ Matrix3x2::Scale(1.0f, -1.0f) *
+				Matrix3x2::Translation(-size.width / 2, size.height / 2) };
 
-			finalMatrix = renderMatrix * textRenderer->GetTransform()->GetWorldMatrix() *
-				viewMatrix * unityMatrix;
+			const Matrix3x2& finalMatrix{ renderMatrix * textRenderer->GetTransform()->GetWorldMatrix() *
+				viewMatrix * unityMatrix };
 
-			point = textRenderer->GetPoint();
-
+			m_d2dRenderer->AddRenderCommand(std::make_unique<TextRenderCommand>(
+				textRenderer->GetTextFormat(),
+				textRenderer->GetText(),
+				finalMatrix,
+				point,
+				textRenderer->GetRectSize(),
+				textRenderer->GetColor(),
+				textRenderer->GetSortOrder()
+			));
 			break;
 		}
 		}
-
-		m_d2dRenderer->AddRenderCommand(std::make_unique<TextRenderCommand>(
-			textRenderer->GetTextFormat(),
-			textRenderer->GetText(),
-			finalMatrix,
-			point,
-			textRenderer->GetRectSize(),
-			textRenderer->GetColor(),
-			textRenderer->GetSortOrder()
-		));
 	}
 }
 

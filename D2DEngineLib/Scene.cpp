@@ -29,7 +29,7 @@ void Scene::Update()
 		m_pendingCreatedGameObjects.clear();
 	}
 
-	for (size_t i = 0; i < m_gameObjects.size(); )
+	for (size_t i{ 0 }; i < m_gameObjects.size(); )
 	{
 		if (m_gameObjects[i]->IsDestroyed())
 		{
@@ -62,6 +62,7 @@ void Scene::Clear()
 	m_pendingCreatedGameObjects.clear();
 	m_gameObjects.clear();
 	m_pendingDestroyedGameObjects.clear();
+	m_validGameObjects.clear();
 }
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
