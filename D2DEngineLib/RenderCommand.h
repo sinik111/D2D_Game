@@ -21,16 +21,17 @@ struct BitmapRenderCommand :
 {
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap;
 	Matrix3x2 transform;
-	// 필요시 추가
-	// float opacity;
-	// D2D1_RECT_F sourceRect;
-	// D2D1_RECT_F destinationRect;
+	float opacity;
+	D2D1_RECT_F sourceRect;
 	int sortOrder;
 
 	BitmapRenderCommand(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap,
 		const Matrix3x2& transform,
-		int sortOrder = 0)
-		: bitmap{ std::move(bitmap) }, transform{ transform }, sortOrder{ sortOrder }
+		const D2D1_RECT_F sourceRect,
+		float opacity,
+		int sortOrder)
+		: bitmap{ std::move(bitmap) }, transform{ transform }, sortOrder{ sortOrder },
+		sourceRect{ sourceRect }, opacity{ opacity }
 	{
 
 	}

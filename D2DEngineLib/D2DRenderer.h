@@ -34,6 +34,9 @@ public:
 	void Initialize();
 	void Shutdown();
 
+	UINT GetWidth() const;
+	UINT GetHeight() const;
+
 public:
 	void BeginDraw(const D2D1::ColorF& color) const;
 	void EndDraw() const;

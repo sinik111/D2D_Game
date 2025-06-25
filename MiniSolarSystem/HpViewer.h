@@ -9,9 +9,10 @@ class HpViewer :
 {
 private:
 	std::wstring m_targetName;
-	TextRenderer* m_textRenderer;
+	TextRenderer* m_textRenderer{};
 
 private:
+	void Initialize() override;
 	void Start() override;
 
 public:

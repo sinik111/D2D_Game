@@ -15,7 +15,7 @@ using Microsoft::WRL::ComPtr;
 D2DRenderer::D2DRenderer(HWND hWnd, UINT width, UINT height)
 	: m_hWnd{ hWnd }, m_width{ width }, m_height{ height }
 {
-
+	
 }
 
 D2DRenderer::~D2DRenderer()
@@ -98,6 +98,16 @@ void D2DRenderer::Shutdown()
 
 }
 
+UINT D2DRenderer::GetWidth() const
+{
+	return m_width;
+}
+
+UINT D2DRenderer::GetHeight() const
+{
+	return m_height;
+}
+
 void D2DRenderer::BeginDraw(const D2D1::ColorF& color) const
 {
 	m_d2dDeviceContext->BeginDraw();
@@ -145,6 +155,8 @@ void D2DRenderer::AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand
 
 void D2DRenderer::PrepareRenderCommands()
 {
+	// frustum culling 추가
+
 	std::sort(
 		m_renderCommands.begin(),
 		m_renderCommands.end(),
@@ -153,7 +165,6 @@ void D2DRenderer::PrepareRenderCommands()
 		}
 	);
 
-	// frustum culling 추가
 }
 
 void D2DRenderer::ExecuteRenderCommands()
@@ -170,7 +181,8 @@ void D2DRenderer::ExecuteRenderCommands()
 			BitmapRenderCommand* bitmapCmd = static_cast<BitmapRenderCommand*>(command.get());
 
 			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(bitmapCmd->transform));
-			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get());
+			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get(), nullptr,
+				bitmapCmd->opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, &bitmapCmd->sourceRect);
 			break;
 		}
 		case RenderCommandType::Text:

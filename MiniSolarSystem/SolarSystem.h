@@ -14,5 +14,5 @@ public:
 	void Unload() override;
 
 private:
-	void LoadResources();
+	void LoadBitmaps();
 };

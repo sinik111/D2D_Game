@@ -18,7 +18,7 @@ Camera::~Camera()
 Matrix3x2 Camera::GetViewMatrix()
 {
 	// caching, dirty flag 적용 필요
-	Matrix3x2 worldMatrix = GetTransform()->GetWorldMatrix();
+	Matrix3x2 worldMatrix{ GetTransform()->GetWorldMatrix() };
 
 	worldMatrix.ResetScale();
 
@@ -27,7 +27,7 @@ Matrix3x2 Camera::GetViewMatrix()
 	return worldMatrix.Inverse();
 }
 
-float Camera::GetZoom()
+float Camera::GetZoom() const
 {
 	return m_zoomFactor;
 }

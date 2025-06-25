@@ -7,7 +7,8 @@ class ScriptSystem
 private:
 	std::vector<Script*> m_scripts;
 
-	std::vector<Script*> m_scriptsForPendingStart;
+	std::vector<Script*> m_scriptsForPendingInitialize;
+	std::vector<Script*> m_scriptsForInitialize;
 	std::vector<Script*> m_scriptsForStart;
 	std::vector<Script*> m_scriptsForUpdate;
 	std::vector<Script*> m_scriptsForLateUpdate;
@@ -26,6 +27,7 @@ public:
 	void UpdateSystem();
 
 private:
+	void CallInitialize();
 	void CallStart();
 	void CallUpdate();
 	void CallLateUpdate();

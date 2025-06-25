@@ -14,6 +14,7 @@ public:
 	GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 
 private:
+	virtual void Initialize();
 	virtual void Start();
 	virtual void Update();
 	virtual void LateUpdate();

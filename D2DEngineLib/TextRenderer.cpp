@@ -121,7 +121,7 @@ D2D1_COLOR_F TextRenderer::GetColor()
 	return m_color;
 }
 
-TextRenderer::SpaceType TextRenderer::GetSpaceType()
+SpaceType TextRenderer::GetSpaceType()
 {
 	return m_spaceType;
 }

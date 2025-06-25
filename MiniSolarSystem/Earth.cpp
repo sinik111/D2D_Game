@@ -1,6 +1,9 @@
 #include "../D2DEngineLib/framework.h"
 #include "Earth.h"
 
+#include <sstream>
+#include <iomanip>
+
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
@@ -25,7 +28,7 @@ void Earth::Start()
     TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
 
     textRenderer->SetText(L"Áö±¸");
-    textRenderer->SetSpaceType(TextRenderer::SpaceType::World);
+    textRenderer->SetSpaceType(SpaceType::World);
     textRenderer->SetFontSize(30.0f);
     textRenderer->SetRectSize({ 100.0f, 100.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
@@ -61,7 +64,10 @@ void Earth::Update()
 
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
-    m_onRotationChange.Invoke(std::to_wstring(GetTransform()->GetRotation()));
+    std::wstringstream ss;
+    ss << std::fixed << std::setprecision(2) << GetTransform()->GetRotation();
+
+    m_onRotationChange.Invoke(ss.str());
 }
 
 Delegate<const std::wstring&>& Earth::GetOnRotationChange()

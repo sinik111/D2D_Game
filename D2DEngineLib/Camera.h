@@ -19,6 +19,6 @@ public:
 public:
 	Matrix3x2 GetViewMatrix();
 
-	float GetZoom();
+	float GetZoom() const;
 	void SetZoom(float zoomFactor);
 };

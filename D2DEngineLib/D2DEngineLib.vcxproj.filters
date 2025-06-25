@@ -147,6 +147,9 @@
     <ClInclude Include="Input.h">
       <Filter>99_Utility\System</Filter>
     </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>99_Utility\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">

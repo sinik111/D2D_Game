@@ -1,17 +1,12 @@
 #pragma once
 
 #include "Component.h"
+#include "Enum.h"
 
 class TextRenderer :
 	public Component
 {
 public:
-	enum class SpaceType
-	{
-		Screen,
-		World
-	};
-
 	enum class VerticalAlignment
 	{
 		Top,

@@ -19,6 +19,11 @@ GameObject* Script::CreateGameObject(const std::wstring& name)
 	return SceneManager::Get().GetCurrentScene()->CreateGameObject(name);
 }
 
+void Script::Initialize()
+{
+
+}
+
 void Script::Start()
 {
 

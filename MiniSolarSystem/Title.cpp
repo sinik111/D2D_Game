@@ -8,7 +8,7 @@ void Title::Start()
     TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
 
     textRenderer->SetText(L"еб╬Г╟Х");
-    textRenderer->SetSpaceType(TextRenderer::SpaceType::Screen);
+    textRenderer->SetSpaceType(SpaceType::Screen);
     textRenderer->SetFontSize(50.0f);
     textRenderer->SetPoint({ -400.0f, 300.0f });
     textRenderer->SetRectSize({ 200.0f, 100.0f });

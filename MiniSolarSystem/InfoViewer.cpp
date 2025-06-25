@@ -6,17 +6,18 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Camera.h"
+#include "../D2DEngineLib/Debug.h"
 #include "Sun.h"
 
 void InfoViewer::Start()
 {
     m_textRenderer = GetGameObject()->AddComponent<TextRenderer>();
 
-    m_textRenderer->SetSpaceType(TextRenderer::SpaceType::Screen);
+    m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(15.0f);
-    m_textRenderer->SetPoint({ -380.0f, -130.0f });
+    m_textRenderer->SetPoint({ -380.0f, -100.0f });
     m_textRenderer->SetRectSize({ 400.0f, 400.0f });
-    m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
+    m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
     m_textRenderer->SetSortOrder(3);
     m_textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Top);
     m_textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Left);
@@ -38,10 +39,11 @@ void InfoViewer::LateUpdate()
     }
 
     std::wstringstream ss;
-    ss << std::fixed << std::setprecision(2);
-    ss << L"Scene을 변경하려면 '1'을 누르세요\n"
-        << L"지구/달에 피해 10 주기 [ T / Y ]\n"
-        << L"지구 생성/삭제하기 [ A / S ] 지구 개수: " << earthCount
+    ss << std::fixed << std::setprecision(2)
+        << L"FPS: " << Debug::GetLastFPS()
+        << L"\nScene을 변경하려면 '1'을 누르세요"
+        << L"\n지구/달에 피해 10 주기 [ T / Y ]"
+        << L"\n지구 생성/삭제하기 [ A / S ] 지구 개수: " << earthCount
         << L"\n카메라 Position [ ← ↑ ↓ → ]: " << cameraPosition.GetX() << L", " << cameraPosition.GetY()
         << L"\n카메라 Zoom [ CTRL + Q / CTRL + W ]: " << cameraZoom
         << L"\n태양 Rotation: " << sunRotation

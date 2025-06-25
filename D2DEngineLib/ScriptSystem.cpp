@@ -7,13 +7,14 @@
 void ScriptSystem::Register(Script* script)
 {
 	m_scripts.push_back(script);
-	m_scriptsForPendingStart.push_back(script);
+	m_scriptsForPendingInitialize.push_back(script);
 }
 
 void ScriptSystem::Unregister(Script* script)
 {
 	Util::OptimizedErase(m_scripts, script);
-	Util::OptimizedErase(m_scriptsForPendingStart, script);
+	Util::OptimizedErase(m_scriptsForPendingInitialize, script);
+	Util::OptimizedErase(m_scriptsForInitialize, script);
 	Util::OptimizedErase(m_scriptsForStart, script);
 	Util::OptimizedErase(m_scriptsForUpdate, script);
 	Util::OptimizedErase(m_scriptsForLateUpdate, script);
@@ -31,34 +32,50 @@ void ScriptSystem::UnregisterLateUpdate(Script* script)
 
 void ScriptSystem::UpdateSystem()
 {
+	CallInitialize();
 	CallStart();
 	CallUpdate();
 	CallLateUpdate();
 }
 
-void ScriptSystem::CallStart()
+void ScriptSystem::CallInitialize()
 {
-	while (!m_scriptsForPendingStart.empty())
+	while (!m_scriptsForPendingInitialize.empty())
 	{
-		m_scriptsForStart.insert(m_scriptsForStart.end(),
-			std::make_move_iterator(m_scriptsForPendingStart.begin()),
-			std::make_move_iterator(m_scriptsForPendingStart.end()));
+		m_scriptsForInitialize.insert(m_scriptsForInitialize.end(),
+			std::make_move_iterator(m_scriptsForPendingInitialize.begin()),
+			std::make_move_iterator(m_scriptsForPendingInitialize.end()));
 
-		m_scriptsForPendingStart.clear();
+		m_scriptsForPendingInitialize.clear();
 
 
-		if (!m_scriptsForStart.empty())
+		if (!m_scriptsForInitialize.empty())
 		{
-			for (const auto& script : m_scriptsForStart)
+			for (const auto& script : m_scriptsForInitialize)
 			{
-				script->Start();
+				script->Initialize();
 
-				m_scriptsForUpdate.push_back(script);
-				m_scriptsForLateUpdate.push_back(script);
+				m_scriptsForStart.push_back(script);
 			}
 
-			m_scriptsForStart.clear();
+			m_scriptsForInitialize.clear();
 		}
+	}
+}
+
+void ScriptSystem::CallStart()
+{
+	if (!m_scriptsForStart.empty())
+	{
+		for (const auto& script : m_scriptsForStart)
+		{
+			script->Start();
+
+			m_scriptsForUpdate.push_back(script);
+			m_scriptsForLateUpdate.push_back(script);
+		}
+
+		m_scriptsForStart.clear();
 	}
 }
 

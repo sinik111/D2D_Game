@@ -15,6 +15,7 @@ void TitleSceneChange::Start()
 
     BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
     bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"Title", L"MainTitle"));
+    bitmapRenderer->SetFlipX(true);
 
     TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
     textRenderer->SetText(L"Scene을 변경하려면 '2'를 누르세요");

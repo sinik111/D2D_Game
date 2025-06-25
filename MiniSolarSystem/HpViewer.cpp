@@ -5,11 +5,14 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 
-void HpViewer::Start()
+void HpViewer::Initialize()
 {
     m_textRenderer = GetGameObject()->GetComponent<TextRenderer>();
+}
 
-    m_textRenderer->SetSpaceType(TextRenderer::SpaceType::Screen);
+void HpViewer::Start()
+{
+    m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(20.0f);
     m_textRenderer->SetRectSize({ 200.0f, 50.0f });
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
@@ -25,11 +28,6 @@ void HpViewer::SetTargetName(const std::wstring& targetName)
 
 void HpViewer::ChangeHpText(int prevHp, int currHp, int maxHp)
 {
-    if (m_textRenderer == nullptr)
-    {
-        m_textRenderer = GetGameObject()->GetComponent<TextRenderer>();
-    }
-
     std::wstringstream ss;
 
     ss << m_targetName << L" HP: " << currHp << L" / " << maxHp;

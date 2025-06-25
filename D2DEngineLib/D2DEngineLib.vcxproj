@@ -150,6 +150,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugSystem.h" />
     <ClInclude Include="Delegate.h" />
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />

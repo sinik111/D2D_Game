@@ -31,7 +31,7 @@ void TextRendererSystem::MakeRenderCommands()
 	{
 		switch (textRenderer->GetSpaceType())
 		{
-		case TextRenderer::SpaceType::Screen:
+		case SpaceType::Screen:
 		{
 			D2D1_POINT_2F point{ textRenderer->GetPoint() };
 			point.y = -point.y;
@@ -49,7 +49,7 @@ void TextRendererSystem::MakeRenderCommands()
 			));
 			break;
 		}
-		case TextRenderer::SpaceType::World:
+		case SpaceType::World:
 		{
 			D2D1_SIZE_F size{ textRenderer->GetRectSize() };
 			D2D1_POINT_2F point{ textRenderer->GetPoint() };
