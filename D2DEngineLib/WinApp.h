@@ -12,6 +12,7 @@ protected:
 	HCURSOR m_hCursor{};
 	HICON m_hIconSmall{};
 
+	// default settings
 	std::wstring m_className{ L"DefaultClassName" };
 	std::wstring m_windowName{ L"DefaultWindowName" };
 	std::wstring m_modulePath;

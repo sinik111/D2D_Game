@@ -80,13 +80,13 @@ GameObject* Scene::CreateGameObject(const std::wstring& name)
 
 GameObject* Scene::Find(const std::wstring& name) const
 {
-	const auto& find = std::find_if(
+	const auto& find{ std::find_if(
 		m_gameObjects.begin(),
 		m_gameObjects.end(),
-		[name](const std::unique_ptr<GameObject>& gameObject) -> bool {
+		[name](const std::unique_ptr<GameObject>& gameObject) {
 			return gameObject->GetName() == name;
 		}
-	);
+	)};
 
 	if (find != m_gameObjects.end())
 	{
@@ -98,7 +98,7 @@ GameObject* Scene::Find(const std::wstring& name) const
 
 bool Scene::IsValid(GameObject* gameObject) const
 {
-	const auto& find = m_validGameObjects.find(gameObject);
+	const auto& find{ m_validGameObjects.find(gameObject) };
 	if (find == m_validGameObjects.end())
 	{
 		return false;

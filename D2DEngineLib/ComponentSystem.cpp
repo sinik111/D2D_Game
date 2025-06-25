@@ -49,7 +49,7 @@ void ComponentSystem::UnregisterValidCheck(Component* component)
 
 bool ComponentSystem::IsValid(Component* component) const
 {
-	const auto& find = m_validComponents.find(component);
+	const auto& find{ m_validComponents.find(component) };
 	if (find == m_validComponents.end())
 	{
 		return false;

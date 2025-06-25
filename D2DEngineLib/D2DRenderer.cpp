@@ -177,16 +177,13 @@ void D2DRenderer::ExecuteRenderCommands()
 		switch (command->GetType())
 		{
 		case RenderCommandType::Bitmap:
-		{
 			BitmapRenderCommand* bitmapCmd = static_cast<BitmapRenderCommand*>(command.get());
 
 			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(bitmapCmd->transform));
 			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get(), nullptr,
 				bitmapCmd->opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, &bitmapCmd->sourceRect);
 			break;
-		}
 		case RenderCommandType::Text:
-		{
 			TextRenderCommand* textCmd = static_cast<TextRenderCommand*>(command.get());
 
 			D2D1_RECT_F layoutRect
@@ -202,12 +199,8 @@ void D2DRenderer::ExecuteRenderCommands()
 			m_d2dDeviceContext->DrawTextW(textCmd->text.c_str(), static_cast<UINT32>(textCmd->text.size()),
 				textCmd->textFormat.Get(), layoutRect, m_d2dSolidColorBrush.Get());
 			break;
-		}
-
 		default:
-		{
 			break;
-		}
 		}
 	}
 
