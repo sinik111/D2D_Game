@@ -17,7 +17,7 @@ void InfoViewer::Start()
     m_textRenderer->SetFontSize(15.0f);
     m_textRenderer->SetPoint({ -380.0f, -100.0f });
     m_textRenderer->SetRectSize({ 400.0f, 400.0f });
-    m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
+    m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);
     m_textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Top);
     m_textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Left);

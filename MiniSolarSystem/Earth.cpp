@@ -9,6 +9,7 @@
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/Input.h"
 #include "../D2DEngineLib/MyTime.h"
+#include "../D2DEngineLib/Debug.h"
 
 #include "Health.h"
 
@@ -54,6 +55,8 @@ void Earth::Start()
 
 void Earth::Update()
 {
+    Debug::Log(std::to_wstring(GetTransform()->GetPosition().GetX()) + L" " + std::to_wstring(GetTransform()->GetPosition().GetY()));
+
     if (Component::IsValid(m_health))
     {
         if (Input::IsKeyPressed('T'))

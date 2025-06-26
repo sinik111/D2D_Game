@@ -6,6 +6,7 @@
 #include "BitmapRenderer.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Debug.h"
 
 void BitmapRendererSystem::Register(BitmapRenderer* bitmapRenderer)
 {
@@ -41,17 +42,20 @@ void BitmapRendererSystem::MakeRenderCommands()
 
 	for (const auto& bitmapRenderer : m_bitmapRenderers)
 	{
+		const Matrix3x2& worldMatrix{ bitmapRenderer->GetTransform()->GetWorldMatrix() };
+		const Vector2& worldPosition{ worldMatrix.GetPosition() };
+
+
 		const D2D1_RECT_F& sourceRect{ bitmapRenderer->GetSourceRect() };
 		const D2D1_SIZE_F& size{ sourceRect.right - sourceRect.left, sourceRect.bottom - sourceRect.top };
-		const Vector2& position{ bitmapRenderer->GetTransform()->GetPosition() };
 
 		const float bitmapHalfWidth{ size.width / 2.0f };
 		const float bitmapHalfHeight{ size.height / 2.0f };
 
-		const float bitmapLeft{ position.GetX() - bitmapHalfWidth };
-		const float bitmapRight{ position.GetX() + bitmapHalfWidth };
-		const float bitmapBottom{ position.GetY() - bitmapHalfHeight };
-		const float bitmapTop{ position.GetY() + bitmapHalfHeight };
+		const float bitmapLeft{ worldPosition.GetX() - bitmapHalfWidth };
+		const float bitmapRight{ worldPosition.GetX() + bitmapHalfWidth };
+		const float bitmapBottom{ worldPosition.GetY() - bitmapHalfHeight };
+		const float bitmapTop{ worldPosition.GetY() + bitmapHalfHeight };
 
 		if (bitmapRight < viewLeft || bitmapLeft > viewRight ||
 			bitmapTop < viewBottom || bitmapBottom > viewTop)

@@ -117,7 +117,7 @@ void D2DRenderer::BeginDraw(const D2D1::ColorF& color) const
 void D2DRenderer::EndDraw() const
 {
 	m_d2dDeviceContext->EndDraw();
-	m_dxgiSwapChain->Present(0, 0);
+	m_dxgiSwapChain->Present(1, 0);
 }
 
 const ComPtr<ID2D1DeviceContext7>& D2DRenderer::GetDeviceContext() const
@@ -155,8 +155,6 @@ void D2DRenderer::AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand
 
 void D2DRenderer::PrepareRenderCommands()
 {
-	// frustum culling Ãß°¡
-
 	std::sort(
 		m_renderCommands.begin(),
 		m_renderCommands.end(),
@@ -177,13 +175,16 @@ void D2DRenderer::ExecuteRenderCommands()
 		switch (command->GetType())
 		{
 		case RenderCommandType::Bitmap:
+		{
 			BitmapRenderCommand* bitmapCmd = static_cast<BitmapRenderCommand*>(command.get());
 
 			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(bitmapCmd->transform));
 			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get(), nullptr,
 				bitmapCmd->opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, &bitmapCmd->sourceRect);
+		}
 			break;
 		case RenderCommandType::Text:
+		{
 			TextRenderCommand* textCmd = static_cast<TextRenderCommand*>(command.get());
 
 			D2D1_RECT_F layoutRect
@@ -198,6 +199,7 @@ void D2DRenderer::ExecuteRenderCommands()
 			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(textCmd->transform));
 			m_d2dDeviceContext->DrawTextW(textCmd->text.c_str(), static_cast<UINT32>(textCmd->text.size()),
 				textCmd->textFormat.Get(), layoutRect, m_d2dSolidColorBrush.Get());
+		}
 			break;
 		default:
 			break;
