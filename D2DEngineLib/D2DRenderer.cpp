@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include "Matrix3x2.h"
+#include "IRenderer.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d2d1.lib")
@@ -148,6 +149,11 @@ ComPtr<IDWriteTextFormat> D2DRenderer::CreateTextFormat(float fontSize)
 	return newDWriteTextFormat;
 }
 
+void D2DRenderer::RegisterRendererToQueue(IRenderer* renderer)
+{
+	m_renderQueue.push_back(renderer);
+}
+
 void D2DRenderer::AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand)
 {
 	m_renderCommands.push_back(std::move(renderCommand));
@@ -163,6 +169,10 @@ void D2DRenderer::PrepareRenderCommands()
 		}
 	);
 
+}
+
+void D2DRenderer::PrepareRenderQueue()
+{
 }
 
 void D2DRenderer::ExecuteRenderCommands()
@@ -209,7 +219,15 @@ void D2DRenderer::ExecuteRenderCommands()
 	ClearCommands();
 }
 
+void D2DRenderer::ExecuteRenderQueue()
+{
+}
+
 void D2DRenderer::ClearCommands()
 {
 	m_renderCommands.clear();
+}
+
+void D2DRenderer::ClearQueue()
+{
 }

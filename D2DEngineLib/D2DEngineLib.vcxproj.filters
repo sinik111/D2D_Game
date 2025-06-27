@@ -43,6 +43,9 @@
     <Filter Include="99_Utility\Resource">
       <UniqueIdentifier>{e4522485-119b-4e7b-9dcd-8a869bc3da84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03_Component\Components\Renderer">
+      <UniqueIdentifier>{695ae289-c7d7-4b0a-a444-c210823431e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoInitializer.h">
@@ -66,9 +69,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>02_GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="BitmapRenderer.h">
-      <Filter>03_Component\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>03_Component\Components</Filter>
     </ClInclude>
@@ -76,9 +76,6 @@
       <Filter>03_Component\Components</Filter>
     </ClInclude>
     <ClInclude Include="Script.h">
-      <Filter>03_Component\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextRenderer.h">
       <Filter>03_Component\Components</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
@@ -153,6 +150,15 @@
     <ClInclude Include="BitmapResource.h">
       <Filter>99_Utility\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="BitmapRenderer.h">
+      <Filter>03_Component\Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>03_Component\Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderer.h">
+      <Filter>03_Component\Components\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -185,17 +191,11 @@
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>00_App</Filter>
     </ClCompile>
-    <ClCompile Include="BitmapRenderer.cpp">
-      <Filter>03_Component\Components</Filter>
-    </ClCompile>
     <ClCompile Include="BitmapRendererSystem.cpp">
       <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="WinApp.cpp">
       <Filter>00_App</Filter>
-    </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
-      <Filter>03_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="TextRendererSystem.cpp">
       <Filter>03_Component\ComponentSystem\Systems</Filter>
@@ -238,6 +238,15 @@
     </ClCompile>
     <ClCompile Include="BitmapResource.cpp">
       <Filter>99_Utility\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapRenderer.cpp">
+      <Filter>03_Component\Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>03_Component\Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="IRenderer.cpp">
+      <Filter>03_Component\Components\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

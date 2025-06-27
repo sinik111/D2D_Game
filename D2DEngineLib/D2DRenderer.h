@@ -3,6 +3,8 @@
 #include "Matrix3x2.h"
 #include "RenderCommand.h"
 
+class IRenderer;
+
 class D2DRenderer
 {
 private:
@@ -20,6 +22,8 @@ private:
 	Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> m_d2dSolidColorBrush;
 
 	std::vector<std::unique_ptr<IRenderCommand>> m_renderCommands;
+
+	std::vector<IRenderer*> m_renderQueue;
 
 	UINT m_width;
 	UINT m_height;
@@ -49,10 +53,15 @@ public:
 	Microsoft::WRL::ComPtr<IDWriteTextFormat> CreateTextFormat(float fontSize);
 
 public:
+	void RegisterRendererToQueue(IRenderer* renderer);
 	void AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand);
 	void ExecuteRenderCommands();
 
+	void ExecuteRenderQueue();
+
 private:
 	void PrepareRenderCommands();
+	void PrepareRenderQueue();
 	void ClearCommands();
+	void ClearQueue();
 };

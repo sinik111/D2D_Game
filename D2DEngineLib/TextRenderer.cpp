@@ -121,12 +121,12 @@ D2D1_COLOR_F TextRenderer::GetColor()
 	return m_color;
 }
 
-SpaceType TextRenderer::GetSpaceType()
+SpaceType TextRenderer::GetSpaceType() const
 {
 	return m_spaceType;
 }
 
-int TextRenderer::GetSortOrder()
+int TextRenderer::GetSortOrder() const
 {
 	return m_sortOrder;
 }

@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "Enum.h"
+#include "IRenderer.h"
 
 enum class VerticalAlignment
 {
@@ -19,7 +20,7 @@ enum class HorizontlAlignment
 };
 
 class TextRenderer :
-	public Component
+	public Component, public IRenderer
 {
 private:
 	Microsoft::WRL::ComPtr<IDWriteTextFormat> m_textFormat;
@@ -48,6 +49,17 @@ public:
 	~TextRenderer() override;
 
 public:
+	Microsoft::WRL::ComPtr<IDWriteTextFormat> GetTextFormat();
+	std::wstring GetText();
+	D2D1_COLOR_F GetColor();
+	D2D1_POINT_2F GetPoint();
+	D2D1_SIZE_F GetRectSize();
+	float GetFontSize();
+
+	SpaceType GetSpaceType() const override;
+	int GetSortOrder() const override;
+
+public:
 	void SetText(const std::wstring& text);
 	void SetColor(const D2D1_COLOR_F& color);
 	void SetSpaceType(SpaceType spaceType);
@@ -57,13 +69,4 @@ public:
 	void SetFontSize(float size);
 	void SetVerticalAlignment(VerticalAlignment align);
 	void SetHorizontalAlignment(HorizontlAlignment align);
-
-	Microsoft::WRL::ComPtr<IDWriteTextFormat> GetTextFormat();
-	std::wstring GetText();
-	D2D1_COLOR_F GetColor();
-	SpaceType GetSpaceType();
-	int GetSortOrder();
-	D2D1_POINT_2F GetPoint();
-	D2D1_SIZE_F GetRectSize();
-	float GetFontSize();
 };

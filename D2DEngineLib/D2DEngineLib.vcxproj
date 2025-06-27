@@ -155,6 +155,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="IRenderer.h" />
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="MyTimeSystem.h" />
     <ClInclude Include="PlayerInputSystem.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="DebugSystem.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="IRenderer.cpp" />
     <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="MyTimeSystem.cpp" />
     <ClCompile Include="PlayerInputSystem.cpp" />

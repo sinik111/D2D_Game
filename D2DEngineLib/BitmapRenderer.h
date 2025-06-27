@@ -3,9 +3,10 @@
 #include "Component.h"
 #include "Enum.h"
 #include "BitmapResource.h"
+#include "IRenderer.h"
 
 class BitmapRenderer :
-	public Component
+	public Component, public IRenderer
 {
 private:
 	std::shared_ptr<BitmapResource> m_bitmapResource;
@@ -22,11 +23,12 @@ public:
 
 public:
 	const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& GetBitmap() const;
-	int GetSortOrder() const;
 	bool GetFlipX() const;
-	SpaceType GetSpaceType() const;
 	D2D1_RECT_F GetSourceRect() const;
 	float GetOpacity() const;
+
+	int GetSortOrder() const override;
+	SpaceType GetSpaceType() const override;
 
 public:
 	void SetBitmap(const std::wstring& filePath);
