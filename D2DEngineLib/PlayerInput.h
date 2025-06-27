@@ -7,24 +7,23 @@
 #include "Action.h"
 #include "Delegate.h"
 
+enum class DirectionInputType
+{
+	WASD,
+	Arrow,
+	Both
+};
+
+enum class InputCheckType
+{
+	Released,
+	Pressed,
+	Held
+};
+
 class PlayerInput :
 	public Component
 {
-public:
-	enum class DirectionInputType
-	{
-		WASD,
-		Arrow,
-		Both
-	};
-
-	enum class InputCheckType
-	{
-		Released,
-		Pressed,
-		Held
-	};
-
 private:
 	struct SingleKeyActionData
 	{

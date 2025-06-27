@@ -25,9 +25,6 @@
     <Filter Include="99_Utility">
       <UniqueIdentifier>{d3215c62-2859-44e6-8c33-5e0c30baf71a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99_Utility\Manager">
-      <UniqueIdentifier>{52b84b9e-5d7d-44c2-8db6-5bd3f9933d4b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="99_Utility\PCH">
       <UniqueIdentifier>{bc3f0eb4-4684-427e-8410-14a04216a2fd}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="99_Utility\Delegate">
       <UniqueIdentifier>{fb0035d4-51dd-4f85-ae64-e3cba25f66f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Utility\Resource">
+      <UniqueIdentifier>{e4522485-119b-4e7b-9dcd-8a869bc3da84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,9 +102,6 @@
     <ClInclude Include="Component.h">
       <Filter>03_Component</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>99_Utility\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>99_Utility\PCH</Filter>
     </ClInclude>
@@ -150,6 +147,12 @@
     <ClInclude Include="Enum.h">
       <Filter>99_Utility\System</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>99_Utility\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapResource.h">
+      <Filter>99_Utility\Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -191,9 +194,6 @@
     <ClCompile Include="WinApp.cpp">
       <Filter>00_App</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>99_Utility\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="TextRenderer.cpp">
       <Filter>03_Component\Components</Filter>
     </ClCompile>
@@ -232,6 +232,12 @@
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>99_Utility\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>99_Utility\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapResource.cpp">
+      <Filter>99_Utility\Resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

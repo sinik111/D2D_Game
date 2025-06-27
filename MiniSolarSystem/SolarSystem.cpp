@@ -20,7 +20,7 @@ SolarSystem::~SolarSystem()
 
 void SolarSystem::Load()
 {
-	LoadBitmaps();
+	
 }
 
 void SolarSystem::Enter()
@@ -76,12 +76,5 @@ void SolarSystem::Enter()
 
 void SolarSystem::Unload()
 {
-	ResourceManager::Get().ReleaseResources(L"SolarSystem");
-}
-
-void SolarSystem::LoadBitmaps()
-{
-	ResourceManager::Get().LoadBitmapFromFile(L"SolarSystem", L"Sun", L"Sun.png");
-	ResourceManager::Get().LoadBitmapFromFile(L"SolarSystem", L"Earth", L"Earth.png");
-	ResourceManager::Get().LoadBitmapFromFile(L"SolarSystem", L"Moon", L"Moon.png");
+	ResourceManager::Get().ReleaseResources();
 }

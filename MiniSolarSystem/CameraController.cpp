@@ -6,19 +6,16 @@
 #include "../D2DEngineLib/SceneManager.h"
 #include "../D2DEngineLib/MyTime.h"
 
-using DirInputType = PlayerInput::DirectionInputType;
-using InputType = PlayerInput::PlayerInput::InputCheckType;
-
 void CameraController::Start()
 {
     m_speed = 200.0f;
 
     PlayerInput* playerInput{ GetGameObject()->AddComponent<PlayerInput>() };
 
-    playerInput->RegisterDirectionAction(DirInputType::Arrow, this, &CameraController::MakeDirection);
-    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'Q' }, InputType::Held, this, &CameraController::ZoomIn);
-    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'W' }, InputType::Held, this, &CameraController::ZoomOut);
-    playerInput->RegisterActionOnKey('1', InputType::Released, this, &CameraController::ChangeScene);
+    playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &CameraController::MakeDirection);
+    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'Q' }, InputCheckType::Held, this, &CameraController::ZoomIn);
+    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'W' }, InputCheckType::Held, this, &CameraController::ZoomOut);
+    playerInput->RegisterActionOnKey('1', InputCheckType::Released, this, &CameraController::ChangeScene);
 
     GetTransform()->SetScale({ 3.0f, 3.0f });
 }

@@ -12,7 +12,7 @@ MainTitle::~MainTitle()
 
 void MainTitle::Load()
 {
-	ResourceManager::Get().LoadBitmapFromFile(L"Title", L"MainTitle", L"MainTitle.png");
+
 }
 
 void MainTitle::Enter()
@@ -26,5 +26,5 @@ void MainTitle::Enter()
 
 void MainTitle::Unload()
 {
-	ResourceManager::Get().ReleaseResources(L"Title");
+	ResourceManager::Get().ReleaseResources();
 }

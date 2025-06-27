@@ -33,12 +33,10 @@ void Moon::Start()
     textRenderer->SetRectSize({ 60.0f, 60.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
     textRenderer->SetSortOrder(2);
-    textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
-    textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
+    textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
 
-    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
-
-    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Moon"));
+    GetGameObject()->AddComponent<BitmapRenderer>(L"Moon.png");
 
     GetTransform()->SetPosition({ 100.0f, 0.0f });
 

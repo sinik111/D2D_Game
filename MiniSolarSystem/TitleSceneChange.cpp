@@ -11,10 +11,9 @@ void TitleSceneChange::Start()
 {
     PlayerInput* playerInput{ GetGameObject()->AddComponent<PlayerInput>() };
 
-    playerInput->RegisterActionOnKey('2', PlayerInput::InputCheckType::Released, this, &TitleSceneChange::ChangeScene);
+    playerInput->RegisterActionOnKey('2', InputCheckType::Released, this, &TitleSceneChange::ChangeScene);
 
-    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
-    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"Title", L"MainTitle"));
+    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>(L"MainTitle.png") };
     bitmapRenderer->SetFlipX(true);
 
     TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };

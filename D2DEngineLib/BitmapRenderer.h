@@ -2,12 +2,13 @@
 
 #include "Component.h"
 #include "Enum.h"
+#include "BitmapResource.h"
 
 class BitmapRenderer :
 	public Component
 {
 private:
-	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_bitmap;
+	std::shared_ptr<BitmapResource> m_bitmapResource;
 	SpaceType m_spaceType{ SpaceType::World };
 	D2D1_RECT_F m_sourceRect{};
 	int m_sortOrder{ 0 };
@@ -16,10 +17,11 @@ private:
 
 public:
 	BitmapRenderer();
+	BitmapRenderer(const std::wstring& filePath);
 	~BitmapRenderer() override;
 
 public:
-	Microsoft::WRL::ComPtr<ID2D1Bitmap1> GetBitmap() const;
+	const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& GetBitmap() const;
 	int GetSortOrder() const;
 	bool GetFlipX() const;
 	SpaceType GetSpaceType() const;
@@ -27,7 +29,7 @@ public:
 	float GetOpacity() const;
 
 public:
-	void SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap);
+	void SetBitmap(const std::wstring& filePath);
 	void SetSortOrder(int sortOrder);
 	void SetFlipX(bool doFlip);
 	void SetSpaceType(SpaceType spaceType);

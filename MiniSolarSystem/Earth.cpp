@@ -34,12 +34,10 @@ void Earth::Start()
     textRenderer->SetRectSize({ 100.0f, 100.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
     textRenderer->SetSortOrder(2);
-    textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
-    textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
+    textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
 
-    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
-
-    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Earth"));
+    GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
 
     GetTransform()->SetScale({ 0.5f, 0.5f });
     
@@ -55,8 +53,6 @@ void Earth::Start()
 
 void Earth::Update()
 {
-    Debug::Log(std::to_wstring(GetTransform()->GetPosition().GetX()) + L" " + std::to_wstring(GetTransform()->GetPosition().GetY()));
-
     if (Component::IsValid(m_health))
     {
         if (Input::IsKeyPressed('T'))

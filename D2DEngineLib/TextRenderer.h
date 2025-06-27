@@ -3,25 +3,24 @@
 #include "Component.h"
 #include "Enum.h"
 
+enum class VerticalAlignment
+{
+	Top,
+	Bottom,
+	Center
+};
+
+enum class HorizontlAlignment
+{
+	Left,
+	Right,
+	Center,
+	Justified
+};
+
 class TextRenderer :
 	public Component
 {
-public:
-	enum class VerticalAlignment
-	{
-		Top,
-		Bottom,
-		Center
-	};
-
-	enum class HorizontlAlignment
-	{
-		Left,
-		Right,
-		Center,
-		Justified
-	};
-
 private:
 	Microsoft::WRL::ComPtr<IDWriteTextFormat> m_textFormat;
 

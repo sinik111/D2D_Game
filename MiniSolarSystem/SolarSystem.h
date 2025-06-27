@@ -12,7 +12,4 @@ public:
 	void Load() override;
 	void Enter() override;
 	void Unload() override;
-
-private:
-	void LoadBitmaps();
 };

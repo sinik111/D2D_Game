@@ -98,11 +98,5 @@ GameObject* Scene::Find(const std::wstring& name) const
 
 bool Scene::IsValid(GameObject* gameObject) const
 {
-	const auto& find{ m_validGameObjects.find(gameObject) };
-	if (find == m_validGameObjects.end())
-	{
-		return false;
-	}
-
-	return true;
+	return m_validGameObjects.find(gameObject) != m_validGameObjects.end();
 }

@@ -14,6 +14,6 @@ void Title::Start()
     textRenderer->SetRectSize({ 200.0f, 100.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     textRenderer->SetSortOrder(3);
-    textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Top);
-    textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Left);
+    textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
+    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
 }

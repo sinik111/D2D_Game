@@ -20,12 +20,10 @@ void Sun::Start()
     textRenderer->SetRectSize({ 60.0f, 60.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Blue));
     textRenderer->SetSortOrder(2);
-    textRenderer->SetVerticalAlignment(TextRenderer::VerticalAlignment::Center);
-    textRenderer->SetHorizontalAlignment(TextRenderer::HorizontlAlignment::Center);
+    textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
 
-    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>() };
-
-    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Sun"));
+    BitmapRenderer* bitmapRenderer{ GetGameObject()->AddComponent<BitmapRenderer>(L"Sun.png") };
     bitmapRenderer->SetOpacity(0.3f);
     //bitmapRenderer->SetSourceRect({ 30.0f, 30.0f, 60.0f, 60.0f });
 
@@ -33,8 +31,8 @@ void Sun::Start()
 
     PlayerInput* playerInput{ GetGameObject()->AddComponent<PlayerInput>() };
 
-    playerInput->RegisterActionOnKey('A', PlayerInput::InputCheckType::Held, this, &Sun::CreateEarth);
-    playerInput->RegisterActionOnKey('S', PlayerInput::InputCheckType::Held, this, &Sun::DeleteEarth);
+    playerInput->RegisterActionOnKey('A', InputCheckType::Held, this, &Sun::CreateEarth);
+    playerInput->RegisterActionOnKey('S', InputCheckType::Held, this, &Sun::DeleteEarth);
 
     m_speed = 45.0f;
 }
@@ -47,8 +45,7 @@ void Sun::Update()
 void Sun::CreateEarth()
 {
     GameObject* newEarth{ CreateGameObject(L"Earth") };
-    BitmapRenderer* bitmapRenderer{ newEarth->AddComponent<BitmapRenderer>() };
-    bitmapRenderer->SetBitmap(ResourceManager::Get().GetBitmap(L"SolarSystem", L"Earth"));
+    newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
     newEarth->GetTransform()->SetPosition(Random::Float(-1600.0f, 1600.0f), Random::Float(-1200.0f, 1200.0f));
 
     m_earths.push_back(newEarth);

@@ -2,10 +2,22 @@
 #include "BitmapRenderer.h"
 
 #include "ComponentSystem.h"
+#include "ResourceManager.h"
 
 BitmapRenderer::BitmapRenderer()
 {
 	ComponentSystem::Get().BitmapRenderer().Register(this);
+}
+
+BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
+{
+	ComponentSystem::Get().BitmapRenderer().Register(this);
+
+	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
+
+	const D2D1_SIZE_F& size{ m_bitmapResource->GetSize() };
+
+	m_sourceRect = { 0.0f, 0.0f, size.width, size.height };
 }
 
 BitmapRenderer::~BitmapRenderer()
@@ -13,9 +25,9 @@ BitmapRenderer::~BitmapRenderer()
 	ComponentSystem::Get().BitmapRenderer().Unregister(this);
 }
 
-Microsoft::WRL::ComPtr<ID2D1Bitmap1> BitmapRenderer::GetBitmap() const
+const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& BitmapRenderer::GetBitmap() const
 {
-	return m_bitmap;
+	return m_bitmapResource->GetBitmap();
 }
 
 int BitmapRenderer::GetSortOrder() const
@@ -43,11 +55,13 @@ float BitmapRenderer::GetOpacity() const
 	return m_opacity;
 }
 
-void BitmapRenderer::SetBitmap(Microsoft::WRL::ComPtr<ID2D1Bitmap1> bitmap)
+void BitmapRenderer::SetBitmap(const std::wstring& filePath)
 {
-	m_bitmap = std::move(bitmap);
+	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
 
-	m_sourceRect = { 0.0f, 0.0f, m_bitmap->GetSize().width, m_bitmap->GetSize().height };
+	const D2D1_SIZE_F& size{ m_bitmapResource->GetSize() };
+
+	m_sourceRect = { 0.0f, 0.0f, size.width, size.height };
 }
 
 void BitmapRenderer::SetSortOrder(int sortOrder)

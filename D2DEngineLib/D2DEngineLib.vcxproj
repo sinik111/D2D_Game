@@ -142,6 +142,7 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="BitmapRenderer.h" />
     <ClInclude Include="BitmapRendererSystem.h" />
+    <ClInclude Include="BitmapResource.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CoInitializer.h" />
     <ClInclude Include="Component.h" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="BitmapRenderer.cpp" />
     <ClCompile Include="BitmapRendererSystem.cpp" />
+    <ClCompile Include="BitmapResource.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
