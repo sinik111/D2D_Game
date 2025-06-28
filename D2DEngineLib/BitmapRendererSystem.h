@@ -6,7 +6,7 @@ class BitmapRenderer;
 class BitmapRendererSystem
 {
 private:
-	D2DRenderer* m_d2dRenderer{};
+	D2DRenderer* m_d2dRenderer = nullptr;
 	std::vector<BitmapRenderer*> m_bitmapRenderers;
 
 public:

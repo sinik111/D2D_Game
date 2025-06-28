@@ -9,7 +9,7 @@ class HpViewer :
 {
 private:
 	std::wstring m_targetName;
-	TextRenderer* m_textRenderer{};
+	TextRenderer* m_textRenderer = nullptr;
 
 private:
 	void Initialize() override;

@@ -6,15 +6,15 @@
 class WinApp
 {
 protected:
-	HWND m_hWnd{};
-	HINSTANCE m_hInstance{};
-	HICON m_hIcon{};
-	HCURSOR m_hCursor{};
-	HICON m_hIconSmall{};
+	HWND m_hWnd = nullptr;
+	HINSTANCE m_hInstance = nullptr;
+	HICON m_hIcon = nullptr;
+	HCURSOR m_hCursor = nullptr;
+	HICON m_hIconSmall = nullptr;
 
 	// default settings
-	std::wstring m_className{ L"DefaultClassName" };
-	std::wstring m_windowName{ L"DefaultWindowName" };
+	std::wstring m_className = L"DefaultClassName";
+	std::wstring m_windowName = L"DefaultWindowName";
 	std::wstring m_modulePath;
 	std::wstring m_workingPath;
 
@@ -22,12 +22,12 @@ protected:
 	std::unique_ptr<D2DRenderer> m_d2dRenderer;
 
 	// default settings
-	UINT m_classStyle{ CS_HREDRAW | CS_VREDRAW };
-	DWORD m_windowStyle{ WS_OVERLAPPEDWINDOW };
-	int m_x{ CW_USEDEFAULT };
-	int m_y{ CW_USEDEFAULT };
-	int m_width{ 800 };
-	int m_height{ 600 };
+	UINT m_classStyle = CS_HREDRAW | CS_VREDRAW;
+	DWORD m_windowStyle = WS_OVERLAPPEDWINDOW;
+	int m_x = CW_USEDEFAULT;
+	int m_y = CW_USEDEFAULT;
+	int m_width = 800;
+	int m_height = 600;
 
 
 public:

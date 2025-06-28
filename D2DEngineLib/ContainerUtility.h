@@ -12,7 +12,7 @@ namespace Util
 	template<typename T>
 	void OptimizedErase(std::vector<T>& container, const T& target)
 	{
-		auto iter = std::find(container.begin(), container.end(), target);
+		const auto& iter = std::find(container.begin(), container.end(), target);
 
 		if (iter != container.end())
 		{
@@ -29,7 +29,7 @@ namespace Util
 	template<typename T>
 	void StableErase(std::vector<T>& container, const T& target)
 	{
-		auto iter = std::find(container.begin(), container.end(), target);
+		const auto& iter = std::find(container.begin(), container.end(), target);
 
 		if (iter != container.end())
 		{

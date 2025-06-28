@@ -26,7 +26,7 @@ Earth::~Earth()
 
 void Earth::Start()
 {
-    TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
+    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
 
     textRenderer->SetText(L"Áö±¸");
     textRenderer->SetSpaceType(SpaceType::World);

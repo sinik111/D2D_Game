@@ -25,50 +25,50 @@ void SolarSystem::Load()
 
 void SolarSystem::Enter()
 {
-	GameObject* camera{ CreateGameObject(L"Camera") };
+	GameObject* camera = CreateGameObject(L"Camera");
 	camera->AddComponent<Camera>();
 	camera->AddComponent<CameraController>();
 
 
-	GameObject* sun{ CreateGameObject(L"Sun") };
+	GameObject* sun = CreateGameObject(L"Sun");
 	sun->AddComponent<Sun>();
 
 
-	GameObject* earth{ CreateGameObject(L"Earth") };
-	Earth* earthComp{ earth->AddComponent<Earth>() };
-	Health* earthHp{ earth->AddComponent<Health>() };
+	GameObject* earth = CreateGameObject(L"Earth");
+	Earth* earthComp = earth->AddComponent<Earth>();
+	Health* earthHp = earth->AddComponent<Health>();
 	earth->GetTransform()->SetParent(sun->GetTransform());
 	earth->GetTransform()->SetPosition({ 200.0f, 0.0f });
 
 
-	GameObject* moon{ CreateGameObject(L"Moon") };
-	Moon* moonComp{ moon->AddComponent<Moon>() };
-	Health* moonHp{ moon->AddComponent<Health>() };
+	GameObject* moon = CreateGameObject(L"Moon");
+	Moon* moonComp = moon->AddComponent<Moon>();
+	Health* moonHp = moon->AddComponent<Health>();
 	moon->GetTransform()->SetParent(earth->GetTransform());
 
 
-	GameObject* title{ CreateGameObject(L"Title") };
+	GameObject* title = CreateGameObject(L"Title");
 	title->AddComponent<Title>();
 
 
-	GameObject* infoViewer{ CreateGameObject(L"InfoViewer") };
-	InfoViewer* infoViewerComp{ infoViewer->AddComponent<InfoViewer>() };
+	GameObject* infoViewer = CreateGameObject(L"InfoViewer");
+	InfoViewer* infoViewerComp = infoViewer->AddComponent<InfoViewer>();
 	infoViewerComp->SetSpaceObjects(sun);
 	earthComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetEarthRotation);
 	moonComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetMoonRotation);
 
 
-	GameObject* earthHpViewer{ CreateGameObject(L"EarthHpViewer") };
-	HpViewer* earthHpViewerComp{ earthHpViewer->AddComponent<HpViewer>() };
-	TextRenderer* earthHpText{ earthHpViewer->AddComponent<TextRenderer>() };
+	GameObject* earthHpViewer = CreateGameObject(L"EarthHpViewer");
+	HpViewer* earthHpViewerComp = earthHpViewer->AddComponent<HpViewer>();
+	TextRenderer* earthHpText = earthHpViewer->AddComponent<TextRenderer>();
 	earthHpViewerComp->SetTargetName(L"Áö±¸");
 	earthHpText->SetPoint({ -100.0f, 300.0f });
 	earthHp->GetOnChangeHp().Add(earthHpViewerComp, &HpViewer::ChangeHpText);
 
 
-	GameObject* moonHpViewer{ CreateGameObject(L"MoonHpViewer") };
-	HpViewer* moonHpViewerComp{ moonHpViewer->AddComponent<HpViewer>() };
-	TextRenderer* moonHpText{ moonHpViewer->AddComponent<TextRenderer>() };
+	GameObject* moonHpViewer = CreateGameObject(L"MoonHpViewer");
+	HpViewer* moonHpViewerComp = moonHpViewer->AddComponent<HpViewer>();
+	TextRenderer* moonHpText = moonHpViewer->AddComponent<TextRenderer>();
 	moonHpViewerComp->SetTargetName(L"´Þ");
 	moonHpText->SetPoint({ 100.0f, 300.0f });
 	moonHp->GetOnChangeHp().Add(moonHpViewerComp, &HpViewer::ChangeHpText);

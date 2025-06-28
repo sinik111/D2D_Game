@@ -1,11 +1,6 @@
 #include "pch.h"
 #include "SceneManager.h"
 
-SceneManager::SceneManager()
-	: m_currentScene{ nullptr }, m_nextScene{ nullptr }
-{
-}
-
 SceneManager& SceneManager::Get()
 {
 	static SceneManager s_instance;

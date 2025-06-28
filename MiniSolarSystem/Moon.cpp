@@ -16,7 +16,7 @@ Moon::~Moon()
 {
     m_onRotationChange.Invoke(L"ÆÄ±«µÊ");
 
-    GameObject* go{ GameObject::Find(L"MoonHpViewer") };
+    GameObject* go = GameObject::Find(L"MoonHpViewer");
     if (GameObject::IsValid(go))
     {
         go->Destroy();
@@ -25,7 +25,7 @@ Moon::~Moon()
 
 void Moon::Start()
 {
-    TextRenderer* textRenderer{ GetGameObject()->AddComponent<TextRenderer>() };
+    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
 
     textRenderer->SetText(L"´Þ");
     textRenderer->SetSpaceType(SpaceType::World);

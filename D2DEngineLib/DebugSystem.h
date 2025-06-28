@@ -9,10 +9,10 @@ class DebugSystem
 {
 private:
     TimePoint m_lastTimestamp;
-    int m_lastFPS{};
-    int m_frameCount{};
+    int m_lastFPS = 0;
+    int m_frameCount = 0;
 
-    bool m_isConsoleOn{};
+    bool m_isConsoleOn = false;
 
 private:
     DebugSystem();

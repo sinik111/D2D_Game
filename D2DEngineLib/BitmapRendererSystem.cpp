@@ -25,37 +25,37 @@ void BitmapRendererSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
 
 void BitmapRendererSystem::MakeRenderCommands()
 {
-	const Matrix3x2& unityMatrix{ m_d2dRenderer->GetUnityMatrix() };
-	const Matrix3x2& viewMatrix{ Camera::s_mainCamera->GetViewMatrix() };
-	const Matrix3x2& unityMulViewMatrix{ viewMatrix * unityMatrix };
+	const Matrix3x2& unityMatrix = m_d2dRenderer->GetUnityMatrix();
+	const Matrix3x2& viewMatrix = Camera::s_mainCamera->GetViewMatrix();
+	const Matrix3x2& unityMulViewMatrix = viewMatrix * unityMatrix;
 
-	const Vector2& cameraPosition{ Camera::s_mainCamera->GetTransform()->GetPosition() };
-	const float zoomFactor{ Camera::s_mainCamera->GetZoom() };
+	const Vector2& cameraPosition = Camera::s_mainCamera->GetTransform()->GetPosition();
+	const float zoomFactor = Camera::s_mainCamera->GetZoom();
 
-	const float halfScreenWidth{ m_d2dRenderer->GetWidth() / 2.0f * zoomFactor };
-	const float halfScreenHeight{ m_d2dRenderer->GetHeight() / 2.0f * zoomFactor };
+	const float halfScreenWidth = m_d2dRenderer->GetWidth() / 2.0f * zoomFactor;
+	const float halfScreenHeight = m_d2dRenderer->GetHeight() / 2.0f * zoomFactor;
 
-	const float viewLeft{ cameraPosition.GetX() - halfScreenWidth };
-	const float viewRight{ cameraPosition.GetX() + halfScreenWidth };
-	const float viewBottom{ cameraPosition.GetY() - halfScreenHeight };
-	const float viewTop{ cameraPosition.GetY() + halfScreenHeight };
+	const float viewLeft = cameraPosition.GetX() - halfScreenWidth;
+	const float viewRight = cameraPosition.GetX() + halfScreenWidth;
+	const float viewBottom = cameraPosition.GetY() - halfScreenHeight;
+	const float viewTop = cameraPosition.GetY() + halfScreenHeight;
 
 	for (const auto& bitmapRenderer : m_bitmapRenderers)
 	{
-		const Matrix3x2& worldMatrix{ bitmapRenderer->GetTransform()->GetWorldMatrix() };
-		const Vector2& worldPosition{ worldMatrix.GetPosition() };
+		const Matrix3x2& worldMatrix = bitmapRenderer->GetTransform()->GetWorldMatrix();
+		const Vector2& worldPosition = worldMatrix.GetPosition();
 
 
-		const D2D1_RECT_F& sourceRect{ bitmapRenderer->GetSourceRect() };
-		const D2D1_SIZE_F& size{ sourceRect.right - sourceRect.left, sourceRect.bottom - sourceRect.top };
+		const D2D1_RECT_F& sourceRect = bitmapRenderer->GetSourceRect();
+		const D2D1_SIZE_F size{ sourceRect.right - sourceRect.left, sourceRect.bottom - sourceRect.top };
 
-		const float bitmapHalfWidth{ size.width / 2.0f };
-		const float bitmapHalfHeight{ size.height / 2.0f };
+		const float bitmapHalfWidth = size.width / 2.0f;
+		const float bitmapHalfHeight = size.height / 2.0f;
 
-		const float bitmapLeft{ worldPosition.GetX() - bitmapHalfWidth };
-		const float bitmapRight{ worldPosition.GetX() + bitmapHalfWidth };
-		const float bitmapBottom{ worldPosition.GetY() - bitmapHalfHeight };
-		const float bitmapTop{ worldPosition.GetY() + bitmapHalfHeight };
+		const float bitmapLeft = worldPosition.GetX() - bitmapHalfWidth;
+		const float bitmapRight = worldPosition.GetX() + bitmapHalfWidth;
+		const float bitmapBottom = worldPosition.GetY() - bitmapHalfHeight;
+		const float bitmapTop = worldPosition.GetY() + bitmapHalfHeight;
 
 		if (bitmapRight < viewLeft || bitmapLeft > viewRight ||
 			bitmapTop < viewBottom || bitmapBottom > viewTop)
@@ -63,10 +63,10 @@ void BitmapRendererSystem::MakeRenderCommands()
 			continue;
 		}
 
-		const Matrix3x2& renderMatrix{ Matrix3x2::Scale(1.0f, -1.0f) *
-			Matrix3x2::Translation(-bitmapHalfWidth, bitmapHalfHeight) };
+		const Matrix3x2 renderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+			Matrix3x2::Translation(-bitmapHalfWidth, bitmapHalfHeight);
 
-		Matrix3x2 finalMatrix{ renderMatrix * bitmapRenderer->GetTransform()->GetWorldMatrix() };
+		Matrix3x2 finalMatrix = renderMatrix * bitmapRenderer->GetTransform()->GetWorldMatrix();
 
 		if (bitmapRenderer->GetFlipX())
 		{

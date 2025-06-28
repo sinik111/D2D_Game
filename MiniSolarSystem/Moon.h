@@ -9,8 +9,8 @@ class Moon :
     public Script
 {
 private:
-    float m_speed{};
-    Health* m_health;
+    float m_speed = 0.0f;
+    Health* m_health = nullptr;
     Delegate<const std::wstring&> m_onRotationChange;
 
 public:

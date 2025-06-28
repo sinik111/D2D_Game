@@ -8,8 +8,8 @@ class InfoViewer :
 	public Script
 {
 private:
-	GameObject* m_sun;
-	TextRenderer* m_textRenderer;
+	GameObject* m_sun = nullptr;
+	TextRenderer* m_textRenderer = nullptr;
 	std::wstring m_earthRotation;
 	std::wstring m_moonRotation;
 

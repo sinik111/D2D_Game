@@ -15,9 +15,7 @@ BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 
 	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
 
-	const D2D1_SIZE_F& size{ m_bitmapResource->GetSize() };
-
-	m_sourceRect = { 0.0f, 0.0f, size.width, size.height };
+	m_sourceRect = { 0.0f, 0.0f, m_bitmapResource->GetSize().width, m_bitmapResource->GetSize().height };
 }
 
 BitmapRenderer::~BitmapRenderer()
@@ -59,9 +57,7 @@ void BitmapRenderer::SetBitmap(const std::wstring& filePath)
 {
 	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
 
-	const D2D1_SIZE_F& size{ m_bitmapResource->GetSize() };
-
-	m_sourceRect = { 0.0f, 0.0f, size.width, size.height };
+	m_sourceRect = { 0.0f, 0.0f, m_bitmapResource->GetSize().width, m_bitmapResource->GetSize().height };
 }
 
 void BitmapRenderer::SetSortOrder(int sortOrder)

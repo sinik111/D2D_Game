@@ -7,15 +7,15 @@ class Transform :
 {
 private:
 	Vector2 m_position{ 0.0f, 0.0f };
-	float m_rotation{ 0.0f };
+	float m_rotation = 0.0f;
 	Vector2 m_scale{ 1.0f, 1.0f };
 
 	Matrix3x2 m_cachedWorld;
 
-	Transform* m_parent{};
+	Transform* m_parent = nullptr;
 	std::vector<Transform*> m_children;
 
-	bool m_isDirty{ true };
+	bool m_isDirty = true;
 
 public:
 	~Transform() override;

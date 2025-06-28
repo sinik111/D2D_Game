@@ -75,7 +75,7 @@ void PlayerInput::CallActions()
 {
     for (const auto& data : m_singleKeyActions)
     {
-        bool shouldCall{ false };
+        bool shouldCall = false;
 
         switch (data.checkType)
         {
@@ -107,7 +107,7 @@ void PlayerInput::CallActions()
 
     for (const auto& data : m_combinedKeyActions)
     {
-        bool allKeysMatch{ true };
+        bool allKeysMatch = true;
         for (short vKey : data.vKeys)
         {
             if (!ComponentSystem::Get().PlayerInput().IsKeyHeld(vKey))
@@ -119,9 +119,9 @@ void PlayerInput::CallActions()
 
         if (allKeysMatch)
         {
-            short lastKey{ data.vKeys.back() };
+            short lastKey = data.vKeys.back();
 
-            bool shouldCallCombined{ false };
+            bool shouldCallCombined = false;
             switch (data.checkType)
             {
             case InputCheckType::Pressed:

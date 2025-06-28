@@ -28,7 +28,7 @@ void D2DRenderer::Initialize()
 {
 	// D3D11 디바이스 생성
 	D3D_FEATURE_LEVEL featureLevel;
-	D3D_FEATURE_LEVEL levels[]{ D3D_FEATURE_LEVEL_11_0 };
+	D3D_FEATURE_LEVEL levels[] = { D3D_FEATURE_LEVEL_11_0 };
 	D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr,
 		D3D11_CREATE_DEVICE_BGRA_SUPPORT, levels, 1,
 		D3D11_SDK_VERSION, m_d3d11Device.GetAddressOf(), &featureLevel, nullptr);

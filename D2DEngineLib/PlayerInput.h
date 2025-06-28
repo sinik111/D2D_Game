@@ -48,7 +48,7 @@ private:
 	std::vector<CombinedKeyActionData> m_combinedKeyActions;
 
 	Vector2 m_mousePosition;
-	DirectionInputType m_directionInputType{ DirectionInputType::Both };
+	DirectionInputType m_directionInputType = DirectionInputType::Both;
 
 public:
 	PlayerInput();

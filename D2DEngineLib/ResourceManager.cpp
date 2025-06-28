@@ -19,7 +19,7 @@ HRESULT ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 {
 	m_d2d1DeviceContext = deviceContext;
 
-	HRESULT hr{};
+	HRESULT hr;
 
 	hr = CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER,
 		__uuidof(m_wicImagingFactory), (void**)m_wicImagingFactory.GetAddressOf());
@@ -29,18 +29,18 @@ HRESULT ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 		return hr;
 	}
 
-	bool isWrongDirectory{ true };
+	bool isWrongDirectory = true;
 
 	m_resourcePath = modulePath;
 
-	size_t pos{ m_resourcePath.length() };
+	size_t pos = m_resourcePath.length();
 
 	while (pos != std::wstring::npos)
 	{
 		pos = m_resourcePath.rfind(L'\\', pos - 1);
 		if (pos != std::wstring::npos)
 		{
-			std::wstring folderName{ m_resourcePath.substr(pos + 1) };
+			std::wstring folderName = m_resourcePath.substr(pos + 1);
 			if (folderName == binaryFolderName)
 			{
 				m_resourcePath = m_resourcePath.substr(0, pos); // 폴더 이름 제거
@@ -77,7 +77,7 @@ void ResourceManager::ReleaseResources()
 
 std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std::wstring& filePath)
 {
-	const auto& iter{ m_bitmapResources.find(filePath) }; // 찾기
+	const auto& iter = m_bitmapResources.find(filePath); // 찾기
 	if (iter != m_bitmapResources.end()) // 이미 있을 경우
 	{
 		if (!iter->second.expired()) // 만료되지 않았을 경우
@@ -87,8 +87,8 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 	}
 
 	// 없거나 만료되었을 경우
-	std::shared_ptr<BitmapResource> newBitmapResource{ std::make_shared<BitmapResource>() };
-	HRESULT hr{ newBitmapResource->CreateBitmap(m_d2d1DeviceContext, m_wicImagingFactory, m_resourcePath + filePath) };
+	std::shared_ptr<BitmapResource> newBitmapResource = std::make_shared<BitmapResource>();
+	HRESULT hr = newBitmapResource->CreateBitmap(m_d2d1DeviceContext, m_wicImagingFactory, m_resourcePath + filePath);
 	if (FAILED(hr))
 	{
 		assert(false && "BitmapResource::CreateBitmap 실패");

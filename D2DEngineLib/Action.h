@@ -6,7 +6,7 @@ template<typename... Args>
 class Action
 {
 private:
-	std::function<void(Args...)> m_func{};
+	std::function<void(Args...)> m_func = nullptr;
 
 public:
 	template<typename Func>

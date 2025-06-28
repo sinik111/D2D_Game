@@ -33,7 +33,7 @@ public:
 
         static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
-        std::unique_ptr<T> component{ std::make_unique<T>(std::forward<Args>(args)...) };
+        std::unique_ptr<T> component = std::make_unique<T>(std::forward<Args>(args)...);
 
         component->SetOwner(this);
 
@@ -45,11 +45,11 @@ public:
     template<typename T>
     T* GetComponent()
     {
-        for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
+        for (const auto& comp : m_components)
         {
-            if (typeid(*(iter->get())) == typeid(T))
+            if (typeid(*(comp.get())) == typeid(T))
             {
-                return static_cast<T*>(iter->get());
+                return static_cast<T*>(comp.get());
             }
         }
 

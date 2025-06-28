@@ -9,7 +9,7 @@ class PlayerInputSystem
 private:
 	std::vector<PlayerInput*> m_playerInputs;
 
-	HWND m_hWnd{};
+	HWND m_hWnd = nullptr;
 	std::bitset<256> m_currentKeyState;
 	std::bitset<256> m_previousKeyState;
 	POINT m_mousePoint{};

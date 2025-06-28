@@ -29,7 +29,7 @@ void Scene::Update()
 		m_pendingCreatedGameObjects.clear();
 	}
 
-	for (size_t i{ 0 }; i < m_gameObjects.size(); )
+	for (size_t i = 0; i < m_gameObjects.size(); )
 	{
 		if (m_gameObjects[i]->IsDestroyed())
 		{
@@ -67,9 +67,9 @@ void Scene::Clear()
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
 {
-	std::unique_ptr<GameObject> gameObject{ std::make_unique<GameObject>(name) };
+	std::unique_ptr<GameObject> gameObject = std::make_unique<GameObject>(name);
 
-	GameObject* gameObjectPtr{ gameObject.get() };
+	GameObject* gameObjectPtr = gameObject.get();
 
 	m_pendingCreatedGameObjects.push_back(std::move(gameObject));
 
@@ -80,13 +80,13 @@ GameObject* Scene::CreateGameObject(const std::wstring& name)
 
 GameObject* Scene::Find(const std::wstring& name) const
 {
-	const auto& find{ std::find_if(
+	const auto& find = std::find_if(
 		m_gameObjects.begin(),
 		m_gameObjects.end(),
 		[name](const std::unique_ptr<GameObject>& gameObject) {
 			return gameObject->GetName() == name;
 		}
-	)};
+	);
 
 	if (find != m_gameObjects.end())
 	{

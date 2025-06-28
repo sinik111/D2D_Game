@@ -8,8 +8,8 @@ class Health :
 {
 private:
 	Delegate<int, int, int> m_onChangeHp; // prev, curr, max
-	int m_hp{};
-	int m_maxHp{};
+	int m_hp = 0;
+	int m_maxHp = 0;
 
 public:
 	int GetHp() const;

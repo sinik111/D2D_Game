@@ -25,16 +25,16 @@ void InfoViewer::Start()
 
 void InfoViewer::LateUpdate()
 {
-    Vector2 cameraPosition{ Camera::s_mainCamera->GetTransform()->GetPosition() };
-    float cameraZoom{ Camera::s_mainCamera->GetZoom() };
+    Vector2 cameraPosition = Camera::s_mainCamera->GetTransform()->GetPosition();
+    float cameraZoom = Camera::s_mainCamera->GetZoom();
 
-    float sunRotation{ 0.0f };
-    size_t earthCount{ 0 };
+    float sunRotation = 0.0f;
+    size_t earthCount = 0;
     if (GameObject::IsValid(m_sun))
     {
         sunRotation = m_sun->GetTransform()->GetRotation();
 
-        Sun* sun{ m_sun->GetComponent<Sun>() };
+        Sun* sun = m_sun->GetComponent<Sun>();
         earthCount = sun->GetEarthCount();
     }
 

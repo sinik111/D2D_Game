@@ -10,11 +10,11 @@ class BitmapRenderer :
 {
 private:
 	std::shared_ptr<BitmapResource> m_bitmapResource;
-	SpaceType m_spaceType{ SpaceType::World };
+	SpaceType m_spaceType = SpaceType::World;
 	D2D1_RECT_F m_sourceRect{};
-	int m_sortOrder{ 0 };
-	float m_opacity{ 1.0f };
-	bool m_doFlipX{ false };
+	int m_sortOrder = 0;
+	float m_opacity = 1.0f;
+	bool m_doFlipX = false;
 
 public:
 	BitmapRenderer();

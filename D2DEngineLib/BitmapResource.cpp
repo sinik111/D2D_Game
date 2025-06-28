@@ -10,7 +10,7 @@ HRESULT BitmapResource::CreateBitmap(const ComPtr<ID2D1DeviceContext7>& d2d1Devi
 	ComPtr<IWICBitmapFrameDecode> frame;
 	ComPtr<IWICFormatConverter> converter;
 
-	HRESULT hr{};
+	HRESULT hr;
 
 	// 디코더 생성
 	hr = wicImagingFactory->CreateDecoderFromFilename(filePath.c_str(), nullptr,

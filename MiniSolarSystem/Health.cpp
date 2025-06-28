@@ -17,7 +17,7 @@ void Health::SetHp(int hp, int maxHp)
 {
 	if (m_hp != hp || m_maxHp != maxHp)
 	{
-		int prevHp{ m_hp };
+		int prevHp = m_hp;
 		m_hp = hp;
 
 		m_maxHp = maxHp;
@@ -33,7 +33,7 @@ void Health::SetHp(int hp, int maxHp)
 
 void Health::TakeDamage(int value)
 {
-	int currentHp{ std::max<int>(0, m_hp - value) };
+	int currentHp = std::max<int>(0, m_hp - value);
 
 	SetHp(currentHp, m_maxHp);
 }

@@ -10,7 +10,7 @@ void CameraController::Start()
 {
     m_speed = 200.0f;
 
-    PlayerInput* playerInput{ GetGameObject()->AddComponent<PlayerInput>() };
+    PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
     playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &CameraController::MakeDirection);
     playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'Q' }, InputCheckType::Held, this, &CameraController::ZoomIn);
@@ -34,7 +34,7 @@ void CameraController::MakeDirection(Vector2 input)
 
 void CameraController::ZoomIn()
 {
-    float zoom{ Camera::s_mainCamera->GetZoom() };
+    float zoom = Camera::s_mainCamera->GetZoom();
 
     zoom -= 1.0f * MyTime::DeltaTime();
 
@@ -43,7 +43,7 @@ void CameraController::ZoomIn()
 
 void CameraController::ZoomOut()
 {
-    float zoom{ Camera::s_mainCamera->GetZoom() };
+    float zoom = Camera::s_mainCamera->GetZoom();
 
     zoom += 1.0f * MyTime::DeltaTime();
 

@@ -23,7 +23,7 @@ void PlayerInputSystem::Update()
 {
     m_previousKeyState = m_currentKeyState;
 
-    for (int i{ 0 }; i < 256; ++i)
+    for (int i = 0; i < 256; ++i)
     {
         m_currentKeyState[i] = (GetAsyncKeyState(i) & 0x8000) != 0;
     }
@@ -71,9 +71,9 @@ void PlayerInputSystem::ProcessInput() const
 
 void PlayerInputSystem::ProcessArrowInput() const
 {
-    bool isHeld{ false };
-    float horizontal{ 0.0f };
-    float vertical{ 0.0f };
+    bool isHeld = false;
+    float horizontal = 0.0f;
+    float vertical = 0.0f;
 
     if (IsKeyHeld(VK_UP))
     {
@@ -114,9 +114,9 @@ void PlayerInputSystem::ProcessArrowInput() const
 
 void PlayerInputSystem::ProcessWASDInput() const
 {
-    bool isHeld{ false };
-    float horizontal{ 0.0f };
-    float vertical{ 0.0f };
+    bool isHeld = false;
+    float horizontal = 0.0f;
+    float vertical = 0.0f;
 
     if (IsKeyHeld('W'))
     {

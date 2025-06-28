@@ -7,11 +7,11 @@ class SceneManager
 private:
 	std::unordered_map<std::wstring, std::unique_ptr<Scene>> m_scenes;
 
-	Scene* m_currentScene;
-	Scene* m_nextScene;
+	Scene* m_currentScene = nullptr;
+	Scene* m_nextScene = nullptr;
 
 private:
-	SceneManager();
+	SceneManager() = default;
 	SceneManager(const SceneManager&) = delete;
 	SceneManager& operator=(const SceneManager&) = delete;
 	SceneManager(SceneManager&&) = delete;

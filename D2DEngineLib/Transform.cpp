@@ -39,7 +39,7 @@ const Matrix3x2& Transform::GetWorldMatrix()
 {
 	if (m_isDirty)
 	{
-		Matrix3x2 localMatrix{ MakeLocalMatrix() };
+		Matrix3x2 localMatrix = MakeLocalMatrix();
 
 		m_cachedWorld = m_parent != nullptr ? 
 			localMatrix * m_parent->GetWorldMatrix() : 
