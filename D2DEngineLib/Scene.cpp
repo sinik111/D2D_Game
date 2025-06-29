@@ -22,9 +22,11 @@ void Scene::Update()
 {
 	if (!m_pendingCreatedGameObjects.empty())
 	{
-		m_gameObjects.insert(m_gameObjects.end(),
+		m_gameObjects.insert(
+			m_gameObjects.end(),
 			std::make_move_iterator(m_pendingCreatedGameObjects.begin()),
-			std::make_move_iterator(m_pendingCreatedGameObjects.end()));
+			std::make_move_iterator(m_pendingCreatedGameObjects.end())
+		);
 
 		m_pendingCreatedGameObjects.clear();
 	}
@@ -83,7 +85,8 @@ GameObject* Scene::Find(const std::wstring& name) const
 	const auto& find = std::find_if(
 		m_gameObjects.begin(),
 		m_gameObjects.end(),
-		[name](const std::unique_ptr<GameObject>& gameObject) {
+		[name](const std::unique_ptr<GameObject>& gameObject)
+		{
 			return gameObject->GetName() == name;
 		}
 	);

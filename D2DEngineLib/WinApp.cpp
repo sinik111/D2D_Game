@@ -125,31 +125,25 @@ void WinApp::Render()
 	m_d2dRenderer->EndDraw();
 }
 
-// 윈도우를 생성할때 설정한 클래스 인스턴스는 각각 다를수 있다.
-// 초기 WM_NCCREATE 에서 윈도우 핸들에 인스턴스 주로를 설정하고
-// 메세지를 받을때 마다 윈도우핸들에 설정된 주소로 MessageProc 를 호출한다.
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	WinApp* winApp = nullptr;
-	// WM_NCCREATE: 윈도우 생성 아주 초기에, 프레임 생성 전에. WM_CREATE보다 이전에발생
+
 	if (uMsg == WM_NCCREATE)
 	{
-		// lParam은 CREATESTRUCT* 이다
 		CREATESTRUCT* cs = reinterpret_cast<CREATESTRUCT*>(lParam);
 		winApp = reinterpret_cast<WinApp*>(cs->lpCreateParams);
 
-		// HWND에 this 포인터 저장
 		SetWindowLongPtrW(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(winApp));
 	}
 	else
 	{
-		// WM_NCCREATE가 아닐 때는 HWND에서 this 포인터를 가져온다
 		winApp = reinterpret_cast<WinApp*>(GetWindowLongPtrW(hWnd, GWLP_USERDATA));
 	}
 
 	if (winApp != nullptr)
 	{
-		winApp->MessageProc(hWnd, uMsg, wParam, lParam); // 멤버 함수 호출
+		winApp->MessageProc(hWnd, uMsg, wParam, lParam);
 	}
 
 	return DefWindowProcW(hWnd, uMsg, wParam, lParam);

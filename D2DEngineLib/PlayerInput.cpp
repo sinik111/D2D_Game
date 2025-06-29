@@ -21,7 +21,8 @@ void PlayerInput::UnregisterActionOnKey(short vKey, void* instance)
             m_singleKeyActions.end(),
             [vKey, instance](const SingleKeyActionData& entry) {
                 return entry.vKey == vKey && entry.instance == instance;
-            }),
+            }
+        ),
         m_singleKeyActions.end()
     );
 }
@@ -33,8 +34,11 @@ void PlayerInput::UnregisterActionOnKey(short vKey, InputCheckType checkType, vo
             m_singleKeyActions.begin(),
             m_singleKeyActions.end(),
             [vKey, checkType, instance](const SingleKeyActionData& entry) {
-                return entry.vKey == vKey && entry.checkType == checkType && entry.instance == instance;
-            }),
+                return entry.vKey == vKey &&
+                    entry.checkType == checkType &&
+                    entry.instance == instance;
+            }
+        ),
         m_singleKeyActions.end()
     );
 }
@@ -47,7 +51,8 @@ void PlayerInput::UnregisterCombinedAction(const std::vector<short>& vKeys, void
             m_combinedKeyActions.end(),
             [vKeys, instance](const CombinedKeyActionData& entry) {
                 return entry.vKeys == vKeys && entry.instance == instance;
-            }),
+            }
+        ),
         m_combinedKeyActions.end()
     );
 }
@@ -59,8 +64,11 @@ void PlayerInput::UnregisterCombinedAction(const std::vector<short>& vKeys, Inpu
             m_combinedKeyActions.begin(),
             m_combinedKeyActions.end(),
             [vKeys, checkType, instance](const CombinedKeyActionData& entry) {
-                return entry.vKeys == vKeys && entry.checkType == checkType && entry.instance == instance;
-            }),
+                return entry.vKeys == vKeys &&
+                    entry.checkType == checkType &&
+                    entry.instance == instance;
+            }
+        ),
         m_combinedKeyActions.end()
     );
 }
@@ -154,7 +162,8 @@ void PlayerInput::CallActions()
 
 void PlayerInput::CallArrowAction(float horizontal, float vertical)
 {
-    if (m_directionInputType == DirectionInputType::Arrow || m_directionInputType == DirectionInputType::Both)
+    if (m_directionInputType == DirectionInputType::Arrow ||
+        m_directionInputType == DirectionInputType::Both)
     {
         if (horizontal != 0 || vertical != 0)
         {
@@ -165,7 +174,8 @@ void PlayerInput::CallArrowAction(float horizontal, float vertical)
 
 void PlayerInput::CallWASDAction(float horizontal, float vertical)
 {
-    if (m_directionInputType == DirectionInputType::WASD || m_directionInputType == DirectionInputType::Both)
+    if (m_directionInputType == DirectionInputType::WASD ||
+        m_directionInputType == DirectionInputType::Both)
     {
         if (horizontal != 0 || vertical != 0)
         {

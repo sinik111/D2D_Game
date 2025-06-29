@@ -35,7 +35,7 @@ public:
 	~D2DRenderer();
 
 public:
-	void Initialize();
+	HRESULT Initialize();
 	void Shutdown();
 
 	UINT GetWidth() const;
