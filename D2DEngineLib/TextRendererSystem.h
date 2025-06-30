@@ -6,7 +6,7 @@ class TextRenderer;
 class TextRendererSystem
 {
 private:
-	D2DRenderer* m_d2dRenderer{};
+	D2DRenderer* m_d2dRenderer = nullptr;
 	std::vector<TextRenderer*> m_textRenderers;
 
 public:
@@ -15,6 +15,6 @@ public:
 
 public:
 	void SetD2DRenderer(D2DRenderer* d2dRenderer);
-	void MakeRenderCommands();
+	void Update();
 	Microsoft::WRL::ComPtr<IDWriteTextFormat> CreateTextFormat(float fontSize);
 };

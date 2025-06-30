@@ -5,6 +5,8 @@
 
 #include "Matrix3x2.h"
 #include "IRenderer.h"
+#include "Camera.h"
+#include "DebugSystem.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d2d1.lib")
@@ -58,11 +60,14 @@ HRESULT D2DRenderer::Initialize()
 		d2dFactory.GetAddressOf()
 	);
 
-	ComPtr<IDXGIDevice> dxgiDevice;
-	m_d3d11Device.As(&dxgiDevice);
+	m_d3d11Device.As(&m_dxgiDevice);
+
+	ComPtr<IDXGIAdapter> dxgiAdapter;
+	m_dxgiDevice->GetAdapter(dxgiAdapter.GetAddressOf());
+	dxgiAdapter.As(&m_dxgiAdapter);
 
 	ComPtr<ID2D1Device7> d2dDevice;
-	d2dFactory->CreateDevice(dxgiDevice.Get(), d2dDevice.GetAddressOf());
+	d2dFactory->CreateDevice(m_dxgiDevice.Get(), d2dDevice.GetAddressOf());
 	d2dDevice->CreateDeviceContext(
 		D2D1_DEVICE_CONTEXT_OPTIONS_NONE,
 		m_d2dDeviceContext.GetAddressOf()
@@ -114,9 +119,6 @@ HRESULT D2DRenderer::Initialize()
 		reinterpret_cast<IUnknown**>(m_dWriteFactory.GetAddressOf())
 	);
 
-	// DWrite Text Format
-
-
 	// Brush
 	m_d2dDeviceContext->CreateSolidColorBrush(
 		D2D1::ColorF(D2D1::ColorF::Black),
@@ -126,6 +128,8 @@ HRESULT D2DRenderer::Initialize()
 	// Unity 스타일 좌표계용 Matrix
 	m_unityMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 		Matrix3x2::Translation(m_width / 2.0f, m_height / 2.0f);
+
+	return S_OK;
 }
 
 void D2DRenderer::Shutdown()
@@ -153,6 +157,11 @@ void D2DRenderer::EndDraw() const
 {
 	m_d2dDeviceContext->EndDraw();
 	m_dxgiSwapChain->Present(1, 0);
+
+	DXGI_QUERY_VIDEO_MEMORY_INFO memInfo{};
+	m_dxgiAdapter->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &memInfo);
+
+	DebugSystem::Get().SetVRAMCurrentUsage(memInfo.CurrentUsage);
 }
 
 const ComPtr<ID2D1DeviceContext7>& D2DRenderer::GetDeviceContext() const
@@ -188,80 +197,52 @@ void D2DRenderer::RegisterRendererToQueue(IRenderer* renderer)
 	m_renderQueue.push_back(renderer);
 }
 
-void D2DRenderer::AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand)
-{
-	m_renderCommands.push_back(std::move(renderCommand));
-}
-
-void D2DRenderer::PrepareRenderCommands()
-{
-	std::sort(
-		m_renderCommands.begin(),
-		m_renderCommands.end(),
-		[](const std::unique_ptr<IRenderCommand>& a, const std::unique_ptr<IRenderCommand>& b) {
-			return a->GetSortOrder() < b->GetSortOrder();
-		}
-	);
-
-}
-
 void D2DRenderer::PrepareRenderQueue()
 {
-}
-
-void D2DRenderer::ExecuteRenderCommands()
-{
-	PrepareRenderCommands();
-
-	// screen, world 분리 필요
-	for (const auto& command : m_renderCommands)
-	{
-		switch (command->GetType())
-		{
-		case RenderCommandType::Bitmap:
-		{
-			BitmapRenderCommand* bitmapCmd = static_cast<BitmapRenderCommand*>(command.get());
-
-			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(bitmapCmd->transform));
-			m_d2dDeviceContext->DrawBitmap(bitmapCmd->bitmap.Get(), nullptr,
-				bitmapCmd->opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, &bitmapCmd->sourceRect);
-		}
-			break;
-		case RenderCommandType::Text:
-		{
-			TextRenderCommand* textCmd = static_cast<TextRenderCommand*>(command.get());
-
-			D2D1_RECT_F layoutRect
+	std::sort(
+		m_renderQueue.begin(),
+		m_renderQueue.end(),
+		[](const IRenderer* a, const IRenderer* b) {
+			if (a->GetSpaceType() != b->GetSpaceType())
 			{
-				textCmd->point.x,
-				textCmd->point.y,
-				textCmd->point.x + textCmd->size.width,
-				textCmd->point.y + textCmd->size.height
-			};
+				return a->GetSpaceType() > b->GetSpaceType();
+			}
 
-			m_d2dSolidColorBrush->SetColor(textCmd->color);
-			m_d2dDeviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(textCmd->transform));
-			m_d2dDeviceContext->DrawTextW(textCmd->text.c_str(), static_cast<UINT32>(textCmd->text.size()),
-				textCmd->textFormat.Get(), layoutRect, m_d2dSolidColorBrush.Get());
-		}
-			break;
-		default:
-			break;
-		}
-	}
+			if (a->GetSortOrder() != b->GetSortOrder())
+			{
+				return a->GetSortOrder() < b->GetSortOrder();
+			}
 
-	ClearCommands();
+			return a->GetY() > b->GetY();
+		}
+	);
 }
 
 void D2DRenderer::ExecuteRenderQueue()
 {
+	PrepareRenderQueue();
+
+	RenderContext context{
+		m_unityMatrix,
+		Camera::s_mainCamera->GetViewMatrix() * m_unityMatrix,
+		m_d2dDeviceContext,
+		m_d2dSolidColorBrush
+	};
+
+	for (const auto& renderer : m_renderQueue)
+	{
+		renderer->Render(context);
+	}
+
+	ClearQueue();
 }
 
-void D2DRenderer::ClearCommands()
+void D2DRenderer::Trim()
 {
-	m_renderCommands.clear();
+	m_dxgiDevice->Trim();
 }
 
 void D2DRenderer::ClearQueue()
 {
+	m_renderQueue.clear();
 }

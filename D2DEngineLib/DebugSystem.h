@@ -12,6 +12,10 @@ private:
     int m_lastFPS = 0;
     int m_frameCount = 0;
 
+    UINT64 m_vramCurrentUsage = 0;
+    size_t m_dramCurrentUsage = 0;
+    size_t m_pageFileCurrentUsage = 0;
+
     bool m_isConsoleOn = false;
 
 private:
@@ -47,4 +51,12 @@ public:
 
     void Log(const std::string& log);
     void Log(const std::wstring& log);
+
+    void SetVRAMCurrentUsage(UINT64 usage);
+    void SetDRAMCurrentUsage(size_t usage);
+    void SetPageFileCurrentUsage(size_t usage);
+
+    UINT64 GetVRAMCurrentUsage() const;
+    size_t GetDRAMCurrentUsage() const;
+    size_t GetPageFileCurrentUsage() const;
 };

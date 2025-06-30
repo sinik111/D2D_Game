@@ -38,7 +38,7 @@ void SolarSystem::Enter()
 	Earth* earthComp = earth->AddComponent<Earth>();
 	Health* earthHp = earth->AddComponent<Health>();
 	earth->GetTransform()->SetParent(sun->GetTransform());
-	earth->GetTransform()->SetPosition({ 200.0f, 0.0f });
+	earth->GetTransform()->SetLocalPosition({ 200.0f, 0.0f });
 
 
 	GameObject* moon = CreateGameObject(L"Moon");
@@ -54,8 +54,8 @@ void SolarSystem::Enter()
 	GameObject* infoViewer = CreateGameObject(L"InfoViewer");
 	InfoViewer* infoViewerComp = infoViewer->AddComponent<InfoViewer>();
 	infoViewerComp->SetSpaceObjects(sun);
-	earthComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetEarthRotation);
-	moonComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetMoonRotation);
+	earthComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetEarthInfo);
+	moonComp->GetOnRotationChange().Add(infoViewerComp, &InfoViewer::SetMoonInfo);
 
 
 	GameObject* earthHpViewer = CreateGameObject(L"EarthHpViewer");

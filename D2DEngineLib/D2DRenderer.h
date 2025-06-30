@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Matrix3x2.h"
-#include "RenderCommand.h"
 
 class IRenderer;
 
@@ -14,15 +13,14 @@ private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> m_dxgiSwapChain;
 	Microsoft::WRL::ComPtr<ID2D1DeviceContext7> m_d2dDeviceContext;
 	Microsoft::WRL::ComPtr<ID2D1Bitmap1> m_d2dBitmapTarget;
+	Microsoft::WRL::ComPtr<IDXGIDevice3> m_dxgiDevice;
+	Microsoft::WRL::ComPtr<IDXGIAdapter3> m_dxgiAdapter;
 
 	// DWrite
 	Microsoft::WRL::ComPtr<IDWriteFactory> m_dWriteFactory;
 
 	// Brush
 	Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> m_d2dSolidColorBrush;
-
-	std::vector<std::unique_ptr<IRenderCommand>> m_renderCommands;
-
 	std::vector<IRenderer*> m_renderQueue;
 
 	UINT m_width;
@@ -54,14 +52,11 @@ public:
 
 public:
 	void RegisterRendererToQueue(IRenderer* renderer);
-	void AddRenderCommand(std::unique_ptr<IRenderCommand> renderCommand);
-	void ExecuteRenderCommands();
-
 	void ExecuteRenderQueue();
 
+	void Trim();
+
 private:
-	void PrepareRenderCommands();
 	void PrepareRenderQueue();
-	void ClearCommands();
 	void ClearQueue();
 };

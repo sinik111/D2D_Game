@@ -17,7 +17,7 @@ void CameraController::Start()
     playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'W' }, InputCheckType::Held, this, &CameraController::ZoomOut);
     playerInput->RegisterActionOnKey('1', InputCheckType::Released, this, &CameraController::ChangeScene);
 
-    GetTransform()->SetScale({ 3.0f, 3.0f });
+    GetTransform()->SetLocalScale({ 3.0f, 3.0f });
 }
 
 void CameraController::Update()

@@ -2,6 +2,7 @@
 #include "TextRenderer.h"
 
 #include "ComponentSystem.h"
+#include "Transform.h"
 
 TextRenderer::TextRenderer()
 {
@@ -106,19 +107,62 @@ void TextRenderer::SetHorizontalAlignment(HorizontlAlignment align)
 	
 }
 
-Microsoft::WRL::ComPtr<IDWriteTextFormat> TextRenderer::GetTextFormat()
+Microsoft::WRL::ComPtr<IDWriteTextFormat> TextRenderer::GetTextFormat() const
 {
 	return m_textFormat;
 }
 
-std::wstring TextRenderer::GetText()
+std::wstring TextRenderer::GetText() const
 {
 	return m_text;
 }
 
-D2D1_COLOR_F TextRenderer::GetColor()
+D2D1_COLOR_F TextRenderer::GetColor() const
 {
 	return m_color;
+}
+
+void TextRenderer::Render(const RenderContext& context) const
+{
+	const Matrix3x2 worldMatrix = GetTransform()->GetWorldMatrix();
+	const Matrix3x2 unityMatrix = context.unityMatrix;
+	const Matrix3x2 viewUnityMatrix = context.viewUnityMatrix;
+
+	Matrix3x2 finalMatrix;
+
+	const D2D1_RECT_F layoutRect
+	{
+		m_point.x,
+		-m_point.y,
+		m_point.x + m_rectSize.width,
+		-m_point.y + m_rectSize.height
+	};
+
+	switch (m_spaceType)
+	{
+	case SpaceType::Screen:
+	{
+		finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) * unityMatrix;
+	}
+		break;
+	case SpaceType::World:
+	{
+		finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+			Matrix3x2::Translation(-m_rectSize.width / 2.0f, m_rectSize.height / 2.0f) *
+			GetTransform()->GetWorldMatrix() *
+			viewUnityMatrix;
+	}
+		break;
+	}
+
+	context.solidBrush->SetColor(m_color);
+	context.deviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(finalMatrix));
+	context.deviceContext->DrawTextW(
+		m_text.c_str(),
+		static_cast<UINT32>(m_text.size()),
+		m_textFormat.Get(),
+		layoutRect,
+		context.solidBrush.Get());
 }
 
 SpaceType TextRenderer::GetSpaceType() const
@@ -131,17 +175,22 @@ int TextRenderer::GetSortOrder() const
 	return m_sortOrder;
 }
 
-D2D1_POINT_2F TextRenderer::GetPoint()
+float TextRenderer::GetY() const
+{
+	return GetTransform()->GetWorldPosition().GetY();
+}
+
+D2D1_POINT_2F TextRenderer::GetPoint() const
 {
 	return m_point;
 }
 
-D2D1_SIZE_F TextRenderer::GetRectSize()
+D2D1_SIZE_F TextRenderer::GetRectSize() const
 {
 	return m_rectSize;
 }
 
-float TextRenderer::GetFontSize()
+float TextRenderer::GetFontSize() const
 {
 	return m_fontSize;
 }

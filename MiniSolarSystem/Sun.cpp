@@ -27,7 +27,7 @@ void Sun::Start()
     bitmapRenderer->SetOpacity(0.3f);
     //bitmapRenderer->SetSourceRect({ 30.0f, 30.0f, 60.0f, 60.0f });
 
-    GetTransform()->SetPosition({ 0.0f, 0.0f });
+    GetTransform()->SetLocalPosition({ 0.0f, 0.0f });
 
     PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
@@ -44,20 +44,26 @@ void Sun::Update()
 
 void Sun::CreateEarth()
 {
-    GameObject* newEarth = CreateGameObject(L"Earth");
-    newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
-    newEarth->GetTransform()->SetPosition(Random::Float(-1600.0f, 1600.0f), Random::Float(-1200.0f, 1200.0f));
+    for (int i = 0; i < 100; ++i)
+    {
+        GameObject* newEarth = CreateGameObject(L"Earth");
+        newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
+        newEarth->GetTransform()->SetLocalPosition(Random::Float(-1600.0f, 1600.0f), Random::Float(-1200.0f, 1200.0f));
 
-    m_earths.push_back(newEarth);
+        m_earths.push_back(newEarth);
+    }
 }
 
 void Sun::DeleteEarth()
 {
-    if (!m_earths.empty())
+    for (int i = 0; i < 100; ++i)
     {
-        m_earths.front()->Destroy();
+        if (!m_earths.empty())
+        {
+            m_earths.front()->Destroy();
 
-        m_earths.pop_front();
+            m_earths.pop_front();
+        }
     }
 }
 

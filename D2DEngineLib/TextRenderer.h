@@ -49,15 +49,17 @@ public:
 	~TextRenderer() override;
 
 public:
-	Microsoft::WRL::ComPtr<IDWriteTextFormat> GetTextFormat();
-	std::wstring GetText();
-	D2D1_COLOR_F GetColor();
-	D2D1_POINT_2F GetPoint();
-	D2D1_SIZE_F GetRectSize();
-	float GetFontSize();
+	Microsoft::WRL::ComPtr<IDWriteTextFormat> GetTextFormat() const;
+	std::wstring GetText() const;
+	D2D1_COLOR_F GetColor() const;
+	D2D1_POINT_2F GetPoint() const;
+	D2D1_SIZE_F GetRectSize() const;
+	float GetFontSize() const;
 
+	void Render(const RenderContext& context) const override;
 	SpaceType GetSpaceType() const override;
 	int GetSortOrder() const override;
+	float GetY() const override;
 
 public:
 	void SetText(const std::wstring& text);

@@ -38,7 +38,7 @@ void Moon::Start()
 
     GetGameObject()->AddComponent<BitmapRenderer>(L"Moon.png");
 
-    GetTransform()->SetPosition({ 100.0f, 0.0f });
+    GetTransform()->SetLocalPosition({ 100.0f, 0.0f });
 
     m_health = GetGameObject()->GetComponent<Health>();
 
@@ -56,8 +56,14 @@ void Moon::Update()
 
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
+    float worldX = GetTransform()->GetWorldPosition().GetX();
+    float worldY = GetTransform()->GetWorldPosition().GetY();
+
     std::wstringstream ss;
-    ss << std::fixed << std::setprecision(2) << GetTransform()->GetRotation();
+    ss << std::fixed << std::setprecision(2)
+        << L"До WorldPosition: " << worldX << ',' << worldY
+        << L"\tLocalRotation: "
+        << GetTransform()->GetLocalRotation();
 
     m_onRotationChange.Invoke(ss.str());
 }

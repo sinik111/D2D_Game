@@ -61,3 +61,18 @@ void Debug::Log(const std::wstring& log)
     DebugSystem::Get().Log(log);
 #endif // _DEBUG
 }
+
+UINT64 Debug::GetVRAMCurrentUsage()
+{
+    return DebugSystem::Get().GetVRAMCurrentUsage();
+}
+
+size_t Debug::GetDRAMCurrentUsage()
+{
+    return DebugSystem::Get().GetDRAMCurrentUsage();
+}
+
+size_t Debug::GetPageFileCurrentUsage()
+{
+    return DebugSystem::Get().GetPageFileCurrentUsage();
+}

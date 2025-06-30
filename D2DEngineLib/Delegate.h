@@ -19,7 +19,7 @@ public:
 	template<typename T>
 	void Add(T* instance, void (T::*func)(Args...))
 	{
-		m_callbackInfos.push_back({ instance, Action<Args...>(instance, func)});
+		m_callbackInfos.push_back({ instance, Action<Args...>(instance, func) });
 	}
 
 	void Remove(void* instance)

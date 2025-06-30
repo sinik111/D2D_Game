@@ -40,4 +40,5 @@ public:
 	void RegisterValidCheck(Component* component);
 	void UnregisterValidCheck(Component* component);
 	bool IsValid(Component* component) const;
+	void Shutdown();
 };

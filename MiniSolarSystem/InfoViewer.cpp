@@ -15,8 +15,8 @@ void InfoViewer::Start()
 
     m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(15.0f);
-    m_textRenderer->SetPoint({ -380.0f, -100.0f });
-    m_textRenderer->SetRectSize({ 400.0f, 400.0f });
+    m_textRenderer->SetPoint({ -380.0f, -10.0f });
+    m_textRenderer->SetRectSize({ 500.0f, 400.0f });
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);
     m_textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
@@ -25,32 +25,36 @@ void InfoViewer::Start()
 
 void InfoViewer::LateUpdate()
 {
-    Vector2 cameraPosition = Camera::s_mainCamera->GetTransform()->GetPosition();
+    Vector2 cameraPosition = Camera::s_mainCamera->GetTransform()->GetLocalPosition();
     float cameraZoom = Camera::s_mainCamera->GetZoom();
 
     float sunRotation = 0.0f;
     size_t earthCount = 0;
     if (GameObject::IsValid(m_sun))
     {
-        sunRotation = m_sun->GetTransform()->GetRotation();
+        sunRotation = m_sun->GetTransform()->GetLocalRotation();
 
         Sun* sun = m_sun->GetComponent<Sun>();
         earthCount = sun->GetEarthCount();
     }
 
-    std::wstringstream ss;
-    ss << std::fixed << std::setprecision(2)
+    std::wostringstream oss;
+    oss << std::fixed << std::setprecision(2)
         << L"FPS: " << Debug::GetLastFPS()
+        << L"\nVRAM: " << FormatBytes(Debug::GetVRAMCurrentUsage())
+        << L"\nDRAM: " << FormatBytes(Debug::GetDRAMCurrentUsage())
+        << L"\nPageFile: " << FormatBytes(Debug::GetPageFileCurrentUsage())
+        << L"\nIDXGIDevice3::Trim() [ P ]"
         << L"\nScene을 변경하려면 '1'을 누르세요"
         << L"\n지구/달에 피해 10 주기 [ T / Y ]"
         << L"\n지구 생성/삭제하기 [ A / S ] 지구 개수: " << earthCount
         << L"\n카메라 Position [ ← ↑ ↓ → ]: " << cameraPosition.GetX() << L", " << cameraPosition.GetY()
         << L"\n카메라 Zoom [ CTRL + Q / CTRL + W ]: " << cameraZoom
         << L"\n태양 Rotation: " << sunRotation
-        << L"\n지구 Rotation: " << m_earthRotation
-        << L"\n달 Rotation: " << m_moonRotation;
+        << L"\n" << m_earthRotation
+        << L"\n" << m_moonRotation;
 
-    m_textRenderer->SetText(ss.str());
+    m_textRenderer->SetText(oss.str());
 }
 
 void InfoViewer::SetSpaceObjects(GameObject* sun)
@@ -58,12 +62,33 @@ void InfoViewer::SetSpaceObjects(GameObject* sun)
 	m_sun = sun;
 }
 
-void InfoViewer::SetEarthRotation(const std::wstring& rotationString)
+void InfoViewer::SetEarthInfo(const std::wstring& earthInfo)
 {
-    m_earthRotation = rotationString;
+    m_earthRotation = earthInfo;
 }
 
-void InfoViewer::SetMoonRotation(const std::wstring& rotationString)
+void InfoViewer::SetMoonInfo(const std::wstring& moonInfo)
 {
-    m_moonRotation = rotationString;
+    m_moonRotation = moonInfo;
+}
+
+std::wstring InfoViewer::FormatBytes(UINT64 bytes)
+{
+    constexpr double KB = 1024.0;
+    constexpr double MB = KB * 1024.0;
+    constexpr double GB = MB * 1024.0;
+
+    std::wostringstream oss;
+    oss << std::fixed << std::setprecision(2);
+
+    if (bytes >= static_cast<UINT64>(GB))
+        oss << (bytes / GB) << " GB";
+    else if (bytes >= static_cast<UINT64>(MB))
+        oss << (bytes / MB) << " MB";
+    else if (bytes >= static_cast<UINT64>(KB))
+        oss << (bytes / KB) << " KB";
+    else
+        oss << bytes << " B";
+
+    return oss.str();
 }

@@ -54,9 +54,6 @@
     <ClInclude Include="D2DRenderer.h">
       <Filter>00_App</Filter>
     </ClInclude>
-    <ClInclude Include="RenderCommand.h">
-      <Filter>00_App</Filter>
-    </ClInclude>
     <ClInclude Include="WinApp.h">
       <Filter>00_App</Filter>
     </ClInclude>
@@ -199,9 +196,6 @@
     </ClCompile>
     <ClCompile Include="TextRendererSystem.cpp">
       <Filter>03_Component\ComponentSystem\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderCommand.cpp">
-      <Filter>00_App</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>99_Utility\PCH</Filter>

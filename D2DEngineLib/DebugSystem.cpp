@@ -121,3 +121,33 @@ void DebugSystem::Log(const std::wstring& log)
         std::wcout << str;
     }
 }
+
+void DebugSystem::SetVRAMCurrentUsage(UINT64 usage)
+{
+    m_vramCurrentUsage = usage;
+}
+
+void DebugSystem::SetDRAMCurrentUsage(size_t usage)
+{
+    m_dramCurrentUsage = usage;
+}
+
+void DebugSystem::SetPageFileCurrentUsage(size_t usage)
+{
+    m_pageFileCurrentUsage = usage;
+}
+
+UINT64 DebugSystem::GetVRAMCurrentUsage() const
+{
+    return m_vramCurrentUsage;
+}
+
+size_t DebugSystem::GetDRAMCurrentUsage() const
+{
+    return m_dramCurrentUsage;
+}
+
+size_t DebugSystem::GetPageFileCurrentUsage() const
+{
+    return m_pageFileCurrentUsage;
+}

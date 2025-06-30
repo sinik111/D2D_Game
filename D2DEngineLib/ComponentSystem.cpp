@@ -51,3 +51,13 @@ bool ComponentSystem::IsValid(Component* component) const
 {
 	return m_validComponents.find(component) != m_validComponents.end();
 }
+
+void ComponentSystem::Shutdown()
+{
+	m_bitmapRendererSystem.reset();
+	m_scriptSystem.reset();
+	m_bitmapRendererSystem.reset();
+	m_textRendererSystem.reset();
+	m_playerInputSystem.reset();
+	m_validComponents.clear();
+}

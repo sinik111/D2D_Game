@@ -39,7 +39,7 @@ void Earth::Start()
 
     GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
 
-    GetTransform()->SetScale({ 0.5f, 0.5f });
+    GetTransform()->SetLocalScale({ 0.5f, 0.5f });
     
     m_health = GetGameObject()->GetComponent<Health>();
 
@@ -63,8 +63,14 @@ void Earth::Update()
 
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
+    float worldX = GetTransform()->GetWorldPosition().GetX();
+    float worldY = GetTransform()->GetWorldPosition().GetY();
+
     std::wstringstream ss;
-    ss << std::fixed << std::setprecision(2) << GetTransform()->GetRotation();
+    ss << std::fixed << std::setprecision(2)
+        << L"Áö±¸ WorldPosition: " << worldX << ',' << worldY
+        << L"\tLocalRotation: "
+        << GetTransform()->GetLocalRotation();
 
     m_onRotationChange.Invoke(ss.str());
 }

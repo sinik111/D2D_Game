@@ -27,8 +27,10 @@ public:
 	D2D1_RECT_F GetSourceRect() const;
 	float GetOpacity() const;
 
+	void Render(const RenderContext& context) const override;
 	int GetSortOrder() const override;
 	SpaceType GetSpaceType() const override;
+	float GetY() const override;
 
 public:
 	void SetBitmap(const std::wstring& filePath);

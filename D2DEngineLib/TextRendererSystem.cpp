@@ -22,53 +22,51 @@ void TextRendererSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
 	m_d2dRenderer = d2dRenderer;
 }
 
-void TextRendererSystem::MakeRenderCommands()
+void TextRendererSystem::Update()
 {
-	const Matrix3x2& unityMatrix = m_d2dRenderer->GetUnityMatrix();
-	const Matrix3x2& viewMatrix = Camera::s_mainCamera->GetViewMatrix();
+	const Vector2 cameraPosition = Camera::s_mainCamera->GetTransform()->GetWorldPosition();
+	const float zoomFactor = Camera::s_mainCamera->GetZoom();
 
-	for (const auto& textRenderer : m_textRenderers)
+	const float halfScreenWidth = m_d2dRenderer->GetWidth() / 2.0f * zoomFactor;
+	const float halfScreenHeight = m_d2dRenderer->GetHeight() / 2.0f * zoomFactor;
+
+	const float viewLeft = cameraPosition.GetX() - halfScreenWidth;
+	const float viewRight = cameraPosition.GetX() + halfScreenWidth;
+	const float viewBottom = cameraPosition.GetY() - halfScreenHeight;
+	const float viewTop = cameraPosition.GetY() + halfScreenHeight;
+
+	for (const auto& renderer : m_textRenderers)
 	{
-		switch (textRenderer->GetSpaceType())
+		switch (renderer->GetSpaceType())
 		{
 		case SpaceType::Screen:
 		{
-			D2D1_POINT_2F point = textRenderer->GetPoint();
-			point.y = -point.y;
-
-			const Matrix3x2 finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) * unityMatrix;
-
-			m_d2dRenderer->AddRenderCommand(std::make_unique<TextRenderCommand>(
-				textRenderer->GetTextFormat(),
-				textRenderer->GetText(),
-				finalMatrix,
-				point,
-				textRenderer->GetRectSize(),
-				textRenderer->GetColor(),
-				textRenderer->GetSortOrder()
-			));
+			m_d2dRenderer->RegisterRendererToQueue(renderer);
 			break;
 		}
 		case SpaceType::World:
 		{
-			const D2D1_SIZE_F& size = textRenderer->GetRectSize();
-			const D2D1_POINT_2F& point = textRenderer->GetPoint();
+			const Vector2 worldPosition = renderer->GetTransform()->GetWorldPosition();
+			const Vector2 worldScale = renderer->GetTransform()->GetWorldScale();
 
-			const Matrix3x2 renderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-				Matrix3x2::Translation(-size.width / 2, size.height / 2);
+			const D2D1_SIZE_F rectSize = renderer->GetRectSize();
 
-			const Matrix3x2 finalMatrix = renderMatrix * textRenderer->GetTransform()->GetWorldMatrix() *
-				viewMatrix * unityMatrix;
+			const float rectHalfWidth = rectSize.width * worldScale.GetX() / 2.0f;
+			const float rectHalfHeight = rectSize.height * worldScale.GetY() / 2.0f;
 
-			m_d2dRenderer->AddRenderCommand(std::make_unique<TextRenderCommand>(
-				textRenderer->GetTextFormat(),
-				textRenderer->GetText(),
-				finalMatrix,
-				point,
-				textRenderer->GetRectSize(),
-				textRenderer->GetColor(),
-				textRenderer->GetSortOrder()
-			));
+			const float rectLeft = worldPosition.GetX() - rectHalfWidth;
+			const float rectRight = worldPosition.GetX() + rectHalfWidth;
+			const float rectBottom = worldPosition.GetY() - rectHalfHeight;
+			const float rectTop = worldPosition.GetY() + rectHalfHeight;
+
+			if (rectRight < viewLeft || rectLeft > viewRight ||
+				rectTop < viewBottom || rectBottom > viewTop)
+			{
+				continue;
+			}
+
+			m_d2dRenderer->RegisterRendererToQueue(renderer);
+
 			break;
 		}
 		}

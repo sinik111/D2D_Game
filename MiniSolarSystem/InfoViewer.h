@@ -19,6 +19,9 @@ private:
 
 public:
 	void SetSpaceObjects(GameObject* sun);
-	void SetEarthRotation(const std::wstring& rotationString);
-	void SetMoonRotation(const std::wstring& rotationString);
+	void SetEarthInfo(const std::wstring& earthInfo);
+	void SetMoonInfo(const std::wstring& moonInfo);
+
+private:
+	std::wstring FormatBytes(UINT64 bytes);
 };

@@ -30,4 +30,8 @@ public:
 
     static void Log(const std::string& log);
     static void Log(const std::wstring& log);
+
+    static UINT64 GetVRAMCurrentUsage();
+    static size_t GetDRAMCurrentUsage();
+    static size_t GetPageFileCurrentUsage();
 };

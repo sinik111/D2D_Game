@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "WinApp.h"
 
+#include <psapi.h>                // GetProcessMemoryInfo, PROCESS_MEMORY_COUNTERS_EX
+#pragma comment(lib, "psapi.lib")
+
 #include "SceneManager.h"
 #include "ComponentSystem.h"
 #include "D2DRenderer.h"
@@ -8,6 +11,7 @@
 #include "Debug.h"
 #include "MyTime.h"
 #include "MyTimeSystem.h"
+#include "DebugSystem.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -77,6 +81,7 @@ void WinApp::Shutdown()
 
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
+	ComponentSystem::Get().Shutdown();
 	m_d2dRenderer->Shutdown();
 }
 
@@ -104,6 +109,17 @@ void WinApp::Run()
 
 void WinApp::Update()
 {
+	HANDLE hProcess = GetCurrentProcess();
+	PROCESS_MEMORY_COUNTERS_EX pmc;
+	pmc.cb = sizeof(PROCESS_MEMORY_COUNTERS_EX);
+
+	// 현재 프로세스의 메모리 사용 정보 조회
+	GetProcessMemoryInfo(hProcess, (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+
+	DebugSystem::Get().SetDRAMCurrentUsage(pmc.WorkingSetSize);
+	DebugSystem::Get().SetPageFileCurrentUsage(pmc.PagefileUsage);
+	
+
 	MyTimeSystem::Get().Update();
 	Debug::UpdateFPS(true);
 
@@ -114,14 +130,14 @@ void WinApp::Update()
 
 	SceneManager::Get().Update();
 
-	ComponentSystem::Get().BitmapRenderer().MakeRenderCommands();
-	ComponentSystem::Get().TextRenderer().MakeRenderCommands();
+	ComponentSystem::Get().BitmapRenderer().Update();
+	ComponentSystem::Get().TextRenderer().Update();
 }
 
 void WinApp::Render()
 {
 	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
-	m_d2dRenderer->ExecuteRenderCommands();
+	m_d2dRenderer->ExecuteRenderQueue();
 	m_d2dRenderer->EndDraw();
 }
 
@@ -155,6 +171,13 @@ void WinApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_DESTROY:
 		PostQuitMessage(0);
+		break;
+
+	case WM_KEYUP:
+		if (wParam == 'P')
+		{
+			m_d2dRenderer->Trim();
+		}
 		break;
 	}
 }
