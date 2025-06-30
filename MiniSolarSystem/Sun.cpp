@@ -12,16 +12,16 @@
 
 void Sun::Start()
 {
-    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
-    
-    textRenderer->SetText(L"태양");
-    textRenderer->SetSpaceType(SpaceType::World);
-    textRenderer->SetFontSize(20.0f);
-    textRenderer->SetRectSize({ 60.0f, 60.0f });
-    textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Blue));
-    textRenderer->SetSortOrder(2);
-    textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
-    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+    //TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+    //
+    //textRenderer->SetText(L"태양");
+    //textRenderer->SetSpaceType(SpaceType::World);
+    //textRenderer->SetFontSize(20.0f);
+    //textRenderer->SetRectSize({ 60.0f, 60.0f });
+    //textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Blue));
+    //textRenderer->SetSortOrder(2);
+    //textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+    //textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
 
     BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>(L"Sun.png");
     bitmapRenderer->SetOpacity(0.3f);

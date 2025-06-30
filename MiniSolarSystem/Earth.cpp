@@ -26,16 +26,16 @@ Earth::~Earth()
 
 void Earth::Start()
 {
-    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+    //TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
 
-    textRenderer->SetText(L"지구");
-    textRenderer->SetSpaceType(SpaceType::World);
-    textRenderer->SetFontSize(30.0f);
-    textRenderer->SetRectSize({ 100.0f, 100.0f });
-    textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
-    textRenderer->SetSortOrder(2);
-    textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
-    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+    //textRenderer->SetText(L"지구");
+    //textRenderer->SetSpaceType(SpaceType::World);
+    //textRenderer->SetFontSize(30.0f);
+    //textRenderer->SetRectSize({ 100.0f, 100.0f });
+    //textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
+    //textRenderer->SetSortOrder(2);
+    //textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+    //textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
 
     GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
 

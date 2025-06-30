@@ -25,16 +25,16 @@ Moon::~Moon()
 
 void Moon::Start()
 {
-    TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+    //TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
 
-    textRenderer->SetText(L"До");
-    textRenderer->SetSpaceType(SpaceType::World);
-    textRenderer->SetFontSize(60.0f);
-    textRenderer->SetRectSize({ 60.0f, 60.0f });
-    textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
-    textRenderer->SetSortOrder(2);
-    textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
-    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+    //textRenderer->SetText(L"До");
+    //textRenderer->SetSpaceType(SpaceType::World);
+    //textRenderer->SetFontSize(60.0f);
+    //textRenderer->SetRectSize({ 60.0f, 60.0f });
+    //textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
+    //textRenderer->SetSortOrder(2);
+    //textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+    //textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
 
     GetGameObject()->AddComponent<BitmapRenderer>(L"Moon.png");
 
