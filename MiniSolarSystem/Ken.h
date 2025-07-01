@@ -18,8 +18,8 @@ class Ken :
 {
 private:
 	Animator* m_animator;
-	Vector2 m_inputDir{};
 	float m_speed = 0.0f;
+	int m_moveDir = 0;
 
 private:
 	void Initialize() override;

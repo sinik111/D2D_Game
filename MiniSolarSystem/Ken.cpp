@@ -20,11 +20,12 @@ void Ken::Start()
 		return;
 	}
 
-	playerInput->RegisterActionOnKey('Q', KeyState::Pressed, this, &Ken::Idle);
-	playerInput->RegisterActionOnKey('W', KeyState::Pressed, this, &Ken::FrontDash);
-	playerInput->RegisterActionOnKey('E', KeyState::Pressed, this, &Ken::BackDash);
-	playerInput->RegisterActionOnKey('R', KeyState::Pressed, this, &Ken::Roll);
-	playerInput->RegisterActionOnKey('T', KeyState::Pressed, this, &Ken::SpinningKick);
+	playerInput->RegisterActionOnKey('Q', KeyState::Pressed, this, &Ken::FrontDash);
+	playerInput->RegisterActionOnKey('Q', KeyState::Released, this, &Ken::Idle);
+	playerInput->RegisterActionOnKey('W', KeyState::Pressed, this, &Ken::BackDash);
+	playerInput->RegisterActionOnKey('W', KeyState::Released, this, &Ken::Idle);
+	playerInput->RegisterActionOnKey('E', KeyState::Pressed, this, &Ken::Roll);
+	playerInput->RegisterActionOnKey('R', KeyState::Pressed, this, &Ken::SpinningKick);
 	playerInput->RegisterActionOnKey('1', KeyState::Pressed, this, &Ken::ChangeScene);
 
 	m_animator = GetGameObject()->GetComponent<Animator>();
@@ -42,7 +43,18 @@ void Ken::Update()
 {
 	if (m_animator->IsFinished())
 	{
-		ChangeState(KenState::IDLE);
+		if (m_moveDir == 1)
+		{
+			ChangeState(KenState::FRONT_DASH);
+		}
+		else if (m_moveDir == -1)
+		{
+			ChangeState(KenState::BACK_DASH);
+		}
+		else
+		{
+			ChangeState(KenState::IDLE);
+		}
 	}
 }
 
@@ -74,17 +86,35 @@ void Ken::ChangeState(KenState state)
 
 void Ken::Idle()
 {
-	ChangeState(KenState::IDLE);
+	if (m_animator->GetCurrentClipName() != L"Roll" &&
+		m_animator->GetCurrentClipName() != L"SpinningKick")
+	{
+		ChangeState(KenState::IDLE);
+	}
+
+	m_moveDir = 0;
 }
 
 void Ken::FrontDash()
 {
-	ChangeState(KenState::FRONT_DASH);
+	if (m_animator->GetCurrentClipName() != L"Roll" &&
+		m_animator->GetCurrentClipName() != L"SpinningKick")
+	{
+		ChangeState(KenState::FRONT_DASH);
+	}
+
+	m_moveDir = 1;
 }
 
 void Ken::BackDash()
 {
-	ChangeState(KenState::BACK_DASH);
+	if (m_animator->GetCurrentClipName() != L"Roll" &&
+		m_animator->GetCurrentClipName() != L"SpinningKick")
+	{
+		ChangeState(KenState::BACK_DASH);
+	}
+
+	m_moveDir = -1;
 }
 
 void Ken::Roll()

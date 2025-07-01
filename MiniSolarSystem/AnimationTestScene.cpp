@@ -41,7 +41,7 @@ void AnimationTestScene::Enter()
 	textRenderer->SetSortOrder(3);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
 	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
-	textRenderer->SetText(L"1: TitleScene\nQ: Idle\nW: FrontDash\nE: BackDash\nR: Roll\nT: SpinningKick");
+	textRenderer->SetText(L"1: TitleScene\nNoKeyInput: Idle\nQ: FrontDash\nW: BackDash\nE: Roll\nR: SpinningKick");
 }
 
 void AnimationTestScene::Unload()

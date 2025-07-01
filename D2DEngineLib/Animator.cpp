@@ -53,6 +53,7 @@ void Animator::Play(const std::wstring& clipName)
 	}
 
 	m_currentClip = iter->second.get();
+	m_currentClipName = clipName;
 
 	m_bitmapRenderer->SetBitmap(m_currentClip->filePath);
 
@@ -65,6 +66,11 @@ void Animator::Play(const std::wstring& clipName)
 	// 0 sec event call
 
 	m_isFinished = false;
+}
+
+const std::wstring& Animator::GetCurrentClipName() const
+{
+	return m_currentClipName;
 }
 
 bool Animator::IsFinished() const
@@ -95,11 +101,6 @@ void Animator::Update()
 				return;
 			}
 		}
-		
-		// 0 1   2   3   4   duration
-		// 0 0.1 0.2 0.3 0.4 0.5
-		// 
-		// 
 
 		float nextFrameTime;
 		if (m_frameCounter < m_currentClip->frames.size() - 1)
@@ -136,8 +137,9 @@ void Animator::Update()
 void Animator::SetSpriteData()
 {
 	const Sprite& sprite = m_spriteSheet->
-		sprites[m_currentClip->frames[m_frameCounter].spriteIndex];
+		sprites[m_currentClip->frames[m_frameCounter % m_currentClip->frames.size()].spriteIndex];
 
+	// rect, pivot 설정 및 window -> unity 좌표계 변경으로 인한 좌표 조정
 	m_bitmapRenderer->SetSourceRect({
 			sprite.x,
 			m_spriteSheet->height - sprite.y,

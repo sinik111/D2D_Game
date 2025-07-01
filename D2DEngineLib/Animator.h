@@ -11,6 +11,7 @@ class Animator :
 private:
 	BitmapRenderer* m_bitmapRenderer = nullptr;
 	AnimationClip* m_currentClip = nullptr;
+	std::wstring m_currentClipName;
 
 	std::shared_ptr<SpriteSheet> m_spriteSheet;
 	std::unordered_map<std::wstring, std::shared_ptr<AnimationClip>> m_animationClips;
@@ -29,6 +30,7 @@ public:
 	void AddAnimationClip(const std::wstring& clipName, const std::wstring& filePath);
 
 	void Play(const std::wstring& clipName);
+	const std::wstring& GetCurrentClipName() const;
 	bool IsFinished() const;
 
 private:
