@@ -31,7 +31,7 @@ public:
 	void ChangeScene(const std::wstring& name);
 	Scene* GetCurrentScene();
 
-private:
+public:
 	void CheckSceneChanged();
 
 public:

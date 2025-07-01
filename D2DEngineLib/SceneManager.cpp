@@ -15,8 +15,6 @@ void SceneManager::Shutdown()
 
 void SceneManager::Update()
 {
-	CheckSceneChanged();
-
 	m_currentScene->Update();
 }
 
@@ -63,5 +61,10 @@ GameObject* SceneManager::Find(const std::wstring& name) const
 
 bool SceneManager::IsValid(GameObject* gameObject) const
 {
+	if (m_currentScene == nullptr)
+	{
+		return false;
+	}
+
 	return m_currentScene->IsValid(gameObject);
 }

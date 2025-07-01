@@ -140,6 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="Animator.h" />
+    <ClInclude Include="AnimatorSystem.h" />
     <ClInclude Include="BitmapRenderer.h" />
     <ClInclude Include="BitmapRendererSystem.h" />
     <ClInclude Include="BitmapResource.h" />
@@ -156,6 +159,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="MyTimeSystem.h" />
     <ClInclude Include="PlayerInputSystem.h" />
@@ -177,6 +181,9 @@
     <ClInclude Include="WinApp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationData.cpp" />
+    <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="AnimatorSystem.cpp" />
     <ClCompile Include="BitmapRenderer.cpp" />
     <ClCompile Include="BitmapRendererSystem.cpp" />
     <ClCompile Include="BitmapResource.cpp" />

@@ -11,6 +11,7 @@ BitmapRenderer::BitmapRenderer()
 }
 
 BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
+	: m_filePath{ filePath }
 {
 	ComponentSystem::Get().BitmapRenderer().Register(this);
 
@@ -40,8 +41,8 @@ void BitmapRenderer::Render(const RenderContext& context) const
 	const Matrix3x2 unityMatrix = context.unityMatrix;
 	const Matrix3x2 viewUnityMatrix = context.viewUnityMatrix;
 
-	const float bitmapHalfWidth = (m_sourceRect.right - m_sourceRect.left) / 2.0f;
-	const float bitmapHalfHeight = (m_sourceRect.bottom - m_sourceRect.top) / 2.0f;
+	const float bitmapHalfWidth = (m_sourceRect.right - m_sourceRect.left) * m_pivot.GetX();
+	const float bitmapHalfHeight = (m_sourceRect.bottom - m_sourceRect.top) * m_pivot.GetY();
 
 	const Matrix3x2 renderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 		Matrix3x2::Translation(-bitmapHalfWidth, bitmapHalfHeight);
@@ -118,6 +119,13 @@ float BitmapRenderer::GetOpacity() const
 
 void BitmapRenderer::SetBitmap(const std::wstring& filePath)
 {
+	if (m_filePath == filePath)
+	{
+		return;
+	}
+
+	m_filePath = filePath;
+
 	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
 
 	m_sourceRect = { 0.0f, 0.0f, m_bitmapResource->GetSize().width, m_bitmapResource->GetSize().height };
@@ -141,6 +149,11 @@ void BitmapRenderer::SetSpaceType(SpaceType spaceType)
 void BitmapRenderer::SetSourceRect(const D2D1_RECT_F& sourceRect)
 {
 	m_sourceRect = sourceRect;
+}
+
+void BitmapRenderer::SetPivot(const Vector2& pivot)
+{
+	m_pivot = pivot;
 }
 
 void BitmapRenderer::SetOpacity(float opacity)

@@ -5,7 +5,8 @@ ComponentSystem::ComponentSystem()
 	: m_scriptSystem{ std::make_unique<ScriptSystem>() },
 	m_bitmapRendererSystem{ std::make_unique<BitmapRendererSystem>() },
 	m_textRendererSystem{ std::make_unique<TextRendererSystem>() },
-	m_playerInputSystem{ std::make_unique<PlayerInputSystem>() }
+	m_playerInputSystem{ std::make_unique<PlayerInputSystem>() },
+	m_animatorSystem{ std::make_unique<AnimatorSystem>() }
 {
 	
 }
@@ -37,6 +38,11 @@ PlayerInputSystem& ComponentSystem::PlayerInput()
 	return *m_playerInputSystem.get();
 }
 
+AnimatorSystem& ComponentSystem::Animator()
+{
+	return *m_animatorSystem.get();
+}
+
 void ComponentSystem::RegisterValidCheck(Component* component)
 {
 	m_validComponents.insert(component);
@@ -50,14 +56,4 @@ void ComponentSystem::UnregisterValidCheck(Component* component)
 bool ComponentSystem::IsValid(Component* component) const
 {
 	return m_validComponents.find(component) != m_validComponents.end();
-}
-
-void ComponentSystem::Shutdown()
-{
-	m_bitmapRendererSystem.reset();
-	m_scriptSystem.reset();
-	m_bitmapRendererSystem.reset();
-	m_textRendererSystem.reset();
-	m_playerInputSystem.reset();
-	m_validComponents.clear();
 }

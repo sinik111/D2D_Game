@@ -1,0 +1,49 @@
+{
+    "name": "ken_spinning_kick",
+    "isLoop": false,
+    "filePath": "ken.png",
+    "duration": 0.8333333134651184,
+    "frames": [
+        {
+            "sprite": "ken_spinning_kick_0",
+            "time": 0.0
+        },
+        {
+            "sprite": "ken_spinning_kick_1",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "ken_spinning_kick_2",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "ken_spinning_kick_3",
+            "time": 0.25
+        },
+        {
+            "sprite": "ken_spinning_kick_4",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "ken_spinning_kick_5",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "ken_spinning_kick_6",
+            "time": 0.5
+        },
+        {
+            "sprite": "ken_spinning_kick_7",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "ken_spinning_kick_8",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "ken_spinning_kick_9",
+            "time": 0.75
+        }
+    ],
+    "events": []
+}

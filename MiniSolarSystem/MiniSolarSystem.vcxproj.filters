@@ -19,6 +19,9 @@
     <Filter Include="02_Script\MainTitle">
       <UniqueIdentifier>{35256866-8e2d-41ff-b8ee-52b019e6c300}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Script\AnimationTest">
+      <UniqueIdentifier>{ba7d2beb-93a3-4883-9a72-7ad81973a09b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SolarSystem.cpp">
@@ -60,6 +63,12 @@
     <ClCompile Include="HpViewer.cpp">
       <Filter>02_Script\Health</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationTestScene.cpp">
+      <Filter>01_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Ken.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -97,6 +106,12 @@
     </ClInclude>
     <ClInclude Include="HpViewer.h">
       <Filter>02_Script\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTestScene.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ken.h">
+      <Filter>02_Script\AnimationTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

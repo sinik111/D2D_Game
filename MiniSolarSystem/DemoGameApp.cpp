@@ -5,6 +5,7 @@
 #include "../D2DEngineLib/SceneManager.h"
 #include "SolarSystem.h"
 #include "MainTitle.h"
+#include "AnimationTestScene.h"
 
 void DemoGameApp::Initialize()
 {
@@ -20,6 +21,7 @@ void DemoGameApp::Initialize()
 
 	SceneManager::Get().CreateScene<MainTitle>(L"Title");
 	SceneManager::Get().CreateScene<SolarSystem>(L"SolarSystem");
+	SceneManager::Get().CreateScene<AnimationTestScene>(L"AnimationTest");
 
 	SceneManager::Get().ChangeScene(L"Title");
 }

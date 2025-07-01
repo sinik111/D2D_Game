@@ -31,8 +31,8 @@ void Sun::Start()
 
     PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
-    playerInput->RegisterActionOnKey('A', InputCheckType::Held, this, &Sun::CreateEarth);
-    playerInput->RegisterActionOnKey('S', InputCheckType::Held, this, &Sun::DeleteEarth);
+    playerInput->RegisterActionOnKey('A', KeyState::Held, this, &Sun::CreateEarth);
+    playerInput->RegisterActionOnKey('S', KeyState::Held, this, &Sun::DeleteEarth);
 
     m_speed = 45.0f;
 }

@@ -14,7 +14,7 @@ enum class DirectionInputType
 	Both
 };
 
-enum class InputCheckType
+enum class KeyState
 {
 	Released,
 	Pressed,
@@ -28,7 +28,7 @@ private:
 	struct SingleKeyActionData
 	{
 		short vKey;
-		InputCheckType checkType;
+		KeyState checkType;
 		void* instance;
 		Action<> action;
 	};
@@ -36,7 +36,7 @@ private:
 	struct CombinedKeyActionData
 	{
 		std::vector<short> vKeys;
-		InputCheckType checkType; // 마지막 키
+		KeyState checkType; // 마지막 키
 		void* instance;
 		Action<> action;
 	};
@@ -56,13 +56,13 @@ public:
 
 public:
 	template<typename T>
-	void RegisterActionOnKey(short vKey, InputCheckType checkType, T* instance, void (T::* func)())
+	void RegisterActionOnKey(short vKey, KeyState checkType, T* instance, void (T::* func)())
 	{
 		m_singleKeyActions.push_back({ vKey, checkType, instance, Action<>(instance, func) });
 	}
 
 	template<typename T>
-	void RegisterActionOnCombinedKey(const std::vector<short>& vKeys, InputCheckType checkType, T* instance, void (T::* func)())
+	void RegisterActionOnCombinedKey(const std::vector<short>& vKeys, KeyState checkType, T* instance, void (T::* func)())
 	{
 		m_combinedKeyActions.push_back({ vKeys, checkType, instance, Action<>(instance, func) });
 	}
@@ -84,9 +84,9 @@ public:
 	}
 
 	void UnregisterActionOnKey(short vKey, void* instance);
-	void UnregisterActionOnKey(short vKey, InputCheckType checkType, void* instance);
+	void UnregisterActionOnKey(short vKey, KeyState checkType, void* instance);
 	void UnregisterCombinedAction(const std::vector<short>& vKeys, void* instance);
-	void UnregisterCombinedAction(const std::vector<short>& vKeys, InputCheckType checkType, void* instance);
+	void UnregisterCombinedAction(const std::vector<short>& vKeys, KeyState checkType, void* instance);
 	void UnregisterDirectionActions(void* instance);
 
 	Vector2 GetMousePosition() const;

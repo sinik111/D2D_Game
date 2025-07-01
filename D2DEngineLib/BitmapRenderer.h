@@ -10,8 +10,10 @@ class BitmapRenderer :
 {
 private:
 	std::shared_ptr<BitmapResource> m_bitmapResource;
+	std::wstring m_filePath;
 	SpaceType m_spaceType = SpaceType::World;
 	D2D1_RECT_F m_sourceRect{};
+	Vector2 m_pivot{ 0.5f, 0.5f };
 	int m_sortOrder = 0;
 	float m_opacity = 1.0f;
 	bool m_doFlipX = false;
@@ -38,5 +40,6 @@ public:
 	void SetFlipX(bool doFlip);
 	void SetSpaceType(SpaceType spaceType);
 	void SetSourceRect(const D2D1_RECT_F& sourceRect);
+	void SetPivot(const Vector2& pivot);
 	void SetOpacity(float opacity);
 };

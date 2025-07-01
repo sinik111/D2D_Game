@@ -27,7 +27,7 @@ void PlayerInput::UnregisterActionOnKey(short vKey, void* instance)
     );
 }
 
-void PlayerInput::UnregisterActionOnKey(short vKey, InputCheckType checkType, void* instance)
+void PlayerInput::UnregisterActionOnKey(short vKey, KeyState checkType, void* instance)
 {
     m_singleKeyActions.erase(
         std::remove_if(
@@ -57,7 +57,7 @@ void PlayerInput::UnregisterCombinedAction(const std::vector<short>& vKeys, void
     );
 }
 
-void PlayerInput::UnregisterCombinedAction(const std::vector<short>& vKeys, InputCheckType checkType, void* instance)
+void PlayerInput::UnregisterCombinedAction(const std::vector<short>& vKeys, KeyState checkType, void* instance)
 {
     m_combinedKeyActions.erase(
         std::remove_if(
@@ -87,19 +87,19 @@ void PlayerInput::CallActions()
 
         switch (data.checkType)
         {
-        case InputCheckType::Pressed:
+        case KeyState::Pressed:
             if (ComponentSystem::Get().PlayerInput().IsKeyPressed(data.vKey))
             {
                 shouldCall = true;
             }
             break;
-        case InputCheckType::Released:
+        case KeyState::Released:
             if (ComponentSystem::Get().PlayerInput().IsKeyReleased(data.vKey))
             {
                 shouldCall = true;
             }
             break;
-        case InputCheckType::Held:
+        case KeyState::Held:
             if (ComponentSystem::Get().PlayerInput().IsKeyHeld(data.vKey))
             {
                 shouldCall = true;
@@ -132,19 +132,19 @@ void PlayerInput::CallActions()
             bool shouldCallCombined = false;
             switch (data.checkType)
             {
-            case InputCheckType::Pressed:
+            case KeyState::Pressed:
                 if (ComponentSystem::Get().PlayerInput().IsKeyPressed(lastKey))
                 {
                     shouldCallCombined = true;
                 }
                 break;
-            case InputCheckType::Held:
+            case KeyState::Held:
                 if (ComponentSystem::Get().PlayerInput().IsKeyHeld(lastKey))
                 {
                     shouldCallCombined = true;
                 }
                 break;
-            case InputCheckType::Released:
+            case KeyState::Released:
                 if (ComponentSystem::Get().PlayerInput().IsKeyReleased(lastKey))
                 {
                     shouldCallCombined = true;

@@ -46,6 +46,9 @@
     <Filter Include="03_Component\Components\Renderer">
       <UniqueIdentifier>{695ae289-c7d7-4b0a-a444-c210823431e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99_Utility\Animation">
+      <UniqueIdentifier>{492e1d68-9762-47a3-9181-e6f6504c9f7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoInitializer.h">
@@ -156,6 +159,18 @@
     <ClInclude Include="IRenderer.h">
       <Filter>03_Component\Components\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="AnimationData.h">
+      <Filter>99_Utility\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>03_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>99_Utility\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatorSystem.h">
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -241,6 +256,15 @@
     </ClCompile>
     <ClCompile Include="IRenderer.cpp">
       <Filter>03_Component\Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationData.cpp">
+      <Filter>99_Utility\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>03_Component\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatorSystem.cpp">
+      <Filter>03_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

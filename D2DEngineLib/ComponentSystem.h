@@ -6,6 +6,7 @@
 #include "BitmapRendererSystem.h"
 #include "TextRendererSystem.h"
 #include "PlayerInputSystem.h"
+#include "AnimatorSystem.h"
 
 class Component;
 
@@ -16,6 +17,7 @@ private:
 	std::unique_ptr<BitmapRendererSystem> m_bitmapRendererSystem;
 	std::unique_ptr<TextRendererSystem> m_textRendererSystem;
 	std::unique_ptr<PlayerInputSystem> m_playerInputSystem;
+	std::unique_ptr<AnimatorSystem> m_animatorSystem;
 
 	std::unordered_set<Component*> m_validComponents;
 
@@ -35,10 +37,10 @@ public:
 	BitmapRendererSystem& BitmapRenderer();
 	TextRendererSystem& TextRenderer();
 	PlayerInputSystem& PlayerInput();
+	AnimatorSystem& Animator();
 
 public:
 	void RegisterValidCheck(Component* component);
 	void UnregisterValidCheck(Component* component);
 	bool IsValid(Component* component) const;
-	void Shutdown();
 };

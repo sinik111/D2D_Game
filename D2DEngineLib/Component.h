@@ -16,10 +16,10 @@ public:
 	GameObject* GetGameObject() const;
 	Transform* GetTransform() const;
 
-	bool IsValid(Component* component) const;
+	static bool IsValid(Component* component);
 
 private:
-	void SetOwner(GameObject* gameObject);
+	virtual void SetOwner(GameObject* gameObject);
 
 	friend class GameObject;
 };

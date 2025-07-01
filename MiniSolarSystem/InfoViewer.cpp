@@ -45,7 +45,7 @@ void InfoViewer::LateUpdate()
         << L"\nDRAM: " << FormatBytes(Debug::GetDRAMCurrentUsage())
         << L"\nPageFile: " << FormatBytes(Debug::GetPageFileCurrentUsage())
         << L"\nIDXGIDevice3::Trim() [ P ]"
-        << L"\nScene을 변경하려면 '1'을 누르세요"
+        << L"\nScene을 변경하려면 '3'을 누르세요"
         << L"\n지구/달에 피해 10 주기 [ T / Y ]"
         << L"\n지구 생성/삭제하기 [ A / S ] 지구 개수: " << earthCount
         << L"\n카메라 Position [ ← ↑ ↓ → ]: " << cameraPosition.GetX() << L", " << cameraPosition.GetY()

@@ -13,9 +13,9 @@ void CameraController::Start()
     PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
     playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &CameraController::MakeDirection);
-    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'Q' }, InputCheckType::Held, this, &CameraController::ZoomIn);
-    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'W' }, InputCheckType::Held, this, &CameraController::ZoomOut);
-    playerInput->RegisterActionOnKey('1', InputCheckType::Released, this, &CameraController::ChangeScene);
+    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'Q' }, KeyState::Held, this, &CameraController::ZoomIn);
+    playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'W' }, KeyState::Held, this, &CameraController::ZoomOut);
+    playerInput->RegisterActionOnKey('3', KeyState::Released, this, &CameraController::ChangeScene);
 
     GetTransform()->SetLocalScale({ 3.0f, 3.0f });
 }
@@ -52,5 +52,5 @@ void CameraController::ZoomOut()
 
 void CameraController::ChangeScene()
 {
-    SceneManager::Get().ChangeScene(L"Title");
+    SceneManager::Get().ChangeScene(L"AnimationTest");
 }

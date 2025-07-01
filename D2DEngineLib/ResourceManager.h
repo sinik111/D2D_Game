@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BitmapResource.h"
+#include "AnimationData.h"
 
 class ResourceManager
 {
@@ -9,6 +10,9 @@ private:
 	Microsoft::WRL::ComPtr<IWICImagingFactory> m_wicImagingFactory;
 
 	std::unordered_map<std::wstring, std::weak_ptr<BitmapResource>> m_bitmapResources;
+	std::unordered_map<std::wstring, std::weak_ptr<SpriteSheet>> m_spriteSheets;
+	std::unordered_map<std::wstring, std::weak_ptr<AnimationClip>> m_animationClips;
+
 	std::wstring m_resourcePath;
 
 private:
@@ -33,4 +37,13 @@ public:
 
 public:
 	std::shared_ptr<BitmapResource> CreateBitmapResource(const std::wstring& filePath);
+	std::shared_ptr<SpriteSheet> CreateSpriteSheet(const std::wstring& filePath);
+	std::shared_ptr<AnimationClip> CreateAnimationClip(const std::wstring& filePath,
+		std::shared_ptr<SpriteSheet>& spriteSheet);
+
+private:
+	HRESULT LoadSpriteSheet(const std::wstring& filePath, std::shared_ptr<SpriteSheet>& spriteSheet);
+	HRESULT LoadAnimationClip(const std::wstring& filePath,
+		std::shared_ptr<AnimationClip>& animationClip,
+		std::shared_ptr<SpriteSheet>& spriteSheet);
 };

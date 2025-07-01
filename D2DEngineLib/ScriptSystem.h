@@ -24,7 +24,7 @@ public:
 	void UnregisterLateUpdate(Script* script);
 
 public:
-	void UpdateSystem();
+	void Update();
 
 private:
 	void CallInitialize();

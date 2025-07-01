@@ -81,7 +81,7 @@ void WinApp::Shutdown()
 
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
-	ComponentSystem::Get().Shutdown();
+	
 	m_d2dRenderer->Shutdown();
 }
 
@@ -123,10 +123,13 @@ void WinApp::Update()
 	MyTimeSystem::Get().Update();
 	Debug::UpdateFPS(true);
 
+	SceneManager::Get().CheckSceneChanged();
+
 	ComponentSystem::Get().PlayerInput().Update();
 	ComponentSystem::Get().PlayerInput().ProcessInput();
 
-	ComponentSystem::Get().Script().UpdateSystem();
+	ComponentSystem::Get().Script().Update();
+	ComponentSystem::Get().Animator().Update();
 
 	SceneManager::Get().Update();
 

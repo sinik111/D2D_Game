@@ -24,7 +24,7 @@ Transform* Component::GetTransform() const
 	return m_owner->GetTransform();
 }
 
-bool Component::IsValid(Component* component) const
+bool Component::IsValid(Component* component)
 {
 	if (component == nullptr)
 	{

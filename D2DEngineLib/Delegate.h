@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Action.h"
+#include "GameObject.h"
+#include "Component.h"
 
 template<typename... Args>
 class Delegate
@@ -45,7 +47,9 @@ public:
 	{
 		for (const auto& info : m_callbackInfos)
 		{
-			if (info.action)
+			if (info.action && 
+				(GameObject::IsValid((GameObject*)info.instance)||
+					Component::IsValid((Component*)info.instance)))
 			{
 				info.action(args...);
 			}

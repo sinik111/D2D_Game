@@ -30,7 +30,7 @@ void ScriptSystem::UnregisterLateUpdate(Script* script)
 	m_pendingUnregisterForLateUpdate.push_back(script);
 }
 
-void ScriptSystem::UpdateSystem()
+void ScriptSystem::Update()
 {
 	CallInitialize();
 	CallStart();
