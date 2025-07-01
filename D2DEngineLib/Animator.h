@@ -33,6 +33,7 @@ public:
 
 private:
 	void Update();
+	void SetSpriteData();
 
 	friend class AnimatorSystem;
 };

@@ -6,6 +6,7 @@
 #include "MyTimeSystem.h"
 #include "ResourceManager.h"
 #include "ComponentSystem.h"
+#include "Debug.h"
 
 Animator::Animator()
 {
@@ -59,19 +60,7 @@ void Animator::Play(const std::wstring& clipName)
 	m_frameCounter = 0;
 	m_eventCounter = 0;
 
-	const Sprite& sprite = m_spriteSheet->
-		sprites[m_currentClip->frames[m_frameCounter].spriteIndex];
-
-	m_bitmapRenderer->SetSourceRect(
-		{
-			sprite.x,
-			sprite.y,
-			sprite.x + sprite.width,
-			sprite.y - sprite.height
-		}
-	);
-
-	m_bitmapRenderer->SetPivot({ sprite.pivotX, sprite.pivotY });
+	SetSpriteData();
 
 	// 0 sec event call
 
@@ -96,6 +85,8 @@ void Animator::Update()
 				m_timer -= m_currentClip->duration;
 				m_frameCounter = 0;
 				m_eventCounter = 0;
+
+				SetSpriteData();
 			}
 			else
 			{
@@ -105,37 +96,26 @@ void Animator::Update()
 			}
 		}
 		
-		// 0 1   2   3   4   5
+		// 0 1   2   3   4   duration
 		// 0 0.1 0.2 0.3 0.4 0.5
 		// 
 		// 
-		// 
-		// 
-		//
 
-		if (m_frameCounter < m_currentClip->frames.size())
+		float nextFrameTime;
+		if (m_frameCounter < m_currentClip->frames.size() - 1)
 		{
-			if (m_timer >= m_currentClip->frames[m_frameCounter].time)
-			{
-				++m_frameCounter;
+			nextFrameTime = m_currentClip->frames[m_frameCounter + 1].time;
+		}
+		else
+		{
+			nextFrameTime = m_currentClip->duration;
+		}
 
-				if (m_frameCounter < m_currentClip->frames.size())
-				{
-					const Sprite& sprite = m_spriteSheet->
-						sprites[m_currentClip->frames[m_frameCounter].spriteIndex];
+		if (m_timer >= nextFrameTime)
+		{
+			++m_frameCounter;
 
-					m_bitmapRenderer->SetSourceRect(
-						{
-							sprite.x,
-							m_spriteSheet->height - sprite.y,
-							sprite.x + sprite.width,
-							m_spriteSheet->height - sprite.y - sprite.height
-						}
-					);
-
-					m_bitmapRenderer->SetPivot({ sprite.pivotX, sprite.pivotY - 1 });
-				}
-			}
+			SetSpriteData();
 		}
 
 		if (m_eventCounter < m_currentClip->events.size())
@@ -151,4 +131,20 @@ void Animator::Update()
 			}
 		}
 	}
+}
+
+void Animator::SetSpriteData()
+{
+	const Sprite& sprite = m_spriteSheet->
+		sprites[m_currentClip->frames[m_frameCounter].spriteIndex];
+
+	m_bitmapRenderer->SetSourceRect({
+			sprite.x,
+			m_spriteSheet->height - sprite.y,
+			sprite.x + sprite.width,
+			m_spriteSheet->height - sprite.y - sprite.height
+		}
+	);
+
+	m_bitmapRenderer->SetPivot({ sprite.pivotX, sprite.pivotY - 1.0f });
 }
