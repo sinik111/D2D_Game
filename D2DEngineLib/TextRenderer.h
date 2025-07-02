@@ -33,6 +33,7 @@ private:
 	// m_spaceType이 Screen이면 왼쪽 위 꼭지점의 위치,
 	// m_spaceType이 World면 중심의 위치
 	D2D1_POINT_2F m_point{};
+	Vector2 m_pivot{ 0.5f, 0.5f };
 
 	D2D1_SIZE_F m_rectSize{ 50.0f, 20.0f }; // 텍스트를 출력할 사각형 사이즈
 	float m_fontSize = 10.0f; // 텍스트 폰트 크기
@@ -71,4 +72,5 @@ public:
 	void SetFontSize(float size);
 	void SetVerticalAlignment(VerticalAlignment align);
 	void SetHorizontalAlignment(HorizontlAlignment align);
+	void SetPivot(const Vector2& pivot);
 };

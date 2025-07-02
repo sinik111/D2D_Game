@@ -45,7 +45,7 @@ Scene* SceneManager::GetCurrentScene()
 	return m_currentScene;
 }
 
-void SceneManager::CheckSceneChanged() // 예외처리 추가 필요
+void SceneManager::CheckSceneChanged()
 {
 	if (m_nextScene != nullptr)
 	{

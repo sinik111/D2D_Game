@@ -7,7 +7,6 @@ class Transform :
 {
 private:
 	Vector2 m_localPosition{ 0.0f, 0.0f };
-	float m_localRotation = 0.0f;
 	Vector2 m_localScale{ 1.0f, 1.0f };
 
 	Vector2 m_worldScale{ 1.0f, 1.0f };
@@ -18,6 +17,7 @@ private:
 	Transform* m_parent = nullptr;
 	std::vector<Transform*> m_children;
 
+	float m_localRotation = 0.0f;
 	bool m_isDirty = true;
 	bool m_isScaleDirty = true;
 	bool m_isPositionDirty = true;

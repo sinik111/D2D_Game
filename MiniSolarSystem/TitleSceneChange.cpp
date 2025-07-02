@@ -18,8 +18,10 @@ void TitleSceneChange::Start()
 
     TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
     textRenderer->SetText(L"Scene을 변경하려면 '2'를 누르세요");
-    textRenderer->SetRectSize({ 400.0f, 400.0f });
+    textRenderer->SetRectSize({ 400.0f, 20.0f });
     textRenderer->SetFontSize(20.0f);
+    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+    textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
 }
 
 void TitleSceneChange::ChangeScene()

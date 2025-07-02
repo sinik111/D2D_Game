@@ -107,6 +107,11 @@ void TextRenderer::SetHorizontalAlignment(HorizontlAlignment align)
 	
 }
 
+void TextRenderer::SetPivot(const Vector2& pivot)
+{
+	m_pivot = pivot;
+}
+
 Microsoft::WRL::ComPtr<IDWriteTextFormat> TextRenderer::GetTextFormat() const
 {
 	return m_textFormat;
@@ -142,13 +147,15 @@ void TextRenderer::Render(const RenderContext& context) const
 	{
 	case SpaceType::Screen:
 	{
-		finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) * unityMatrix;
+		finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+			Matrix3x2::Translation(-m_rectSize.width * m_pivot.GetX(), m_rectSize.height * m_pivot.GetY()) *
+			unityMatrix;
 	}
 		break;
 	case SpaceType::World:
 	{
 		finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-			Matrix3x2::Translation(-m_rectSize.width / 2.0f, m_rectSize.height / 2.0f) *
+			Matrix3x2::Translation(-m_rectSize.width * m_pivot.GetX(), m_rectSize.height * m_pivot.GetY()) *
 			GetTransform()->GetWorldMatrix() *
 			viewUnityMatrix;
 	}

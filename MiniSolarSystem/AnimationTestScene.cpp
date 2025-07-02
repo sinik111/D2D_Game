@@ -24,8 +24,9 @@ void AnimationTestScene::Enter()
 	TextRenderer* textRenderer = go->AddComponent<TextRenderer>();
 	textRenderer->SetSpaceType(SpaceType::Screen);
 	textRenderer->SetFontSize(15.0f);
-	textRenderer->SetPoint({ -380.0f, -100.0f });
-	textRenderer->SetRectSize({ 500.0f, 400.0f });
+	textRenderer->SetPivot({ 0.5f, 0.0f });
+	textRenderer->SetPoint({ 100.0f, 0.0f });
+	textRenderer->SetRectSize({ 300.0f, 400.0f });
 	textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
 	textRenderer->SetSortOrder(3);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);

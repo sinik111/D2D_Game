@@ -15,11 +15,12 @@ void InfoViewer::Start()
 
     m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(15.0f);
-    m_textRenderer->SetPoint({ -380.0f, -10.0f });
+    m_textRenderer->SetPivot({ 0.0f, 1.0f });
+    m_textRenderer->SetPoint({ -380.0f, -280.0f });
     m_textRenderer->SetRectSize({ 500.0f, 400.0f });
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);
-    m_textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
+    m_textRenderer->SetVerticalAlignment(VerticalAlignment::Bottom);
     m_textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
 }
 
