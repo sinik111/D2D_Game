@@ -2,19 +2,12 @@
 #include "Scene.h"
 
 #include "GameObject.h"
-
-Scene::~Scene()
-{
-	Clear();
-}
-
-void Scene::Enter()
-{
-	
-}
+#include "ResourceManager.h"
 
 void Scene::Exit()
 {
+	ResourceManager::Get().ReleaseResources();
+
 	Clear();
 }
 
@@ -69,15 +62,11 @@ void Scene::Clear()
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
 {
-	std::unique_ptr<GameObject> gameObject = std::make_unique<GameObject>(name);
+	m_pendingCreatedGameObjects.push_back(std::make_unique<GameObject>(name));
 
-	GameObject* gameObjectPtr = gameObject.get();
+	m_validGameObjects.insert(m_pendingCreatedGameObjects.back().get());
 
-	m_pendingCreatedGameObjects.push_back(std::move(gameObject));
-
-	m_validGameObjects.insert(gameObjectPtr);
-
-	return gameObjectPtr;
+	return m_pendingCreatedGameObjects.back().get();
 }
 
 GameObject* Scene::Find(const std::wstring& name) const
@@ -85,8 +74,7 @@ GameObject* Scene::Find(const std::wstring& name) const
 	const auto& find = std::find_if(
 		m_gameObjects.begin(),
 		m_gameObjects.end(),
-		[name](const std::unique_ptr<GameObject>& gameObject)
-		{
+		[name](const std::unique_ptr<GameObject>& gameObject) {
 			return gameObject->GetName() == name;
 		}
 	);

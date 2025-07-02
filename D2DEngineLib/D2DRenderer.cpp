@@ -21,11 +21,6 @@ D2DRenderer::D2DRenderer(HWND hWnd, UINT width, UINT height)
 	
 }
 
-D2DRenderer::~D2DRenderer()
-{
-	
-}
-
 HRESULT D2DRenderer::Initialize()
 {
 	HRESULT hr = S_OK;
@@ -130,11 +125,6 @@ HRESULT D2DRenderer::Initialize()
 		Matrix3x2::Translation(m_width / 2.0f, m_height / 2.0f);
 
 	return S_OK;
-}
-
-void D2DRenderer::Shutdown()
-{
-
 }
 
 UINT D2DRenderer::GetWidth() const

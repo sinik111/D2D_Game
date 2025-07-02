@@ -11,13 +11,11 @@ protected:
 	std::unordered_set<GameObject*> m_validGameObjects;
 
 public:
-	virtual ~Scene();
+	virtual ~Scene() = default;
 
 public:
-	virtual void Load() = 0;
-	virtual void Enter();
-	virtual void Exit();
-	virtual void Unload() = 0;
+	virtual void Enter() = 0;
+	void Exit();
 
 public:
 	void Update();

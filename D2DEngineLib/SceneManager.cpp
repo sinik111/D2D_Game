@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "SceneManager.h"
 
+#include "D2DRenderer.h"
+
 SceneManager& SceneManager::Get()
 {
 	static SceneManager s_instance;
@@ -10,6 +12,11 @@ SceneManager& SceneManager::Get()
 
 void SceneManager::Shutdown()
 {
+	if (m_currentScene != nullptr)
+	{
+		m_currentScene->Exit();
+	}
+
 	m_scenes.clear();
 }
 
@@ -28,6 +35,11 @@ void SceneManager::ChangeScene(const std::wstring& name)
 	m_nextScene = m_scenes[name].get();
 }
 
+void SceneManager::SetD2DRenderer(D2DRenderer* d2dRenderer)
+{
+	m_d2dRenderer = d2dRenderer;
+}
+
 Scene* SceneManager::GetCurrentScene()
 {
 	return m_currentScene;
@@ -36,14 +48,12 @@ Scene* SceneManager::GetCurrentScene()
 void SceneManager::CheckSceneChanged() // 예외처리 추가 필요
 {
 	if (m_nextScene != nullptr)
-	{	
-		m_nextScene->Load();
-
+	{
 		if (m_currentScene != nullptr)
 		{
 			m_currentScene->Exit();
 
-			m_currentScene->Unload();
+			m_d2dRenderer->Trim();
 		}
 		
 		m_currentScene = m_nextScene;

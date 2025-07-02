@@ -20,7 +20,7 @@ struct FrameInfo
 
 struct EventInfo
 {
-	std::wstring functionName;
+	std::wstring name;
 	std::wstring parameter;
 	float time;
 };

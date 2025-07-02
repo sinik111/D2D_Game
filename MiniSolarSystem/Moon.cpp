@@ -14,7 +14,7 @@
 
 Moon::~Moon()
 {
-    m_onRotationChange.Invoke(L"ÆÄ±«µÊ");
+    m_onRotationChange.Invoke(L"´Þ: ÆÄ±«µÊ");
 
     GameObject* go = GameObject::Find(L"MoonHpViewer");
     if (GameObject::IsValid(go))
@@ -61,7 +61,7 @@ void Moon::Update()
 
     std::wstringstream ss;
     ss << std::fixed << std::setprecision(2)
-        << L"´Þ WorldPosition: " << worldX << ',' << worldY
+        << L"´Þ: WorldPosition: " << worldX << ',' << worldY
         << L"\tLocalRotation: "
         << GetTransform()->GetLocalRotation();
 

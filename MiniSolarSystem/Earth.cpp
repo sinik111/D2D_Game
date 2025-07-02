@@ -15,12 +15,15 @@
 
 Earth::~Earth()
 {
-    m_onRotationChange.Invoke(L"ÆÄ±«µÊ");
-
-    GameObject* go = GameObject::Find(L"EarthHpViewer");
-    if (GameObject::IsValid(go))
+    if (Component::IsValid(m_health))
     {
-        go->Destroy();
+        m_onRotationChange.Invoke(L"Áö±¸: ÆÄ±«µÊ");
+
+        GameObject* go = GameObject::Find(L"EarthHpViewer");
+        if (GameObject::IsValid(go))
+        {
+            go->Destroy();
+        }
     }
 }
 
@@ -59,23 +62,40 @@ void Earth::Update()
         {
             m_health->TakeDamage(10);
         }
+        float worldX = GetTransform()->GetWorldPosition().GetX();
+        float worldY = GetTransform()->GetWorldPosition().GetY();
+
+        std::wstringstream ss;
+        ss << std::fixed << std::setprecision(2)
+            << L"Áö±¸: WorldPosition: " << worldX << ',' << worldY
+            << L"\tLocalRotation: "
+            << GetTransform()->GetLocalRotation();
+
+        m_onRotationChange.Invoke(ss.str());
     }
 
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
-    float worldX = GetTransform()->GetWorldPosition().GetX();
-    float worldY = GetTransform()->GetWorldPosition().GetY();
 
-    std::wstringstream ss;
-    ss << std::fixed << std::setprecision(2)
-        << L"Áö±¸ WorldPosition: " << worldX << ',' << worldY
-        << L"\tLocalRotation: "
-        << GetTransform()->GetLocalRotation();
+    if (m_isFired)
+    {
+        GetTransform()->Translate(Vector2::Right * 200.0f * MyTime::DeltaTime());
+        GetTransform()->Rotate(-600.0f * MyTime::DeltaTime());
 
-    m_onRotationChange.Invoke(ss.str());
+        m_destroyTimer += MyTime::DeltaTime();
+        if (m_destroyTimer > 1.0f)
+        {
+            GetGameObject()->Destroy();
+        }
+    }
 }
 
 Delegate<const std::wstring&>& Earth::GetOnRotationChange()
 {
     return m_onRotationChange;
+}
+
+void Earth::Fired()
+{
+    m_isFired = true;
 }

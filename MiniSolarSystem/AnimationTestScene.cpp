@@ -2,23 +2,12 @@
 #include "AnimationTestScene.h"
 
 #include "../D2DEngineLib/BitmapRenderer.h"
-#include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/Camera.h"
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/TextRenderer.h"
 
 #include "Ken.h"
-
-AnimationTestScene::~AnimationTestScene()
-{
-	Unload();
-}
-
-void AnimationTestScene::Load()
-{
-
-}
 
 void AnimationTestScene::Enter()
 {
@@ -41,10 +30,5 @@ void AnimationTestScene::Enter()
 	textRenderer->SetSortOrder(3);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
 	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
-	textRenderer->SetText(L"1: TitleScene\nNoKeyInput: Idle\nQ: FrontDash\nW: BackDash\nE: Roll\nR: SpinningKick");
-}
-
-void AnimationTestScene::Unload()
-{
-	ResourceManager::Get().ReleaseResources();
+	textRenderer->SetText(L"1: TitleScene\n\nQ: BackDash\nW: FrontDash\nE: Roll\nR: SpinningKick - FireEarth");
 }

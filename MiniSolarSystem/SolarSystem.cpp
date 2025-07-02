@@ -2,7 +2,6 @@
 #include "SolarSystem.h"
 
 #include "../D2DEngineLib/TextRenderer.h"
-#include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/Camera.h"
 #include "CameraController.h"
 #include "Sun.h"
@@ -12,16 +11,6 @@
 #include "InfoViewer.h"
 #include "HpViewer.h"
 #include "Health.h"
-
-SolarSystem::~SolarSystem()
-{
-	Unload();
-}
-
-void SolarSystem::Load()
-{
-	
-}
 
 void SolarSystem::Enter()
 {
@@ -72,9 +61,4 @@ void SolarSystem::Enter()
 	moonHpViewerComp->SetTargetName(L"До");
 	moonHpText->SetPoint({ 100.0f, 300.0f });
 	moonHp->GetOnChangeHp().Add(moonHpViewerComp, &HpViewer::ChangeHpText);
-}
-
-void SolarSystem::Unload()
-{
-	ResourceManager::Get().ReleaseResources();
 }

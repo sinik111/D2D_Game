@@ -30,11 +30,9 @@ private:
 
 public:
 	D2DRenderer(HWND hWnd, UINT width, UINT height);
-	~D2DRenderer();
 
 public:
 	HRESULT Initialize();
-	void Shutdown();
 
 	UINT GetWidth() const;
 	UINT GetHeight() const;

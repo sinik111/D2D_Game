@@ -23,16 +23,11 @@ void Animator::SetSpriteSheet(const std::wstring& filePath)
 	m_spriteSheet = ResourceManager::Get().CreateSpriteSheet(filePath);
 }
 
-void Animator::AddAnimationClip(const std::wstring& clipName, const std::wstring& filePath)
+void Animator::AddAnimationClip(const std::wstring& filePath)
 {
-	if (m_animationClips.find(clipName) != m_animationClips.end())
-	{
-		assert(false && L"이미 있는 클립 이름");
+	std::shared_ptr<AnimationClip> clip = ResourceManager::Get().CreateAnimationClip(filePath, m_spriteSheet);
 
-		return;
-	}
-
-	m_animationClips[clipName] = ResourceManager::Get().CreateAnimationClip(filePath, m_spriteSheet);
+	m_animationClips[clip->name] = clip;
 }
 
 void Animator::Play(const std::wstring& clipName)
@@ -53,7 +48,6 @@ void Animator::Play(const std::wstring& clipName)
 	}
 
 	m_currentClip = iter->second.get();
-	m_currentClipName = clipName;
 
 	m_bitmapRenderer->SetBitmap(m_currentClip->filePath);
 
@@ -70,7 +64,7 @@ void Animator::Play(const std::wstring& clipName)
 
 const std::wstring& Animator::GetCurrentClipName() const
 {
-	return m_currentClipName;
+	return m_currentClip->name;
 }
 
 bool Animator::IsFinished() const
@@ -119,16 +113,18 @@ void Animator::Update()
 			SetSpriteData();
 		}
 
-		if (m_eventCounter < m_currentClip->events.size())
+		if (m_currentClip->events.size() > m_eventCounter)
 		{
-			if (m_timer >= m_currentClip->frames[m_eventCounter].time)
+			const auto& event = m_currentClip->events[m_eventCounter];
+			if (m_timer >= event.time)
 			{
-				++m_eventCounter;
-
-				if (m_eventCounter < m_currentClip->events.size())
+				const auto& iter = m_eventDelegates.find(event.name);
+				if (iter != m_eventDelegates.end())
 				{
-					// event call
+					iter->second.Invoke();
 				}
+
+				++m_eventCounter;
 			}
 		}
 	}
@@ -136,6 +132,7 @@ void Animator::Update()
 
 void Animator::SetSpriteData()
 {
+	// 혹시 모를 인덱스 초과를 대비해서 % 연산자로 나눠줌
 	const Sprite& sprite = m_spriteSheet->
 		sprites[m_currentClip->frames[m_frameCounter % m_currentClip->frames.size()].spriteIndex];
 

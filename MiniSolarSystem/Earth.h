@@ -9,9 +9,11 @@ class Earth :
     public Script
 {
 private:
-    float m_speed = 0.0f;
     Health* m_health = nullptr;
     Delegate<const std::wstring&> m_onRotationChange;
+    float m_speed = 0.0f;
+    float m_destroyTimer = 0.0f;
+    bool m_isFired = false;
 
 public:
     ~Earth() override;
@@ -22,4 +24,5 @@ private:
 
 public:
     Delegate<const std::wstring&>& GetOnRotationChange();
+    void Fired();
 };

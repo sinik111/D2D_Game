@@ -43,16 +43,21 @@ public:
 		m_callbackInfos.clear();
 	}
 
-	void Invoke(Args... args) const
+	void Invoke(Args... args)
 	{
-		for (const auto& info : m_callbackInfos)
+		for (auto iter = m_callbackInfos.begin(); iter != m_callbackInfos.end();)
 		{
-			if (info.action && 
-				(GameObject::IsValid((GameObject*)info.instance)||
-					Component::IsValid((Component*)info.instance)))
+			if (!GameObject::IsValid((GameObject*)iter->instance) &&
+				!Component::IsValid((Component*)iter->instance))
 			{
-				info.action(args...);
+				iter = m_callbackInfos.erase(iter);
+
+				continue;
 			}
+
+			iter->action(args...);
+
+			++iter;
 		}
 	}
 };

@@ -29,7 +29,6 @@ protected:
 	int m_width = 800;
 	int m_height = 600;
 
-
 public:
 	virtual ~WinApp() = default;
 

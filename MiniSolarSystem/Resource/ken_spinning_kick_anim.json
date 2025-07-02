@@ -45,5 +45,11 @@
             "time": 0.75
         }
     ],
-    "events": []
+    "events": [
+        {
+            "name": "FireEarth",
+            "parameter": "",
+            "time": 0.4166666567325592
+        }
+    ]
 }

@@ -12,6 +12,7 @@
 #include "MyTime.h"
 #include "MyTimeSystem.h"
 #include "DebugSystem.h"
+#include "Screen.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -70,9 +71,13 @@ void WinApp::Initialize()
 	m_d2dRenderer = std::make_unique<D2DRenderer>(m_hWnd, m_width, m_height);
 	m_d2dRenderer->Initialize();
 
+	Screen::Get().SetWidth(m_width);
+	Screen::Get().SetHeight(m_height);
+
 	ComponentSystem::Get().BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
 	ComponentSystem::Get().TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
 	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
+	SceneManager::Get().SetD2DRenderer(m_d2dRenderer.get());
 }
 
 void WinApp::Shutdown()
@@ -81,8 +86,6 @@ void WinApp::Shutdown()
 
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
-	
-	m_d2dRenderer->Shutdown();
 }
 
 void WinApp::Run()

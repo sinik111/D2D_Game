@@ -2,6 +2,8 @@
 
 #include "Scene.h"
 
+class D2DRenderer;
+
 class SceneManager
 {
 private:
@@ -9,6 +11,8 @@ private:
 
 	Scene* m_currentScene = nullptr;
 	Scene* m_nextScene = nullptr;
+
+	D2DRenderer* m_d2dRenderer = nullptr;
 
 private:
 	SceneManager() = default;
@@ -22,16 +26,13 @@ public:
 	static SceneManager& Get();
 
 public:
+	void Update();
 	void Shutdown();
 
 public:
-	void Update();
-
-public:
-	void ChangeScene(const std::wstring& name);
+	void SetD2DRenderer(D2DRenderer* d2dRenderer);
 	Scene* GetCurrentScene();
-
-public:
+	void ChangeScene(const std::wstring& name);
 	void CheckSceneChanged();
 
 public:

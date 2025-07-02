@@ -111,7 +111,7 @@ static void from_json(const json& j, FrameInfo& frameinfo)
 
 static void from_json(const nlohmann::json& j, EventInfo& eventinfo)
 {
-	j.at("functionName").get_to(eventinfo.functionName);
+	j.at("name").get_to(eventinfo.name);
 	j.at("parameter").get_to(eventinfo.parameter);
 	j.at("time").get_to(eventinfo.time);
 }
@@ -132,8 +132,13 @@ HRESULT ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 
 	HRESULT hr;
 
-	hr = CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER,
-		__uuidof(m_wicImagingFactory), (void**)m_wicImagingFactory.GetAddressOf());
+	hr = CoCreateInstance(
+		CLSID_WICImagingFactory,
+		NULL,
+		CLSCTX_INPROC_SERVER,
+		__uuidof(m_wicImagingFactory),
+		(void**)m_wicImagingFactory.GetAddressOf()
+	);
 
 	if (FAILED(hr))
 	{
@@ -208,6 +213,7 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 		m_wicImagingFactory,
 		m_resourcePath + filePath
 	);
+
 	if (FAILED(hr))
 	{
 		assert(false && "BitmapResource::CreateBitmap ½ÇÆÐ");

@@ -15,7 +15,7 @@ void CameraController::Start()
     playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &CameraController::MakeDirection);
     playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'Q' }, KeyState::Held, this, &CameraController::ZoomIn);
     playerInput->RegisterActionOnCombinedKey({ VK_CONTROL, 'W' }, KeyState::Held, this, &CameraController::ZoomOut);
-    playerInput->RegisterActionOnKey('3', KeyState::Released, this, &CameraController::ChangeScene);
+    playerInput->RegisterActionOnKey('3', KeyState::Pressed, this, &CameraController::ChangeScene);
 
     GetTransform()->SetLocalScale({ 3.0f, 3.0f });
 }

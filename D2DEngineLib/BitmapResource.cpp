@@ -13,8 +13,14 @@ HRESULT BitmapResource::CreateBitmap(const ComPtr<ID2D1DeviceContext7>& d2d1Devi
 	HRESULT hr;
 
 	// 디코더 생성
-	hr = wicImagingFactory->CreateDecoderFromFilename(filePath.c_str(), nullptr,
-		GENERIC_READ, WICDecodeMetadataCacheOnLoad, &decoder);
+	hr = wicImagingFactory->CreateDecoderFromFilename(
+		filePath.c_str(),
+		nullptr,
+		GENERIC_READ,
+		WICDecodeMetadataCacheOnLoad,
+		&decoder
+	);
+
 	if (FAILED(hr))
 	{
 		return hr;
@@ -43,6 +49,7 @@ HRESULT BitmapResource::CreateBitmap(const ComPtr<ID2D1DeviceContext7>& d2d1Devi
 		0.0f,
 		WICBitmapPaletteTypeCustom
 	);
+
 	if (FAILED(hr))
 	{
 		return hr;
@@ -55,8 +62,12 @@ HRESULT BitmapResource::CreateBitmap(const ComPtr<ID2D1DeviceContext7>& d2d1Devi
 	};
 
 	// DeviceContext에서 WIC 비트맵으로부터 D2D1Bitmap1 생성
-	hr = d2d1DeviceContext->CreateBitmapFromWicBitmap(converter.Get(), 
-		&bmpProps, m_d2d1Bitmap.GetAddressOf());
+	hr = d2d1DeviceContext->CreateBitmapFromWicBitmap(
+		converter.Get(), 
+		&bmpProps,
+		m_d2d1Bitmap.GetAddressOf()
+	);
+
 	if (FAILED(hr))
 	{
 		return hr;

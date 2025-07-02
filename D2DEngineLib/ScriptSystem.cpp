@@ -84,7 +84,7 @@ void ScriptSystem::CallUpdate()
 	for (const auto& script : m_scriptsForUpdate)
 	{
 		script->Update();
-	}
+	}       
 
 	if (!m_pendingUnregisterForUpdate.empty())
 	{
