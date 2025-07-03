@@ -27,5 +27,10 @@ void MyTimeSystem::Update()
 
 float MyTimeSystem::DeltaTime()
 {
-    return m_deltaTime;
+    return m_deltaTime * m_timeScale;
+}
+
+void MyTimeSystem::SetTimeScale(float timeScale)
+{
+    m_timeScale = timeScale;
 }

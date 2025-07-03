@@ -2,6 +2,7 @@
 
 #include "../D2DEngineLib/Script.h"
 #include "KenFSM.h"
+#include "FSMContext.h"
 
 class Animator;
 
@@ -9,11 +10,10 @@ class Ken :
 	public Script
 {
 private:
-	std::unique_ptr<KenFSM> m_kenFSM;
 	Animator* m_animator;
+	std::unique_ptr<KenFSM> m_kenFSM;
 
-	std::unordered_map<std::wstring, float> m_floatParams;
-	std::unordered_map<std::wstring, bool> m_triggerParams;
+	FSMContext m_context;
 
 private:
 	void Initialize() override;

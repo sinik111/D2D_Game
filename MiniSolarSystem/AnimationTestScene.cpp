@@ -31,5 +31,5 @@ void AnimationTestScene::Enter()
 	textRenderer->SetSortOrder(3);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
 	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
-	textRenderer->SetText(L"1: TitleScene\n\nQ: BackDash\nW: FrontDash\nE: Roll\nR: SpinningKick - FireEarth");
+	textRenderer->SetText(L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ A ]: Roll\n[ S ]: SpinningKick - FireEarth");
 }

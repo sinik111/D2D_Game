@@ -17,4 +17,5 @@ public:
     static TimePoint GetTimestamp();
     static TimePoint GetAccumulatedTime(const TimePoint& timePoint, int seconds);
     static float GetElapsedSeconds(const TimePoint& timePoint);
+    static void SetTimeScale(float timeScale);
 };

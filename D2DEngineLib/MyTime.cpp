@@ -22,3 +22,8 @@ float MyTime::GetElapsedSeconds(const TimePoint& timePoint)
 {
     return Duration(Clock::now() - timePoint).count();
 }
+
+void MyTime::SetTimeScale(float timeScale)
+{
+    return MyTimeSystem::Get().SetTimeScale(timeScale);
+}

@@ -7,10 +7,10 @@ class KenFSM
 {
 private:
 	std::unordered_map<std::wstring, std::unique_ptr<IState>> m_states;
-	std::pair<std::wstring, IState*> m_currentState;
+	IState* m_currentState;
 
 public:
-	KenFSM();
+	KenFSM(FSMContext& context);
 
 public:
 	void Update(FSMContext& context);

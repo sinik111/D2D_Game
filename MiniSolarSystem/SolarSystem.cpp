@@ -3,6 +3,7 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Camera.h"
+#include "../D2DEngineLib/MyTime.h"
 #include "CameraController.h"
 #include "Sun.h"
 #include "Earth.h"
@@ -61,4 +62,6 @@ void SolarSystem::Enter()
 	moonHpViewerComp->SetTargetName(L"До");
 	moonHpText->SetPoint({ 100.0f, 300.0f });
 	moonHp->GetOnChangeHp().Add(moonHpViewerComp, &HpViewer::ChangeHpText);
+
+	//MyTime::SetTimeScale(2.0f);
 }

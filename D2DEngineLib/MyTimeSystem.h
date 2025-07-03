@@ -13,6 +13,7 @@ private:
     TimePoint m_currentTime;
 
     float m_deltaTime = 0.0f;
+    float m_timeScale = 1.0f;
 
 private:
     MyTimeSystem();
@@ -24,4 +25,5 @@ public:
 public:
     void Update();
     float DeltaTime();
+    void SetTimeScale(float timeScale);
 };

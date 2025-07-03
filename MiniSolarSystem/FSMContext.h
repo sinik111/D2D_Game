@@ -5,15 +5,28 @@
 
 class Transform;
 class Animator;
+class BitmapRenderer;
 
 struct FSMContext
 {
 	Transform* transform;
 	Animator* animator;
-	std::unordered_map<std::wstring, int>* intParams;
-	std::unordered_map<std::wstring, float>* floatParams;
-	std::unordered_map<std::wstring, bool>* boolParams;
-	std::unordered_map<std::wstring, bool>* triggerParams;
+	BitmapRenderer* bitmapRenderer;
+	std::unordered_map<std::wstring, int> intParams;
+	std::unordered_map<std::wstring, float> floatParams;
+	std::unordered_map<std::wstring, bool> boolParams;
+	std::unordered_map<std::wstring, bool> triggerParams;
 	std::wstring nextStateName;
 	bool hasRequest;
+
+	void Reset()
+	{
+		hasRequest = false;
+		nextStateName = L"";
+
+		for (auto& pair : triggerParams)
+		{
+			pair.second = false;
+		}
+	}
 };

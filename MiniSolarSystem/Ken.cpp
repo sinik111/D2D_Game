@@ -13,15 +13,14 @@
 void Ken::Initialize()
 {
 	m_animator = GetGameObject()->GetComponent<Animator>();
-	m_kenFSM = std::make_unique<KenFSM>();
 }
 
 void Ken::Start()
 {
 	PlayerInput* playerInput = GetGameObject()->GetComponent<PlayerInput>();
 	playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &Ken::ArrowInput);
-	playerInput->RegisterActionOnKey('E', KeyState::Pressed, this, &Ken::Roll);
-	playerInput->RegisterActionOnKey('R', KeyState::Pressed, this, &Ken::SpinningKick);
+	playerInput->RegisterActionOnKey('A', KeyState::Pressed, this, &Ken::Roll);
+	playerInput->RegisterActionOnKey('S', KeyState::Pressed, this, &Ken::SpinningKick);
 	playerInput->RegisterActionOnKey('1', KeyState::Pressed, this, &Ken::ChangeScene);
 
 	m_animator = GetGameObject()->GetComponent<Animator>();
@@ -34,42 +33,34 @@ void Ken::Start()
 
 	m_animator->AddActionOnEvent(L"FireEarth", this, &Ken::FireEarth);
 
-	m_animator->Play(L"ken_idle");
+	m_context.animator = m_animator;
+	m_context.transform = GetTransform();
+	m_context.bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
+	m_context.floatParams[L"HorizontalInput"] = 0.0f;
+	m_context.triggerParams[L"Roll"] = false;
+	m_context.triggerParams[L"SpinningKick"] = false;
 
-	m_floatParams[L"HorizontalInput"] = 0.0f;
-	m_triggerParams[L"Roll"] = false;
-	m_triggerParams[L"SpinningKick"] = false;
+	m_kenFSM = std::make_unique<KenFSM>(m_context);
 }
 
 void Ken::Update()
 {
-	FSMContext context{};
-	context.transform = GetTransform();
-	context.animator = m_animator;
-	context.floatParams = &m_floatParams;
-	context.triggerParams = &m_triggerParams;
-
-	m_kenFSM->Update(context);
-
-	for (auto& pair : m_triggerParams)
-	{
-		pair.second = false;
-	}
+	m_kenFSM->Update(m_context);
 }
 
 void Ken::ArrowInput(Vector2 input)
 {
-	m_floatParams[L"HorizontalInput"] = input.GetX();
+	m_context.floatParams[L"HorizontalInput"] = input.GetX();
 }
 
 void Ken::Roll()
 {
-	m_triggerParams[L"Roll"] = true;
+	m_context.triggerParams[L"Roll"] = true;
 }
 
 void Ken::SpinningKick()
 {
-	m_triggerParams[L"SpinningKick"] = true;
+	m_context.triggerParams[L"SpinningKick"] = true;
 }
 
 void Ken::ChangeScene()
