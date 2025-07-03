@@ -8,19 +8,18 @@
 #include "../D2DEngineLib/MyTime.h"
 
 #include "Earth.h"
+#include "FSMContext.h"
 
 void Ken::Initialize()
 {
 	m_animator = GetGameObject()->GetComponent<Animator>();
+	m_kenFSM = std::make_unique<KenFSM>();
 }
 
 void Ken::Start()
 {
 	PlayerInput* playerInput = GetGameObject()->GetComponent<PlayerInput>();
-	playerInput->RegisterActionOnKey('Q', KeyState::Pressed, this, &Ken::BackDash);
-	playerInput->RegisterActionOnKey('Q', KeyState::Released, this, &Ken::Idle);
-	playerInput->RegisterActionOnKey('W', KeyState::Pressed, this, &Ken::FrontDash);
-	playerInput->RegisterActionOnKey('W', KeyState::Released, this, &Ken::Idle);
+	playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &Ken::ArrowInput);
 	playerInput->RegisterActionOnKey('E', KeyState::Pressed, this, &Ken::Roll);
 	playerInput->RegisterActionOnKey('R', KeyState::Pressed, this, &Ken::SpinningKick);
 	playerInput->RegisterActionOnKey('1', KeyState::Pressed, this, &Ken::ChangeScene);
@@ -36,56 +35,41 @@ void Ken::Start()
 	m_animator->AddActionOnEvent(L"FireEarth", this, &Ken::FireEarth);
 
 	m_animator->Play(L"ken_idle");
+
+	m_floatParams[L"HorizontalInput"] = 0.0f;
+	m_triggerParams[L"Roll"] = false;
+	m_triggerParams[L"SpinningKick"] = false;
 }
 
 void Ken::Update()
 {
-	if (m_animator->IsFinished())
+	FSMContext context{};
+	context.transform = GetTransform();
+	context.animator = m_animator;
+	context.floatParams = &m_floatParams;
+	context.triggerParams = &m_triggerParams;
+
+	m_kenFSM->Update(context);
+
+	for (auto& pair : m_triggerParams)
 	{
-		if (m_moveDir == 1)
-		{
-			m_animator->Play(L"ken_front_dash");
-		}
-		else if (m_moveDir == -1)
-		{
-			m_animator->Play(L"ken_back_dash");
-		}
-		else
-		{
-			m_animator->Play(L"ken_idle");
-		}
+		pair.second = false;
 	}
 }
 
-void Ken::Idle()
+void Ken::ArrowInput(Vector2 input)
 {
-	m_animator->Play(L"ken_idle");
-
-	m_moveDir = 0;
-}
-
-void Ken::FrontDash()
-{
-	m_animator->Play(L"ken_front_dash");
-
-	m_moveDir = 1;
-}
-
-void Ken::BackDash()
-{
-	m_animator->Play(L"ken_back_dash");
-
-	m_moveDir = -1;
+	m_floatParams[L"HorizontalInput"] = input.GetX();
 }
 
 void Ken::Roll()
 {
-	m_animator->Play(L"ken_roll");
+	m_triggerParams[L"Roll"] = true;
 }
 
 void Ken::SpinningKick()
 {
-	m_animator->Play(L"ken_spinning_kick");
+	m_triggerParams[L"SpinningKick"] = true;
 }
 
 void Ken::ChangeScene()

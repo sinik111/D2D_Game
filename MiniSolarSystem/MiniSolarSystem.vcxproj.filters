@@ -22,6 +22,15 @@
     <Filter Include="02_Script\AnimationTest">
       <UniqueIdentifier>{ba7d2beb-93a3-4883-9a72-7ad81973a09b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Script\AnimationTest\FSM">
+      <UniqueIdentifier>{4838baf1-b08f-41d9-81c9-da4a3f8ce62f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\AnimationTest\FSM\State">
+      <UniqueIdentifier>{eef5002f-ce69-45f3-8aaa-f36e6c504035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\AnimationTest\FSM\State\Base">
+      <UniqueIdentifier>{d38068cf-cf38-4aa2-83bc-fee7399bf9d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SolarSystem.cpp">
@@ -69,6 +78,27 @@
     <ClCompile Include="Ken.cpp">
       <Filter>02_Script\AnimationTest</Filter>
     </ClCompile>
+    <ClCompile Include="KenFSM.cpp">
+      <Filter>02_Script\AnimationTest\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="IState.cpp">
+      <Filter>02_Script\AnimationTest\FSM\State\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="KenBackDashState.cpp">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClCompile>
+    <ClCompile Include="KenFrontDashState.cpp">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClCompile>
+    <ClCompile Include="KenRollState.cpp">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClCompile>
+    <ClCompile Include="KenSpinningKickState.cpp">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClCompile>
+    <ClCompile Include="KenIdleState.cpp">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -112,6 +142,30 @@
     </ClInclude>
     <ClInclude Include="Ken.h">
       <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="KenFSM.h">
+      <Filter>02_Script\AnimationTest\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="IState.h">
+      <Filter>02_Script\AnimationTest\FSM\State\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="KenBackDashState.h">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClInclude>
+    <ClInclude Include="KenFrontDashState.h">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClInclude>
+    <ClInclude Include="KenRollState.h">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClInclude>
+    <ClInclude Include="KenSpinningKickState.h">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMContext.h">
+      <Filter>02_Script\AnimationTest\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="KenIdleState.h">
+      <Filter>02_Script\AnimationTest\FSM\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

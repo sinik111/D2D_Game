@@ -165,10 +165,7 @@ void PlayerInput::CallArrowAction(float horizontal, float vertical)
     if (m_directionInputType == DirectionInputType::Arrow ||
         m_directionInputType == DirectionInputType::Both)
     {
-        if (horizontal != 0 || vertical != 0)
-        {
-            m_directionDelegateArrow.Invoke(Vector2(horizontal, vertical));
-        }
+        m_directionDelegateArrow.Invoke(Vector2(horizontal, vertical));
     }
 }
 
@@ -177,10 +174,7 @@ void PlayerInput::CallWASDAction(float horizontal, float vertical)
     if (m_directionInputType == DirectionInputType::WASD ||
         m_directionInputType == DirectionInputType::Both)
     {
-        if (horizontal != 0 || vertical != 0)
-        {
-            m_directionDelegateWASD.Invoke(Vector2(horizontal, vertical));
-        }
+        m_directionDelegateWASD.Invoke(Vector2(horizontal, vertical));
     }
 }
 

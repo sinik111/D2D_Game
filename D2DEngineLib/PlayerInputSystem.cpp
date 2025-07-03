@@ -71,86 +71,62 @@ void PlayerInputSystem::ProcessInput() const
 
 void PlayerInputSystem::ProcessArrowInput() const
 {
-    bool isHeld = false;
     float horizontal = 0.0f;
     float vertical = 0.0f;
 
     if (IsKeyHeld(VK_UP))
     {
         vertical += 1.0f;
-
-        isHeld = true;
     }
 
     if (IsKeyHeld(VK_DOWN))
     {
         vertical -= 1.0f;
-
-        isHeld = true;
     }
 
     if (IsKeyHeld(VK_RIGHT))
     {
         horizontal += 1.0f;
-
-        isHeld = true;
     }
 
     if (IsKeyHeld(VK_LEFT))
     {
         horizontal -= 1.0f;
-
-        isHeld = true;
     }
 
-    if (isHeld && (vertical != 0.0f || horizontal != 0.0f))
+    for (const auto& playerInput : m_playerInputs)
     {
-        for (const auto& playerInput : m_playerInputs)
-        {
-            playerInput->CallArrowAction(horizontal, vertical);
-        }
+        playerInput->CallArrowAction(horizontal, vertical);
     }
 }
 
 void PlayerInputSystem::ProcessWASDInput() const
 {
-    bool isHeld = false;
     float horizontal = 0.0f;
     float vertical = 0.0f;
 
     if (IsKeyHeld('W'))
     {
         vertical += 1.0f;
-
-        isHeld = true;
     }
 
     if (IsKeyHeld('S'))
     {
         vertical -= 1.0f;
-
-        isHeld = true;
     }
 
     if (IsKeyHeld('D'))
     {
         horizontal += 1.0f;
-
-        isHeld = true;
     }
 
     if (IsKeyHeld('A'))
     {
         horizontal -= 1.0f;
-
-        isHeld = true;
     }
 
-    if (isHeld && (vertical != 0.0f || horizontal != 0.0f))
+    for (const auto& playerInput : m_playerInputs)
     {
-        for (const auto& playerInput : m_playerInputs)
-        {
-            playerInput->CallWASDAction(horizontal, vertical);
-        }
+        playerInput->CallWASDAction(horizontal, vertical);
     }
 }
