@@ -5,7 +5,7 @@
 
 #include "Vector2.h"
 
-struct Matrix3x2
+struct Matrix3x2 // DirectX::XMMATRIX Wrapper struct
 {
 private: // SIMD 연산을 위한 DirectXMath의 XMMATRIX
 	DirectX::XMMATRIX m_rawMatrix;

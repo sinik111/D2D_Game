@@ -6,7 +6,7 @@
 
 #include "MyMath.h"
 
-struct Vector2
+struct Vector2 // DirectX::XMVECTOR Wrapper struct
 {
 private: // SIMD 연산을 위한 DirectXMath의 XMVECTOR
 	DirectX::XMVECTOR m_rawVector;
@@ -178,7 +178,7 @@ public: // 유틸리티 함수
 	static Vector2 Lerp(const Vector2& v0, const Vector2& v1, float t)
 	{
 		t = MyMath::Clamp(t, 0.0f, 1.0f);
-
+		
 		return Vector2(DirectX::XMVectorLerp(v0.m_rawVector, v1.m_rawVector, t));
 	}
 
