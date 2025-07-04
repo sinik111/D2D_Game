@@ -14,7 +14,7 @@ private:
 
 public:
 	GameObject(const std::wstring& name = L"GameObject");
-	virtual ~GameObject() = default;
+	virtual ~GameObject();
 
 public:
 	Transform* GetTransform() const;

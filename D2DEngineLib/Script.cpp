@@ -42,3 +42,8 @@ void Script::LateUpdate()
 	// LateUpdate 리스트에서 제거함
 	ComponentSystem::Get().Script().UnregisterLateUpdate(this);
 }
+
+void Script::OnDestroy()
+{
+
+}

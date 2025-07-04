@@ -13,20 +13,6 @@
 
 #include "Health.h"
 
-Earth::~Earth()
-{
-    if (Component::IsValid(m_health))
-    {
-        m_onRotationChange.Invoke(L"Áö±¸: ÆÄ±«µÊ");
-
-        GameObject* go = GameObject::Find(L"EarthHpViewer");
-        if (GameObject::IsValid(go))
-        {
-            go->Destroy();
-        }
-    }
-}
-
 void Earth::Start()
 {
     //TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
@@ -86,6 +72,20 @@ void Earth::Update()
         if (m_destroyTimer > 1.0f)
         {
             GetGameObject()->Destroy();
+        }
+    }
+}
+
+void Earth::OnDestroy()
+{
+    if (Component::IsValid(m_health))
+    {
+        m_onRotationChange.Invoke(L"Áö±¸: ÆÄ±«µÊ");
+
+        GameObject* go = GameObject::Find(L"EarthHpViewer");
+        if (GameObject::IsValid(go))
+        {
+            go->Destroy();
         }
     }
 }

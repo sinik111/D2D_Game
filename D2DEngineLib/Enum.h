@@ -2,6 +2,7 @@
 
 enum class SpaceType
 {
+	World,
 	Screen,
-	World
+	MAX
 };

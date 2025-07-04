@@ -51,15 +51,15 @@ void BitmapRenderer::Render(const RenderContext& context) const
 
 	switch (m_spaceType)
 	{
-	case SpaceType::Screen: // 수정 필요. 방향 이상함
+	case SpaceType::Screen:
 	{
 		if (m_doFlipX)
 		{
-			finalMatrix = Matrix3x2::Scale(-1.0f, -1.0f) * worldMatrix * unityMatrix;
+			finalMatrix = renderMatrix * Matrix3x2::Scale(-1.0f, 1.0f) * worldMatrix * unityMatrix;
 		}
 		else
 		{
-			finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) * worldMatrix * unityMatrix;
+			finalMatrix = renderMatrix * worldMatrix * unityMatrix;
 		}
 	}
 		break;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Matrix3x2.h"
+#include "Enum.h"
 
 class IRenderer;
 
@@ -21,7 +22,7 @@ private:
 
 	// Brush
 	Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> m_d2dSolidColorBrush;
-	std::vector<IRenderer*> m_renderQueue;
+	std::vector<IRenderer*> m_renderQueue[static_cast<int>(SpaceType::MAX)];
 
 	UINT m_width;
 	UINT m_height;

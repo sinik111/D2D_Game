@@ -18,6 +18,8 @@ private:
 	virtual void Start();
 	virtual void Update();
 	virtual void LateUpdate();
+	virtual void OnDestroy();
 
 	friend class ScriptSystem;
+	friend GameObject::~GameObject();
 };

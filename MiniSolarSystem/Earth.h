@@ -15,12 +15,10 @@ private:
     float m_destroyTimer = 0.0f;
     bool m_isFired = false;
 
-public:
-    ~Earth() override;
-
 private:
     void Start() override;
     void Update() override;
+    void OnDestroy() override;
 
 public:
     Delegate<const std::wstring&>& GetOnRotationChange();

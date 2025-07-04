@@ -184,20 +184,28 @@ ComPtr<IDWriteTextFormat> D2DRenderer::CreateTextFormat(float fontSize)
 
 void D2DRenderer::RegisterRendererToQueue(IRenderer* renderer)
 {
-	m_renderQueue.push_back(renderer);
+	m_renderQueue[static_cast<int>(renderer->GetSpaceType())].push_back(renderer);
 }
 
 void D2DRenderer::PrepareRenderQueue()
 {
 	std::sort(
-		m_renderQueue.begin(),
-		m_renderQueue.end(),
+		m_renderQueue[static_cast<int>(SpaceType::World)].begin(),
+		m_renderQueue[static_cast<int>(SpaceType::World)].end(),
 		[](const IRenderer* a, const IRenderer* b) {
-			if (a->GetSpaceType() != b->GetSpaceType())
+			if (a->GetSortOrder() != b->GetSortOrder())
 			{
-				return a->GetSpaceType() > b->GetSpaceType();
+				return a->GetSortOrder() < b->GetSortOrder();
 			}
 
+			return a->GetY() > b->GetY();
+		}
+	);
+
+	std::sort(
+		m_renderQueue[static_cast<int>(SpaceType::Screen)].begin(),
+		m_renderQueue[static_cast<int>(SpaceType::Screen)].end(),
+		[](const IRenderer* a, const IRenderer* b) {
 			if (a->GetSortOrder() != b->GetSortOrder())
 			{
 				return a->GetSortOrder() < b->GetSortOrder();
@@ -219,7 +227,12 @@ void D2DRenderer::ExecuteRenderQueue()
 		m_d2dSolidColorBrush
 	};
 
-	for (const auto& renderer : m_renderQueue)
+	for (const auto& renderer : m_renderQueue[static_cast<int>(SpaceType::World)])
+	{
+		renderer->Render(context);
+	}
+
+	for (const auto& renderer : m_renderQueue[static_cast<int>(SpaceType::Screen)])
 	{
 		renderer->Render(context);
 	}
@@ -234,5 +247,6 @@ void D2DRenderer::Trim()
 
 void D2DRenderer::ClearQueue()
 {
-	m_renderQueue.clear();
+	m_renderQueue[static_cast<int>(SpaceType::Screen)].clear();
+	m_renderQueue[static_cast<int>(SpaceType::World)].clear();
 }

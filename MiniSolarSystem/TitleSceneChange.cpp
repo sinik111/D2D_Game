@@ -15,6 +15,8 @@ void TitleSceneChange::Start()
 
     BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>(L"MainTitle.png");
     bitmapRenderer->SetFlipX(true);
+    bitmapRenderer->SetSpaceType(SpaceType::Screen);
+    
 
     TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
     textRenderer->SetText(L"Scene을 변경하려면 '2'를 누르세요");
@@ -22,6 +24,8 @@ void TitleSceneChange::Start()
     textRenderer->SetFontSize(20.0f);
     textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
     textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+    textRenderer->SetSpaceType(SpaceType::Screen);
+    textRenderer->SetSortOrder(1);
 }
 
 void TitleSceneChange::ChangeScene()

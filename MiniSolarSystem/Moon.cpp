@@ -12,17 +12,6 @@
 
 #include "Health.h"
 
-Moon::~Moon()
-{
-    m_onRotationChange.Invoke(L"´Þ: ÆÄ±«µÊ");
-
-    GameObject* go = GameObject::Find(L"MoonHpViewer");
-    if (GameObject::IsValid(go))
-    {
-        go->Destroy();
-    }
-}
-
 void Moon::Start()
 {
     //TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
@@ -66,6 +55,17 @@ void Moon::Update()
         << GetTransform()->GetLocalRotation();
 
     m_onRotationChange.Invoke(ss.str());
+}
+
+void Moon::OnDestroy()
+{
+    m_onRotationChange.Invoke(L"´Þ: ÆÄ±«µÊ");
+
+    GameObject* go = GameObject::Find(L"MoonHpViewer");
+    if (GameObject::IsValid(go))
+    {
+        go->Destroy();
+    }
 }
 
 Delegate<const std::wstring&>& Moon::GetOnRotationChange()
