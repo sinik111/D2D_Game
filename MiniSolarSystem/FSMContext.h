@@ -6,9 +6,11 @@
 class Transform;
 class Animator;
 class BitmapRenderer;
+class GameObject;
 
 struct FSMContext
 {
+	GameObject* gameObject;
 	Transform* transform;
 	Animator* animator;
 	BitmapRenderer* bitmapRenderer;

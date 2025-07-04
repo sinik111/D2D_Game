@@ -42,18 +42,3 @@ AnimatorSystem& ComponentSystem::Animator()
 {
 	return *m_animatorSystem.get();
 }
-
-void ComponentSystem::RegisterValidCheck(Component* component)
-{
-	m_validComponents.insert(component);
-}
-
-void ComponentSystem::UnregisterValidCheck(Component* component)
-{
-	m_validComponents.erase(component);
-}
-
-bool ComponentSystem::IsValid(Component* component) const
-{
-	return m_validComponents.find(component) != m_validComponents.end();
-}

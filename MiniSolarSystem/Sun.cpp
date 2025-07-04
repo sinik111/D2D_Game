@@ -33,6 +33,7 @@ void Sun::Start()
 
     playerInput->RegisterActionOnKey('A', KeyState::Held, this, &Sun::CreateEarth);
     playerInput->RegisterActionOnKey('S', KeyState::Held, this, &Sun::DeleteEarth);
+    playerInput->RegisterActionOnKey('D', KeyState::Pressed, this, &Sun::DestroySelf);
 
     m_speed = 45.0f;
 }
@@ -40,6 +41,15 @@ void Sun::Start()
 void Sun::Update()
 {
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
+}
+
+void Sun::OnDestroy()
+{
+    PlayerInput* playerInput = GetGameObject()->GetComponent<PlayerInput>();
+
+    playerInput->UnregisterActionOnKey('A', this);
+    playerInput->UnregisterActionOnKey('S', this);
+    playerInput->UnregisterActionOnKey('D', this);
 }
 
 void Sun::CreateEarth()
@@ -61,11 +71,16 @@ void Sun::DeleteEarth()
     {
         if (!m_earths.empty())
         {
-            m_earths.front()->Destroy();
+            Destroy(m_earths.front());
 
             m_earths.pop_front();
         }
     }
+}
+
+void Sun::DestroySelf()
+{
+    Destroy(this);
 }
 
 size_t Sun::GetEarthCount() const

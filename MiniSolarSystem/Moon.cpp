@@ -62,9 +62,9 @@ void Moon::OnDestroy()
     m_onRotationChange.Invoke(L"´Þ: ÆÄ±«µÊ");
 
     GameObject* go = GameObject::Find(L"MoonHpViewer");
-    if (GameObject::IsValid(go))
+    if (IsValid(go))
     {
-        go->Destroy();
+        Destroy(go);
     }
 }
 

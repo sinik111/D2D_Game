@@ -31,12 +31,15 @@ void InfoViewer::LateUpdate()
 
     float sunRotation = 0.0f;
     size_t earthCount = 0;
-    if (GameObject::IsValid(m_sun))
+    if (IsValid(m_sun))
     {
         sunRotation = m_sun->GetTransform()->GetLocalRotation();
 
         Sun* sun = m_sun->GetComponent<Sun>();
-        earthCount = sun->GetEarthCount();
+        if (IsValid(sun))
+        {
+            earthCount = sun->GetEarthCount();
+        }
     }
 
     std::wostringstream oss;
@@ -49,6 +52,7 @@ void InfoViewer::LateUpdate()
         << L"\nScene을 변경하려면 '3'을 누르세요"
         << L"\n지구/달에 피해 10 주기 [ T / Y ]"
         << L"\n지구 생성/삭제하기 [ A / S ] 지구 개수: " << earthCount
+        << L"\n태양 Component 삭제하기 [ D ] - 회전 멈춤"
         << L"\n카메라 Position [ ← ↑ ↓ → ]: " << cameraPosition.GetX() << L", " << cameraPosition.GetY()
         << L"\n카메라 Zoom [ CTRL + Q / CTRL + W ]: " << cameraZoom
         << L"\n태양 Rotation: " << sunRotation

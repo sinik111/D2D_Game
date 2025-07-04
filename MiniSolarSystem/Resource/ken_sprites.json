@@ -3316,51 +3316,6 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_hurt_0",
-            "x": 325.0,
-            "y": 822.0,
-            "width": 64.0,
-            "height": 93.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_hurt_1",
-            "x": 400.0,
-            "y": 821.0,
-            "width": 70.0,
-            "height": 90.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_hurt_2",
-            "x": 484.0,
-            "y": 821.0,
-            "width": 75.0,
-            "height": 90.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_hurt_3",
-            "x": 575.0,
-            "y": 821.0,
-            "width": 85.0,
-            "height": 95.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_hurt_4",
-            "x": 668.0,
-            "y": 822.0,
-            "width": 69.0,
-            "height": 92.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
             "name": "ken_415",
             "x": 741.0,
             "y": 821.0,
@@ -3424,33 +3379,6 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_dead_0",
-            "x": 1.0,
-            "y": 616.0,
-            "width": 84.0,
-            "height": 70.0,
-            "pivotX": 0.5000004768371582,
-            "pivotY": -0.18687570095062257
-        },
-        {
-            "name": "ken_dead_1",
-            "x": 84.0,
-            "y": 683.0,
-            "width": 104.0,
-            "height": 47.0,
-            "pivotX": 0.5000004172325134,
-            "pivotY": -0.7735387682914734
-        },
-        {
-            "name": "ken_dead_2",
-            "x": 187.0,
-            "y": 643.0,
-            "width": 80.0,
-            "height": 82.0,
-            "pivotX": 0.5061334371566773,
-            "pivotY": -0.11627197265625
-        },
-        {
             "name": "ken_425",
             "x": 265.0,
             "y": 647.0,
@@ -3460,31 +3388,22 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_dead_3",
-            "x": 340.0,
-            "y": 663.0,
-            "width": 126.0,
-            "height": 50.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_427",
+            "name": "ken_revive_2",
             "x": 1020.0,
             "y": 589.0,
             "width": 49.0,
             "height": 117.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_428",
+            "name": "ken_revive_5",
             "x": 1208.0,
             "y": 618.0,
             "width": 56.0,
             "height": 79.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": -0.23999999463558198
         },
         {
             "name": "ken_429",
@@ -3496,58 +3415,31 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_dead_4",
-            "x": 465.0,
-            "y": 588.0,
-            "width": 121.0,
-            "height": 46.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_dead_5",
-            "x": 585.0,
-            "y": 592.0,
-            "width": 125.0,
-            "height": 43.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_dead_6",
-            "x": 709.0,
-            "y": 589.0,
-            "width": 130.0,
-            "height": 33.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_433",
+            "name": "ken_revive_0",
             "x": 838.0,
             "y": 589.0,
             "width": 96.0,
             "height": 36.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_434",
+            "name": "ken_revive_1",
             "x": 933.0,
             "y": 590.0,
             "width": 59.0,
             "height": 73.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_435",
+            "name": "ken_revive_4",
             "x": 1108.0,
             "y": 599.0,
             "width": 82.0,
             "height": 71.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": -0.09000000357627869
         },
         {
             "name": "ken_436",
@@ -3946,6 +3838,69 @@
             "pivotY": 0.0
         },
         {
+            "name": "ken_dead_0",
+            "x": 1.0,
+            "y": 616.0,
+            "width": 84.0,
+            "height": 70.0,
+            "pivotX": 0.5000004768371582,
+            "pivotY": -0.18687570095062257
+        },
+        {
+            "name": "ken_dead_1",
+            "x": 84.0,
+            "y": 683.0,
+            "width": 104.0,
+            "height": 47.0,
+            "pivotX": 0.5000004172325134,
+            "pivotY": -0.7735387682914734
+        },
+        {
+            "name": "ken_dead_2",
+            "x": 187.0,
+            "y": 643.0,
+            "width": 80.0,
+            "height": 82.0,
+            "pivotX": 0.5061334371566773,
+            "pivotY": -0.11627197265625
+        },
+        {
+            "name": "ken_dead_3",
+            "x": 340.0,
+            "y": 663.0,
+            "width": 126.0,
+            "height": 50.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_dead_4",
+            "x": 465.0,
+            "y": 588.0,
+            "width": 121.0,
+            "height": 46.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_dead_5",
+            "x": 585.0,
+            "y": 592.0,
+            "width": 125.0,
+            "height": 43.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_dead_6",
+            "x": 709.0,
+            "y": 589.0,
+            "width": 130.0,
+            "height": 33.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
             "name": "ken_front_dash_0",
             "x": 8.0,
             "y": 3233.0,
@@ -3996,6 +3951,51 @@
             "y": 3233.0,
             "width": 52.0,
             "height": 91.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_hurt_0",
+            "x": 325.0,
+            "y": 822.0,
+            "width": 64.0,
+            "height": 93.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_hurt_1",
+            "x": 400.0,
+            "y": 821.0,
+            "width": 70.0,
+            "height": 90.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_hurt_2",
+            "x": 484.0,
+            "y": 821.0,
+            "width": 75.0,
+            "height": 90.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_hurt_3",
+            "x": 575.0,
+            "y": 821.0,
+            "width": 85.0,
+            "height": 95.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_hurt_4",
+            "x": 668.0,
+            "y": 822.0,
+            "width": 69.0,
+            "height": 92.0,
             "pivotX": 0.5,
             "pivotY": 0.0
         },

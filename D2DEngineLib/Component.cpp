@@ -2,17 +2,6 @@
 #include "Component.h"
 
 #include "GameObject.h"
-#include "ComponentSystem.h"
-
-Component::Component()
-{
-	ComponentSystem::Get().RegisterValidCheck(this);
-}
-
-Component::~Component()
-{
-	ComponentSystem::Get().UnregisterValidCheck(this);
-}
 
 GameObject* Component::GetGameObject() const
 {
@@ -24,14 +13,16 @@ Transform* Component::GetTransform() const
 	return m_owner->GetTransform();
 }
 
-bool Component::IsValid(Component* component)
+void Component::Destroy(Object* object)
 {
-	if (component == nullptr)
-	{
-		return false;
-	}
+	object->Destroy();
+}
 
-	return ComponentSystem::Get().IsValid(component);
+void Component::Destroy()
+{
+	assert(dynamic_cast<Transform*>(this) == nullptr && L"Transform 컴포넌트는 삭제할 수 없습니다");
+
+	m_isDestroyed = true;
 }
 
 void Component::SetOwner(GameObject* gameObject)

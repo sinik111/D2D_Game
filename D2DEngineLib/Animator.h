@@ -19,6 +19,7 @@ private:
 	std::unordered_map<std::wstring, Delegate<>> m_eventDelegates;
 
 	float m_timer = 0.0f;
+	float m_playSpeed = 1.0f;
 	size_t m_frameCounter = 0;
 	size_t m_eventCounter = 0;
 	bool m_isFinished = true;
@@ -40,6 +41,7 @@ public:
 	void Play(const std::wstring& clipName);
 	const std::wstring& GetCurrentClipName() const;
 	bool IsFinished() const;
+	void SetPlaySpeed(float playSpeed); // πË¿≤
 
 private:
 	void Update();

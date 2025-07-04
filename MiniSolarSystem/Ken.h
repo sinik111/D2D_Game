@@ -29,4 +29,5 @@ private:
 	void ChangeScene();
 	void FireEarth();
 	void TakeDamage();
+	void Revive();
 };

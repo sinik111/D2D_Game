@@ -21,5 +21,5 @@ private:
 	virtual void OnDestroy();
 
 	friend class ScriptSystem;
-	friend GameObject::~GameObject();
+	friend void GameObject::CallOnDestroy(Script* script);
 };

@@ -72,11 +72,16 @@ bool Animator::IsFinished() const
 	return m_isFinished;
 }
 
+void Animator::SetPlaySpeed(float playSpeed)
+{
+	m_playSpeed = playSpeed;
+}
+
 void Animator::Update()
 {
 	if (!m_isFinished)
 	{
-		m_timer += MyTimeSystem::Get().DeltaTime();
+		m_timer += MyTimeSystem::Get().DeltaTime() * m_playSpeed;
 
 		if (m_timer >= m_currentClip->duration)
 		{

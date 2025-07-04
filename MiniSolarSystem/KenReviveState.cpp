@@ -1,5 +1,5 @@
 #include "../D2DEngineLib/framework.h"
-#include "KenRollState.h"
+#include "KenReviveState.h"
 
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/MyTime.h"
@@ -7,12 +7,13 @@
 
 #include "FSMContext.h"
 
-void KenRollState::Enter(FSMContext& context)
+void KenReviveState::Enter(FSMContext& context)
 {
-	context.animator->Play(L"ken_roll");
+	context.animator->Play(L"ken_revive");
+	context.currentStateName = L"Revive";
 }
 
-void KenRollState::Update(FSMContext& context)
+void KenReviveState::Update(FSMContext& context)
 {
 	float horizontalInput = context.floatParams[L"HorizontalInput"];
 
@@ -35,10 +36,8 @@ void KenRollState::Update(FSMContext& context)
 
 		return;
 	}
-
-	context.transform->Translate(Vector2(horizontalInput, 0.0f) * m_speed * MyTime::DeltaTime());
 }
 
-void KenRollState::Exit(FSMContext& context)
+void KenReviveState::Exit(FSMContext& context)
 {
 }

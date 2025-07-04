@@ -1,16 +1,18 @@
 #pragma once
 
+#include "Object.h"
 #include "Transform.h"
 #include "Component.h"
 
-class GameObject
+class Script;
+
+class GameObject :
+    public Object
 {
 private:
 	std::wstring m_name;
 	std::unique_ptr<Transform> m_transform;
 	std::vector<std::unique_ptr<Component>> m_components;
-
-    bool m_isDestroyed = false;
 
 public:
 	GameObject(const std::wstring& name = L"GameObject");
@@ -19,8 +21,11 @@ public:
 public:
 	Transform* GetTransform() const;
     const std::wstring& GetName() const;
-    void Destroy();
-    bool IsDestroyed() const;
+    void Update();
+    void CallOnDestroy(Script* script);
+
+private:
+    void Destroy() override;
 
 public:
     template<typename T, typename... Args>
@@ -56,23 +61,6 @@ public:
         return nullptr;
     }
 
-    template<typename T>
-    bool RemoveComponent(T* target)
-    {
-        for (auto iter = m_components.begin(); iter != m_components.end(); ++iter)
-        {
-            if (iter->get() == target)
-            {
-                m_components.erase(iter);
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
 public:
     static GameObject* Find(const std::wstring name);
-    static bool IsValid(GameObject* gameObject);
 };

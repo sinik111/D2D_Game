@@ -147,6 +147,7 @@
     <ClCompile Include="KenFSM.cpp" />
     <ClCompile Include="KenHurtState.cpp" />
     <ClCompile Include="KenIdleState.cpp" />
+    <ClCompile Include="KenReviveState.cpp" />
     <ClCompile Include="KenRollState.cpp" />
     <ClCompile Include="KenSpinningKickState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="KenFSM.h" />
     <ClInclude Include="KenHurtState.h" />
     <ClInclude Include="KenIdleState.h" />
+    <ClInclude Include="KenReviveState.h" />
     <ClInclude Include="KenRollState.h" />
     <ClInclude Include="KenSpinningKickState.h" />
     <ClInclude Include="MainTitle.h" />

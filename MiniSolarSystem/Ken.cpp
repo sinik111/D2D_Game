@@ -24,6 +24,7 @@ void Ken::Start()
 	playerInput->RegisterActionOnKey('Q', KeyState::Pressed, this, &Ken::Roll);
 	playerInput->RegisterActionOnKey('W', KeyState::Pressed, this, &Ken::SpinningKick);
 	playerInput->RegisterActionOnKey('E', KeyState::Pressed, this, &Ken::TakeDamage);
+	playerInput->RegisterActionOnKey('R', KeyState::Pressed, this, &Ken::Revive);
 
 	playerInput->RegisterActionOnKey('1', KeyState::Pressed, this, &Ken::ChangeScene);
 
@@ -35,9 +36,11 @@ void Ken::Start()
 	m_animator->AddAnimationClip(L"ken_spinning_kick_anim.json");
 	m_animator->AddAnimationClip(L"ken_hurt_anim.json");
 	m_animator->AddAnimationClip(L"ken_dead_anim.json");
+	m_animator->AddAnimationClip(L"ken_revive_anim.json");
 
 	m_animator->AddActionOnEvent(L"FireEarth", this, &Ken::FireEarth);
 
+	m_context.gameObject = GetGameObject();
 	m_context.animator = m_animator;
 	m_context.transform = GetTransform();
 	m_context.bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
@@ -46,6 +49,7 @@ void Ken::Start()
 	m_context.triggerParams[L"SpinningKick"] = false;
 	m_context.triggerParams[L"Hurt"] = false;
 	m_context.boolParams[L"IsDead"] = false;
+	m_context.triggerParams[L"Revive"] = false;
 
 	m_kenFSM = std::make_unique<KenFSM>(m_context);
 
@@ -97,4 +101,10 @@ void Ken::TakeDamage()
 	{
 		m_context.triggerParams[L"Hurt"] = true;
 	}
+}
+
+void Ken::Revive()
+{
+	m_context.triggerParams[L"Revive"] = true;
+	m_context.boolParams[L"IsDead"] = false;
 }

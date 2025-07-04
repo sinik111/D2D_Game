@@ -3,6 +3,7 @@
 
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/MyTime.h"
+#include "../D2DEngineLib/Transform.h"
 
 #include "FSMContext.h"
 

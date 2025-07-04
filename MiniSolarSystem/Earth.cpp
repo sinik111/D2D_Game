@@ -32,7 +32,7 @@ void Earth::Start()
     
     m_health = GetGameObject()->GetComponent<Health>();
 
-    if (Component::IsValid(m_health))
+    if (IsValid(m_health))
     {
         m_health->SetHp(100, 100);
     }
@@ -42,7 +42,7 @@ void Earth::Start()
 
 void Earth::Update()
 {
-    if (Component::IsValid(m_health))
+    if (IsValid(m_health))
     {
         if (Input::IsKeyPressed('T'))
         {
@@ -71,21 +71,21 @@ void Earth::Update()
         m_destroyTimer += MyTime::DeltaTime();
         if (m_destroyTimer > 1.0f)
         {
-            GetGameObject()->Destroy();
+            Destroy(GetGameObject());
         }
     }
 }
 
 void Earth::OnDestroy()
 {
-    if (Component::IsValid(m_health))
+    if (IsValid(m_health))
     {
         m_onRotationChange.Invoke(L"Áö±¸: ÆÄ±«µÊ");
 
         GameObject* go = GameObject::Find(L"EarthHpViewer");
-        if (GameObject::IsValid(go))
+        if (IsValid(go))
         {
-            go->Destroy();
+            Destroy(go);
         }
     }
 }

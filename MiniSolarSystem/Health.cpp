@@ -34,7 +34,7 @@ void Health::TakeDamage(int value, bool destroy)
 
 	if (destroy && m_hp == 0)
 	{
-		GetGameObject()->Destroy();
+		Destroy(GetGameObject());
 	}
 }
 

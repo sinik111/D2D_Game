@@ -12,9 +12,11 @@ private:
 private:
 	void Start() override;
 	void Update() override;
+	void OnDestroy() override;
 
 	void CreateEarth();
 	void DeleteEarth();
+	void DestroySelf();
 
 public:
 	size_t GetEarthCount() const;

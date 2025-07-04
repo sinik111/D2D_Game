@@ -17,7 +17,7 @@ GameObject::~GameObject()
 	{
 		if (Script* script = dynamic_cast<Script*>(comp.get()))
 		{
-			script->OnDestroy();
+			CallOnDestroy(script);
 		}
 	}
 }
@@ -32,6 +32,26 @@ const std::wstring& GameObject::GetName() const
 	return m_name;
 }
 
+void GameObject::Update()
+{
+	for (auto iter = m_components.begin(); iter != m_components.end();)
+	{
+		if ((*iter)->m_isDestroyed)
+		{
+			if (Script* script = dynamic_cast<Script*>((*iter).get()))
+			{
+				CallOnDestroy(script);
+			}
+
+			iter = m_components.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+}
+
 void GameObject::Destroy()
 {
 	m_isDestroyed = true;
@@ -42,22 +62,12 @@ void GameObject::Destroy()
 	}
 }
 
-bool GameObject::IsDestroyed() const
+void GameObject::CallOnDestroy(Script* script)
 {
-	return m_isDestroyed;
+	script->OnDestroy();
 }
 
 GameObject* GameObject::Find(const std::wstring name)
 {
 	return SceneManager::Get().Find(name);
-}
-
-bool GameObject::IsValid(GameObject* gameObject)
-{
-	if (gameObject == nullptr)
-	{
-		return false;
-	}
-
-	return SceneManager::Get().IsValid(gameObject);
 }

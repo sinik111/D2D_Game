@@ -17,11 +17,23 @@ public:
 	}
 
 	template<typename T>
-	Action(T* instance, void (T::*func)(Args...))
+	Action(T* instance, void (T::*func)(Args...), bool safeAction = true)
 	{
-		m_func = [instance, func](Args... args) {
+		if (safeAction)
+		{
+			m_func = [instance, func](Args... args) {
+				if (Object::IsValid(instance))
+				{
+					(instance->*func)(args...);
+				}
+			};
+		}
+		else
+		{
+			m_func = [instance, func](Args... args) {
 				(instance->*func)(args...);
 			};
+		}
 	}
 
 	void operator()(Args... args) const

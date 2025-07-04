@@ -1,22 +1,26 @@
 #pragma once
 
+#include "Object.h"
+
 class GameObject;
 class Transform;
 
-class Component
+class Component :
+	public Object
 {
 private:
 	GameObject* m_owner = nullptr;
 
 public:
-	Component();
-	virtual ~Component();
+	virtual ~Component() = default;
 
 public:
 	GameObject* GetGameObject() const;
 	Transform* GetTransform() const;
+	void Destroy(Object* object) override;
 
-	static bool IsValid(Component* component);
+private:
+	void Destroy() override;
 
 private:
 	virtual void SetOwner(GameObject* gameObject);

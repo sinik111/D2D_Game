@@ -1,8 +1,7 @@
 #pragma once
 
+#include "Object.h"
 #include "Action.h"
-#include "GameObject.h"
-#include "Component.h"
 
 template<typename... Args>
 class Delegate
@@ -10,7 +9,7 @@ class Delegate
 private:
 	struct CallbackInfo
 	{
-		void* instance;
+		Object* instance;
 		Action<Args...> action;
 	};
 
@@ -21,7 +20,7 @@ public:
 	template<typename T>
 	void Add(T* instance, void (T::*func)(Args...))
 	{
-		m_callbackInfos.push_back({ instance, Action<Args...>(instance, func) });
+		m_callbackInfos.push_back({ instance, Action<Args...>(instance, func, false) });
 	}
 
 	void Remove(void* instance)
@@ -47,8 +46,7 @@ public:
 	{
 		for (auto iter = m_callbackInfos.begin(); iter != m_callbackInfos.end();)
 		{
-			if (!GameObject::IsValid((GameObject*)iter->instance) &&
-				!Component::IsValid((Component*)iter->instance))
+			if (!Object::IsValid(iter->instance))
 			{
 				iter = m_callbackInfos.erase(iter);
 

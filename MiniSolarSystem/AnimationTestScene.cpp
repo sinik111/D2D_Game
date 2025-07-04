@@ -1,6 +1,8 @@
 #include "../D2DEngineLib/framework.h"
 #include "AnimationTestScene.h"
 
+#include <sstream>
+
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/Camera.h"
 #include "../D2DEngineLib/Animator.h"
@@ -37,7 +39,12 @@ void AnimationTestScene::Enter()
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
 	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
 	
-	textRenderer->SetText(L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Roll\n[ W ]: SpinningKick - FireEarth\n[ E ]: Ken takes damage 10");
+	std::wostringstream oss;
+	oss << L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Jump\n"
+		<< L"[ W ]: SpinningKick - FireEarth\n[ E ]: Ken takes damage 10\n"
+		<< L"[ R ]: Ken revive";
+
+	textRenderer->SetText(oss.str());
 
 
 

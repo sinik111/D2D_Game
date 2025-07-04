@@ -19,8 +19,6 @@ private:
 	std::unique_ptr<PlayerInputSystem> m_playerInputSystem;
 	std::unique_ptr<AnimatorSystem> m_animatorSystem;
 
-	std::unordered_set<Component*> m_validComponents;
-
 private:
 	ComponentSystem();
 	ComponentSystem(const ComponentSystem&) = delete;
@@ -38,9 +36,4 @@ public:
 	TextRendererSystem& TextRenderer();
 	PlayerInputSystem& PlayerInput();
 	AnimatorSystem& Animator();
-
-public:
-	void RegisterValidCheck(Component* component);
-	void UnregisterValidCheck(Component* component);
-	bool IsValid(Component* component) const;
 };
