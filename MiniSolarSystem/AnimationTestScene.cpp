@@ -6,8 +6,11 @@
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/TextRenderer.h"
+#include "../D2DEngineLib/MyTime.h"
 
 #include "Ken.h"
+#include "HpViewer.h"
+#include "Health.h"
 
 void AnimationTestScene::Enter()
 {
@@ -19,6 +22,8 @@ void AnimationTestScene::Enter()
 	go->AddComponent<Animator>();
 	go->AddComponent<PlayerInput>();
 	go->AddComponent<Ken>();
+	Health* health = go->AddComponent<Health>();
+	
 
 	go = CreateGameObject(L"KenKeyInfo");
 	TextRenderer* textRenderer = go->AddComponent<TextRenderer>();
@@ -31,5 +36,25 @@ void AnimationTestScene::Enter()
 	textRenderer->SetSortOrder(3);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
 	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
-	textRenderer->SetText(L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ A ]: Roll\n[ S ]: SpinningKick - FireEarth");
+	
+	textRenderer->SetText(L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Roll\n[ W ]: SpinningKick - FireEarth\n[ E ]: Ken takes damage 10");
+
+
+
+	go = CreateGameObject(L"KenHpViewer");
+
+	HpViewer* hpViewer = go->AddComponent<HpViewer>();
+	hpViewer->SetTargetName(L"Ken");
+
+	textRenderer = go->AddComponent<TextRenderer>();
+	textRenderer->SetPoint({ 0.0f, 300.0f });
+
+	health->GetOnChangeHp().Add(hpViewer, &HpViewer::ChangeHpText);
+}
+
+void AnimationTestScene::Exit()
+{
+	Scene::Exit();
+
+	MyTime::SetTimeScale(1.0f);
 }

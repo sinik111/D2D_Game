@@ -16,7 +16,7 @@ public:
 	int GetMaxHp() const;
 	void SetHp(int hp, int maxHp);
 
-	void TakeDamage(int value);
+	void TakeDamage(int value, bool destroy = true);
 
 	Delegate<int, int, int>& GetOnChangeHp();
 };

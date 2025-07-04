@@ -5,12 +5,14 @@
 #include "FSMContext.h"
 
 class Animator;
+class Health;
 
 class Ken :
 	public Script
 {
 private:
 	Animator* m_animator;
+	Health* m_health;
 	std::unique_ptr<KenFSM> m_kenFSM;
 
 	FSMContext m_context;
@@ -26,4 +28,5 @@ private:
 	void SpinningKick();
 	void ChangeScene();
 	void FireEarth();
+	void TakeDamage();
 };

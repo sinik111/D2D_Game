@@ -16,7 +16,7 @@ void KenSpinningKickState::Update(FSMContext& context)
 
 	if (context.animator->IsFinished())
 	{
-		context.hasRequest = true;
+		context.shouldChangeState = true;
 
 		if (horizontalInput < 0.0f)
 		{

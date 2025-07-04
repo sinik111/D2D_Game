@@ -16,12 +16,13 @@ struct FSMContext
 	std::unordered_map<std::wstring, float> floatParams;
 	std::unordered_map<std::wstring, bool> boolParams;
 	std::unordered_map<std::wstring, bool> triggerParams;
+	std::wstring currentStateName;
 	std::wstring nextStateName;
-	bool hasRequest;
+	bool shouldChangeState;
 
 	void Reset()
 	{
-		hasRequest = false;
+		shouldChangeState = false;
 		nextStateName = L"";
 
 		for (auto& pair : triggerParams)

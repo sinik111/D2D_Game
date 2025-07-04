@@ -15,7 +15,7 @@ void KenFrontDashState::Update(FSMContext& context)
 {
 	if (context.triggerParams[L"SpinningKick"])
 	{
-		context.hasRequest = true;
+		context.shouldChangeState = true;
 		context.nextStateName = L"SpinningKick";
 
 		return;
@@ -23,7 +23,7 @@ void KenFrontDashState::Update(FSMContext& context)
 
 	if (context.triggerParams[L"Roll"])
 	{
-		context.hasRequest = true;
+		context.shouldChangeState = true;
 		context.nextStateName = L"Roll";
 
 		return;
@@ -33,7 +33,7 @@ void KenFrontDashState::Update(FSMContext& context)
 
 	if (horizontalInput < 0.0f)
 	{
-		context.hasRequest = true;
+		context.shouldChangeState = true;
 		context.nextStateName = L"BackDash";
 
 		return;
@@ -41,7 +41,7 @@ void KenFrontDashState::Update(FSMContext& context)
 
 	if (horizontalInput == 0.0f)
 	{
-		context.hasRequest = true;
+		context.shouldChangeState = true;
 		context.nextStateName = L"Idle";
 
 		return;

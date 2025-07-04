@@ -9,27 +9,32 @@
 
 #include "Earth.h"
 #include "FSMContext.h"
+#include "Health.h"
 
 void Ken::Initialize()
 {
 	m_animator = GetGameObject()->GetComponent<Animator>();
+	m_health = GetGameObject()->GetComponent<Health>();
 }
 
 void Ken::Start()
 {
 	PlayerInput* playerInput = GetGameObject()->GetComponent<PlayerInput>();
 	playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &Ken::ArrowInput);
-	playerInput->RegisterActionOnKey('A', KeyState::Pressed, this, &Ken::Roll);
-	playerInput->RegisterActionOnKey('S', KeyState::Pressed, this, &Ken::SpinningKick);
+	playerInput->RegisterActionOnKey('Q', KeyState::Pressed, this, &Ken::Roll);
+	playerInput->RegisterActionOnKey('W', KeyState::Pressed, this, &Ken::SpinningKick);
+	playerInput->RegisterActionOnKey('E', KeyState::Pressed, this, &Ken::TakeDamage);
+
 	playerInput->RegisterActionOnKey('1', KeyState::Pressed, this, &Ken::ChangeScene);
 
-	m_animator = GetGameObject()->GetComponent<Animator>();
 	m_animator->SetSpriteSheet(L"ken_sprites.json");
 	m_animator->AddAnimationClip(L"ken_idle_anim.json");
 	m_animator->AddAnimationClip(L"ken_front_dash_anim.json");
 	m_animator->AddAnimationClip(L"ken_back_dash_anim.json");
 	m_animator->AddAnimationClip(L"ken_roll_anim.json");
 	m_animator->AddAnimationClip(L"ken_spinning_kick_anim.json");
+	m_animator->AddAnimationClip(L"ken_hurt_anim.json");
+	m_animator->AddAnimationClip(L"ken_dead_anim.json");
 
 	m_animator->AddActionOnEvent(L"FireEarth", this, &Ken::FireEarth);
 
@@ -39,8 +44,12 @@ void Ken::Start()
 	m_context.floatParams[L"HorizontalInput"] = 0.0f;
 	m_context.triggerParams[L"Roll"] = false;
 	m_context.triggerParams[L"SpinningKick"] = false;
+	m_context.triggerParams[L"Hurt"] = false;
+	m_context.boolParams[L"IsDead"] = false;
 
 	m_kenFSM = std::make_unique<KenFSM>(m_context);
+
+	m_health->SetHp(50, 50);
 }
 
 void Ken::Update()
@@ -74,4 +83,18 @@ void Ken::FireEarth()
 	go->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition() + Vector2(50.0f, 70.0f));
 	Earth* earth = go->AddComponent<Earth>();
 	earth->Fired();
+}
+
+void Ken::TakeDamage()
+{
+	m_health->TakeDamage(10, false);
+
+	if (m_health->GetHp() == 0)
+	{
+		m_context.boolParams[L"IsDead"] = true;
+	}
+	else
+	{
+		m_context.triggerParams[L"Hurt"] = true;
+	}
 }

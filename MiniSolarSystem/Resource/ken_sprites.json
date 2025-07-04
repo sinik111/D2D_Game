@@ -1048,69 +1048,6 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_idle_0",
-            "x": 2.0,
-            "y": 3411.0,
-            "width": 61.0,
-            "height": 92.0,
-            "pivotX": 0.510083794593811,
-            "pivotY": 0.016713017597794534
-        },
-        {
-            "name": "ken_idle_1",
-            "x": 72.0,
-            "y": 3411.0,
-            "width": 60.0,
-            "height": 94.0,
-            "pivotX": 0.5025633573532105,
-            "pivotY": 0.013084898702800274
-        },
-        {
-            "name": "ken_idle_2",
-            "x": 142.0,
-            "y": 3411.0,
-            "width": 57.0,
-            "height": 95.0,
-            "pivotX": 0.5026978850364685,
-            "pivotY": 0.012947162613272667
-        },
-        {
-            "name": "ken_idle_3",
-            "x": 210.0,
-            "y": 3411.0,
-            "width": 60.0,
-            "height": 94.0,
-            "pivotX": 0.5051259398460388,
-            "pivotY": 0.013084898702800274
-        },
-        {
-            "name": "ken_idle_4",
-            "x": 278.0,
-            "y": 3411.0,
-            "width": 61.0,
-            "height": 92.0,
-            "pivotX": 0.5025204420089722,
-            "pivotY": 0.01336935255676508
-        },
-        {
-            "name": "ken_idle_5",
-            "x": 346.0,
-            "y": 3411.0,
-            "width": 62.0,
-            "height": 91.0,
-            "pivotX": 0.4962187707424164,
-            "pivotY": 0.012877747416496277
-        },
-        {
-            "name": "ken_dd",
-            "x": 420.0,
-            "y": 3411.0,
-            "width": 56.0,
-            "height": 97.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
             "name": "ken_123",
             "x": 488.0,
             "y": 3412.0,
@@ -1199,114 +1136,6 @@
             "height": 63.0,
             "pivotX": 0.5,
             "pivotY": 0.5
-        },
-        {
-            "name": "ken_back_dash_3",
-            "x": 629.0,
-            "y": 3234.0,
-            "width": 60.0,
-            "height": 92.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_front_dash_0",
-            "x": 8.0,
-            "y": 3233.0,
-            "width": 55.0,
-            "height": 85.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_front_dash_1",
-            "x": 70.0,
-            "y": 3234.0,
-            "width": 62.0,
-            "height": 90.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_front_dash_2",
-            "x": 140.0,
-            "y": 3232.0,
-            "width": 66.0,
-            "height": 92.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_front_dash_3",
-            "x": 215.0,
-            "y": 3234.0,
-            "width": 65.0,
-            "height": 91.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_front_dash_4",
-            "x": 288.0,
-            "y": 3233.0,
-            "width": 56.0,
-            "height": 91.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_front_dash_5",
-            "x": 357.0,
-            "y": 3233.0,
-            "width": 52.0,
-            "height": 91.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_back_dash_0",
-            "x": 417.0,
-            "y": 3233.0,
-            "width": 63.0,
-            "height": 89.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_back_dash_1",
-            "x": 487.0,
-            "y": 3232.0,
-            "width": 61.0,
-            "height": 92.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_back_dash_2",
-            "x": 558.0,
-            "y": 3234.0,
-            "width": 59.0,
-            "height": 92.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_back_dash_4",
-            "x": 702.0,
-            "y": 3232.0,
-            "width": 60.0,
-            "height": 93.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_back_dash_5",
-            "x": 773.0,
-            "y": 3233.0,
-            "width": 59.0,
-            "height": 91.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
         },
         {
             "name": "ken_150",
@@ -2929,96 +2758,6 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_spinning_kick_0",
-            "x": 1.0,
-            "y": 1561.0,
-            "width": 76.0,
-            "height": 92.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_1",
-            "x": 85.0,
-            "y": 1559.0,
-            "width": 73.0,
-            "height": 96.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_2",
-            "x": 179.0,
-            "y": 1556.0,
-            "width": 64.0,
-            "height": 89.0,
-            "pivotX": 0.6200000047683716,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_3",
-            "x": 262.0,
-            "y": 1559.0,
-            "width": 63.0,
-            "height": 92.0,
-            "pivotX": 0.7099999785423279,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_4",
-            "x": 341.0,
-            "y": 1560.0,
-            "width": 97.0,
-            "height": 96.0,
-            "pivotX": 0.5899999737739563,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_5",
-            "x": 449.0,
-            "y": 1558.0,
-            "width": 122.0,
-            "height": 96.0,
-            "pivotX": 0.5,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_6",
-            "x": 584.0,
-            "y": 1560.0,
-            "width": 103.0,
-            "height": 79.0,
-            "pivotX": 0.5299999713897705,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_7",
-            "x": 726.0,
-            "y": 1551.0,
-            "width": 66.0,
-            "height": 83.0,
-            "pivotX": 0.7699999809265137,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_8",
-            "x": 802.0,
-            "y": 1550.0,
-            "width": 61.0,
-            "height": 92.0,
-            "pivotX": 0.6600000262260437,
-            "pivotY": 0.0
-        },
-        {
-            "name": "ken_spinning_kick_9",
-            "x": 878.0,
-            "y": 1552.0,
-            "width": 63.0,
-            "height": 89.0,
-            "pivotX": 0.5600000023841858,
-            "pivotY": 0.0
-        },
-        {
             "name": "ken_348",
             "x": 1.0,
             "y": 1448.0,
@@ -3577,49 +3316,49 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_410",
+            "name": "ken_hurt_0",
             "x": 325.0,
             "y": 822.0,
             "width": 64.0,
             "height": 93.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_411",
+            "name": "ken_hurt_1",
             "x": 400.0,
             "y": 821.0,
             "width": 70.0,
             "height": 90.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_412",
+            "name": "ken_hurt_2",
             "x": 484.0,
             "y": 821.0,
             "width": 75.0,
             "height": 90.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_413",
+            "name": "ken_hurt_3",
             "x": 575.0,
             "y": 821.0,
             "width": 85.0,
             "height": 95.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_414",
+            "name": "ken_hurt_4",
             "x": 668.0,
             "y": 822.0,
             "width": 69.0,
             "height": 92.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
             "name": "ken_415",
@@ -3685,31 +3424,31 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_422",
+            "name": "ken_dead_0",
             "x": 1.0,
             "y": 616.0,
             "width": 84.0,
             "height": 70.0,
-            "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotX": 0.5000004768371582,
+            "pivotY": -0.18687570095062257
         },
         {
-            "name": "ken_423",
+            "name": "ken_dead_1",
             "x": 84.0,
             "y": 683.0,
             "width": 104.0,
             "height": 47.0,
-            "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotX": 0.5000004172325134,
+            "pivotY": -0.7735387682914734
         },
         {
-            "name": "ken_424",
+            "name": "ken_dead_2",
             "x": 187.0,
             "y": 643.0,
             "width": 80.0,
             "height": 82.0,
-            "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotX": 0.5061334371566773,
+            "pivotY": -0.11627197265625
         },
         {
             "name": "ken_425",
@@ -3721,13 +3460,13 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_426",
+            "name": "ken_dead_3",
             "x": 340.0,
             "y": 663.0,
             "width": 126.0,
             "height": 50.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
             "name": "ken_427",
@@ -3757,31 +3496,31 @@
             "pivotY": 0.5
         },
         {
-            "name": "ken_430",
+            "name": "ken_dead_4",
             "x": 465.0,
             "y": 588.0,
             "width": 121.0,
             "height": 46.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_431",
+            "name": "ken_dead_5",
             "x": 585.0,
             "y": 592.0,
             "width": 125.0,
             "height": 43.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
-            "name": "ken_432",
+            "name": "ken_dead_6",
             "x": 709.0,
             "y": 589.0,
             "width": 130.0,
             "height": 33.0,
             "pivotX": 0.5,
-            "pivotY": 0.5
+            "pivotY": 0.0
         },
         {
             "name": "ken_433",
@@ -4144,6 +3883,177 @@
             "pivotY": 0.5
         },
         {
+            "name": "ken_back_dash_0",
+            "x": 417.0,
+            "y": 3233.0,
+            "width": 63.0,
+            "height": 89.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_back_dash_1",
+            "x": 487.0,
+            "y": 3232.0,
+            "width": 61.0,
+            "height": 92.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_back_dash_2",
+            "x": 558.0,
+            "y": 3234.0,
+            "width": 59.0,
+            "height": 92.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_back_dash_3",
+            "x": 629.0,
+            "y": 3234.0,
+            "width": 60.0,
+            "height": 92.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_back_dash_4",
+            "x": 702.0,
+            "y": 3232.0,
+            "width": 60.0,
+            "height": 93.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_back_dash_5",
+            "x": 773.0,
+            "y": 3233.0,
+            "width": 59.0,
+            "height": 91.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_dd",
+            "x": 420.0,
+            "y": 3411.0,
+            "width": 56.0,
+            "height": 97.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_front_dash_0",
+            "x": 8.0,
+            "y": 3233.0,
+            "width": 55.0,
+            "height": 85.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_front_dash_1",
+            "x": 70.0,
+            "y": 3234.0,
+            "width": 62.0,
+            "height": 90.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_front_dash_2",
+            "x": 140.0,
+            "y": 3232.0,
+            "width": 66.0,
+            "height": 92.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_front_dash_3",
+            "x": 215.0,
+            "y": 3234.0,
+            "width": 65.0,
+            "height": 91.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_front_dash_4",
+            "x": 288.0,
+            "y": 3233.0,
+            "width": 56.0,
+            "height": 91.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_front_dash_5",
+            "x": 357.0,
+            "y": 3233.0,
+            "width": 52.0,
+            "height": 91.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_idle_0",
+            "x": 2.0,
+            "y": 3411.0,
+            "width": 61.0,
+            "height": 92.0,
+            "pivotX": 0.510083794593811,
+            "pivotY": 0.016713017597794534
+        },
+        {
+            "name": "ken_idle_1",
+            "x": 72.0,
+            "y": 3411.0,
+            "width": 60.0,
+            "height": 94.0,
+            "pivotX": 0.5025633573532105,
+            "pivotY": 0.013084898702800274
+        },
+        {
+            "name": "ken_idle_2",
+            "x": 142.0,
+            "y": 3411.0,
+            "width": 57.0,
+            "height": 95.0,
+            "pivotX": 0.5026978850364685,
+            "pivotY": 0.012947162613272667
+        },
+        {
+            "name": "ken_idle_3",
+            "x": 210.0,
+            "y": 3411.0,
+            "width": 60.0,
+            "height": 94.0,
+            "pivotX": 0.5051259398460388,
+            "pivotY": 0.013084898702800274
+        },
+        {
+            "name": "ken_idle_4",
+            "x": 278.0,
+            "y": 3411.0,
+            "width": 61.0,
+            "height": 92.0,
+            "pivotX": 0.5025204420089722,
+            "pivotY": 0.01336935255676508
+        },
+        {
+            "name": "ken_idle_5",
+            "x": 346.0,
+            "y": 3411.0,
+            "width": 62.0,
+            "height": 91.0,
+            "pivotX": 0.4962187707424164,
+            "pivotY": 0.012877747416496277
+        },
+        {
             "name": "ken_kick_0",
             "x": 1.0,
             "y": 2527.0,
@@ -4258,6 +4168,96 @@
             "width": 57.0,
             "height": 87.0,
             "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_0",
+            "x": 1.0,
+            "y": 1561.0,
+            "width": 76.0,
+            "height": 92.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_1",
+            "x": 85.0,
+            "y": 1559.0,
+            "width": 73.0,
+            "height": 96.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_2",
+            "x": 179.0,
+            "y": 1556.0,
+            "width": 64.0,
+            "height": 89.0,
+            "pivotX": 0.6200000047683716,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_3",
+            "x": 262.0,
+            "y": 1559.0,
+            "width": 63.0,
+            "height": 92.0,
+            "pivotX": 0.7099999785423279,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_4",
+            "x": 341.0,
+            "y": 1560.0,
+            "width": 97.0,
+            "height": 96.0,
+            "pivotX": 0.5899999737739563,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_5",
+            "x": 449.0,
+            "y": 1558.0,
+            "width": 122.0,
+            "height": 96.0,
+            "pivotX": 0.5,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_6",
+            "x": 584.0,
+            "y": 1560.0,
+            "width": 103.0,
+            "height": 79.0,
+            "pivotX": 0.5299999713897705,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_7",
+            "x": 726.0,
+            "y": 1551.0,
+            "width": 66.0,
+            "height": 83.0,
+            "pivotX": 0.7699999809265137,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_8",
+            "x": 802.0,
+            "y": 1550.0,
+            "width": 61.0,
+            "height": 92.0,
+            "pivotX": 0.6600000262260437,
+            "pivotY": 0.0
+        },
+        {
+            "name": "ken_spinning_kick_9",
+            "x": 878.0,
+            "y": 1552.0,
+            "width": 63.0,
+            "height": 89.0,
+            "pivotX": 0.5600000023841858,
             "pivotY": 0.0
         }
     ]

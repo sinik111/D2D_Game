@@ -7,4 +7,5 @@ class AnimationTestScene :
 {
 public:
 	void Enter() override;
+	void Exit() override;
 };

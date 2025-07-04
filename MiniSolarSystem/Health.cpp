@@ -23,19 +23,19 @@ void Health::SetHp(int hp, int maxHp)
 		m_maxHp = maxHp;
 
 		m_onChangeHp.Invoke(prevHp, m_hp, m_maxHp);
-
-		if (m_hp == 0)
-		{
-			GetGameObject()->Destroy();
-		}
 	}
 }
 
-void Health::TakeDamage(int value)
+void Health::TakeDamage(int value, bool destroy)
 {
 	int currentHp = std::max<int>(0, m_hp - value);
 
 	SetHp(currentHp, m_maxHp);
+
+	if (destroy && m_hp == 0)
+	{
+		GetGameObject()->Destroy();
+	}
 }
 
 Delegate<int, int, int>& Health::GetOnChangeHp()
