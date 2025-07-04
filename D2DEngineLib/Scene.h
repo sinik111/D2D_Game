@@ -6,7 +6,6 @@ class Scene
 {
 protected:
 	std::vector<std::unique_ptr<GameObject>> m_gameObjects;
-	std::vector<std::unique_ptr<GameObject>> m_pendingDestroyedGameObjects;
 
 public:
 	virtual ~Scene() = default;

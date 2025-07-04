@@ -31,12 +31,8 @@ public:
     template<typename T, typename... Args>
     T* AddComponent(Args&&... args)
     {
-        if (typeid(Transform) == typeid(T))
-        {
-            return (T*)m_transform.get();
-        }
-
-        static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
+        assert(typeid(Transform) != typeid(T) && L"Transform 컴포넌트는 추가할 수 없습니다");
+        static_assert(std::is_base_of<Component, T>::value, "Component가 아닙니다");
 
         std::unique_ptr<T> component = std::make_unique<T>(std::forward<Args>(args)...);
 

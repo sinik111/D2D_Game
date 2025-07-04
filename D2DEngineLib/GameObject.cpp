@@ -34,21 +34,23 @@ const std::wstring& GameObject::GetName() const
 
 void GameObject::Update()
 {
-	for (auto iter = m_components.begin(); iter != m_components.end();)
+	for (size_t i = 0; i < m_components.size(); )
 	{
-		if ((*iter)->m_isDestroyed)
+		if (m_components[i]->m_isDestroyed)
 		{
-			if (Script* script = dynamic_cast<Script*>((*iter).get()))
+			if (Script* script = dynamic_cast<Script*>(m_components[i].get()))
 			{
 				CallOnDestroy(script);
 			}
 
-			iter = m_components.erase(iter);
+			std::swap(m_components[i], m_components.back());
+
+			m_components.pop_back();
+
+			continue;
 		}
-		else
-		{
-			++iter;
-		}
+
+		++i;
 	}
 }
 

@@ -39,15 +39,12 @@ public:
 	template<typename T>
 	void CreateScene(const std::wstring& name)
 	{
-		if (m_scenes.find(name) != m_scenes.end())
+		if (m_scenes.find(name) == m_scenes.end())
 		{
-			return;
+			m_scenes.emplace(name, std::make_unique<T>());
 		}
-
-		m_scenes.emplace(name, std::make_unique<T>());
 	}
 
 public:
 	GameObject* Find(const std::wstring& name) const;
-	bool IsValid(GameObject* gameObject) const;
 };

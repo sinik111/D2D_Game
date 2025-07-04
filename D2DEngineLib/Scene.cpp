@@ -19,8 +19,6 @@ void Scene::Update()
 		{
 			std::swap(m_gameObjects[i], m_gameObjects.back());
 
-			m_pendingDestroyedGameObjects.push_back(std::move(m_gameObjects.back()));
-
 			m_gameObjects.pop_back();
 
 			continue;
@@ -30,18 +28,11 @@ void Scene::Update()
 
 		++i;
 	}
-
-	if (!m_pendingDestroyedGameObjects.empty())
-	{
-		m_pendingDestroyedGameObjects.clear();
-	}
 }
-
 
 void Scene::Clear()
 {
 	m_gameObjects.clear();
-	m_pendingDestroyedGameObjects.clear();
 }
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
