@@ -24,7 +24,7 @@ BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 		m_bitmapResource->GetSize().height
 	};
 
-	MakeCachedRenderMatrix();
+	MakeRenderMatrix();
 }
 
 BitmapRenderer::~BitmapRenderer()
@@ -123,7 +123,7 @@ void BitmapRenderer::SetFlipX(bool doFlip)
 {
 	m_doFlipX = doFlip;
 
-	MakeCachedRenderMatrix();
+	MakeRenderMatrix();
 }
 
 void BitmapRenderer::SetSpaceType(SpaceType spaceType)
@@ -135,14 +135,14 @@ void BitmapRenderer::SetSourceRect(const D2D1_RECT_F& sourceRect)
 {
 	m_sourceRect = sourceRect;
 
-	MakeCachedRenderMatrix();
+	MakeRenderMatrix();
 }
 
 void BitmapRenderer::SetPivot(const Vector2& pivot)
 {
 	m_pivot = pivot;
 
-	MakeCachedRenderMatrix();
+	MakeRenderMatrix();
 }
 
 void BitmapRenderer::SetOpacity(float opacity)
@@ -150,7 +150,7 @@ void BitmapRenderer::SetOpacity(float opacity)
 	m_opacity = opacity;
 }
 
-void BitmapRenderer::MakeCachedRenderMatrix()
+void BitmapRenderer::MakeRenderMatrix()
 {
 	if (m_doFlipX)
 	{

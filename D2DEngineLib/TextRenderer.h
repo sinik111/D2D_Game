@@ -51,6 +51,7 @@ public:
 	D2D1_COLOR_F GetColor() const;
 	D2D1_SIZE_F GetRectSize() const;
 	float GetFontSize() const;
+	Vector2 GetPivot() const;
 
 	void Render(const RenderContext& context) const override;
 	SpaceType GetSpaceType() const override;
@@ -67,4 +68,7 @@ public:
 	void SetVerticalAlignment(VerticalAlignment align);
 	void SetHorizontalAlignment(HorizontlAlignment align);
 	void SetPivot(const Vector2& pivot);
+
+private:
+	void MakeRenderMatrix();
 };

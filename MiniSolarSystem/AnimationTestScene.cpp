@@ -31,7 +31,7 @@ void AnimationTestScene::Enter()
 	TextRenderer* textRenderer = go->AddComponent<TextRenderer>();
 	textRenderer->SetSpaceType(SpaceType::Screen);
 	textRenderer->SetFontSize(15.0f);
-	textRenderer->SetPivot({ 0.5f, 0.0f });
+	textRenderer->SetPivot({ 0.5f, 1.0f });
 	//textRenderer->SetPoint({ 100.0f, 0.0f });
 	textRenderer->SetRectSize({ 300.0f, 400.0f });
 	textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
@@ -54,10 +54,9 @@ void AnimationTestScene::Enter()
 
 	HpViewer* hpViewer = go->AddComponent<HpViewer>();
 	hpViewer->SetTargetName(L"Ken");
+	go->GetTransform()->SetLocalPosition({ 0.0f, 300.0f });
 
 	textRenderer = go->AddComponent<TextRenderer>();
-	go->GetTransform()->SetLocalPosition({ 0.0f, 300.0f });
-	//textRenderer->SetPoint({ 0.0f, 300.0f });
 
 	health->GetOnChangeHp().Add(hpViewer, &HpViewer::ChangeHpText);
 }

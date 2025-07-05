@@ -48,16 +48,17 @@ void TextRendererSystem::Update()
 		{
 			const Vector2 worldPosition = renderer->GetTransform()->GetWorldPosition();
 			const Vector2 worldScale = renderer->GetTransform()->GetWorldScale();
+			const Vector2 pivot = renderer->GetPivot();
 
 			const D2D1_SIZE_F rectSize = renderer->GetRectSize();
 
-			const float rectHalfWidth = rectSize.width * worldScale.x / 2.0f;
-			const float rectHalfHeight = rectSize.height * worldScale.y / 2.0f;
+			const float rectHalfWidth = rectSize.width * worldScale.x;
+			const float rectHalfHeight = rectSize.height * worldScale.y;
 
-			const float rectLeft = worldPosition.x - rectHalfWidth;
-			const float rectRight = worldPosition.x + rectHalfWidth;
-			const float rectBottom = worldPosition.y - rectHalfHeight;
-			const float rectTop = worldPosition.y + rectHalfHeight;
+			const float rectLeft = worldPosition.x - rectHalfWidth * pivot.x;
+			const float rectRight = worldPosition.x + rectHalfWidth * (1.0f - pivot.x);
+			const float rectBottom = worldPosition.y - rectHalfHeight * pivot.y;
+			const float rectTop = worldPosition.y + rectHalfHeight * (1.0f - pivot.y);
 
 			if (rectRight < viewLeft || rectLeft > viewRight ||
 				rectTop < viewBottom || rectBottom > viewTop)

@@ -10,7 +10,7 @@ void Title::Start()
     textRenderer->SetText(L"еб╬Г╟Х");
     textRenderer->SetSpaceType(SpaceType::Screen);
     textRenderer->SetFontSize(50.0f);
-    textRenderer->SetPivot({ 0.0f, 0.0f });
+    textRenderer->SetPivot({ 0.0f, 1.0f });
     //textRenderer->SetPoint({ -400.0f, 300.0f });
     textRenderer->SetRectSize({ 200.0f, 100.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));

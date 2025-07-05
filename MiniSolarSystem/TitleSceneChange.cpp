@@ -22,10 +22,11 @@ void TitleSceneChange::Start()
     textRenderer->SetText(L"Scene을 변경하려면 '2'를 누르세요");
     textRenderer->SetRectSize({ 400.0f, 20.0f });
     textRenderer->SetFontSize(20.0f);
-    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
     textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
     textRenderer->SetSpaceType(SpaceType::Screen);
     textRenderer->SetSortOrder(1);
+    textRenderer->SetPivot({ 0.0f, 0.0f });
 }
 
 void TitleSceneChange::ChangeScene()

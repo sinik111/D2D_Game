@@ -10,8 +10,7 @@ TextRenderer::TextRenderer()
 
 	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
 
-	m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x, m_rectSize.height * m_pivot.y);
+	MakeRenderMatrix();
 }
 
 TextRenderer::~TextRenderer()
@@ -43,8 +42,7 @@ void TextRenderer::SetRectSize(const D2D1_SIZE_F& size)
 {
 	m_rectSize = size;
 
-	m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x, m_rectSize.height * m_pivot.y);	
+	MakeRenderMatrix();
 }
 
 void TextRenderer::SetFontSize(float size)
@@ -112,8 +110,14 @@ void TextRenderer::SetPivot(const Vector2& pivot)
 {
 	m_pivot = pivot;
 
+	MakeRenderMatrix();
+}
+
+void TextRenderer::MakeRenderMatrix()
+{
 	m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x, m_rectSize.height * m_pivot.y);
+		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x,
+			m_rectSize.height * (1.0f - m_pivot.y));
 }
 
 Microsoft::WRL::ComPtr<IDWriteTextFormat> TextRenderer::GetTextFormat() const
@@ -133,22 +137,18 @@ D2D1_COLOR_F TextRenderer::GetColor() const
 
 void TextRenderer::Render(const RenderContext& context) const
 {
-	Vector2 position = GetTransform()->GetWorldPosition();
+	const Matrix3x2 worldMatrix = GetTransform()->GetWorldMatrix();
 
 	Matrix3x2 finalMatrix;
 
 	switch (m_spaceType)
 	{
 	case SpaceType::Screen:
-		finalMatrix = m_cachedRenderMatrix *
-			GetTransform()->GetWorldMatrix() *
-			context.unityMatrix;
+		finalMatrix = m_cachedRenderMatrix * worldMatrix * context.unityMatrix;
 		break;
 
 	case SpaceType::World:
-		finalMatrix = m_cachedRenderMatrix *
-			GetTransform()->GetWorldMatrix() *
-			context.viewUnityMatrix;
+		finalMatrix = m_cachedRenderMatrix * worldMatrix * context.viewUnityMatrix;
 		break;
 	}
 
@@ -185,4 +185,9 @@ D2D1_SIZE_F TextRenderer::GetRectSize() const
 float TextRenderer::GetFontSize() const
 {
 	return m_fontSize;
+}
+
+Vector2 TextRenderer::GetPivot() const
+{
+	return m_pivot;
 }

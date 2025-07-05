@@ -14,8 +14,8 @@ void HpViewer::Start()
 {
     m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(20.0f);
-    m_textRenderer->SetPivot({ 0.0f, 0.0f });
-    m_textRenderer->SetRectSize({ 200.0f, 50.0f });
+    m_textRenderer->SetPivot({ 0.0f, 1.0f });
+    m_textRenderer->SetRectSize({ 200.0f, 20.0f });
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);
     m_textRenderer->SetVerticalAlignment(VerticalAlignment::Top);

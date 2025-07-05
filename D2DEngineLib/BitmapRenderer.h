@@ -48,5 +48,5 @@ public:
 	void SetOpacity(float opacity);
 
 private:
-	void MakeCachedRenderMatrix();
+	void MakeRenderMatrix();
 };
