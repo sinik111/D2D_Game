@@ -63,7 +63,7 @@ void Ken::Update()
 
 void Ken::ArrowInput(Vector2 input)
 {
-	m_context.floatParams[L"HorizontalInput"] = input.GetX();
+	m_context.floatParams[L"HorizontalInput"] = input.x;
 }
 
 void Ken::Roll()

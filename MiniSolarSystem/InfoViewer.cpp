@@ -16,12 +16,14 @@ void InfoViewer::Start()
     m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(15.0f);
     m_textRenderer->SetPivot({ 0.0f, 1.0f });
-    m_textRenderer->SetPoint({ -380.0f, -280.0f });
+    //m_textRenderer->SetPoint({ -380.0f, -280.0f });
     m_textRenderer->SetRectSize({ 500.0f, 400.0f });
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);
     m_textRenderer->SetVerticalAlignment(VerticalAlignment::Bottom);
     m_textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
+
+    GetTransform()->SetLocalPosition({ -380.0f, -280.0f });
 }
 
 void InfoViewer::LateUpdate()
@@ -53,7 +55,7 @@ void InfoViewer::LateUpdate()
         << L"\n지구/달에 피해 10 주기 [ T / Y ]"
         << L"\n지구 생성/삭제하기 [ A / S ] 지구 개수: " << earthCount
         << L"\n태양 Component 삭제하기 [ D ] - 회전 멈춤"
-        << L"\n카메라 Position [ ← ↑ ↓ → ]: " << cameraPosition.GetX() << L", " << cameraPosition.GetY()
+        << L"\n카메라 Position [ ← ↑ ↓ → ]: " << cameraPosition.x << L", " << cameraPosition.y
         << L"\n카메라 Zoom [ CTRL + Q / CTRL + W ]: " << cameraZoom
         << L"\n태양 Rotation: " << sunRotation
         << L"\n" << m_earthRotation

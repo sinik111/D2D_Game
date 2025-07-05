@@ -11,10 +11,12 @@ void Title::Start()
     textRenderer->SetSpaceType(SpaceType::Screen);
     textRenderer->SetFontSize(50.0f);
     textRenderer->SetPivot({ 0.0f, 0.0f });
-    textRenderer->SetPoint({ -400.0f, 300.0f });
+    //textRenderer->SetPoint({ -400.0f, 300.0f });
     textRenderer->SetRectSize({ 200.0f, 100.0f });
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     textRenderer->SetSortOrder(3);
     textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
     textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
+
+    GetTransform()->SetLocalPosition({ -400.0f, 300.0f });
 }

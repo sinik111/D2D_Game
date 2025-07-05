@@ -22,7 +22,7 @@ private:
 
 	// Brush
 	Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> m_d2dSolidColorBrush;
-	std::vector<IRenderer*> m_renderQueue[static_cast<int>(SpaceType::MAX)];
+	std::vector<std::vector<std::vector<IRenderer*>>> m_renderQueues;
 
 	UINT m_width;
 	UINT m_height;

@@ -11,6 +11,7 @@ class BitmapRenderer :
 private:
 	std::shared_ptr<BitmapResource> m_bitmapResource;
 	std::wstring m_filePath;
+	Matrix3x2 m_cachedRenderMatrix;
 	SpaceType m_spaceType = SpaceType::World;
 	D2D1_RECT_F m_sourceRect{};
 	Vector2 m_pivot{ 0.5f, 0.5f };
@@ -35,6 +36,9 @@ public:
 	float GetY() const override;
 
 public:
+	Vector2 GetPivot() const;
+
+public:
 	void SetBitmap(const std::wstring& filePath);
 	void SetSortOrder(int sortOrder);
 	void SetFlipX(bool doFlip);
@@ -42,4 +46,7 @@ public:
 	void SetSourceRect(const D2D1_RECT_F& sourceRect);
 	void SetPivot(const Vector2& pivot);
 	void SetOpacity(float opacity);
+
+private:
+	void MakeCachedRenderMatrix();
 };

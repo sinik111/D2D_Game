@@ -45,8 +45,8 @@ void Moon::Update()
 
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
-    float worldX = GetTransform()->GetWorldPosition().GetX();
-    float worldY = GetTransform()->GetWorldPosition().GetY();
+    float worldX = GetTransform()->GetWorldPosition().x;
+    float worldY = GetTransform()->GetWorldPosition().y;
 
     std::wstringstream ss;
     ss << std::fixed << std::setprecision(2)

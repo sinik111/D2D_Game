@@ -40,8 +40,8 @@ const Vector2& Transform::GetWorldScale()
 	if (m_isDirty || m_isScaleDirty)
 	{
 		m_worldScale = m_parent != nullptr ?
-			Vector2(m_localScale.GetX() * m_parent->GetWorldScale().GetX(),
-				m_localScale.GetY() * m_parent->GetWorldScale().GetY()) :
+			Vector2(m_localScale.x * m_parent->GetWorldScale().x,
+				m_localScale.y * m_parent->GetWorldScale().y) :
 			m_localScale;
 
 		m_isScaleDirty = false;
@@ -55,7 +55,7 @@ const Vector2& Transform::GetWorldPosition()
 	if (m_isDirty || m_isPositionDirty)
 	{
 		m_worldPosition = m_parent != nullptr ?
-			GetWorldMatrix().GetPosition() :
+			GetWorldMatrix().r[2] :
 			m_localPosition;
 
 		m_isPositionDirty = false;

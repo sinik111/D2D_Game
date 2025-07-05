@@ -1,157 +1,150 @@
 #pragma once
 
-#include <d2d1_1.h>
-#include <DirectXMath.h>
+#include <d2d1.h>
+#include <cassert>
 
+#include "MyMath.h"
 #include "Vector2.h"
 
-struct Matrix3x2 // DirectX::XMMATRIX Wrapper struct
+struct Matrix3x2
 {
-private: // SIMD 연산을 위한 DirectXMath의 XMMATRIX
-	DirectX::XMMATRIX m_rawMatrix;
+public:
+    union
+    {
+        struct
+        {
+            float _11, _12;
+            float _21, _22;
+            float _31, _32;
+        };
+
+        struct
+        {
+            Vector2 r[3];
+        };
+
+        float m[3][2];
+    };
 
 public:
 	Matrix3x2()
-		: m_rawMatrix{ DirectX::XMMatrixIdentity() }
+        : m{}
 	{
 
 	}
 
-	explicit Matrix3x2(DirectX::XMMATRIX rawMatrix)
-		: m_rawMatrix{ rawMatrix }
-	{
-
-	}
-
-	explicit Matrix3x2(const D2D1::Matrix3x2F& d2d1Matrix)
-        : m_rawMatrix{
-            d2d1Matrix._11, d2d1Matrix._12, 0.0f, 0.0f,
-            d2d1Matrix._21, d2d1Matrix._22, 0.0f, 0.0f,
-            0.0f          , 0.0f          , 1.0f, 0.0f,
-            d2d1Matrix._31, d2d1Matrix._32, 0.0f, 1.0f }
+    Matrix3x2(float m11, float m12, float m21, float m22, float m31, float m32)
+        : _11{ m11 }, _12{ m12 }, _21{ m21 }, _22{ m22 }, _31{ m31 }, _32{ m32 }
 	{
 
 	}
 
 public: // 연산자 오버로딩
-    Matrix3x2 operator*(const Matrix3x2& other) const
+    Matrix3x2 operator*(const Matrix3x2& rhs) const
     {
-        return Matrix3x2(DirectX::XMMatrixMultiply(m_rawMatrix, other.m_rawMatrix));
+       return Matrix3x2(
+            _11 * rhs._11 + _12 * rhs._21, _11 * rhs._12 + _12 * rhs._22,
+            _21 * rhs._11 + _22 * rhs._21, _21 * rhs._12 + _22 * rhs._22,
+            _31 * rhs._11 + _32 * rhs._21 + rhs._31, _31 * rhs._12 + _32 * rhs._22 + rhs._32
+        );
     }
 
-    Matrix3x2& operator*=(const Matrix3x2& other)
+    Matrix3x2& operator*=(const Matrix3x2& rhs)
     {
-        m_rawMatrix = DirectX::XMMatrixMultiply(m_rawMatrix, other.m_rawMatrix);
-
-        return *this;
+        return (*this = *this * rhs);
     }
 
-public: // Get, Set, As
+    operator D2D1_MATRIX_3X2_F() const
+    {
+        return D2D1_MATRIX_3X2_F{ _11, _12, _21, _22, _31, _32 };
+    }
+
+public: // Get
     Vector2 GetPosition() const
     {
-        return Vector2(m_rawMatrix.r[3]);
+        return r[2];
     }
 
     Vector2 GetScale() const
     {
-        DirectX::XMVECTOR scale;
-        DirectX::XMVECTOR r;
-        DirectX::XMVECTOR p;
-
-        // 행렬 분해
-        DirectX::XMMatrixDecompose(&scale, &r, &p, m_rawMatrix);
-
-        return Vector2(scale);
-    }
-
-    D2D1_MATRIX_3X2_F AsD2D1Matrix() const
-    {
-        DirectX::XMVECTOR r0 = m_rawMatrix.r[0];
-        DirectX::XMVECTOR r1 = m_rawMatrix.r[1];
-        DirectX::XMVECTOR r3 = m_rawMatrix.r[3];
-
-        return D2D1::Matrix3x2F(
-            DirectX::XMVectorGetX(r0), DirectX::XMVectorGetY(r0),
-            DirectX::XMVectorGetX(r1), DirectX::XMVectorGetY(r1),
-            DirectX::XMVectorGetX(r3), DirectX::XMVectorGetY(r3)
-        );
-    }
-
-    DirectX::XMMATRIX AsXMMatrix() const
-    {
-        return m_rawMatrix;
-    }
-
-    explicit operator D2D1_MATRIX_3X2_F() const
-    {
-        DirectX::XMVECTOR r0 = m_rawMatrix.r[0];
-        DirectX::XMVECTOR r1 = m_rawMatrix.r[1];
-        DirectX::XMVECTOR r3 = m_rawMatrix.r[3];
-
-        return D2D1::Matrix3x2F(
-            DirectX::XMVectorGetX(r0), DirectX::XMVectorGetY(r0),
-            DirectX::XMVectorGetX(r1), DirectX::XMVectorGetY(r1),
-            DirectX::XMVectorGetX(r3), DirectX::XMVectorGetY(r3)
-        );
+        return Vector2(r[0].Length(), r[1].Length());
     }
 
 public: // 유틸리티 함수
     static Matrix3x2 Translation(float x, float y)
     {
-        return Matrix3x2(DirectX::XMMatrixTranslation(x, y, 0.0f));
+        return Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, x, y);
     }
 
     static Matrix3x2 Translation(Vector2 position)
     {
-        return Matrix3x2(DirectX::XMMatrixTranslation(position.GetX(), position.GetY(), 0.0f));
+        return Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, position.x, position.y);
     }
 
-    static Matrix3x2 Rotation(float angleDegrees)
+    static Matrix3x2 Rotation(float degree)
     {
-        return Matrix3x2(DirectX::XMMatrixRotationZ(DirectX::XMConvertToRadians(angleDegrees)));
+        float radian = degree * MyMath::DegToRad;
+        float cosResult = std::cos(radian);
+        float sinResult = std::sin(radian);
+
+        return Matrix3x2(cosResult, -sinResult, sinResult, cosResult, 0.0f, 0.0f);
     }
 
-    static Matrix3x2 Scale(float sx, float sy)
+    static Matrix3x2 Scale(float x, float y)
     {
-        return Matrix3x2(DirectX::XMMatrixScaling(sx, sy, 1.0f));
+        return Matrix3x2(x, 0.0f, 0.0f, y, 0.0f, 0.0f);
     }
 
     static Matrix3x2 Scale(Vector2 scale)
     {
-        return Matrix3x2(DirectX::XMMatrixScaling(scale.GetX(), scale.GetY(), 1.0f));
+        return Matrix3x2(scale.x, 0.0f, 0.0f, scale.y, 0.0f, 0.0f);
     }
 
     Matrix3x2 Inverse() const
     {
-        DirectX::XMVECTOR determinant;
+        float determinant = _11 * _22 - _12 * _21;
 
-        return Matrix3x2(DirectX::XMMatrixInverse(&determinant, m_rawMatrix));
+        if (std::fabs(determinant) < MyMath::EPSILON)
+        {
+            assert(false && "0으로 나누고 있습니다");
+            return Identity();
+        }
+
+        Matrix3x2 result;
+
+        result._11 = _22 / determinant;
+        result._12 = -_12 / determinant;
+        result._21 = -_21 / determinant;
+        result._22 = _11 / determinant;
+        result._31 = -(_31 * result._11 + _32 * result._21);
+        result._32 = -(_31 * result._12 + _32 * result._22);
+
+        return result;
     }
 
     static Matrix3x2 Identity()
     {
-        return Matrix3x2(DirectX::XMMatrixIdentity());
+        return Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
     }
 
     void ResetScale(float scaleX = 1.0f, float scaleY = 1.0f)
     {
-        // 현재 행렬에서 스케일, 회전, 변환을 분리합니다.
-        DirectX::XMVECTOR scale;
-        DirectX::XMVECTOR rotation;
-        DirectX::XMVECTOR translation;
-        DirectX::XMMatrixDecompose(&scale, &rotation, &translation, m_rawMatrix);
+        Vector2 xAxis = r[0];
+        Vector2 yAxis = r[1];
 
-        // 스케일을 (1, 1, 1)로 재구성합니다 (Z는 2D 행렬에서 항상 1.0f).
-        DirectX::XMVECTOR newScale = DirectX::XMVectorSet(scaleX, scaleY, 1.0f, 0.0f); // 0.0f for W
+        float currentScaleX = r[0].Length();
+        float currentScaleY = r[1].Length();
 
-        // 새로운 스케일, 기존 회전, 기존 변환을 사용하여 행렬을 재조립합니다.
-        m_rawMatrix = DirectX::XMMatrixTransformation(
-            DirectX::g_XMIdentityR0, // ScaleOrigin (사용하지 않음)
-            DirectX::g_XMIdentityR1, // ScaleRotation (사용하지 않음)
-            newScale,                // New Scale
-            DirectX::g_XMIdentityR2, // RotationOrigin (사용하지 않음)
-            rotation,                // Existing Rotation
-            translation              // Existing Translation
-        );
+        float invScaleX = (currentScaleX != 0.0f) ? (1.0f / currentScaleX) : 0.0f;
+        float invScaleY = (currentScaleY != 0.0f) ? (1.0f / currentScaleY) : 0.0f;
+
+        xAxis *= invScaleX;
+        yAxis *= invScaleY;
+
+        xAxis *= scaleX;
+        yAxis *= scaleY;
+
+        r[0] = xAxis;
+        r[1] = yAxis;
     }
 };

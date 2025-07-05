@@ -32,12 +32,14 @@ void AnimationTestScene::Enter()
 	textRenderer->SetSpaceType(SpaceType::Screen);
 	textRenderer->SetFontSize(15.0f);
 	textRenderer->SetPivot({ 0.5f, 0.0f });
-	textRenderer->SetPoint({ 100.0f, 0.0f });
+	//textRenderer->SetPoint({ 100.0f, 0.0f });
 	textRenderer->SetRectSize({ 300.0f, 400.0f });
 	textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
 	textRenderer->SetSortOrder(3);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
 	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
+
+	go->GetTransform()->SetLocalPosition({ 100.0f, 0.0f });
 	
 	std::wostringstream oss;
 	oss << L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Jump\n"
@@ -54,7 +56,8 @@ void AnimationTestScene::Enter()
 	hpViewer->SetTargetName(L"Ken");
 
 	textRenderer = go->AddComponent<TextRenderer>();
-	textRenderer->SetPoint({ 0.0f, 300.0f });
+	go->GetTransform()->SetLocalPosition({ 0.0f, 300.0f });
+	//textRenderer->SetPoint({ 0.0f, 300.0f });
 
 	health->GetOnChangeHp().Add(hpViewer, &HpViewer::ChangeHpText);
 }

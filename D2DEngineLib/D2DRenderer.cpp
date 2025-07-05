@@ -13,12 +13,18 @@
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "dwrite.lib")
 
+constexpr int MAX_SORT_ORDER = 100;
+
 using Microsoft::WRL::ComPtr;
 
 D2DRenderer::D2DRenderer(HWND hWnd, UINT width, UINT height)
 	: m_hWnd{ hWnd }, m_width{ width }, m_height{ height }
 {
-	
+	m_renderQueues.resize(static_cast<int>(SpaceType::MAX));
+	for (auto& queue : m_renderQueues)
+	{
+		queue.resize(MAX_SORT_ORDER);
+	}
 }
 
 HRESULT D2DRenderer::Initialize()
@@ -124,6 +130,10 @@ HRESULT D2DRenderer::Initialize()
 	m_unityMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 		Matrix3x2::Translation(m_width / 2.0f, m_height / 2.0f);
 
+	D2D1_MATRIX_3X2_F a;
+	D2D1_MATRIX_3X2_F b;
+	D2D1_MATRIX_3X2_F c = a * b;
+
 	return S_OK;
 }
 
@@ -184,36 +194,24 @@ ComPtr<IDWriteTextFormat> D2DRenderer::CreateTextFormat(float fontSize)
 
 void D2DRenderer::RegisterRendererToQueue(IRenderer* renderer)
 {
-	m_renderQueue[static_cast<int>(renderer->GetSpaceType())].push_back(renderer);
+	m_renderQueues[static_cast<int>(renderer->GetSpaceType())][renderer->GetSortOrder()].push_back(renderer);
 }
 
 void D2DRenderer::PrepareRenderQueue()
 {
-	std::sort(
-		m_renderQueue[static_cast<int>(SpaceType::World)].begin(),
-		m_renderQueue[static_cast<int>(SpaceType::World)].end(),
-		[](const IRenderer* a, const IRenderer* b) {
-			if (a->GetSortOrder() != b->GetSortOrder())
-			{
-				return a->GetSortOrder() < b->GetSortOrder();
-			}
-
-			return a->GetY() > b->GetY();
+	for (auto& spaceTypeGroup : m_renderQueues)
+	{
+		for (auto& sortOrderGroup : spaceTypeGroup)
+		{
+			std::sort(
+				sortOrderGroup.begin(),
+				sortOrderGroup.end(),
+				[](const IRenderer* a, const IRenderer* b) {
+					return a->GetY() > b->GetY();
+				}
+			);
 		}
-	);
-
-	std::sort(
-		m_renderQueue[static_cast<int>(SpaceType::Screen)].begin(),
-		m_renderQueue[static_cast<int>(SpaceType::Screen)].end(),
-		[](const IRenderer* a, const IRenderer* b) {
-			if (a->GetSortOrder() != b->GetSortOrder())
-			{
-				return a->GetSortOrder() < b->GetSortOrder();
-			}
-
-			return a->GetY() > b->GetY();
-		}
-	);
+	}
 }
 
 void D2DRenderer::ExecuteRenderQueue()
@@ -227,14 +225,15 @@ void D2DRenderer::ExecuteRenderQueue()
 		m_d2dSolidColorBrush
 	};
 
-	for (const auto& renderer : m_renderQueue[static_cast<int>(SpaceType::World)])
+	for (const auto& spaceTypeGroup : m_renderQueues)
 	{
-		renderer->Render(context);
-	}
-
-	for (const auto& renderer : m_renderQueue[static_cast<int>(SpaceType::Screen)])
-	{
-		renderer->Render(context);
+		for (const auto& sortOrderGroup : spaceTypeGroup)
+		{
+			for (const auto& renderer : sortOrderGroup)
+			{
+				renderer->Render(context);
+			}
+		}
 	}
 
 	ClearQueue();
@@ -247,6 +246,11 @@ void D2DRenderer::Trim()
 
 void D2DRenderer::ClearQueue()
 {
-	m_renderQueue[static_cast<int>(SpaceType::Screen)].clear();
-	m_renderQueue[static_cast<int>(SpaceType::World)].clear();
+	for (auto& spaceTypeGroup : m_renderQueues)
+	{
+		for (auto& sortOrderGroup : spaceTypeGroup)
+		{
+			sortOrderGroup.clear();
+		}
+	}
 }

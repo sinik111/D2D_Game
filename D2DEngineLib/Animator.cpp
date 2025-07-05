@@ -150,5 +150,5 @@ void Animator::SetSpriteData()
 		}
 	);
 
-	m_bitmapRenderer->SetPivot({ sprite.pivotX, sprite.pivotY - 1.0f });
+	m_bitmapRenderer->SetPivot({ sprite.pivotX, sprite.pivotY });
 }

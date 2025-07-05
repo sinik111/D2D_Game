@@ -30,10 +30,10 @@ void TextRendererSystem::Update()
 	const float halfScreenWidth = m_d2dRenderer->GetWidth() / 2.0f * zoomFactor;
 	const float halfScreenHeight = m_d2dRenderer->GetHeight() / 2.0f * zoomFactor;
 
-	const float viewLeft = cameraPosition.GetX() - halfScreenWidth;
-	const float viewRight = cameraPosition.GetX() + halfScreenWidth;
-	const float viewBottom = cameraPosition.GetY() - halfScreenHeight;
-	const float viewTop = cameraPosition.GetY() + halfScreenHeight;
+	const float viewLeft = cameraPosition.x - halfScreenWidth;
+	const float viewRight = cameraPosition.x + halfScreenWidth;
+	const float viewBottom = cameraPosition.y - halfScreenHeight;
+	const float viewTop = cameraPosition.y + halfScreenHeight;
 
 	for (const auto& renderer : m_textRenderers)
 	{
@@ -51,13 +51,13 @@ void TextRendererSystem::Update()
 
 			const D2D1_SIZE_F rectSize = renderer->GetRectSize();
 
-			const float rectHalfWidth = rectSize.width * worldScale.GetX() / 2.0f;
-			const float rectHalfHeight = rectSize.height * worldScale.GetY() / 2.0f;
+			const float rectHalfWidth = rectSize.width * worldScale.x / 2.0f;
+			const float rectHalfHeight = rectSize.height * worldScale.y / 2.0f;
 
-			const float rectLeft = worldPosition.GetX() - rectHalfWidth;
-			const float rectRight = worldPosition.GetX() + rectHalfWidth;
-			const float rectBottom = worldPosition.GetY() - rectHalfHeight;
-			const float rectTop = worldPosition.GetY() + rectHalfHeight;
+			const float rectLeft = worldPosition.x - rectHalfWidth;
+			const float rectRight = worldPosition.x + rectHalfWidth;
+			const float rectBottom = worldPosition.y - rectHalfHeight;
+			const float rectTop = worldPosition.y + rectHalfHeight;
 
 			if (rectRight < viewLeft || rectLeft > viewRight ||
 				rectTop < viewBottom || rectBottom > viewTop)

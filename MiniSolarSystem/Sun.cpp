@@ -7,6 +7,7 @@
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/Random.h"
 #include "../D2DEngineLib/MyTime.h"
+#include "../D2DEngineLib/Debug.h"
 
 #include "Earth.h"
 
@@ -26,6 +27,7 @@ void Sun::Start()
     BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>(L"Sun.png");
     bitmapRenderer->SetOpacity(0.3f);
     //bitmapRenderer->SetSourceRect({ 30.0f, 30.0f, 60.0f, 60.0f });
+    //bitmapRenderer->SetPivot({ 0.5f, 0.0f });
 
     GetTransform()->SetLocalPosition({ 0.0f, 0.0f });
 
@@ -58,7 +60,8 @@ void Sun::CreateEarth()
     {
         GameObject* newEarth = CreateGameObject(L"Earth");
         newEarth->AddComponent<Earth>();
-        newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
+        auto bitmap = newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
+        bitmap->SetSortOrder(Random::Int(0, 99));
         newEarth->GetTransform()->SetLocalPosition(Random::Float(-1600.0f, 1600.0f), Random::Float(-1200.0f, 1200.0f));
 
         m_earths.push_back(newEarth);

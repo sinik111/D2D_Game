@@ -15,18 +15,11 @@
 
 void Earth::Start()
 {
-    //TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
-
-    //textRenderer->SetText(L"지구");
-    //textRenderer->SetSpaceType(SpaceType::World);
-    //textRenderer->SetFontSize(30.0f);
-    //textRenderer->SetRectSize({ 100.0f, 100.0f });
-    //textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
-    //textRenderer->SetSortOrder(2);
-    //textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
-    //textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
-
-    GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
+    auto bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
+    if (bitmapRenderer == nullptr)
+    {
+        GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
+    }
 
     GetTransform()->SetLocalScale({ 0.5f, 0.5f });
     
@@ -35,6 +28,17 @@ void Earth::Start()
     if (IsValid(m_health))
     {
         m_health->SetHp(100, 100);
+
+        TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+
+        textRenderer->SetText(L"지구");
+        textRenderer->SetSpaceType(SpaceType::World);
+        textRenderer->SetFontSize(30.0f);
+        textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
+        textRenderer->SetSortOrder(2);
+        textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+        textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+        textRenderer->SetRectSize({ 100.0f, 100.0f });
     }
 
     m_speed = 60.0f;
@@ -48,8 +52,8 @@ void Earth::Update()
         {
             m_health->TakeDamage(10);
         }
-        float worldX = GetTransform()->GetWorldPosition().GetX();
-        float worldY = GetTransform()->GetWorldPosition().GetY();
+        float worldX = GetTransform()->GetWorldPosition().x;
+        float worldY = GetTransform()->GetWorldPosition().y;
 
         std::wstringstream ss;
         ss << std::fixed << std::setprecision(2)

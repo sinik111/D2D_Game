@@ -23,6 +23,8 @@ BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 		m_bitmapResource->GetSize().width,
 		m_bitmapResource->GetSize().height
 	};
+
+	MakeCachedRenderMatrix();
 }
 
 BitmapRenderer::~BitmapRenderer()
@@ -38,46 +40,22 @@ const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& BitmapRenderer::GetBitmap() const
 void BitmapRenderer::Render(const RenderContext& context) const
 {
 	const Matrix3x2 worldMatrix = GetTransform()->GetWorldMatrix();
-	const Matrix3x2 unityMatrix = context.unityMatrix;
-	const Matrix3x2 viewUnityMatrix = context.viewUnityMatrix;
-
-	const float bitmapHalfWidth = (m_sourceRect.right - m_sourceRect.left) * m_pivot.GetX();
-	const float bitmapHalfHeight = (m_sourceRect.bottom - m_sourceRect.top) * m_pivot.GetY();
-
-	const Matrix3x2 renderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-		Matrix3x2::Translation(-bitmapHalfWidth, bitmapHalfHeight);
 
 	Matrix3x2 finalMatrix;
 
 	switch (m_spaceType)
 	{
 	case SpaceType::Screen:
-	{
-		if (m_doFlipX)
-		{
-			finalMatrix = renderMatrix * Matrix3x2::Scale(-1.0f, 1.0f) * worldMatrix * unityMatrix;
-		}
-		else
-		{
-			finalMatrix = renderMatrix * worldMatrix * unityMatrix;
-		}
-	}
+		finalMatrix = m_cachedRenderMatrix * worldMatrix * context.unityMatrix;
+
 		break;
 	case SpaceType::World:
-	{
-		if (m_doFlipX)
-		{
-			finalMatrix = renderMatrix * Matrix3x2::Scale(-1.0f, 1.0f) * worldMatrix * viewUnityMatrix;
-		}
-		else
-		{
-			finalMatrix = renderMatrix * worldMatrix * viewUnityMatrix;
-		}
-	}
+		finalMatrix = m_cachedRenderMatrix * worldMatrix * context.viewUnityMatrix;
+
 		break;
 	}
 
-	context.deviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(finalMatrix));
+	context.deviceContext->SetTransform(finalMatrix);
 	context.deviceContext->DrawBitmap(
 		m_bitmapResource->GetBitmap().Get(),
 		nullptr,
@@ -104,7 +82,12 @@ SpaceType BitmapRenderer::GetSpaceType() const
 
 float BitmapRenderer::GetY() const
 {
-	return GetTransform()->GetWorldPosition().GetY();
+	return GetTransform()->GetWorldPosition().y;
+}
+
+Vector2 BitmapRenderer::GetPivot() const
+{
+	return m_pivot;
 }
 
 D2D1_RECT_F BitmapRenderer::GetSourceRect() const
@@ -139,6 +122,8 @@ void BitmapRenderer::SetSortOrder(int sortOrder)
 void BitmapRenderer::SetFlipX(bool doFlip)
 {
 	m_doFlipX = doFlip;
+
+	MakeCachedRenderMatrix();
 }
 
 void BitmapRenderer::SetSpaceType(SpaceType spaceType)
@@ -149,14 +134,35 @@ void BitmapRenderer::SetSpaceType(SpaceType spaceType)
 void BitmapRenderer::SetSourceRect(const D2D1_RECT_F& sourceRect)
 {
 	m_sourceRect = sourceRect;
+
+	MakeCachedRenderMatrix();
 }
 
 void BitmapRenderer::SetPivot(const Vector2& pivot)
 {
 	m_pivot = pivot;
+
+	MakeCachedRenderMatrix();
 }
 
 void BitmapRenderer::SetOpacity(float opacity)
 {
 	m_opacity = opacity;
+}
+
+void BitmapRenderer::MakeCachedRenderMatrix()
+{
+	if (m_doFlipX)
+	{
+		m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+			Matrix3x2::Translation(-(m_sourceRect.right - m_sourceRect.left) * m_pivot.x,
+				(std::fabsf(m_sourceRect.bottom - m_sourceRect.top)) * (1 - m_pivot.y)) *
+			Matrix3x2::Scale(-1.0f, 1.0f);
+	}
+	else
+	{
+		m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+			Matrix3x2::Translation(-(m_sourceRect.right - m_sourceRect.left) * m_pivot.x,
+				(std::fabsf(m_sourceRect.bottom - m_sourceRect.top)) * (1 - m_pivot.y));
+	}
 }

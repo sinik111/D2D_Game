@@ -31,10 +31,10 @@ void BitmapRendererSystem::Update()
 	const float halfScreenWidth = m_d2dRenderer->GetWidth() / 2.0f * zoomFactor;
 	const float halfScreenHeight = m_d2dRenderer->GetHeight() / 2.0f * zoomFactor;
 
-	const float viewLeft = cameraPosition.GetX() - halfScreenWidth;
-	const float viewRight = cameraPosition.GetX() + halfScreenWidth;
-	const float viewBottom = cameraPosition.GetY() - halfScreenHeight;
-	const float viewTop = cameraPosition.GetY() + halfScreenHeight;
+	const float viewLeft = cameraPosition.x - halfScreenWidth;
+	const float viewRight = cameraPosition.x + halfScreenWidth;
+	const float viewBottom = cameraPosition.y - halfScreenHeight;
+	const float viewTop = cameraPosition.y + halfScreenHeight;
 
 	for (const auto& renderer : m_bitmapRenderers)
 	{
@@ -48,16 +48,17 @@ void BitmapRendererSystem::Update()
 		{
 			const Vector2 worldPosition = renderer->GetTransform()->GetWorldPosition();
 			const Vector2 worldScale = renderer->GetTransform()->GetWorldScale();
+			const Vector2 pivot = renderer->GetPivot();
 
 			const D2D1_RECT_F sourceRect = renderer->GetSourceRect();
 
-			const float bitmapHalfWidth = (sourceRect.right - sourceRect.left) * worldScale.GetX() / 2.0f;
-			const float bitmapHalfHeight = (sourceRect.bottom - sourceRect.top) * worldScale.GetY() / 2.0f;
+			const float bitmapWidth = (sourceRect.right - sourceRect.left) * worldScale.x;
+			const float bitmapHeight = (std::fabsf(sourceRect.bottom - sourceRect.top)) * worldScale.y;
 
-			const float bitmapLeft = worldPosition.GetX() - bitmapHalfWidth;
-			const float bitmapRight = worldPosition.GetX() + bitmapHalfWidth;
-			const float bitmapBottom = worldPosition.GetY() - bitmapHalfHeight;
-			const float bitmapTop = worldPosition.GetY() + bitmapHalfHeight;
+			const float bitmapLeft = worldPosition.x - bitmapWidth * pivot.x;
+			const float bitmapRight = worldPosition.x + bitmapWidth * (1.0f - pivot.x);
+			const float bitmapBottom = worldPosition.y - bitmapHeight * pivot.y;
+			const float bitmapTop = worldPosition.y + bitmapHeight * (1.0f - pivot.y);
 
 			if (bitmapRight < viewLeft || bitmapLeft > viewRight ||
 				bitmapTop < viewBottom || bitmapBottom > viewTop)

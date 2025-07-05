@@ -9,6 +9,9 @@ TextRenderer::TextRenderer()
 	ComponentSystem::Get().TextRenderer().Register(this);
 
 	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
+
+	m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x, m_rectSize.height * m_pivot.y);
 }
 
 TextRenderer::~TextRenderer()
@@ -36,14 +39,12 @@ void TextRenderer::SetSortOrder(int sortOrder)
 	m_sortOrder = sortOrder;
 }
 
-void TextRenderer::SetPoint(const D2D1_POINT_2F& point)
-{
-	m_point = point;
-}
-
 void TextRenderer::SetRectSize(const D2D1_SIZE_F& size)
 {
 	m_rectSize = size;
+
+	m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x, m_rectSize.height * m_pivot.y);	
 }
 
 void TextRenderer::SetFontSize(float size)
@@ -110,6 +111,9 @@ void TextRenderer::SetHorizontalAlignment(HorizontlAlignment align)
 void TextRenderer::SetPivot(const Vector2& pivot)
 {
 	m_pivot = pivot;
+
+	m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
+		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x, m_rectSize.height * m_pivot.y);
 }
 
 Microsoft::WRL::ComPtr<IDWriteTextFormat> TextRenderer::GetTextFormat() const
@@ -129,46 +133,32 @@ D2D1_COLOR_F TextRenderer::GetColor() const
 
 void TextRenderer::Render(const RenderContext& context) const
 {
-	const Matrix3x2 worldMatrix = GetTransform()->GetWorldMatrix();
-	const Matrix3x2 unityMatrix = context.unityMatrix;
-	const Matrix3x2 viewUnityMatrix = context.viewUnityMatrix;
+	Vector2 position = GetTransform()->GetWorldPosition();
 
 	Matrix3x2 finalMatrix;
-
-	const D2D1_RECT_F layoutRect
-	{
-		m_point.x,
-		-m_point.y,
-		m_point.x + m_rectSize.width,
-		-m_point.y + m_rectSize.height
-	};
 
 	switch (m_spaceType)
 	{
 	case SpaceType::Screen:
-	{
-		finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-			Matrix3x2::Translation(-m_rectSize.width * m_pivot.GetX(), m_rectSize.height * m_pivot.GetY()) *
-			unityMatrix;
-	}
-		break;
-	case SpaceType::World:
-	{
-		finalMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
-			Matrix3x2::Translation(-m_rectSize.width * m_pivot.GetX(), m_rectSize.height * m_pivot.GetY()) *
+		finalMatrix = m_cachedRenderMatrix *
 			GetTransform()->GetWorldMatrix() *
-			viewUnityMatrix;
-	}
+			context.unityMatrix;
+		break;
+
+	case SpaceType::World:
+		finalMatrix = m_cachedRenderMatrix *
+			GetTransform()->GetWorldMatrix() *
+			context.viewUnityMatrix;
 		break;
 	}
 
 	context.solidBrush->SetColor(m_color);
-	context.deviceContext->SetTransform(static_cast<D2D1_MATRIX_3X2_F>(finalMatrix));
+	context.deviceContext->SetTransform(finalMatrix);
 	context.deviceContext->DrawTextW(
 		m_text.c_str(),
 		static_cast<UINT32>(m_text.size()),
 		m_textFormat.Get(),
-		layoutRect,
+		{ 0.0f, 0.0f, m_rectSize.width, m_rectSize.height },
 		context.solidBrush.Get());
 }
 
@@ -184,12 +174,7 @@ int TextRenderer::GetSortOrder() const
 
 float TextRenderer::GetY() const
 {
-	return GetTransform()->GetWorldPosition().GetY();
-}
-
-D2D1_POINT_2F TextRenderer::GetPoint() const
-{
-	return m_point;
+	return GetTransform()->GetWorldPosition().y;
 }
 
 D2D1_SIZE_F TextRenderer::GetRectSize() const
