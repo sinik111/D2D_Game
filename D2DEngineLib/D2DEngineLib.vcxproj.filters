@@ -180,6 +180,9 @@
     <ClInclude Include="Object.h">
       <Filter>02_Object</Filter>
     </ClInclude>
+    <ClInclude Include="Bound.h">
+      <Filter>99_Utility\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -280,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>02_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bound.cpp">
+      <Filter>99_Utility\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -59,17 +59,6 @@ public: // 연산자 오버로딩
         return D2D1_MATRIX_3X2_F{ _11, _12, _21, _22, _31, _32 };
     }
 
-public: // Get
-    Vector2 GetPosition() const
-    {
-        return r[2];
-    }
-
-    Vector2 GetScale() const
-    {
-        return Vector2(r[0].Length(), r[1].Length());
-    }
-
 public: // 유틸리티 함수
     static Matrix3x2 Translation(float x, float y)
     {
@@ -125,6 +114,14 @@ public: // 유틸리티 함수
     static Matrix3x2 Identity()
     {
         return Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
+    }
+
+    Vector2 TransformPoint(const Vector2& point) const
+    {
+        return Vector2(
+            point.x * _11 + point.y * _21 + _31,
+            point.x * _12 + point.y * _22 + _32
+        );
     }
 
     void ResetScale(float scaleX = 1.0f, float scaleY = 1.0f)

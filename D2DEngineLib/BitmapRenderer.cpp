@@ -112,6 +112,8 @@ void BitmapRenderer::SetBitmap(const std::wstring& filePath)
 	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
 
 	m_sourceRect = { 0.0f, 0.0f, m_bitmapResource->GetSize().width, m_bitmapResource->GetSize().height };
+
+	MakeRenderMatrix();
 }
 
 void BitmapRenderer::SetSortOrder(int sortOrder)

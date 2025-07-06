@@ -6,7 +6,7 @@ class MyMath
 {
 public:
 	static constexpr float EPSILON = 0.0001f;
-	static constexpr float PI = 3.1415f;
+	static constexpr float PI = 3.1415926535f;
 	static constexpr float RadToDeg = 180.0f / PI;
 	static constexpr float DegToRad = PI / 180.0f;
 
