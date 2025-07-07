@@ -9,8 +9,6 @@ TextRenderer::TextRenderer()
 	ComponentSystem::Get().TextRenderer().Register(this);
 
 	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
-
-	MakeRenderMatrix();
 }
 
 TextRenderer::~TextRenderer()
@@ -42,7 +40,7 @@ void TextRenderer::SetRectSize(const D2D1_SIZE_F& size)
 {
 	m_rectSize = size;
 
-	MakeRenderMatrix();
+	m_isTextDirty = true;
 }
 
 void TextRenderer::SetFontSize(float size)
@@ -110,7 +108,7 @@ void TextRenderer::SetPivot(const Vector2& pivot)
 {
 	m_pivot = pivot;
 
-	MakeRenderMatrix();
+	m_isTextDirty = true;
 }
 
 void TextRenderer::MakeRenderMatrix()
@@ -135,20 +133,44 @@ D2D1_COLOR_F TextRenderer::GetColor() const
 	return m_color;
 }
 
+void TextRenderer::Update()
+{
+	if (m_isTextDirty || GetTransform()->GetIsDirtyThisFrame())
+	{
+		if (m_isTextDirty)
+		{
+			MakeRenderMatrix();
+		}
+
+		const Matrix3x2& worldMatrix = GetTransform()->GetWorldMatrix();
+
+		m_cachedRenderWorldMatrix = m_cachedRenderMatrix * worldMatrix;
+
+		D2D1_RECT_F localRect{
+			-m_rectSize.width * m_pivot.x,
+			m_rectSize.height * (1.0f - m_pivot.y),
+			m_rectSize.width * (1.0f - m_pivot.x),
+			-m_rectSize.height * m_pivot.y
+		};
+
+		m_bounds = Bounds::RectToWorldBounds(localRect, worldMatrix);
+
+		m_isTextDirty = false;
+	}
+}
+
 void TextRenderer::Render(const RenderContext& context) const
 {
-	const Matrix3x2 worldMatrix = GetTransform()->GetWorldMatrix();
-
 	Matrix3x2 finalMatrix;
 
 	switch (m_spaceType)
 	{
 	case SpaceType::Screen:
-		finalMatrix = m_cachedRenderMatrix * worldMatrix * context.unityMatrix;
+		finalMatrix = m_cachedRenderWorldMatrix * context.unityMatrix;
 		break;
 
 	case SpaceType::World:
-		finalMatrix = m_cachedRenderMatrix * worldMatrix * context.viewUnityMatrix;
+		finalMatrix = m_cachedRenderWorldMatrix * context.viewUnityMatrix;
 		break;
 	}
 
@@ -190,4 +212,9 @@ float TextRenderer::GetFontSize() const
 Vector2 TextRenderer::GetPivot() const
 {
 	return m_pivot;
+}
+
+const Bounds& TextRenderer::GetBounds() const
+{
+	return m_bounds;
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Component.h"
-#include "Matrix3x2.h"
 
 class Camera :
 	public Component
@@ -11,6 +10,7 @@ public:
 
 private:
 	Matrix3x2 m_cachedViewMatrix;
+	Bounds m_visibleBounds;
 	float m_zoomFactor = 1.0f;
 	bool m_isDirty = true;
 
@@ -19,8 +19,9 @@ public:
 	~Camera() override;
 
 public:
-	void Update();;
-	const Matrix3x2& GetViewMatrix();
+	void Update();
+	const Matrix3x2& GetViewMatrix() const;
+	const Bounds& GetVisibleBounds() const;
 
 	float GetZoom() const;
 	void SetZoom(float zoomFactor);

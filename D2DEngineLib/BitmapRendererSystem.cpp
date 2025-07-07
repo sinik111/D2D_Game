@@ -25,19 +25,12 @@ void BitmapRendererSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
 
 void BitmapRendererSystem::Update()
 {
-	const Vector2 cameraPosition = Camera::s_mainCamera->GetTransform()->GetWorldPosition();
-	const float zoomFactor = Camera::s_mainCamera->GetZoom();
-
-	const float halfScreenWidth = m_d2dRenderer->GetWidth() / 2.0f * zoomFactor;
-	const float halfScreenHeight = m_d2dRenderer->GetHeight() / 2.0f * zoomFactor;
-
-	const float viewLeft = cameraPosition.x - halfScreenWidth;
-	const float viewRight = cameraPosition.x + halfScreenWidth;
-	const float viewBottom = cameraPosition.y - halfScreenHeight;
-	const float viewTop = cameraPosition.y + halfScreenHeight;
+	const Bounds& visibleBounds = Camera::s_mainCamera->GetVisibleBounds();
 
 	for (const auto& renderer : m_bitmapRenderers)
 	{
+		renderer->Update();
+
 		switch (renderer->GetSpaceType())
 		{
 		case SpaceType::Screen:
@@ -46,22 +39,9 @@ void BitmapRendererSystem::Update()
 
 		case SpaceType::World:
 		{
-			const Vector2 worldPosition = renderer->GetTransform()->GetWorldPosition();
-			const Vector2 worldScale = renderer->GetTransform()->GetWorldScale();
-			const Vector2 pivot = renderer->GetPivot();
+			const Bounds& bounds = renderer->GetBounds();
 
-			const D2D1_RECT_F sourceRect = renderer->GetSourceRect();
-
-			const float bitmapWidth = (sourceRect.right - sourceRect.left) * worldScale.x;
-			const float bitmapHeight = (std::fabsf(sourceRect.bottom - sourceRect.top)) * worldScale.y;
-
-			const float bitmapLeft = worldPosition.x - bitmapWidth * pivot.x;
-			const float bitmapRight = worldPosition.x + bitmapWidth * (1.0f - pivot.x);
-			const float bitmapBottom = worldPosition.y - bitmapHeight * pivot.y;
-			const float bitmapTop = worldPosition.y + bitmapHeight * (1.0f - pivot.y);
-
-			if (bitmapRight < viewLeft || bitmapLeft > viewRight ||
-				bitmapTop < viewBottom || bitmapBottom > viewTop)
+			if (!Bounds::IsOverlap(visibleBounds, bounds))
 			{
 				continue;
 			}

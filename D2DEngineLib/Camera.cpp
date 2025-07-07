@@ -32,14 +32,29 @@ void Camera::Update()
 		worldMatrix = Matrix3x2::Scale(scale) * worldMatrix;
 
 		m_cachedViewMatrix = worldMatrix.Inverse();
-		
-	worldMatrix.ResetScale(m_zoomFactor, m_zoomFactor);
+
+		float halfScreenWidth = Screen::Get().GetWidth() * 0.5f;
+		float halfScreenHeight = Screen::Get().GetHeight() * 0.5f;
+
+		D2D1_RECT_F screenRect{
+			-halfScreenWidth,
+			-halfScreenHeight,
+			halfScreenWidth,
+			halfScreenHeight
+		};
+
+		m_visibleBounds = Bounds::RectToWorldBounds(screenRect, worldMatrix);
 
 		m_isDirty = false;
 	}
 }
 
-const Matrix3x2& Camera::GetViewMatrix()
+const Bounds& Camera::GetVisibleBounds() const
+{
+	return m_visibleBounds;
+}
+
+const Matrix3x2& Camera::GetViewMatrix() const
 {
 	return m_cachedViewMatrix;
 }

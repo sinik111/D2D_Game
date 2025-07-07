@@ -28,10 +28,11 @@ private:
 	std::wstring m_text = L"text"; // 출력할 텍스트
 
 	Matrix3x2 m_cachedRenderMatrix;
-
+	Matrix3x2 m_cachedRenderWorldMatrix;
 	D2D1_COLOR_F m_color{ 0.0f, 0.0f, 0.0f, 1.0f }; // 텍스트 색 (RGBA)
 	Vector2 m_pivot{ 0.5f, 0.5f };
 	D2D1_SIZE_F m_rectSize{ 50.0f, 20.0f }; // 텍스트를 출력할 사각형 사이즈
+	Bounds m_bounds;
 	float m_fontSize = 10.0f; // 텍스트 폰트 크기
 
 	SpaceType m_spaceType = SpaceType::Screen; // 출력 타입
@@ -40,6 +41,8 @@ private:
 	HorizontlAlignment m_horizontalAlignment = HorizontlAlignment::Left; // 가로 정렬
 
 	int m_sortOrder{}; // 정렬 순서
+
+	bool m_isTextDirty = true;
 
 public:
 	TextRenderer();
@@ -52,7 +55,9 @@ public:
 	D2D1_SIZE_F GetRectSize() const;
 	float GetFontSize() const;
 	Vector2 GetPivot() const;
+	const Bounds& GetBounds() const;
 
+	void Update();
 	void Render(const RenderContext& context) const override;
 	SpaceType GetSpaceType() const override;
 	int GetSortOrder() const override;

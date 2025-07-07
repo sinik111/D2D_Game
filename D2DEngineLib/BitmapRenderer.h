@@ -12,12 +12,15 @@ private:
 	std::shared_ptr<BitmapResource> m_bitmapResource;
 	std::wstring m_filePath;
 	Matrix3x2 m_cachedRenderMatrix;
+	Matrix3x2 m_cachedRenderWorldMatrix;
 	SpaceType m_spaceType = SpaceType::World;
 	D2D1_RECT_F m_sourceRect{};
+	Bounds m_bounds;
 	Vector2 m_pivot{ 0.5f, 0.5f };
 	int m_sortOrder = 0;
 	float m_opacity = 1.0f;
 	bool m_doFlipX = false;
+	bool m_isBitmapDirty = true;
 
 public:
 	BitmapRenderer();
@@ -29,14 +32,14 @@ public:
 	bool GetFlipX() const;
 	D2D1_RECT_F GetSourceRect() const;
 	float GetOpacity() const;
+	Vector2 GetPivot() const;
+	const Bounds& GetBounds() const;
 
+	void Update();
 	void Render(const RenderContext& context) const override;
 	int GetSortOrder() const override;
 	SpaceType GetSpaceType() const override;
 	float GetY() const override;
-
-public:
-	Vector2 GetPivot() const;
 
 public:
 	void SetBitmap(const std::wstring& filePath);

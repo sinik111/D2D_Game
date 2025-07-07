@@ -21,7 +21,7 @@ void Earth::Start()
         GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
     }
 
-    GetTransform()->SetLocalScale({ 0.5f, 0.5f });
+    GetTransform()->SetLocalScale({ 0.1f, 0.1f });
     
     m_health = GetGameObject()->GetComponent<Health>();
 
@@ -29,16 +29,16 @@ void Earth::Start()
     {
         m_health->SetHp(100, 100);
 
-        TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
+        //TextRenderer* textRenderer = GetGameObject()->AddComponent<TextRenderer>();
 
-        textRenderer->SetText(L"지구");
-        textRenderer->SetSpaceType(SpaceType::World);
-        textRenderer->SetFontSize(30.0f);
-        textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
-        textRenderer->SetSortOrder(2);
-        textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
-        textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
-        textRenderer->SetRectSize({ 100.0f, 100.0f });
+        //textRenderer->SetText(L"지구");
+        //textRenderer->SetSpaceType(SpaceType::World);
+        //textRenderer->SetFontSize(30.0f);
+        //textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
+        //textRenderer->SetSortOrder(2);
+        //textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+        //textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+        //textRenderer->SetRectSize({ 100.0f, 100.0f });
     }
 
     m_speed = 60.0f;
@@ -62,10 +62,9 @@ void Earth::Update()
             << GetTransform()->GetLocalRotation();
 
         m_onRotationChange.Invoke(ss.str());
+
+        GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
     }
-
-    GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
-
 
     if (m_isFired)
     {
