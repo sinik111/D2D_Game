@@ -146,7 +146,7 @@
     <ClInclude Include="BitmapRenderer.h" />
     <ClInclude Include="BitmapRendererSystem.h" />
     <ClInclude Include="BitmapResource.h" />
-    <ClInclude Include="Bound.h" />
+    <ClInclude Include="Bounds.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CoInitializer.h" />
     <ClInclude Include="Component.h" />
@@ -170,6 +170,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="RectUtil.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="TextRendererSystem.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="ContainerUtility.h" />
+    <ClInclude Include="TransformSystem.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="WinApp.h" />
   </ItemGroup>
@@ -190,7 +192,6 @@
     <ClCompile Include="BitmapRenderer.cpp" />
     <ClCompile Include="BitmapRendererSystem.cpp" />
     <ClCompile Include="BitmapResource.cpp" />
-    <ClCompile Include="Bound.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
@@ -221,6 +222,7 @@
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="TextRendererSystem.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="TransformSystem.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="WinApp.cpp" />
   </ItemGroup>

@@ -1,12 +1,11 @@
 #pragma once
 
-#include <memory>
-
 #include "ScriptSystem.h"
 #include "BitmapRendererSystem.h"
 #include "TextRendererSystem.h"
 #include "PlayerInputSystem.h"
 #include "AnimatorSystem.h"
+#include "TransformSystem.h"
 
 class Component;
 
@@ -18,6 +17,7 @@ private:
 	std::unique_ptr<TextRendererSystem> m_textRendererSystem;
 	std::unique_ptr<PlayerInputSystem> m_playerInputSystem;
 	std::unique_ptr<AnimatorSystem> m_animatorSystem;
+	std::unique_ptr<TransformSystem> m_transformSystem;
 
 private:
 	ComponentSystem();
@@ -36,4 +36,5 @@ public:
 	TextRendererSystem& TextRenderer();
 	PlayerInputSystem& PlayerInput();
 	AnimatorSystem& Animator();
+	TransformSystem& Transform();
 };

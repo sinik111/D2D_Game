@@ -93,7 +93,7 @@ public: // 유틸리티 함수
     {
         float determinant = _11 * _22 - _12 * _21;
 
-        if (std::fabs(determinant) < MyMath::EPSILON)
+        if (std::abs(determinant) < MyMath::EPSILON)
         {
             assert(false && "0으로 나누고 있습니다");
             return Identity();
@@ -118,10 +118,38 @@ public: // 유틸리티 함수
 
     Vector2 TransformPoint(const Vector2& point) const
     {
-        return Vector2(
-            point.x * _11 + point.y * _21 + _31,
-            point.x * _12 + point.y * _22 + _32
-        );
+        return Vector2(point.x * _11 + point.y * _21 + _31, point.x * _12 + point.y * _22 + _32);
+    }
+
+    Vector2 TransformVector(const Vector2& v) const
+    {
+        return Vector2(v.x * _11 + v.y * _21, v.x * _12 + v.y * _22);
+    }
+
+    Vector2 GetScale() const
+    {
+        return Vector2(std::sqrt(_11 * _11 + _12 * _12), std::sqrt(_21 * _21 + _22 * _22));
+    }
+
+    Vector2 GetPosition() const
+    {
+        return r[2];
+    }
+
+    float GetRotation() const
+    {
+        Vector2 xAxis = r[0];
+
+        float currentScaleX = xAxis.Length();
+        if (std::abs(currentScaleX) < MyMath::EPSILON)
+        {
+            return 0.0f;
+        }
+        xAxis *= (1.0f / currentScaleX);
+
+        float radian = std::atan2(xAxis.y, xAxis.x);
+
+        return radian * MyMath::RadToDeg;
     }
 
     void ResetScale(float scaleX = 1.0f, float scaleY = 1.0f)

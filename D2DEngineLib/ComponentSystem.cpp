@@ -6,7 +6,8 @@ ComponentSystem::ComponentSystem()
 	m_bitmapRendererSystem{ std::make_unique<BitmapRendererSystem>() },
 	m_textRendererSystem{ std::make_unique<TextRendererSystem>() },
 	m_playerInputSystem{ std::make_unique<PlayerInputSystem>() },
-	m_animatorSystem{ std::make_unique<AnimatorSystem>() }
+	m_animatorSystem{ std::make_unique<AnimatorSystem>() },
+	m_transformSystem{ std::make_unique<TransformSystem>() }
 {
 	
 }
@@ -41,4 +42,9 @@ PlayerInputSystem& ComponentSystem::PlayerInput()
 AnimatorSystem& ComponentSystem::Animator()
 {
 	return *m_animatorSystem.get();
+}
+
+TransformSystem& ComponentSystem::Transform()
+{
+	return *m_transformSystem.get();
 }

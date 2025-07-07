@@ -180,7 +180,13 @@
     <ClInclude Include="Object.h">
       <Filter>02_Object</Filter>
     </ClInclude>
-    <ClInclude Include="Bound.h">
+    <ClInclude Include="Bounds.h">
+      <Filter>99_Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformSystem.h">
+      <Filter>04_Component\ComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="RectUtil.h">
       <Filter>99_Utility\Math</Filter>
     </ClInclude>
   </ItemGroup>
@@ -284,8 +290,8 @@
     <ClCompile Include="Object.cpp">
       <Filter>02_Object</Filter>
     </ClCompile>
-    <ClCompile Include="Bound.cpp">
-      <Filter>99_Utility\Math</Filter>
+    <ClCompile Include="TransformSystem.cpp">
+      <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

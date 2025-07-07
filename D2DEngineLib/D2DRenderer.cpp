@@ -13,7 +13,7 @@
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "dwrite.lib")
 
-constexpr int MAX_SORT_ORDER = 100;
+constexpr int MAX_SORT_ORDER = 30;
 
 using Microsoft::WRL::ComPtr;
 

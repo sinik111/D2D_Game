@@ -158,13 +158,13 @@ void BitmapRenderer::MakeRenderMatrix()
 	{
 		m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 			Matrix3x2::Translation(-(m_sourceRect.right - m_sourceRect.left) * m_pivot.x,
-				(std::fabsf(m_sourceRect.bottom - m_sourceRect.top)) * (1 - m_pivot.y)) *
+				(std::abs(m_sourceRect.bottom - m_sourceRect.top)) * (1 - m_pivot.y)) *
 			Matrix3x2::Scale(-1.0f, 1.0f);
 	}
 	else
 	{
 		m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 			Matrix3x2::Translation(-(m_sourceRect.right - m_sourceRect.left) * m_pivot.x,
-				(std::fabsf(m_sourceRect.bottom - m_sourceRect.top)) * (1 - m_pivot.y));
+				(std::abs(m_sourceRect.bottom - m_sourceRect.top)) * (1 - m_pivot.y));
 	}
 }

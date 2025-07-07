@@ -7,6 +7,11 @@
 
 static constexpr float MaxDegree = 360.0f;
 
+Transform::Transform()
+{
+	ComponentSystem::Get().Transform().Register(this);
+}
+
 Transform::~Transform()
 {
 	if (m_parent != nullptr)
@@ -18,6 +23,8 @@ Transform::~Transform()
 	{
 		child->SetParent(nullptr);
 	}
+
+	ComponentSystem::Get().Transform().Unregister(this);
 }
 
 const Vector2& Transform::GetLocalPosition() const
@@ -35,49 +42,55 @@ const Vector2& Transform::GetLocalScale() const
 	return m_localScale;
 }
 
-const Vector2& Transform::GetWorldScale()
-{
-	if (m_isDirty || m_isScaleDirty)
-	{
-		m_worldScale = m_parent != nullptr ?
-			Vector2(m_localScale.x * m_parent->GetWorldScale().x,
-				m_localScale.y * m_parent->GetWorldScale().y) :
-			m_localScale;
-
-		m_isScaleDirty = false;
-	}
-
-	return m_worldScale;
-}
-
 const Vector2& Transform::GetWorldPosition()
 {
-	if (m_isDirty || m_isPositionDirty)
+	if (m_isDirty)
 	{
-		m_worldPosition = m_parent != nullptr ?
-			GetWorldMatrix().r[2] :
-			m_localPosition;
-
-		m_isPositionDirty = false;
+		CalculateWorldMatrix();
 	}
 
-	return m_worldPosition;
+	return m_cachedWorld.r[2];
+}
+
+Vector2 Transform::GetWorldScale()
+{
+	if (m_isDirty)
+	{
+		CalculateWorldMatrix();
+	}
+
+	return m_cachedWorld.GetScale();
+}
+
+float Transform::GetWorldRotation()
+{
+	if (m_isDirty)
+	{
+		CalculateWorldMatrix();
+	}
+
+	return m_cachedWorld.GetRotation();
 }
 
 const Matrix3x2& Transform::GetWorldMatrix()
 {
 	if (m_isDirty)
 	{
-		Matrix3x2 localMatrix = MakeLocalMatrix();
-
-		m_cachedWorld = m_parent != nullptr ? 
-			localMatrix * m_parent->GetWorldMatrix() : 
-			localMatrix;
-
-		m_isDirty = false;
+		CalculateWorldMatrix();
 	}
 
 	return m_cachedWorld;
+}
+
+void Transform::CalculateWorldMatrix()
+{
+	const Matrix3x2& localMatrix = MakeLocalMatrix();
+
+	m_cachedWorld = m_parent != nullptr ?
+		localMatrix * m_parent->GetWorldMatrix() :
+		localMatrix;
+
+	m_isDirty = false;
 }
 
 Transform* Transform::GetParent() const
@@ -100,7 +113,6 @@ void Transform::SetLocalPosition(const Vector2& position)
 	m_localPosition = position;
 
 	MarkDirty();
-	MarkPositionDirty();
 }
 
 void Transform::SetLocalRotation(float angle)
@@ -119,7 +131,6 @@ void Transform::SetLocalScale(const Vector2& scale)
 {
 	m_localScale = scale;
 
-	MarkScaleDirty();
 	MarkDirty();
 }
 
@@ -143,8 +154,6 @@ void Transform::SetParent(Transform* parent)
 	}
 
 	MarkDirty();
-	MarkScaleDirty();
-	MarkPositionDirty();
 }
 
 void Transform::Reset()
@@ -180,49 +189,36 @@ void Transform::Rotate(float angle)
 	MarkDirty();
 }
 
+bool Transform::GetIsDirtyThisFrame() const
+{
+	return m_isDirtyThisFrame;
+}
+
+void Transform::UnmarkDirtyThisFrame()
+{
+	m_isDirtyThisFrame = false;
+}
+
 Matrix3x2 Transform::MakeLocalMatrix()
 {
-	return Matrix3x2::Scale(m_localScale) * 
-		Matrix3x2::Rotation(m_localRotation) * 
+	return Matrix3x2::Scale(m_localScale) *
+		Matrix3x2::Rotation(m_localRotation) *
 		Matrix3x2::Translation(m_localPosition);
 }
 
 void Transform::MarkDirty()
 {
-	if (!m_isDirty)
+	if (m_isDirty && m_isDirtyThisFrame)
 	{
-		m_isDirty = true;
-
-		for (const auto& child : m_children)
-		{
-			child->MarkDirty();
-		}
+		return;
 	}
-}
 
-void Transform::MarkScaleDirty()
-{
-	if (!m_isScaleDirty)
+	m_isDirty = true;
+	m_isDirtyThisFrame = true;
+
+	for (const auto& child : m_children)
 	{
-		m_isScaleDirty = true;
-
-		for (const auto& child : m_children)
-		{
-			child->MarkScaleDirty();
-		}
-	}
-}
-
-void Transform::MarkPositionDirty()
-{
-	if (!m_isPositionDirty)
-	{
-		m_isPositionDirty = true;
-
-		for (const auto& child : m_children)
-		{
-			child->MarkPositionDirty();
-		}
+		child->MarkDirty();
 	}
 }
 

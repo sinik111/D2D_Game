@@ -13,6 +13,7 @@
 #include "MyTimeSystem.h"
 #include "DebugSystem.h"
 #include "Screen.h"
+#include "Camera.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -128,6 +129,8 @@ void WinApp::Update()
 
 	SceneManager::Get().CheckSceneChanged();
 
+	ComponentSystem::Get().Transform().UnmarkDirtyThisFrame();
+
 	ComponentSystem::Get().PlayerInput().Update();
 	ComponentSystem::Get().PlayerInput().ProcessInput();
 
@@ -135,6 +138,8 @@ void WinApp::Update()
 	ComponentSystem::Get().Animator().Update();
 
 	SceneManager::Get().Update();
+
+	Camera::s_mainCamera->Update();
 
 	ComponentSystem::Get().BitmapRenderer().Update();
 	ComponentSystem::Get().TextRenderer().Update();

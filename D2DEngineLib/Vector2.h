@@ -43,7 +43,7 @@ public: // 연산자 오버로딩
 	
 	Vector2 operator/(float scalar) const
 	{
-		if (std::fabs(scalar) <= MyMath::EPSILON)
+		if (std::abs(scalar) <= MyMath::EPSILON)
 		{
 			assert(false && "0으로 나누고 있습니다");
 			return Vector2(INFINITY, INFINITY);
@@ -78,7 +78,7 @@ public: // 연산자 오버로딩
 	
 	Vector2& operator/=(float scalar)
 	{
-		if (std::fabs(scalar) <= MyMath::EPSILON)
+		if (std::abs(scalar) <= MyMath::EPSILON)
 		{
 			assert(false && "0으로 나누고 있습니다");
 
@@ -99,7 +99,7 @@ public: // 유틸리티 함수
 	{
 		float length = std::sqrt(x * x + y * y);
 
-		if (std::fabs(length) <= MyMath::EPSILON)
+		if (std::abs(length) <= MyMath::EPSILON)
 		{
 			assert(false && "0으로 나누고 있습니다");
 
@@ -113,7 +113,7 @@ public: // 유틸리티 함수
 	{
 		float length = std::sqrt(x * x + y * y);
 
-		if (std::fabs(length) <= MyMath::EPSILON)
+		if (std::abs(length) <= MyMath::EPSILON)
 		{
 			assert(false && "0으로 나누고 있습니다");
 
@@ -182,6 +182,11 @@ public: // 유틸리티 함수
 		}
 
 		return Dot(v01, v0c) / squareLength;
+	}
+
+	static Vector2 Abs(const Vector2& v)
+	{
+		return Vector2(std::abs(v.x), std::abs(v.y));
 	}
 	
 public:

@@ -61,7 +61,7 @@ void Sun::CreateEarth()
         GameObject* newEarth = CreateGameObject(L"Earth");
         newEarth->AddComponent<Earth>();
         auto bitmap = newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
-        bitmap->SetSortOrder(Random::Int(0, 99));
+        bitmap->SetSortOrder(Random::Int(0, 29));
         newEarth->GetTransform()->SetLocalPosition(Random::Float(-1600.0f, 1600.0f), Random::Float(-1200.0f, 1200.0f));
 
         m_earths.push_back(newEarth);

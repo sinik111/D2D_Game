@@ -8,31 +8,31 @@ class Transform :
 private:
 	Vector2 m_localPosition{ 0.0f, 0.0f };
 	Vector2 m_localScale{ 1.0f, 1.0f };
-
-	Vector2 m_worldScale{ 1.0f, 1.0f };
-	Vector2 m_worldPosition{ 0.0f, 0.0f };
+	float m_localRotation = 0.0f;
 
 	Matrix3x2 m_cachedWorld;
 
 	Transform* m_parent = nullptr;
 	std::vector<Transform*> m_children;
 
-	float m_localRotation = 0.0f;
 	bool m_isDirty = true;
-	bool m_isScaleDirty = true;
-	bool m_isPositionDirty = true;
+	bool m_isDirtyThisFrame = true;
 
 public:
+	Transform();
 	~Transform() override;
 
 public:
 	const Vector2& GetLocalPosition() const;
-	float GetLocalRotation() const;
 	const Vector2& GetLocalScale() const;
+	float GetLocalRotation() const;
 
-	const Vector2& GetWorldScale();
 	const Vector2& GetWorldPosition();
+	Vector2 GetWorldScale();
+	float GetWorldRotation();
+
 	const Matrix3x2& GetWorldMatrix();
+	void CalculateWorldMatrix();
 
 	Transform* GetParent() const;
 	const std::vector<Transform*>& GetChildren();
@@ -54,11 +54,13 @@ public:
 	void Translate(const Vector2& movement);
 	void Rotate(float angle);
 
+public:
+	bool GetIsDirtyThisFrame() const;
+	void UnmarkDirtyThisFrame();
+
 private:
 	Matrix3x2 MakeLocalMatrix();
 	void MarkDirty();
-	void MarkScaleDirty();
-	void MarkPositionDirty();
 	void AddChild(Transform* child);
 	void RemoveChild(Transform* child);
 };
