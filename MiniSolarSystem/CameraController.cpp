@@ -23,8 +23,6 @@ void CameraController::Start()
 void CameraController::Update()
 {
     GetTransform()->Translate(m_direction * m_speed * MyTime::DeltaTime());
-
-    m_direction = Vector2::Zero;
 }
 
 void CameraController::MakeDirection(Vector2 input)
