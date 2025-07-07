@@ -43,8 +43,8 @@ void AnimationTestScene::Enter()
 	
 	std::wostringstream oss;
 	oss << L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Jump\n"
-		<< L"[ W ]: SpinningKick - FireEarth\n[ E ]: Ken takes damage 10\n"
-		<< L"[ R ]: Ken revive";
+		<< L"[ W ]: SpinningKick - FireEarth\n[ E ]: Take 10 damage\n"
+		<< L"[ R ]: Revive";
 
 	textRenderer->SetText(oss.str());
 

@@ -179,7 +179,7 @@ ComPtr<IDWriteTextFormat> D2DRenderer::CreateTextFormat(float fontSize)
 	ComPtr<IDWriteTextFormat> newDWriteTextFormat;
 
 	m_dWriteFactory->CreateTextFormat(
-		L"",
+		L"consolas",
 		nullptr,
 		DWRITE_FONT_WEIGHT_NORMAL,
 		DWRITE_FONT_STYLE_NORMAL,

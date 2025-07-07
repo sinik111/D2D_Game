@@ -21,7 +21,7 @@ void Earth::Start()
         GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
     }
 
-    GetTransform()->SetLocalScale({ 0.1f, 0.1f });
+    GetTransform()->SetLocalScale({ 0.5f, 0.5f });
     
     m_health = GetGameObject()->GetComponent<Health>();
 
