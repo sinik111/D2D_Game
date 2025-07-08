@@ -20,7 +20,7 @@ WinApp.cpp line 132 - 각 ComponentSystem Update 설명
 D2DRenderer.cpp - 출력에 필요한 자원 생성에 관련된 것들 가짐. 출력될 Renderer들을 등록받아서 출력 호출해줌.
 
 5. Scene의 역할은 어디까지 인가?
-Scene.cpp line 14, SolarSystem.cpp line 17, GameObject.cpp line 35 - Scene은 GameObject의 생성 삭제만을 관리하고 GameObject는 Component의 생성 삭제만을 관리함.
+Scene.cpp line 14, SolarSystem.cpp line 17, GameObject.cpp line 35 - Scene은 GameObject 컨테이너이고 생성 삭제만을 관리하고 GameObject는 Component 컨테이너이고 생성 삭제만을 관리함.
 
 6. 로딩된 리소스 재활용 방식은?
 ResourceManager.h - weak_ptr, shared_ptr을 이용해서 재활용함.
@@ -40,7 +40,7 @@ CameraController.cpp line 15, Ken.cpp line 23 - 단일키, 다중키의 Pressed,
 	방향키(WASD, 화살표 키)에 Vector2를 인자로 갖는 함수 등록 가능. 방향키는 키를 누르든 안누르든 등록된 함수를 호출해서 (0, 0) 벡터도 인자로 올 수 있음.
 
 10. 게임오브젝트도 상속을 사용하였나?
-GameObject는 Component를 소유하고 생성, 삭제하는 컨테이너 역할
+Object라는 베이스 클래스를 제외하고는 사용하지 않음. GameObject는 Component를 소유하고 생성, 삭제하는 컨테이너 역할
 
 11. 컨텐츠 구현은 어떤 클래스를 상속하거나 생성하여 작성하여야 하는가?
 컨텐츠 구현은 유니티처럼 GameObject를 생성하고 GameObject에 필요한 Component들을 붙이고 Script Component를 상속한 클래스에 로직을 작성해서 컨텐츠를 구현함.
@@ -48,8 +48,9 @@ GameObject는 Component를 소유하고 생성, 삭제하는 컨테이너 역할
 12. Script Component의 생명주기 함수
 ScriptSystem.cpp line 7 - ScriptSystem에 Script가 등록되면 Initialize 할 vector목록에 추가됨. Initialize 후에 Start할 목록에 추가됨.
 	Start 후에는 Update, LateUpdate 목록에 추가됨.
-Script.cpp line 32 - Update, LateUpdate가 override 되지 않았다면 Update, LateUpdate 목록에서 제거됨. 가상함수는 함수 호출될 때 가상함수 테이블을 참고해서 ... 
-	그런데 Update, LateUpdate를 구현했는데도 사용자가 부모의 Update, LateUpdate를 호출하면 목록에서 제거될 위험이 있어서,
-	부모 클래스 Script에서 해당 함수들을 private으로 선언하고 호출해줄 ScriptSystem 클래스는 friend로 허용해두고 자식은 부모의 함수를 오버라이드는 할 수 있지만 호출은 못하게 함.
-
-
+Script.cpp line 32 - 가상함수는 함수 호출될 때 런타임에 가상함수 테이블을 참조해서 호출하기 때문에 비용이 듦.
+	override 되지 않은 Update, LateUpdate는 호출 될 필요가 없음. Update, LateUpdate가 override 되지 않았다면 Update, LateUpdate 목록에서 제거됨.
+	그런데 Update, LateUpdate가 override 되었는데도 사용자가 실수로 부모의 Update, LateUpdate를 호출하면 목록에서 제거될 위험이 있음.
+	부모 클래스 Script에서 해당 함수들을 private으로 선언함.
+	Update, LateUpdate를 호출해줄 ScriptSystem 클래스는 friend로 허용해둠.
+	자식은 부모의 함수를 오버라이드는 할 수 있지만 호출은 못하게 함.

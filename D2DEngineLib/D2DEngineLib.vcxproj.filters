@@ -189,6 +189,12 @@
     <ClInclude Include="RectUtil.h">
       <Filter>99_Utility\Math</Filter>
     </ClInclude>
+    <ClInclude Include="BoxCollider2D.h">
+      <Filter>04_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody2D.h">
+      <Filter>04_Component\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -292,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="TransformSystem.cpp">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider2D.cpp">
+      <Filter>04_Component\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody2D.cpp">
+      <Filter>04_Component\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

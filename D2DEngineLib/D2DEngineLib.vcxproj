@@ -147,6 +147,7 @@
     <ClInclude Include="BitmapRendererSystem.h" />
     <ClInclude Include="BitmapResource.h" />
     <ClInclude Include="Bounds.h" />
+    <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CoInitializer.h" />
     <ClInclude Include="Component.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="RectUtil.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="RigidBody2D.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Screen.h" />
@@ -192,6 +194,7 @@
     <ClCompile Include="BitmapRenderer.cpp" />
     <ClCompile Include="BitmapRendererSystem.cpp" />
     <ClCompile Include="BitmapResource.cpp" />
+    <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
@@ -214,6 +217,7 @@
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="RigidBody2D.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Screen.cpp" />
