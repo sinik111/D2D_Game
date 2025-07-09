@@ -30,8 +30,8 @@ public:
 public:
     void Update();
 
-    float GetDeltaTime() const;
-    float GetFixedDeltaTime() const;
+    float DeltaTime() const;
+    float FixedDeltaTime() const;
 
     void SetTimeScale(float timeScale);
     void SetFixedDeltaTime(float fixedDeltaTime);

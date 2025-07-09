@@ -42,7 +42,7 @@ void Sun::Start()
 
 void Sun::Update()
 {
-    GetTransform()->Rotate(m_speed * MyTime::GetDeltaTime());
+    GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 }
 
 void Sun::OnDestroy()

@@ -81,7 +81,7 @@ void Animator::Update()
 {
 	if (!m_isFinished)
 	{
-		m_timer += MyTimeSystem::Get().GetDeltaTime() * m_playSpeed;
+		m_timer += MyTimeSystem::Get().DeltaTime() * m_playSpeed;
 
 		if (m_timer >= m_currentClip->duration)
 		{

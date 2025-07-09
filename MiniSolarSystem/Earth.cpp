@@ -63,15 +63,15 @@ void Earth::Update()
 
         m_onRotationChange.Invoke(ss.str());
 
-        GetTransform()->Rotate(m_speed * MyTime::GetDeltaTime());
+        GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
     }
 
     if (m_isFired)
     {
-        GetTransform()->Translate(Vector2::Right * 200.0f * MyTime::GetDeltaTime());
-        GetTransform()->Rotate(-600.0f * MyTime::GetDeltaTime());
+        GetTransform()->Translate(Vector2::Right * 200.0f * MyTime::DeltaTime());
+        GetTransform()->Rotate(-600.0f * MyTime::DeltaTime());
 
-        m_destroyTimer += MyTime::GetDeltaTime();
+        m_destroyTimer += MyTime::DeltaTime();
         if (m_destroyTimer > 1.0f)
         {
             Destroy(GetGameObject());
