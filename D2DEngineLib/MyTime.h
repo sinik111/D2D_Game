@@ -13,7 +13,7 @@ private:
     ~MyTime() = default;
 
 public:
-    static float DeltaTime();
+    static float GetDeltaTime();
     static TimePoint GetTimestamp();
     static TimePoint GetAccumulatedTime(const TimePoint& timePoint, int seconds);
     static float GetElapsedSeconds(const TimePoint& timePoint);

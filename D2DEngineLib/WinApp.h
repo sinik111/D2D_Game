@@ -42,6 +42,9 @@ private:
 	void Update();
 	void Render();
 
+private:
+	void Profiling();
+
 protected:
 	virtual void MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	friend LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);	

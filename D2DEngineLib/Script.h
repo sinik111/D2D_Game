@@ -16,6 +16,7 @@ public:
 private:
 	virtual void Initialize();
 	virtual void Start();
+	virtual void FixedUpdate();
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void OnDestroy();

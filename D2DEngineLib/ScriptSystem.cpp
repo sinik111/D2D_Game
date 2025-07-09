@@ -16,8 +16,14 @@ void ScriptSystem::Unregister(Script* script)
 	Util::OptimizedErase(m_scriptsForPendingInitialize, script);
 	Util::OptimizedErase(m_scriptsForInitialize, script);
 	Util::OptimizedErase(m_scriptsForStart, script);
+	Util::OptimizedErase(m_scriptsForFixedUpdate, script);
 	Util::OptimizedErase(m_scriptsForUpdate, script);
 	Util::OptimizedErase(m_scriptsForLateUpdate, script);
+}
+
+void ScriptSystem::UnregisterFixedUpdate(Script* script)
+{
+	m_pendingUnregisterForFixedUpdate.push_back(script);
 }
 
 void ScriptSystem::UnregisterUpdate(Script* script)
@@ -28,14 +34,6 @@ void ScriptSystem::UnregisterUpdate(Script* script)
 void ScriptSystem::UnregisterLateUpdate(Script* script)
 {
 	m_pendingUnregisterForLateUpdate.push_back(script);
-}
-
-void ScriptSystem::Update()
-{
-	CallInitialize();
-	CallStart();
-	CallUpdate();
-	CallLateUpdate();
 }
 
 void ScriptSystem::CallInitialize()
@@ -71,11 +69,30 @@ void ScriptSystem::CallStart()
 		{
 			script->Start();
 
+			m_scriptsForFixedUpdate.push_back(script);
 			m_scriptsForUpdate.push_back(script);
 			m_scriptsForLateUpdate.push_back(script);
 		}
 
 		m_scriptsForStart.clear();
+	}
+}
+
+void ScriptSystem::CallFixedUpdate()
+{
+	for (const auto& script : m_scriptsForFixedUpdate)
+	{
+		script->FixedUpdate();
+	}
+
+	if (!m_pendingUnregisterForFixedUpdate.empty())
+	{
+		for (const auto& script : m_pendingUnregisterForFixedUpdate)
+		{
+			Util::OptimizedErase(m_scriptsForFixedUpdate, script);
+		}
+
+		m_pendingUnregisterForFixedUpdate.clear();
 	}
 }
 

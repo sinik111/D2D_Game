@@ -9,14 +9,19 @@ using Duration = std::chrono::duration<float>;
 class MyTimeSystem
 {
 private:
-    TimePoint m_previousTime;
-    TimePoint m_currentTime;
+    TimePoint m_previousTime = Clock::now();
+    TimePoint m_currentTime = Clock::now();
 
     float m_deltaTime = 0.0f;
+    float m_fixedDeltaTime = 0.02f;
     float m_timeScale = 1.0f;
 
 private:
-    MyTimeSystem();
+    MyTimeSystem() = default;
+    MyTimeSystem(const MyTimeSystem&) = delete;
+    MyTimeSystem operator=(const MyTimeSystem&) = delete;
+    MyTimeSystem(MyTimeSystem&&) = delete;
+    MyTimeSystem operator=(MyTimeSystem&&) = delete;
     ~MyTimeSystem() = default;
 
 public:
@@ -24,6 +29,10 @@ public:
 
 public:
     void Update();
-    float DeltaTime();
+
+    float GetDeltaTime() const;
+    float GetFixedDeltaTime() const;
+
     void SetTimeScale(float timeScale);
+    void SetFixedDeltaTime(float fixedDeltaTime);
 };

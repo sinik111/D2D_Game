@@ -3,9 +3,9 @@
 
 #include "MyTimeSystem.h"
 
-float MyTime::DeltaTime()
+float MyTime::GetDeltaTime()
 {
-    return MyTimeSystem::Get().DeltaTime();
+    return MyTimeSystem::Get().GetDeltaTime();
 }
 
 TimePoint MyTime::GetTimestamp()

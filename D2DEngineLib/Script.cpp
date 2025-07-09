@@ -29,6 +29,11 @@ void Script::Start()
 
 }
 
+void Script::FixedUpdate()
+{
+	ComponentSystem::Get().Script().UnregisterFixedUpdate(this);
+}
+
 void Script::Update()
 {
 	// 자식에서 Update()가 override되지 않았을 경우 Update 리스트에서 제거함

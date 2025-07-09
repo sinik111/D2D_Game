@@ -113,6 +113,51 @@ void WinApp::Run()
 
 void WinApp::Update()
 {
+	MyTimeSystem::Get().Update();
+	
+	Profiling();
+
+	ComponentSystem::Get().Transform().UnmarkDirtyThisFrame();
+
+	SceneManager::Get().CheckSceneChanged();
+
+	ComponentSystem::Get().Script().CallInitialize();
+
+	ComponentSystem::Get().Script().CallStart();
+
+	ComponentSystem::Get().Script().CallFixedUpdate();
+
+	// process physics
+
+	ComponentSystem::Get().PlayerInput().Update();
+
+	ComponentSystem::Get().PlayerInput().ProcessInput();
+
+	ComponentSystem::Get().Script().CallUpdate();
+
+	ComponentSystem::Get().Animator().Update();
+
+	ComponentSystem::Get().Script().CallLateUpdate();
+
+	SceneManager::Get().Update(); // cleanup destroyed gameObjects/components
+}
+
+void WinApp::Render()
+{
+	Camera::s_mainCamera->Update();
+
+	ComponentSystem::Get().BitmapRenderer().Update();
+	ComponentSystem::Get().TextRenderer().Update();
+
+	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
+	m_d2dRenderer->ExecuteRenderQueue();
+	m_d2dRenderer->EndDraw();
+}
+
+void WinApp::Profiling()
+{
+	Debug::UpdateFPS(true);
+
 	HANDLE hProcess = GetCurrentProcess();
 	PROCESS_MEMORY_COUNTERS_EX pmc;
 	pmc.cb = sizeof(PROCESS_MEMORY_COUNTERS_EX);
@@ -122,34 +167,6 @@ void WinApp::Update()
 
 	DebugSystem::Get().SetDRAMCurrentUsage(pmc.WorkingSetSize);
 	DebugSystem::Get().SetPageFileCurrentUsage(pmc.PagefileUsage);
-	
-
-	MyTimeSystem::Get().Update();
-	Debug::UpdateFPS(true);
-
-	SceneManager::Get().CheckSceneChanged();
-
-	ComponentSystem::Get().Transform().UnmarkDirtyThisFrame();
-
-	ComponentSystem::Get().PlayerInput().Update();
-	ComponentSystem::Get().PlayerInput().ProcessInput();
-
-	ComponentSystem::Get().Script().Update();
-	ComponentSystem::Get().Animator().Update();
-
-	SceneManager::Get().Update();
-
-	Camera::s_mainCamera->Update();
-
-	ComponentSystem::Get().BitmapRenderer().Update();
-	ComponentSystem::Get().TextRenderer().Update();
-}
-
-void WinApp::Render()
-{
-	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
-	m_d2dRenderer->ExecuteRenderQueue();
-	m_d2dRenderer->EndDraw();
 }
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

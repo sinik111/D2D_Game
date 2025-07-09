@@ -1,12 +1,6 @@
 #include "pch.h"
 #include "MyTimeSystem.h"
 
-MyTimeSystem::MyTimeSystem()
-    : m_previousTime{ Clock::now() }, m_currentTime{ Clock::now() }
-{
-
-}
-
 MyTimeSystem& MyTimeSystem::Get()
 {
     static MyTimeSystem s_instance;
@@ -25,12 +19,22 @@ void MyTimeSystem::Update()
     m_previousTime = m_currentTime;
 }
 
-float MyTimeSystem::DeltaTime()
+float MyTimeSystem::GetDeltaTime() const
 {
     return m_deltaTime * m_timeScale;
+}
+
+float MyTimeSystem::GetFixedDeltaTime() const
+{
+    return m_fixedDeltaTime * m_timeScale;
 }
 
 void MyTimeSystem::SetTimeScale(float timeScale)
 {
     m_timeScale = timeScale;
+}
+
+void MyTimeSystem::SetFixedDeltaTime(float fixedDeltaTime)
+{
+    m_fixedDeltaTime = fixedDeltaTime;
 }
