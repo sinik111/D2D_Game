@@ -25,10 +25,9 @@ private:
 	bool m_isFinished = true;
 
 public:
-	Animator();
-	~Animator() override;
+	void RegisterToSystem() override;
+	void UnregisterFromSystem() override;
 
-public:
 	void SetSpriteSheet(const std::wstring& filePath);
 	void AddAnimationClip(const std::wstring& filePath);
 

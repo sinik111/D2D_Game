@@ -6,21 +6,27 @@
 class Script :
 	public Component
 {
-public:
-	Script();
-	~Script() override;
+private:
+	bool m_isStarted = false;
 
 public:
 	GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 
+	void SetEnabled(bool enabled) override;
+
 private:
-	virtual void Initialize();
+	void RegisterToSystem() override;
+	void UnregisterFromSystem() override;
+
+	void Initialize() override;
+	virtual void OnEnable();
 	virtual void Start();
 	virtual void FixedUpdate();
 	virtual void Update();
 	virtual void LateUpdate();
-	virtual void OnDestroy();
+	virtual void OnDisable();
+	void OnDestroy() override;
 
 	friend class ScriptSystem;
-	friend void GameObject::CallOnDestroy(Script* script);
+	friend class GameObject;
 };

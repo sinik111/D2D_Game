@@ -26,7 +26,7 @@ public:
 	static SceneManager& Get();
 
 public:
-	void Update();
+	void CleanupDestroyedObjects();
 	void Shutdown();
 
 public:
@@ -34,6 +34,7 @@ public:
 	Scene* GetCurrentScene();
 	void ChangeScene(const std::wstring& name);
 	void CheckSceneChanged();
+	void InitializeGameObjectsCreatedLastFrame();
 
 public:
 	template<typename T>
