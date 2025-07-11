@@ -23,9 +23,12 @@ private:
 	bool m_isBitmapDirty = true;
 
 public:
-	BitmapRenderer();
+	BitmapRenderer() = default;
 	BitmapRenderer(const std::wstring& filePath);
-	~BitmapRenderer() override;
+
+public:
+	void RegisterToSystem() override;
+	void UnregisterFromSystem() override;
 
 public:
 	const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& GetBitmap() const;

@@ -1,8 +1,6 @@
 #include "../D2DEngineLib/framework.h"
 #include "Health.h"
 
-#include <cmath>
-
 int Health::GetHp() const
 {
 	return m_hp;

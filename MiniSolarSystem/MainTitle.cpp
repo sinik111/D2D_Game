@@ -2,13 +2,16 @@
 #include "MainTitle.h"
 
 #include "../D2DEngineLib/Camera.h"
+
 #include "TitleSceneChange.h"
 
 void MainTitle::Enter()
 {
-	GameObject* camera = CreateGameObject(L"Camera");
-	camera->AddComponent<Camera>();
-
-	GameObject* go = CreateGameObject(L"SceneChange");
-	go->AddComponent<TitleSceneChange>();
+	GameObject* camera = CreateGameObjectWithComponents(L"Camera",
+		camera->AddComponent<Camera>();
+	);
+	
+	GameObject* go = CreateGameObjectWithComponents(L"SceneChange",
+		go->AddComponent<TitleSceneChange>();
+	);
 }

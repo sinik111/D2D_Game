@@ -20,9 +20,14 @@ void SceneManager::Shutdown()
 	m_scenes.clear();
 }
 
-void SceneManager::Update()
+void SceneManager::CleanupDestroyedObjects()
 {
-	m_currentScene->Update();
+	m_currentScene->CleanupDestroyedObjects();
+}
+
+void SceneManager::InitializeObjectsCreatedLastFrame()
+{
+	m_currentScene->InitializeObjectsCreatedLastFrame();
 }
 
 void SceneManager::ChangeScene(const std::wstring& name)
