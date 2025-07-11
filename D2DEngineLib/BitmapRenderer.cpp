@@ -5,16 +5,9 @@
 #include "ResourceManager.h"
 #include "Transform.h"
 
-BitmapRenderer::BitmapRenderer()
-{
-	ComponentSystem::Get().BitmapRenderer().Register(this);
-}
-
 BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 	: m_filePath{ filePath }
 {
-	ComponentSystem::Get().BitmapRenderer().Register(this);
-
 	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
 
 	m_sourceRect = {
@@ -25,7 +18,12 @@ BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 	};
 }
 
-BitmapRenderer::~BitmapRenderer()
+void BitmapRenderer::RegisterToSystem()
+{
+	ComponentSystem::Get().BitmapRenderer().Register(this);
+}
+
+void BitmapRenderer::UnregisterFromSystem()
 {
 	ComponentSystem::Get().BitmapRenderer().Unregister(this);
 }

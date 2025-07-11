@@ -4,19 +4,29 @@
 #include "ComponentSystem.h"
 #include "SceneManager.h"
 
-Script::Script()
-{
-	ComponentSystem::Get().Script().Register(this);
-}
-
 Script::~Script()
 {
-	ComponentSystem::Get().Script().Unregister(this);
+	OnDestroy();
 }
 
 GameObject* Script::CreateGameObject(const std::wstring& name)
 {
 	return SceneManager::Get().GetCurrentScene()->CreateGameObject(name);
+}
+
+GameObject* Script::__CreateGameObject(const std::wstring& name)
+{
+	return SceneManager::Get().GetCurrentScene()->CreateGameObject(name);
+}
+
+void Script::RegisterToSystem()
+{
+	ComponentSystem::Get().Script().Register(this);
+}
+
+void Script::UnregisterFromSystem()
+{
+	ComponentSystem::Get().Script().Unregister(this);
 }
 
 void Script::Initialize()

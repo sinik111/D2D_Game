@@ -5,9 +5,6 @@ class Script;
 class ScriptSystem
 {
 private:
-	std::vector<Script*> m_scripts;
-
-	std::vector<Script*> m_scriptsForPendingInitialize;
 	std::vector<Script*> m_scriptsForInitialize;
 	std::vector<Script*> m_scriptsForStart;
 	std::vector<Script*> m_scriptsForFixedUpdate;
@@ -28,7 +25,6 @@ public:
 	void UnregisterLateUpdate(Script* script);
 
 public:
-	void CallInitialize();
 	void CallStart();
 	void CallFixedUpdate();
 	void CallUpdate();

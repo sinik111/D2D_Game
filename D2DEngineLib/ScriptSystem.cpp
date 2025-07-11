@@ -6,14 +6,11 @@
 
 void ScriptSystem::Register(Script* script)
 {
-	m_scripts.push_back(script);
-	m_scriptsForPendingInitialize.push_back(script);
+	m_scriptsForStart.push_back(script);
 }
 
 void ScriptSystem::Unregister(Script* script)
 {
-	Util::OptimizedErase(m_scripts, script);
-	Util::OptimizedErase(m_scriptsForPendingInitialize, script);
 	Util::OptimizedErase(m_scriptsForInitialize, script);
 	Util::OptimizedErase(m_scriptsForStart, script);
 	Util::OptimizedErase(m_scriptsForFixedUpdate, script);
@@ -34,31 +31,6 @@ void ScriptSystem::UnregisterUpdate(Script* script)
 void ScriptSystem::UnregisterLateUpdate(Script* script)
 {
 	m_pendingUnregisterForLateUpdate.push_back(script);
-}
-
-void ScriptSystem::CallInitialize()
-{
-	while (!m_scriptsForPendingInitialize.empty())
-	{
-		m_scriptsForInitialize.insert(m_scriptsForInitialize.end(),
-			std::make_move_iterator(m_scriptsForPendingInitialize.begin()),
-			std::make_move_iterator(m_scriptsForPendingInitialize.end()));
-
-		m_scriptsForPendingInitialize.clear();
-
-
-		if (!m_scriptsForInitialize.empty())
-		{
-			for (const auto& script : m_scriptsForInitialize)
-			{
-				script->Initialize();
-
-				m_scriptsForStart.push_back(script);
-			}
-
-			m_scriptsForInitialize.clear();
-		}
-	}
 }
 
 void ScriptSystem::CallStart()

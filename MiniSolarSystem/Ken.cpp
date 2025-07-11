@@ -5,7 +5,6 @@
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/SceneManager.h"
-#include "../D2DEngineLib/MyTime.h"
 
 #include "Earth.h"
 #include "FSMContext.h"

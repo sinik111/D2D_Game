@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\D2DEngineLib\Script.h"
+#include "../D2DEngineLib/Script.h"
 #include "../D2DEngineLib/Delegate.h"
 
 class Health;

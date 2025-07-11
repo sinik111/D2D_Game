@@ -46,7 +46,10 @@ private:
 
 public:
 	TextRenderer();
-	~TextRenderer() override;
+
+public:
+	void RegisterToSystem() override;
+	void UnregisterFromSystem() override;
 
 public:
 	Microsoft::WRL::ComPtr<IDWriteTextFormat> GetTextFormat() const;

@@ -4,7 +4,6 @@
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/Camera.h"
 #include "../D2DEngineLib/SceneManager.h"
-#include "../D2DEngineLib/MyTime.h"
 
 void CameraController::Start()
 {

@@ -13,12 +13,9 @@ GameObject::GameObject(const std::wstring& name)
 
 GameObject::~GameObject()
 {
-	for (const auto& comp : m_components)
+	for (const auto& component : m_components)
 	{
-		if (Script* script = dynamic_cast<Script*>(comp.get()))
-		{
-			CallOnDestroy(script);
-		}
+		component->UnregisterFromSystem();
 	}
 }
 
@@ -32,16 +29,13 @@ const std::wstring& GameObject::GetName() const
 	return m_name;
 }
 
-void GameObject::Update()
+void GameObject::CleanupDestroyedComponents()
 {
 	for (size_t i = 0; i < m_components.size(); )
 	{
 		if (m_components[i]->m_isDestroyed)
 		{
-			if (Script* script = dynamic_cast<Script*>(m_components[i].get()))
-			{
-				CallOnDestroy(script);
-			}
+			m_components[i]->UnregisterFromSystem();
 
 			std::swap(m_components[i], m_components.back());
 
@@ -52,6 +46,8 @@ void GameObject::Update()
 
 		++i;
 	}
+
+	m_hasDestroyedComponent = false;
 }
 
 void GameObject::Destroy()
@@ -64,9 +60,47 @@ void GameObject::Destroy()
 	}
 }
 
-void GameObject::CallOnDestroy(Script* script)
+bool GameObject::HasAddedComponent() const
 {
-	script->OnDestroy();
+	return !m_addedComponents.empty();
+}
+
+bool GameObject::HasDestroyedComponents() const
+{
+	return m_hasDestroyedComponent;
+}
+
+void GameObject::Initialize()
+{
+	if (!m_isInitialized)
+	{
+		for (const auto& component : m_components)
+		{
+			component->Initialize();
+			component->RegisterToSystem();
+		}
+
+		m_isInitialized = true;
+	}
+}
+
+void GameObject::InitializeAddedComponents()
+{
+	for (const auto& component : m_addedComponents)
+	{
+		if (IsValid(component))
+		{
+			component->Initialize();
+			component->RegisterToSystem();
+		}
+	}
+
+	m_addedComponents.clear();
+}
+
+void GameObject::MarkComponentDestroyed()
+{
+	m_hasDestroyedComponent = true;
 }
 
 GameObject* GameObject::Find(const std::wstring name)

@@ -5,9 +5,6 @@
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/PlayerInput.h"
-#include "../D2DEngineLib/Random.h"
-#include "../D2DEngineLib/MyTime.h"
-#include "../D2DEngineLib/Debug.h"
 
 #include "Earth.h"
 
@@ -33,8 +30,8 @@ void Sun::Start()
 
     PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
-    playerInput->RegisterActionOnKey('A', KeyState::Held, this, &Sun::CreateEarth);
-    playerInput->RegisterActionOnKey('S', KeyState::Held, this, &Sun::DeleteEarth);
+    //playerInput->RegisterActionOnKey('A', KeyState::Held, this, &Sun::CreateEarth);
+    //playerInput->RegisterActionOnKey('S', KeyState::Held, this, &Sun::DeleteEarth);
     playerInput->RegisterActionOnKey('D', KeyState::Pressed, this, &Sun::DestroySelf);
 
     m_speed = 45.0f;
@@ -43,6 +40,34 @@ void Sun::Start()
 void Sun::Update()
 {
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
+
+    if (Input::IsKeyHeld('A'))
+    {
+        for (int i = 0; i < 100; ++i)
+        {
+            GameObject* newEarth = CreateGameObjectWithComponents(L"Earth",
+                newEarth->AddComponent<Earth>();
+                auto bitmap = newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
+                bitmap->SetSortOrder(Random::Int(0, 29));
+                newEarth->GetTransform()->SetLocalPosition(Random::Float(-1600.0f, 1600.0f), Random::Float(-1200.0f, 1200.0f));
+                );
+
+            m_earths.push_back(newEarth);
+        }
+    }
+
+    if (Input::IsKeyHeld('S'))
+    {
+        for (int i = 0; i < 100; ++i)
+        {
+            if (!m_earths.empty())
+            {
+                Destroy(m_earths.front());
+
+                m_earths.pop_front();
+            }
+        }
+    }
 }
 
 void Sun::OnDestroy()

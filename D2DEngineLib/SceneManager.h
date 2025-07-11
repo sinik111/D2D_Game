@@ -26,7 +26,8 @@ public:
 	static SceneManager& Get();
 
 public:
-	void Update();
+	void CleanupDestroyedObjects();
+	void InitializeObjectsCreatedLastFrame();
 	void Shutdown();
 
 public:

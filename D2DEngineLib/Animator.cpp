@@ -8,12 +8,19 @@
 #include "ComponentSystem.h"
 #include "Debug.h"
 
-Animator::Animator()
+void Animator::Initialize()
+{
+	m_bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
+
+	assert(m_bitmapRenderer != nullptr && L"Animator가 참조할 BitmapRenderer가 없습니다");
+}
+
+void Animator::RegisterToSystem()
 {
 	ComponentSystem::Get().Animator().Register(this);
 }
 
-Animator::~Animator()
+void Animator::UnregisterFromSystem()
 {
 	ComponentSystem::Get().Animator().Unregister(this);
 }
@@ -32,13 +39,6 @@ void Animator::AddAnimationClip(const std::wstring& filePath)
 
 void Animator::Play(const std::wstring& clipName)
 {
-	if (m_bitmapRenderer == nullptr)
-	{
-		m_bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
-
-		assert(m_bitmapRenderer != nullptr && L"Animator가 참조할 BitmapRenderer가 없습니다");
-	}
-
 	const auto& iter = m_animationClips.find(clipName);
 	if (iter == m_animationClips.end())
 	{

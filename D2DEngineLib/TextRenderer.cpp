@@ -6,12 +6,15 @@
 
 TextRenderer::TextRenderer()
 {
-	ComponentSystem::Get().TextRenderer().Register(this);
-
 	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
 }
 
-TextRenderer::~TextRenderer()
+void TextRenderer::RegisterToSystem()
+{
+	ComponentSystem::Get().TextRenderer().Register(this);
+}
+
+void TextRenderer::UnregisterFromSystem()
 {
 	ComponentSystem::Get().TextRenderer().Unregister(this);
 }

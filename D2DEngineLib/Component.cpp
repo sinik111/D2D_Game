@@ -18,11 +18,28 @@ void Component::Destroy(Object* object)
 	object->Destroy();
 }
 
+void Component::RegisterToSystem()
+{
+	
+}
+
+void Component::UnregisterFromSystem()
+{
+	
+}
+
+void Component::Initialize()
+{
+	
+}
+
 void Component::Destroy()
 {
 	assert(dynamic_cast<Transform*>(this) == nullptr && L"Transform 컴포넌트는 삭제할 수 없습니다");
 
 	m_isDestroyed = true;
+
+	m_owner->MarkComponentDestroyed();
 }
 
 void Component::SetOwner(GameObject* gameObject)
