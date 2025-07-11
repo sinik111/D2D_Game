@@ -19,12 +19,12 @@ void MyTimeSystem::Update()
     m_previousTime = m_currentTime;
 }
 
-float MyTimeSystem::DeltaTime() const
+float MyTimeSystem::GetDeltaTime() const
 {
     return m_deltaTime * m_timeScale;
 }
 
-float MyTimeSystem::FixedDeltaTime() const
+float MyTimeSystem::GetFixedDeltaTime() const
 {
     return m_fixedDeltaTime * m_timeScale;
 }

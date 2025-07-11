@@ -43,7 +43,7 @@ void Moon::Update()
         m_health->TakeDamage(10);
     }
 
-    GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
+    GetTransform()->Rotate(m_speed * MyTime::GetDeltaTime());
 
     float worldX = GetTransform()->GetWorldPosition().x;
     float worldY = GetTransform()->GetWorldPosition().y;

@@ -36,7 +36,7 @@ void KenRollState::Update(FSMContext& context)
 		return;
 	}
 
-	context.transform->Translate(Vector2(horizontalInput, 0.0f) * m_speed * MyTime::DeltaTime());
+	context.transform->Translate(Vector2(horizontalInput, 0.0f) * m_speed * MyTime::GetDeltaTime());
 }
 
 void KenRollState::Exit(FSMContext& context)
