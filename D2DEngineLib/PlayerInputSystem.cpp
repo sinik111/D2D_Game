@@ -11,7 +11,7 @@ void PlayerInputSystem::Register(PlayerInput* playerInput)
 
 void PlayerInputSystem::Unregister(PlayerInput* playerInput)
 {
-    m_pendingUnregisteredPlayerInputs.push_back(playerInput);
+    Util::OptimizedErase(m_playerInputs, playerInput);
 }
 
 void PlayerInputSystem::SetWindow(HWND hWnd)
@@ -53,7 +53,7 @@ POINT PlayerInputSystem::GetCursorPoint() const
     return m_mousePoint;
 }
 
-void PlayerInputSystem::ProcessInput()
+void PlayerInputSystem::ProcessInput() const
 {
     for (const auto& playerInput : m_playerInputs)
     {
@@ -63,14 +63,9 @@ void PlayerInputSystem::ProcessInput()
     ProcessArrowInput();
     ProcessWASDInput();
 
-    for (size_t i = 0; i < m_playerInputs.size(); ++i)
+    for (const auto& playerInput : m_playerInputs)
     {
-        m_playerInputs[i]->CallActions();
-    }
-
-    if (!m_pendingUnregisteredPlayerInputs.empty())
-    {
-        Util::OptimizedErase(m_playerInputs, m_pendingUnregisteredPlayerInputs);
+        playerInput->CallActions();
     }
 }
 
@@ -99,9 +94,9 @@ void PlayerInputSystem::ProcessArrowInput() const
         horizontal -= 1.0f;
     }
 
-    for (size_t i = 0; i < m_playerInputs.size(); ++i)
+    for (const auto& playerInput : m_playerInputs)
     {
-        m_playerInputs[i]->CallArrowAction(horizontal, vertical);
+        playerInput->CallArrowAction(horizontal, vertical);
     }
 }
 
@@ -130,8 +125,8 @@ void PlayerInputSystem::ProcessWASDInput() const
         horizontal -= 1.0f;
     }
 
-    for (size_t i = 0; i < m_playerInputs.size(); ++i)
+    for (const auto& playerInput : m_playerInputs)
     {
-        m_playerInputs[i]->CallWASDAction(horizontal, vertical);
+        playerInput->CallWASDAction(horizontal, vertical);
     }
 }

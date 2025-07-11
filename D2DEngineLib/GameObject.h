@@ -13,9 +13,6 @@ private:
 	std::wstring m_name;
 	std::unique_ptr<Transform> m_transform;
 	std::vector<std::unique_ptr<Component>> m_components;
-    bool m_isActiveSelf = true;
-    bool m_isActiveInHierarchy = true;
-    bool m_isInitialized = false;
 
 public:
 	GameObject(const std::wstring& name = L"GameObject");
@@ -24,20 +21,8 @@ public:
 public:
 	Transform* GetTransform() const;
     const std::wstring& GetName() const;
-    bool IsActive() const;
-    bool IsActiveSelf() const;
-    void SetActive(bool active);
-
-private:
-    void SetActiveInHierarchy(bool activeInHierarchy);
-
-public:
-    void Initialize();
-    void CleanupDestroyedComponents();
-    void CallComponentsInitialize();
-    void RegisterComponentsToSystem();
-    void UnregisterComponentsFromSystem();
-    void CallComponentsOnDestroy(Script* script);
+    void Update();
+    void CallOnDestroy(Script* script);
 
 private:
     void Destroy() override;
@@ -52,16 +37,6 @@ public:
         std::unique_ptr<T> component = std::make_unique<T>(std::forward<Args>(args)...);
 
         component->SetOwner(this);
-
-
-        if (m_isInitialized)
-        {
-            if (m_isActiveSelf && m_isActiveInHierarchy)
-            {
-                ((Component*)component.get())->Initialize();
-                ((Component*)component.get())->RegisterToSystem();
-            }
-        }
 
         m_components.push_back(std::move(component));
 

@@ -121,7 +121,7 @@ void WinApp::Update()
 
 	SceneManager::Get().CheckSceneChanged();
 
-	SceneManager::Get().InitializeGameObjectsCreatedLastFrame();
+	ComponentSystem::Get().Script().CallInitialize();
 
 	ComponentSystem::Get().Script().CallStart();
 
@@ -139,7 +139,7 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Script().CallLateUpdate();
 
-	SceneManager::Get().CleanupDestroyedObjects(); // cleanup destroyed gameObjects/components
+	SceneManager::Get().Update(); // cleanup destroyed gameObjects/components
 }
 
 void WinApp::Render()

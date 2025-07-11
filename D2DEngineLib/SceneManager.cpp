@@ -20,9 +20,9 @@ void SceneManager::Shutdown()
 	m_scenes.clear();
 }
 
-void SceneManager::CleanupDestroyedObjects()
+void SceneManager::Update()
 {
-	m_currentScene->CleanupDestroyedGameObjects();
+	m_currentScene->Update();
 }
 
 void SceneManager::ChangeScene(const std::wstring& name)
@@ -62,11 +62,6 @@ void SceneManager::CheckSceneChanged()
 
 		m_currentScene->Enter();
 	}
-}
-
-void SceneManager::InitializeGameObjectsCreatedLastFrame()
-{
-	m_currentScene->InitializeGameObjectsCreatedLastFrame();
 }
 
 GameObject* SceneManager::Find(const std::wstring& name) const

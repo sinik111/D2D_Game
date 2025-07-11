@@ -3,14 +3,14 @@
 
 #include "ComponentSystem.h"
 
-void PlayerInput::RegisterToSystem()
+PlayerInput::PlayerInput()
 {
-    ComponentSystem::Get().PlayerInput().Register(this);
+	ComponentSystem::Get().PlayerInput().Register(this);
 }
 
-void PlayerInput::UnregisterFromSystem()
+PlayerInput::~PlayerInput()
 {
-    ComponentSystem::Get().PlayerInput().Unregister(this);
+	ComponentSystem::Get().PlayerInput().Unregister(this);
 }
 
 void PlayerInput::UnregisterActionOnKey(short vKey, void* instance)

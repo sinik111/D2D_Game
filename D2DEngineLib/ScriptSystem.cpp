@@ -6,111 +6,128 @@
 
 void ScriptSystem::Register(Script* script)
 {
-	if (script->m_isStarted)
-	{
-		m_scriptsForFixedUpdate.push_back(script);
-		m_scriptsForUpdate.push_back(script);
-		m_scriptsForLateUpdate.push_back(script);
-	}
-	else
-	{
-		m_scriptsForStart.push_back(script);
-	}
+	m_scripts.push_back(script);
+	m_scriptsForPendingInitialize.push_back(script);
 }
 
 void ScriptSystem::Unregister(Script* script)
 {
-	m_pendingUnregisteredScripts.push_back(script);
+	Util::OptimizedErase(m_scripts, script);
+	Util::OptimizedErase(m_scriptsForPendingInitialize, script);
+	Util::OptimizedErase(m_scriptsForInitialize, script);
+	Util::OptimizedErase(m_scriptsForStart, script);
+	Util::OptimizedErase(m_scriptsForFixedUpdate, script);
+	Util::OptimizedErase(m_scriptsForUpdate, script);
+	Util::OptimizedErase(m_scriptsForLateUpdate, script);
 }
 
 void ScriptSystem::UnregisterFixedUpdate(Script* script)
 {
-	m_pendingUnregisteredFixedUpdate.push_back(script);
+	m_pendingUnregisterForFixedUpdate.push_back(script);
 }
 
 void ScriptSystem::UnregisterUpdate(Script* script)
 {
-	m_pendingUnregisteredUpdate.push_back(script);
+	m_pendingUnregisterForUpdate.push_back(script);
 }
 
 void ScriptSystem::UnregisterLateUpdate(Script* script)
 {
-	m_pendingUnregisteredLateUpdate.push_back(script);
+	m_pendingUnregisterForLateUpdate.push_back(script);
+}
+
+void ScriptSystem::CallInitialize()
+{
+	while (!m_scriptsForPendingInitialize.empty())
+	{
+		m_scriptsForInitialize.insert(m_scriptsForInitialize.end(),
+			std::make_move_iterator(m_scriptsForPendingInitialize.begin()),
+			std::make_move_iterator(m_scriptsForPendingInitialize.end()));
+
+		m_scriptsForPendingInitialize.clear();
+
+
+		if (!m_scriptsForInitialize.empty())
+		{
+			for (const auto& script : m_scriptsForInitialize)
+			{
+				script->Initialize();
+
+				m_scriptsForStart.push_back(script);
+			}
+
+			m_scriptsForInitialize.clear();
+		}
+	}
 }
 
 void ScriptSystem::CallStart()
 {
-	for (size_t i = 0; i < m_scriptsForStart.size(); ++i)
+	if (!m_scriptsForStart.empty())
 	{
-		auto& script = m_scriptsForStart[i];
+		for (const auto& script : m_scriptsForStart)
+		{
+			script->Start();
 
-		script->Start();
-		script->m_isStarted = true;
+			m_scriptsForFixedUpdate.push_back(script);
+			m_scriptsForUpdate.push_back(script);
+			m_scriptsForLateUpdate.push_back(script);
+		}
 
-		m_scriptsForFixedUpdate.push_back(script);
-		m_scriptsForUpdate.push_back(script);
-		m_scriptsForLateUpdate.push_back(script);
+		m_scriptsForStart.clear();
 	}
-
-	m_scriptsForStart.clear();
 }
 
 void ScriptSystem::CallFixedUpdate()
 {
-	UpdateScriptsList();
-
-	for (size_t i = 0; i < m_scriptsForFixedUpdate.size(); ++i)
+	for (const auto& script : m_scriptsForFixedUpdate)
 	{
-		m_scriptsForFixedUpdate[i]->FixedUpdate();
+		script->FixedUpdate();
 	}
 
-	UpdateScriptsList();
+	if (!m_pendingUnregisterForFixedUpdate.empty())
+	{
+		for (const auto& script : m_pendingUnregisterForFixedUpdate)
+		{
+			Util::OptimizedErase(m_scriptsForFixedUpdate, script);
+		}
+
+		m_pendingUnregisterForFixedUpdate.clear();
+	}
 }
 
 void ScriptSystem::CallUpdate()
 {
-	UpdateScriptsList();
-
-	for (size_t i = 0; i < m_scriptsForUpdate.size(); ++i)
+	for (const auto& script : m_scriptsForUpdate)
 	{
-		m_scriptsForUpdate[i]->Update();
-	}
+		script->Update();
+	}       
 
-	UpdateScriptsList();
+	if (!m_pendingUnregisterForUpdate.empty())
+	{
+		for (const auto& script : m_pendingUnregisterForUpdate)
+		{
+			Util::OptimizedErase(m_scriptsForUpdate, script);
+		}
+
+		m_pendingUnregisterForUpdate.clear();
+	}
 }
 
 void ScriptSystem::CallLateUpdate()
 {
-	UpdateScriptsList();
-
-	for (size_t i = 0; i < m_scriptsForLateUpdate.size(); ++i)
+	for (const auto& script : m_scriptsForLateUpdate)
 	{
-		m_scriptsForLateUpdate[i]->LateUpdate();
+		script->LateUpdate();
 	}
 
-	UpdateScriptsList();
-}
-
-void ScriptSystem::UnregisterScripts()
-{
-	std::sort(m_pendingUnregisteredScripts.begin(), m_pendingUnregisteredScripts.end());
-
-	Util::OptimizedErase(m_scriptsForFixedUpdate, m_pendingUnregisteredScripts, true);
-	Util::OptimizedErase(m_scriptsForUpdate, m_pendingUnregisteredScripts, true);
-	Util::OptimizedErase(m_scriptsForLateUpdate, m_pendingUnregisteredScripts, true);
-
-	m_pendingUnregisteredScripts.clear();
-}
-
-void ScriptSystem::UpdateScriptsList()
-{
-	if (!m_pendingUnregisteredScripts.empty())
+	if (!m_pendingUnregisterForLateUpdate.empty())
 	{
-		UnregisterScripts();
-	}
+		for (const auto& script : m_pendingUnregisterForLateUpdate)
+		{
+			Util::OptimizedErase(m_scriptsForLateUpdate, script);
+		}
 
-	if (!m_scriptsForStart.empty())
-	{
-		CallStart();
+		m_pendingUnregisterForLateUpdate.clear();
 	}
 }

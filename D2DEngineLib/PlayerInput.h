@@ -51,9 +51,10 @@ private:
 	DirectionInputType m_directionInputType = DirectionInputType::Both;
 
 public:
-	void RegisterToSystem() override;
-	void UnregisterFromSystem() override;
+	PlayerInput();
+	~PlayerInput() override;
 
+public:
 	template<typename T>
 	void RegisterActionOnKey(short vKey, KeyState checkType, T* instance, void (T::* func)())
 	{

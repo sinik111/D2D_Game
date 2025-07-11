@@ -23,8 +23,9 @@ private:
 	bool m_isBitmapDirty = true;
 
 public:
-	BitmapRenderer() = default;
+	BitmapRenderer();
 	BitmapRenderer(const std::wstring& filePath);
+	~BitmapRenderer() override;
 
 public:
 	const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& GetBitmap() const;
@@ -33,9 +34,6 @@ public:
 	float GetOpacity() const;
 	Vector2 GetPivot() const;
 	const Bounds& GetBounds() const;
-
-	void RegisterToSystem() override;
-	void UnregisterFromSystem() override;
 
 	void Update();
 	void Render(const RenderContext& context) const override;

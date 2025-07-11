@@ -6,7 +6,14 @@
 
 TextRenderer::TextRenderer()
 {
+	ComponentSystem::Get().TextRenderer().Register(this);
+
 	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
+}
+
+TextRenderer::~TextRenderer()
+{
+	ComponentSystem::Get().TextRenderer().Unregister(this);
 }
 
 void TextRenderer::SetText(const std::wstring& text)
@@ -126,16 +133,6 @@ D2D1_COLOR_F TextRenderer::GetColor() const
 	return m_color;
 }
 
-void TextRenderer::RegisterToSystem()
-{
-	ComponentSystem::Get().TextRenderer().Register(this);
-}
-
-void TextRenderer::UnregisterFromSystem()
-{
-	ComponentSystem::Get().TextRenderer().Unregister(this);
-}
-
 void TextRenderer::Update()
 {
 	if (m_isTextDirty || GetTransform()->GetIsDirtyThisFrame())
@@ -221,4 +218,3 @@ const Bounds& TextRenderer::GetBounds() const
 {
 	return m_bounds;
 }
-

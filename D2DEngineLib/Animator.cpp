@@ -8,12 +8,12 @@
 #include "ComponentSystem.h"
 #include "Debug.h"
 
-void Animator::RegisterToSystem()
+Animator::Animator()
 {
 	ComponentSystem::Get().Animator().Register(this);
 }
 
-void Animator::UnregisterFromSystem()
+Animator::~Animator()
 {
 	ComponentSystem::Get().Animator().Unregister(this);
 }

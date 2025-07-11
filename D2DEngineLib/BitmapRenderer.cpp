@@ -5,9 +5,16 @@
 #include "ResourceManager.h"
 #include "Transform.h"
 
+BitmapRenderer::BitmapRenderer()
+{
+	ComponentSystem::Get().BitmapRenderer().Register(this);
+}
+
 BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 	: m_filePath{ filePath }
 {
+	ComponentSystem::Get().BitmapRenderer().Register(this);
+
 	m_bitmapResource = ResourceManager::Get().CreateBitmapResource(filePath);
 
 	m_sourceRect = {
@@ -16,6 +23,11 @@ BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 		m_bitmapResource->GetSize().width,
 		m_bitmapResource->GetSize().height
 	};
+}
+
+BitmapRenderer::~BitmapRenderer()
+{
+	ComponentSystem::Get().BitmapRenderer().Unregister(this);
 }
 
 const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& BitmapRenderer::GetBitmap() const
@@ -106,16 +118,6 @@ Vector2 BitmapRenderer::GetPivot() const
 const Bounds& BitmapRenderer::GetBounds() const
 {
 	return m_bounds;
-}
-
-void BitmapRenderer::RegisterToSystem()
-{
-	ComponentSystem::Get().BitmapRenderer().Register(this);
-}
-
-void BitmapRenderer::UnregisterFromSystem()
-{
-	ComponentSystem::Get().BitmapRenderer().Unregister(this);
 }
 
 D2D1_RECT_F BitmapRenderer::GetSourceRect() const

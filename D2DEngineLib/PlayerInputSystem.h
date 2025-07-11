@@ -8,7 +8,6 @@ class PlayerInputSystem
 {
 private:
 	std::vector<PlayerInput*> m_playerInputs;
-	std::vector<PlayerInput*> m_pendingUnregisteredPlayerInputs;
 
 	HWND m_hWnd = nullptr;
 	std::bitset<256> m_currentKeyState;
@@ -37,7 +36,7 @@ public:
 	POINT GetCursorPoint() const;
 
 public:
-	void ProcessInput();
+	void ProcessInput() const;
 	
 private:
 	void ProcessArrowInput() const;
