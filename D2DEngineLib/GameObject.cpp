@@ -16,6 +16,11 @@ GameObject::~GameObject()
 	for (const auto& component : m_components)
 	{
 		component->UnregisterFromSystem();
+
+		if (Script* script = dynamic_cast<Script*>(component.get()))
+		{
+			script->OnDestroy();
+		}
 	}
 }
 
@@ -88,11 +93,8 @@ void GameObject::InitializeAddedComponents()
 {
 	for (const auto& component : m_addedComponents)
 	{
-		if (IsValid(component))
-		{
-			component->Initialize();
-			component->RegisterToSystem();
-		}
+		component->Initialize();
+		component->RegisterToSystem();
 	}
 
 	m_addedComponents.clear();

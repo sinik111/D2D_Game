@@ -7,11 +7,9 @@
 
 void MainTitle::Enter()
 {
-	GameObject* camera = CreateGameObjectWithComponents(L"Camera",
-		camera->AddComponent<Camera>();
-	);
+	GameObject* camera = CreateGameObject(L"Camera");
+	camera->AddComponent<Camera>();
 	
-	GameObject* go = CreateGameObjectWithComponents(L"SceneChange",
-		go->AddComponent<TitleSceneChange>();
-	);
+	GameObject* go = CreateGameObject(L"SceneChange");
+	go->AddComponent<TitleSceneChange>();
 }

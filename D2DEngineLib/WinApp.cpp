@@ -121,7 +121,7 @@ void WinApp::Update()
 
 	SceneManager::Get().CheckSceneChanged();
 
-	SceneManager::Get().InitializeObjectsCreatedLastFrame();
+	SceneManager::Get().InitializeObjects();
 
 	ComponentSystem::Get().Script().CallStart();
 

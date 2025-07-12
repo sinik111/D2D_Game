@@ -6,15 +6,10 @@
 
 Script::~Script()
 {
-	OnDestroy();
+	
 }
 
 GameObject* Script::CreateGameObject(const std::wstring& name)
-{
-	return SceneManager::Get().GetCurrentScene()->CreateGameObject(name);
-}
-
-GameObject* Script::__CreateGameObject(const std::wstring& name)
 {
 	return SceneManager::Get().GetCurrentScene()->CreateGameObject(name);
 }

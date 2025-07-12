@@ -25,9 +25,9 @@ void SceneManager::CleanupDestroyedObjects()
 	m_currentScene->CleanupDestroyedObjects();
 }
 
-void SceneManager::InitializeObjectsCreatedLastFrame()
+void SceneManager::InitializeObjects()
 {
-	m_currentScene->InitializeObjectsCreatedLastFrame();
+	m_currentScene->InitializeObjects();
 }
 
 void SceneManager::ChangeScene(const std::wstring& name)

@@ -4,11 +4,6 @@
 #include "GameObject.h"
 #include "SceneManager.h"
 
-#define CreateGameObjectWithComponents(name, addingComponents)\
-__CreateGameObject(name);\
-__AddComponentAndInitialize([&]() {\
-addingComponents })
-
 class Script :
 	public Component
 {
@@ -17,13 +12,6 @@ public:
 
 public:
 	GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
-	GameObject* __CreateGameObject(const std::wstring& name = L"GameObject");
-
-	template<typename F>
-	void __AddComponentAndInitialize(F&& componentAdder)
-	{
-		SceneManager::Get().GetCurrentScene()->__AddComponentAndInitialize(componentAdder);
-	}
 
 public:
 	void RegisterToSystem() override;

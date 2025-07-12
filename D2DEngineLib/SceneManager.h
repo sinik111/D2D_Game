@@ -27,7 +27,7 @@ public:
 
 public:
 	void CleanupDestroyedObjects();
-	void InitializeObjectsCreatedLastFrame();
+	void InitializeObjects();
 	void Shutdown();
 
 public:

@@ -11,11 +11,11 @@ void Scene::Exit()
 	ResourceManager::Get().ReleaseResources();
 }
 
-void Scene::InitializeObjectsCreatedLastFrame()
+void Scene::InitializeObjects()
 {
-	if (!m_createdLastFrameGameObjects.empty())
+	if (!m_createdGameObjects.empty())
 	{
-		for (const auto& gameObject : m_createdLastFrameGameObjects)
+		for (const auto& gameObject : m_createdGameObjects)
 		{
 			if (Object::IsValid(gameObject))
 			{
@@ -23,7 +23,7 @@ void Scene::InitializeObjectsCreatedLastFrame()
 			}
 		}
 
-		m_createdLastFrameGameObjects.clear();
+		m_createdGameObjects.clear();
 	}
 
 	for (const auto& gameObject : m_gameObjects)
@@ -61,23 +61,16 @@ void Scene::CleanupDestroyedObjects()
 void Scene::Clear()
 {
 	m_gameObjects.clear();
-	m_createdLastFrameGameObjects.clear();
+	m_createdGameObjects.clear();
 }
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
 {
 	std::unique_ptr<GameObject> gameObject = std::make_unique<GameObject>(name);
 
-	m_createdLastFrameGameObjects.push_back(gameObject.get());
+	m_createdGameObjects.push_back(gameObject.get());
 
 	m_gameObjects.push_back(std::move(gameObject));
-
-	return m_gameObjects.back().get();
-}
-
-GameObject* Scene::__CreateGameObject(const std::wstring& name)
-{
-	m_gameObjects.push_back(std::make_unique<GameObject>(name));
 
 	return m_gameObjects.back().get();
 }
