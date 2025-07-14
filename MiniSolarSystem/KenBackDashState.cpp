@@ -49,7 +49,7 @@ void KenBackDashState::Update(FSMContext& context)
 		return;
 	}
 	
-	context.transform->Translate(Vector2::Left * m_speed * MyTime::GetDeltaTime());
+	//context.transform->Translate(Vector2::Left * m_speed * MyTime::DeltaTime());
 }
 
 void KenBackDashState::Exit(FSMContext& context)

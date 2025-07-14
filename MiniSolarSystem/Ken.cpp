@@ -5,6 +5,7 @@
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/SceneManager.h"
+#include "../D2DEngineLib/RigidBody2D.h"
 
 #include "Earth.h"
 #include "FSMContext.h"
@@ -53,6 +54,12 @@ void Ken::Start()
 	m_kenFSM = std::make_unique<KenFSM>(m_context);
 
 	m_health->SetHp(50, 50);
+}
+
+void Ken::FixedUpdate()
+{
+	RigidBody2D* rb = GetGameObject()->GetComponent<RigidBody2D>();
+	rb->AddForce(Vector2(m_context.floatParams[L"HorizontalInput"] * 1000.0f, 0.0f));
 }
 
 void Ken::Update()

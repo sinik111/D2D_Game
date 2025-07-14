@@ -20,6 +20,7 @@ private:
 private:
 	void Initialize() override;
 	void Start() override;
+	void FixedUpdate() override;
 	void Update() override;
 
 private:

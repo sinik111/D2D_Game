@@ -6,6 +6,7 @@
 #include "PlayerInputSystem.h"
 #include "AnimatorSystem.h"
 #include "TransformSystem.h"
+#include "PhysicsSystem.h"
 
 class Component;
 
@@ -18,6 +19,7 @@ private:
 	std::unique_ptr<PlayerInputSystem> m_playerInputSystem;
 	std::unique_ptr<AnimatorSystem> m_animatorSystem;
 	std::unique_ptr<TransformSystem> m_transformSystem;
+	std::unique_ptr<PhysicsSystem> m_physicsSystem;
 
 private:
 	ComponentSystem();
@@ -31,10 +33,11 @@ public:
 	static ComponentSystem& Get();
 
 public:
-	ScriptSystem& Script();
-	BitmapRendererSystem& BitmapRenderer();
-	TextRendererSystem& TextRenderer();
-	PlayerInputSystem& PlayerInput();
-	AnimatorSystem& Animator();
-	TransformSystem& Transform();
+	ScriptSystem& Script() const;
+	BitmapRendererSystem& BitmapRenderer() const;
+	TextRendererSystem& TextRenderer() const;
+	PlayerInputSystem& PlayerInput() const;
+	AnimatorSystem& Animator() const;
+	TransformSystem& Transform() const;
+	PhysicsSystem& Physics() const;
 };

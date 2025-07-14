@@ -8,6 +8,8 @@
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/TextRenderer.h"
+#include "../D2DEngineLib/RigidBody2D.h"
+#include "../D2DEngineLib/BoxCollider2D.h"
 
 #include "Ken.h"
 #include "HpViewer.h"
@@ -24,7 +26,14 @@ void AnimationTestScene::Enter()
 	go->AddComponent<PlayerInput>();
 	go->AddComponent<Ken>();
 	Health* health = go->AddComponent<Health>();
-	
+	go->AddComponent<RigidBody2D>();
+	BoxCollider2D* boxCollider2d = go->AddComponent<BoxCollider2D>();
+	boxCollider2d->SetSize({ 40.0f, 20.0f });
+
+	GameObject* floor = CreateGameObject(L"Floor");
+	boxCollider2d = floor->AddComponent<BoxCollider2D>();
+	boxCollider2d->SetSize({ 800.0f, 20.0f });
+	floor->GetTransform()->SetLocalPosition({ 0.0f, -50.0f });
 
 	go = CreateGameObject(L"KenKeyInfo");
 	TextRenderer* textRenderer = go->AddComponent<TextRenderer>();

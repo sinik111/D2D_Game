@@ -21,7 +21,7 @@ void CameraController::Start()
 
 void CameraController::Update()
 {
-    GetTransform()->Translate(m_direction * m_speed * MyTime::GetDeltaTime());
+    GetTransform()->Translate(m_direction * m_speed * MyTime::DeltaTime());
 }
 
 void CameraController::MakeDirection(Vector2 input)
@@ -33,7 +33,7 @@ void CameraController::ZoomIn()
 {
     float zoom = Camera::s_mainCamera->GetZoom();
 
-    zoom -= 1.0f * MyTime::GetDeltaTime();
+    zoom -= 1.0f * MyTime::DeltaTime();
 
     Camera::s_mainCamera->SetZoom(zoom);
 }
@@ -42,7 +42,7 @@ void CameraController::ZoomOut()
 {
     float zoom = Camera::s_mainCamera->GetZoom();
 
-    zoom += 1.0f * MyTime::GetDeltaTime();
+    zoom += 1.0f * MyTime::DeltaTime();
 
     Camera::s_mainCamera->SetZoom(zoom);
 }

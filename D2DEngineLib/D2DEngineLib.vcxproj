@@ -165,6 +165,8 @@
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="MyTimeSystem.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="PlayerInputSystem.h" />
     <ClInclude Include="Matrix3x2.h" />
     <ClInclude Include="MyMath.h" />
@@ -207,6 +209,8 @@
     <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="MyTimeSystem.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="PlayerInputSystem.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

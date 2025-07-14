@@ -127,7 +127,11 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Script().CallFixedUpdate();
 
-	// process physics
+	ComponentSystem::Get().Physics().ProcessPhysics();
+
+	ComponentSystem::Get().Physics().Interpolate();
+
+	ComponentSystem::Get().Physics().UpdateColliders();
 
 	ComponentSystem::Get().PlayerInput().Update();
 
@@ -139,7 +143,7 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Script().CallLateUpdate();
 
-	SceneManager::Get().CleanupDestroyedObjects(); // cleanup destroyed gameObjects/components
+	SceneManager::Get().CleanupDestroyedObjects();
 }
 
 void WinApp::Render()
