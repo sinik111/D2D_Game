@@ -10,24 +10,23 @@ class Component :
 {
 private:
 	GameObject* m_owner = nullptr;
-	bool m_isEnabled = true;
 
 public:
-	virtual ~Component() = default;
+	virtual ~Component() override = default;
 
 public:
 	GameObject* GetGameObject() const;
 	Transform* GetTransform() const;
 	void Destroy(Object* object) override;
-	bool IsEnabled() const;
-	bool IsActiveAndEnabled() const;
-	virtual void SetEnabled(bool enabled);
 
-private:
-	virtual void Initialize();
+public:
 	virtual void RegisterToSystem();
 	virtual void UnregisterFromSystem();
-	virtual void OnDestroy();
+
+public:
+	virtual void Initialize();
+
+private:
 	void Destroy() override;
 
 private:

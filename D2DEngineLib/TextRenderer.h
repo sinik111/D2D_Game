@@ -48,6 +48,10 @@ public:
 	TextRenderer();
 
 public:
+	void RegisterToSystem() override;
+	void UnregisterFromSystem() override;
+
+public:
 	Microsoft::WRL::ComPtr<IDWriteTextFormat> GetTextFormat() const;
 	std::wstring GetText() const;
 	D2D1_COLOR_F GetColor() const;
@@ -55,9 +59,6 @@ public:
 	float GetFontSize() const;
 	Vector2 GetPivot() const;
 	const Bounds& GetBounds() const;
-
-	void RegisterToSystem() override;
-	void UnregisterFromSystem() override;
 
 	void Update();
 	void Render(const RenderContext& context) const override;

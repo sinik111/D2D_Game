@@ -13,31 +13,23 @@ private:
 	std::wstring m_name;
 	std::unique_ptr<Transform> m_transform;
 	std::vector<std::unique_ptr<Component>> m_components;
-    bool m_isActiveSelf = true;
-    bool m_isActiveInHierarchy = true;
+    std::vector<Component*> m_addedComponents;
     bool m_isInitialized = false;
+    bool m_hasDestroyedComponent = false;
 
 public:
 	GameObject(const std::wstring& name = L"GameObject");
-	virtual ~GameObject();
+	~GameObject() override;
 
 public:
 	Transform* GetTransform() const;
     const std::wstring& GetName() const;
-    bool IsActive() const;
-    bool IsActiveSelf() const;
-    void SetActive(bool active);
-
-private:
-    void SetActiveInHierarchy(bool activeInHierarchy);
-
-public:
-    void Initialize();
     void CleanupDestroyedComponents();
-    void CallComponentsInitialize();
-    void RegisterComponentsToSystem();
-    void UnregisterComponentsFromSystem();
-    void CallComponentsOnDestroy(Script* script);
+    bool HasAddedComponent() const;
+    bool HasDestroyedComponents() const;
+    void Initialize();
+    void InitializeAddedComponents();
+    void MarkComponentDestroyed();
 
 private:
     void Destroy() override;
@@ -46,21 +38,16 @@ public:
     template<typename T, typename... Args>
     T* AddComponent(Args&&... args)
     {
-        assert(typeid(Transform) != typeid(T) && L"Transform 컴포넌트는 추가할 수 없습니다");
         static_assert(std::is_base_of<Component, T>::value, "Component가 아닙니다");
+        static_assert(!std::is_same<Transform, T>::value, "Transform 컴포넌트는 추가할 수 없습니다");
 
         std::unique_ptr<T> component = std::make_unique<T>(std::forward<Args>(args)...);
 
         component->SetOwner(this);
 
-
         if (m_isInitialized)
         {
-            if (m_isActiveSelf && m_isActiveInHierarchy)
-            {
-                ((Component*)component.get())->Initialize();
-                ((Component*)component.get())->RegisterToSystem();
-            }
+            m_addedComponents.push_back(component.get());
         }
 
         m_components.push_back(std::move(component));

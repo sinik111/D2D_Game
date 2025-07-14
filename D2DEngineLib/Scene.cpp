@@ -6,25 +6,53 @@
 
 void Scene::Exit()
 {
-	ResourceManager::Get().ReleaseResources();
-
 	Clear();
+
+	ResourceManager::Get().ReleaseResources();
 }
 
-void Scene::CleanupDestroyedGameObjects()
+void Scene::InitializeObjects()
+{
+	if (!m_createdGameObjects.empty())
+	{
+		for (const auto& gameObject : m_createdGameObjects)
+		{
+			if (Object::IsValid(gameObject))
+			{
+				gameObject->Initialize();
+			}
+		}
+
+		m_createdGameObjects.clear();
+	}
+
+	for (const auto& gameObject : m_gameObjects)
+	{
+		if (gameObject->HasAddedComponent())
+		{
+			gameObject->InitializeAddedComponents();
+		}
+	}
+}
+
+void Scene::CleanupDestroyedObjects()
 {
 	for (size_t i = 0; i < m_gameObjects.size(); )
 	{
-		if (m_gameObjects[i]->m_isDestroyed)
+		auto& gameObject = m_gameObjects[i];
+
+		if (gameObject->m_isDestroyed)
 		{
-			std::swap(m_gameObjects[i], m_gameObjects.back());
+			std::swap(gameObject, m_gameObjects.back());
 
 			m_gameObjects.pop_back();
 
 			continue;
 		}
-
-		m_gameObjects[i]->CleanupDestroyedComponents();
+		else if (gameObject->HasDestroyedComponents())
+		{
+			gameObject->CleanupDestroyedComponents();
+		}
 
 		++i;
 	}
@@ -33,38 +61,18 @@ void Scene::CleanupDestroyedGameObjects()
 void Scene::Clear()
 {
 	m_gameObjects.clear();
-	m_pendingInitializeGameObjects.clear();
+	m_createdGameObjects.clear();
 }
 
 GameObject* Scene::CreateGameObject(const std::wstring& name)
 {
-	m_pendingInitializeGameObjects.push_back(std::make_unique<GameObject>(name));
+	std::unique_ptr<GameObject> gameObject = std::make_unique<GameObject>(name);
 
-	return m_pendingInitializeGameObjects.back().get();
-}
+	m_createdGameObjects.push_back(gameObject.get());
 
-GameObject* Scene::__CreateGameObject(const std::wstring& name)
-{
-	m_gameObjects.push_back(std::make_unique<GameObject>(name));
+	m_gameObjects.push_back(std::move(gameObject));
 
 	return m_gameObjects.back().get();
-}
-
-void Scene::InitializeGameObjectsCreatedLastFrame()
-{
-	if (!m_pendingInitializeGameObjects.empty())
-	{
-		for (size_t i = 0; i < m_pendingInitializeGameObjects.size(); ++i)
-		{
-			m_pendingInitializeGameObjects[i]->Initialize();
-		}
-		
-		m_gameObjects.insert(m_gameObjects.end(),
-			std::make_move_iterator(m_pendingInitializeGameObjects.begin()),
-			std::make_move_iterator(m_pendingInitializeGameObjects.end()));
-
-		m_pendingInitializeGameObjects.clear();
-	}
 }
 
 GameObject* Scene::Find(const std::wstring& name) const
@@ -80,19 +88,6 @@ GameObject* Scene::Find(const std::wstring& name) const
 	if (find != m_gameObjects.end())
 	{
 		return find->get();
-	}
-
-	const auto& findFromInit = std::find_if(
-		m_pendingInitializeGameObjects.begin(),
-		m_pendingInitializeGameObjects.end(),
-		[name](const std::unique_ptr<GameObject>& gameObject) {
-			return gameObject->GetName() == name;
-		}
-	);
-
-	if (findFromInit != m_pendingInitializeGameObjects.end())
-	{
-		return findFromInit->get();
 	}
 
 	return nullptr;

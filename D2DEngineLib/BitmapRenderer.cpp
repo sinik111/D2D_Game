@@ -18,6 +18,16 @@ BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 	};
 }
 
+void BitmapRenderer::RegisterToSystem()
+{
+	ComponentSystem::Get().BitmapRenderer().Register(this);
+}
+
+void BitmapRenderer::UnregisterFromSystem()
+{
+	ComponentSystem::Get().BitmapRenderer().Unregister(this);
+}
+
 const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& BitmapRenderer::GetBitmap() const
 {
 	return m_bitmapResource->GetBitmap();
@@ -106,16 +116,6 @@ Vector2 BitmapRenderer::GetPivot() const
 const Bounds& BitmapRenderer::GetBounds() const
 {
 	return m_bounds;
-}
-
-void BitmapRenderer::RegisterToSystem()
-{
-	ComponentSystem::Get().BitmapRenderer().Register(this);
-}
-
-void BitmapRenderer::UnregisterFromSystem()
-{
-	ComponentSystem::Get().BitmapRenderer().Unregister(this);
 }
 
 D2D1_RECT_F BitmapRenderer::GetSourceRect() const

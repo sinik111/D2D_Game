@@ -5,15 +5,16 @@ class Script;
 class ScriptSystem
 {
 private:
+	std::vector<Script*> m_scriptsForInitialize;
 	std::vector<Script*> m_scriptsForStart;
 	std::vector<Script*> m_scriptsForFixedUpdate;
 	std::vector<Script*> m_scriptsForUpdate;
 	std::vector<Script*> m_scriptsForLateUpdate;
 
-	std::vector<Script*> m_pendingUnregisteredScripts;
-	std::vector<Script*> m_pendingUnregisteredFixedUpdate;
-	std::vector<Script*> m_pendingUnregisteredUpdate;
-	std::vector<Script*> m_pendingUnregisteredLateUpdate;
+	// 자식 클래스에서 override 하지 않았을 경우 삭제하기 위해 임시로 보관하는 컨테이너
+	std::vector<Script*> m_pendingUnregisterForFixedUpdate;
+	std::vector<Script*> m_pendingUnregisterForUpdate;
+	std::vector<Script*> m_pendingUnregisterForLateUpdate;
 
 public:
 	void Register(Script* script);
@@ -28,8 +29,4 @@ public:
 	void CallFixedUpdate();
 	void CallUpdate();
 	void CallLateUpdate();
-
-private:
-	void UnregisterScripts();
-	void UpdateScriptsList();
 };

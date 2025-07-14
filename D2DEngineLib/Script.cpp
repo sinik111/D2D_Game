@@ -4,26 +4,14 @@
 #include "ComponentSystem.h"
 #include "SceneManager.h"
 
+Script::~Script()
+{
+	
+}
+
 GameObject* Script::CreateGameObject(const std::wstring& name)
 {
 	return SceneManager::Get().GetCurrentScene()->CreateGameObject(name);
-}
-
-void Script::SetEnabled(bool enabled)
-{
-	Component::SetEnabled(enabled);
-
-	if (GetGameObject()->IsActive())
-	{
-		if (enabled)
-		{
-			OnEnable();
-		}
-		else
-		{
-			OnDisable();
-		}
-	}
 }
 
 void Script::RegisterToSystem()
@@ -39,11 +27,6 @@ void Script::UnregisterFromSystem()
 void Script::Initialize()
 {
 
-}
-
-void Script::OnEnable()
-{
-	
 }
 
 void Script::Start()
@@ -66,11 +49,6 @@ void Script::LateUpdate()
 {
 	// 자식에서 LateUpdate()가 override되지 않았을 경우 LateUpdate 리스트에서 제거함
 	ComponentSystem::Get().Script().UnregisterLateUpdate(this);
-}
-
-void Script::OnDisable()
-{
-
 }
 
 void Script::OnDestroy()

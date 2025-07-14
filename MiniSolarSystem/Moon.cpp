@@ -7,8 +7,6 @@
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
-#include "../D2DEngineLib/Input.h"
-#include "../D2DEngineLib/MyTime.h"
 
 #include "Health.h"
 

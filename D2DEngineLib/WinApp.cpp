@@ -121,7 +121,7 @@ void WinApp::Update()
 
 	SceneManager::Get().CheckSceneChanged();
 
-	SceneManager::Get().InitializeGameObjectsCreatedLastFrame();
+	SceneManager::Get().InitializeObjects();
 
 	ComponentSystem::Get().Script().CallStart();
 
@@ -159,7 +159,7 @@ void WinApp::Profiling()
 	Debug::UpdateFPS(true);
 
 	HANDLE hProcess = GetCurrentProcess();
-	PROCESS_MEMORY_COUNTERS_EX pmc;
+	PROCESS_MEMORY_COUNTERS_EX pmc{};
 	pmc.cb = sizeof(PROCESS_MEMORY_COUNTERS_EX);
 
 	// 현재 프로세스의 메모리 사용 정보 조회

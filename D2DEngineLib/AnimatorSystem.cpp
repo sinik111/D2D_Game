@@ -11,20 +11,13 @@ void AnimatorSystem::Register(Animator* animator)
 
 void AnimatorSystem::Unregister(Animator* animator)
 {
-	m_pendingUnregisteredAnimators.push_back(animator);
+	Util::OptimizedErase(m_animators, animator);
 }
 
 void AnimatorSystem::Update()
 {
-	for (size_t i = 0; i < m_animators.size(); ++i)
+	for (const auto& animator : m_animators)
 	{
-		m_animators[i]->Update();
-	}
-
-	if (!m_pendingUnregisteredAnimators.empty())
-	{
-		Util::OptimizedErase(m_animators, m_pendingUnregisteredAnimators);
-
-		m_pendingUnregisteredAnimators.clear();
+		animator->Update();
 	}
 }

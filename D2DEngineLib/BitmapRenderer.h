@@ -27,15 +27,16 @@ public:
 	BitmapRenderer(const std::wstring& filePath);
 
 public:
+	void RegisterToSystem() override;
+	void UnregisterFromSystem() override;
+
+public:
 	const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& GetBitmap() const;
 	bool GetFlipX() const;
 	D2D1_RECT_F GetSourceRect() const;
 	float GetOpacity() const;
 	Vector2 GetPivot() const;
 	const Bounds& GetBounds() const;
-
-	void RegisterToSystem() override;
-	void UnregisterFromSystem() override;
 
 	void Update();
 	void Render(const RenderContext& context) const override;

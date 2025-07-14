@@ -2,30 +2,28 @@
 
 #include "Component.h"
 #include "GameObject.h"
+#include "SceneManager.h"
 
 class Script :
 	public Component
 {
-private:
-	bool m_isStarted = false;
+public:
+	virtual ~Script() override;
 
 public:
 	GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 
-	void SetEnabled(bool enabled) override;
-
-private:
+public:
 	void RegisterToSystem() override;
 	void UnregisterFromSystem() override;
 
-	void Initialize() override;
-	virtual void OnEnable();
+private:
+	virtual void Initialize() override;
 	virtual void Start();
 	virtual void FixedUpdate();
 	virtual void Update();
 	virtual void LateUpdate();
-	virtual void OnDisable();
-	void OnDestroy() override;
+	virtual void OnDestroy();
 
 	friend class ScriptSystem;
 	friend class GameObject;

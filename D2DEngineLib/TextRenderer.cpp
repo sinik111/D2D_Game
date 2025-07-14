@@ -9,6 +9,16 @@ TextRenderer::TextRenderer()
 	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
 }
 
+void TextRenderer::RegisterToSystem()
+{
+	ComponentSystem::Get().TextRenderer().Register(this);
+}
+
+void TextRenderer::UnregisterFromSystem()
+{
+	ComponentSystem::Get().TextRenderer().Unregister(this);
+}
+
 void TextRenderer::SetText(const std::wstring& text)
 {
 	m_text = text;
@@ -126,16 +136,6 @@ D2D1_COLOR_F TextRenderer::GetColor() const
 	return m_color;
 }
 
-void TextRenderer::RegisterToSystem()
-{
-	ComponentSystem::Get().TextRenderer().Register(this);
-}
-
-void TextRenderer::UnregisterFromSystem()
-{
-	ComponentSystem::Get().TextRenderer().Unregister(this);
-}
-
 void TextRenderer::Update()
 {
 	if (m_isTextDirty || GetTransform()->GetIsDirtyThisFrame())
@@ -221,4 +221,3 @@ const Bounds& TextRenderer::GetBounds() const
 {
 	return m_bounds;
 }
-

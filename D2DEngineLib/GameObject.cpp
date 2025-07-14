@@ -13,17 +13,13 @@ GameObject::GameObject(const std::wstring& name)
 
 GameObject::~GameObject()
 {
-	for (const auto& comp : m_components)
+	for (const auto& component : m_components)
 	{
-		comp->UnregisterFromSystem();
-		if (Script* script = dynamic_cast<Script*>(comp.get()))
-		{
-			if (script->IsActiveAndEnabled())
-			{
-				script->OnDisable();
-			}
+		component->UnregisterFromSystem();
 
-			CallComponentsOnDestroy(script);
+		if (Script* script = dynamic_cast<Script*>(component.get()))
+		{
+			script->OnDestroy();
 		}
 	}
 }
@@ -38,95 +34,13 @@ const std::wstring& GameObject::GetName() const
 	return m_name;
 }
 
-bool GameObject::IsActive() const
-{
-	return m_isActiveSelf && m_isActiveInHierarchy;
-}
-
-bool GameObject::IsActiveSelf() const
-{
-	return m_isActiveSelf;
-}
-
-void GameObject::SetActive(bool active)
-{
-	if (m_isActiveSelf != active)
-	{
-		m_isActiveSelf = active;
-
-		if (m_isActiveInHierarchy)
-		{
-			auto& children = m_transform->GetChildren();
-			for (auto& child : children)
-			{
-				child->GetGameObject()->SetActiveInHierarchy(active);
-			}
-
-			if (m_isInitialized)
-			{
-				if (active)
-				{
-					RegisterComponentsToSystem();
-				}
-				else
-				{
-					UnregisterComponentsFromSystem();
-				}
-			}
-		}
-	}
-}
-
-void GameObject::SetActiveInHierarchy(bool activeInHierarchy)
-{
-	if (m_isActiveInHierarchy != activeInHierarchy)
-	{
-		m_isActiveInHierarchy = activeInHierarchy;
-
-		if (m_isActiveSelf)
-		{
-			auto& children = m_transform->GetChildren();
-			for (auto& child : children)
-			{
-				child->GetGameObject()->SetActiveInHierarchy(activeInHierarchy);
-			}
-
-			if (m_isInitialized)
-			{
-				if (activeInHierarchy)
-				{
-					RegisterComponentsToSystem();
-				}
-				else
-				{
-					UnregisterComponentsFromSystem();
-				}
-			}
-		}
-	}
-}
-
-void GameObject::Initialize()
-{
-	if (!m_isInitialized)
-	{
-		CallComponentsInitialize();
-		RegisterComponentsToSystem();
-
-		m_isInitialized = true;
-	}
-}
-
 void GameObject::CleanupDestroyedComponents()
 {
 	for (size_t i = 0; i < m_components.size(); )
 	{
 		if (m_components[i]->m_isDestroyed)
 		{
-			if (Script* script = dynamic_cast<Script*>(m_components[i].get()))
-			{
-				CallComponentsOnDestroy(script);
-			}
+			m_components[i]->UnregisterFromSystem();
 
 			std::swap(m_components[i], m_components.back());
 
@@ -137,41 +51,8 @@ void GameObject::CleanupDestroyedComponents()
 
 		++i;
 	}
-}
 
-void GameObject::CallComponentsInitialize()
-{
-	for (size_t i = 0; i < m_components.size(); ++i)
-	{
-		m_components[i]->Initialize();
-	}
-}
-
-void GameObject::RegisterComponentsToSystem()
-{
-	for (auto& component : m_components)
-	{
-		if (component->IsEnabled())
-		{
-			component->RegisterToSystem();
-		}
-	}
-}
-
-void GameObject::UnregisterComponentsFromSystem()
-{
-	for (auto& component : m_components)
-	{
-		if (component->IsEnabled())
-		{
-			component->UnregisterFromSystem();
-		}
-	}
-}
-
-void GameObject::CallComponentsOnDestroy(Script* script)
-{
-	script->OnDestroy();
+	m_hasDestroyedComponent = false;
 }
 
 void GameObject::Destroy()
@@ -182,6 +63,46 @@ void GameObject::Destroy()
 	{
 		child->GetGameObject()->Destroy();
 	}
+}
+
+bool GameObject::HasAddedComponent() const
+{
+	return !m_addedComponents.empty();
+}
+
+bool GameObject::HasDestroyedComponents() const
+{
+	return m_hasDestroyedComponent;
+}
+
+void GameObject::Initialize()
+{
+	if (!m_isInitialized)
+	{
+		for (const auto& component : m_components)
+		{
+			component->Initialize();
+			component->RegisterToSystem();
+		}
+
+		m_isInitialized = true;
+	}
+}
+
+void GameObject::InitializeAddedComponents()
+{
+	for (const auto& component : m_addedComponents)
+	{
+		component->Initialize();
+		component->RegisterToSystem();
+	}
+
+	m_addedComponents.clear();
+}
+
+void GameObject::MarkComponentDestroyed()
+{
+	m_hasDestroyedComponent = true;
 }
 
 GameObject* GameObject::Find(const std::wstring name)

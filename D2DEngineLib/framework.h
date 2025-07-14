@@ -26,3 +26,9 @@
 #include "Vector2.h"
 #include "Matrix3x2.h"
 #include "Bounds.h"
+#include "Random.h"
+
+// System
+#include "MyTime.h"
+#include "Input.h"
+#include "Debug.h"

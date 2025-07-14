@@ -3,7 +3,6 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Camera.h"
-#include "../D2DEngineLib/MyTime.h"
 
 #include "CameraController.h"
 #include "Sun.h"
@@ -53,7 +52,6 @@ void SolarSystem::Enter()
 	HpViewer* earthHpViewerComp = earthHpViewer->AddComponent<HpViewer>();
 	TextRenderer* earthHpText = earthHpViewer->AddComponent<TextRenderer>();
 	earthHpViewerComp->SetTargetName(L"Áö±¸");
-	//earthHpText->SetPoint({ -100.0f, 300.0f });
 	earthHp->GetOnChangeHp().Add(earthHpViewerComp, &HpViewer::ChangeHpText);
 	earthHpViewer->GetTransform()->SetLocalPosition({ -100.0f, 300.0f });
 
@@ -62,9 +60,6 @@ void SolarSystem::Enter()
 	HpViewer* moonHpViewerComp = moonHpViewer->AddComponent<HpViewer>();
 	TextRenderer* moonHpText = moonHpViewer->AddComponent<TextRenderer>();
 	moonHpViewerComp->SetTargetName(L"´Þ");
-	//moonHpText->SetPoint({ 100.0f, 300.0f });
 	moonHp->GetOnChangeHp().Add(moonHpViewerComp, &HpViewer::ChangeHpText);
 	moonHpViewer->GetTransform()->SetLocalPosition({ 100.0f, 300.0f });
-
-	//MyTime::SetTimeScale(2.0f);
 }

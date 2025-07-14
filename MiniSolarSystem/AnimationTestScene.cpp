@@ -8,7 +8,6 @@
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/TextRenderer.h"
-#include "../D2DEngineLib/MyTime.h"
 
 #include "Ken.h"
 #include "HpViewer.h"
@@ -32,7 +31,6 @@ void AnimationTestScene::Enter()
 	textRenderer->SetSpaceType(SpaceType::Screen);
 	textRenderer->SetFontSize(15.0f);
 	textRenderer->SetPivot({ 0.5f, 1.0f });
-	//textRenderer->SetPoint({ 100.0f, 0.0f });
 	textRenderer->SetRectSize({ 300.0f, 400.0f });
 	textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
 	textRenderer->SetSortOrder(3);
@@ -40,18 +38,15 @@ void AnimationTestScene::Enter()
 	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
 
 	go->GetTransform()->SetLocalPosition({ 100.0f, 0.0f });
-	
+
 	std::wostringstream oss;
 	oss << L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Jump\n"
 		<< L"[ W ]: SpinningKick - FireEarth\n[ E ]: Take 10 damage\n"
 		<< L"[ R ]: Revive";
 
 	textRenderer->SetText(oss.str());
-
-
-
+	
 	go = CreateGameObject(L"KenHpViewer");
-
 	HpViewer* hpViewer = go->AddComponent<HpViewer>();
 	hpViewer->SetTargetName(L"Ken");
 	go->GetTransform()->SetLocalPosition({ 0.0f, 300.0f });
