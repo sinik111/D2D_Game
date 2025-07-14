@@ -59,12 +59,14 @@ void Ken::Start()
 void Ken::FixedUpdate()
 {
 	RigidBody2D* rb = GetGameObject()->GetComponent<RigidBody2D>();
-	rb->AddForce(Vector2(m_context.floatParams[L"HorizontalInput"] * 1000.0f, 0.0f));
+	rb->AddForce(Vector2(m_context.floatParams[L"HorizontalInput"] * 2000.0f, 0.0f));
 }
 
 void Ken::Update()
 {
 	m_kenFSM->Update(m_context);
+
+	Debug::Log(GetTransform()->GetLocalPosition().ToString());
 }
 
 void Ken::ArrowInput(Vector2 input)

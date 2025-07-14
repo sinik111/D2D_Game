@@ -128,4 +128,6 @@ void RigidBody2D::CalculatePosition()
     m_position += m_velocity * MyTime::FixedDeltaTime();
 
     m_accumulatedForce = Vector2::Zero;
+
+    m_accumulatedTime = 0.0f;
 }

@@ -99,9 +99,6 @@
     <ClInclude Include="TextRendererSystem.h">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentSystem.h">
-      <Filter>04_Component\ComponentSystem</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>04_Component</Filter>
     </ClInclude>
@@ -203,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="Physics.h">
       <Filter>99_Module\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentSystem.h">
+      <Filter>04_Component\ComponentSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

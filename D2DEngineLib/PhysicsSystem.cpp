@@ -54,46 +54,38 @@ void PhysicsSystem::UnregisterBoxCollider2D(BoxCollider2D* boxCollider2d)
 
 void PhysicsSystem::ProcessPhysics()
 {
-	m_accumulatedDeltaTime += MyTime::DeltaTime();
 
-	const float fixedDeltaTime = MyTime::FixedDeltaTime();
-
-	while (m_accumulatedDeltaTime >= fixedDeltaTime)
+	for (const auto& rigidBody2d : m_dynamicRigidBodies)
 	{
-		m_accumulatedDeltaTime -= fixedDeltaTime;
+		rigidBody2d->ApplyOverriden();
+	}
 
-		for (const auto& rigidBody2d : m_dynamicRigidBodies)
+	for (const auto& rigidBody2d : m_kinematicRigidBodies)
+	{
+		rigidBody2d->ApplyOverriden();
+	}
+
+	for (const auto& rigidBody2d : m_staticRigidBodies)
+	{
+		rigidBody2d->ApplyOverriden();
+	}
+
+	for (const auto& rigidBody2d : m_dynamicRigidBodies)
+	{
+		rigidBody2d->ApplyGraviy(Physics::gravity);
+
+		rigidBody2d->CalculatePosition();
+	}
+
+	for (size_t i = 0; i < m_boxColliders.size(); ++i)
+	{
+		for (size_t j = i + 1; j < m_boxColliders.size(); ++j)
 		{
-			rigidBody2d->ApplyOverriden();
-		}
+			CollisionInfo info{};
 
-		for (const auto& rigidBody2d : m_kinematicRigidBodies)
-		{
-			rigidBody2d->ApplyOverriden();
-		}
-
-		for (const auto& rigidBody2d : m_staticRigidBodies)
-		{
-			rigidBody2d->ApplyOverriden();
-		}
-
-		for (const auto& rigidBody2d : m_dynamicRigidBodies)
-		{
-			rigidBody2d->ApplyGraviy(Physics::gravity);
-
-			rigidBody2d->CalculatePosition();
-		}
-
-		for (size_t i = 0; i < m_boxColliders.size(); ++i)
-		{
-			for (size_t j = i + 1; j < m_boxColliders.size(); ++j)
+			if (Physics::DetectCollision(m_boxColliders[i], m_boxColliders[j], info))
 			{
-				CollisionInfo info{};
-
-				if (Physics::DetectCollision(m_boxColliders[i], m_boxColliders[j], info))
-				{
-					Physics::ResolveCollision(info);
-				}
+				Physics::ResolveCollision(info);
 			}
 		}
 	}

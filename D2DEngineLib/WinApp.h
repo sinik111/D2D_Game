@@ -29,6 +29,8 @@ protected:
 	int m_width = 800;
 	int m_height = 600;
 
+	float m_accumulatedDeltaTime = 0.0f;
+
 public:
 	virtual ~WinApp() = default;
 

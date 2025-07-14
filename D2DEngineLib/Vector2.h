@@ -188,6 +188,8 @@ public: // 유틸리티 함수
 	{
 		return Vector2(std::abs(v.x), std::abs(v.y));
 	}
+
+	std::string ToString() const;
 	
 public:
 	static const Vector2 Zero;

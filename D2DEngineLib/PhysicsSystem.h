@@ -11,8 +11,6 @@ private:
 	std::vector<RigidBody2D*> m_staticRigidBodies;
 	std::vector<BoxCollider2D*> m_boxColliders;
 
-	float m_accumulatedDeltaTime = 0.0f;
-
 public:
 	void RegisterRigidBody2D(RigidBody2D* rigidBody2d);
 	void UnregisterRigidBody2D(RigidBody2D* rigidBody2d);

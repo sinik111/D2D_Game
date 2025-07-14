@@ -125,9 +125,18 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Script().CallStart();
 
-	ComponentSystem::Get().Script().CallFixedUpdate();
+	m_accumulatedDeltaTime += MyTime::DeltaTime();
 
-	ComponentSystem::Get().Physics().ProcessPhysics();
+	const float fixedDeltaTime = MyTime::FixedDeltaTime();
+
+	while (m_accumulatedDeltaTime >= fixedDeltaTime)
+	{
+		m_accumulatedDeltaTime -= fixedDeltaTime;
+
+		ComponentSystem::Get().Script().CallFixedUpdate();
+
+		ComponentSystem::Get().Physics().ProcessPhysics();
+	}
 
 	ComponentSystem::Get().Physics().Interpolate();
 
