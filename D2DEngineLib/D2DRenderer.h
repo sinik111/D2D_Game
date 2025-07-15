@@ -54,6 +54,7 @@ public:
 	void ExecuteRenderQueue();
 
 	void Trim();
+	void DrawRect(const D2D1_RECT_F& rect);
 
 private:
 	void PrepareRenderQueue();

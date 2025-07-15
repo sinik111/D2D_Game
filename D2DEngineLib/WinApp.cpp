@@ -77,6 +77,7 @@ void WinApp::Initialize()
 
 	ComponentSystem::Get().BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
 	ComponentSystem::Get().TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::Get().Physics().SetD2DRenderer(m_d2dRenderer.get());
 	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
 	SceneManager::Get().SetD2DRenderer(m_d2dRenderer.get());
 }
@@ -164,6 +165,9 @@ void WinApp::Render()
 
 	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
 	m_d2dRenderer->ExecuteRenderQueue();
+
+	ComponentSystem::Get().Physics().RenderColliders();
+
 	m_d2dRenderer->EndDraw();
 }
 

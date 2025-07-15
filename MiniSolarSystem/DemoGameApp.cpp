@@ -14,6 +14,9 @@ void DemoGameApp::Initialize()
 	m_className = L"D2DGame";
 	m_windowName = L"MiniSolarSystem";
 
+	m_width = 1920;
+	m_height = 1080;
+
 	__super::Initialize();
 
 	ResourceManager::Get().Initialize(m_d2dRenderer->GetDeviceContext(),

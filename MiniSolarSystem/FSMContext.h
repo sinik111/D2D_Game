@@ -7,6 +7,7 @@ class Transform;
 class Animator;
 class BitmapRenderer;
 class GameObject;
+class RigidBody2D;
 
 struct FSMContext
 {
@@ -14,6 +15,7 @@ struct FSMContext
 	Transform* transform;
 	Animator* animator;
 	BitmapRenderer* bitmapRenderer;
+	RigidBody2D* rigidBody2d;
 	std::unordered_map<std::wstring, int> intParams;
 	std::unordered_map<std::wstring, float> floatParams;
 	std::unordered_map<std::wstring, bool> boolParams;

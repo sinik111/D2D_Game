@@ -4,12 +4,15 @@
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/MyTime.h"
 #include "../D2DEngineLib/Transform.h"
+#include "../D2DEngineLib/RigidBody2D.h"
 
 #include "FSMContext.h"
 
 void KenRollState::Enter(FSMContext& context)
 {
 	context.animator->Play(L"ken_roll");
+
+	context.rigidBody2d->AddForce(Vector2(0.0f, 15000.0f));
 }
 
 void KenRollState::Update(FSMContext& context)
@@ -36,7 +39,7 @@ void KenRollState::Update(FSMContext& context)
 		return;
 	}
 
-	context.transform->Translate(Vector2(horizontalInput, 0.0f) * m_speed * MyTime::DeltaTime());
+	//context.transform->Translate(Vector2(horizontalInput, 0.0f) * m_speed * MyTime::DeltaTime());
 }
 
 void KenRollState::Exit(FSMContext& context)

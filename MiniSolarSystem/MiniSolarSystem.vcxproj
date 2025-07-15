@@ -136,6 +136,7 @@
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="DemoGameApp.cpp" />
     <ClCompile Include="Earth.cpp" />
+    <ClCompile Include="FollowCameraController.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HpViewer.cpp" />
     <ClCompile Include="InfoViewer.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="CameraController.h" />
     <ClInclude Include="DemoGameApp.h" />
     <ClInclude Include="Earth.h" />
+    <ClInclude Include="FollowCameraController.h" />
     <ClInclude Include="FSMContext.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HpViewer.h" />

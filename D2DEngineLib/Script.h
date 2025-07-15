@@ -8,9 +8,6 @@ class Script :
 	public Component
 {
 public:
-	virtual ~Script() override;
-
-public:
 	GameObject* CreateGameObject(const std::wstring& name = L"GameObject");
 
 public:
@@ -24,6 +21,13 @@ private:
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void OnDestroy();
+
+	virtual void OnCollisionEnter();
+	virtual void OnCollisionStay();
+	virtual void OnCollisionExit();
+	virtual void OnTriggerEnter();
+	virtual void OnTriggerStay();
+	virtual void OnTriggerExit();
 
 	friend class ScriptSystem;
 	friend class GameObject;

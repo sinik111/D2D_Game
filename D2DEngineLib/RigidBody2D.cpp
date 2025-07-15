@@ -7,6 +7,8 @@
 void RigidBody2D::Initialize()
 {
     m_transform = GetTransform();
+
+    m_lastFramePosition = m_position = m_transform->GetLocalPosition();
 }
 
 void RigidBody2D::RegisterToSystem()
@@ -36,16 +38,12 @@ void RigidBody2D::SetGravityScale(float gravityScale)
 
 void RigidBody2D::SetVelocity(const Vector2& velocity)
 {
-    m_overridenVelocity = velocity;
-
-    m_isVelocityOverriden = true;
+    m_velocity = velocity;
 }
 
 void RigidBody2D::SetPosition(const Vector2& position)
 {
-    m_overridenPosition = position;
-
-    m_isPositionOverriden = true;
+    m_lastFramePosition = m_position = position;
 }
 
 void RigidBody2D::AddForce(const Vector2& force)
@@ -56,27 +54,6 @@ void RigidBody2D::AddForce(const Vector2& force)
 void RigidBody2D::ApplyGraviy(const Vector2& gravity)
 {
     m_accumulatedForce += gravity * m_gravityScale * m_mass;
-}
-
-void RigidBody2D::ApplyOverriden()
-{
-    if (m_isVelocityOverriden)
-    {
-        m_velocity = m_overridenVelocity;
-
-        m_isVelocityOverriden = false;
-
-        m_overridenVelocity = Vector2::Zero;
-    }
-    
-    if (m_isPositionOverriden)
-    {
-        m_position = m_overridenPosition;
-
-        m_isPositionOverriden = false;
-
-        m_overridenPosition = Vector2::Zero;
-    }
 }
 
 void RigidBody2D::Interpolate()
@@ -119,9 +96,7 @@ float RigidBody2D::GetMass() const
 
 void RigidBody2D::CalculatePosition()
 {
-    Vector2 acceleration = m_accumulatedForce / m_mass;
-
-    m_velocity += acceleration * MyTime::FixedDeltaTime();
+    m_velocity += m_accumulatedForce / m_mass * MyTime::FixedDeltaTime();
 
     m_lastFramePosition = m_position;
 

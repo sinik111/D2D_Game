@@ -108,6 +108,9 @@
     <ClCompile Include="KenReviveState.cpp">
       <Filter>02_Script\AnimationTest\FSM\State</Filter>
     </ClCompile>
+    <ClCompile Include="FollowCameraController.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="KenReviveState.h">
       <Filter>02_Script\AnimationTest\FSM\State</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCameraController.h">
+      <Filter>02_Script\AnimationTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

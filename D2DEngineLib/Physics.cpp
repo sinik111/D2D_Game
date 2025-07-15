@@ -3,8 +3,9 @@
 
 #include "BoxCollider2D.h"
 #include "RigidBody2D.h"
+#include "GameObject.h"
 
-const Vector2 Physics::gravity{ 0.0f, -100.0f };
+const Vector2 Physics::gravity{ 0.0f, -500.0f };
 
 bool Physics::DetectCollision(const BoxCollider2D* a, const BoxCollider2D* b, CollisionInfo& info)
 {
@@ -94,21 +95,92 @@ void Physics::ResolveCollision(const CollisionInfo& info)
 
 	if (rigidBodyA && rigidBodyA->GetBodyType() == RigidBody2D::BodyType::Dynamic)
 	{
-		rigidBodyA->SetPosition(rigidBodyA->GetPosition() - info.normal * moveAmountA);
-	}
-	if (rigidBodyB && rigidBodyB->GetBodyType() == RigidBody2D::BodyType::Dynamic)
-	{
-		rigidBodyB->SetPosition(rigidBodyB->GetPosition() + info.normal * moveAmountB);
+
+		rigidBodyA->SetPosition(rigidBodyA->GetPosition() - info.normal * (moveAmountA + 0.01f));
+
+		if (info.normal.y < 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyA->GetVelocity();
+			if (velocitiy.y < 0.0f)
+			{
+				velocitiy.y = 0.0f;
+				rigidBodyA->SetVelocity(velocitiy);
+			}
+		}
+
+		if (info.normal.y > 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyA->GetVelocity();
+			if (velocitiy.y > 0.0f)
+			{
+				velocitiy.y = 0.0f;
+				rigidBodyA->SetVelocity(velocitiy);
+			}
+		}
+
+		if (info.normal.x < 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyA->GetVelocity();
+			if (velocitiy.x < 0.0f)
+			{
+				velocitiy.x = 0.0f;
+				rigidBodyA->SetVelocity(velocitiy);
+			}
+		}
+
+		if (info.normal.x > 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyA->GetVelocity();
+			if (velocitiy.x > 0.0f)
+			{
+				velocitiy.x = 0.0f;
+				rigidBodyA->SetVelocity(velocitiy);
+			}
+		}
 	}
 
-	if (rigidBodyA && rigidBodyA->GetBodyType() == RigidBody2D::BodyType::Dynamic)
-	{
-		// A의 속도를 0으로 설정
-		rigidBodyA->SetVelocity(Vector2::Zero);
-	}
 	if (rigidBodyB && rigidBodyB->GetBodyType() == RigidBody2D::BodyType::Dynamic)
 	{
-		// B의 속도를 0으로 설정
-		rigidBodyB->SetVelocity(Vector2::Zero);
+		rigidBodyB->SetPosition(rigidBodyB->GetPosition() + info.normal * (moveAmountB + 0.01f));
+
+		if (info.normal.y < 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyB->GetVelocity();
+			if (velocitiy.y < 0.0f)
+			{
+				velocitiy.y = 0.0f;
+				rigidBodyB->SetVelocity(velocitiy);
+			}
+		}
+
+		if (info.normal.y > 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyB->GetVelocity();
+			if (velocitiy.y > 0.0f)
+			{
+				velocitiy.y = 0.0f;
+				rigidBodyB->SetVelocity(velocitiy);
+			}
+		}
+
+		if (info.normal.x < 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyB->GetVelocity();
+			if (velocitiy.x < 0.0f)
+			{
+				velocitiy.x = 0.0f;
+				rigidBodyB->SetVelocity(velocitiy);
+			}
+		}
+
+		if (info.normal.x > 0.0f)
+		{
+			Vector2 velocitiy = rigidBodyB->GetVelocity();
+			if (velocitiy.x > 0.0f)
+			{
+				velocitiy.x = 0.0f;
+				rigidBodyB->SetVelocity(velocitiy);
+			}
+		}
 	}
 }

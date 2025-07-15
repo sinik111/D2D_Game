@@ -44,6 +44,7 @@ void Ken::Start()
 	m_context.animator = m_animator;
 	m_context.transform = GetTransform();
 	m_context.bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
+	m_context.rigidBody2d = GetGameObject()->GetComponent<RigidBody2D>();
 	m_context.floatParams[L"HorizontalInput"] = 0.0f;
 	m_context.triggerParams[L"Roll"] = false;
 	m_context.triggerParams[L"SpinningKick"] = false;
@@ -58,15 +59,15 @@ void Ken::Start()
 
 void Ken::FixedUpdate()
 {
-	RigidBody2D* rb = GetGameObject()->GetComponent<RigidBody2D>();
-	rb->AddForce(Vector2(m_context.floatParams[L"HorizontalInput"] * 2000.0f, 0.0f));
+	Vector2 velocity = m_context.rigidBody2d->GetVelocity();
+	m_context.rigidBody2d->SetVelocity(Vector2(m_context.floatParams[L"HorizontalInput"] * 100.0f, velocity.y));
+
+	m_kenFSM->Update(m_context);
 }
 
 void Ken::Update()
 {
-	m_kenFSM->Update(m_context);
-
-	Debug::Log(GetTransform()->GetLocalPosition().ToString());
+	//Debug::Log(GetTransform()->GetLocalPosition().ToString());
 }
 
 void Ken::ArrowInput(Vector2 input)

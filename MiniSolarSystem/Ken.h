@@ -17,6 +17,8 @@ private:
 
 	FSMContext m_context;
 
+	bool m_isJump = false;
+
 private:
 	void Initialize() override;
 	void Start() override;

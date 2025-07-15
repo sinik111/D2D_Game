@@ -3,11 +3,7 @@
 
 #include "ComponentSystem.h"
 #include "SceneManager.h"
-
-Script::~Script()
-{
-	
-}
+#include "BoxCollider2D.h"
 
 GameObject* Script::CreateGameObject(const std::wstring& name)
 {
@@ -17,11 +13,25 @@ GameObject* Script::CreateGameObject(const std::wstring& name)
 void Script::RegisterToSystem()
 {
 	ComponentSystem::Get().Script().Register(this);
+
+	auto components = GetGameObject()->GetComponents<BoxCollider2D>();
+
+	for (const auto& collider : components)
+	{
+		collider->RegisterScript(this);
+	}
 }
 
 void Script::UnregisterFromSystem()
 {
 	ComponentSystem::Get().Script().Unregister(this);
+
+	auto components = GetGameObject()->GetComponents<BoxCollider2D>();
+
+	for (const auto& collider : components)
+	{
+		collider->UnregisterScript(this);
+	}
 }
 
 void Script::Initialize()
@@ -54,4 +64,28 @@ void Script::LateUpdate()
 void Script::OnDestroy()
 {
 
+}
+
+void Script::OnCollisionEnter()
+{
+}
+
+void Script::OnCollisionStay()
+{
+}
+
+void Script::OnCollisionExit()
+{
+}
+
+void Script::OnTriggerEnter()
+{
+}
+
+void Script::OnTriggerStay()
+{
+}
+
+void Script::OnTriggerExit()
+{
 }

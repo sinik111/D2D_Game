@@ -244,6 +244,13 @@ void D2DRenderer::Trim()
 	m_dxgiDevice->Trim();
 }
 
+void D2DRenderer::DrawRect(const D2D1_RECT_F& rect)
+{
+	m_d2dDeviceContext->SetTransform(Camera::s_mainCamera->GetViewMatrix() * m_unityMatrix);
+	m_d2dSolidColorBrush->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
+	m_d2dDeviceContext->DrawRectangle(rect, m_d2dSolidColorBrush.Get());
+}
+
 void D2DRenderer::ClearQueue()
 {
 	for (auto& spaceTypeGroup : m_renderQueues)

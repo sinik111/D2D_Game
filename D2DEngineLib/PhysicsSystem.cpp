@@ -5,6 +5,7 @@
 #include "ContainerUtility.h"
 #include "Physics.h"
 #include "BoxCollider2D.h"
+#include "D2DRenderer.h"
 
 void PhysicsSystem::RegisterRigidBody2D(RigidBody2D* rigidBody2d)
 {
@@ -52,24 +53,13 @@ void PhysicsSystem::UnregisterBoxCollider2D(BoxCollider2D* boxCollider2d)
 	Util::OptimizedErase(m_boxColliders, boxCollider2d);
 }
 
+void PhysicsSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
+{
+	m_d2dRenderer = d2dRenderer;
+}
+
 void PhysicsSystem::ProcessPhysics()
 {
-
-	for (const auto& rigidBody2d : m_dynamicRigidBodies)
-	{
-		rigidBody2d->ApplyOverriden();
-	}
-
-	for (const auto& rigidBody2d : m_kinematicRigidBodies)
-	{
-		rigidBody2d->ApplyOverriden();
-	}
-
-	for (const auto& rigidBody2d : m_staticRigidBodies)
-	{
-		rigidBody2d->ApplyOverriden();
-	}
-
 	for (const auto& rigidBody2d : m_dynamicRigidBodies)
 	{
 		rigidBody2d->ApplyGraviy(Physics::gravity);
@@ -77,10 +67,36 @@ void PhysicsSystem::ProcessPhysics()
 		rigidBody2d->CalculatePosition();
 	}
 
+	for (const auto& collider : m_boxColliders)
+	{
+		collider->Update();
+	}
+
+	
+	std::sort(
+		m_boxColliders.begin(),
+		m_boxColliders.end(),
+		[](BoxCollider2D* a, BoxCollider2D* b) {
+			if (a->GetRigidBody2D() == nullptr || b->GetRigidBody2D() == nullptr)
+			{
+				return false;
+			}
+
+			return a->GetRigidBody2D()->GetPosition().y > b->GetRigidBody2D()->GetPosition().y;
+		}
+	);
+
 	for (size_t i = 0; i < m_boxColliders.size(); ++i)
 	{
 		for (size_t j = i + 1; j < m_boxColliders.size(); ++j)
 		{
+			if (m_boxColliders[i]->GetRigidBody2D() == nullptr &&
+				m_boxColliders[j]->GetRigidBody2D() == nullptr)
+			{
+				continue;
+			}
+
+
 			CollisionInfo info{};
 
 			if (Physics::DetectCollision(m_boxColliders[i], m_boxColliders[j], info))
@@ -89,6 +105,8 @@ void PhysicsSystem::ProcessPhysics()
 			}
 		}
 	}
+
+	UpdateColliders();
 }
 
 void PhysicsSystem::Interpolate()
@@ -114,5 +132,20 @@ void PhysicsSystem::UpdateColliders()
 	for (const auto& collider : m_boxColliders)
 	{
 		collider->Update();
+	}
+}
+
+void PhysicsSystem::RenderColliders()
+{
+	for (const auto& collider : m_boxColliders)
+	{
+		const Bounds& bounds = collider->GetBounds();
+
+		Vector2 min = bounds.GetMin();
+		Vector2 max = bounds.GetMax();
+
+		D2D1_RECT_F rect{ min.x, min.y, max.x, max.y };
+
+		m_d2dRenderer->DrawRect(rect);
 	}
 }

@@ -4,8 +4,6 @@
 
 class Transform;
 
-
-
 class RigidBody2D :
 	public Component
 {
@@ -27,14 +25,9 @@ private:
 	
 	Vector2 m_accumulatedForce;
 	Vector2 m_velocity;
-	Vector2 m_overridenVelocity;
 
 	Vector2 m_lastFramePosition;
 	Vector2 m_position;
-	Vector2 m_overridenPosition;
-
-	bool m_isVelocityOverriden = false;
-	bool m_isPositionOverriden = false;
 
 public:
 	void Initialize() override;
@@ -60,6 +53,5 @@ public:
 public:
 	void CalculatePosition();
 	void ApplyGraviy(const Vector2& gravity);
-	void ApplyOverriden();
 	void Interpolate();
 };

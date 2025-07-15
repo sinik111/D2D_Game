@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "RigidBody2D.h"
 #include "ComponentSystem.h"
+#include "ContainerUtility.h"
 
 void BoxCollider2D::Initialize()
 {
@@ -19,6 +20,16 @@ void BoxCollider2D::RegisterToSystem()
 void BoxCollider2D::UnregisterFromSystem()
 {
 	ComponentSystem::Get().Physics().UnregisterBoxCollider2D(this);
+}
+
+void BoxCollider2D::RegisterScript(Script* script)
+{
+	m_scriptsForCallBack.push_back(script);
+}
+
+void BoxCollider2D::UnregisterScript(Script* script)
+{
+	Util::OptimizedErase(m_scriptsForCallBack, script);
 }
 
 RigidBody2D* BoxCollider2D::GetRigidBody2D() const
@@ -62,10 +73,43 @@ void BoxCollider2D::Update()
 		// 현재는 AABB만 가능하도록 회전, 스케일은 제외함
 		// 스케일은 회전에서 분리해야하기 때문에 그냥 뺌.
 
-		m_bounds = Bounds(
-			m_transform->GetWorldPosition() + m_offset,
-			m_size);
+		if (m_rigidBody2d != nullptr)
+		{
+			m_bounds = Bounds(
+				m_rigidBody2d->GetPosition() + m_offset,
+				m_size);
+		}
+		else
+		{
+			m_bounds = Bounds(
+				m_transform->GetWorldPosition() + m_offset,
+				m_size);
 
-		m_isBoundsDirty = false;
+			m_isBoundsDirty = false;
+		}
 	}
+}
+
+void BoxCollider2D::CallOnCollisionEnter(const CollisionInfo& collisionInfo)
+{
+}
+
+void BoxCollider2D::CallOnCollisionStay(const CollisionInfo& collisionInfo)
+{
+}
+
+void BoxCollider2D::CallOnCollisionExit(const CollisionInfo& collisionInfo)
+{
+}
+
+void BoxCollider2D::CallOnTriggerEnter(const CollisionInfo& collisionInfo)
+{
+}
+
+void BoxCollider2D::CallOnTriggerStay(const CollisionInfo& collisionInfo)
+{
+}
+
+void BoxCollider2D::CallOnTriggerExit(const CollisionInfo& collisionInfo)
+{
 }

@@ -1,8 +1,11 @@
 #pragma once
 
 #include "Component.h"
+#include "Delegate.h"
+#include "Physics.h"
 
 class RigidBody2D;
+class Script;
 
 class BoxCollider2D :
 	public Component
@@ -10,6 +13,8 @@ class BoxCollider2D :
 private:
 	Transform* m_transform = nullptr;
 	RigidBody2D* m_rigidBody2d = nullptr;
+
+	std::vector<Script*> m_scriptsForCallBack;
 
 	Bounds m_bounds;
 	Vector2 m_offset;
@@ -26,6 +31,9 @@ public:
 	void RegisterToSystem() override;
 	void UnregisterFromSystem() override;
 
+	void RegisterScript(Script* script);
+	void UnregisterScript(Script* script);
+
 public:
 	RigidBody2D* GetRigidBody2D() const;
 
@@ -40,4 +48,11 @@ public:
 
 public:
 	void Update();
+
+	void CallOnCollisionEnter(const CollisionInfo& collisionInfo);
+	void CallOnCollisionStay(const CollisionInfo& collisionInfo);
+	void CallOnCollisionExit(const CollisionInfo& collisionInfo);
+	void CallOnTriggerEnter(const CollisionInfo& collisionInfo);
+	void CallOnTriggerStay(const CollisionInfo& collisionInfo);
+	void CallOnTriggerExit(const CollisionInfo& collisionInfo);
 };

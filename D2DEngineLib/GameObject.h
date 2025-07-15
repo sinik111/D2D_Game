@@ -69,6 +69,22 @@ public:
         return nullptr;
     }
 
+    template<typename T>
+    std::vector<T*> GetComponents()
+    {
+        std::vector<T*> components;
+
+        for (const auto& comp : m_components)
+        {
+            if (typeid(*(comp.get())) == typeid(T))
+            {
+                components.push_back(static_cast<T*>(comp.get()));
+            }
+        }
+
+        return components;
+    }
+
 public:
     static GameObject* Find(const std::wstring name);
 };
