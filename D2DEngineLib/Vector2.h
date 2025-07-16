@@ -33,6 +33,11 @@ public: // 연산자 오버로딩
 	{
 		return Vector2(x - rhs.x, y - rhs.y);
 	}
+
+	Vector2 operator-() const
+	{
+		return Vector2(-x, -y);
+	}
 	
 	Vector2 operator*(float scalar) const
 	{

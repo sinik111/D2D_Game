@@ -6,15 +6,20 @@
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/SceneManager.h"
 #include "../D2DEngineLib/RigidBody2D.h"
+#include "../D2DEngineLib/Physics.h"
+#include "../D2DEngineLib/BoxCollider2D.h"
 
 #include "Earth.h"
 #include "FSMContext.h"
 #include "Health.h"
+#include "JumpingText.h"
+#include "LandingText.h"
 
 void Ken::Initialize()
 {
 	m_animator = GetGameObject()->GetComponent<Animator>();
 	m_health = GetGameObject()->GetComponent<Health>();
+	m_rigidBody = GetGameObject()->GetComponent<RigidBody2D>();
 }
 
 void Ken::Start()
@@ -44,13 +49,15 @@ void Ken::Start()
 	m_context.animator = m_animator;
 	m_context.transform = GetTransform();
 	m_context.bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
-	m_context.rigidBody2d = GetGameObject()->GetComponent<RigidBody2D>();
+	m_context.rigidBody2d = m_rigidBody;
 	m_context.floatParams[L"HorizontalInput"] = 0.0f;
+	m_context.floatParams[L"VerticalInput"] = 0.0f;
 	m_context.triggerParams[L"Roll"] = false;
 	m_context.triggerParams[L"SpinningKick"] = false;
 	m_context.triggerParams[L"Hurt"] = false;
 	m_context.boolParams[L"IsDead"] = false;
 	m_context.triggerParams[L"Revive"] = false;
+	m_context.boolParams[L"IsGround"] = false;
 
 	m_kenFSM = std::make_unique<KenFSM>(m_context);
 
@@ -59,20 +66,67 @@ void Ken::Start()
 
 void Ken::FixedUpdate()
 {
-	Vector2 velocity = m_context.rigidBody2d->GetVelocity();
-	m_context.rigidBody2d->SetVelocity(Vector2(m_context.floatParams[L"HorizontalInput"] * 100.0f, velocity.y));
+	m_context.boolParams[L"IsGround"] = m_isGround;
+	m_isGround = false;
 
 	m_kenFSM->Update(m_context);
 }
 
 void Ken::Update()
 {
-	//Debug::Log(GetTransform()->GetLocalPosition().ToString());
+
+}
+
+void Ken::OnCollisionEnter(const Collision& collision)
+{
+	if (collision.otherGameObject->GetName() == L"Floor")
+	{
+		if (m_rigidBody->GetVelocity().y < 0.001f && !m_context.boolParams[L"IsGround"] && collision.normal.y < 0.0f)
+		{
+			GameObject* go = CreateGameObject(L"LandingText");
+			LandingText* landingText = go->AddComponent<LandingText>();
+			landingText->SetDirection(Vector2(-2.0f, 1.0f).Normalized());
+			go->GetTransform()->SetLocalPosition(collision.contactPoint);
+
+			go = CreateGameObject(L"LandingText");
+			landingText = go->AddComponent<LandingText>();
+			landingText->SetDirection(Vector2(2.0f, 1.0f).Normalized());
+			go->GetTransform()->SetLocalPosition(collision.contactPoint);
+		}
+	}
+}
+
+void Ken::OnCollisionStay(const Collision& collision)
+{
+	if (collision.otherGameObject->GetName() == L"Floor")
+	{
+		if (m_rigidBody->GetVelocity().y < 0.001f && collision.normal.y < 0.0f)
+		{
+			m_isGround = true;
+		}
+	}
+}
+
+void Ken::OnCollisionExit(const Collision& collision)
+{
+	if (collision.otherGameObject->GetName() == L"Floor")
+	{
+		if (collision.otherGameObject->GetName() == L"Floor")
+		{
+			if (m_rigidBody->GetVelocity().y > 0.001f && m_context.boolParams[L"IsGround"] && collision.normal.y < 0.0f)
+			{
+				GameObject* go = CreateGameObject(L"JumpingText");
+				go->AddComponent<JumpingText>();
+				go->GetTransform()->SetLocalPosition(collision.contactPoint);
+			}
+		}
+	}
 }
 
 void Ken::ArrowInput(Vector2 input)
 {
 	m_context.floatParams[L"HorizontalInput"] = input.x;
+	m_context.floatParams[L"VerticalInput"] = input.y;
 }
 
 void Ken::Roll()
@@ -96,6 +150,7 @@ void Ken::FireEarth()
 	go->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition() + Vector2(50.0f, 70.0f));
 	Earth* earth = go->AddComponent<Earth>();
 	earth->Fired();
+	Destroy(go, 1.0f);
 }
 
 void Ken::TakeDamage()

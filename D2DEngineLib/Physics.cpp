@@ -55,7 +55,23 @@ bool Physics::DetectCollision(const BoxCollider2D* a, const BoxCollider2D* b, Co
 		info.rigidBodyA = a->GetRigidBody2D();
 		info.rigidBodyB = b->GetRigidBody2D();
 
-		info.contactPoint = boundsA.center - info.normal * info.penetrationDepth * 0.5f;
+		// 겹치는 영역의 X, Y 최소/최대값
+
+		Vector2 aMin = boundsA.GetMin();
+		Vector2 aMax = boundsA.GetMax();
+		Vector2 bMin = boundsB.GetMin();
+		Vector2 bMax = boundsB.GetMax();
+
+
+		float overlapMinX = std::max<float>(aMin.x, bMin.x);
+		float overlapMaxX = std::min<float>(aMax.x, bMax.x);
+		float overlapMinY = std::max<float>(aMin.y, bMin.y);
+		float overlapMaxY = std::min<float>(aMax.y, bMax.y);
+
+		// 겹치는 영역의 중심을 접점으로 사용
+		info.contactPoint = Vector2((overlapMinX + overlapMaxX) * 0.5f, (overlapMinY + overlapMaxY) * 0.5f);
+
+		//info.contactPoint = boundsA.center - info.normal * info.penetrationDepth * 0.5f;
 
 		return true;
 	}
@@ -95,92 +111,37 @@ void Physics::ResolveCollision(const CollisionInfo& info)
 
 	if (rigidBodyA && rigidBodyA->GetBodyType() == RigidBody2D::BodyType::Dynamic)
 	{
+		rigidBodyA->SetPosition(rigidBodyA->GetPosition() - info.normal * moveAmountA);
+		Vector2 velocitiy = rigidBodyA->GetVelocity();
 
-		rigidBodyA->SetPosition(rigidBodyA->GetPosition() - info.normal * (moveAmountA + 0.01f));
-
-		if (info.normal.y < 0.0f)
+		if (info.normal.y < 0.0f && velocitiy.y < 0.0f || info.normal.y > 0.0f && velocitiy.y > 0.0f)
 		{
-			Vector2 velocitiy = rigidBodyA->GetVelocity();
-			if (velocitiy.y < 0.0f)
-			{
-				velocitiy.y = 0.0f;
-				rigidBodyA->SetVelocity(velocitiy);
-			}
+			velocitiy.y = 0.0f;
 		}
 
-		if (info.normal.y > 0.0f)
+		if (info.normal.x < 0.0f && velocitiy.x < 0.0f || info.normal.x > 0.0f && velocitiy.x > 0.0f)
 		{
-			Vector2 velocitiy = rigidBodyA->GetVelocity();
-			if (velocitiy.y > 0.0f)
-			{
-				velocitiy.y = 0.0f;
-				rigidBodyA->SetVelocity(velocitiy);
-			}
+			velocitiy.x = 0.0f;
 		}
 
-		if (info.normal.x < 0.0f)
-		{
-			Vector2 velocitiy = rigidBodyA->GetVelocity();
-			if (velocitiy.x < 0.0f)
-			{
-				velocitiy.x = 0.0f;
-				rigidBodyA->SetVelocity(velocitiy);
-			}
-		}
-
-		if (info.normal.x > 0.0f)
-		{
-			Vector2 velocitiy = rigidBodyA->GetVelocity();
-			if (velocitiy.x > 0.0f)
-			{
-				velocitiy.x = 0.0f;
-				rigidBodyA->SetVelocity(velocitiy);
-			}
-		}
+		rigidBodyA->SetVelocity(velocitiy);
 	}
 
 	if (rigidBodyB && rigidBodyB->GetBodyType() == RigidBody2D::BodyType::Dynamic)
 	{
-		rigidBodyB->SetPosition(rigidBodyB->GetPosition() + info.normal * (moveAmountB + 0.01f));
+		rigidBodyB->SetPosition(rigidBodyB->GetPosition() + info.normal * moveAmountB);
+		Vector2 velocitiy = rigidBodyB->GetVelocity();
 
-		if (info.normal.y < 0.0f)
+		if (-info.normal.y < 0.0f && velocitiy.y < 0.0f || -info.normal.y > 0.0f && velocitiy.y > 0.0f)
 		{
-			Vector2 velocitiy = rigidBodyB->GetVelocity();
-			if (velocitiy.y < 0.0f)
-			{
-				velocitiy.y = 0.0f;
-				rigidBodyB->SetVelocity(velocitiy);
-			}
+			velocitiy.y = 0.0f;
 		}
 
-		if (info.normal.y > 0.0f)
+		if (-info.normal.x < 0.0f && velocitiy.x < 0.0f || -info.normal.x > 0.0f && velocitiy.x > 0.0f)
 		{
-			Vector2 velocitiy = rigidBodyB->GetVelocity();
-			if (velocitiy.y > 0.0f)
-			{
-				velocitiy.y = 0.0f;
-				rigidBodyB->SetVelocity(velocitiy);
-			}
+			velocitiy.x = 0.0f;
 		}
-
-		if (info.normal.x < 0.0f)
-		{
-			Vector2 velocitiy = rigidBodyB->GetVelocity();
-			if (velocitiy.x < 0.0f)
-			{
-				velocitiy.x = 0.0f;
-				rigidBodyB->SetVelocity(velocitiy);
-			}
-		}
-
-		if (info.normal.x > 0.0f)
-		{
-			Vector2 velocitiy = rigidBodyB->GetVelocity();
-			if (velocitiy.x > 0.0f)
-			{
-				velocitiy.x = 0.0f;
-				rigidBodyB->SetVelocity(velocitiy);
-			}
-		}
+		
+		rigidBodyB->SetVelocity(velocitiy);
 	}
 }

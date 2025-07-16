@@ -13,8 +13,10 @@ struct RenderContext
 class IRenderer
 {
 public:
+	virtual void Update() = 0;
 	virtual void Render(const RenderContext& context) const = 0;
 	virtual SpaceType GetSpaceType() const = 0;
 	virtual int GetSortOrder() const = 0;
 	virtual float GetY() const = 0;
+	virtual const Bounds& GetBounds() const = 0;
 };

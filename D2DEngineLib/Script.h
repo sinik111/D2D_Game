@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "SceneManager.h"
 
+struct Collision;
+
 class Script :
 	public Component
 {
@@ -22,13 +24,14 @@ private:
 	virtual void LateUpdate();
 	virtual void OnDestroy();
 
-	virtual void OnCollisionEnter();
-	virtual void OnCollisionStay();
-	virtual void OnCollisionExit();
-	virtual void OnTriggerEnter();
-	virtual void OnTriggerStay();
-	virtual void OnTriggerExit();
+	virtual void OnCollisionEnter(const Collision& collision);
+	virtual void OnCollisionStay(const Collision& collision);
+	virtual void OnCollisionExit(const Collision& collision);
+	virtual void OnTriggerEnter(const Collision& collision);
+	virtual void OnTriggerStay(const Collision& collision);
+	virtual void OnTriggerExit(const Collision& collision);
 
 	friend class ScriptSystem;
 	friend class GameObject;
+	friend class BoxCollider2D;
 };

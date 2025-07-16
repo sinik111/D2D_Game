@@ -75,8 +75,7 @@ void WinApp::Initialize()
 	Screen::Get().SetWidth(m_width);
 	Screen::Get().SetHeight(m_height);
 
-	ComponentSystem::Get().BitmapRenderer().SetD2DRenderer(m_d2dRenderer.get());
-	ComponentSystem::Get().TextRenderer().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::Get().Renderer().SetD2DRenderer(m_d2dRenderer.get());
 	ComponentSystem::Get().Physics().SetD2DRenderer(m_d2dRenderer.get());
 	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
 	SceneManager::Get().SetD2DRenderer(m_d2dRenderer.get());
@@ -153,6 +152,8 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Script().CallLateUpdate();
 
+	Object::UpdateDelayDestroy();
+
 	SceneManager::Get().CleanupDestroyedObjects();
 }
 
@@ -160,10 +161,10 @@ void WinApp::Render()
 {
 	Camera::s_mainCamera->Update();
 
-	ComponentSystem::Get().BitmapRenderer().Update();
-	ComponentSystem::Get().TextRenderer().Update();
+	ComponentSystem::Get().Renderer().RegisterRendererToRenderQueue();
 
 	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
+
 	m_d2dRenderer->ExecuteRenderQueue();
 
 	ComponentSystem::Get().Physics().RenderColliders();

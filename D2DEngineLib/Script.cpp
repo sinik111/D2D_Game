@@ -66,26 +66,26 @@ void Script::OnDestroy()
 
 }
 
-void Script::OnCollisionEnter()
+void Script::OnCollisionEnter(const Collision& collision)
 {
 }
 
-void Script::OnCollisionStay()
+void Script::OnCollisionStay(const Collision& collision)
 {
 }
 
-void Script::OnCollisionExit()
+void Script::OnCollisionExit(const Collision& collision)
 {
 }
 
-void Script::OnTriggerEnter()
+void Script::OnTriggerEnter(const Collision& collision)
 {
 }
 
-void Script::OnTriggerStay()
+void Script::OnTriggerStay(const Collision& collision)
 {
 }
 
-void Script::OnTriggerExit()
+void Script::OnTriggerExit(const Collision& collision)
 {
 }

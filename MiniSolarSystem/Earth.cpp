@@ -68,11 +68,11 @@ void Earth::Update()
         GetTransform()->Translate(Vector2::Right * 200.0f * MyTime::DeltaTime());
         GetTransform()->Rotate(-600.0f * MyTime::DeltaTime());
 
-        m_destroyTimer += MyTime::DeltaTime();
-        if (m_destroyTimer > 1.0f)
-        {
-            Destroy(GetGameObject());
-        }
+        //m_destroyTimer += MyTime::DeltaTime();
+        //if (m_destroyTimer > 1.0f)
+        //{
+        //    Destroy(GetGameObject());
+        //}
     }
 }
 

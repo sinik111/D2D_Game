@@ -6,6 +6,7 @@
 
 class Animator;
 class Health;
+class RigidBody2D;
 
 class Ken :
 	public Script
@@ -13,17 +14,22 @@ class Ken :
 private:
 	Animator* m_animator;
 	Health* m_health;
+	RigidBody2D* m_rigidBody;
 	std::unique_ptr<KenFSM> m_kenFSM;
 
 	FSMContext m_context;
 
 	bool m_isJump = false;
+	bool m_isGround = false;
 
 private:
 	void Initialize() override;
 	void Start() override;
 	void FixedUpdate() override;
 	void Update() override;
+	void OnCollisionEnter(const Collision& collision) override;
+	void OnCollisionStay(const Collision& collision) override;
+	void OnCollisionExit(const Collision& collision) override;
 
 private:
 	void ArrowInput(Vector2 input);

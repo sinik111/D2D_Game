@@ -49,10 +49,10 @@ public:
 public:
 	void Update();
 
-	void CallOnCollisionEnter(const CollisionInfo& collisionInfo);
-	void CallOnCollisionStay(const CollisionInfo& collisionInfo);
-	void CallOnCollisionExit(const CollisionInfo& collisionInfo);
-	void CallOnTriggerEnter(const CollisionInfo& collisionInfo);
-	void CallOnTriggerStay(const CollisionInfo& collisionInfo);
-	void CallOnTriggerExit(const CollisionInfo& collisionInfo);
+	void CallOnCollisionEnter(const Collision& collision);
+	void CallOnCollisionStay(const Collision& collision);
+	void CallOnCollisionExit(const Collision& collision);
+	void CallOnTriggerEnter(const Collision& collision);
+	void CallOnTriggerStay(const Collision& collision);
+	void CallOnTriggerExit(const Collision& collision);
 };

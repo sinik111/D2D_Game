@@ -2,6 +2,16 @@
 
 class BoxCollider2D;
 class RigidBody2D;
+class GameObject;
+
+struct Collision
+{
+	const GameObject* otherGameObject;
+	const BoxCollider2D* other;
+	const Vector2 normal;
+	const float penetrationDepth;
+	const Vector2 contactPoint;
+};
 
 struct CollisionInfo
 {
@@ -23,7 +33,6 @@ class Physics
 public:
 	static const Vector2 gravity;
 
-	// ICollider로 Circle, Box 둘 다 적용 필요
 	static bool DetectCollision(const BoxCollider2D* a, const BoxCollider2D* b, CollisionInfo& info);
 
 	static void ResolveCollision(const CollisionInfo& info);

@@ -111,6 +111,12 @@
     <ClCompile Include="FollowCameraController.cpp">
       <Filter>02_Script\AnimationTest</Filter>
     </ClCompile>
+    <ClCompile Include="JumpingText.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingText.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -189,6 +195,12 @@
       <Filter>02_Script\AnimationTest\FSM\State</Filter>
     </ClInclude>
     <ClInclude Include="FollowCameraController.h">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpingText.h">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingText.h">
       <Filter>02_Script\AnimationTest</Filter>
     </ClInclude>
   </ItemGroup>

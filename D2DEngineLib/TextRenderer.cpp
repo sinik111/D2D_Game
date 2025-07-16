@@ -6,17 +6,17 @@
 
 TextRenderer::TextRenderer()
 {
-	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
+	m_textFormat = ComponentSystem::Get().Renderer().CreateTextFormat(m_fontSize);
 }
 
 void TextRenderer::RegisterToSystem()
 {
-	ComponentSystem::Get().TextRenderer().Register(this);
+	ComponentSystem::Get().Renderer().Register(this);
 }
 
 void TextRenderer::UnregisterFromSystem()
 {
-	ComponentSystem::Get().TextRenderer().Unregister(this);
+	ComponentSystem::Get().Renderer().Unregister(this);
 }
 
 void TextRenderer::SetText(const std::wstring& text)
@@ -50,7 +50,7 @@ void TextRenderer::SetFontSize(float size)
 {
 	m_fontSize = size;
 
-	m_textFormat = ComponentSystem::Get().TextRenderer().CreateTextFormat(m_fontSize);
+	m_textFormat = ComponentSystem::Get().Renderer().CreateTextFormat(m_fontSize);
 
 	SetVerticalAlignment(m_verticalAlignment);
 	SetHorizontalAlignment(m_horizontalAlignment);

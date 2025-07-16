@@ -17,7 +17,7 @@ public:
 public:
 	GameObject* GetGameObject() const;
 	Transform* GetTransform() const;
-	void Destroy(Object* object) override;
+	void Destroy(Object* object, float delay = 0.0f) override;
 
 public:
 	virtual void RegisterToSystem();

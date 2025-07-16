@@ -4,6 +4,7 @@
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/MyTime.h"
 #include "../D2DEngineLib/Transform.h"
+#include "../D2DEngineLib/RigidBody2D.h"
 
 #include "FSMContext.h"
 
@@ -23,7 +24,7 @@ void KenBackDashState::Update(FSMContext& context)
 		return;
 	}
 
-	if (context.triggerParams[L"Roll"])
+	if (context.triggerParams[L"Roll"] && context.boolParams[L"IsGround"])
 	{
 		context.shouldChangeState = true;
 		context.nextStateName = L"Roll";
@@ -49,9 +50,14 @@ void KenBackDashState::Update(FSMContext& context)
 		return;
 	}
 	
-	//context.transform->Translate(Vector2::Left * m_speed * MyTime::DeltaTime());
+	Vector2 velocity = context.rigidBody2d->GetVelocity();
+
+	context.rigidBody2d->SetVelocity(Vector2(horizontalInput * 100.0f, velocity.y));
 }
 
 void KenBackDashState::Exit(FSMContext& context)
 {
+	Vector2 velocity = context.rigidBody2d->GetVelocity();
+
+	context.rigidBody2d->SetVelocity(Vector2(0.0f, velocity.y));
 }

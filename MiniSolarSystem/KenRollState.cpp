@@ -19,7 +19,7 @@ void KenRollState::Update(FSMContext& context)
 {
 	float horizontalInput = context.floatParams[L"HorizontalInput"];
 
-	if (context.animator->IsFinished())
+	if (context.boolParams[L"IsGround"])
 	{
 		context.shouldChangeState = true;
 
@@ -39,9 +39,14 @@ void KenRollState::Update(FSMContext& context)
 		return;
 	}
 
-	//context.transform->Translate(Vector2(horizontalInput, 0.0f) * m_speed * MyTime::DeltaTime());
+	Vector2 velocity = context.rigidBody2d->GetVelocity();
+
+	context.rigidBody2d->SetVelocity(Vector2(horizontalInput * 100.0f, velocity.y));
 }
 
 void KenRollState::Exit(FSMContext& context)
 {
+	Vector2 velocity = context.rigidBody2d->GetVelocity();
+
+	context.rigidBody2d->SetVelocity(Vector2(0.0f, velocity.y));
 }

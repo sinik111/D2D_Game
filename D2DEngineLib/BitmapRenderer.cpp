@@ -20,12 +20,12 @@ BitmapRenderer::BitmapRenderer(const std::wstring& filePath)
 
 void BitmapRenderer::RegisterToSystem()
 {
-	ComponentSystem::Get().BitmapRenderer().Register(this);
+	ComponentSystem::Get().Renderer().Register(this);
 }
 
 void BitmapRenderer::UnregisterFromSystem()
 {
-	ComponentSystem::Get().BitmapRenderer().Unregister(this);
+	ComponentSystem::Get().Renderer().Unregister(this);
 }
 
 const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& BitmapRenderer::GetBitmap() const

@@ -28,24 +28,24 @@ void AnimationTestScene::Enter()
 	go->AddComponent<PlayerInput>();
 	go->AddComponent<Ken>();
 	Health* health = go->AddComponent<Health>();
-	go->AddComponent<RigidBody2D>();
+	auto rigidBody = go->AddComponent<RigidBody2D>();
 	BoxCollider2D* boxCollider2d = go->AddComponent<BoxCollider2D>();
 	boxCollider2d->SetSize({ 30.0f, 45.0f });
 	boxCollider2d->SetOffset({ 0.0f, 45.0f });
 
 	controller->SetTarget(go->GetTransform());
 
-	go = CreateGameObject(L"Ken2");
-	go->AddComponent<BitmapRenderer>();
-	go->AddComponent<Animator>();
-	go->AddComponent<PlayerInput>();
-	go->AddComponent<Ken>();
-	go->AddComponent<RigidBody2D>();
-	go->AddComponent<Health>();
-	boxCollider2d = go->AddComponent<BoxCollider2D>();
-	boxCollider2d->SetSize({ 30.0f, 45.0f });
-	boxCollider2d->SetOffset({ 0.0f, 45.0f });
-	go->GetTransform()->SetLocalPosition(0.0f, 100.0f);
+	//go = CreateGameObject(L"Ken2");
+	//go->AddComponent<BitmapRenderer>();
+	//go->AddComponent<Animator>();
+	//go->AddComponent<PlayerInput>();
+	//go->AddComponent<Ken>();
+	//go->AddComponent<RigidBody2D>();
+	//go->AddComponent<Health>();
+	//boxCollider2d = go->AddComponent<BoxCollider2D>();
+	//boxCollider2d->SetSize({ 30.0f, 45.0f });
+	//boxCollider2d->SetOffset({ 0.0f, 45.0f });
+	//go->GetTransform()->SetLocalPosition(0.0f, 100.0f);
 
 
 	GameObject* floor = CreateGameObject(L"Floor");

@@ -55,6 +55,9 @@
     <Filter Include="99_Module\Physics">
       <UniqueIdentifier>{824b0074-ed42-40a0-8f6c-98770b4d2be3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04_Component\Components\Physics">
+      <UniqueIdentifier>{c1bfc007-efe7-4ef8-9115-e6ff8eb9475a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoInitializer.h">
@@ -87,16 +90,13 @@
     <ClInclude Include="Transform.h">
       <Filter>04_Component\Components</Filter>
     </ClInclude>
-    <ClInclude Include="BitmapRendererSystem.h">
-      <Filter>04_Component\ComponentSystem\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerInputSystem.h">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
     <ClInclude Include="ScriptSystem.h">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="TextRendererSystem.h">
+    <ClInclude Include="RendererSystem.h">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
@@ -189,12 +189,6 @@
     <ClInclude Include="RectUtil.h">
       <Filter>99_Module\Math</Filter>
     </ClInclude>
-    <ClInclude Include="BoxCollider2D.h">
-      <Filter>04_Component\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RigidBody2D.h">
-      <Filter>04_Component\Components</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsSystem.h">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
@@ -203,6 +197,12 @@
     </ClInclude>
     <ClInclude Include="ComponentSystem.h">
       <Filter>04_Component\ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider2D.h">
+      <Filter>04_Component\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody2D.h">
+      <Filter>04_Component\Components\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,13 +236,10 @@
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>00_App</Filter>
     </ClCompile>
-    <ClCompile Include="BitmapRendererSystem.cpp">
-      <Filter>04_Component\ComponentSystem\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="WinApp.cpp">
       <Filter>00_App</Filter>
     </ClCompile>
-    <ClCompile Include="TextRendererSystem.cpp">
+    <ClCompile Include="RendererSystem.cpp">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -308,17 +305,17 @@
     <ClCompile Include="TransformSystem.cpp">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="BoxCollider2D.cpp">
-      <Filter>04_Component\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RigidBody2D.cpp">
-      <Filter>04_Component\Components</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsSystem.cpp">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Physics.cpp">
       <Filter>99_Module\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider2D.cpp">
+      <Filter>04_Component\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody2D.cpp">
+      <Filter>04_Component\Components\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

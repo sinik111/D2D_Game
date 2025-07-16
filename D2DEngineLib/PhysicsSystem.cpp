@@ -3,7 +3,6 @@
 
 #include "RigidBody2D.h"
 #include "ContainerUtility.h"
-#include "Physics.h"
 #include "BoxCollider2D.h"
 #include "D2DRenderer.h"
 
@@ -67,11 +66,12 @@ void PhysicsSystem::ProcessPhysics()
 		rigidBody2d->CalculatePosition();
 	}
 
-	for (const auto& collider : m_boxColliders)
+	for (const auto& rigidBody2d : m_kinematicRigidBodies)
 	{
-		collider->Update();
+		rigidBody2d->CalculatePosition();
 	}
 
+	UpdateColliders();
 	
 	std::sort(
 		m_boxColliders.begin(),
@@ -86,6 +86,8 @@ void PhysicsSystem::ProcessPhysics()
 		}
 	);
 
+	m_currentCollisions.clear();
+
 	for (size_t i = 0; i < m_boxColliders.size(); ++i)
 	{
 		for (size_t j = i + 1; j < m_boxColliders.size(); ++j)
@@ -96,17 +98,43 @@ void PhysicsSystem::ProcessPhysics()
 				continue;
 			}
 
+			BoxCollider2D* colliderA;
+			BoxCollider2D* colliderB;
+
+			if (m_boxColliders[i] < m_boxColliders[j])
+			{
+				colliderA = m_boxColliders[i];
+				colliderB = m_boxColliders[j];
+			}
+			else
+			{
+				colliderA = m_boxColliders[j];
+				colliderB = m_boxColliders[i];
+			}
 
 			CollisionInfo info{};
 
-			if (Physics::DetectCollision(m_boxColliders[i], m_boxColliders[j], info))
+			if (Physics::DetectCollision(colliderA, colliderB, info))
 			{
-				Physics::ResolveCollision(info);
+				CollisionPair pair{ colliderA, colliderB };
+
+				if (colliderA->GetTrigger() || colliderB->GetTrigger())
+				{
+					m_currentTriggers.emplace(pair, info);
+				}
+				else
+				{
+					m_currentCollisions.emplace(pair, info);
+
+					Physics::ResolveCollision(info);
+				}
 			}
 		}
 	}
 
-	UpdateColliders();
+	// Enter, Stay, Exit 상태 처리
+	CallCollisionEvent();
+	CallTriggerEvent();
 }
 
 void PhysicsSystem::Interpolate()
@@ -148,4 +176,186 @@ void PhysicsSystem::RenderColliders()
 
 		m_d2dRenderer->DrawRect(rect);
 	}
+}
+
+void PhysicsSystem::CallCollisionEvent()
+{
+	for (const auto& pair : m_currentCollisions)
+	{
+		Collision collisionA{
+			pair.second.colliderB->GetGameObject(),
+			pair.second.colliderB,
+			pair.second.normal,
+			pair.second.penetrationDepth,
+			pair.second.contactPoint
+		};
+
+		Collision collisionB{
+			pair.second.colliderA->GetGameObject(),
+			pair.second.colliderA,
+			-pair.second.normal,
+			pair.second.penetrationDepth,
+			pair.second.contactPoint
+		};
+
+		if (m_previousCollisions.find(pair.first) == m_previousCollisions.end())
+		{
+			pair.first.first->CallOnCollisionEnter(collisionA);
+			pair.first.second->CallOnCollisionEnter(collisionB);
+		}
+		else
+		{
+			pair.first.first->CallOnCollisionStay(collisionA);
+			pair.first.second->CallOnCollisionStay(collisionB);
+		}
+	}
+
+	for (const auto& pair : m_previousCollisions)
+	{
+		if (m_currentCollisions.find(pair.first) == m_currentCollisions.end())
+		{
+			bool validA = Object::IsValid(pair.first.first);
+			bool validB = Object::IsValid(pair.first.second);
+
+			if (validA && validB)
+			{
+				Collision collisionA{
+					pair.second.colliderB->GetGameObject(),
+					pair.second.colliderB,
+					pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.first->CallOnCollisionExit(collisionA);
+
+				Collision collisionB{
+					pair.second.colliderA->GetGameObject(),
+					pair.second.colliderA,
+					-pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.second->CallOnCollisionExit(collisionB);
+			}
+			else if (validA)
+			{
+				Collision collisionA{
+					nullptr,
+					nullptr,
+					pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.first->CallOnCollisionExit(collisionA);
+			}
+			else if (validB)
+			{
+				Collision collisionB{
+					nullptr,
+					nullptr,
+					-pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.second->CallOnCollisionExit(collisionB);
+			}
+		}
+	}
+
+	m_previousCollisions = m_currentCollisions;
+}
+
+void PhysicsSystem::CallTriggerEvent()
+{
+	for (const auto& pair : m_currentTriggers)
+	{
+		Collision collisionA{
+			pair.second.colliderB->GetGameObject(),
+			pair.second.colliderB,
+			pair.second.normal,
+			pair.second.penetrationDepth,
+			pair.second.contactPoint
+		};
+
+		Collision collisionB{
+			pair.second.colliderA->GetGameObject(),
+			pair.second.colliderA,
+			-pair.second.normal,
+			pair.second.penetrationDepth,
+			pair.second.contactPoint
+		};
+
+		if (m_previousTriggers.find(pair.first) == m_previousTriggers.end())
+		{
+			pair.first.first->CallOnTriggerEnter(collisionA);
+			pair.first.second->CallOnTriggerEnter(collisionB);
+		}
+		else
+		{
+			pair.first.first->CallOnTriggerStay(collisionA);
+			pair.first.second->CallOnTriggerStay(collisionB);
+		}
+	}
+
+	for (const auto& pair : m_previousTriggers)
+	{
+		if (m_currentTriggers.find(pair.first) == m_currentTriggers.end())
+		{
+			bool validA = Object::IsValid(pair.first.first);
+			bool validB = Object::IsValid(pair.first.second);
+
+			if (validA && validB)
+			{
+				Collision collisionA{
+					pair.second.colliderB->GetGameObject(),
+					pair.second.colliderB,
+					pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.first->CallOnTriggerExit(collisionA);
+
+				Collision collisionB{
+					pair.second.colliderA->GetGameObject(),
+					pair.second.colliderA,
+					-pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.second->CallOnTriggerExit(collisionB);
+			}
+			else if (validA)
+			{
+				Collision collisionA{
+					nullptr,
+					nullptr,
+					pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.first->CallOnTriggerExit(collisionA);
+			}
+			else if (validB)
+			{
+				Collision collisionB{
+					nullptr,
+					nullptr,
+					-pair.second.normal,
+					pair.second.penetrationDepth,
+					pair.second.contactPoint
+				};
+
+				pair.first.second->CallOnTriggerExit(collisionB);
+			}
+		}
+	}
+
+	m_previousTriggers = m_currentTriggers;
 }

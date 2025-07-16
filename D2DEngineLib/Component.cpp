@@ -13,9 +13,9 @@ Transform* Component::GetTransform() const
 	return m_owner->GetTransform();
 }
 
-void Component::Destroy(Object* object)
+void Component::Destroy(Object* object, float delay)
 {
-	object->Destroy();
+	object->Object::Destroy(object, delay);
 }
 
 void Component::RegisterToSystem()

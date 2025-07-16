@@ -1,42 +1,42 @@
 #include "pch.h"
-#include "BitmapRendererSystem.h"
+#include "RendererSystem.h"
 
 #include "ContainerUtility.h"
 #include "D2DRenderer.h"
-#include "BitmapRenderer.h"
 #include "Transform.h"
 #include "Camera.h"
-#include "Debug.h"
+#include "IRenderer.h"
 
-void BitmapRendererSystem::Register(BitmapRenderer* bitmapRenderer)
+void RendererSystem::Register(IRenderer* renderer)
 {
-	m_bitmapRenderers.push_back(bitmapRenderer);
+	m_renderers.push_back(renderer);
 }
 
-void BitmapRendererSystem::Unregister(BitmapRenderer* bitmapRenderer)
+void RendererSystem::Unregister(IRenderer* renderer)
 {
-	Util::OptimizedErase(m_bitmapRenderers, bitmapRenderer);
+	Util::OptimizedErase(m_renderers, renderer);
 }
 
-void BitmapRendererSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
+void RendererSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
 {
 	m_d2dRenderer = d2dRenderer;
 }
 
-void BitmapRendererSystem::Update()
+void RendererSystem::RegisterRendererToRenderQueue()
 {
 	const Bounds& visibleBounds = Camera::s_mainCamera->GetVisibleBounds();
 
-	for (const auto& renderer : m_bitmapRenderers)
+	for (const auto& renderer : m_renderers)
 	{
 		renderer->Update();
 
 		switch (renderer->GetSpaceType())
 		{
 		case SpaceType::Screen:
+		{
 			m_d2dRenderer->RegisterRendererToQueue(renderer);
 			break;
-
+		}
 		case SpaceType::World:
 		{
 			const Bounds& bounds = renderer->GetBounds();
@@ -47,8 +47,14 @@ void BitmapRendererSystem::Update()
 			}
 
 			m_d2dRenderer->RegisterRendererToQueue(renderer);
-		}
+
 			break;
 		}
+		}
 	}
+}
+
+Microsoft::WRL::ComPtr<IDWriteTextFormat> RendererSystem::CreateTextFormat(float fontSize)
+{
+	return m_d2dRenderer->CreateTextFormat(fontSize);
 }

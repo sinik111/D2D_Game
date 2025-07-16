@@ -79,13 +79,14 @@ void GameObject::Initialize()
 {
 	if (!m_isInitialized)
 	{
-		for (const auto& component : m_components)
-		{
-			component->Initialize();
-			component->RegisterToSystem();
-		}
-
 		m_isInitialized = true;
+
+		size_t initialSize = m_components.size();
+		for (size_t i = 0; i < initialSize; ++i)
+		{
+			m_components[i]->Initialize();
+			m_components[i]->RegisterToSystem();
+		}
 	}
 }
 

@@ -1,20 +1,20 @@
 #pragma once
 
 class D2DRenderer;
-class TextRenderer;
+class IRenderer;
 
-class TextRendererSystem
+class RendererSystem
 {
 private:
 	D2DRenderer* m_d2dRenderer = nullptr;
-	std::vector<TextRenderer*> m_textRenderers;
+	std::vector<IRenderer*> m_renderers;
 
 public:
-	void Register(TextRenderer* textRenderer);
-	void Unregister(TextRenderer* textRenderer);
+	void Register(IRenderer* textRenderer);
+	void Unregister(IRenderer* textRenderer);
 
 public:
 	void SetD2DRenderer(D2DRenderer* d2dRenderer);
-	void Update();
+	void RegisterRendererToRenderQueue();
 	Microsoft::WRL::ComPtr<IDWriteTextFormat> CreateTextFormat(float fontSize);
 };

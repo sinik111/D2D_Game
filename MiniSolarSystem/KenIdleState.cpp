@@ -20,7 +20,7 @@ void KenIdleState::Update(FSMContext& context)
 		return;
 	}
 
-	if (context.triggerParams[L"Roll"])
+	if (context.triggerParams[L"Roll"] && context.boolParams[L"IsGround"])
 	{
 		context.shouldChangeState = true;
 		context.nextStateName = L"Roll";

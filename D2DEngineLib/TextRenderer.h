@@ -58,13 +58,13 @@ public:
 	D2D1_SIZE_F GetRectSize() const;
 	float GetFontSize() const;
 	Vector2 GetPivot() const;
-	const Bounds& GetBounds() const;
 
-	void Update();
+	void Update() override;
 	void Render(const RenderContext& context) const override;
 	SpaceType GetSpaceType() const override;
 	int GetSortOrder() const override;
 	float GetY() const override;
+	const Bounds& GetBounds() const override;
 
 public:
 	void SetText(const std::wstring& text);

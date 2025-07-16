@@ -3,8 +3,7 @@
 
 ComponentSystem::ComponentSystem()
 	: m_scriptSystem{ std::make_unique<ScriptSystem>() },
-	m_bitmapRendererSystem{ std::make_unique<BitmapRendererSystem>() },
-	m_textRendererSystem{ std::make_unique<TextRendererSystem>() },
+	m_rendererSystem{ std::make_unique<RendererSystem>() },
 	m_playerInputSystem{ std::make_unique<PlayerInputSystem>() },
 	m_animatorSystem{ std::make_unique<AnimatorSystem>() },
 	m_transformSystem{ std::make_unique<TransformSystem>() },
@@ -25,14 +24,9 @@ ScriptSystem& ComponentSystem::Script() const
 	return *m_scriptSystem.get();
 }
 
-BitmapRendererSystem& ComponentSystem::BitmapRenderer() const
+RendererSystem& ComponentSystem::Renderer() const
 {
-	return *m_bitmapRendererSystem.get();
-}
-
-TextRendererSystem& ComponentSystem::TextRenderer() const
-{
-	return *m_textRendererSystem.get();
+	return *m_rendererSystem.get();
 }
 
 PlayerInputSystem& ComponentSystem::PlayerInput() const

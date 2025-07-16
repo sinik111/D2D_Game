@@ -141,6 +141,7 @@
     <ClCompile Include="HpViewer.cpp" />
     <ClCompile Include="InfoViewer.cpp" />
     <ClCompile Include="IState.cpp" />
+    <ClCompile Include="JumpingText.cpp" />
     <ClCompile Include="Ken.cpp" />
     <ClCompile Include="KenBackDashState.cpp" />
     <ClCompile Include="KenDeadState.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="KenReviveState.cpp" />
     <ClCompile Include="KenRollState.cpp" />
     <ClCompile Include="KenSpinningKickState.cpp" />
+    <ClCompile Include="LandingText.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainTitle.cpp" />
     <ClCompile Include="Moon.cpp" />
@@ -170,6 +172,7 @@
     <ClInclude Include="HpViewer.h" />
     <ClInclude Include="InfoViewer.h" />
     <ClInclude Include="IState.h" />
+    <ClInclude Include="JumpingText.h" />
     <ClInclude Include="Ken.h" />
     <ClInclude Include="KenBackDashState.h" />
     <ClInclude Include="KenDeadState.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="KenReviveState.h" />
     <ClInclude Include="KenRollState.h" />
     <ClInclude Include="KenSpinningKickState.h" />
+    <ClInclude Include="LandingText.h" />
     <ClInclude Include="MainTitle.h" />
     <ClInclude Include="Moon.h" />
     <ClInclude Include="SolarSystem.h" />

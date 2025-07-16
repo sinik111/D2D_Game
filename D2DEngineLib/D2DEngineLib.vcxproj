@@ -144,7 +144,6 @@
     <ClInclude Include="Animator.h" />
     <ClInclude Include="AnimatorSystem.h" />
     <ClInclude Include="BitmapRenderer.h" />
-    <ClInclude Include="BitmapRendererSystem.h" />
     <ClInclude Include="BitmapResource.h" />
     <ClInclude Include="Bounds.h" />
     <ClInclude Include="BoxCollider2D.h" />
@@ -182,7 +181,7 @@
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptSystem.h" />
     <ClInclude Include="TextRenderer.h" />
-    <ClInclude Include="TextRendererSystem.h" />
+    <ClInclude Include="RendererSystem.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="ContainerUtility.h" />
     <ClInclude Include="TransformSystem.h" />
@@ -194,7 +193,6 @@
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="AnimatorSystem.cpp" />
     <ClCompile Include="BitmapRenderer.cpp" />
-    <ClCompile Include="BitmapRendererSystem.cpp" />
     <ClCompile Include="BitmapResource.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -228,7 +226,7 @@
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptSystem.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
-    <ClCompile Include="TextRendererSystem.cpp" />
+    <ClCompile Include="RendererSystem.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformSystem.cpp" />
     <ClCompile Include="Vector2.cpp" />

@@ -5,6 +5,7 @@
 #include "RigidBody2D.h"
 #include "ComponentSystem.h"
 #include "ContainerUtility.h"
+#include "Script.h"
 
 void BoxCollider2D::Initialize()
 {
@@ -90,26 +91,50 @@ void BoxCollider2D::Update()
 	}
 }
 
-void BoxCollider2D::CallOnCollisionEnter(const CollisionInfo& collisionInfo)
+void BoxCollider2D::CallOnCollisionEnter(const Collision& collision)
 {
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnCollisionEnter(collision);
+	}
 }
 
-void BoxCollider2D::CallOnCollisionStay(const CollisionInfo& collisionInfo)
+void BoxCollider2D::CallOnCollisionStay(const Collision& collision)
 {
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnCollisionStay(collision);
+	}
 }
 
-void BoxCollider2D::CallOnCollisionExit(const CollisionInfo& collisionInfo)
+void BoxCollider2D::CallOnCollisionExit(const Collision& collision)
 {
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnCollisionExit(collision);
+	}
 }
 
-void BoxCollider2D::CallOnTriggerEnter(const CollisionInfo& collisionInfo)
+void BoxCollider2D::CallOnTriggerEnter(const Collision& collision)
 {
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnTriggerEnter(collision);
+	}
 }
 
-void BoxCollider2D::CallOnTriggerStay(const CollisionInfo& collisionInfo)
+void BoxCollider2D::CallOnTriggerStay(const Collision& collision)
 {
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnTriggerStay(collision);
+	}
 }
 
-void BoxCollider2D::CallOnTriggerExit(const CollisionInfo& collisionInfo)
+void BoxCollider2D::CallOnTriggerExit(const Collision& collision)
 {
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnTriggerExit(collision);
+	}
 }
