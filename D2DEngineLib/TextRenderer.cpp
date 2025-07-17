@@ -79,25 +79,25 @@ void TextRenderer::SetVerticalAlignment(VerticalAlignment align)
 	}
 }
 
-void TextRenderer::SetHorizontalAlignment(HorizontlAlignment align)
+void TextRenderer::SetHorizontalAlignment(HorizontalAlignment align)
 {
 	m_horizontalAlignment = align;
 
 	switch (align)
 	{
-	case HorizontlAlignment::Left:
+	case HorizontalAlignment::Left:
 		m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 		break;
 
-	case HorizontlAlignment::Right:
+	case HorizontalAlignment::Right:
 		m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
 		break;
 
-	case HorizontlAlignment::Center:
+	case HorizontalAlignment::Center:
 		m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 		break;
 
-	case HorizontlAlignment::Justified:
+	case HorizontalAlignment::Justified:
 		m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 		break;
 

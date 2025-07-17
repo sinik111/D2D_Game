@@ -6,6 +6,7 @@
 #include "SolarSystem.h"
 #include "MainTitle.h"
 #include "AnimationTestScene.h"
+#include "KinematicTest.h"
 
 void DemoGameApp::Initialize()
 {
@@ -25,6 +26,7 @@ void DemoGameApp::Initialize()
 	SceneManager::Get().CreateScene<MainTitle>(L"Title");
 	SceneManager::Get().CreateScene<SolarSystem>(L"SolarSystem");
 	SceneManager::Get().CreateScene<AnimationTestScene>(L"AnimationTest");
+	SceneManager::Get().CreateScene<KinematicTest>(L"KinematicTest");
 
 	SceneManager::Get().ChangeScene(L"Title");
 }

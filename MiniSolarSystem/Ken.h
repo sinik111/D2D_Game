@@ -31,6 +31,9 @@ private:
 	void OnCollisionStay(const Collision& collision) override;
 	void OnCollisionExit(const Collision& collision) override;
 
+	void OnTriggerEnter(const Collision& collision) override;
+	void OnTriggerExit(const Collision& collision) override;
+
 private:
 	void ArrowInput(Vector2 input);
 	void Roll();

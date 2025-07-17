@@ -9,7 +9,7 @@ void LandingText::Initialize()
 
 	textRenderer->SetText(L"ÂøÁö!");
 	textRenderer->SetFontSize(20.f);
-	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
 	textRenderer->SetRectSize({ 60.0f, 40.0f });
 	textRenderer->SetSpaceType(SpaceType::World);

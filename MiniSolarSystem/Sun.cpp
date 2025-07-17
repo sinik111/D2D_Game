@@ -5,6 +5,7 @@
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/PlayerInput.h"
+#include "../D2DEngineLib/BoxCollider2D.h"
 
 #include "Earth.h"
 
@@ -19,14 +20,12 @@ void Sun::Start()
     //textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Blue));
     //textRenderer->SetSortOrder(2);
     //textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
-    //textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+    //textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
 
     BitmapRenderer* bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>(L"Sun.png");
-    bitmapRenderer->SetOpacity(0.3f);
+    //bitmapRenderer->SetOpacity(0.3f);
     //bitmapRenderer->SetSourceRect({ 30.0f, 30.0f, 60.0f, 60.0f });
     //bitmapRenderer->SetPivot({ 0.5f, 0.0f });
-
-    GetTransform()->SetLocalPosition({ 0.0f, 0.0f });
 
     PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
@@ -76,6 +75,14 @@ void Sun::OnDestroy()
     playerInput->UnregisterActionOnKey('A', this);
     playerInput->UnregisterActionOnKey('S', this);
     playerInput->UnregisterActionOnKey('D', this);
+}
+
+void Sun::OnTriggerEnter(const Collision& collision)
+{
+    if (collision.otherGameObject->GetName() == L"Ken")
+    {
+        Destroy(GetGameObject());
+    }
 }
 
 void Sun::CreateEarth()

@@ -31,7 +31,7 @@ void Ken::Start()
 	playerInput->RegisterActionOnKey('E', KeyState::Pressed, this, &Ken::TakeDamage);
 	playerInput->RegisterActionOnKey('R', KeyState::Pressed, this, &Ken::Revive);
 
-	playerInput->RegisterActionOnKey('1', KeyState::Pressed, this, &Ken::ChangeScene);
+	playerInput->RegisterActionOnKey('4', KeyState::Pressed, this, &Ken::ChangeScene);
 
 	m_animator->SetSpriteSheet(L"ken_sprites.json");
 	m_animator->AddAnimationClip(L"ken_idle_anim.json");
@@ -123,6 +123,16 @@ void Ken::OnCollisionExit(const Collision& collision)
 	}
 }
 
+void Ken::OnTriggerEnter(const Collision& collision)
+{
+	Debug::Log(L"Ken OnTriggerEnter");
+}
+
+void Ken::OnTriggerExit(const Collision& collision)
+{
+	Debug::Log(L"Ken OnTriggerExit");
+}
+
 void Ken::ArrowInput(Vector2 input)
 {
 	m_context.floatParams[L"HorizontalInput"] = input.x;
@@ -141,7 +151,7 @@ void Ken::SpinningKick()
 
 void Ken::ChangeScene()
 {
-	SceneManager::Get().ChangeScene(L"Title");
+	SceneManager::Get().ChangeScene(L"KinematicTest");
 }
 
 void Ken::FireEarth()

@@ -87,6 +87,7 @@ void PhysicsSystem::ProcessPhysics()
 	);
 
 	m_currentCollisions.clear();
+	m_currentTriggers.clear();
 
 	for (size_t i = 0; i < m_boxColliders.size(); ++i)
 	{

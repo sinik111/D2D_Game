@@ -14,6 +14,8 @@ private:
 	void Update() override;
 	void OnDestroy() override;
 
+	void OnTriggerEnter(const Collision& collision) override;
+
 	void CreateEarth();
 	void DeleteEarth();
 	void DestroySelf();

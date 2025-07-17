@@ -15,7 +15,7 @@ void Title::Start()
     textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     textRenderer->SetSortOrder(3);
     textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
-    textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
+    textRenderer->SetHorizontalAlignment(HorizontalAlignment::Left);
 
     GetTransform()->SetLocalPosition({ -400.0f, 300.0f });
 }

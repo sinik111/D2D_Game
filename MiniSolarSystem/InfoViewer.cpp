@@ -20,7 +20,7 @@ void InfoViewer::Start()
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);
     m_textRenderer->SetVerticalAlignment(VerticalAlignment::Bottom);
-    m_textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
+    m_textRenderer->SetHorizontalAlignment(HorizontalAlignment::Left);
 
     GetTransform()->SetLocalPosition({ -380.0f, -280.0f });
 }

@@ -34,7 +34,7 @@ void Earth::Start()
         //textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Yellow));
         //textRenderer->SetSortOrder(2);
         //textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
-        //textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+        //textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
         //textRenderer->SetRectSize({ 100.0f, 100.0f });
     }
 

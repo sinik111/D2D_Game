@@ -19,7 +19,7 @@ void HpViewer::Start()
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);
     m_textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
-    m_textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
+    m_textRenderer->SetHorizontalAlignment(HorizontalAlignment::Left);
 }
 
 void HpViewer::SetTargetName(const std::wstring& targetName)

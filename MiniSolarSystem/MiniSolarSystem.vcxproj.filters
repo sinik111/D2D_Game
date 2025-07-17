@@ -10,9 +10,6 @@
     <Filter Include="02_Script">
       <UniqueIdentifier>{a0396846-3d06-4297-8c7d-5ad432db6940}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Script\SolarSystem">
-      <UniqueIdentifier>{a0b81d89-0d3f-43f0-8314-f73d39ae67fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Script\Health">
       <UniqueIdentifier>{c4da00e8-eaa9-439b-b6d9-3022ac487259}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,12 @@
     </Filter>
     <Filter Include="02_Script\AnimationTest\FSM\State\Base">
       <UniqueIdentifier>{d38068cf-cf38-4aa2-83bc-fee7399bf9d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Kinematic">
+      <UniqueIdentifier>{0ded1b8e-a01f-4876-8a89-60dfccbee589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\SolarSystem">
+      <UniqueIdentifier>{a0b81d89-0d3f-43f0-8314-f73d39ae67fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +120,15 @@
     <ClCompile Include="LandingText.cpp">
       <Filter>02_Script\AnimationTest</Filter>
     </ClCompile>
+    <ClCompile Include="KinematicTest.cpp">
+      <Filter>01_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicSun.cpp">
+      <Filter>02_Script\Kinematic</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMoon.cpp">
+      <Filter>02_Script\Kinematic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -202,6 +214,15 @@
     </ClInclude>
     <ClInclude Include="LandingText.h">
       <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicTest.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicSun.h">
+      <Filter>02_Script\Kinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMoon.h">
+      <Filter>02_Script\Kinematic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

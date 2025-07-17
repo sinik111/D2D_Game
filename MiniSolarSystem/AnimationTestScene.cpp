@@ -15,6 +15,7 @@
 #include "HpViewer.h"
 #include "Health.h"
 #include "FollowCameraController.h"
+#include "Sun.h"
 
 void AnimationTestScene::Enter()
 {
@@ -87,12 +88,12 @@ void AnimationTestScene::Enter()
 	textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
 	textRenderer->SetSortOrder(3);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
-	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Left);
+	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Left);
 
 	go->GetTransform()->SetLocalPosition({ 100.0f, 0.0f });
 
 	std::wostringstream oss;
-	oss << L"[ 1 ]: TitleScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Jump\n"
+	oss << L"[ 4 ]: KinematicTestScene\n\n[ ¡ç ¡æ ]: Back/FrontDash\n[ Q ]: Jump\n"
 		<< L"[ W ]: SpinningKick - FireEarth\n[ E ]: Take 10 damage\n"
 		<< L"[ R ]: Revive";
 
@@ -106,6 +107,14 @@ void AnimationTestScene::Enter()
 	textRenderer = go->AddComponent<TextRenderer>();
 
 	health->GetOnChangeHp().Add(hpViewer, &HpViewer::ChangeHpText);
+
+	go = CreateGameObject(L"Sun");
+	go->AddComponent<Sun>();
+	go->GetTransform()->SetLocalScale(0.5f, 0.5f);
+	go->GetTransform()->SetLocalPosition(-200.0f, 50.0f);
+	auto collider = go->AddComponent<BoxCollider2D>();
+	collider->SetTrigger(true);
+	collider->SetSize({ 25.0f, 25.f });
 }
 
 void AnimationTestScene::Exit()

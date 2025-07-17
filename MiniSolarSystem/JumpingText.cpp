@@ -9,7 +9,7 @@ void JumpingText::Initialize()
 
 	textRenderer->SetText(L"มกวม!");
 	textRenderer->SetFontSize(10.f);
-	textRenderer->SetHorizontalAlignment(HorizontlAlignment::Center);
+	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
 	textRenderer->SetRectSize({ 40.0f, 20.0f });
 	textRenderer->SetSpaceType(SpaceType::World);
