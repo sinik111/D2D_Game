@@ -1,6 +1,6 @@
 #pragma once
 
-struct FSMContext;
+#include "FSMContext.h"
 
 class IState
 {

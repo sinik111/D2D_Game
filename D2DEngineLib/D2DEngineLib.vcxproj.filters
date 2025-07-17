@@ -58,6 +58,9 @@
     <Filter Include="04_Component\Components\Physics">
       <UniqueIdentifier>{c1bfc007-efe7-4ef8-9115-e6ff8eb9475a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99_Module\FSM">
+      <UniqueIdentifier>{9d89952a-f243-4cdf-b57e-85c0df05d344}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoInitializer.h">
@@ -204,6 +207,15 @@
     <ClInclude Include="RigidBody2D.h">
       <Filter>04_Component\Components\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="FSM.h">
+      <Filter>99_Module\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="IState.h">
+      <Filter>99_Module\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMContext.h">
+      <Filter>99_Module\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -316,6 +328,12 @@
     </ClCompile>
     <ClCompile Include="RigidBody2D.cpp">
       <Filter>04_Component\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM.cpp">
+      <Filter>99_Module\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="IState.cpp">
+      <Filter>99_Module\FSM</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

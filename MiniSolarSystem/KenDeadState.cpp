@@ -5,7 +5,6 @@
 #include "../D2DEngineLib/MyTime.h"
 #include "../D2DEngineLib/GameObject.h"
 
-#include "FSMContext.h"
 #include "Health.h"
 
 bool KenDeadState::CheckCondition(FSMContext& context)

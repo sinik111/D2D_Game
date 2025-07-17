@@ -11,7 +11,7 @@ void StaticMoon::OnTriggerEnter(const Collision& collision)
 		GameObject* go = CreateGameObject();
 		go->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition());
 		auto textRenderer = go->AddComponent<TextRenderer>();
-		textRenderer->SetText(L"ÆÄ±«");
+		textRenderer->SetText(L"ÆÄ±«!");
 		textRenderer->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 		textRenderer->SetFontSize(15.0f);
 		textRenderer->SetFontSize(15.0f);

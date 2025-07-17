@@ -3,8 +3,6 @@
 
 #include "../D2DEngineLib/Animator.h"
 
-#include "FSMContext.h"
-
 bool KenHurtState::CheckCondition(FSMContext& context)
 {
 	if (context.triggerParams[L"Hurt"])

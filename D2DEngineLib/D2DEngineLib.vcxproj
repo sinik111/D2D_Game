@@ -157,9 +157,12 @@
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="FSM.h" />
+    <ClInclude Include="FSMContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="IState.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="MyTimeSystem.h" />
@@ -201,9 +204,11 @@
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
+    <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IRenderer.cpp" />
+    <ClCompile Include="IState.cpp" />
     <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="MyTimeSystem.cpp" />
     <ClCompile Include="Object.cpp" />

@@ -5,8 +5,6 @@
 #include "../D2DEngineLib/MyTime.h"
 #include "../D2DEngineLib/Transform.h"
 
-#include "FSMContext.h"
-
 void KenReviveState::Enter(FSMContext& context)
 {
 	context.animator->Play(L"ken_revive");

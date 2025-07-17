@@ -8,12 +8,21 @@
 #include "../D2DEngineLib/RigidBody2D.h"
 #include "../D2DEngineLib/Physics.h"
 #include "../D2DEngineLib/BoxCollider2D.h"
+#include "../D2DEngineLib/FSMContext.h"
 
 #include "Earth.h"
-#include "FSMContext.h"
 #include "Health.h"
 #include "JumpingText.h"
 #include "LandingText.h"
+
+#include "KenIdleState.h"
+#include "KenBackDashState.h"
+#include "KenFrontDashState.h"
+#include "KenRollState.h"
+#include "KenSpinningKickState.h"
+#include "KenHurtState.h"
+#include "KenDeadState.h"
+#include "KenReviveState.h"
 
 void Ken::Initialize()
 {
@@ -59,7 +68,16 @@ void Ken::Start()
 	m_context.triggerParams[L"Revive"] = false;
 	m_context.boolParams[L"IsGround"] = false;
 
-	m_kenFSM = std::make_unique<KenFSM>(m_context);
+	m_fsm.AddState<KenIdleState>(L"Idle");
+	m_fsm.AddState<KenFrontDashState>(L"FrontDash");
+	m_fsm.AddState<KenBackDashState>(L"BackDash");
+	m_fsm.AddState<KenRollState>(L"Roll");
+	m_fsm.AddState<KenSpinningKickState>(L"SpinningKick");
+	m_fsm.AddState<KenHurtState>(L"Hurt", true);
+	m_fsm.AddState<KenDeadState>(L"Dead", true);
+	m_fsm.AddState<KenReviveState>(L"Revive");
+
+	m_fsm.SetState(L"Idle", m_context);
 
 	m_health->SetHp(50, 50);
 }
@@ -69,7 +87,7 @@ void Ken::FixedUpdate()
 	m_context.boolParams[L"IsGround"] = m_isGround;
 	m_isGround = false;
 
-	m_kenFSM->Update(m_context);
+	m_fsm.Update(m_context);
 }
 
 void Ken::Update()

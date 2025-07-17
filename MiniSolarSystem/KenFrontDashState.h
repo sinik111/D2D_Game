@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IState.h"
+#include "../D2DEngineLib/IState.h"
 
 class KenFrontDashState :
 	public IState

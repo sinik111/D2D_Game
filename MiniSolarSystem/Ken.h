@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../D2DEngineLib/Script.h"
-#include "KenFSM.h"
-#include "FSMContext.h"
+#include "../D2DEngineLib/FSM.h"
+#include "../D2DEngineLib/FSMContext.h"
 
 class Animator;
 class Health;
@@ -15,8 +15,8 @@ private:
 	Animator* m_animator;
 	Health* m_health;
 	RigidBody2D* m_rigidBody;
-	std::unique_ptr<KenFSM> m_kenFSM;
 
+	FSM m_fsm;
 	FSMContext m_context;
 
 	bool m_isJump = false;

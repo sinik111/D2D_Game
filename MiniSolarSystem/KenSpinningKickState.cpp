@@ -3,8 +3,6 @@
 
 #include "../D2DEngineLib/Animator.h"
 
-#include "FSMContext.h"
-
 void KenSpinningKickState::Enter(FSMContext& context)
 {
 	context.animator->Play(L"ken_spinning_kick");

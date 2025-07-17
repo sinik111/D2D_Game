@@ -6,8 +6,6 @@
 #include "../D2DEngineLib/Transform.h"
 #include "../D2DEngineLib/RigidBody2D.h"
 
-#include "FSMContext.h"
-
 void KenBackDashState::Enter(FSMContext& context)
 {
 	context.animator->Play(L"ken_back_dash");
