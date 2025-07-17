@@ -6,7 +6,7 @@ class Camera :
 	public Component
 {
 public:
-	static Camera* s_mainCamera; // 수정 필요, CameraManager 등등
+	static Camera* s_mainCamera; // 여러 카메라 사용 시 수정 필요
 
 private:
 	Matrix3x2 m_cachedViewMatrix;

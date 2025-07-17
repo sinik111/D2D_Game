@@ -216,6 +216,7 @@
     <ClInclude Include="FSMContext.h">
       <Filter>99_Module\FSM</Filter>
     </ClInclude>
+    <ClInclude Include="Button.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -335,5 +336,6 @@
     <ClCompile Include="IState.cpp">
       <Filter>99_Module\FSM</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp" />
   </ItemGroup>
 </Project>
