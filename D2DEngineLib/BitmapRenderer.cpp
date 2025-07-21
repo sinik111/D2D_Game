@@ -47,7 +47,7 @@ void BitmapRenderer::Update()
 		m_cachedRenderWorldMatrix = m_cachedRenderMatrix * worldMatrix;
 
 		const float bitmapWidth = m_sourceRect.right - m_sourceRect.left;
-		const float bitmapHeight = std::fabsf(m_sourceRect.bottom - m_sourceRect.top);
+		const float bitmapHeight = std::abs(m_sourceRect.bottom - m_sourceRect.top);
 
 		D2D1_RECT_F localRect{
 			-bitmapWidth * m_pivot.x,
@@ -78,14 +78,45 @@ void BitmapRenderer::Render(const RenderContext& context) const
 		break;
 	}
 
-	context.deviceContext->SetTransform(finalMatrix);
-	context.deviceContext->DrawBitmap(
-		m_bitmapResource->GetBitmap().Get(),
-		nullptr,
-		m_opacity,
-		D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
-		&m_sourceRect
-	);
+	if (m_isColored)
+	{
+		context.deviceContext->SetTransform(Matrix3x2::Identity());
+		context.deviceContext->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+		context.spriteBatch->Clear();
+
+		D2D1_RECT_F destinationRect{
+			0.0f,
+			0.0f,
+			m_sourceRect.right - m_sourceRect.left,
+			m_sourceRect.bottom - m_sourceRect.top
+		};
+
+		D2D1_RECT_U sourceRectU{
+			static_cast<UINT32>(m_sourceRect.left),
+			static_cast<UINT32>(m_sourceRect.top),
+			static_cast<UINT32>(m_sourceRect.right),
+			static_cast<UINT32>(m_sourceRect.bottom),
+		};
+
+		context.spriteBatch->AddSprites(1, &destinationRect, &sourceRectU, &m_color, &finalMatrix);
+		context.deviceContext->DrawSpriteBatch(
+			context.spriteBatch.Get(),
+			m_bitmapResource->GetBitmap().Get()
+		);
+
+		context.deviceContext->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
+	}
+	else
+	{
+		context.deviceContext->SetTransform(finalMatrix);
+		context.deviceContext->DrawBitmap(
+			m_bitmapResource->GetBitmap().Get(),
+			nullptr,
+			m_opacity,
+			D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+			&m_sourceRect
+		);
+	}
 }
 
 int BitmapRenderer::GetSortOrder() const
@@ -178,6 +209,20 @@ void BitmapRenderer::SetPivot(const Vector2& pivot)
 void BitmapRenderer::SetOpacity(float opacity)
 {
 	m_opacity = opacity;
+}
+
+void BitmapRenderer::SetColor(const D2D1_COLOR_F& color)
+{
+	m_color = color;
+
+	m_isColored = true;
+}
+
+void BitmapRenderer::ResetColor()
+{
+	m_color = { D2D1::ColorF::White };
+
+	m_isColored = false;
 }
 
 void BitmapRenderer::MakeRenderMatrix()

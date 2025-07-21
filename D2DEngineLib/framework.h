@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
+#include <queue>
 
 // Com
 #include <wrl.h>

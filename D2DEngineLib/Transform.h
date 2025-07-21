@@ -27,7 +27,7 @@ public:
 	const Vector2& GetLocalScale() const;
 	float GetLocalRotation() const;
 
-	const Vector2& GetWorldPosition();
+	Vector2 GetWorldPosition();
 	Vector2 GetWorldScale();
 	float GetWorldRotation();
 

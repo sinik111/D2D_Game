@@ -216,7 +216,12 @@
     <ClInclude Include="FSMContext.h">
       <Filter>99_Module\FSM</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="Button.h">
+      <Filter>04_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonSystem.h">
+      <Filter>04_Component\ComponentSystem\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -336,6 +341,11 @@
     <ClCompile Include="IState.cpp">
       <Filter>99_Module\FSM</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Button.cpp">
+      <Filter>04_Component\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonSystem.cpp">
+      <Filter>04_Component\ComponentSystem\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

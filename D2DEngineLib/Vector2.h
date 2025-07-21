@@ -4,21 +4,18 @@
 
 #include "MyMath.h"
 
-struct Vector2
+struct Vector2 : 
+	public D2D1_VECTOR_2F
 {
 public:
-	float x;
-	float y;
-
-public:
 	Vector2()
-		: x{}, y{}
+		: D2D1_VECTOR_2F{}
 	{
 
 	}
 
 	Vector2(float x, float y)
-		: x{ x }, y{ y }
+		: D2D1_VECTOR_2F{ x, y }
 	{
 
 	}

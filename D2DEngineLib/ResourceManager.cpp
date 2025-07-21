@@ -178,11 +178,26 @@ HRESULT ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 	return S_OK;
 }
 
+void ResourceManager::Update()
+{
+	m_resourceTimer += MyTime::DeltaTime();
+
+	while (!m_shortCachedBitmapResources.empty())
+	{
+		if (m_shortCachedBitmapResources.front().first > m_resourceTimer)
+		{
+			break;
+		}
+
+		m_shortCachedBitmapResources.pop();
+	}
+
+	Debug::Log(std::to_string(m_shortCachedBitmapResources.size()));
+}
+
 void ResourceManager::Release()
 {
-	m_bitmapResources.clear();
-	m_spriteSheets.clear();
-	m_animationClips.clear();
+	ReleaseResources();
 
 	m_wicImagingFactory = nullptr;
 	m_d2d1DeviceContext = nullptr;
@@ -190,6 +205,8 @@ void ResourceManager::Release()
 
 void ResourceManager::ReleaseResources()
 {
+	m_shortCachedBitmapResources = std::queue<std::pair<float, std::shared_ptr<BitmapResource>>>();
+
 	m_bitmapResources.clear();
 	m_spriteSheets.clear();
 	m_animationClips.clear();
@@ -202,6 +219,8 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 	{
 		if (!iter->second.expired()) // 만료되지 않았을 경우
 		{
+			m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, iter->second.lock() });
+
 			return iter->second.lock(); // shared_ptr로 return
 		}
 	}
@@ -222,6 +241,8 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 	}
 
 	m_bitmapResources[filePath] = newBitmapResource;
+
+	m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, newBitmapResource });
 
 	return newBitmapResource;
 }

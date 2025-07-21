@@ -8,6 +8,7 @@ struct RenderContext
 	Matrix3x2 viewUnityMatrix;
 	Microsoft::WRL::ComPtr<ID2D1DeviceContext7> deviceContext;
 	Microsoft::WRL::ComPtr<ID2D1SolidColorBrush> solidBrush;
+	Microsoft::WRL::ComPtr<ID2D1SpriteBatch> spriteBatch;
 };
 
 class IRenderer

@@ -7,7 +7,8 @@ ComponentSystem::ComponentSystem()
 	m_playerInputSystem{ std::make_unique<PlayerInputSystem>() },
 	m_animatorSystem{ std::make_unique<AnimatorSystem>() },
 	m_transformSystem{ std::make_unique<TransformSystem>() },
-	m_physicsSystem{ std::make_unique<PhysicsSystem>() }
+	m_physicsSystem{ std::make_unique<PhysicsSystem>() },
+	m_buttonSystem{ std::make_unique<ButtonSystem>() }
 {
 	
 }
@@ -47,4 +48,9 @@ TransformSystem& ComponentSystem::Transform() const
 PhysicsSystem& ComponentSystem::Physics() const
 {
 	return *m_physicsSystem.get();
+}
+
+ButtonSystem& ComponentSystem::Button() const
+{
+	return *m_buttonSystem.get();
 }

@@ -155,6 +155,8 @@ void WinApp::Update()
 	Object::UpdateDelayDestroy();
 
 	SceneManager::Get().CleanupDestroyedObjects();
+
+	ResourceManager::Get().Update();
 }
 
 void WinApp::Render()

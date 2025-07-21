@@ -42,14 +42,14 @@ const Vector2& Transform::GetLocalScale() const
 	return m_localScale;
 }
 
-const Vector2& Transform::GetWorldPosition()
+Vector2 Transform::GetWorldPosition()
 {
 	if (m_isDirty)
 	{
 		CalculateWorldMatrix();
 	}
 
-	return m_cachedWorld.r[2];
+	return m_cachedWorld.GetPosition();
 }
 
 Vector2 Transform::GetWorldScale()

@@ -148,6 +148,7 @@
     <ClInclude Include="Bounds.h" />
     <ClInclude Include="BoxCollider2D.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonSystem.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CoInitializer.h" />
     <ClInclude Include="Component.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="BitmapResource.cpp" />
     <ClCompile Include="BoxCollider2D.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />

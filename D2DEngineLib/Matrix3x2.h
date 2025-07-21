@@ -6,35 +6,36 @@
 #include "MyMath.h"
 #include "Vector2.h"
 
-struct Matrix3x2
+struct Matrix3x2 :
+    public D2D1_MATRIX_3X2_F
 {
 public:
-    union
-    {
-        struct
-        {
-            float _11, _12;
-            float _21, _22;
-            float _31, _32;
-        };
+    //union
+    //{
+    //    struct
+    //    {
+    //        float _11, _12;
+    //        float _21, _22;
+    //        float _31, _32;
+    //    };
 
-        struct
-        {
-            Vector2 r[3];
-        };
+    //    struct
+    //    {
+    //        Vector2 r[3];
+    //    };
 
-        float m[3][2];
-    };
+    //    float m[3][2];
+    //};
 
 public:
 	Matrix3x2()
-        : m{}
+        : D2D1_MATRIX_3X2_F{}
 	{
 
 	}
 
     Matrix3x2(float m11, float m12, float m21, float m22, float m31, float m32)
-        : _11{ m11 }, _12{ m12 }, _21{ m21 }, _22{ m22 }, _31{ m31 }, _32{ m32 }
+        : D2D1_MATRIX_3X2_F{ m11, m12, m21, m22, m31, m32 }
 	{
 
 	}
@@ -54,10 +55,10 @@ public: // 연산자 오버로딩
         return (*this = *this * rhs);
     }
 
-    operator D2D1_MATRIX_3X2_F() const
-    {
-        return D2D1_MATRIX_3X2_F{ _11, _12, _21, _22, _31, _32 };
-    }
+    //operator D2D1_MATRIX_3X2_F() const
+    //{
+    //    return D2D1_MATRIX_3X2_F{ _11, _12, _21, _22, _31, _32 };
+    //}
 
 public: // 유틸리티 함수
     static Matrix3x2 Translation(float x, float y)
@@ -133,12 +134,12 @@ public: // 유틸리티 함수
 
     Vector2 GetPosition() const
     {
-        return r[2];
+        return Vector2(_31, _32);
     }
 
     float GetRotation() const
     {
-        Vector2 xAxis = r[0];
+        Vector2 xAxis{ _11, _12 };
 
         float currentScaleX = xAxis.Length();
         if (std::abs(currentScaleX) < MyMath::EPSILON)
@@ -154,11 +155,11 @@ public: // 유틸리티 함수
 
     void ResetScale(float scaleX = 1.0f, float scaleY = 1.0f)
     {
-        Vector2 xAxis = r[0];
-        Vector2 yAxis = r[1];
+        Vector2 xAxis{ _11, _12 };
+        Vector2 yAxis{ _21, _22 };
 
-        float currentScaleX = r[0].Length();
-        float currentScaleY = r[1].Length();
+        float currentScaleX = xAxis.Length();
+        float currentScaleY = yAxis.Length();
 
         float invScaleX = (currentScaleX != 0.0f) ? (1.0f / currentScaleX) : 0.0f;
         float invScaleY = (currentScaleY != 0.0f) ? (1.0f / currentScaleY) : 0.0f;
@@ -169,7 +170,9 @@ public: // 유틸리티 함수
         xAxis *= scaleX;
         yAxis *= scaleY;
 
-        r[0] = xAxis;
-        r[1] = yAxis;
+        _11 = xAxis.x;
+        _12 = xAxis.y;
+        _21 = yAxis.x;
+        _22 = yAxis.y;
     }
 };

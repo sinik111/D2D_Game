@@ -113,7 +113,9 @@ void AnimationTestScene::Enter()
 	go->GetTransform()->SetLocalScale(0.5f, 0.5f);
 	go->GetTransform()->SetLocalPosition(-200.0f, 50.0f);
 	auto collider = go->AddComponent<BoxCollider2D>();
-	collider->SetTrigger(true);
+	auto rigidBody2 = go->AddComponent<RigidBody2D>();
+	rigidBody2->SetMass(2.0f);
+	//collider->SetTrigger(true);
 	collider->SetSize({ 25.0f, 25.f });
 }
 

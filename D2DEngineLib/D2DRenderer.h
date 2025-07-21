@@ -17,6 +17,9 @@ private:
 	Microsoft::WRL::ComPtr<IDXGIDevice3> m_dxgiDevice;
 	Microsoft::WRL::ComPtr<IDXGIAdapter3> m_dxgiAdapter;
 
+	// Batch
+	Microsoft::WRL::ComPtr<ID2D1SpriteBatch> m_d2dSpriteBatch;
+
 	// DWrite
 	Microsoft::WRL::ComPtr<IDWriteFactory> m_dWriteFactory;
 

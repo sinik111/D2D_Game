@@ -113,6 +113,9 @@ HRESULT D2DRenderer::Initialize()
 
 	m_d2dDeviceContext->SetTarget(m_d2dBitmapTarget.Get());
 
+	// Batch
+	m_d2dDeviceContext->CreateSpriteBatch(m_d2dSpriteBatch.GetAddressOf());
+
 	// DWrite Factory
 	DWriteCreateFactory(
 		DWRITE_FACTORY_TYPE_SHARED,
@@ -222,7 +225,8 @@ void D2DRenderer::ExecuteRenderQueue()
 		m_unityMatrix,
 		Camera::s_mainCamera->GetViewMatrix() * m_unityMatrix,
 		m_d2dDeviceContext,
-		m_d2dSolidColorBrush
+		m_d2dSolidColorBrush,
+		m_d2dSpriteBatch
 	};
 
 	for (const auto& spaceTypeGroup : m_renderQueues)

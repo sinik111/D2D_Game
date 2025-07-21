@@ -15,8 +15,10 @@ void Earth::Start()
     auto bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
     if (bitmapRenderer == nullptr)
     {
-        GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
+        bitmapRenderer = GetGameObject()->AddComponent<BitmapRenderer>(L"Earth.png");
     }
+
+    bitmapRenderer->SetColor({ 0.7f, 0.5f, 0.5f, 0.5f });
 
     GetTransform()->SetLocalScale({ 0.5f, 0.5f });
     

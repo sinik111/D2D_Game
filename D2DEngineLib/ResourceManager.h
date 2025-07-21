@@ -13,7 +13,11 @@ private:
 	std::unordered_map<std::wstring, std::weak_ptr<SpriteSheet>> m_spriteSheets;
 	std::unordered_map<std::wstring, std::weak_ptr<AnimationClip>> m_animationClips;
 
+	std::queue<std::pair<float, std::shared_ptr<BitmapResource>>> m_shortCachedBitmapResources;
+
 	std::wstring m_resourcePath;
+
+	float m_resourceTimer = 0.0f;
 
 private:
 	ResourceManager() = default;
@@ -32,6 +36,7 @@ public:
 		const std::wstring& binaryFolderName,
 		const std::wstring& resourceFolderName);
 
+	void Update();
 	void Release();
 	void ReleaseResources();
 
