@@ -22,7 +22,7 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-	if (m_isDirty || GetTransform()->GetIsDirtyThisFrame())
+	if (m_isDirty || GetTransform()->IsDirtyThisFrame())
 	{
 		Matrix3x2 worldMatrix = GetTransform()->GetWorldMatrix();
 

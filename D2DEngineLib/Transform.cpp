@@ -189,7 +189,7 @@ void Transform::Rotate(float angle)
 	MarkDirty();
 }
 
-bool Transform::GetIsDirtyThisFrame() const
+bool Transform::IsDirtyThisFrame() const
 {
 	return m_isDirtyThisFrame;
 }

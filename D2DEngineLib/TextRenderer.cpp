@@ -138,7 +138,7 @@ D2D1_COLOR_F TextRenderer::GetColor() const
 
 void TextRenderer::Update()
 {
-	if (m_isTextDirty || GetTransform()->GetIsDirtyThisFrame())
+	if (m_isTextDirty || GetTransform()->IsDirtyThisFrame())
 	{
 		if (m_isTextDirty)
 		{

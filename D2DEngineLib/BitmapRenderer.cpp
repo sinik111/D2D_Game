@@ -35,7 +35,7 @@ const Microsoft::WRL::ComPtr<ID2D1Bitmap1>& BitmapRenderer::GetBitmap() const
 
 void BitmapRenderer::Update()
 {
-	if (m_isBitmapDirty || GetTransform()->GetIsDirtyThisFrame())
+	if (m_isBitmapDirty || GetTransform()->IsDirtyThisFrame())
 	{
 		if (m_isBitmapDirty)
 		{

@@ -69,7 +69,7 @@ void BoxCollider2D::SetTrigger(bool trigger)
 
 void BoxCollider2D::Update()
 {
-	if (m_isBoundsDirty || m_transform->GetIsDirtyThisFrame())
+	if (m_isBoundsDirty || m_transform->IsDirtyThisFrame())
 	{
 		// 현재는 AABB만 가능하도록 회전, 스케일은 제외함
 		// 스케일은 회전에서 분리해야하기 때문에 그냥 뺌.

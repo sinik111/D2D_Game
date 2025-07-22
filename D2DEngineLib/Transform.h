@@ -55,7 +55,7 @@ public:
 	void Rotate(float angle);
 
 public:
-	bool GetIsDirtyThisFrame() const;
+	bool IsDirtyThisFrame() const;
 	void UnmarkDirtyThisFrame();
 
 private:
