@@ -26,3 +26,23 @@ bool Button::IsContainPoint(const Vector2& point)
 {
 	return m_bitmapRenderer->GetBounds().IsContain(point);
 }
+
+SpaceType Button::GetSpaceType() const
+{
+	return m_bitmapRenderer->GetSpaceType();
+}
+
+void Button::InvokeAction()
+{
+	m_onClickButton.Invoke();
+}
+
+void Button::SetClickedColor(const D2D1_COLOR_F& color)
+{
+	m_bitmapRenderer->SetColor(color);
+}
+
+void Button::ResetColor()
+{
+	m_bitmapRenderer->ResetColor();
+}

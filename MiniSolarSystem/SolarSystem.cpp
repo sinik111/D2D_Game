@@ -62,4 +62,6 @@ void SolarSystem::Enter()
 	moonHpViewerComp->SetTargetName(L"До");
 	moonHp->GetOnChangeHp().Add(moonHpViewerComp, &HpViewer::ChangeHpText);
 	moonHpViewer->GetTransform()->SetLocalPosition({ 100.0f, 300.0f });
+
+	Debug::Log("solar load done");
 }

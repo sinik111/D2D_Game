@@ -14,6 +14,7 @@ struct RenderContext
 class IRenderer
 {
 public:
+	virtual ~IRenderer() = default;
 	virtual void Update() = 0;
 	virtual void Render(const RenderContext& context) const = 0;
 	virtual SpaceType GetSpaceType() const = 0;

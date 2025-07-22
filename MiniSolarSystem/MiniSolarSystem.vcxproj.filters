@@ -117,6 +117,9 @@
     <ClCompile Include="StaticMoon.cpp">
       <Filter>02_Script\Kinematic</Filter>
     </ClCompile>
+    <ClCompile Include="MainSceneChangeButton.cpp">
+      <Filter>02_Script\MainTitle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="StaticMoon.h">
       <Filter>02_Script\Kinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="MainSceneChangeButton.h">
+      <Filter>02_Script\MainTitle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

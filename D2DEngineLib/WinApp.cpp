@@ -146,6 +146,8 @@ void WinApp::Update()
 
 	ComponentSystem::Get().PlayerInput().ProcessInput();
 
+	ComponentSystem::Get().Button().Update();
+
 	ComponentSystem::Get().Script().CallUpdate();
 
 	ComponentSystem::Get().Animator().Update();

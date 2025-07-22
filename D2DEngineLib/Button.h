@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "Delegate.h"
+#include "Enum.h"
 
 class BitmapRenderer;
 
@@ -20,10 +21,14 @@ public:
 
 public:
 	template<typename T>
-	void AddListener(T* instance, void (T::* func)())
+	void AddAction(T* instance, void (T::* func)())
 	{
 		m_onClickButton.Add(instance, func);
 	}
 
 	bool IsContainPoint(const Vector2& point);
+	SpaceType GetSpaceType() const;
+	void InvokeAction();
+	void SetClickedColor(const D2D1_COLOR_F& color);
+	void ResetColor();
 };

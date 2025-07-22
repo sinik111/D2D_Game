@@ -40,4 +40,6 @@ void KinematicTest::Enter()
 	textRenderer->SetText(L"Press 1 to go main");
 	textRenderer->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 	textRenderer->SetFontSize(20.0f);
+
+	Debug::Log("kine load done");
 }

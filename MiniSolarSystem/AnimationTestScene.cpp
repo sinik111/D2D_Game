@@ -117,6 +117,8 @@ void AnimationTestScene::Enter()
 	rigidBody2->SetMass(2.0f);
 	//collider->SetTrigger(true);
 	collider->SetSize({ 25.0f, 25.f });
+
+	Debug::Log("ani load done");
 }
 
 void AnimationTestScene::Exit()
