@@ -4,6 +4,11 @@
 #include "../D2DEngineLib/BoxCollider2D.h"
 #include "../D2DEngineLib/TextRenderer.h"
 
+StaticMoon::~StaticMoon()
+{
+	int a = 0;
+}
+
 void StaticMoon::OnTriggerEnter(const Collision& collision)
 {
 	if (collision.otherGameObject->GetName() == L"KinematicSun")

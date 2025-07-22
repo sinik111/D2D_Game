@@ -12,6 +12,21 @@ Object::Object()
 
 Object::~Object()
 {
+	if (m_isDelayedDestroy)
+	{
+		for (auto iter = s_delayDestroyObjects.begin(); iter != s_delayDestroyObjects.end(); ++iter)
+		{
+			if (iter->first == this)
+			{
+				std::swap(*iter, s_delayDestroyObjects.back());
+
+				s_delayDestroyObjects.pop_back();
+
+				break;
+			}
+		}
+	}
+
 	s_validObjects.erase(this);
 }
 
@@ -28,6 +43,7 @@ void Object::Destroy(Object* object, float delay)
 	}
 	else
 	{
+		m_isDelayedDestroy = true;
 		s_delayDestroyObjects.emplace_back(object, s_delayDestroyTimer + delay);
 	}
 }
@@ -40,10 +56,7 @@ void Object::UpdateDelayDestroy()
 	{
 		if (s_delayDestroyObjects[i].second <= s_delayDestroyTimer)
 		{
-			if (IsValid(s_delayDestroyObjects[i].first))
-			{
-				s_delayDestroyObjects[i].first->Destroy();	
-			}
+			s_delayDestroyObjects[i].first->Destroy();
 
 			std::swap(s_delayDestroyObjects[i], s_delayDestroyObjects.back());
 
@@ -54,4 +67,9 @@ void Object::UpdateDelayDestroy()
 
 		++i;
 	}
+}
+
+void Object::ClearDelayDestroyObjects()
+{
+	s_delayDestroyObjects.clear();
 }

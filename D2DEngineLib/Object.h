@@ -8,6 +8,7 @@ private:
 
 	static float s_delayDestroyTimer;
 	bool m_isDestroyed = false;
+	bool m_isDelayedDestroy = false;
 
 protected:
 	Object();
@@ -18,6 +19,7 @@ public:
 	virtual void Destroy(Object* object, float delay = 0.0f);
 
 	static void UpdateDelayDestroy();
+	static void ClearDelayDestroyObjects();
 
 private:
 	virtual void Destroy() = 0;
