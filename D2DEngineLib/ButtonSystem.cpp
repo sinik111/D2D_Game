@@ -38,7 +38,7 @@ void ButtonSystem::Update()
 				{
 					m_pressedButton = button;
 
-					m_pressedButton->SetClickedColor({ 0.9f, 0.9f, 0.9f, 1.0f });
+					m_pressedButton->SetClickedColor({ 0.97f, 0.97f, 0.97f, 1.0f });
 				}
 			}
 			else
@@ -47,7 +47,7 @@ void ButtonSystem::Update()
 				{
 					m_pressedButton = button;
 
-					m_pressedButton->SetClickedColor({ 0.9f, 0.9f, 0.9f, 1.0f });
+					m_pressedButton->SetClickedColor({ 0.97f, 0.97f, 0.97f, 1.0f });
 				}
 			}
 		}
