@@ -15,4 +15,11 @@ public:
 	{
 		return value < min ? min : (value > max ? max : value);
 	}
+
+	static float Lerp(float f0, float f1, float t)
+	{
+		t = t < 0.0f ? 0.0f : (t > 1.0f ? 1.0f : t);
+
+		return (1.0f - t) * f0 + t * f1;
+	}
 };

@@ -144,9 +144,9 @@ void Animator::SetSpriteData()
 	// rect, pivot 설정 및 window -> unity 좌표계 변경으로 인한 좌표 조정
 	m_bitmapRenderer->SetSourceRect({
 			sprite.x,
-			m_spriteSheet->height - sprite.y,
+			sprite.y,
 			sprite.x + sprite.width,
-			m_spriteSheet->height - sprite.y - sprite.height
+			sprite.y + sprite.height
 		}
 	);
 

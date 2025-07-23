@@ -3,6 +3,8 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Camera.h"
+#include "../D2DEngineLib/Particle.h"
+#include "../D2DEngineLib/BatchRenderer.h"
 
 #include "CameraController.h"
 #include "Sun.h"
@@ -63,5 +65,43 @@ void SolarSystem::Enter()
 	moonHp->GetOnChangeHp().Add(moonHpViewerComp, &HpViewer::ChangeHpText);
 	moonHpViewer->GetTransform()->SetLocalPosition({ 100.0f, 300.0f });
 
-	Debug::Log("solar load done");
+
+	GameObject* particleTest = CreateGameObject(L"ParticleTest");
+	particleTest->GetTransform()->SetParent(moon->GetTransform());
+	//particleTest->GetTransform()->SetLocalPosition(-300.0f, 200.0f);
+	particleTest->AddComponent<BatchRenderer>();
+	auto particle = particleTest->AddComponent<Particle>();
+	particle->SetBitmap(L"effect_test.png");
+	particle->SetSpriteSheet(L"effect_test_sprites.json");
+	particle->SetLoop(true);
+	particle->SetDuration(1.0f);
+
+	for (size_t i = 0; i < 100; ++i)
+	{
+		ParticleUnit particleUnit;
+
+		particleUnit.batchUnits.push_back(
+			{ 
+				i % 5,
+				{ 0.0f, 0.0f },
+				{ 0.3f, 0.3f },
+				0.0f,
+				{ 1.0f, 1.0f, 1.0f, 1.0f }
+			}
+		);
+		particleUnit.batchUnits.push_back(
+			{
+				i % 5,
+				Random::Direction() * Random::Float(100.0f, 300.0f),
+				{ 0.5f, 0.5f },
+				Random::Float(-1060.0f, 1060.0f),
+				{ 1.0f, 1.0f, 1.0f, 1.0f }
+			}
+		);
+		particleUnit.duration = 1.0f;
+		particleUnit.startTime = 0.01f * i;
+		particleUnit.isFollowing = false;
+
+		particle->AddParticleUnit(particleUnit);
+	}
 }

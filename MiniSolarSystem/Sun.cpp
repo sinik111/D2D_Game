@@ -6,6 +6,7 @@
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/BoxCollider2D.h"
+#include "../D2DEngineLib/BatchRenderer.h"
 
 #include "Earth.h"
 
@@ -34,6 +35,11 @@ void Sun::Start()
     playerInput->RegisterActionOnKey('D', KeyState::Pressed, this, &Sun::DestroySelf);
 
     m_speed = 45.0f;
+
+    m_batchTest = CreateGameObject(L"BatchTest");
+    auto batchRenderer = m_batchTest->AddComponent<BatchRenderer>(L"ken.png", L"ken_sprites.json");
+    batchRenderer->SetLocalRect({ -960.0f, -540.0f, 960.0f, 540.0f });
+    batchRenderer->SetSortOrder(3);
 }
 
 void Sun::Update()
@@ -42,29 +48,27 @@ void Sun::Update()
 
     if (Input::IsKeyHeld('A'))
     {
+        auto batchRenderer = m_batchTest->GetComponent<BatchRenderer>();
+
         for (int i = 0; i < 100; ++i)
         {
-            GameObject* newEarth = CreateGameObject(L"Earth");
-            newEarth->AddComponent<Earth>();
-            auto bitmap = newEarth->AddComponent<BitmapRenderer>(L"Earth.png");
-            bitmap->SetSortOrder(Random::Int(0, 29));
-            newEarth->GetTransform()->SetLocalPosition(Random::Float(-1600.0f, 1600.0f), Random::Float(-1200.0f, 1200.0f));
+            BatchUnit unit;
+            unit.index = Random::Int(0, 470);
+            unit.position = { Random::Float(-1920.0f, 1920.0f) * 4, Random::Float(-1080.0f, 1080.0f) * 4 };
+            unit.color = {
+                Random::Float(0.0f, 1.0f),
+                Random::Float(0.0f, 1.0f),
+                Random::Float(0.0f, 1.0f),
+                Random::Float(0.0f, 1.0f)
+            };
 
-            m_earths.push_back(newEarth);
+            batchRenderer->AddBatchUnit(unit);
         }
     }
 
-    if (Input::IsKeyHeld('S'))
+    if (Input::IsKeyPressed('S'))
     {
-        for (int i = 0; i < 100; ++i)
-        {
-            if (!m_earths.empty())
-            {
-                Destroy(m_earths.front());
-
-                m_earths.pop_front();
-            }
-        }
+        m_batchTest->GetComponent<BatchRenderer>()->ClearBatchUnitList();
     }
 }
 
@@ -119,5 +123,12 @@ void Sun::DestroySelf()
 
 size_t Sun::GetEarthCount() const
 {
-    return m_earths.size();
+    if (m_batchTest != nullptr)
+    {
+        return m_batchTest->GetComponent<BatchRenderer>()->GetBatchCount();
+    }
+    else
+    {
+        return 0;
+    }
 }

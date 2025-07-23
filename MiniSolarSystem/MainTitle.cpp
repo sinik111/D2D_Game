@@ -20,6 +20,4 @@ void MainTitle::Enter()
 	buttonGo->AddComponent<BitmapRenderer>(L"ChangeSceneButton.png");
 	buttonGo->AddComponent<Button>();
 	buttonGo->AddComponent<MainSceneChangeButton>();
-
-	Debug::Log("main load done");
 }

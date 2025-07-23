@@ -7,6 +7,7 @@
 #include "TransformSystem.h"
 #include "PhysicsSystem.h"
 #include "ButtonSystem.h"
+#include "ParticleSystem.h"
 
 class Component;
 
@@ -20,6 +21,7 @@ private:
 	std::unique_ptr<TransformSystem> m_transformSystem;
 	std::unique_ptr<PhysicsSystem> m_physicsSystem;
 	std::unique_ptr<ButtonSystem> m_buttonSystem;
+	std::unique_ptr<ParticleSystem> m_particleSystem;
 
 private:
 	ComponentSystem();
@@ -40,4 +42,5 @@ public:
 	TransformSystem& Transform() const;
 	PhysicsSystem& Physics() const;
 	ButtonSystem& Button() const;
+	ParticleSystem& Particle() const;
 };

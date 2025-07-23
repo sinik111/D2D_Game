@@ -1,15 +1,7 @@
 #pragma once
 
-struct Sprite
-{
-	std::wstring name;
-	float x;
-	float y;
-	float width;
-	float height;
-	float pivotX;
-	float pivotY;
-};
+#include <string>
+#include <vector>
 
 struct FrameInfo
 {
@@ -33,13 +25,4 @@ struct AnimationClip
 	std::vector<EventInfo> events;
 	float duration;
 	bool isLoop;
-};
-
-struct SpriteSheet
-{
-	std::wstring name;
-	std::vector<Sprite> sprites;
-	std::unordered_map<std::wstring, size_t> spriteIndexMap;
-	float width;
-	float height;
 };

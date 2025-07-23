@@ -8,7 +8,8 @@ ComponentSystem::ComponentSystem()
 	m_animatorSystem{ std::make_unique<AnimatorSystem>() },
 	m_transformSystem{ std::make_unique<TransformSystem>() },
 	m_physicsSystem{ std::make_unique<PhysicsSystem>() },
-	m_buttonSystem{ std::make_unique<ButtonSystem>() }
+	m_buttonSystem{ std::make_unique<ButtonSystem>() },
+	m_particleSystem{ std::make_unique<ParticleSystem>() }
 {
 	
 }
@@ -53,4 +54,9 @@ PhysicsSystem& ComponentSystem::Physics() const
 ButtonSystem& ComponentSystem::Button() const
 {
 	return *m_buttonSystem.get();
+}
+
+ParticleSystem& ComponentSystem::Particle() const
+{
+	return *m_particleSystem.get();
 }

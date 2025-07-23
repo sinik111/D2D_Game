@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "AnimationData.h"
 #include "Delegate.h"
+#include "SpriteData.h"
 
 class BitmapRenderer;
 

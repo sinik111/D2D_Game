@@ -49,9 +49,6 @@
     <Filter Include="99_Module\Resource">
       <UniqueIdentifier>{e4522485-119b-4e7b-9dcd-8a869bc3da84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99_Module\Resource\Animation">
-      <UniqueIdentifier>{492e1d68-9762-47a3-9181-e6f6504c9f7c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="99_Module\Physics">
       <UniqueIdentifier>{824b0074-ed42-40a0-8f6c-98770b4d2be3}</UniqueIdentifier>
     </Filter>
@@ -162,9 +159,6 @@
     <ClInclude Include="IRenderer.h">
       <Filter>04_Component\Components\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationData.h">
-      <Filter>99_Module\Resource\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="Animator.h">
       <Filter>04_Component\Components</Filter>
     </ClInclude>
@@ -220,6 +214,21 @@
       <Filter>04_Component\Components</Filter>
     </ClInclude>
     <ClInclude Include="ButtonSystem.h">
+      <Filter>04_Component\ComponentSystem\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="BatchRenderer.h">
+      <Filter>04_Component\Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationData.h">
+      <Filter>99_Module\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteData.h">
+      <Filter>99_Module\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>04_Component\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
   </ItemGroup>
@@ -305,9 +314,6 @@
     <ClCompile Include="IRenderer.cpp">
       <Filter>04_Component\Components\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationData.cpp">
-      <Filter>99_Module\Resource\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>04_Component\Components</Filter>
     </ClCompile>
@@ -345,6 +351,15 @@
       <Filter>04_Component\Components</Filter>
     </ClCompile>
     <ClCompile Include="ButtonSystem.cpp">
+      <Filter>04_Component\ComponentSystem\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="BatchRenderer.cpp">
+      <Filter>04_Component\Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>04_Component\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
   </ItemGroup>

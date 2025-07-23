@@ -2,6 +2,7 @@
 
 #include "BitmapResource.h"
 #include "AnimationData.h"
+#include "SpriteData.h"
 
 class ResourceManager
 {

@@ -66,7 +66,7 @@ public: // 유틸리티 함수
         return Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, x, y);
     }
 
-    static Matrix3x2 Translation(Vector2 position)
+    static Matrix3x2 Translation(const Vector2& position)
     {
         return Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, position.x, position.y);
     }
@@ -85,7 +85,7 @@ public: // 유틸리티 함수
         return Matrix3x2(x, 0.0f, 0.0f, y, 0.0f, 0.0f);
     }
 
-    static Matrix3x2 Scale(Vector2 scale)
+    static Matrix3x2 Scale(const Vector2& scale)
     {
         return Matrix3x2(scale.x, 0.0f, 0.0f, scale.y, 0.0f, 0.0f);
     }

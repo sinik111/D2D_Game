@@ -9,14 +9,10 @@ Camera* Camera::s_mainCamera = nullptr;
 Camera::Camera()
 {
 	s_mainCamera = this;
-
-	Debug::Log("Ä«¸Þ¶ó »ý¼ºµÊ");
 }
 
 Camera::~Camera()
 {
-	Debug::Log("Ä«¸Þ¶ó ÆÄ±«µÊ");
-
 	s_mainCamera = nullptr;
 }
 

@@ -7,6 +7,7 @@ class Sun :
 {
 private:
 	std::list<GameObject*> m_earths;
+	GameObject* m_batchTest = nullptr;
 	float m_speed = 0.0f;
 
 private:

@@ -152,6 +152,8 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Animator().Update();
 
+	ComponentSystem::Get().Particle().Update();
+
 	ComponentSystem::Get().Script().CallLateUpdate();
 
 	Object::UpdateDelayDestroy();
