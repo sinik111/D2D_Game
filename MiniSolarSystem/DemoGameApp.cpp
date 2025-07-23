@@ -20,7 +20,7 @@ void DemoGameApp::Initialize()
 
 	__super::Initialize();
 
-	ResourceManager::Get().Initialize(m_d2dRenderer->GetDeviceContext(),
+	ResourceManager::Get().Initialize(m_d2dRenderer.GetDeviceContext(),
 		m_modulePath, L"x64", L"MiniSolarSystem/Resource");
 
 	SceneManager::Get().CreateScene<MainTitle>(L"Title");

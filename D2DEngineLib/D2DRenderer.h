@@ -33,10 +33,7 @@ private:
 	Matrix3x2 m_unityMatrix;
 
 public:
-	D2DRenderer(HWND hWnd, UINT width, UINT height);
-
-public:
-	HRESULT Initialize();
+	HRESULT Initialize(HWND hWnd, UINT width, UINT height);
 
 	UINT GetWidth() const;
 	UINT GetHeight() const;

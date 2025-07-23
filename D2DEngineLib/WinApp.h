@@ -19,7 +19,7 @@ protected:
 	std::wstring m_workingPath;
 
 	CoInitializer m_coInitializer;
-	std::unique_ptr<D2DRenderer> m_d2dRenderer;
+	D2DRenderer m_d2dRenderer;
 
 	// default settings
 	UINT m_classStyle = CS_HREDRAW | CS_VREDRAW;

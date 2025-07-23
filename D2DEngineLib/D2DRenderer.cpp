@@ -17,19 +17,19 @@ constexpr int MAX_SORT_ORDER = 30;
 
 using Microsoft::WRL::ComPtr;
 
-D2DRenderer::D2DRenderer(HWND hWnd, UINT width, UINT height)
-	: m_hWnd{ hWnd }, m_width{ width }, m_height{ height }
+HRESULT D2DRenderer::Initialize(HWND hWnd, UINT width, UINT height)
 {
+	HRESULT hr = S_OK;
+
+	m_hWnd = hWnd;
+	m_width = width;
+	m_height = height;
+
 	m_renderQueues.resize(static_cast<int>(SpaceType::MAX));
 	for (auto& queue : m_renderQueues)
 	{
 		queue.resize(MAX_SORT_ORDER);
 	}
-}
-
-HRESULT D2DRenderer::Initialize()
-{
-	HRESULT hr = S_OK;
 
 	// D3D11 디바이스 생성
 	D3D_FEATURE_LEVEL featureLevel;

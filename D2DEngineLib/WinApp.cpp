@@ -69,16 +69,15 @@ void WinApp::Initialize()
 	ShowWindow(m_hWnd, SW_SHOW);
 	UpdateWindow(m_hWnd);
 
-	m_d2dRenderer = std::make_unique<D2DRenderer>(m_hWnd, m_width, m_height);
-	m_d2dRenderer->Initialize();
+	m_d2dRenderer.Initialize(m_hWnd, m_width, m_height);
 
 	Screen::Get().SetWidth(m_width);
 	Screen::Get().SetHeight(m_height);
 
-	ComponentSystem::Get().Renderer().SetD2DRenderer(m_d2dRenderer.get());
-	ComponentSystem::Get().Physics().SetD2DRenderer(m_d2dRenderer.get());
+	ComponentSystem::Get().Renderer().SetD2DRenderer(&m_d2dRenderer);
+	ComponentSystem::Get().Physics().SetD2DRenderer(&m_d2dRenderer);
 	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
-	SceneManager::Get().SetD2DRenderer(m_d2dRenderer.get());
+	SceneManager::Get().SetD2DRenderer(&m_d2dRenderer);
 }
 
 void WinApp::Shutdown()
@@ -169,13 +168,13 @@ void WinApp::Render()
 
 	ComponentSystem::Get().Renderer().RegisterRendererToRenderQueue();
 
-	m_d2dRenderer->BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
+	m_d2dRenderer.BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
 
-	m_d2dRenderer->ExecuteRenderQueue();
+	m_d2dRenderer.ExecuteRenderQueue();
 
 	ComponentSystem::Get().Physics().RenderColliders();
 
-	m_d2dRenderer->EndDraw();
+	m_d2dRenderer.EndDraw();
 }
 
 void WinApp::Profiling()
@@ -228,7 +227,7 @@ void WinApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYUP:
 		if (wParam == 'P')
 		{
-			m_d2dRenderer->Trim();
+			m_d2dRenderer.Trim();
 		}
 		break;
 	}
