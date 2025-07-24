@@ -150,10 +150,10 @@ UINT D2DRenderer::GetHeight() const
 	return m_height;
 }
 
-void D2DRenderer::BeginDraw(const D2D1::ColorF& color) const
+void D2DRenderer::BeginDraw(const D2D1_COLOR_F& color) const
 {
 	m_d2dDeviceContext->BeginDraw();
-	m_d2dDeviceContext->Clear(D2D1::ColorF(color));
+	m_d2dDeviceContext->Clear(color);
 }
 
 void D2DRenderer::EndDraw() const

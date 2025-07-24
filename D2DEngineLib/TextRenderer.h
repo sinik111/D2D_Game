@@ -31,9 +31,9 @@ private:
 	Matrix3x2 m_cachedRenderWorldMatrix;
 	D2D1_COLOR_F m_color{ 0.0f, 0.0f, 0.0f, 1.0f }; // 텍스트 색 (RGBA)
 	Vector2 m_pivot{ 0.5f, 0.5f };
-	D2D1_SIZE_F m_rectSize{ 200.0f, 40.0f }; // 텍스트를 출력할 사각형 사이즈
+	D2D1_SIZE_F m_rectSize{ 250.0f, 50.0f }; // 텍스트를 출력할 사각형 사이즈
 	Bounds m_bounds;
-	float m_fontSize = 10.0f; // 텍스트 폰트 크기
+	float m_fontSize = 15.0f; // 텍스트 폰트 크기
 
 	SpaceType m_spaceType = SpaceType::Screen; // 출력 타입
 

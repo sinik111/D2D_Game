@@ -58,6 +58,8 @@ void RigidBody2D::ApplyGraviy(const Vector2& gravity)
 
 void RigidBody2D::Interpolate()
 {
+    m_isMultipleCalculation = false;
+
     m_accumulatedTime += MyTime::DeltaTime();
 
     Vector2 interpolatedPosition = Vector2::Lerp(
@@ -96,9 +98,17 @@ float RigidBody2D::GetMass() const
 
 void RigidBody2D::CalculatePosition()
 {
-    m_velocity += m_accumulatedForce / m_mass * MyTime::FixedDeltaTime();
+    if (m_bodyType == BodyType::Dynamic)
+    {
+        m_velocity += m_accumulatedForce / m_mass * MyTime::FixedDeltaTime();
+    }
 
-    m_lastFramePosition = m_position;
+    if (!m_isMultipleCalculation)
+    {
+        m_lastFramePosition = m_position;
+
+        m_isMultipleCalculation = true;
+    }
 
     m_position += m_velocity * MyTime::FixedDeltaTime();
 

@@ -36,18 +36,6 @@ void AnimationTestScene::Enter()
 
 	controller->SetTarget(go->GetTransform());
 
-	//go = CreateGameObject(L"Ken2");
-	//go->AddComponent<BitmapRenderer>();
-	//go->AddComponent<Animator>();
-	//go->AddComponent<PlayerInput>();
-	//go->AddComponent<Ken>();
-	//go->AddComponent<RigidBody2D>();
-	//go->AddComponent<Health>();
-	//boxCollider2d = go->AddComponent<BoxCollider2D>();
-	//boxCollider2d->SetSize({ 30.0f, 45.0f });
-	//boxCollider2d->SetOffset({ 0.0f, 45.0f });
-	//go->GetTransform()->SetLocalPosition(0.0f, 100.0f);
-
 
 	GameObject* floor = CreateGameObject(L"Floor");
 	boxCollider2d = floor->AddComponent<BoxCollider2D>();

@@ -60,6 +60,11 @@ void Earth::Update()
             << L"\tLocalRotation: "
             << GetTransform()->GetLocalRotation();
 
+        // [Tip] UI 구현 시 필요한 Delegate를 통한 함수 호출
+        // 각도가 바뀌었으니 등록된 함수를 호출하면서 각도에 대한 정보를 인자로 넣어줌.
+        // Delegate 내부에서 유효성 검증을 하긴 하지만
+        // 호출할 instance가 유효하지 않을 상황 자체를 안 만드는 게 좋을 것 같음.
+
         m_onRotationChange.Invoke(ss.str());
 
         GetTransform()->Rotate(m_speed * MyTime::DeltaTime());

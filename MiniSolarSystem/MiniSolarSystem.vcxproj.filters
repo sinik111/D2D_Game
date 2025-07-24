@@ -28,11 +28,20 @@
     <Filter Include="02_Script\AnimationTest\KenState">
       <UniqueIdentifier>{eef5002f-ce69-45f3-8aaa-f36e6c504035}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Scene\01_Title">
+      <UniqueIdentifier>{b05dce1c-962d-457e-b231-582be96ee5a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\02_SolarSystem">
+      <UniqueIdentifier>{3274a254-58cb-4c59-ab6e-4687745bfa42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\03_AnimationTest">
+      <UniqueIdentifier>{b3c28999-4bd8-4537-b084-cd6561baff49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\04_KinematicTest">
+      <UniqueIdentifier>{538fe3fa-3883-41f4-9489-90689ae9d7fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SolarSystem.cpp">
-      <Filter>01_Scene</Filter>
-    </ClCompile>
     <ClCompile Include="DemoGameApp.cpp">
       <Filter>00_App</Filter>
     </ClCompile>
@@ -57,9 +66,6 @@
     <ClCompile Include="Title.cpp">
       <Filter>02_Script\SolarSystem</Filter>
     </ClCompile>
-    <ClCompile Include="MainTitle.cpp">
-      <Filter>01_Scene</Filter>
-    </ClCompile>
     <ClCompile Include="TitleSceneChange.cpp">
       <Filter>02_Script\MainTitle</Filter>
     </ClCompile>
@@ -68,9 +74,6 @@
     </ClCompile>
     <ClCompile Include="HpViewer.cpp">
       <Filter>02_Script\Health</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationTestScene.cpp">
-      <Filter>01_Scene</Filter>
     </ClCompile>
     <ClCompile Include="Ken.cpp">
       <Filter>02_Script\AnimationTest</Filter>
@@ -108,9 +111,6 @@
     <ClCompile Include="LandingText.cpp">
       <Filter>02_Script\AnimationTest</Filter>
     </ClCompile>
-    <ClCompile Include="KinematicTest.cpp">
-      <Filter>01_Scene</Filter>
-    </ClCompile>
     <ClCompile Include="KinematicSun.cpp">
       <Filter>02_Script\Kinematic</Filter>
     </ClCompile>
@@ -119,6 +119,18 @@
     </ClCompile>
     <ClCompile Include="MainSceneChangeButton.cpp">
       <Filter>02_Script\MainTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTitle.cpp">
+      <Filter>01_Scene\01_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SolarSystem.cpp">
+      <Filter>01_Scene\02_SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationTestScene.cpp">
+      <Filter>01_Scene\03_AnimationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicTest.cpp">
+      <Filter>01_Scene\04_KinematicTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,12 +152,6 @@
     <ClInclude Include="Title.h">
       <Filter>02_Script\SolarSystem</Filter>
     </ClInclude>
-    <ClInclude Include="MainTitle.h">
-      <Filter>01_Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SolarSystem.h">
-      <Filter>01_Scene</Filter>
-    </ClInclude>
     <ClInclude Include="DemoGameApp.h">
       <Filter>00_App</Filter>
     </ClInclude>
@@ -157,9 +163,6 @@
     </ClInclude>
     <ClInclude Include="HpViewer.h">
       <Filter>02_Script\Health</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationTestScene.h">
-      <Filter>01_Scene</Filter>
     </ClInclude>
     <ClInclude Include="Ken.h">
       <Filter>02_Script\AnimationTest</Filter>
@@ -197,9 +200,6 @@
     <ClInclude Include="LandingText.h">
       <Filter>02_Script\AnimationTest</Filter>
     </ClInclude>
-    <ClInclude Include="KinematicTest.h">
-      <Filter>01_Scene</Filter>
-    </ClInclude>
     <ClInclude Include="KinematicSun.h">
       <Filter>02_Script\Kinematic</Filter>
     </ClInclude>
@@ -208,6 +208,18 @@
     </ClInclude>
     <ClInclude Include="MainSceneChangeButton.h">
       <Filter>02_Script\MainTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTitle.h">
+      <Filter>01_Scene\01_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SolarSystem.h">
+      <Filter>01_Scene\02_SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTestScene.h">
+      <Filter>01_Scene\03_AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicTest.h">
+      <Filter>01_Scene\04_KinematicTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

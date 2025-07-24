@@ -29,6 +29,8 @@ private:
 	Vector2 m_lastFramePosition;
 	Vector2 m_position;
 
+	bool m_isMultipleCalculation = false;
+
 public:
 	void Initialize() override;
 	void RegisterToSystem() override;

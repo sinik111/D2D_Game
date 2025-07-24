@@ -6,8 +6,8 @@
 struct ParticleUnit
 {
 	std::vector<BatchUnit> batchUnits;
-	float duration;
-	float startTime;
+	float duration = 0.0f;
+	float startTime = 0.0f;
 	float timer = 0.0f;
 	Matrix3x2 original;
 	bool isPlaying = false;

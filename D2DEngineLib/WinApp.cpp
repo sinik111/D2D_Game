@@ -112,6 +112,8 @@ void WinApp::Run()
 
 void WinApp::Update()
 {
+	// [Tip] 실행순서
+
 	MyTimeSystem::Get().Update();
 	
 	Profiling();
@@ -120,6 +122,7 @@ void WinApp::Update()
 
 	SceneManager::Get().CheckSceneChanged();
 
+	// [Tip] Scene Enter/이전 프레임에 생성된 오브젝트(GameObject, Component)들 초기화
 	SceneManager::Get().InitializeObjects();
 
 	ComponentSystem::Get().Script().CallStart();
@@ -157,6 +160,7 @@ void WinApp::Update()
 
 	Object::UpdateDelayDestroy();
 
+	// [Tip] 이번 프레임에 파괴된 오브젝트(GameObject, Component)들 정리
 	SceneManager::Get().CleanupDestroyedObjects();
 
 	ResourceManager::Get().Update();
@@ -168,11 +172,13 @@ void WinApp::Render()
 
 	ComponentSystem::Get().Renderer().RegisterRendererToRenderQueue();
 
-	m_d2dRenderer.BeginDraw(D2D1::ColorF(D2D1::ColorF::Black));
+	m_d2dRenderer.BeginDraw(m_clearColor);
 
 	m_d2dRenderer.ExecuteRenderQueue();
 
+//#ifdef _DEBUG
 	ComponentSystem::Get().Physics().RenderColliders();
+//#endif // _DEBUG
 
 	m_d2dRenderer.EndDraw();
 }

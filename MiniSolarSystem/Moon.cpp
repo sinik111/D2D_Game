@@ -25,7 +25,7 @@ void Moon::Start()
 
     GetGameObject()->AddComponent<BitmapRenderer>(L"Moon.png");
 
-    GetTransform()->SetLocalPosition({ 100.0f, 0.0f });
+    GetTransform()->SetLocalPosition({ 200.0f, 0.0f });
 
     m_health = GetGameObject()->GetComponent<Health>();
 

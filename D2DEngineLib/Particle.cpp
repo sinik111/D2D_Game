@@ -43,7 +43,7 @@ void Particle::Update()
 				return;
 			}
 
-			m_timer = 0.0f;
+			m_timer -= m_duration;
 		}
 
 		for (auto& particleUnit : m_particleUnits)
@@ -67,7 +67,7 @@ void Particle::Update()
 
 				if (particleUnit.timer >= particleUnit.duration)
 				{
-					particleUnit.timer = 0.0f;
+					particleUnit.timer -= particleUnit.duration;
 
 					particleUnit.isPlaying = false;
 
@@ -80,7 +80,14 @@ void Particle::Update()
 				{
 					size_t index = static_cast<size_t>((particleUnit.timer / particleUnit.duration) * size);
 
-					m_batchRenderer->AddBatchUnit(particleUnit.batchUnits[index]);
+					BatchUnit batchUnit = particleUnit.batchUnits[index];
+					if (!particleUnit.isFollowing)
+					{
+						batchUnit.isFollowing = false;
+						batchUnit.world = particleUnit.original;
+					}
+
+					m_batchRenderer->AddBatchUnit(batchUnit);
 				}
 				else
 				{

@@ -39,7 +39,7 @@ public:
 	UINT GetHeight() const;
 
 public:
-	void BeginDraw(const D2D1::ColorF& color) const;
+	void BeginDraw(const D2D1_COLOR_F& color) const;
 	void EndDraw() const;
 
 public:

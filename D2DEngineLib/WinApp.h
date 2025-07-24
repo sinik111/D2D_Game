@@ -28,6 +28,7 @@ protected:
 	int m_y = CW_USEDEFAULT;
 	int m_width = 800;
 	int m_height = 600;
+	D2D1_COLOR_F m_clearColor{ D2D1::ColorF{ D2D1::ColorF::Black } };
 
 	float m_accumulatedDeltaTime = 0.0f;
 
