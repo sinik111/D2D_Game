@@ -14,10 +14,14 @@ void DemoGameApp::Initialize()
 	// [Tip] WinApp::Initialize()을 호출하기 전에 Window 설정을 하면 반영됨.
 	// default값이 적용되어 있어서 아무것도 설정하지 않아도 문제는 없음.
 
+	//m_windowStyle = WS_MAXIMIZE | WS_POPUP; // 전체화면
 	m_windowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU;
 
 	m_className = L"D2DGame";
 	m_windowName = L"MiniSolarSystem";
+
+	//m_width = 960;
+	//m_height = 540;
 
 	m_width = 1280;
 	m_height = 720;
