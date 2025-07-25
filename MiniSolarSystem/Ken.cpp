@@ -33,6 +33,8 @@ void Ken::Initialize()
 
 void Ken::Start()
 {
+	// [Tip] PlayerInput Component 사용법
+
 	PlayerInput* playerInput = GetGameObject()->GetComponent<PlayerInput>();
 	playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &Ken::ArrowInput);
 	playerInput->RegisterActionOnKey('Q', KeyState::Pressed, this, &Ken::Roll);
@@ -41,6 +43,8 @@ void Ken::Start()
 	playerInput->RegisterActionOnKey('R', KeyState::Pressed, this, &Ken::Revive);
 
 	playerInput->RegisterActionOnKey('4', KeyState::Pressed, this, &Ken::ChangeScene);
+
+	// [Tip] Animator Component 사용법
 
 	m_animator->SetSpriteSheet(L"ken_sprites.json");
 	m_animator->AddAnimationClip(L"ken_idle_anim.json");
@@ -53,6 +57,9 @@ void Ken::Start()
 	m_animator->AddAnimationClip(L"ken_revive_anim.json");
 
 	m_animator->AddActionOnEvent(L"FireEarth", this, &Ken::FireEarth);
+
+
+	// [Tip] FSM 사용법
 
 	m_context.gameObject = GetGameObject();
 	m_context.animator = m_animator;

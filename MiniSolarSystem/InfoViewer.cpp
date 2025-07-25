@@ -13,6 +13,20 @@ void InfoViewer::Start()
 {
     m_textRenderer = GetGameObject()->AddComponent<TextRenderer>();
 
+    // [Tip] TextRenderer 사용법
+    // 
+    // void SetText(const std::wstring& text);          // 텍스트 지정
+    // void SetColor(const D2D1_COLOR_F & color);       // 텍스트 색상 지정
+    // void SetSpaceType(SpaceType spaceType);          // 출력 공간(Screen/World) 지정
+    // void SetSortOrder(int sortOrder);                // 출력 순서 지정 
+    // void SetRectSize(const D2D1_SIZE_F & size);      // 텍스트를 출력할 공간 크기 지정
+    // void SetFontSize(float size);                    // 폰트 사이즈 지정
+    // void SetVerticalAlignment(VerticalAlignment align); // 세로 정렬 기본 Top
+    // void SetHorizontalAlignment(HorizontalAlignment align); // 가로 정렬 기본 Left
+    // void SetPivot(const Vector2 & pivot);            // 피벗 설정. 기본 { 0.5, 0.5 } 임
+    // 
+    // 텍스트의 위치는 Transform을 수정해서 조정함.
+
     m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(15.0f);
     m_textRenderer->SetPivot({ 0.0f, 0.0f });

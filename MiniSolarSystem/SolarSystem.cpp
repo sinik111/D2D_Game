@@ -164,6 +164,6 @@ void SolarSystem::Enter()
 		// 첫번째와 두번째의 BatchUnit들을 1초동안 보간한 값의 위치에
 		// SpriteSheet의 i % 5 인덱스에 해당하는 이미지를 출력함.
 
-		particle->AddParticleUnit(particleUnit);
+		particle->AddParticleUnit(particleUnit); // ParticleUnit 추가
 	}
 }

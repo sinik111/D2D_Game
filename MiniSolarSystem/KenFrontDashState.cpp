@@ -49,7 +49,7 @@ void KenFrontDashState::Update(FSMContext& context)
 
 	Vector2 velocity = context.rigidBody2d->GetVelocity();
 
-	context.rigidBody2d->SetVelocity(Vector2(horizontalInput * 1000.0f, velocity.y));
+	context.rigidBody2d->SetVelocity(Vector2(horizontalInput * 100.0f, velocity.y));
 }
 
 void KenFrontDashState::Exit(FSMContext& context)
