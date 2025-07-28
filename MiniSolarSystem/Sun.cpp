@@ -84,7 +84,7 @@ void Sun::Update()
                 Random::Float(0.0f, 1.0f),
                 Random::Float(0.0f, 1.0f),
                 Random::Float(0.0f, 1.0f),
-                Random::Float(0.1f, 0.2f)
+                Random::Float(0.5f, 0.8f)
             };
 
             batchRenderer->AddBatchUnit(unit); // BatchRenderer¿¡ BatchUnit Ãß°¡

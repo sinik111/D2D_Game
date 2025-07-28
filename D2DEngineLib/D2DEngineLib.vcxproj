@@ -151,6 +151,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonSystem.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="CoInitializer.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentSystem.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />

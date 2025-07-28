@@ -200,6 +200,11 @@ public:
 	static const Vector2 Down;
 	static const Vector2 Right;
 	static const Vector2 Left;
+
+	static const Vector2 EllipseRightUp;
+	static const Vector2 EllipseLeftUp;
+	static const Vector2 EllipseRightDown;
+	static const Vector2 EllipseLeftDown;
 };
 	
 inline Vector2 operator*(float scalar, const Vector2& v)

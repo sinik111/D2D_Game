@@ -118,7 +118,7 @@ void TextRenderer::MakeRenderMatrix()
 {
 	m_cachedRenderMatrix = Matrix3x2::Scale(1.0f, -1.0f) *
 		Matrix3x2::Translation(-m_rectSize.width * m_pivot.x,
-			m_rectSize.height * (1.0f - m_pivot.y));
+			m_rectSize.height * m_pivot.y);
 }
 
 Microsoft::WRL::ComPtr<IDWriteTextFormat> TextRenderer::GetTextFormat() const

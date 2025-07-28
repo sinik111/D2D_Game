@@ -157,6 +157,12 @@
     <ClCompile Include="MainSceneChangeButton.cpp" />
     <ClCompile Include="MainTitle.cpp" />
     <ClCompile Include="Moon.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDashState.cpp" />
+    <ClCompile Include="PlayerDodgeState.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerMakingTestScene.cpp" />
+    <ClCompile Include="PlayerWalkState.cpp" />
     <ClCompile Include="SolarSystem.cpp" />
     <ClCompile Include="StaticMoon.cpp" />
     <ClCompile Include="Sun.cpp" />
@@ -188,6 +194,12 @@
     <ClInclude Include="MainSceneChangeButton.h" />
     <ClInclude Include="MainTitle.h" />
     <ClInclude Include="Moon.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerDashState.h" />
+    <ClInclude Include="PlayerDodgeState.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerMakingTestScene.h" />
+    <ClInclude Include="PlayerWalkState.h" />
     <ClInclude Include="SolarSystem.h" />
     <ClInclude Include="StaticMoon.h" />
     <ClInclude Include="Sun.h" />

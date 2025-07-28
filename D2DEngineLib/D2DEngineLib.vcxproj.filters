@@ -231,6 +231,7 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="CircleCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -362,5 +363,6 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="CircleCollider.cpp" />
   </ItemGroup>
 </Project>

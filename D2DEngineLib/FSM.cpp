@@ -43,6 +43,8 @@ void FSM::Update(FSMContext& context)
 
 void FSM::SetState(const std::wstring& name, FSMContext& context)
 {
+	context.previousStateName = context.currentStateName;
 	m_currentState = m_states[name].get();
 	m_currentState->Enter(context);
+	context.currentStateName = name;
 }

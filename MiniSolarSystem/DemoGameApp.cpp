@@ -9,6 +9,8 @@
 #include "AnimationTestScene.h"
 #include "KinematicTest.h"
 
+#include "PlayerMakingTestScene.h"
+
 void DemoGameApp::Initialize()
 {
 	// [Tip] WinApp::Initialize()을 호출하기 전에 Window 설정을 하면 반영됨.
@@ -49,8 +51,11 @@ void DemoGameApp::Initialize()
 	SceneManager::Get().CreateScene<AnimationTestScene>(L"AnimationTest");
 	SceneManager::Get().CreateScene<KinematicTest>(L"KinematicTest");
 
+	SceneManager::Get().CreateScene<PlayerMakingTestScene>(L"PlayerMakingTestScene");
+
 	// [Tip] Scene 변경하기
 	SceneManager::Get().ChangeScene(L"Title");
+	//SceneManager::Get().ChangeScene(L"PlayerMakingTestScene");
 }
 
 void DemoGameApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

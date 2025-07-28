@@ -40,6 +40,15 @@
     <Filter Include="01_Scene\04_KinematicTest">
       <UniqueIdentifier>{538fe3fa-3883-41f4-9489-90689ae9d7fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Scene\05_PlayerMakingTest">
+      <UniqueIdentifier>{a8f232a9-cf0a-4ced-9d99-8f1457eb7985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\PlayerMaking">
+      <UniqueIdentifier>{985ba1e1-0328-4639-9ea6-09c7edad34fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\PlayerMaking\FSM">
+      <UniqueIdentifier>{1ab2beff-cf20-4556-ad13-fe79eb7ac469}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DemoGameApp.cpp">
@@ -132,6 +141,24 @@
     <ClCompile Include="KinematicTest.cpp">
       <Filter>01_Scene\04_KinematicTest</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerMakingTestScene.cpp">
+      <Filter>01_Scene\05_PlayerMakingTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02_Script\PlayerMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWalkState.cpp">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDashState.cpp">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDodgeState.cpp">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -220,6 +247,24 @@
     </ClInclude>
     <ClInclude Include="KinematicTest.h">
       <Filter>01_Scene\04_KinematicTest</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMakingTestScene.h">
+      <Filter>01_Scene\05_PlayerMakingTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02_Script\PlayerMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWalkState.h">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDashState.h">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDodgeState.h">
+      <Filter>02_Script\PlayerMaking\FSM</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

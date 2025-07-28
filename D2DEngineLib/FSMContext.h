@@ -8,6 +8,7 @@ class Animator;
 class BitmapRenderer;
 class GameObject;
 class RigidBody2D;
+class TextRenderer;
 
 struct FSMContext
 {
@@ -16,10 +17,12 @@ struct FSMContext
 	Animator* animator;
 	BitmapRenderer* bitmapRenderer;
 	RigidBody2D* rigidBody2d;
+	TextRenderer* textRenderer;
 	std::unordered_map<std::wstring, int> intParams;
 	std::unordered_map<std::wstring, float> floatParams;
 	std::unordered_map<std::wstring, bool> boolParams;
 	std::unordered_map<std::wstring, bool> triggerParams;
+	std::wstring previousStateName;
 	std::wstring currentStateName;
 	std::wstring nextStateName;
 	bool shouldChangeState;
