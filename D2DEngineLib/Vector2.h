@@ -1,5 +1,6 @@
 #pragma once
 
+#include <d2d1.h>
 #include <cassert>
 
 #include "MyMath.h"

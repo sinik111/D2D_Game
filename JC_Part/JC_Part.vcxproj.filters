@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e21b3019-f930-4173-87bf-a4d209330076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{00c4b63f-5d17-429d-a3ca-7f60cf3f5a05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\EnemyBase">
+      <UniqueIdentifier>{30837b54-c5b6-4725-867a-3a027e7d14d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\EnemyBase\Script">
+      <UniqueIdentifier>{8e821758-9808-4e6e-8e9a-2c184cbc465f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="JC_DemoGameApp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTestScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBase.cpp">
+      <Filter>GameObject\EnemyBase</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseIdle.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseMove.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseAttack.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseDamaged.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseDead.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseStaggered.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseDash.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCameraController.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="JC_DemoGameApp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBase.h">
+      <Filter>GameObject\EnemyBase</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseIdle.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseMove.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseAttack.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseDamaged.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseDead.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseStaggered.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseDash.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCameraController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

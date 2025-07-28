@@ -232,6 +232,10 @@
       <Filter>04_Component\ComponentSystem\Systems</Filter>
     </ClInclude>
     <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="Circle.h">
+      <Filter>99_Module\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">

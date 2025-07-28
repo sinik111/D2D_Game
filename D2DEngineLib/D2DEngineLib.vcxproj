@@ -151,6 +151,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonSystem.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="CoInitializer.h" />
     <ClInclude Include="Component.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="MyTimeSystem.h" />
     <ClInclude Include="Object.h" />

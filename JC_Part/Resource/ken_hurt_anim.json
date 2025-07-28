@@ -1,0 +1,29 @@
+{
+    "name": "ken_hurt",
+    "isLoop": false,
+    "filePath": "ken.png",
+    "duration": 0.4166666865348816,
+    "frames": [
+        {
+            "sprite": "ken_hurt_0",
+            "time": 0.0
+        },
+        {
+            "sprite": "ken_hurt_1",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "ken_hurt_2",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "ken_hurt_3",
+            "time": 0.25
+        },
+        {
+            "sprite": "ken_hurt_4",
+            "time": 0.3333333432674408
+        }
+    ],
+    "events": []
+}

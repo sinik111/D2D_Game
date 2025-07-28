@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00_App">
+      <UniqueIdentifier>{3bed4ac3-34ab-4646-a184-827938b501e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene">
+      <UniqueIdentifier>{2e45be38-c36b-4ebb-b02e-3a7ff8cfc93d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script">
+      <UniqueIdentifier>{a0396846-3d06-4297-8c7d-5ad432db6940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Health">
+      <UniqueIdentifier>{c4da00e8-eaa9-439b-b6d9-3022ac487259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainTitle">
+      <UniqueIdentifier>{35256866-8e2d-41ff-b8ee-52b019e6c300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\AnimationTest">
+      <UniqueIdentifier>{ba7d2beb-93a3-4883-9a72-7ad81973a09b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Kinematic">
+      <UniqueIdentifier>{0ded1b8e-a01f-4876-8a89-60dfccbee589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\SolarSystem">
+      <UniqueIdentifier>{a0b81d89-0d3f-43f0-8314-f73d39ae67fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\AnimationTest\KenState">
+      <UniqueIdentifier>{eef5002f-ce69-45f3-8aaa-f36e6c504035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\01_Title">
+      <UniqueIdentifier>{b05dce1c-962d-457e-b231-582be96ee5a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\02_SolarSystem">
+      <UniqueIdentifier>{3274a254-58cb-4c59-ab6e-4687745bfa42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\03_AnimationTest">
+      <UniqueIdentifier>{b3c28999-4bd8-4537-b084-cd6561baff49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\04_KinematicTest">
+      <UniqueIdentifier>{538fe3fa-3883-41f4-9489-90689ae9d7fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DemoGameApp.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Earth.cpp">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoViewer.cpp">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Moon.cpp">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Sun.cpp">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSceneChange.cpp">
+      <Filter>02_Script\MainTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>02_Script\Health</Filter>
+    </ClCompile>
+    <ClCompile Include="HpViewer.cpp">
+      <Filter>02_Script\Health</Filter>
+    </ClCompile>
+    <ClCompile Include="Ken.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="KenBackDashState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="KenFrontDashState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="KenRollState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="KenSpinningKickState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="KenIdleState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="KenDeadState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="KenHurtState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="KenReviveState.cpp">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCameraController.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpingText.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="LandingText.cpp">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicSun.cpp">
+      <Filter>02_Script\Kinematic</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMoon.cpp">
+      <Filter>02_Script\Kinematic</Filter>
+    </ClCompile>
+    <ClCompile Include="MainSceneChangeButton.cpp">
+      <Filter>02_Script\MainTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTitle.cpp">
+      <Filter>01_Scene\01_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SolarSystem.cpp">
+      <Filter>01_Scene\02_SolarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationTestScene.cpp">
+      <Filter>01_Scene\03_AnimationTest</Filter>
+    </ClCompile>
+    <ClCompile Include="KinematicTest.cpp">
+      <Filter>01_Scene\04_KinematicTest</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CameraController.h">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Earth.h">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoViewer.h">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Moon.h">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun.h">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>02_Script\SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoGameApp.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSceneChange.h">
+      <Filter>02_Script\MainTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>02_Script\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="HpViewer.h">
+      <Filter>02_Script\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="Ken.h">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="KenBackDashState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="KenFrontDashState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="KenRollState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="KenSpinningKickState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="KenIdleState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="KenDeadState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="KenHurtState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="KenReviveState.h">
+      <Filter>02_Script\AnimationTest\KenState</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCameraController.h">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpingText.h">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="LandingText.h">
+      <Filter>02_Script\AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicSun.h">
+      <Filter>02_Script\Kinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMoon.h">
+      <Filter>02_Script\Kinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="MainSceneChangeButton.h">
+      <Filter>02_Script\MainTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTitle.h">
+      <Filter>01_Scene\01_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SolarSystem.h">
+      <Filter>01_Scene\02_SolarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationTestScene.h">
+      <Filter>01_Scene\03_AnimationTest</Filter>
+    </ClInclude>
+    <ClInclude Include="KinematicTest.h">
+      <Filter>01_Scene\04_KinematicTest</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,41 @@
+{
+    "name": "EnemyBase_Move_LEFT_UP",
+    "isLoop": true,
+    "filePath": "Assets/Editor/SpriteTool/EnemyBase.png",
+    "duration": 0.6666666865348816,
+    "frames": [
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_56",
+            "time": 0.0
+        },
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_57",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_58",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_59",
+            "time": 0.25
+        },
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_60",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_61",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_62",
+            "time": 0.5
+        },
+        {
+            "sprite": "EnemyBase_Move_LEFT_UP_63",
+            "time": 0.5833333730697632
+        }
+    ],
+    "events": []
+}
