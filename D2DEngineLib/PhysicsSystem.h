@@ -3,7 +3,7 @@
 #include "Physics.h"
 
 class RigidBody2D;
-class BoxCollider2D;
+class Collider;
 class D2DRenderer;
 
 class PhysicsSystem
@@ -12,9 +12,9 @@ private:
 	std::vector<RigidBody2D*> m_dynamicRigidBodies;
 	std::vector<RigidBody2D*> m_kinematicRigidBodies;
 	std::vector<RigidBody2D*> m_staticRigidBodies;
-	std::vector<BoxCollider2D*> m_boxColliders;
+	std::vector<Collider*> m_colliders;
 
-	using CollisionPair = std::pair<BoxCollider2D*, BoxCollider2D*>;
+	using CollisionPair = std::pair<Collider*, Collider*>;
 
 	std::unordered_map<CollisionPair, CollisionInfo, Util::PairHash> m_previousCollisions;
 	std::unordered_map<CollisionPair, CollisionInfo, Util::PairHash> m_currentCollisions;
@@ -27,8 +27,8 @@ private:
 public:
 	void RegisterRigidBody2D(RigidBody2D* rigidBody2d);
 	void UnregisterRigidBody2D(RigidBody2D* rigidBody2d);
-	void RegisterBoxCollider2D(BoxCollider2D* boxCollider2d);
-	void UnregisterBoxCollider2D(BoxCollider2D* boxCollider2d);
+	void RegisterCollider(Collider* collider);
+	void UnregisterCollider(Collider* collider);
 
 public:
 	void SetD2DRenderer(D2DRenderer* d2dRenderer);

@@ -31,11 +31,15 @@ void FSM::Update(FSMContext& context)
 		const auto& iter = m_states.find(context.nextStateName);
 		assert(iter != m_states.end() && L"없는 state 입니다");
 
+		context.previousStateName = context.currentStateName;
+
 		m_currentState->Exit(context);
 
 		m_currentState = iter->second.get();
 
 		m_currentState->Enter(context);
+
+		context.currentStateName = context.nextStateName;
 	}
 
 	context.Reset();

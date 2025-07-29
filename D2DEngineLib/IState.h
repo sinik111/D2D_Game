@@ -5,6 +5,9 @@
 class IState
 {
 public:
+	virtual ~IState() = default;
+
+public:
 	virtual bool CheckCondition(FSMContext& context)
 	{
 		return false;

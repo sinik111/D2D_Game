@@ -4,23 +4,30 @@
 #include "../D2DEngineLib/FSM.h"
 #include "../D2DEngineLib/FSMContext.h"
 
+class PlayerInput;
 class Animator;
-class Health;
-class RigidBody2D;
+//class RigidBody2D;
+//class TextRenderer;
 
 class EnemyBase :public Script
 {
 private:
+
+	PlayerInput* m_playerInput;
+
 	Animator* m_animator;
 	
-	RigidBody2D* m_rigidBody;
+	//RigidBody2D* m_rigidBody;
+
+	//TextRenderer* m_text;
 
 	FSM m_fsm;
-	FSMContext m_context;
+	FSMContext m_context;	
 
 	bool m_isJump = false;
 	bool m_isGround = false;
 
+	float degree = 0.0f;
 	int direction = DOWN;
 
 

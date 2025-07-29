@@ -137,13 +137,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyBaseAttack.cpp" />
+    <ClCompile Include="EnemyBaseAttackOne.cpp" />
     <ClCompile Include="EnemyBaseDamaged.cpp" />
     <ClCompile Include="EnemyBaseDash.cpp" />
     <ClCompile Include="EnemyBaseDead.cpp" />
     <ClCompile Include="EnemyBaseIdle.cpp" />
     <ClCompile Include="EnemyBaseMove.cpp" />
-    <ClCompile Include="EnemyBaseStaggered.cpp" />
+    <ClCompile Include="EnemyState.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="FollowCameraController.cpp" />
@@ -159,13 +159,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EnemyBaseAttack.h" />
+    <ClInclude Include="EnemyBaseAttackOne.h" />
     <ClInclude Include="EnemyBaseDamaged.h" />
     <ClInclude Include="EnemyBaseDash.h" />
     <ClInclude Include="EnemyBaseDead.h" />
     <ClInclude Include="EnemyBaseIdle.h" />
     <ClInclude Include="EnemyBaseMove.h" />
-    <ClInclude Include="EnemyBaseStaggered.h" />
+    <ClInclude Include="EnemyState.h" />
     <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="FollowCameraController.h" />

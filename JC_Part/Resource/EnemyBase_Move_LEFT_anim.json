@@ -1,7 +1,7 @@
 {
     "name": "EnemyBase_Move_LEFT",
     "isLoop": true,
-    "filePath": "Assets/Editor/SpriteTool/EnemyBase.png",
+    "filePath": "EnemyBase.png",
     "duration": 0.6666666865348816,
     "frames": [
         {

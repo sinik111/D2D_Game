@@ -113,4 +113,15 @@ struct Bounds
 		return myMin.x <= otherMin.x && myMax.x >= otherMax.x &&
 			myMin.y <= otherMin.y && myMax.y >= otherMax.y;
 	}
+
+	void GetVertices(Vector2 outVertices[4]) const
+	{
+		Vector2 min = GetMin();
+		Vector2 max = GetMax();
+
+		outVertices[0] = { min.x, min.y }; // Bottom-left
+		outVertices[1] = { max.x, min.y }; // Bottom-right
+		outVertices[2] = { max.x, max.y }; // Top-right
+		outVertices[3] = { min.x, max.y }; // Top-left
+	}
 };

@@ -45,7 +45,7 @@
     <ClCompile Include="EnemyBaseMove.cpp">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBaseAttack.cpp">
+    <ClCompile Include="EnemyBaseAttackOne.cpp">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBaseDamaged.cpp">
@@ -54,14 +54,14 @@
     <ClCompile Include="EnemyBaseDead.cpp">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBaseStaggered.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBaseDash.cpp">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClCompile>
     <ClCompile Include="FollowCameraController.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyState.cpp">
+      <Filter>GameObject\EnemyBase\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="EnemyBaseMove.h">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBaseAttack.h">
+    <ClInclude Include="EnemyBaseAttackOne.h">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBaseDamaged.h">
@@ -89,14 +89,14 @@
     <ClInclude Include="EnemyBaseDead.h">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBaseStaggered.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyBaseDash.h">
       <Filter>GameObject\EnemyBase\Script</Filter>
     </ClInclude>
     <ClInclude Include="FollowCameraController.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyState.h">
+      <Filter>GameObject\EnemyBase\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

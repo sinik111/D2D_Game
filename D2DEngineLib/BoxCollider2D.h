@@ -1,58 +1,25 @@
 #pragma once
 
-#include "Component.h"
-#include "Delegate.h"
-#include "Physics.h"
-
-class RigidBody2D;
-class Script;
+#include "Collider.h"
 
 class BoxCollider2D :
-	public Component
+	public Collider
 {
 private:
-	Transform* m_transform = nullptr;
-	RigidBody2D* m_rigidBody2d = nullptr;
-
-	std::vector<Script*> m_scriptsForCallBack;
-
-	Bounds m_bounds;
-	Vector2 m_offset;
-	Vector2 m_size;
-	bool m_isBoundsDirty = true;
-	bool m_isTrigger = false;
+	Bounds m_box;
 
 public:
-	BoxCollider2D() = default;
-	~BoxCollider2D() override = default;
+	const Bounds& GetBox() const;
 
-public:
-	void Initialize() override;
-	void RegisterToSystem() override;
-	void UnregisterFromSystem() override;
-
-	void RegisterScript(Script* script);
-	void UnregisterScript(Script* script);
-
-public:
-	RigidBody2D* GetRigidBody2D() const;
-
-public:
-	bool GetTrigger() const;
-	const Bounds& GetBounds() const;
-
-public:
-	void SetOffset(const Vector2& offset);
 	void SetSize(const Vector2& size);
-	void SetTrigger(bool trigger);
 
 public:
-	void Update();
+	void UpdateCollider() override;
+	void CalculateSpatialBounds() override;
 
-	void CallOnCollisionEnter(const Collision& collision);
-	void CallOnCollisionStay(const Collision& collision);
-	void CallOnCollisionExit(const Collision& collision);
-	void CallOnTriggerEnter(const Collision& collision);
-	void CallOnTriggerStay(const Collision& collision);
-	void CallOnTriggerExit(const Collision& collision);
+	CollisionInfo DetectCollision(const Collider* other) const override;
+	CollisionInfo DetectCollision(const BoxCollider2D* other) const override;
+	CollisionInfo DetectCollision(const CircleCollider* other) const override;
+	CollisionInfo DetectCollision(const LineCollider* other) const override;
+	CollisionInfo DetectCollision(const ConeCollider2D* other) const override;
 };

@@ -42,14 +42,14 @@ void PhysicsSystem::UnregisterRigidBody2D(RigidBody2D* rigidBody2d)
 	}
 }
 
-void PhysicsSystem::RegisterBoxCollider2D(BoxCollider2D* boxCollider2d)
+void PhysicsSystem::RegisterCollider(Collider* collider)
 {
-	m_boxColliders.push_back(boxCollider2d);
+	m_colliders.push_back(collider);
 }
 
-void PhysicsSystem::UnregisterBoxCollider2D(BoxCollider2D* boxCollider2d)
+void PhysicsSystem::UnregisterCollider(Collider* collider)
 {
-	Util::OptimizedErase(m_boxColliders, boxCollider2d);
+	Util::OptimizedErase(m_colliders, collider);
 }
 
 void PhysicsSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
@@ -74,9 +74,9 @@ void PhysicsSystem::ProcessPhysics()
 	UpdateColliders();
 	
 	std::sort(
-		m_boxColliders.begin(),
-		m_boxColliders.end(),
-		[](BoxCollider2D* a, BoxCollider2D* b) {
+		m_colliders.begin(),
+		m_colliders.end(),
+		[](Collider* a, Collider* b) {
 			if (a->GetRigidBody2D() == nullptr || b->GetRigidBody2D() == nullptr)
 			{
 				return false;
@@ -89,33 +89,33 @@ void PhysicsSystem::ProcessPhysics()
 	m_currentCollisions.clear();
 	m_currentTriggers.clear();
 
-	for (size_t i = 0; i < m_boxColliders.size(); ++i)
+	for (size_t i = 0; i < m_colliders.size(); ++i)
 	{
-		for (size_t j = i + 1; j < m_boxColliders.size(); ++j)
+		for (size_t j = i + 1; j < m_colliders.size(); ++j)
 		{
-			if (m_boxColliders[i]->GetRigidBody2D() == nullptr &&
-				m_boxColliders[j]->GetRigidBody2D() == nullptr)
+			if (m_colliders[i]->GetRigidBody2D() == nullptr &&
+				m_colliders[j]->GetRigidBody2D() == nullptr)
 			{
 				continue;
 			}
 
-			BoxCollider2D* colliderA;
-			BoxCollider2D* colliderB;
+			Collider* colliderA;
+			Collider* colliderB;
 
-			if (m_boxColliders[i] < m_boxColliders[j])
+			if (m_colliders[i] < m_colliders[j])
 			{
-				colliderA = m_boxColliders[i];
-				colliderB = m_boxColliders[j];
+				colliderA = m_colliders[i];
+				colliderB = m_colliders[j];
 			}
 			else
 			{
-				colliderA = m_boxColliders[j];
-				colliderB = m_boxColliders[i];
+				colliderA = m_colliders[j];
+				colliderB = m_colliders[i];
 			}
 
-			CollisionInfo info{};
+			CollisionInfo info = colliderA->DetectCollision(colliderB);
 
-			if (Physics::DetectCollision(colliderA, colliderB, info))
+			if (info.isCollide)
 			{
 				CollisionPair pair{ colliderA, colliderB };
 
@@ -158,7 +158,7 @@ void PhysicsSystem::Interpolate()
 
 void PhysicsSystem::UpdateColliders()
 {
-	for (const auto& collider : m_boxColliders)
+	for (const auto& collider : m_colliders)
 	{
 		collider->Update();
 	}
@@ -166,16 +166,17 @@ void PhysicsSystem::UpdateColliders()
 
 void PhysicsSystem::RenderColliders()
 {
-	for (const auto& collider : m_boxColliders)
+	for (const auto& collider : m_colliders)
 	{
-		const Bounds& bounds = collider->GetBounds();
+		collider->Render();
+		//const Bounds& bounds = collider->GetBounds();
 
-		Vector2 min = bounds.GetMin();
-		Vector2 max = bounds.GetMax();
+		//Vector2 min = bounds.GetMin();
+		//Vector2 max = bounds.GetMax();
 
-		D2D1_RECT_F rect{ min.x, min.y, max.x, max.y };
+		//D2D1_RECT_F rect{ min.x, min.y, max.x, max.y };
 
-		m_d2dRenderer->DrawRect(rect);
+		//m_d2dRenderer->DrawRect(rect);
 	}
 }
 

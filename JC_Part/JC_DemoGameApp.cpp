@@ -4,6 +4,7 @@
 #include "../D2DEngineLib/SceneManager.h"
 
 #include "JC_DemoGameApp.h"
+#include "EnemyTestScene.h"
 
 
 void JC_DemoGameApp::Initialize() 
@@ -41,14 +42,14 @@ void JC_DemoGameApp::Initialize()
 		m_modulePath, L"x64", L"JC_Part/Resource");
 
 	// [Tip] Scene 생성하기. 인자의 name은 SceneChange할 때 쓰이는 key
-	//SceneManager::Get().CreateScene<MainTitle>(L"Title");
+	SceneManager::Get().CreateScene<EnemyTestScene>(L"Test");
 	//SceneManager::Get().CreateScene<SolarSystem>(L"SolarSystem");
 	//SceneManager::Get().CreateScene<AnimationTestScene>(L"AnimationTest");
 	//SceneManager::Get().CreateScene<KinematicTest>(L"KinematicTest");
 
 
 	// [Tip] Scene 변경하기
-	//SceneManager::Get().ChangeScene(L"Title");
+	SceneManager::Get().ChangeScene(L"Test");
 }
 
 void JC_DemoGameApp::MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

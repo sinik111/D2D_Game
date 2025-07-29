@@ -154,6 +154,8 @@
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="CoInitializer.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionLayer.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="D2DRenderer.h" />
@@ -169,7 +171,8 @@
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="json.hpp" />
-    <ClInclude Include="Line.h" />
+    <ClInclude Include="LineSegment.h" />
+    <ClInclude Include="LineCollider.h" />
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="MyTimeSystem.h" />
     <ClInclude Include="Object.h" />
@@ -191,6 +194,8 @@
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptSystem.h" />
+    <ClInclude Include="Cone2D.h" />
+    <ClInclude Include="ConeCollider2D.h" />
     <ClInclude Include="SpriteData.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="RendererSystem.h" />
@@ -211,6 +216,7 @@
     <ClCompile Include="ButtonSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
@@ -221,6 +227,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IRenderer.cpp" />
     <ClCompile Include="IState.cpp" />
+    <ClCompile Include="LineCollider.cpp" />
     <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="MyTimeSystem.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -244,6 +251,7 @@
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptSystem.cpp" />
+    <ClCompile Include="ConeCollider2D.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="RendererSystem.cpp" />
     <ClCompile Include="Transform.cpp" />

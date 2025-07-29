@@ -22,4 +22,26 @@ public:
 
 		return (1.0f - t) * f0 + t * f1;
 	}
+
+	static float NormalizeRadian(float radian)
+	{
+		radian = std::fmodf(radian, PI * 2.0f);
+		if (radian < 0.0f)
+		{
+			radian += PI * 2.0f;
+		}
+
+		return radian;
+	}
+
+	static float NormalizeDegree(float degree)
+	{
+		degree = std::fmodf(degree, 360.0f);
+		if (degree < 0.0f)
+		{
+			degree += 360.0f;
+		}
+
+		return degree;
+	}
 };

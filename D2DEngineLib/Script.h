@@ -33,5 +33,5 @@ private:
 
 	friend class ScriptSystem;
 	friend class GameObject;
-	friend class BoxCollider2D;
+	friend class Collider;
 };

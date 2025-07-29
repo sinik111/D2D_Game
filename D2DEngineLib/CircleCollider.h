@@ -1,35 +1,27 @@
 #pragma once
-#include "Component.h"
-#include "Delegate.h"
-#include "Physics.h"
 
-class RigidBody2D;
-class Script;
-class CircleCollider : public Component
+#include "Collider.h"
+#include "Circle.h"
+
+class CircleCollider :
+	public Collider
 {
-	Transform* m_transform = nullptr;
-	RigidBody2D* m_rigidBody2D = nullptr;
-
-	std::vector<Script*> m_scriptsForCallBack;
+private:
+	Circle m_circle;
 
 public:
-	CircleCollider() = default;
-	~CircleCollider() = default;
+	const Circle& GetCircle() const;
 
-public :
-	void Initialize() override;
-	void RegisterToSystem() override;
-	void UnregisterFromSystem() override;
-
-	void RegisterScript(Script* script);
-	void UnregisterScript(Script* script);
+	void SetRadius(float radius);
 
 public:
-	RigidBody2D* GetRigidBody2D() const;
+	void UpdateCollider() override;
+	void CalculateSpatialBounds() override;
 
-public:
-	void Update();
-
-	
+	CollisionInfo DetectCollision(const Collider* other) const override;
+	CollisionInfo DetectCollision(const BoxCollider2D* other) const override;
+	CollisionInfo DetectCollision(const CircleCollider* other) const override;
+	CollisionInfo DetectCollision(const LineCollider* other) const override;
+	CollisionInfo DetectCollision(const ConeCollider2D* other) const override;
 };
 

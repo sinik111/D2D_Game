@@ -44,6 +44,8 @@ void RigidBody2D::SetVelocity(const Vector2& velocity)
 void RigidBody2D::SetPosition(const Vector2& position)
 {
     m_lastFramePosition = m_position = position;
+
+    m_transform->SetLocalPosition(position);
 }
 
 void RigidBody2D::AddForce(const Vector2& force)

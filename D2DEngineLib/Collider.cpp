@@ -1,0 +1,120 @@
+#include "pch.h"
+#include "Collider.h"
+
+#include "GameObject.h"
+#include "RigidBody2D.h"
+#include "Script.h"
+#include "ComponentSystem.h"
+
+void Collider::Initialize()
+{
+	m_transform = GetTransform();
+	m_rigidBody2d = GetGameObject()->GetComponent<RigidBody2D>();
+}
+
+void Collider::RegisterToSystem()
+{
+	ComponentSystem::Get().Physics().RegisterCollider(this);
+}
+
+void Collider::UnregisterFromSystem()
+{
+	ComponentSystem::Get().Physics().UnregisterCollider(this);
+}
+
+void Collider::RegisterScript(Script* script)
+{
+	m_scriptsForCallBack.push_back(script);
+}
+
+void Collider::UnregisterScript(Script* script)
+{
+	Util::OptimizedErase(m_scriptsForCallBack, script);
+}
+
+RigidBody2D* Collider::GetRigidBody2D() const
+{
+	return m_rigidBody2d;
+}
+
+void Collider::SetTrigger(bool trigger)
+{
+	m_isTrigger = trigger;
+}
+
+void Collider::SetOffset(const Vector2& offset)
+{
+	m_offset = offset;
+
+	m_isColliderDirty = true;
+}
+
+bool Collider::GetTrigger() const
+{
+	return m_isTrigger;
+}
+
+Bounds Collider::GetSpatialBounds() const
+{
+	return m_spatialBounds;
+}
+
+void Collider::Update()
+{
+	if (m_isColliderDirty || m_transform->IsDirtyThisFrame())
+	{
+		UpdateCollider();
+
+		CalculateSpatialBounds();
+
+		m_isColliderDirty = false;
+	}
+}
+
+void Collider::Render()
+{
+
+}
+
+void Collider::CallOnCollisionEnter(const Collision& collision)
+{
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnCollisionEnter(collision);
+	}
+}
+void Collider::CallOnCollisionStay(const Collision& collision)
+{
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnCollisionStay(collision);
+	}
+}
+void Collider::CallOnCollisionExit(const Collision& collision)
+{
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnCollisionExit(collision);
+	}
+}
+void Collider::CallOnTriggerEnter(const Collision& collision)
+{
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnTriggerEnter(collision);
+	}
+}
+void Collider::CallOnTriggerStay(const Collision& collision)
+{
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnTriggerStay(collision);
+	}
+}
+void Collider::CallOnTriggerExit(const Collision& collision)
+{
+	for (const auto& script : m_scriptsForCallBack)
+	{
+		script->OnTriggerExit(collision);
+	}
+}
