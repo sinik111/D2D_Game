@@ -39,6 +39,8 @@ public:
 
 	void RenderColliders();
 
+	void ClearCollisionPairs();
+
 private:
 	void CallCollisionEvent();
 	void CallTriggerEvent();

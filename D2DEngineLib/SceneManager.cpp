@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 
 #include "D2DRenderer.h"
+#include "ComponentSystem.h"
 
 SceneManager& SceneManager::Get()
 {
@@ -57,6 +58,8 @@ void SceneManager::CheckSceneChanged()
 		if (m_currentScene != nullptr)
 		{
 			m_currentScene->Exit();
+
+			ComponentSystem::Get().Physics().ClearCollisionPairs();
 
 			m_d2dRenderer->Trim();
 		}

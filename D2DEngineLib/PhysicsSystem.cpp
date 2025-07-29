@@ -180,6 +180,15 @@ void PhysicsSystem::RenderColliders()
 	}
 }
 
+void PhysicsSystem::ClearCollisionPairs()
+{
+	m_currentCollisions.clear();
+	m_previousCollisions.clear();
+
+	m_currentTriggers.clear();
+	m_previousCollisions.clear();
+}
+
 void PhysicsSystem::CallCollisionEvent()
 {
 	for (const auto& pair : m_currentCollisions)
