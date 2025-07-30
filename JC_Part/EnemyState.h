@@ -1,92 +1,119 @@
 #pragma once
 #include "../D2DEngineLib/IState.h"
+#include "EnemyBase.h"
 
-class EnemyState 
+
+class EnemyState
 	: public IState
 {
 public:
 
+	EnemyState() {}	
+
+	EnemyBase* m_Script;
+
+	void SetScript(EnemyBase* script)
+	{
+		m_Script = script;
+	}
+
 	void Enter(FSMContext& context) override;
+
 	void Update(FSMContext& context) override;
 
-	void Exit(FSMContext& context) override;
-
-	virtual void SetDirection(FSMContext& context);
-	//virtual void UpdateMovement(FSMContext& context);
-	
-	int prevDir = 0;
-	int curDir = 0;
-	
-	/*Vector2& m_pos;
-	
-	float& m_rotationAngle;            
-	
-	Vector2& m_cameraPos;
-	
-	Vector2& m_targetPos;
-	
-	Vector2& m_originPos;
-	
-	float& m_originAngle;
-	
-	Vector2& m_movingDestPos;
-	   
-	float& m_moveSpeed;
-	float& m_maxSightDistance;
-	float& m_sightAngle;
-	float& m_maxRoamDistance;
-	float& m_maxChaseDistance;
+	void Exit(FSMContext& context) override;	
 		
-	int& m_direction;
-	
-	bool& m_isMove;
-	bool& m_toDoMove;*/
 
-	std::wstring animPath[10] = {
-		L"",
-		L"",
-		L"",
-		L""
-		L"",
-		L"",
-		L"",
-		L"",
-		L"",
-		L"",
+	inline bool& IsMove() { return m_Script->IsMove(); }
+
+	inline const Vector2& Pos() { return m_Script->Pos(); }
+
+	inline float& RotationAngle() { return m_Script->RotationAngle(); }
+
+	inline int& PrevDir() { return m_Script->PrevDir(); }
+
+	inline int& CurrDir() { return m_Script->CurrDir(); }
+
+	inline float& OriginAngle() { return m_Script->OriginAngle(); }
+
+	inline float& MoveSpeed() { return m_Script->MoveSpeed(); }
+
+	inline float& MaxSightDistance() { return m_Script->MaxSightDistance(); }
+
+	inline float& SightAngle() { return m_Script->SightAngle(); }
+
+	inline float& MaxRoamDistance() { return m_Script->MaxRoamDistance(); }
+
+	inline float& MaxChaseDistance() { return m_Script->MaxChaseDistance(); }
+
+	inline int& Direction() { return m_Script->Direction(); }
+
+	inline const Vector2& CameraPos() { return m_Script->CameraPos(); }
+
+	inline bool& IsInCamera() {	return m_Script->IsInCamera(); }
+
+	inline const Vector2& TargetPos() { return m_Script->TargetPos(); }
+
+	inline Vector2& OriginPos() { return m_Script->OriginPos(); }
+
+	inline Vector2& MovingDestPos() { return m_Script->MovingDestPos(); }
+
+	inline bool& ToDoMove() { return m_Script->ToDoMove(); }
+
+	RigidBody2D* RigidBody(); 
+	
+
+	void CheckCameraArea();
+
+	void SetEnemyDirectionByInput(FSMContext& context);
+
+	void StopMoving();
+
+	void UpdateDirection();
+
+	void SetAngle(float angle);
+
+	void SetDirection(int n);
+
+
+	virtual void UpdateMovement(FSMContext& context);
+
+
+	inline float LerpAngle(float a, float b, float t)
+	{
+		// 각도 보간 로직 (예: -180 ~ 180 또는 0 ~ 360 범위 처리)
+		// 가장 일반적인 각도 Lerp는 다음과 같은 형태를 가집니다.
+		float delta = fmod(b - a, 360.0f);
+		if (delta > 180.0f) delta -= 360.0f;
+		if (delta < -180.0f) delta += 360.0f;
+		return a + delta * t;
+	}
+
+	enum Dir	//Num키 기준으로 배열. 0은 랜덤(나중에 쓰게 된다면..), 5는 NONE(값 없음)
+	{
+		RANDOM,			//0
+		LEFT_DOWN,		//1
+		DOWN,			//2
+		RIGHT_DOWN,		//3
+		LEFT,			//4
+		NONE,			//5
+		RIGHT,			//6
+		LEFT_UP,		//7	
+		UP,				//8
+		RIGHT_UP,		//9	
 	};
 
-	//void Init(FSMContext& context)
-	//{
-	//	/*m_posX = context.floatParams[L"PosX"];
-	//	m_posY = context.floatParams[L"PosY"];
-	//	m_rotationAngle = context.floatParams[L"Angle"]; 
-	//	m_direction = context.intParams[L"Direction"];
-	//	
-	//	m_isMove = context.boolParams[L"isMove"];
-	//
-	//	m_cameraPosX = context.floatParams[L"CameraPosX"];
-	//	m_cameraPosY = context.floatParams[L"CameraPosY"];
 
-	//	m_targetPosX = context.floatParams[L"TargetPosX"];
-	//	m_targetPosY = context.floatParams[L"TargetPosY"];
-
-	//	m_originPosX = context.floatParams[L"OriginPosX"];
-	//	m_originPosY = context.floatParams[L"OriginPosY"];
-	//	m_originAngle = context.floatParams[L"OriginAngle"];
-
-	//	m_toDoMove = context.boolParams[L"ToDoMove"];
-	//	
-	//	m_movingDestPosX = context.floatParams[L"MovingDestPosX"];
-	//	m_movingDestPosY = context.floatParams[L"MovingDestPosY"];
-
-	//	m_moveSpeed = context.floatParams[L"MoveSpeed"];
-	//	m_maxSightDistance = context.floatParams[L"MaxSightDistance"];
-	//	m_sightAngle = context.floatParams[L"SightAngle"];
-	//	m_maxRoamDistance = context.floatParams[L"MaxRoamDistance"];
-	//	m_maxChaseDistance = context.floatParams[L"MaxChaseDistance"];*/
-	//}
-
-	
-
+	enum State
+	{
+		OUTOFAREA,		//카메라 범위 밖	
+		INAREA,			//카메라 범위 안
+		ENGAGE,			//이동 가능한 위치에 있는 플레이어 발견
+		ONATTACK,
+		RETURN,
+	};
 };
+
+
+
 

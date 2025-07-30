@@ -17,6 +17,8 @@
 #include "EnemyBaseMove.h"
 #include "EnemyBaseIdle.h"
 
+#include "EnemyOutOfArea.h"
+
 
 
 void EnemyBase::Initialize()
@@ -24,17 +26,17 @@ void EnemyBase::Initialize()
 	m_playerInput = GetGameObject()->GetComponent<PlayerInput>();
 	m_animator = GetGameObject()->GetComponent<Animator>();
 	m_rigidBody = GetGameObject()->GetComponent<RigidBody2D>();
-	m_text = GetGameObject()->GetComponent<TextRenderer>();
+	m_textRenderer = GetGameObject()->GetComponent<TextRenderer>();
 
-	m_text->SetText(L"IdleState : 2");
-	//m_text->GetTransform()->SetLocalPosition(m_rigidBody->GetPosition());
-	m_text->SetFontSize(15.f);
-	m_text->SetHorizontalAlignment(HorizontalAlignment::Center);
-	m_text->SetVerticalAlignment(VerticalAlignment::Center);
-	m_text->SetRectSize({ 120.0f, 40.0f });
-	m_text->SetSpaceType(SpaceType::World);
-	m_text->SetSortOrder(10);
-	m_text->SetColor(D2D1::ColorF(D2D1::ColorF::White));
+	m_textRenderer->SetText(L"IdleState : 2");
+	//m_textRenderer->GetTransform()->SetLocalPosition(m_rigidBody->GetPosition());
+	m_textRenderer->SetFontSize(15.f);
+	m_textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
+	m_textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
+	m_textRenderer->SetRectSize({ 120.0f, 40.0f });
+	m_textRenderer->SetSpaceType(SpaceType::World);
+	m_textRenderer->SetSortOrder(10);
+	m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
 
 	//콜라이더
 	m_collider = GetGameObject()->GetComponent<BoxCollider2D>();
@@ -43,10 +45,10 @@ void EnemyBase::Initialize()
 
 void EnemyBase::Start()
 {
-
 	m_playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &EnemyBase::ArrowInput);
 
 	m_animator->SetSpriteSheet(L"EnemyBase_sprites.json");
+
 	m_animator->AddAnimationClip(L"EnemyBase_Move_UP_anim.json");
 	m_animator->AddAnimationClip(L"EnemyBase_Move_DOWN_anim.json");
 	m_animator->AddAnimationClip(L"EnemyBase_Move_LEFT_anim.json");
@@ -56,6 +58,17 @@ void EnemyBase::Start()
 	m_animator->AddAnimationClip(L"EnemyBase_Move_LEFT_UP_anim.json");
 	m_animator->AddAnimationClip(L"EnemyBase_Move_LEFT_DOWN_anim.json");
 
+	animPath[0] = L"EnemyBase_Move_UP";
+	animPath[1] = L"EnemyBase_Move_LEFT_DOWN";
+	animPath[2] = L"EnemyBase_Move_DOWN";
+	animPath[3] = L"EnemyBase_Move_RIGHT_DOWN";
+	animPath[4] = L"EnemyBase_Move_LEFT";
+	animPath[5] = L"EnemyBase_Move_UP";
+	animPath[6] = L"EnemyBase_Move_RIGHT";
+	animPath[7] = L"EnemyBase_Move_LEFT_UP";
+	animPath[8] = L"EnemyBase_Move_UP";
+	animPath[9] = L"EnemyBase_Move_RIGHT_UP";
+
 	m_context.gameObject = GetGameObject();
 	m_context.animator = m_animator;
 	m_context.transform = GetTransform();
@@ -63,36 +76,13 @@ void EnemyBase::Start()
 	m_context.rigidBody2d = m_rigidBody;
 	m_context.floatParams[L"HorizontalInput"] = 0.0f;
 	m_context.floatParams[L"VerticalInput"] = 0.0f;
-	
-	m_context.boolParams[L"isMove"] = false;
 
-	m_context.vector2Params[L"Pos"] = m_context.gameObject->GetTransform()->GetLocalPosition();
-	
-	m_context.floatParams[L"Angle"] = m_rotationAngle;
-	m_context.intParams[L"Direction"] = m_direction;
+	m_context.intParams[L"NextEnemyState"] = m_nextEnemyState;
+	m_context.intParams[L"CurrEnemyState"] = m_currEnemyState;
+	m_context.intParams[L"PrevEnemyState"] = m_prevEnemyState;
 
-	m_context.vector2Params[L"CameraPos"] = m_camera->GetTransform()->GetLocalPosition();
-	
-	m_context.vector2Params[L"TargetPos"] = m_player->GetTransform()->GetLocalPosition();
-	
-	m_context.vector2Params[L"OriginPos"] = m_originPosition;
-	
-	m_context.floatParams[L"OriginAngle"] = m_originAngle;
-
-	m_context.boolParams[L"ToDoMove"] = m_toDoMove;
-	m_context.vector2Params[L"MovingDestPos"] = m_movingDestPos;
-	
-	m_context.floatParams[L"MoveSpeed"] = m_moveSpeed;
-
-	m_context.floatParams[L"MaxSightDistance"] = m_maxSightDistance;
-	m_context.floatParams[L"SightAngle"] = m_sightAngle;
-
-	m_context.floatParams[L"MaxRoamDistance"] = m_maxRoamDistance;
-	m_context.floatParams[L"MaxChaseDistance"] = m_maxChaseDistance;
-
-
-	m_context.textRenderer = m_text;
-	m_text->SetText(L"IdleState : 2");
+	m_context.textRenderer = m_textRenderer;
+	m_textRenderer->SetText(L"IdleState : 2");
 
 	m_rigidBody->SetGravityScale(0.0f);
 
@@ -101,6 +91,8 @@ void EnemyBase::Start()
 	PositionInit(500.0f, 200.0f, 180.0f);
 	m_maxRoamDistance = 500.0f;
 	m_maxChaseDistance = 650.0f;
+
+	m_fsm.AddState<EnemyOutOfArea>(L"OutOfArea", false, this);
 
 	m_fsm.AddState<EnemyBaseIdle>(L"Idle", false);
 	m_fsm.AddState<EnemyBaseMove>(L"Move", false);
@@ -119,10 +111,9 @@ void EnemyBase::FixedUpdate()
 }
 
 void EnemyBase::Update()
-{	
-	SetEnemyDirectionByInput();
-	CheckCameraArea();
-
+{
+	CheckState();
+	UpdateDirection();
 }
 
 
@@ -132,49 +123,38 @@ void EnemyBase::ArrowInput(Vector2 input)
 	m_context.floatParams[L"VerticalInput"] = input.y;
 }
 
-void EnemyBase::SetEnemyDirectionByInput()
+void EnemyBase::CheckState()
 {
-	float horizontalInput = m_context.floatParams[L"HorizontalInput"];
-	float verticalInput = m_context.floatParams[L"VerticalInput"];
-
-	// 방향 벡터가 없으면 0 (중립)
-	if (horizontalInput == 0.0f && verticalInput == 0.0f)
-	{
-		m_context.boolParams[L"isMove"] = false;
+	if (m_nextEnemyState == NONE)
 		return;
+
+	m_currEnemyState = m_nextEnemyState;
+
+	switch (m_currEnemyState)
+	{
+	case OUTOFAREA:
+
+		break;
+
+	case INAREA:
+
+		break;
+
+	case ENGAGE:
+
+		break;
+
+	case ONATTACK:
+
+		break;
+
+	case RETURN:
+
+		break;
 	}
 
-	m_context.boolParams[L"isMove"] = true;
+	m_nextEnemyState = NONE;
 
-	// atan2는 y 먼저, x 나중	
-	m_rotationAngle = std::atan2(horizontalInput, verticalInput) * 180.0f / 3.14159265f;
-
-	SetEnemyDirectionByRotation(m_rotationAngle);
-
-	m_context.intParams[L"Direction"] = m_direction;
-
-}
-
-void EnemyBase::SetEnemyDirectionByRotation(float angle)
-{
-	// atan2는 y 먼저, x 나중	
-	m_rotationAngle = angle;
-
-	if (m_rotationAngle < 0.0f) m_rotationAngle += 360.0f;
-
-	float& degree = m_rotationAngle;
-
-	// 시계방향으로 8방향 판정. 0도가 UP, 180도가 DOWN
-	if (degree >= 337.5 || degree < 22.5)  m_direction = Dir::UP; // ↑
-	if (degree >= 22.5 && degree < 67.5) m_direction = Dir::RIGHT_UP; // ↗
-	if (degree >= 67.5 && degree < 112.5)  m_direction = Dir::RIGHT; // →
-	if (degree >= 112.5 && degree < 157.5)   m_direction = Dir::RIGHT_DOWN; // ↘
-	if (degree >= 157.5 && degree < 202.5)  m_direction = Dir::DOWN; // ↓
-	if (degree >= 202.5 && degree < 247.5)  m_direction = Dir::LEFT_DOWN; // ↙
-	if (degree >= 247.5 && degree < 292.5) m_direction = Dir::LEFT; // ←
-	if (degree >= 292.5 && degree < 337.5) m_direction = Dir::LEFT_UP; // ↖
-
-	m_context.intParams[L"Direction"] = m_direction;
 }
 
 
@@ -187,32 +167,71 @@ void EnemyBase::SetTargetPlayerAndCamera(GameObject* player, GameObject* camera)
 void EnemyBase::PositionInit(float x, float y, float angle)
 {
 	m_rigidBody->SetPosition({ x, y });
-	SetEnemyDirectionByRotation(angle);
-
-	m_originPosition = m_rigidBody->GetPosition();
+	m_originPos = m_rigidBody->GetPosition();
 	m_originAngle = angle;
 }
 
-void EnemyBase::CheckCameraArea() {
-	
-	//카메라 범위 안에 있는지 체크하는 조건. 맞는지 확인 필요.
-	Vector2 campos = m_camera->GetTransform()->GetLocalPosition();
-	Vector2 enemypos = m_rigidBody->GetPosition();
-
-	if (enemypos.x < campos.x + 960 &&
-		enemypos.x > campos.x - 960 &&
-		enemypos.y < campos.y + 540 &&
-		enemypos.y > campos.y - 540)
-	{
-		m_isInCamera = true;
-		return;
-	}
-
-	m_isInCamera = false;
+void EnemyBase::MoveTo(const Vector2& destination)
+{
+	MovingDestPos() = destination;
+	ToDoMove() = true;
 }
 
+void EnemyBase::StopMoving()
+{
+	ToDoMove() = false;
+	m_rigidBody->SetVelocity(Vector2::Zero);
+}
 
+void EnemyBase::SetAnimDirection()
+{
+	CurrDir() = Direction();
 
+	if (m_textRenderer)
+		m_textRenderer->SetText(m_context.currentStateName + L" " + std::to_wstring(CurrDir()));
+
+	if (CurrDir() != PrevDir())
+	{
+		PrevDir() = CurrDir();
+
+		m_animator->Play(animPath[CurrDir()]);
+	}
+}
+
+void EnemyBase::UpdateDirection()
+{
+	if (m_rotationAngle >= 337.5 || m_rotationAngle < 22.5)		m_direction = 8;			// Dir::UP;			// ↑
+	else if (m_rotationAngle >= 22.5 && m_rotationAngle < 67.5)		m_direction = 9;		// Dir::RIGHT_UP;	// ↗
+	else if (m_rotationAngle >= 67.5 && m_rotationAngle < 112.5)		m_direction = 6;	// Dir::RIGHT;		// →
+	else if (m_rotationAngle >= 112.5 && m_rotationAngle < 157.5)	m_direction = 3;		// Dir::RIGHT_DOWN; // ↘
+	else if (m_rotationAngle >= 157.5 && m_rotationAngle < 202.5)	m_direction = 2;		// Dir::DOWN;		// ↓
+	else if (m_rotationAngle >= 202.5 && m_rotationAngle < 247.5)	m_direction = 1;		// Dir::LEFT_DOWN;	// ↙
+	else if (m_rotationAngle >= 247.5 && m_rotationAngle < 292.5)	m_direction = 4;		// Dir::LEFT;		// ←
+	else if (m_rotationAngle >= 292.5 && m_rotationAngle < 337.5)	m_direction = 7;		// Dir::LEFT_UP;	// ↖	
+
+	SetAnimDirection();
+}
+
+void EnemyBase::SetRotationAngle(float angle)
+{
+	m_rotationAngle = angle;
+
+	if (m_rotationAngle < 0.0f) m_rotationAngle += 360.0f;
+}
+
+void EnemyBase::SetDirection(int n)
+{
+	m_direction = n;
+
+	if (m_direction == 8)		m_rotationAngle = 0.0f;
+	else if (m_direction == 9)	m_rotationAngle = 45.0f;
+	else if (m_direction == 6)	m_rotationAngle = 90.0f;
+	else if (m_direction == 3)	m_rotationAngle = 135.0f;
+	else if (m_direction == 2)	m_rotationAngle = 180.0f;
+	else if (m_direction == 1)	m_rotationAngle = 225.0f;
+	else if (m_direction == 4)	m_rotationAngle = 270.0f;
+	else if (m_direction == 7)	m_rotationAngle = 315.0f;
+}
 
 
 
@@ -239,4 +258,14 @@ void EnemyBase::OnTriggerEnter(const Collision& collision)
 void EnemyBase::OnTriggerExit(const Collision& collision)
 {
 	Debug::Log(L"EnemyBase OnTriggerExit");
+}
+
+RigidBody2D* EnemyBase::RigidBody()
+{
+	return m_rigidBody;
+}
+
+const Vector2& EnemyBase::Pos()
+{
+	return m_rigidBody->GetTransform()->GetLocalPosition();
 }

@@ -145,12 +145,14 @@
     <ClCompile Include="EnemyBaseDead.cpp" />
     <ClCompile Include="EnemyBaseIdle.cpp" />
     <ClCompile Include="EnemyBaseMove.cpp" />
+    <ClCompile Include="EnemyInArea.cpp" />
     <ClCompile Include="EnemyState.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="FollowCameraController.cpp" />
     <ClCompile Include="JC_DemoGameApp.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="EnemyOutOfArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\D2DEngineLib\D2DEngineLib.vcxproj">
@@ -169,11 +171,13 @@
     <ClInclude Include="EnemyBaseDead.h" />
     <ClInclude Include="EnemyBaseIdle.h" />
     <ClInclude Include="EnemyBaseMove.h" />
+    <ClInclude Include="EnemyInArea.h" />
     <ClInclude Include="EnemyState.h" />
     <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="FollowCameraController.h" />
     <ClInclude Include="JC_DemoGameApp.h" />
+    <ClInclude Include="EnemyOutOfArea.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

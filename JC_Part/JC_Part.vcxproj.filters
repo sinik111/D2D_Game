@@ -75,6 +75,12 @@
     <ClCompile Include="DummyIdle.cpp">
       <Filter>GameObject\DummyPlayer\StateScript</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyOutOfArea.cpp">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInArea.cpp">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="JC_DemoGameApp.h">
@@ -115,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="DummyIdle.h">
       <Filter>GameObject\DummyPlayer\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOutOfArea.h">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInArea.h">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
