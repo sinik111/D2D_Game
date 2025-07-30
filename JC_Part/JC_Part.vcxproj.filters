@@ -22,7 +22,13 @@
     <Filter Include="GameObject\EnemyBase">
       <UniqueIdentifier>{30837b54-c5b6-4725-867a-3a027e7d14d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\EnemyBase\Script">
+    <Filter Include="GameObject\DummyPlayer">
+      <UniqueIdentifier>{80510eb9-04d5-46fc-86fa-db2a24f6dc5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\DummyPlayer\StateScript">
+      <UniqueIdentifier>{f30be032-1730-441f-b7e0-d2d8b90874c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\EnemyBase\StateScript">
       <UniqueIdentifier>{8e821758-9808-4e6e-8e9a-2c184cbc465f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -40,28 +46,34 @@
       <Filter>GameObject\EnemyBase</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBaseIdle.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBaseMove.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBaseAttackOne.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBaseDamaged.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBaseDead.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBaseDash.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
     <ClCompile Include="FollowCameraController.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="EnemyState.cpp">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyP.cpp">
+      <Filter>GameObject\DummyPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyIdle.cpp">
+      <Filter>GameObject\DummyPlayer\StateScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,28 +87,34 @@
       <Filter>GameObject\EnemyBase</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBaseIdle.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBaseMove.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBaseAttackOne.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBaseDamaged.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBaseDead.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBaseDash.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
     <ClInclude Include="FollowCameraController.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="EnemyState.h">
-      <Filter>GameObject\EnemyBase\Script</Filter>
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyP.h">
+      <Filter>GameObject\DummyPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyIdle.h">
+      <Filter>GameObject\DummyPlayer\StateScript</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

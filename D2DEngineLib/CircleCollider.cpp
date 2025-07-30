@@ -2,6 +2,8 @@
 #include "CircleCollider.h"
 
 #include "Transform.h"
+#include "D2DRenderer.h"
+#include "RigidBody2D.h"
 
 const Circle& CircleCollider::GetCircle() const
 {
@@ -15,9 +17,21 @@ void CircleCollider::SetRadius(float radius)
     m_isColliderDirty = true;
 }
 
+void CircleCollider::Render()
+{
+
+}
+
 void CircleCollider::UpdateCollider()
 {
-    m_circle.center = m_transform->GetWorldPosition() + m_offset;
+    if (m_rigidBody2d != nullptr)
+    {
+        m_circle.center = m_rigidBody2d->GetPosition() + m_offset;
+    }
+    else
+    {
+        m_circle.center = m_transform->GetWorldPosition() + m_offset;
+    }
 }
 
 void CircleCollider::CalculateSpatialBounds()

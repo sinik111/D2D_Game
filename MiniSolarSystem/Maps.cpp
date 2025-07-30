@@ -1,0 +1,199 @@
+#include "../D2DEngineLib/framework.h"
+#include "Maps.h"
+#include "../D2DEngineLib/GameObject.h"
+#include "../D2DEngineLib/D2DRenderer.h"
+#include "../D2DEngineLib/BitmapRenderer.h"
+#include "../D2DEngineLib/PlayerInputSystem.h"
+#include "../D2DEngineLib/Input.h"
+#include "../D2DEngineLib/Camera.h"
+#include "CameraController.h"
+#include <fstream>
+#include "../D2DEngineLib/json.hpp"
+#include <iostream>
+#include "../D2DEngineLib/Screen.h"
+#include "../D2DEngineLib/LineSegment.h"
+#include "../D2DEngineLib/LineCollider.h"
+
+using json = nlohmann::json;
+
+void Maps::Initialize()
+{
+	GameObject* gameobject = CreateGameObject(L"Map1");
+	gameobject->AddComponent<BitmapRenderer>(L"background.png");
+	gameobject->GetTransform()->SetLocalPosition({ -500,-300 });
+	
+	gameobject = CreateGameObject(L"Map2");
+	gameobject->AddComponent<BitmapRenderer>(L"background.png");
+	gameobject->GetTransform()->SetLocalPosition({ 500,-300 });
+	
+	gameobject = CreateGameObject(L"Map3");
+	gameobject->AddComponent<BitmapRenderer>(L"background.png");
+	gameobject->GetTransform()->SetLocalPosition({ -500,300 });
+	
+	gameobject = CreateGameObject(L"Map4");
+	gameobject->AddComponent<BitmapRenderer>(L"background.png");
+	gameobject->GetTransform()->SetLocalPosition({ 500,300 });
+	
+	m_GameObjects.push_back(gameobject);
+}
+
+void Maps::Start()
+{
+}
+
+void Maps::FixedUpdate()
+{
+}
+
+void Maps::Update()
+{
+	// 마우스 우클릭으로 추가
+	if (Input::IsKeyPressed(VK_RBUTTON))
+	{
+		float width = Screen::Get().GetWidth()*0.5 ;
+		float height = Screen::Get().GetHeight() * 0.5;
+		
+		Transform* camera = GetGameObject()->GetComponent<CameraController>()->GetTransform();
+		float worldx = camera->GetLocalPosition().x + ((float)Input::GetCursorPoint().x - width);
+		float worldy = camera->GetLocalPosition().y - ((float)Input::GetCursorPoint().y - height);
+
+		Vector2 pos{ worldx, worldy};
+		m_Positions.push_back(pos);
+		std::cout << "x : " << pos.x << ", y : " << pos.y << std::endl;
+	}
+	
+	if (Input::IsKeyPressed(VK_RETURN))
+	{
+		ExportJsontoPath("Resource/points.json");
+		AddtoImgui();
+	}
+	
+	if (Input::IsKeyPressed(VK_DELETE))
+	{
+		if(m_Positions.size() >= 1) { m_Positions.pop_back(); }
+
+		ExportJsontoPath("Resource/points.json");
+	}
+
+	if (Input::IsKeyPressed(VK_BACK))
+	{
+		CreateLineCollider();
+	}
+}
+
+void Maps::LateUpdate()
+{
+}
+
+void Maps::OnDestroy()
+{
+}
+
+void Maps::OnCollisionEnter(const Collision& collision)
+{
+}
+
+void Maps::OnCollisionStay(const Collision& collision)
+{
+}
+
+void Maps::OnCollisionExit(const Collision& collision)
+{
+}
+
+void Maps::OnTriggerEnter(const Collision& collision)
+{
+}
+
+void Maps::OnTriggerStay(const Collision& collision)
+{
+}
+
+void Maps::OnTriggerExit(const Collision& collision)
+{
+}
+
+std::string Maps::ConvertPositiontoJSON()
+{
+	json jarr = json::array();
+	for (int i = 0; i< m_Positions.size();++i)
+	{
+		if (i + 1 < m_Positions.size())
+		{
+			Vector2 vecdistance= (m_Positions[i + 1] - m_Positions[i]) / 2;
+			Vector2 centerPos = m_Positions[i] + vecdistance;
+			Vector2 relativeStart = -vecdistance;
+			Vector2 relativeEnd = vecdistance;
+
+			json j;
+			j["center"] = { {"x",centerPos.x},{"y", centerPos.y}};
+			j["start"] = { {"x", relativeStart.x} ,{"y", relativeStart.y} };
+			j["end"] = { {"x", relativeEnd.x}, {"y", relativeEnd.y} };
+			jarr.push_back(j);
+		}
+	}
+	json j;
+	j["lines"] = jarr;
+	std::string jsonstring = j.dump(4);
+	return jsonstring;
+}
+
+void Maps::ExportJsontoPath(std::string filepath)
+{
+	std::ofstream outfile(filepath);
+	if (outfile.is_open())
+	{
+		std::string str = ConvertPositiontoJSON();
+		outfile << str;
+		outfile.close();
+	}
+}
+
+void Maps::CreateLineCollider()
+{
+	
+	// [TODO] : AddComponent<LineCollider>를 json에 있는 개수만큼 for문 돌면서 해주어야 함
+	// gameObject->AddComponent<LineCollider>();
+	//std::vector<LineSegment> lines;
+	std::ifstream infile("Resource/points.json");
+	if (infile.is_open())
+	{
+		json j;
+		infile >> j;
+		infile.close();
+
+		//json파일의 라인의 개수만큼 크기 조정
+		for (auto& line : j["lines"])
+		{
+			GameObject* gameobject = CreateGameObject();
+			//Float2Imgui* imgui = gameobject->AddComponent<Float2Imgui>();
+			//imgui->SetImGui()
+
+			Vector2 position;
+			position.x = line["center"]["x"];
+			position.y = line["center"]["y"];
+			gameobject->GetTransform()->SetLocalPosition(position);
+
+
+			LineCollider* linecollider = gameobject->AddComponent<LineCollider>();
+			Vector2 startPoint;
+			startPoint.x = line["start"]["x"];
+			startPoint.y = line["start"]["y"];
+
+			Vector2 endPoint;
+			endPoint.x = line["end"]["x"];
+			endPoint.y = line["end"]["y"];
+			std::cout << "startPoint : " << startPoint.x <<", " << startPoint.y <<"\nendPoint : " << endPoint.x <<", " << endPoint.y << std::endl;
+			linecollider->SetLine(startPoint, endPoint);
+		}
+	}
+}
+
+void Maps::AddtoImgui()
+{
+	//for(auto& it : m_Positions)
+	//{
+		m_ImGui.SetImGui(std::string("example"), &(m_Positions[0].x));
+		m_ImGui.Add();
+	//}
+}

@@ -58,6 +58,12 @@
     <Filter Include="99_Module\FSM">
       <UniqueIdentifier>{9d89952a-f243-4cdf-b57e-85c0df05d344}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99_Module\System\ImGui">
+      <UniqueIdentifier>{dfd6ec11-fabc-4fe2-9690-51ce9f2c02a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Module\MyImgui">
+      <UniqueIdentifier>{d879f06d-3ebe-4386-9d77-b6505d4aa2b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoInitializer.h">
@@ -255,6 +261,42 @@
     <ClInclude Include="CollisionLayer.h">
       <Filter>99_Module\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>99_Module\Physics</Filter>
+	</ClInclude>
+	<ClInclude Include="imconfig.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_dx11.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Float2Imgui.h">
+      <Filter>99_Module\MyImgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Float3Imgui.h">
+      <Filter>99_Module\MyImgui</Filter>
+    </ClInclude>
+    <ClInclude Include="MyImGui.h">
+      <Filter>99_Module\MyImgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -397,6 +439,36 @@
     </ClCompile>
     <ClCompile Include="ConeCollider2D.cpp">
       <Filter>04_Component\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>99_Module\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>99_Module\System\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Float2Imgui.cpp">
+      <Filter>99_Module\MyImgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Float3Imgui.cpp">
+      <Filter>99_Module\MyImgui</Filter>
+    </ClCompile>
+    <ClCompile Include="MyImGui.cpp">
+      <Filter>99_Module\MyImgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

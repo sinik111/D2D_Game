@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00_App">
+      <UniqueIdentifier>{49ee0705-09fa-456c-b48a-67ae169090a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene">
+      <UniqueIdentifier>{933f5a45-5336-447a-92b3-bef380cd74e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script">
+      <UniqueIdentifier>{4af246b9-37bf-49ed-8065-156768585fb8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsTestApp.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene1.cpp">
+      <Filter>01_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PhysicsTestApp.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene1.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

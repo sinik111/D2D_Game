@@ -7,6 +7,10 @@
 #include "IRenderer.h"
 #include "Camera.h"
 #include "DebugSystem.h"
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
+#include "MyImGui.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d2d1.lib")
@@ -16,6 +20,8 @@
 constexpr int MAX_SORT_ORDER = 30;
 
 using Microsoft::WRL::ComPtr;
+
+D2DRenderer* D2DRenderer::m_Instance = nullptr;
 
 HRESULT D2DRenderer::Initialize(HWND hWnd, UINT width, UINT height)
 {
@@ -86,7 +92,7 @@ HRESULT D2DRenderer::Initialize(HWND hWnd, UINT width, UINT height)
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	swapChainDesc.BufferCount = 2;
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	dxgiFactory->CreateSwapChainForHwnd(
+	hr =dxgiFactory->CreateSwapChainForHwnd(
 		m_d3d11Device.Get(),
 		m_hWnd,
 		&swapChainDesc,
@@ -110,6 +116,12 @@ HRESULT D2DRenderer::Initialize(HWND hWnd, UINT width, UINT height)
 		backBuffer.Get(),
 		&bmpProps, m_d2dBitmapTarget.GetAddressOf()
 	);
+
+	// ImGui를 생성하기 위한 RenderTargetView 생성 및 d3dBackBuffer 생성
+	ComPtr<ID3D11Texture2D> d3dBackBuffer;
+	m_dxgiSwapChain->GetBuffer(0, IID_PPV_ARGS(&d3dBackBuffer));
+	m_d3d11Device->CreateRenderTargetView(d3dBackBuffer.Get(), nullptr, m_renderTargetView.GetAddressOf());
+
 
 	m_d2dDeviceContext->SetTarget(m_d2dBitmapTarget.Get());
 
@@ -137,6 +149,9 @@ HRESULT D2DRenderer::Initialize(HWND hWnd, UINT width, UINT height)
 	D2D1_MATRIX_3X2_F b;
 	D2D1_MATRIX_3X2_F c = a * b;
 
+	//ImGui 초기화
+	InitImGui();
+
 	return S_OK;
 }
 
@@ -152,6 +167,9 @@ UINT D2DRenderer::GetHeight() const
 
 void D2DRenderer::BeginDraw(const D2D1_COLOR_F& color) const
 {
+	ImGui_ImplWin32_NewFrame();
+	ImGui_ImplDX11_NewFrame();
+	ImGui::NewFrame();
 	m_d2dDeviceContext->BeginDraw();
 	m_d2dDeviceContext->Clear(color);
 }
@@ -159,6 +177,8 @@ void D2DRenderer::BeginDraw(const D2D1_COLOR_F& color) const
 void D2DRenderer::EndDraw() const
 {
 	m_d2dDeviceContext->EndDraw();
+	m_d3dDeviceContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	m_dxgiSwapChain->Present(1, 0);
 
 	DXGI_QUERY_VIDEO_MEMORY_INFO memInfo{};
@@ -241,6 +261,9 @@ void D2DRenderer::ExecuteRenderQueue()
 	}
 
 	ClearQueue();
+	BeginDrawImGui();
+	DrawImGui();
+	EndDrawImGui();
 }
 
 void D2DRenderer::Trim()
@@ -248,11 +271,30 @@ void D2DRenderer::Trim()
 	m_dxgiDevice->Trim();
 }
 
-void D2DRenderer::DrawRect(const D2D1_RECT_F& rect)
+void D2DRenderer::DrawRect(const D2D1_RECT_F& rect, const D2D1_COLOR_F& color)
 {
-	m_d2dDeviceContext->SetTransform(Camera::s_mainCamera->GetViewMatrix() * m_unityMatrix);
-	m_d2dSolidColorBrush->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
+	m_d2dSolidColorBrush->SetColor(color);
 	m_d2dDeviceContext->DrawRectangle(rect, m_d2dSolidColorBrush.Get());
+}
+
+void D2DRenderer::DrawEllipse(const D2D1_ELLIPSE& ellipse, const D2D1_COLOR_F& color)
+{
+	m_d2dSolidColorBrush->SetColor(color);
+	m_d2dDeviceContext->DrawEllipse(ellipse, m_d2dSolidColorBrush.Get());
+}
+
+void D2DRenderer::DrawLine(const D2D1_POINT_2F& startPoint, const D2D1_POINT_2F& endPoint, const D2D1_COLOR_F& color)
+{
+	m_d2dSolidColorBrush->SetColor(color);
+	m_d2dDeviceContext->DrawLine(startPoint, endPoint, m_d2dSolidColorBrush.Get());
+}
+
+void D2DRenderer::DrawTriangle(const D2D1_POINT_2F& p1, const D2D1_POINT_2F& p2, const D2D1_POINT_2F& p3, const D2D1_COLOR_F& color)
+{
+	m_d2dSolidColorBrush->SetColor(color);
+	m_d2dDeviceContext->DrawLine(p1, p2, m_d2dSolidColorBrush.Get());
+	m_d2dDeviceContext->DrawLine(p2, p3, m_d2dSolidColorBrush.Get());
+	m_d2dDeviceContext->DrawLine(p3, p1, m_d2dSolidColorBrush.Get());
 }
 
 void D2DRenderer::ClearQueue()
@@ -264,4 +306,51 @@ void D2DRenderer::ClearQueue()
 			sortOrderGroup.clear();
 		}
 	}
+}
+
+void D2DRenderer::InitImGui()
+{
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplWin32_Init(m_hWnd);
+	m_d3d11Device->GetImmediateContext(m_d3dDeviceContext.GetAddressOf());
+	ImGui_ImplDX11_Init(m_d3d11Device.Get(), m_d3dDeviceContext.Get());
+}
+
+void D2DRenderer::BeginDrawImGui()
+{
+	//ImGui::ShowMetricsWindow();
+	ImGui::Begin("Settings"); // 창 제목
+}
+
+void D2DRenderer::DrawImGui()
+{
+	ImGui::Text("it is just an example.");
+	ImGui::NewLine();
+	for (auto& it : m_ImGuiVector)
+	{
+		it->DrawImgui();
+	}
+	
+}
+
+void D2DRenderer::EndDrawImGui()
+{
+	ImGui::End();
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+}
+
+void D2DRenderer::UnInitImGui()
+{
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
+}
+
+void D2DRenderer::AddImGui(MyImGui* imgui)
+{
+	m_ImGuiVector.push_back(imgui);
 }

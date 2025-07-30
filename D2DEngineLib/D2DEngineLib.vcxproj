@@ -163,16 +163,27 @@
     <ClInclude Include="DebugSystem.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="Float2Imgui.h" />
+    <ClInclude Include="Float3Imgui.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="FSMContext.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_dx11.h" />
+    <ClInclude Include="imgui_impl_win32.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="LineCollider.h" />
+    <ClInclude Include="MyImGui.h" />
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="MyTimeSystem.h" />
     <ClInclude Include="Object.h" />
@@ -185,6 +196,7 @@
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RectUtil.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -222,12 +234,39 @@
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
+    <ClCompile Include="Float2Imgui.cpp" />
+    <ClCompile Include="Float3Imgui.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IRenderer.cpp" />
     <ClCompile Include="IState.cpp" />
     <ClCompile Include="LineCollider.cpp" />
+    <ClCompile Include="MyImGui.cpp" />
     <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="MyTimeSystem.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -243,6 +282,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PlayerInput.cpp" />
+    <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RigidBody2D.cpp" />

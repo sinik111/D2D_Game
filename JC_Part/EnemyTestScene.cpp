@@ -11,10 +11,9 @@
 #include "../D2DEngineLib/RigidBody2D.h"
 #include "../D2DEngineLib/BoxCollider2D.h"
 
-
 #include "EnemyBase.h"
+#include "DummyP.h"
 #include "FollowCameraController.h"
-
 
 
 void EnemyTestScene::Enter()
@@ -23,40 +22,28 @@ void EnemyTestScene::Enter()
 	camera->AddComponent<Camera>();
 	//auto controller = camera->AddComponent<FollowCameraController>();
 
-	GameObject* go = CreateGameObject(L"EnemyBase");
+	GameObject* go = CreateGameObject(L"DummyPlayer");
+	go->AddComponent<PlayerInput>();
+	go->AddComponent<TextRenderer>();
+	go->GetTransform()->SetLocalPosition(0.0f, 0.0f);
+	go->AddComponent<DummyP>();
+	go->AddComponent<BitmapRenderer>(L"Ramiel.png");
+	go->AddComponent<RigidBody2D>();
+	go->AddComponent<BoxCollider2D>();
+
+
+	go = CreateGameObject(L"EnemyBase");
 	go->AddComponent<BitmapRenderer>();
 	go->AddComponent<Animator>();
 	go->AddComponent<PlayerInput>();
-	go->AddComponent<TextRenderer>();
+	go->AddComponent<TextRenderer>();	
 	go->AddComponent<EnemyBase>();
+	go->AddComponent<RigidBody2D>();
+	go->AddComponent<BoxCollider2D>();
+	go->GetComponent<EnemyBase>()->SetTargetPlayerAndCamera(Find(L"DummyPlayer"), camera);
 
-
-	//auto rigidBody = go->AddComponent<RigidBody2D>();
-	//BoxCollider2D* boxCollider2d = go->AddComponent<BoxCollider2D>();
-	//boxCollider2d->SetSize({ 30.0f, 45.0f });
-	//boxCollider2d->SetOffset({ 0.0f, 45.0f });
-
+	
 	//controller->SetTarget(go->GetTransform());
-
-	//go = CreateGameObject(L"EnemyBaseInfo");
-	//TextRenderer* textRenderer = go->AddComponent<TextRenderer>();
-	//textRenderer->SetSpaceType(SpaceType::Screen);
-	//textRenderer->SetFontSize(15.0f);
-	//textRenderer->SetPivot({ 0.5f, 1.0f });
-	//textRenderer->SetRectSize({ 300.0f, 400.0f });
-	//textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
-	//textRenderer->SetSortOrder(3);
-	//textRenderer->SetVerticalAlignment(VerticalAlignment::Top);
-	//textRenderer->SetHorizontalAlignment(HorizontalAlignment::Left);
-
-	//go->GetTransform()->SetLocalPosition({ 100.0f, 0.0f });
-
-	//std::wostringstream oss;
-	//oss << L"EnemyBase\n"
-	//	<< L"Testing\n"
-	//	<< L"¤·¤·";
-
-	//textRenderer->SetText(oss.str());
 
 }
 
@@ -64,5 +51,5 @@ void EnemyTestScene::Exit()
 {
 	Scene::Exit();
 
-	MyTime::SetTimeScale(1.0f);
+	//MyTime::SetTimeScale(1.0f);
 }

@@ -22,6 +22,7 @@ struct FSMContext
 	std::unordered_map<std::wstring, float> floatParams;
 	std::unordered_map<std::wstring, bool> boolParams;
 	std::unordered_map<std::wstring, bool> triggerParams;
+	std::unordered_map<std::wstring, Vector2> vector2Params;
 	std::wstring previousStateName;
 	std::wstring currentStateName;
 	std::wstring nextStateName;

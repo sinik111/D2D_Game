@@ -15,6 +15,7 @@ public:
 	void SetLine(const Vector2& startPoint, const Vector2& endPoint);
 
 public:
+	void Render() override;
 	void UpdateCollider() override;
 	void CalculateSpatialBounds() override;
 

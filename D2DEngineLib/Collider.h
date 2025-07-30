@@ -45,9 +45,11 @@ public:
 	virtual void CalculateSpatialBounds() = 0;
 	void SetTrigger(bool trigger);
 	void SetOffset(const Vector2& offset);
+	void SetLayer(CollisionLayer layer);
 
 	bool GetTrigger() const;
 	Bounds GetSpatialBounds() const;
+	CollisionLayer GetLayer() const;
 
 	void Update();
 	virtual void UpdateCollider() = 0;

@@ -10,6 +10,8 @@ void Collider::Initialize()
 {
 	m_transform = GetTransform();
 	m_rigidBody2d = GetGameObject()->GetComponent<RigidBody2D>();
+
+	Update();
 }
 
 void Collider::RegisterToSystem()
@@ -49,6 +51,11 @@ void Collider::SetOffset(const Vector2& offset)
 	m_isColliderDirty = true;
 }
 
+void Collider::SetLayer(CollisionLayer layer)
+{
+	m_layer = layer;
+}
+
 bool Collider::GetTrigger() const
 {
 	return m_isTrigger;
@@ -59,15 +66,27 @@ Bounds Collider::GetSpatialBounds() const
 	return m_spatialBounds;
 }
 
+CollisionLayer Collider::GetLayer() const
+{
+	return m_layer;
+}
+
 void Collider::Update()
 {
-	if (m_isColliderDirty || m_transform->IsDirtyThisFrame())
+	if (m_rigidBody2d == nullptr)
+	{
+		if (m_isColliderDirty || m_transform->IsDirtyThisFrame())
+		{
+			UpdateCollider();
+
+			CalculateSpatialBounds();
+		}
+	}
+	else
 	{
 		UpdateCollider();
 
 		CalculateSpatialBounds();
-
-		m_isColliderDirty = false;
 	}
 }
 

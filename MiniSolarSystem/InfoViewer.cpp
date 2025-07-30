@@ -29,7 +29,7 @@ void InfoViewer::Start()
 
     m_textRenderer->SetSpaceType(SpaceType::Screen);
     m_textRenderer->SetFontSize(15.0f);
-    m_textRenderer->SetPivot({ 0.0f, 0.0f });
+    m_textRenderer->SetPivot({ 0.0f, 1.0f });
     m_textRenderer->SetRectSize({ 500.0f, 400.0f });
     m_textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::White));
     m_textRenderer->SetSortOrder(3);

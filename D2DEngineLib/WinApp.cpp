@@ -14,6 +14,7 @@
 #include "DebugSystem.h"
 #include "Screen.h"
 #include "Camera.h"
+#include "imgui_impl_win32.cpp"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -70,6 +71,7 @@ void WinApp::Initialize()
 	UpdateWindow(m_hWnd);
 
 	m_d2dRenderer.Initialize(m_hWnd, m_width, m_height);
+	m_d2dRenderer.Set(&m_d2dRenderer);
 
 	Screen::Get().SetWidth(m_width);
 	Screen::Get().SetHeight(m_height);
@@ -78,6 +80,8 @@ void WinApp::Initialize()
 	ComponentSystem::Get().Physics().SetD2DRenderer(&m_d2dRenderer);
 	ComponentSystem::Get().PlayerInput().SetWindow(m_hWnd);
 	SceneManager::Get().SetD2DRenderer(&m_d2dRenderer);
+
+	Physics::SetupCollisionMatrix();
 }
 
 void WinApp::Shutdown()
@@ -86,6 +90,7 @@ void WinApp::Shutdown()
 
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
+	m_d2dRenderer.UnInitImGui();
 }
 
 void WinApp::Run()
@@ -218,6 +223,10 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		winApp->MessageProc(hWnd, uMsg, wParam, lParam);
 	}
+
+	if(ImGui_ImplWin32_WndProcHandler(hWnd,uMsg, wParam, lParam))
+		return true;
+
 
 	return DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }

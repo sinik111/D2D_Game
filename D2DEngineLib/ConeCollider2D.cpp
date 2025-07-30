@@ -2,6 +2,8 @@
 #include "ConeCollider2D.h"
 
 #include "Transform.h"
+#include "D2DRenderer.h"
+#include "RigidBody2D.h"
 
 const Cone2D& ConeCollider2D::GetCone() const
 {
@@ -17,9 +19,31 @@ void ConeCollider2D::SetCone(float radius, const Vector2& direction, float angle
     m_isColliderDirty = true;
 }
 
+void ConeCollider2D::Render()
+{
+    Vector2 vertices[3];
+
+    m_cone.GetVertices(vertices);
+
+    D2DRenderer::Get()->DrawTriangle(
+        { vertices[0].x, vertices[0].y },
+        { vertices[1].x, vertices[1].y },
+        { vertices[2].x, vertices[2].y }
+    );
+}
+
 void ConeCollider2D::UpdateCollider()
 {
-    m_cone.center = m_transform->GetWorldPosition() + m_offset;
+    if (m_rigidBody2d != nullptr)
+    {
+        m_cone.center = m_rigidBody2d->GetPosition() + m_offset;
+    }
+    else
+    {
+        m_cone.center = m_transform->GetWorldPosition() + m_offset;
+
+        m_isColliderDirty = false;
+    }
 }
 
 void ConeCollider2D::CalculateSpatialBounds()

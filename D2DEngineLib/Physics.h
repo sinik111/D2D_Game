@@ -68,6 +68,7 @@ public:
 	static const Vector2 gravity;
 
 	static void SetupCollisionMatrix();
+	static unsigned int GetCollisionMask(CollisionLayer layer);
 
 	static bool DetectCollision(const BoxCollider2D* a, const BoxCollider2D* b, CollisionInfo& info);
 

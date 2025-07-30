@@ -2,6 +2,7 @@
 #include "LineCollider.h"
 
 #include "Transform.h"
+#include "D2DRenderer.h"
 
 const LineSegment& LineCollider::GetLineSegment() const
 {
@@ -13,6 +14,14 @@ void LineCollider::SetLine(const Vector2& startPoint, const Vector2& endPoint)
     m_lineSegment = LineSegment(startPoint, endPoint);
 
     m_isColliderDirty = true;
+}
+
+void LineCollider::Render()
+{
+    D2DRenderer::Get()->DrawLine(
+        { m_lineSegment.startPoint.x, m_lineSegment.startPoint.y },
+        { m_lineSegment.endPoint.x, m_lineSegment.endPoint.y }
+    );
 }
 
 void LineCollider::UpdateCollider()

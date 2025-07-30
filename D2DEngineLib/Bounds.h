@@ -1,7 +1,5 @@
 #pragma once
 
-#include <d2d1.h>
-
 #include "Vector2.h"
 #include "Matrix3x2.h"
 

@@ -14,22 +14,22 @@ void KinematicSun::FixedUpdate()
 
 	if (Input::IsKeyHeld(VK_UP))
 	{
-		velocity.y = 100.0f;
+		velocity.y = 500.0f;
 	}
 
 	if (Input::IsKeyHeld(VK_DOWN))
 	{
-		velocity.y = -100.0f;
+		velocity.y = -500.0f;
 	}
 
 	if (Input::IsKeyHeld(VK_LEFT))
 	{
-		velocity.x = -100.0f;
+		velocity.x = -1000.0f;
 	}
 
 	if (Input::IsKeyHeld(VK_RIGHT))
 	{
-		velocity.x = 100.0f;
+		velocity.x = 1000.0f;
 	}
 
 	m_rigidBody->SetVelocity(velocity);

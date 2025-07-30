@@ -19,6 +19,7 @@ public:
 		animPath[8] = L"EnemyBase_Move_UP";
 		animPath[9] = L"EnemyBase_Move_RIGHT_UP";
 	}
+
 	void Enter(FSMContext& context) override;
 	void Update(FSMContext& context) override;
 	void Exit(FSMContext& context) override;

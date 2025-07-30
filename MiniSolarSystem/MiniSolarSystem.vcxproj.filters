@@ -159,6 +159,7 @@
     <ClCompile Include="PlayerDodgeState.cpp">
       <Filter>02_Script\PlayerMaking\FSM</Filter>
     </ClCompile>
+    <ClCompile Include="Maps.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h">
@@ -266,5 +267,6 @@
     <ClInclude Include="PlayerDodgeState.h">
       <Filter>02_Script\PlayerMaking\FSM</Filter>
     </ClInclude>
+    <ClInclude Include="Maps.h" />
   </ItemGroup>
 </Project>

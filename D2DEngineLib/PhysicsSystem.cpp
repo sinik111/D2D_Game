@@ -5,6 +5,16 @@
 #include "ContainerUtility.h"
 #include "BoxCollider2D.h"
 #include "D2DRenderer.h"
+#include "Camera.h"
+
+static const Bounds defaultBounds{ Vector2(0.0f, 0.0f), Vector2(400.0f, 300.0f) };
+static const int defaultMaxDepth = 5;
+static const int defaultmaxObjectsPerNode = 10;
+
+PhysicsSystem::PhysicsSystem()
+{
+	m_quadtree = std::make_unique<Quadtree>(defaultBounds, defaultMaxDepth, defaultmaxObjectsPerNode);
+}
 
 void PhysicsSystem::RegisterRigidBody2D(RigidBody2D* rigidBody2d)
 {
@@ -45,11 +55,30 @@ void PhysicsSystem::UnregisterRigidBody2D(RigidBody2D* rigidBody2d)
 void PhysicsSystem::RegisterCollider(Collider* collider)
 {
 	m_colliders.push_back(collider);
+
+	if (collider->GetRigidBody2D() != nullptr)
+	{
+		m_rigidBodyColliders.push_back(collider);
+	}
+
+	m_quadtree->Insert(collider);
 }
 
 void PhysicsSystem::UnregisterCollider(Collider* collider)
 {
+	m_quadtree->Remove(collider);
+
+	if (collider->GetRigidBody2D() != nullptr)
+	{
+		Util::OptimizedErase(m_rigidBodyColliders, collider);
+	}
+
 	Util::OptimizedErase(m_colliders, collider);
+}
+
+void PhysicsSystem::SetupQuadtree(const Bounds& worldBounds, int maxDepth, int maxObjectsPerNode)
+{
+	m_quadtree = std::make_unique<Quadtree>(worldBounds, maxDepth, maxObjectsPerNode);
 }
 
 void PhysicsSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
@@ -72,62 +101,58 @@ void PhysicsSystem::ProcessPhysics()
 	}
 
 	UpdateColliders();
-	
-	std::sort(
-		m_colliders.begin(),
-		m_colliders.end(),
-		[](Collider* a, Collider* b) {
-			if (a->GetRigidBody2D() == nullptr || b->GetRigidBody2D() == nullptr)
-			{
-				return false;
-			}
 
-			return a->GetRigidBody2D()->GetPosition().y > b->GetRigidBody2D()->GetPosition().y;
-		}
-	);
+	m_quadtree->Update();
 
 	m_currentCollisions.clear();
 	m_currentTriggers.clear();
 
-	for (size_t i = 0; i < m_colliders.size(); ++i)
+	for (auto collider : m_rigidBodyColliders)
 	{
-		for (size_t j = i + 1; j < m_colliders.size(); ++j)
+		auto candidates = m_quadtree->GetPotentialCollisions(collider);
+
+		for (auto candidate : candidates)
 		{
-			if (m_colliders[i]->GetRigidBody2D() == nullptr &&
-				m_colliders[j]->GetRigidBody2D() == nullptr)
+			if (collider == candidate)
 			{
 				continue;
 			}
 
-			Collider* colliderA;
-			Collider* colliderB;
+			bool isInteractable = (Physics::GetCollisionMask(collider->GetLayer()) 
+				& static_cast<unsigned int>(candidate->GetLayer())) != 0;
 
-			if (m_colliders[i] < m_colliders[j])
+			if (isInteractable)
 			{
-				colliderA = m_colliders[i];
-				colliderB = m_colliders[j];
-			}
-			else
-			{
-				colliderA = m_colliders[j];
-				colliderB = m_colliders[i];
-			}
+				Collider* colliderA;
+				Collider* colliderB;
 
-			CollisionInfo info = colliderA->DetectCollision(colliderB);
-
-			if (info.isCollide)
-			{
-				CollisionPair pair{ colliderA, colliderB };
-
-				if (colliderA->GetTrigger() || colliderB->GetTrigger())
+				if (collider < candidate)
 				{
-					m_currentTriggers.emplace(pair, info);
+					colliderA = collider;
+					colliderB = candidate;
 				}
 				else
 				{
-					m_currentCollisions.emplace(pair, info);
+					colliderA = candidate;
+					colliderB = collider;
+				}
 
-					Physics::ResolveCollision(info);
+				CollisionInfo info = colliderA->DetectCollision(colliderB);
+
+				if (info.isCollide)
+				{
+					CollisionPair pair{ colliderA, colliderB };
+
+					if (colliderA->GetTrigger() || colliderB->GetTrigger())
+					{
+						m_currentTriggers.emplace(pair, info);
+					}
+					else
+					{
+						m_currentCollisions.emplace(pair, info);
+
+						Physics::ResolveCollision(info);
+					}
 				}
 			}
 		}
@@ -166,22 +191,30 @@ void PhysicsSystem::UpdateColliders()
 
 void PhysicsSystem::RenderColliders()
 {
+	m_d2dRenderer->GetDeviceContext()->SetTransform(Camera::s_mainCamera->GetViewMatrix() * m_d2dRenderer->GetUnityMatrix());
+
+	auto allBounds = m_quadtree->GetAllNodeBounds();
+
+	for (auto& bounds : allBounds)
+	{
+		Vector2 min = bounds.GetMin();
+		Vector2 max = bounds.GetMax();
+
+		D2D1_RECT_F rect{ min.x, min.y, max.x, max.y };
+
+		D2DRenderer::Get()->DrawRect(rect);
+	}
+	
 	for (const auto& collider : m_colliders)
 	{
 		collider->Render();
-		//const Bounds& bounds = collider->GetBounds();
-
-		//Vector2 min = bounds.GetMin();
-		//Vector2 max = bounds.GetMax();
-
-		//D2D1_RECT_F rect{ min.x, min.y, max.x, max.y };
-
-		//m_d2dRenderer->DrawRect(rect);
 	}
 }
 
 void PhysicsSystem::ClearCollisionPairs()
 {
+	m_quadtree->Clear();
+
 	m_currentCollisions.clear();
 	m_previousCollisions.clear();
 

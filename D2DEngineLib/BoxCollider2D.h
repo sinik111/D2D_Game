@@ -14,6 +14,7 @@ public:
 	void SetSize(const Vector2& size);
 
 public:
+	void Render() override;
 	void UpdateCollider() override;
 	void CalculateSpatialBounds() override;
 

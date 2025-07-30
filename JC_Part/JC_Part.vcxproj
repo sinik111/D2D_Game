@@ -137,6 +137,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DummyIdle.cpp" />
+    <ClCompile Include="DummyP.cpp" />
     <ClCompile Include="EnemyBaseAttackOne.cpp" />
     <ClCompile Include="EnemyBaseDamaged.cpp" />
     <ClCompile Include="EnemyBaseDash.cpp" />
@@ -159,6 +161,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DummyIdle.h" />
+    <ClInclude Include="DummyP.h" />
     <ClInclude Include="EnemyBaseAttackOne.h" />
     <ClInclude Include="EnemyBaseDamaged.h" />
     <ClInclude Include="EnemyBaseDash.h" />

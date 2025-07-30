@@ -2,6 +2,8 @@
 #include "BoxCollider2D.h"
 
 #include "Transform.h"
+#include "D2DRenderer.h"
+#include "RigidBody2D.h"
 
 const Bounds& BoxCollider2D::GetBox() const
 {
@@ -15,9 +17,26 @@ void BoxCollider2D::SetSize(const Vector2& size)
 	m_isColliderDirty = true;
 }
 
+void BoxCollider2D::Render()
+{
+	Vector2 min = m_box.GetMin();
+	Vector2 max = m_box.GetMax();
+
+	D2D1_RECT_F rect{ min.x, min.y, max.x, max.y };
+
+	D2DRenderer::Get()->DrawRect(rect);
+}
+
 void BoxCollider2D::UpdateCollider()
 {
-	m_box.center = m_transform->GetWorldPosition() + m_offset;
+	if (m_rigidBody2d != nullptr)
+	{
+		m_box.center = m_rigidBody2d->GetPosition() + m_offset;
+	}
+	else
+	{
+		m_box.center = m_transform->GetWorldPosition() + m_offset;
+	}
 }
 
 void BoxCollider2D::CalculateSpatialBounds()

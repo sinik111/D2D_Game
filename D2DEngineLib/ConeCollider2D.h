@@ -15,6 +15,7 @@ public:
 	void SetCone(float radius, const Vector2& direction, float angle);
 
 public:
+	void Render() override;
 	void UpdateCollider() override;
 	void CalculateSpatialBounds() override;
 

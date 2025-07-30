@@ -15,6 +15,7 @@ public:
 	void SetRadius(float radius);
 
 public:
+	void Render() override;
 	void UpdateCollider() override;
 	void CalculateSpatialBounds() override;
 

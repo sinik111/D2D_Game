@@ -29,7 +29,10 @@ void EnemyBaseIdle::Update(FSMContext& context)
 void EnemyBaseIdle::Exit(FSMContext& context)
 {
 }
-//
+
+
+
+
 //void EnemyBaseIdle::SetDirection(FSMContext& context)
 //{
 //	curDir = context.intParams[L"Direction"];

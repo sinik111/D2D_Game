@@ -46,15 +46,15 @@ void DemoGameApp::Initialize()
 		m_modulePath, L"x64", L"MiniSolarSystem/Resource");
 
 	// [Tip] Scene 생성하기. 인자의 name은 SceneChange할 때 쓰이는 key
-	SceneManager::Get().CreateScene<MainTitle>(L"Title");
-	SceneManager::Get().CreateScene<SolarSystem>(L"SolarSystem");
-	SceneManager::Get().CreateScene<AnimationTestScene>(L"AnimationTest");
+	//SceneManager::Get().CreateScene<MainTitle>(L"Title");
+	//SceneManager::Get().CreateScene<SolarSystem>(L"SolarSystem");
+	//SceneManager::Get().CreateScene<AnimationTestScene>(L"AnimationTest");
 	SceneManager::Get().CreateScene<KinematicTest>(L"KinematicTest");
 
 	SceneManager::Get().CreateScene<PlayerMakingTestScene>(L"PlayerMakingTestScene");
 
 	// [Tip] Scene 변경하기
-	SceneManager::Get().ChangeScene(L"Title");
+	SceneManager::Get().ChangeScene(L"KinematicTest");
 	//SceneManager::Get().ChangeScene(L"PlayerMakingTestScene");
 }
 

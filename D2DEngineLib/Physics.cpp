@@ -43,6 +43,11 @@ void Physics::SetupCollisionMatrix()
 		static_cast<unsigned int>(CollisionLayer::PlayerMove);
 }
 
+unsigned int Physics::GetCollisionMask(CollisionLayer layer)
+{
+	return s_collisionMasks[layer];
+}
+
 bool Physics::DetectCollision(const BoxCollider2D* a, const BoxCollider2D* b, CollisionInfo& info)
 {
 	const Bounds& boundsA = a->GetBox();
@@ -847,7 +852,9 @@ Vector2 Physics::GetClosestPointOnLineSegment(const Vector2& point, const LineSe
 void Physics::ResolveCollision(const CollisionInfo& info)
 {
 	if (!info.isCollide)
+	{
 		return;
+	}
 
 	RigidBody2D* rigidBodyA = info.rigidBodyA;
 	RigidBody2D* rigidBodyB = info.rigidBodyB;
@@ -873,31 +880,6 @@ void Physics::ResolveCollision(const CollisionInfo& info)
 
 	float moveAmountA = info.penetrationDepth * (inverseMassA / totalInverseMass);
 	float moveAmountB = info.penetrationDepth * (inverseMassB / totalInverseMass);
-
-	//// rigidBodyA의 속도 처리
-	//if (rigidBodyA && rigidBodyA->GetBodyType() == RigidBody2D::BodyType::Dynamic)
-	//{
-	//	Vector2 currentVelocityA = rigidBodyA->GetVelocity();
-	//	// 현재 속도에서 법선 방향으로의 성분을 계산
-	//	Vector2 velocityNormalComponentA = info.normal * Vector2::Dot(currentVelocityA, info.normal);
-	//	// 접선 방향 속도 성분만 남김 (법선 방향 속도 제거)
-	//	Vector2 velocityTangentComponentA = currentVelocityA - velocityNormalComponentA;
-	//	rigidBodyA->SetVelocity(velocityTangentComponentA);
-	//}
-
-	//// rigidBodyB의 속도 처리
-	//if (rigidBodyB && rigidBodyB->GetBodyType() == RigidBody2D::BodyType::Dynamic)
-	//{
-	//	Vector2 currentVelocityB = rigidBodyB->GetVelocity();
-	//	// 현재 속도에서 법선 방향으로의 성분을 계산
-	//	// B는 A로부터 info.normal 방향으로 밀려나는 것이므로, B의 관점에서는 -info.normal 방향으로 충돌함
-	//	// 하지만 속도를 분해할 때는 원래의 normal 벡터를 사용해도 됩니다.
-	//	// 중요한 것은 B가 info.normal 방향으로 '밀려나는' 것을 방지하는 것입니다.
-	//	Vector2 velocityNormalComponentB = info.normal * Vector2::Dot(currentVelocityB, info.normal);
-	//	// 접선 방향 속도 성분만 남김 (법선 방향 속도 제거)
-	//	Vector2 velocityTangentComponentB = currentVelocityB - velocityNormalComponentB;
-	//	rigidBodyB->SetVelocity(velocityTangentComponentB);
-	//}
 
 	if (rigidBodyA && rigidBodyA->GetBodyType() == RigidBody2D::BodyType::Dynamic)
 	{

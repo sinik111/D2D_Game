@@ -4,6 +4,7 @@
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/Camera.h"
 #include "../D2DEngineLib/SceneManager.h"
+#include <iostream>
 
 void CameraController::Start()
 {
@@ -21,6 +22,18 @@ void CameraController::Start()
 
 void CameraController::Update()
 {
+    //마우스 우클릭에 따른 카메라 이동입니다.
+    if (Input::IsKeyPressed(VK_MBUTTON))
+    {
+        prevPos = { -(float)Input::GetCursorPoint().x, (float)Input::GetCursorPoint().y };
+    }
+    if (Input::IsKeyHeld(VK_MBUTTON))
+    {
+        Vector2 currPos = { -(float)Input::GetCursorPoint().x , (float)Input::GetCursorPoint().y };
+        Vector2 movement = currPos - prevPos;
+        GetTransform()->Translate(movement  * m_speed * MyTime::DeltaTime());
+        prevPos = currPos;
+    }
     GetTransform()->Translate(m_direction * m_speed * MyTime::DeltaTime());
 }
 
