@@ -45,7 +45,8 @@ struct Projection
 
 	bool Overlaps(const Projection& other) const
 	{
-		return max > other.min && other.max > min;
+		return !(min > other.max || other.min > max);
+		//return max > other.min && other.max > min;
 	}
 
 	float GetOverlap(const Projection& other) const

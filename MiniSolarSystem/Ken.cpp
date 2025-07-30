@@ -75,14 +75,14 @@ void Ken::Start()
 	m_context.triggerParams[L"Revive"] = false;
 	m_context.boolParams[L"IsGround"] = false;
 
-	m_fsm.AddState<KenIdleState>(L"Idle");
-	m_fsm.AddState<KenFrontDashState>(L"FrontDash");
-	m_fsm.AddState<KenBackDashState>(L"BackDash");
-	m_fsm.AddState<KenRollState>(L"Roll");
-	m_fsm.AddState<KenSpinningKickState>(L"SpinningKick");
+	m_fsm.AddState<KenIdleState>(L"Idle", false);
+	m_fsm.AddState<KenFrontDashState>(L"FrontDash", false);
+	m_fsm.AddState<KenBackDashState>(L"BackDash", false);
+	m_fsm.AddState<KenRollState>(L"Roll", false);
+	m_fsm.AddState<KenSpinningKickState>(L"SpinningKick", false);
 	m_fsm.AddState<KenHurtState>(L"Hurt", true);
 	m_fsm.AddState<KenDeadState>(L"Dead", true);
-	m_fsm.AddState<KenReviveState>(L"Revive");
+	m_fsm.AddState<KenReviveState>(L"Revive", false);
 
 	m_fsm.SetState(L"Idle", m_context);
 

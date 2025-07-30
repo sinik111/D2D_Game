@@ -56,6 +56,11 @@ void Collider::SetLayer(CollisionLayer layer)
 	m_layer = layer;
 }
 
+void Collider::SetIsCollide(bool isCollide)
+{
+	m_isCollide = isCollide;
+}
+
 bool Collider::GetTrigger() const
 {
 	return m_isTrigger;

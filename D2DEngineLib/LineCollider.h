@@ -8,6 +8,7 @@ class LineCollider :
 {
 private:
 	LineSegment m_lineSegment;
+	LineSegment m_localLineSegment;
 
 public:
 	const LineSegment& GetLineSegment() const;

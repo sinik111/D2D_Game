@@ -32,6 +32,7 @@ protected:
 
 	bool m_isTrigger = false;
 	bool m_isColliderDirty = true;
+	bool m_isCollide = false;
 
 public:
 	void Initialize() override;
@@ -46,6 +47,7 @@ public:
 	void SetTrigger(bool trigger);
 	void SetOffset(const Vector2& offset);
 	void SetLayer(CollisionLayer layer);
+	void SetIsCollide(bool isCollide);
 
 	bool GetTrigger() const;
 	Bounds GetSpatialBounds() const;

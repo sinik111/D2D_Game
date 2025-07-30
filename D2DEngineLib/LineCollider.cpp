@@ -11,27 +11,50 @@ const LineSegment& LineCollider::GetLineSegment() const
 
 void LineCollider::SetLine(const Vector2& startPoint, const Vector2& endPoint)
 {
-    m_lineSegment = LineSegment(startPoint, endPoint);
+    m_localLineSegment = LineSegment(startPoint, endPoint);
 
     m_isColliderDirty = true;
 }
 
 void LineCollider::Render()
 {
+    Vector2 position = m_transform->GetWorldPosition();
+
+    D2D1_COLOR_F color;
+    if (m_isCollide)
+    {
+        color = D2D1::ColorF(D2D1::ColorF::Yellow);
+    }
+    else
+    {
+        color = D2D1::ColorF(D2D1::ColorF::Red);
+    }
+
     D2DRenderer::Get()->DrawLine(
         { m_lineSegment.startPoint.x, m_lineSegment.startPoint.y },
-        { m_lineSegment.endPoint.x, m_lineSegment.endPoint.y }
+        { m_lineSegment.endPoint.x, m_lineSegment.endPoint.y },
+        color
+    );
+
+    D2DRenderer::Get()->DrawLine(
+        { position.x, position.y },
+        { position.x + m_lineSegment.normal.x * 20.0f, position.y + m_lineSegment.normal.y * 20.0f },
+        color
     );
 }
 
 void LineCollider::UpdateCollider()
 {
+    Vector2 position = m_transform->GetWorldPosition();
 
+    m_lineSegment = m_localLineSegment;
+    m_lineSegment.startPoint += position;
+    m_lineSegment.endPoint += position;
 }
 
 void LineCollider::CalculateSpatialBounds()
 {
-    m_spatialBounds = m_lineSegment.GetBounds(m_transform->GetWorldPosition());
+    m_spatialBounds = m_lineSegment.GetBounds();
 }
 
 CollisionInfo LineCollider::DetectCollision(const Collider* other) const

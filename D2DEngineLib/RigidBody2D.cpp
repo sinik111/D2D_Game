@@ -98,6 +98,11 @@ float RigidBody2D::GetMass() const
     return m_mass;
 }
 
+Vector2 RigidBody2D::GetLastFramePosition() const
+{
+    return m_lastFramePosition;
+}
+
 void RigidBody2D::CalculatePosition()
 {
     if (m_bodyType == BodyType::Dynamic)

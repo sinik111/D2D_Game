@@ -42,6 +42,7 @@ public:
 	void ProcessPhysics();
 
 	void Interpolate();
+	void ResetCollidersIsCollide();
 	void UpdateColliders();
 
 	void RenderColliders();

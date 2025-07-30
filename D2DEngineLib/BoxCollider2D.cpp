@@ -19,12 +19,23 @@ void BoxCollider2D::SetSize(const Vector2& size)
 
 void BoxCollider2D::Render()
 {
+	D2D1_COLOR_F color;
+	if (m_isCollide)
+	{
+		color = D2D1::ColorF(D2D1::ColorF::Yellow);
+	}
+	else
+	{
+		color = D2D1::ColorF(D2D1::ColorF::Red);
+	}
+
+
 	Vector2 min = m_box.GetMin();
 	Vector2 max = m_box.GetMax();
 
 	D2D1_RECT_F rect{ min.x, min.y, max.x, max.y };
 
-	D2DRenderer::Get()->DrawRect(rect);
+	D2DRenderer::Get()->DrawRect(rect, color);
 }
 
 void BoxCollider2D::UpdateCollider()

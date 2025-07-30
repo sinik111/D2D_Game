@@ -144,6 +144,11 @@ public: // 유틸리티 함수
 	{
 	    return v1.x * v2.x + v1.y * v2.y;
 	}
+
+	static float Cross(const Vector2& v1, const Vector2& v2)
+	{
+		return v1.x * v2.y - v1.y * v2.x;
+	}
 	
 	static float Distance(const Vector2& v1, const Vector2& v2)
 	{

@@ -102,8 +102,8 @@ void EnemyBase::Start()
 	m_maxRoamDistance = 500.0f;
 	m_maxChaseDistance = 650.0f;
 
-	m_fsm.AddState<EnemyBaseIdle>(L"Idle");
-	m_fsm.AddState<EnemyBaseMove>(L"Move");
+	m_fsm.AddState<EnemyBaseIdle>(L"Idle", false);
+	m_fsm.AddState<EnemyBaseMove>(L"Move", false);
 
 	m_fsm.SetState(L"Idle", m_context);
 

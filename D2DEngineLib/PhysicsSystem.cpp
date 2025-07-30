@@ -88,6 +88,8 @@ void PhysicsSystem::SetD2DRenderer(D2DRenderer* d2dRenderer)
 
 void PhysicsSystem::ProcessPhysics()
 {
+	ResetCollidersIsCollide();
+
 	for (const auto& rigidBody2d : m_dynamicRigidBodies)
 	{
 		rigidBody2d->ApplyGraviy(Physics::gravity);
@@ -126,21 +128,28 @@ void PhysicsSystem::ProcessPhysics()
 				Collider* colliderA;
 				Collider* colliderB;
 
+				CollisionInfo info;
+
 				if (collider < candidate)
 				{
 					colliderA = collider;
 					colliderB = candidate;
+
+					info = colliderB->DetectCollision(colliderA);
 				}
 				else
 				{
 					colliderA = candidate;
 					colliderB = collider;
-				}
 
-				CollisionInfo info = colliderA->DetectCollision(colliderB);
+					info = colliderA->DetectCollision(colliderB);
+				}
 
 				if (info.isCollide)
 				{
+					colliderA->SetIsCollide(true);
+					colliderB->SetIsCollide(true);
+
 					CollisionPair pair{ colliderA, colliderB };
 
 					if (colliderA->GetTrigger() || colliderB->GetTrigger())
@@ -178,6 +187,14 @@ void PhysicsSystem::Interpolate()
 	for (const auto& rigidBody2d : m_staticRigidBodies)
 	{
 		rigidBody2d->Interpolate();
+	}
+}
+
+void PhysicsSystem::ResetCollidersIsCollide() // 디버그용
+{
+	for (const auto& collider : m_colliders)
+	{
+		collider->SetIsCollide(false);
 	}
 }
 

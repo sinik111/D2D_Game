@@ -79,10 +79,10 @@ void Player::Start()
 	m_fsmContext.triggerParams[L"Dodge"] = false;
 	m_fsmContext.floatParams[L"DodgeAvailableTime"] = m_dodgeAvailableTime;
 
-	m_playerFSM.AddState<PlayerIdleState>(L"Idle");
-	m_playerFSM.AddState<PlayerWalkState>(L"Walk");
-	m_playerFSM.AddState<PlayerDashState>(L"Dash");
-	m_playerFSM.AddState<PlayerDodgeState>(L"Dodge");
+	m_playerFSM.AddState<PlayerIdleState>(L"Idle", false);
+	m_playerFSM.AddState<PlayerWalkState>(L"Walk", false);
+	m_playerFSM.AddState<PlayerDashState>(L"Dash", false);
+	m_playerFSM.AddState<PlayerDodgeState>(L"Dodge", false);
 
 	m_playerFSM.SetState(L"Idle", m_fsmContext);
 }

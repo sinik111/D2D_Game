@@ -21,6 +21,17 @@ void ConeCollider2D::SetCone(float radius, const Vector2& direction, float angle
 
 void ConeCollider2D::Render()
 {
+    D2D1_COLOR_F color;
+    if (m_isCollide)
+    {
+        color = D2D1::ColorF(D2D1::ColorF::Yellow);
+    }
+    else
+    {
+        color = D2D1::ColorF(D2D1::ColorF::Red);
+    }
+
+
     Vector2 vertices[3];
 
     m_cone.GetVertices(vertices);
@@ -28,7 +39,8 @@ void ConeCollider2D::Render()
     D2DRenderer::Get()->DrawTriangle(
         { vertices[0].x, vertices[0].y },
         { vertices[1].x, vertices[1].y },
-        { vertices[2].x, vertices[2].y }
+        { vertices[2].x, vertices[2].y },
+        color
     );
 }
 

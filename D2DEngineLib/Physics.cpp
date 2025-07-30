@@ -222,11 +222,6 @@ CollisionInfo Physics::DetectCollisionCircleCircle(const CircleCollider* a, cons
 		// 6. 충돌 법선
 		if (distance == 0.0f)
 		{
-			// 두 원의 중심이 완전히 겹칠 때 (겹침이 매우 심함)
-			// 이 경우 법선은 어느 방향으로든 설정 가능.
-			// 예를 들어, (0, 1) 또는 (1, 0)과 같은 임의의 방향으로 설정하거나,
-			// 이전 프레임의 속도 방향 등을 고려할 수 있음.
-			// 여기서는 간단하게 Y축 양의 방향으로 설정
 			info.normal = { 0.0f, 1.0f };
 		}
 		else
@@ -234,11 +229,7 @@ CollisionInfo Physics::DetectCollisionCircleCircle(const CircleCollider* a, cons
 			info.normal = displacement.Normalized(); // circleA에서 circleB로 향하는 단위 벡터
 		}
 
-		// 7. 충돌 지점
-		// CircleA의 경계에서 법선 방향으로 CircleA의 반지름만큼 떨어진 지점 (즉, CircleA의 "충돌 면" 지점)
 		info.contactPoint = circleA.center + info.normal * circleA.radius;
-		// 또는 두 원의 중심을 잇는 선분 위에서 충돌이 일어나는 지점 (평균치)
-		// info.contactPoint = circleA.center + info.normal * (circleA.radius - info.penetrationDepth / 2.0f);
 
 		info.colliderA = a;
 		info.colliderB = b;
@@ -266,9 +257,6 @@ CollisionInfo Physics::DetectCollisionConeCone(const ConeCollider2D* a, const Co
 	// 최소 침투 깊이 및 해당 법선을 저장할 변수
 	float minOverlap = FLT_MAX;
 	Vector2 collisionNormal = { 0.0f, 0.0f };
-
-	// 모든 잠재적 분리 축을 수집합니다.
-	// 두 삼각형의 경우, 각 모서리의 법선이 축이 됩니다.
 	std::vector<Vector2> axes;
 
 	// Cone A의 모서리 축 추가
@@ -324,23 +312,9 @@ CollisionInfo Physics::DetectCollisionConeCone(const ConeCollider2D* a, const Co
 		}
 	}
 
-	// 루프가 완료되면, 분리 축을 찾지 못했다는 의미입니다.
-	// 따라서 충돌이 발생했습니다.
 	info.isCollide = true;
 	info.penetrationDepth = minOverlap;
-	info.normal = collisionNormal.Normalized(); // 최종 법선을 단위 벡터로 정규화
-
-	// 접점(Contact Point) 계산:
-	// SAT는 일반적으로 MTV(Minimum Translation Vector)만 제공하며, 직접적인 접점을 제공하지 않습니다.
-	// 삼각형의 경우 정확한 접점(단일 정점, 모서리 중간점 또는 여러 점이 접점 매니폴드를 형성)을
-	// 결정하는 것은 더 복잡하며, 일반적으로 GJK-EPA 정제 또는 클리핑과 같은 추가 알고리즘이 필요합니다.
-
-	// 여기서는 간단하게 추정된 접점을 계산합니다.
-	// coneA의 중심에서 법선 반대 방향으로 반지름에서 침투 깊이를 뺀 만큼 이동한 지점입니다.
-	// 이는 A가 충돌 경계선 밖으로 밀려나야 할 지점을 나타냅니다.
 	info.contactPoint = verticesA[0] + info.normal * (coneA.radius - info.penetrationDepth);
-	// 이 contactPoint는 근사치이며, 충돌이 복잡한 방식으로 모서리-모서리 또는 정점-정점으로 발생할 경우
-	// 물리적으로 정확한 접점이 아닐 수 있습니다.
 
 	info.colliderA = a;
 	info.colliderB = b;
@@ -385,13 +359,6 @@ CollisionInfo Physics::DetectCollisionBoxCircle(const BoxCollider2D* a, const Ci
 		// 5. 충돌 법선 (Normal)
 		if (distance == 0.0f)
 		{
-			// 원의 중심이 AABB 내부에 있을 때 (정확히 AABB의 어느 한 점에 가장 가까울 때)
-			// 이 경우 법선은 약간의 heuristics가 필요.
-			// 보통은 AABB의 어떤 면에 가장 가까운지 판단하여 그 면의 법선을 사용.
-			// 여기서는 간단하게 AABB의 한 점(min.x, min.y)에서 중심까지의 벡터를 정규화하여 사용하거나,
-			// 가장 깊이 겹치는 축을 찾아 해당 축의 법선을 사용.
-			// 예를 들어, AABB의 중심에서 원의 중심 방향으로 법선을 설정할 수 있음.
-
 			Vector2 aabbCenter = { (boxMin.x + boxMax.x) / 2.0f, (boxMin.y + boxMax.y) / 2.0f };
 			info.normal = (circle.center - aabbCenter).Normalized();
 			if (info.normal.LengthSq() == 0.0f) // 만약 원의 중심이 AABB 중심과 겹치면
@@ -404,11 +371,7 @@ CollisionInfo Physics::DetectCollisionBoxCircle(const BoxCollider2D* a, const Ci
 			info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
 		}
 
-		// 6. 충돌 지점 (Contact Point)
-		// 가장 일반적인 정의: 원의 경계 중 AABB와 가장 가까운 지점
 		info.contactPoint = circle.center - info.normal * circle.radius;
-		// 다른 정의: closestPoint (AABB에서 원에 가장 가까운 지점)
-		// info.contactPoint = closestPoint;
 
 		info.colliderA = a;
 		info.colliderB = b;
@@ -428,13 +391,11 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 	const Vector2 boxMin = box.GetMin();
 	const Vector2 boxMax = box.GetMax();
 
-	// 1. AABB 내에서 원의 중심과 가장 가까운 점 찾기
 	const float closestX = MyMath::Clamp(circle.center.x, boxMin.x, boxMax.x);
 	const float closestY = MyMath::Clamp(circle.center.y, boxMin.y, boxMax.y);
 
 	Vector2 closestPoint{ closestX, closestY };
 
-	// 2. 가장 가까운 점과 원의 중심 간의 거리 계산
 	const Vector2 displacement = circle.center - closestPoint;
 	const float distanceSquared = displacement.LengthSq();
 	const float distance = std::sqrt(distanceSquared);
@@ -443,23 +404,14 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 
 	CollisionInfo info;
 
-	// 3. 충돌 여부 판단
 	if (distanceSquared <= radiusSquared)
 	{
 		info.isCollide = true;
 
-		// 4. 파고들어간 거리 (Penetration Depth)
 		info.penetrationDepth = circle.radius - distance;
 
-		// 5. 충돌 법선 (Normal)
 		if (distance == 0.0f)
 		{
-			// 원의 중심이 AABB 내부에 있을 때 (정확히 AABB의 어느 한 점에 가장 가까울 때)
-			// 이 경우 법선은 약간의 heuristics가 필요.
-			// 보통은 AABB의 어떤 면에 가장 가까운지 판단하여 그 면의 법선을 사용.
-			// 여기서는 간단하게 AABB의 한 점(min.x, min.y)에서 중심까지의 벡터를 정규화하여 사용하거나,
-			// 가장 깊이 겹치는 축을 찾아 해당 축의 법선을 사용.
-			// 예를 들어, AABB의 중심에서 원의 중심 방향으로 법선을 설정할 수 있음.
 
 			Vector2 aabbCenter = { (boxMin.x + boxMax.x) / 2.0f, (boxMin.y + boxMax.y) / 2.0f };
 			info.normal = (circle.center - aabbCenter).Normalized();
@@ -473,11 +425,7 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 			info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
 		}
 
-		// 6. 충돌 지점 (Contact Point)
-		// 가장 일반적인 정의: 원의 경계 중 AABB와 가장 가까운 지점
 		info.contactPoint = circle.center - info.normal * circle.radius;
-		// 다른 정의: closestPoint (AABB에서 원에 가장 가까운 지점)
-		// info.contactPoint = closestPoint;
 
 		info.colliderA = a;
 		info.colliderB = b;
@@ -507,50 +455,16 @@ CollisionInfo Physics::DetectCollisionLineCircle(const LineCollider* a, const Ci
 	// 거리가 반지름보다 작으면 충돌
 	if (distanceSq < radiusSq)
 	{
-		// 원이 선분의 '안쪽' (normal이 가리키는 방향)으로 침투했는지 확인
-		// 원의 중심이 선분 normal 방향으로 얼마나 떨어져 있는지 (양수면 normal 방향, 음수면 반대 방향)
 		float projDistance = Vector2::Dot(distVec, segment.normal);
-
-		// 만약 원의 중심이 선분 normal과 반대 방향으로 침투했거나,
-		// (projDistance + circle.radius)가 양수가 아니면 충돌로 간주하지 않을 수 있음.
-		// 하지만 사용자 요청에 따라 "무조건 라인의 법선쪽으로 밀게" 하려면,
-		// 거리만으로 충돌 여부를 판단하고 법선 방향은 고정하는 것이 맞습니다.
-		// 여기서는 원이 선분에 닿기만 해도 충돌로 간주합니다.
 
 		info.isCollide = true;
 
-		// 충돌 법선은 무조건 LineSegment의 normal 방향으로 고정
 		info.normal = segment.normal;
 
-		// 침투 깊이 계산:
-		// 원의 중심이 선분 normal 방향으로 얼마나 깊이 파고들었는가?
-		// 원의 중심과 선분 사이의 '거리'는 distVec.Length() 입니다.
-		// 이 거리를 통해 '안쪽'으로 얼마나 들어왔는지 계산합니다.
-
-		// 원의 중심에서 선분 normal 방향으로의 벡터는 distVec 이 아닙니다.
-		// distVec는 closestPoint로의 벡터입니다.
-		// 원의 중심에서 선분 (평면)으로의 최단 거리를 구해야 합니다.
-		// 이를 위해 (원의 중심 - 선분 위의 임의의 점)과 선분 normal의 dot product를 사용합니다.
 		float signedDistanceFromLine = Vector2::Dot((circle.center - segment.startPoint), segment.normal);
 
-		// 원이 LineSegment의 normal 방향으로 파고들었을 때만 유효한 깊이를 가집니다.
-		// 반지름만큼 침투해야 충돌이 시작됩니다.
-		// 예를 들어, signedDistanceFromLine이 0보다 작으면 원의 중심이 벽 바깥쪽에 있습니다.
-		// 벽에 닿으려면 signedDistanceFromLine의 절대값이 반지름보다 작아야 합니다.
-
-		// penetrationDepth는 '벽 안쪽' 방향으로의 침투 깊이
-		// signedDistanceFromLine이 양수 (normal 방향 안쪽)일 경우, 침투 깊이는 (반지름 - signedDistanceFromLine)
-		// signedDistanceFromLine이 음수 (normal 방향 바깥쪽)일 경우, 침투 깊이는 (반지름 + abs(signedDistanceFromLine))
-		// 또는 simply: (반지름 - signedDistanceFromLine)
-
-		// 원의 중심이 선분 normal 방향으로 (벽 안쪽으로) 얼마나 깊이 들어왔는지 계산
-		// 원이 벽에 닿기 시작하는 순간 signedDistanceFromLine == radius
-		// 원이 벽을 완전히 통과하면 signedDistanceFromLine == -radius (벽 너머)
 		info.penetrationDepth = circle.radius - signedDistanceFromLine;
 
-		// 접점 (contactPoint):
-		// 원의 중심에서 충돌 법선(segment.normal)과 반대 방향으로 반지름만큼 이동한 지점
-		// 이 지점이 원이 벽에 닿는 "이론적인" 지점이 됩니다.
 		info.contactPoint = circle.center - segment.normal * circle.radius;
 
 		info.colliderA = a;
@@ -558,6 +472,44 @@ CollisionInfo Physics::DetectCollisionLineCircle(const LineCollider* a, const Ci
 
 		info.rigidBodyA = a->GetRigidBody2D();
 		info.rigidBodyB = b->GetRigidBody2D();
+	}
+
+	auto rb = b->GetRigidBody2D();
+	if (rb)
+	{
+		Vector2 lastPosition = rb->GetLastFramePosition();
+		Vector2 estimatePosition = rb->GetPosition();
+
+		Vector2 sweepLine = estimatePosition - lastPosition;
+		Vector2 segmentLine = segment.endPoint - segment.startPoint;
+		Vector2 startToStart = segment.startPoint - lastPosition;
+
+		float sweepXsegment = Vector2::Cross(sweepLine, segmentLine);
+
+		if (!(std::abs(sweepXsegment) < MyMath::EPSILON))
+		{
+			float t = Vector2::Cross(startToStart, segmentLine) / sweepXsegment;
+			float u = Vector2::Cross(startToStart, sweepLine) / sweepXsegment;
+
+			if (t >= 0.0f && t <= 1.0f && u >= 0.0f && u <= 1.0f)
+			{
+				info.isCollide = true;
+
+				info.normal = segment.normal;
+
+				float signedDistanceFromLine = Vector2::Dot((estimatePosition - segment.startPoint), segment.normal);
+
+				info.penetrationDepth = circle.radius - signedDistanceFromLine;
+
+				info.contactPoint = circle.center - segment.normal * circle.radius;
+
+				info.colliderA = a;
+				info.colliderB = b;
+
+				info.rigidBodyA = a->GetRigidBody2D();
+				info.rigidBodyB = b->GetRigidBody2D();
+			}
+		}
 	}
 
 	return info;
@@ -581,50 +533,14 @@ CollisionInfo Physics::DetectCollisionCircleLine(const CircleCollider* a, const 
 	// 거리가 반지름보다 작으면 충돌
 	if (distanceSq < radiusSq)
 	{
-		// 원이 선분의 '안쪽' (normal이 가리키는 방향)으로 침투했는지 확인
-		// 원의 중심이 선분 normal 방향으로 얼마나 떨어져 있는지 (양수면 normal 방향, 음수면 반대 방향)
-		float projDistance = Vector2::Dot(distVec, segment.normal);
-
-		// 만약 원의 중심이 선분 normal과 반대 방향으로 침투했거나,
-		// (projDistance + circle.radius)가 양수가 아니면 충돌로 간주하지 않을 수 있음.
-		// 하지만 사용자 요청에 따라 "무조건 라인의 법선쪽으로 밀게" 하려면,
-		// 거리만으로 충돌 여부를 판단하고 법선 방향은 고정하는 것이 맞습니다.
-		// 여기서는 원이 선분에 닿기만 해도 충돌로 간주합니다.
-
 		info.isCollide = true;
 
-		// 충돌 법선은 무조건 LineSegment의 normal 방향으로 고정
 		info.normal = segment.normal;
 
-		// 침투 깊이 계산:
-		// 원의 중심이 선분 normal 방향으로 얼마나 깊이 파고들었는가?
-		// 원의 중심과 선분 사이의 '거리'는 distVec.Length() 입니다.
-		// 이 거리를 통해 '안쪽'으로 얼마나 들어왔는지 계산합니다.
-
-		// 원의 중심에서 선분 normal 방향으로의 벡터는 distVec 이 아닙니다.
-		// distVec는 closestPoint로의 벡터입니다.
-		// 원의 중심에서 선분 (평면)으로의 최단 거리를 구해야 합니다.
-		// 이를 위해 (원의 중심 - 선분 위의 임의의 점)과 선분 normal의 dot product를 사용합니다.
 		float signedDistanceFromLine = Vector2::Dot((circle.center - segment.startPoint), segment.normal);
 
-		// 원이 LineSegment의 normal 방향으로 파고들었을 때만 유효한 깊이를 가집니다.
-		// 반지름만큼 침투해야 충돌이 시작됩니다.
-		// 예를 들어, signedDistanceFromLine이 0보다 작으면 원의 중심이 벽 바깥쪽에 있습니다.
-		// 벽에 닿으려면 signedDistanceFromLine의 절대값이 반지름보다 작아야 합니다.
-
-		// penetrationDepth는 '벽 안쪽' 방향으로의 침투 깊이
-		// signedDistanceFromLine이 양수 (normal 방향 안쪽)일 경우, 침투 깊이는 (반지름 - signedDistanceFromLine)
-		// signedDistanceFromLine이 음수 (normal 방향 바깥쪽)일 경우, 침투 깊이는 (반지름 + abs(signedDistanceFromLine))
-		// 또는 simply: (반지름 - signedDistanceFromLine)
-
-		// 원의 중심이 선분 normal 방향으로 (벽 안쪽으로) 얼마나 깊이 들어왔는지 계산
-		// 원이 벽에 닿기 시작하는 순간 signedDistanceFromLine == radius
-		// 원이 벽을 완전히 통과하면 signedDistanceFromLine == -radius (벽 너머)
 		info.penetrationDepth = circle.radius - signedDistanceFromLine;
 
-		// 접점 (contactPoint):
-		// 원의 중심에서 충돌 법선(segment.normal)과 반대 방향으로 반지름만큼 이동한 지점
-		// 이 지점이 원이 벽에 닿는 "이론적인" 지점이 됩니다.
 		info.contactPoint = circle.center - segment.normal * circle.radius;
 
 		info.colliderA = a;
@@ -632,6 +548,44 @@ CollisionInfo Physics::DetectCollisionCircleLine(const CircleCollider* a, const 
 
 		info.rigidBodyA = a->GetRigidBody2D();
 		info.rigidBodyB = b->GetRigidBody2D();
+	}
+
+	auto rb = a->GetRigidBody2D();
+	if (rb)
+	{
+		Vector2 lastPosition = rb->GetLastFramePosition();
+		Vector2 estimatePosition = rb->GetPosition();
+
+		Vector2 sweepLine = estimatePosition - lastPosition;
+		Vector2 segmentLine = segment.endPoint - segment.startPoint;
+		Vector2 startToStart = segment.startPoint - lastPosition;
+
+		float sweepXsegment = Vector2::Cross(sweepLine, segmentLine);
+
+		if (!(std::abs(sweepXsegment) < MyMath::EPSILON))
+		{
+			float t = Vector2::Cross(startToStart, segmentLine) / sweepXsegment;
+			float u = Vector2::Cross(startToStart, sweepLine) / sweepXsegment;
+
+			if (t >= 0.0f && t <= 1.0f && u >= 0.0f && u <= 1.0f)
+			{
+				info.isCollide = true;
+
+				info.normal = segment.normal;
+
+				float signedDistanceFromLine = Vector2::Dot((estimatePosition - segment.startPoint), segment.normal);
+
+				info.penetrationDepth = circle.radius - signedDistanceFromLine;
+
+				info.contactPoint = circle.center - segment.normal * circle.radius;
+
+				info.colliderA = a;
+				info.colliderB = b;
+
+				info.rigidBodyA = a->GetRigidBody2D();
+				info.rigidBodyB = b->GetRigidBody2D();
+			}
+		}
 	}
 
 	return info;
@@ -662,13 +616,11 @@ CollisionInfo Physics::DetectCollisionBoxCone(const BoxCollider2D* a, const Cone
 	axes.push_back({ 1.0f, 0.0f }); // X축
 	axes.push_back({ 0.0f, 1.0f }); // Y축
 
-	// Cone의 모서리 축 추가 (정규화된 변 벡터를 사용)
-	axes.push_back((coneVertices[1] - coneVertices[0]).Normalized()); // cone edge 0-1
-	axes.push_back((coneVertices[2] - coneVertices[1]).Normalized()); // cone edge 1-2
-	axes.push_back((coneVertices[0] - coneVertices[2]).Normalized()); // cone edge 2-0
+	axes.push_back(Vector2(-(coneVertices[1].y - coneVertices[0].y), coneVertices[1].x - coneVertices[0].x).Normalized());
+	axes.push_back(Vector2(-(coneVertices[2].y - coneVertices[1].y), coneVertices[2].x - coneVertices[1].x).Normalized());
+	axes.push_back(Vector2(-(coneVertices[0].y - coneVertices[2].y), coneVertices[0].x - coneVertices[2].x).Normalized());
 
-	// 각 잠재적 분리 축을 순회
-	for (const auto& axis : axes) // AABB의 축은 이미 정규화되어 있음. Cone의 축은 Normalize() 호출 필요.
+	for (const auto& axis : axes)
 	{
 		// 투영 (AABB의 경우 GetVertices를 통해 Polygon처럼 투영)
 		const Projection projBox = ProjectPolygon(boxVertices, 4, axis); // 박스는 4개의 정점
@@ -681,7 +633,6 @@ CollisionInfo Physics::DetectCollisionBoxCone(const BoxCollider2D* a, const Cone
 			return info;
 		}
 
-		// 겹친다면 현재 겹침 양을 계산
 		const float currentOverlap = projBox.GetOverlap(projCone);
 
 		// 최소 겹침 업데이트
@@ -690,8 +641,6 @@ CollisionInfo Physics::DetectCollisionBoxCone(const BoxCollider2D* a, const Cone
 			minOverlap = currentOverlap;
 			collisionNormal = axis;
 
-			// 법선 방향 조정: box의 중심에서 cone의 중심 방향으로
-			// AABB의 중심은 min과 max의 중간점
 			Vector2 centerBox{ (min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f };
 			Vector2 centerCone = cone.center;
 			Vector2 dirBoxToCone = centerCone - centerBox;
@@ -703,18 +652,12 @@ CollisionInfo Physics::DetectCollisionBoxCone(const BoxCollider2D* a, const Cone
 		}
 	}
 
-	// 모든 축에서 겹쳤다면 충돌 발생
 	info.isCollide = true;
 	info.penetrationDepth = minOverlap;
 	info.normal = collisionNormal.Normalized(); // 최종 법선은 단위 벡터
 
-	// 접점(Contact Point) 계산:
-	// AABB와 삼각형의 충돌 지점 계산은 복잡하며, SAT만으로는 충분하지 않습니다.
-	// 여기서는 간단한 추정치를 사용합니다.
-	// AABB의 중심에서 법선 반대 방향으로 침투 깊이를 고려하여 이동한 지점
 	Vector2 centerBox = { (min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f };
 	info.contactPoint = centerBox + info.normal * (minOverlap);
-	// 이는 근사치이며, 정확한 접점은 더 복잡한 알고리즘(GJK-EPA, 클리핑)이 필요합니다.
 
 	info.colliderA = a;
 	info.colliderB = b;
@@ -746,23 +689,18 @@ CollisionInfo Physics::DetectCollisionConeBox(const ConeCollider2D* a, const Box
 
 	std::vector<Vector2> axes;
 
-	// AABB의 축은 항상 X축과 Y축의 법선입니다. (0,1)과 (1,0) 두 가지
 	axes.push_back({ 1.0f, 0.0f }); // X축
 	axes.push_back({ 0.0f, 1.0f }); // Y축
 
-	// Cone의 모서리 축 추가 (정규화된 변 벡터를 사용)
-	axes.push_back((coneVertices[1] - coneVertices[0]).Normalized()); // cone edge 0-1
-	axes.push_back((coneVertices[2] - coneVertices[1]).Normalized()); // cone edge 1-2
-	axes.push_back((coneVertices[0] - coneVertices[2]).Normalized()); // cone edge 2-0
+	axes.push_back(Vector2(-(coneVertices[1].y - coneVertices[0].y), coneVertices[1].x - coneVertices[0].x).Normalized());
+	axes.push_back(Vector2(-(coneVertices[2].y - coneVertices[1].y), coneVertices[2].x - coneVertices[1].x).Normalized());
+	axes.push_back(Vector2(-(coneVertices[0].y - coneVertices[2].y), coneVertices[0].x - coneVertices[2].x).Normalized());
 
-	// 각 잠재적 분리 축을 순회
-	for (const auto& axis : axes) // AABB의 축은 이미 정규화되어 있음. Cone의 축은 Normalize() 호출 필요.
+	for (const auto& axis : axes)
 	{
-		// 투영 (AABB의 경우 GetVertices를 통해 Polygon처럼 투영)
 		const Projection projBox = ProjectPolygon(boxVertices, 4, axis); // 박스는 4개의 정점
 		const Projection projCone = ProjectPolygon(coneVertices, 3, axis); // 콘은 3개의 정점
 
-		// 투영이 겹치지 않으면 분리 축이 존재 -> 충돌 없음
 		if (!projBox.Overlaps(projCone))
 		{
 			info.isCollide = false;
@@ -778,8 +716,6 @@ CollisionInfo Physics::DetectCollisionConeBox(const ConeCollider2D* a, const Box
 			minOverlap = currentOverlap;
 			collisionNormal = axis;
 
-			// 법선 방향 조정: box의 중심에서 cone의 중심 방향으로
-			// AABB의 중심은 min과 max의 중간점
 			Vector2 centerBox{ (min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f };
 			Vector2 centerCone = cone.center;
 			Vector2 dirBoxToCone = centerCone - centerBox;
@@ -791,18 +727,12 @@ CollisionInfo Physics::DetectCollisionConeBox(const ConeCollider2D* a, const Box
 		}
 	}
 
-	// 모든 축에서 겹쳤다면 충돌 발생
 	info.isCollide = true;
 	info.penetrationDepth = minOverlap;
-	info.normal = collisionNormal.Normalized(); // 최종 법선은 단위 벡터
+	info.normal = collisionNormal.Normalized();
 
-	// 접점(Contact Point) 계산:
-	// AABB와 삼각형의 충돌 지점 계산은 복잡하며, SAT만으로는 충분하지 않습니다.
-	// 여기서는 간단한 추정치를 사용합니다.
-	// AABB의 중심에서 법선 반대 방향으로 침투 깊이를 고려하여 이동한 지점
 	Vector2 centerBox = { (min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f };
 	info.contactPoint = centerBox + info.normal * (minOverlap);
-	// 이는 근사치이며, 정확한 접점은 더 복잡한 알고리즘(GJK-EPA, 클리핑)이 필요합니다.
 
 	info.colliderA = a;
 	info.colliderB = b;
@@ -838,14 +768,10 @@ Vector2 Physics::GetClosestPointOnLineSegment(const Vector2& point, const LineSe
 		return segment.startPoint;
 	}
 
-	// 점이 선분 AB에 투영된 위치 (0.0f: p1, 1.0f: p2)
-	// t = (point - segment.p1).Dot(AB) / lengthSq;
 	float t = Vector2::Dot((point - segment.startPoint), AB) / lengthSq;
 
-	// t 값을 [0, 1] 범위로 클램프하여 선분 내의 가장 가까운 점을 찾도록 보장
 	t_out = std::max<float>(0.0f, std::min<float>(1.0f, t));
 
-	// 선분 위의 가장 가까운 점
 	return segment.startPoint + AB * t_out;
 }
 

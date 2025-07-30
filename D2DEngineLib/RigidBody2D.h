@@ -51,6 +51,7 @@ public:
 	Vector2 GetPosition() const;
 	float GetGravityScale() const;
 	float GetMass() const;
+	Vector2 GetLastFramePosition() const;
 
 public:
 	void CalculatePosition();

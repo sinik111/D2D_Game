@@ -80,7 +80,7 @@ void DummyP::Start()
 	
 
 
-	m_fsm.AddState<DummyIdle>(L"Idle");
+	m_fsm.AddState<DummyIdle>(L"Idle", false);
 	
 	m_fsm.SetState(L"Idle", m_context);
 
