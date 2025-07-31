@@ -46,6 +46,20 @@ void Debug::DisplayFPS()
 #endif // _DEBUG
 }
 
+void Debug::Log(const char* log)
+{
+#ifdef _DEBUG
+    DebugSystem::Get().Log(log);
+#endif // _DEBUG
+}
+
+void Debug::Log(const wchar_t* log)
+{
+#ifdef _DEBUG
+    DebugSystem::Get().Log(log);
+#endif // _DEBUG
+}
+
 void Debug::Log(const std::string& log)
 {
 #ifdef _DEBUG

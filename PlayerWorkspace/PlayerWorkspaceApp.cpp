@@ -20,7 +20,7 @@ void PlayerWorkspaceApp::Initialize()
 
 	WinApp::Initialize();
 
-	Bounds bounds{ Vector2(0.0f, 0.0f), Vector2(960.0f, 540.0f) };
+	Bounds bounds{ Vector2(0.0f, 0.0f), Vector2(m_width * 0.5f, m_height * 0.5f) };
 
 	ComponentSystem::Get().Physics().SetupQuadtree(bounds, 5, 10);
 

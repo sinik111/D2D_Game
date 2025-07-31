@@ -61,6 +61,11 @@ void Collider::SetIsCollide(bool isCollide)
 	m_isCollide = isCollide;
 }
 
+void Collider::AddBelongingNode(QuadtreeNode* node)
+{
+	m_belongingNodes.push_back(node);
+}
+
 bool Collider::GetTrigger() const
 {
 	return m_isTrigger;
@@ -74,6 +79,16 @@ Bounds Collider::GetSpatialBounds() const
 CollisionLayer Collider::GetLayer() const
 {
 	return m_layer;
+}
+
+std::vector<QuadtreeNode*>& Collider::GetBelongingNode()
+{
+	return m_belongingNodes;
+}
+
+Vector2 Collider::GetOffset() const
+{
+	return m_offset;
 }
 
 void Collider::Update()

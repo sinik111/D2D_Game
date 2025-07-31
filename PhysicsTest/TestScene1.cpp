@@ -7,6 +7,7 @@
 #include "../D2DEngineLib/CircleCollider.h"
 #include "../D2DEngineLib/ConeCollider2D.h"
 #include "../D2DEngineLib/LineCollider.h"
+#include "../D2DEngineLib/Screen.h"
 
 #include "PlayerController.h"
 
@@ -31,21 +32,24 @@ void TestScene1::Enter()
 	//	boxCollider->SetCone(100.0f, Random::Direction(), 11.25f);
 	//}
 
-	//for (int i = 0; i < 2; ++i)
-	//{
-	//	GameObject* floor = CreateGameObject(L"Floor");
-	//	auto boxCollider = floor->AddComponent<BoxCollider2D>();
-	//	boxCollider->SetLayer(CollisionLayer::Wall);
-	//	boxCollider->SetSize({ 20.0f, 20.0f });
-	//	floor->GetTransform()->SetLocalPosition({ 100.0f, 100.0f });
-	//}
+	float width = Screen::Get().GetWidth() * 0.5f;
+	float height = Screen::Get().GetHeight() * 0.5f;
+
+	for (int i = 0; i < 1000; ++i)
+	{
+		GameObject* floor = CreateGameObject(L"Floor");
+		auto boxCollider = floor->AddComponent<BoxCollider2D>();
+		boxCollider->SetLayer(CollisionLayer::Wall);
+		boxCollider->SetSize({ 2.0f, 2.0f });
+		floor->GetTransform()->SetLocalPosition({ Random::Float(-width, width), Random::Float(-height, height) });
+	}
 
 	GameObject* player = CreateGameObject(L"Player");
 	auto rigidBody = player->AddComponent<RigidBody2D>();
 	rigidBody->SetGravityScale(0.0f);
 	auto circleCollider = player->AddComponent<CircleCollider>();
 	circleCollider->SetLayer(CollisionLayer::PlayerMove);
-	circleCollider->SetRadius(10.0f);
+	circleCollider->SetRadius(2.0f);
 	//circleCollider->SetCone(100.0f, Vector2::EllipseRightUp, 11.25f);
 	player->AddComponent<PlayerController>();
 }

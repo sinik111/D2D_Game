@@ -6,7 +6,7 @@
 
 #include "Player.h"
 
-void PlayerDodgeState::Enter(FSMContext& context)
+void PlayerEvadeState::Enter(FSMContext& context)
 {
 	int direction = context.intParams[L"PlayerDirection"];
 
@@ -19,7 +19,7 @@ void PlayerDodgeState::Enter(FSMContext& context)
 	m_endPosition = m_startPosition + m_dodgeDirection * context.floatParams[L"DodgeDistance"];
 }
 
-void PlayerDodgeState::Update(FSMContext& context)
+void PlayerEvadeState::Update(FSMContext& context)
 {
 	float dodgeSpeed = context.floatParams[L"DodgeSpeed"];
 
@@ -68,7 +68,7 @@ void PlayerDodgeState::Update(FSMContext& context)
 	}
 }
 
-void PlayerDodgeState::Exit(FSMContext& context)
+void PlayerEvadeState::Exit(FSMContext& context)
 {
 	context.rigidBody2d->SetVelocity({ 0.0f, 0.0f });
 }

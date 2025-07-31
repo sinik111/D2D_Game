@@ -2,7 +2,7 @@
 
 #include "../D2DEngineLib/IState.h"
 
-class PlayerDodgeState :
+class PlayerEvadeState :
 	public IState
 {
 private:

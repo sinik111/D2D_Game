@@ -82,7 +82,7 @@ void Player::Start()
 	m_playerFSM.AddState<PlayerIdleState>(L"Idle", false);
 	m_playerFSM.AddState<PlayerWalkState>(L"Walk", false);
 	m_playerFSM.AddState<PlayerDashState>(L"Dash", false);
-	m_playerFSM.AddState<PlayerDodgeState>(L"Dodge", false);
+	m_playerFSM.AddState<PlayerEvadeState>(L"Dodge", false);
 
 	m_playerFSM.SetState(L"Idle", m_fsmContext);
 }

@@ -63,7 +63,7 @@ struct Projection
 class Physics
 {
 private:
-	static std::map<CollisionLayer, unsigned int> s_collisionMasks;
+	static std::unordered_map<CollisionLayer, unsigned int> s_collisionMasks;
 
 public:
 	static const Vector2 gravity;

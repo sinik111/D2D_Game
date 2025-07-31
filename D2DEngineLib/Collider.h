@@ -15,6 +15,8 @@ class Transform;
 class RigidBody2D;
 class Script;
 
+struct QuadtreeNode;
+
 class Collider :
 	public Component
 {
@@ -29,6 +31,8 @@ protected:
 	Vector2 m_offset;
 
 	CollisionLayer m_layer;
+
+	std::vector<QuadtreeNode*> m_belongingNodes;
 
 	bool m_isTrigger = false;
 	bool m_isColliderDirty = true;
@@ -48,10 +52,13 @@ public:
 	void SetOffset(const Vector2& offset);
 	void SetLayer(CollisionLayer layer);
 	void SetIsCollide(bool isCollide);
+	void AddBelongingNode(QuadtreeNode* node);
 
 	bool GetTrigger() const;
 	Bounds GetSpatialBounds() const;
 	CollisionLayer GetLayer() const;
+	std::vector<QuadtreeNode*>& GetBelongingNode();
+	Vector2 GetOffset() const;
 
 	void Update();
 	virtual void UpdateCollider() = 0;

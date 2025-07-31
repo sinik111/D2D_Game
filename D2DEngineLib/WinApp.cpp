@@ -14,9 +14,10 @@
 #include "DebugSystem.h"
 #include "Screen.h"
 #include "Camera.h"
-#include "imgui_impl_win32.cpp"
+#include "imgui_impl_win32.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 void WinApp::Initialize()
 {
@@ -146,8 +147,6 @@ void WinApp::Update()
 	}
 
 	ComponentSystem::Get().Physics().Interpolate();
-
-	ComponentSystem::Get().Physics().UpdateColliders();
 
 	ComponentSystem::Get().PlayerInput().Update();
 

@@ -1,39 +1,46 @@
 #include "../D2DEngineLib/framework.h"
-#include "PlayerDodgeState.h"
+#include "PlayerEvadeState.h"
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/RigidBody2D.h"
 
 #include "Player.h"
 
-void PlayerDodgeState::Enter(FSMContext& context)
+PlayerEvadeState::PlayerEvadeState(Player* player)
+	: PlayerStateBase(player)
+{
+}
+
+void PlayerEvadeState::Enter(FSMContext& context)
 {
 	int direction = context.intParams[L"PlayerDirection"];
 
-	std::wstring stateText = std::to_wstring(direction) + std::wstring(L" Dodge");
+	std::wstring stateText = std::to_wstring(direction) + std::wstring(L" Evade");
 
 	context.textRenderer->SetText(stateText);
 
 	m_dodgeDirection = Player::CalculateDirectionVector(direction);
 	m_startPosition = context.rigidBody2d->GetPosition();
-	m_endPosition = m_startPosition + m_dodgeDirection * context.floatParams[L"DodgeDistance"];
+	m_endPosition = m_startPosition + m_dodgeDirection * m_player->GetPlayerStat().evadeDistance;
+
+	m_player->GetPlayerStatus().evadeIntervalTimer = 0.0f;
+
+	m_player->GetPlayerStatus().currentStamina -= m_player->GetPlayerStat().evadeStamina;
 }
 
-void PlayerDodgeState::Update(FSMContext& context)
+void PlayerEvadeState::Update(FSMContext& context)
 {
-	float dodgeSpeed = context.floatParams[L"DodgeSpeed"];
+	const auto& stat = m_player->GetPlayerStat();
+	auto& status = m_player->GetPlayerStatus();
 
-	Vector2 currentPosition = context.rigidBody2d->GetPosition();
-	
-	float remainDistanceSq = Vector2::DistanceSq(m_endPosition, currentPosition);
+	Vector2 dodgeVelocity = (m_endPosition - m_startPosition) * 1.0f / stat.evadeDuration;
 
-	Vector2 nextPosition = currentPosition +
-		m_dodgeDirection * dodgeSpeed * MyTime::FixedDeltaTime();
+	status.evadeDurationTimer += MyTime::FixedDeltaTime();
 
-	float nextDistanceSq = Vector2::DistanceSq(currentPosition, nextPosition);
-
-	if (remainDistanceSq <= nextDistanceSq)
+	if (status.evadeDurationTimer >= stat.evadeDuration)
 	{
+		status.evadeDurationTimer = 0.0f;
+
 		float horizontalInput = context.floatParams[L"HorizontalInput"];
 		float verticalInput = context.floatParams[L"VerticalInput"];
 
@@ -64,11 +71,11 @@ void PlayerDodgeState::Update(FSMContext& context)
 	}
 	else
 	{
-		context.rigidBody2d->SetVelocity(m_dodgeDirection * dodgeSpeed);
+		context.rigidBody2d->SetVelocity(dodgeVelocity);
 	}
 }
 
-void PlayerDodgeState::Exit(FSMContext& context)
+void PlayerEvadeState::Exit(FSMContext& context)
 {
 	context.rigidBody2d->SetVelocity({ 0.0f, 0.0f });
 }

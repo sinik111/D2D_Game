@@ -88,19 +88,21 @@ void DebugSystem::UpdateFPS(bool display)
     }
 }
 
-int DebugSystem::GetLastFPS()
+int DebugSystem::GetLastFPS() const
 {
     return m_lastFPS;
 }
 
-void DebugSystem::DisplayFPS()
+void DebugSystem::DisplayFPS() const
 {
-    Log(std::string("FPS: " + std::to_string(m_lastFPS)));
+    Log("FPS: ", m_lastFPS);
 }
 
-void DebugSystem::Log(const std::string& log)
+void DebugSystem::Log(const char* log) const
 {
-    std::string str = log + "\n";
+    std::string str{ log };
+
+    str += '\n';
 
     OutputDebugStringA(str.c_str());
 
@@ -110,9 +112,35 @@ void DebugSystem::Log(const std::string& log)
     }
 }
 
-void DebugSystem::Log(const std::wstring& log)
+void DebugSystem::Log(const wchar_t* log) const
 {
-    std::wstring str = log + L"\n";
+    std::wstring str{ log };
+
+    str += L'\n';
+
+    OutputDebugStringW(str.c_str());
+
+    if (m_isConsoleOn)
+    {
+        std::wcout << str;
+    }
+}
+
+void DebugSystem::Log(const std::string& log) const
+{
+    std::string str = log + '\n';
+
+    OutputDebugStringA(str.c_str());
+
+    if (m_isConsoleOn)
+    {
+        std::cout << str;
+    }
+}
+
+void DebugSystem::Log(const std::wstring& log) const
+{
+    std::wstring str = log + L'\n';
 
     OutputDebugStringW(str.c_str());
 

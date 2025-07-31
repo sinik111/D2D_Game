@@ -50,8 +50,8 @@ void Maps::Update()
 	// 마우스 우클릭으로 추가
 	if (Input::IsKeyPressed(VK_RBUTTON))
 	{
-		float width = Screen::Get().GetWidth()*0.5 ;
-		float height = Screen::Get().GetHeight() * 0.5;
+		float width = Screen::Get().GetWidth() * 0.5f;
+		float height = Screen::Get().GetHeight() * 0.5f;
 		
 		Transform* camera = GetGameObject()->GetComponent<CameraController>()->GetTransform();
 		float worldx = camera->GetLocalPosition().x + ((float)Input::GetCursorPoint().x - width);

@@ -14,22 +14,22 @@ void PlayerController::FixedUpdate()
 
 	if (Input::IsKeyHeld(VK_UP))
 	{
-		velocity.y += 1000.0f;
+		velocity.y += 200.0f;
 	}
 
 	if (Input::IsKeyHeld(VK_DOWN))
 	{
-		velocity.y -= 1000.0f;
+		velocity.y -= 200.0f;
 	}
 
 	if (Input::IsKeyHeld(VK_LEFT))
 	{
-		velocity.x -= 1000.0f;
+		velocity.x -= 200.0f;
 	}
 
 	if (Input::IsKeyHeld(VK_RIGHT))
 	{
-		velocity.x += 1000.0f;
+		velocity.x += 200.0f;
 	}
 
 	m_rb2d->SetVelocity(velocity);

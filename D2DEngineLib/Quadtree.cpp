@@ -27,34 +27,18 @@ void Quadtree::Clear()
         }
         root->isLeaf = true;
     }
-    allManagedObjects.clear(); // 관리하는 객체 목록도 초기화
 }
 
 void Quadtree::Insert(Collider* object)
 {
-    if (!object || !root) return;
-
-    // 이미 삽입된 객체인지 확인 (중복 삽입 방지)
-    // 실제 게임에서는 객체 ID를 사용하는 것이 더 효율적일 수 있습니다.
-    bool alreadyExists = false;
-    for (Collider* existingObj : allManagedObjects)
+    if (!object || !root)
     {
-        if (existingObj == object) // 포인터 주소로 동일성 판단
-        {
-            alreadyExists = true;
-            break;
-        }
-    }
-
-    if (!alreadyExists)
-    {
-        allManagedObjects.push_back(object);
+        return;
     }
 
     InsertObjectRecursive(root.get(), object);
 }
 
-// 기존 InsertObjectRecursive 로직은 변경 없음
 void Quadtree::InsertObjectRecursive(QuadtreeNode* node, Collider* object)
 {
     if (!Bounds::IsOverlap(node->bounds, object->GetSpatialBounds()))
@@ -65,6 +49,11 @@ void Quadtree::InsertObjectRecursive(QuadtreeNode* node, Collider* object)
     if (node->isLeaf || node->depth >= maxDepth)
     {
         node->objects.push_back(object);
+        
+        if (object->GetRigidBody2D() != nullptr)
+        {
+            object->AddBelongingNode(node);
+        }
 
         if (node->objects.size() > maxObjectsPerNode && node->depth < maxDepth)
         {
@@ -76,10 +65,6 @@ void Quadtree::InsertObjectRecursive(QuadtreeNode* node, Collider* object)
 
     for (int i = 0; i < 4; ++i)
     {
-        // 자식 노드가 생성되지 않은 경우 (Subdivide가 호출되지 않았을 때)
-        // 여기에 직접 객체를 삽입하는 것이 아니라,
-        // InsertObjectRecursive는 항상 자식 노드가 존재한다는 가정하에 호출되어야 합니다.
-        // 이 부분은 Subdivide 로직에 의해 보장됩니다.
         InsertObjectRecursive(node->children[i].get(), object);
     }
 }
@@ -111,6 +96,12 @@ void Quadtree::Subdivide(QuadtreeNode* node)
             if (node->children[i] && Bounds::IsOverlap(node->children[i]->bounds, obj->GetSpatialBounds()))
             {
                 node->children[i]->objects.push_back(obj);
+
+                if (obj->GetRigidBody2D() != nullptr)
+                {
+                    obj->AddBelongingNode(node);
+                }
+
                 if (node->children[i]->objects.size() > maxObjectsPerNode && node->children[i]->depth < maxDepth)
                 {
                     Subdivide(node->children[i].get());
@@ -120,8 +111,6 @@ void Quadtree::Subdivide(QuadtreeNode* node)
     }
 }
 
-// --- 새롭게 추가된 Update 및 Remove 로직 ---
-
 void Quadtree::Remove(Collider* object)
 {
     if (!object || !root)
@@ -129,25 +118,35 @@ void Quadtree::Remove(Collider* object)
         return;
     }
 
-    // 1. allManagedObjects 리스트에서 객체 제거
-    // std::remove_if는 조건에 맞는 요소를 끝으로 보내고 새 end 이터레이터를 반환합니다.
-    // 그 다음 erase를 호출하여 실제로 제거합니다.
-    auto it_managed = std::remove(allManagedObjects.begin(), allManagedObjects.end(), object);
-    if (it_managed != allManagedObjects.end())
-    {
-        allManagedObjects.erase(it_managed, allManagedObjects.end());
-    }
-    else {
-        // 객체가 allManagedObjects에 없으면 쿼드트리에도 없을 가능성이 높습니다.
-        // 하지만 혹시 모를 상황을 대비해 계속 진행합니다.
-        // std::cout << "Warning: Object to remove not found in allManagedObjects list." << std::endl;
-    }
-
-    // 2. 쿼드트리 노드들에서 객체 제거
     RemoveObjectRecursive(root.get(), object);
 }
 
-// 쿼드트리에 삽입된 모든 객체 중 dirty 상태인 객체들을 찾아 업데이트합니다.
+void Quadtree::Relocate(Collider* object)
+{
+    auto& nodes = object->GetBelongingNode();
+    if (!nodes.empty())
+    {
+        for (const auto& node : nodes)
+        {
+            for (auto iter = node->objects.begin(); iter != node->objects.end(); ++iter)
+            {
+                if (*iter == object)
+                {
+                    std::swap(*iter, node->objects.back());
+
+                    node->objects.pop_back();
+
+                    break;
+                }
+            }
+        }
+    }
+
+    nodes.clear();
+
+    Insert(object);
+}
+
 void Quadtree::Update()
 {
     std::vector<Collider*> dirtyObjectsToReinsert;
@@ -206,7 +205,10 @@ void Quadtree::Update()
 // 객체가 발견되어 제거되면 true를 반환합니다.
 bool Quadtree::RemoveObjectRecursive(QuadtreeNode* node, Collider* object)
 {
-    if (!node) return false;
+    if (!node)
+    {
+        return false;
+    }
 
     // 객체가 현재 노드의 영역 내에 있는지 확인 (최적화)
     if (!Bounds::IsOverlap(node->bounds, object->GetSpatialBounds()))

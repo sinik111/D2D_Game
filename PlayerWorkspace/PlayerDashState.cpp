@@ -6,6 +6,11 @@
 
 #include "Player.h"
 
+PlayerDashState::PlayerDashState(Player* player)
+	: PlayerStateBase(player)
+{
+}
+
 void PlayerDashState::Enter(FSMContext& context)
 {
 	int direction = context.intParams[L"PlayerDirection"];
@@ -38,13 +43,25 @@ void PlayerDashState::Update(FSMContext& context)
 		return;
 	}
 
+	m_player->GetPlayerStatus().currentStamina -= m_player->GetPlayerStat().dashStaminaPerSec * MyTime::FixedDeltaTime();
+	if (m_player->GetPlayerStatus().currentStamina < 0.0f)
+	{
+		m_player->GetPlayerStatus().currentStamina = 0.0f;
+
+		context.nextStateName = L"Walk";
+
+		context.shouldChangeState = true;
+
+		return;
+	}
+
 	int direction = context.intParams[L"PlayerDirection"];
 
 	std::wstring stateText = std::to_wstring(direction) + std::wstring(L" Dash");
 
 	context.textRenderer->SetText(stateText);
 
-	float dashSpeed = context.floatParams[L"DashSpeed"];
+	float dashSpeed = m_player->GetPlayerStat().dashSpeed;
 
 	Vector2 directionVector = Player::CalculateDirectionVector(direction);
 

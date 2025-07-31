@@ -1,13 +1,15 @@
 #pragma once
 
-#include "../D2DEngineLib/IState.h"
+#include "PlayerStateBase.h"
 
 class PlayerWalkState :
-	public IState
+	public PlayerStateBase
 {
 private:
-	float m_dodgeAvailableTimer = 0.0f;
 	bool m_canDodge = false;
+
+public:
+	PlayerWalkState(Player* player);
 
 public:
 	void Enter(FSMContext& context) override;

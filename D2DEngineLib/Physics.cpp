@@ -11,7 +11,7 @@
 #include "Circle.h"
 
 const Vector2 Physics::gravity{ 0.0f, -500.0f };
-std::map<CollisionLayer, unsigned int> Physics::s_collisionMasks;
+std::unordered_map<CollisionLayer, unsigned int> Physics::s_collisionMasks;
 
 void Physics::SetupCollisionMatrix()
 {
@@ -220,7 +220,7 @@ CollisionInfo Physics::DetectCollisionCircleCircle(const CircleCollider* a, cons
 		info.penetrationDepth = radiiSum - distance;
 
 		// 6. 충돌 법선
-		if (distance == 0.0f)
+		if (distance < MyMath::EPSILON)
 		{
 			info.normal = { 0.0f, 1.0f };
 		}
@@ -357,19 +357,33 @@ CollisionInfo Physics::DetectCollisionBoxCircle(const BoxCollider2D* a, const Ci
 		info.penetrationDepth = circle.radius - distance;
 
 		// 5. 충돌 법선 (Normal)
-		if (distance == 0.0f)
+		if (distance < MyMath::EPSILON)
 		{
 			Vector2 aabbCenter = { (boxMin.x + boxMax.x) / 2.0f, (boxMin.y + boxMax.y) / 2.0f };
-			info.normal = (circle.center - aabbCenter).Normalized();
-			if (info.normal.LengthSq() == 0.0f) // 만약 원의 중심이 AABB 중심과 겹치면
+			Vector2 direction = circle.center - aabbCenter;
+			
+			if (direction.LengthSq() < MyMath::EPSILON) // 만약 원의 중심이 AABB 중심과 겹치면
 			{
 				info.normal = { 0.0f, 1.0f }; // 기본값으로 위쪽 법선 설정
+			}
+			else
+			{
+				info.normal = (circle.center - aabbCenter).Normalized();
 			}
 		}
 		else
 		{
-			info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
+			if (distanceSquared < MyMath::EPSILON)
+			{
+				info.normal = { 0.0f, 1.0f }; // 기본값으로 위쪽 법선 설정
+			}
+			else
+			{
+				info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
+			}
 		}
+
+
 
 		info.contactPoint = circle.center - info.normal * circle.radius;
 
@@ -391,11 +405,13 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 	const Vector2 boxMin = box.GetMin();
 	const Vector2 boxMax = box.GetMax();
 
+	// 1. AABB 내에서 원의 중심과 가장 가까운 점 찾기
 	const float closestX = MyMath::Clamp(circle.center.x, boxMin.x, boxMax.x);
 	const float closestY = MyMath::Clamp(circle.center.y, boxMin.y, boxMax.y);
 
 	Vector2 closestPoint{ closestX, closestY };
 
+	// 2. 가장 가까운 점과 원의 중심 간의 거리 계산
 	const Vector2 displacement = circle.center - closestPoint;
 	const float distanceSquared = displacement.LengthSq();
 	const float distance = std::sqrt(distanceSquared);
@@ -404,25 +420,39 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 
 	CollisionInfo info;
 
+	// 3. 충돌 여부 판단
 	if (distanceSquared <= radiusSquared)
 	{
 		info.isCollide = true;
 
+		// 4. 파고들어간 거리 (Penetration Depth)
 		info.penetrationDepth = circle.radius - distance;
 
-		if (distance == 0.0f)
+		// 5. 충돌 법선 (Normal)
+		if (distance < MyMath::EPSILON)
 		{
-
 			Vector2 aabbCenter = { (boxMin.x + boxMax.x) / 2.0f, (boxMin.y + boxMax.y) / 2.0f };
-			info.normal = (circle.center - aabbCenter).Normalized();
-			if (info.normal.LengthSq() == 0.0f) // 만약 원의 중심이 AABB 중심과 겹치면
+			Vector2 direction = circle.center - aabbCenter;
+
+			if (direction.LengthSq() < MyMath::EPSILON) // 만약 원의 중심이 AABB 중심과 겹치면
 			{
 				info.normal = { 0.0f, 1.0f }; // 기본값으로 위쪽 법선 설정
+			}
+			else
+			{
+				info.normal = (circle.center - aabbCenter).Normalized();
 			}
 		}
 		else
 		{
-			info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
+			if (distanceSquared < MyMath::EPSILON)
+			{
+				info.normal = { 0.0f, 1.0f }; // 기본값으로 위쪽 법선 설정
+			}
+			else
+			{
+				info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
+			}
 		}
 
 		info.contactPoint = circle.center - info.normal * circle.radius;
@@ -477,8 +507,8 @@ CollisionInfo Physics::DetectCollisionLineCircle(const LineCollider* a, const Ci
 	auto rb = b->GetRigidBody2D();
 	if (rb)
 	{
-		Vector2 lastPosition = rb->GetLastFramePosition();
-		Vector2 estimatePosition = rb->GetPosition();
+		Vector2 lastPosition = rb->GetLastFramePosition() + b->GetOffset();
+		Vector2 estimatePosition = rb->GetPosition() + b->GetOffset();
 
 		Vector2 sweepLine = estimatePosition - lastPosition;
 		Vector2 segmentLine = segment.endPoint - segment.startPoint;
@@ -761,7 +791,7 @@ Vector2 Physics::GetClosestPointOnLineSegment(const Vector2& point, const LineSe
 	Vector2 AB = segment.endPoint - segment.startPoint; // 선분 벡터
 	float lengthSq = AB.LengthSq(); // 선분 길이의 제곱
 
-	if (lengthSq == 0.0f) // 선분이 점과 같거나 길이가 0인 경우
+	if (lengthSq < MyMath::EPSILON) // 선분이 점과 같거나 길이가 0인 경우
 	{
 		t_out = 0.0f;
 

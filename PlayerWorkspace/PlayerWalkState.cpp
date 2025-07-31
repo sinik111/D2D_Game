@@ -6,6 +6,11 @@
 
 #include "Player.h"
 
+PlayerWalkState::PlayerWalkState(Player* player)
+	: PlayerStateBase(player)
+{
+}
+
 void PlayerWalkState::Enter(FSMContext& context)
 {
 	int direction = context.intParams[L"PlayerDirection"];
@@ -29,16 +34,18 @@ void PlayerWalkState::Update(FSMContext& context)
 		return;
 	}
 
-	if (context.triggerParams[L"Dodge"])
+	if (context.triggerParams[L"Evade"])
 	{
 		m_canDodge = true;
 	}
 
 	if (!context.boolParams[L"Dash"])
 	{
-		if (m_canDodge)
+		if (m_canDodge &&
+			m_player->GetPlayerStatus().evadeIntervalTimer >= m_player->GetPlayerStat().evadeInterval &&
+			m_player->GetPlayerStatus().currentStamina >= m_player->GetPlayerStat().evadeStamina)
 		{
-			context.nextStateName = L"Dodge";
+			context.nextStateName = L"Evade";
 
 			context.shouldChangeState = true;
 
@@ -46,15 +53,21 @@ void PlayerWalkState::Update(FSMContext& context)
 		}
 	}
 
+	m_player->GetPlayerStatus().currentStamina += m_player->GetPlayerStat().staminaRestoreAmountPerSecond * MyTime::FixedDeltaTime();
+	if (m_player->GetPlayerStatus().currentStamina > m_player->GetPlayerStat().maxStamina)
+	{
+		m_player->GetPlayerStatus().currentStamina = m_player->GetPlayerStat().maxStamina;
+	}
+
 	if (m_canDodge)
 	{
-		m_dodgeAvailableTimer += MyTime::FixedDeltaTime();
+		m_player->GetPlayerStatus().evadeAvailalbeTimer += MyTime::FixedDeltaTime();
 
-		if (m_dodgeAvailableTimer >= context.floatParams[L"DodgeAvailableTime"])
+		if (m_player->GetPlayerStatus().evadeAvailalbeTimer >= m_player->GetPlayerStat().evadeAvailableTime)
 		{
 			m_canDodge = false;
 
-			m_dodgeAvailableTimer = 0.0f;
+			m_player->GetPlayerStatus().evadeAvailalbeTimer = 0.0f;
 		}
 	}
 
@@ -64,7 +77,7 @@ void PlayerWalkState::Update(FSMContext& context)
 
 	context.textRenderer->SetText(stateText);
 
-	float moveSpeed = context.floatParams[L"MoveSpeed"];
+	float moveSpeed = m_player->GetPlayerStat().moveSpeed;
 
 	Vector2 directionVector = Player::CalculateDirectionVector(direction);
 
@@ -77,5 +90,5 @@ void PlayerWalkState::Exit(FSMContext& context)
 
 	m_canDodge = false;
 
-	m_dodgeAvailableTimer = 0.0f;
+	m_player->GetPlayerStatus().evadeAvailalbeTimer = 0.0f;
 }

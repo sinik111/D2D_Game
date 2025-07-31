@@ -46,15 +46,17 @@ public:
     // Frame Count 누적, 매 프레임 호출 해야함
     void UpdateFPS(bool display = false);
     // 최근 FPS
-    int GetLastFPS();
+    int GetLastFPS() const;
     // 최근 FPS 콘솔에 출력, 기본적으로 UpdateFPS에서 호출 중임
-    void DisplayFPS();
+    void DisplayFPS() const;
 
-    void Log(const std::string& log);
-    void Log(const std::wstring& log);
+    void Log(const char* log) const;
+    void Log(const wchar_t* log) const;
+    void Log(const std::string& log) const;
+    void Log(const std::wstring& log) const;
 
     template<typename...Args>
-    void Log(Args...args)
+    void Log(Args...args) const
     {
         std::wostringstream woss;
 
@@ -64,13 +66,13 @@ public:
     }
 
     template<typename T>
-    void Log(std::wostringstream& woss, T arg)
+    void Log(std::wostringstream& woss, T arg) const
     {
         woss << arg;
     }
 
     template<typename T, typename...Args>
-    void Log(std::wostringstream& woss, T arg, Args...args)
+    void Log(std::wostringstream& woss, T arg, Args...args) const
     {
         woss << arg;
 

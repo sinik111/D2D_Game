@@ -30,6 +30,8 @@ public:
     // 최근 FPS 콘솔에 출력, 기본적으로 UpdateFPS에서 호출 중임
     static void DisplayFPS();
 
+    static void Log(const char* log);
+    static void Log(const wchar_t* log);
     static void Log(const std::string& log);
     static void Log(const std::wstring& log);
     template<typename...Args>

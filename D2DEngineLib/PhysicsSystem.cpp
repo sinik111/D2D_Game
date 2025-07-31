@@ -104,10 +104,72 @@ void PhysicsSystem::ProcessPhysics()
 
 	UpdateColliders();
 
-	m_quadtree->Update();
+	for (auto collider : m_rigidBodyColliders)
+	{
+		m_quadtree->Relocate(collider);
+	}
 
 	m_currentCollisions.clear();
 	m_currentTriggers.clear();
+
+	//for (auto collider : m_rigidBodyColliders) // no quadtree
+	//{
+	//	//auto candidates = m_quadtree->GetPotentialCollisions(collider);
+
+	//	//for (auto candidate : candidates)
+	//	for (auto candidate : m_colliders)
+	//	{
+	//		if (collider == candidate)
+	//		{
+	//			continue;
+	//		}
+
+	//		bool isInteractable = (Physics::GetCollisionMask(collider->GetLayer())
+	//			& static_cast<unsigned int>(candidate->GetLayer())) != 0;
+
+	//		if (isInteractable)
+	//		{
+	//			Collider* colliderA;
+	//			Collider* colliderB;
+
+	//			CollisionInfo info;
+
+	//			if (collider < candidate)
+	//			{
+	//				colliderA = collider;
+	//				colliderB = candidate;
+
+	//				info = colliderB->DetectCollision(colliderA);
+	//			}
+	//			else
+	//			{
+	//				colliderA = candidate;
+	//				colliderB = collider;
+
+	//				info = colliderA->DetectCollision(colliderB);
+	//			}
+
+	//			if (info.isCollide)
+	//			{
+	//				colliderA->SetIsCollide(true);
+	//				colliderB->SetIsCollide(true);
+
+	//				CollisionPair pair{ colliderA, colliderB };
+
+	//				if (colliderA->GetTrigger() || colliderB->GetTrigger())
+	//				{
+	//					m_currentTriggers.emplace(pair, info);
+	//				}
+	//				else
+	//				{
+	//					m_currentCollisions.emplace(pair, info);
+
+	//					Physics::ResolveCollision(info);
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 
 	for (auto collider : m_rigidBodyColliders)
 	{
@@ -161,6 +223,9 @@ void PhysicsSystem::ProcessPhysics()
 						m_currentCollisions.emplace(pair, info);
 
 						Physics::ResolveCollision(info);
+
+						colliderA->UpdateCollider();
+						colliderB->UpdateCollider();
 					}
 				}
 			}

@@ -1,6 +1,8 @@
 #include "../D2DEngineLib/framework.h"
 #include "Player.h"
 
+#include <sstream>
+
 #include "../D2DEngineLib/RigidBody2D.h"
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/BitmapRenderer.h"
@@ -9,7 +11,7 @@
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
 #include "PlayerDashState.h"
-#include "PlayerDodgeState.h"
+#include "PlayerEvadeState.h"
 
 constexpr static PlayerDirection s_directionEnums[3][3]{
 	{ 
@@ -41,6 +43,10 @@ const Vector2 s_directionVectors[9]{
 		{ 0.0f, 0.0f }
 };
 
+const wchar_t* keyInfo{ L"이동: 방향키\n"
+	L"회피: L - Shift 짧게\n"
+	L"대시 : 회피 후 L - Shift 유지\n" };
+
 void Player::Initialize()
 {
 	m_rigidBody2d = GetGameObject()->GetComponent<RigidBody2D>();
@@ -70,26 +76,41 @@ void Player::Start()
 	m_fsmContext.textRenderer = textRenderer;
 	m_fsmContext.floatParams[L"HorizontalInput"] = 0.0f;
 	m_fsmContext.floatParams[L"VerticalInput"] = 0.0f;
-	m_fsmContext.floatParams[L"MoveSpeed"] = m_moveSpeed;
-	m_fsmContext.floatParams[L"DashSpeed"] = m_dashSpeed;
-	m_fsmContext.floatParams[L"DodgeDistance"] = m_dodgeDistance;
-	m_fsmContext.floatParams[L"DodgeSpeed"] = m_dodgeSpeed;
 	m_fsmContext.intParams[L"PlayerDirection"] = static_cast<int>(PlayerDirection::Down);
 	m_fsmContext.boolParams[L"Dash"] = false;
-	m_fsmContext.triggerParams[L"Dodge"] = false;
-	m_fsmContext.floatParams[L"DodgeAvailableTime"] = m_dodgeAvailableTime;
+	m_fsmContext.triggerParams[L"Evade"] = false;
 
-	m_playerFSM.AddState<PlayerIdleState>(L"Idle", false);
-	m_playerFSM.AddState<PlayerWalkState>(L"Walk", false);
-	m_playerFSM.AddState<PlayerDashState>(L"Dash", false);
-	m_playerFSM.AddState<PlayerDodgeState>(L"Dodge", false);
+	m_playerFSM.AddState<PlayerIdleState>(L"Idle", false, this);
+	m_playerFSM.AddState<PlayerWalkState>(L"Walk", false, this);
+	m_playerFSM.AddState<PlayerDashState>(L"Dash", false, this);
+	m_playerFSM.AddState<PlayerEvadeState>(L"Evade", false, this);
 
 	m_playerFSM.SetState(L"Idle", m_fsmContext);
+
+	m_playerInfoTextRenderer->SetPivot({ 0.0f, 0.0f });
+	m_playerInfoTextRenderer->SetRectSize({ 800.0f, 1080.0f });
 }
 
 void Player::FixedUpdate()
 {
 	m_playerFSM.Update(m_fsmContext);
+}
+
+void Player::Update()
+{
+	std::wostringstream woss;
+
+	woss << keyInfo << L"\n\n";
+	woss << m_playerStat << L"\n\n";
+	woss << m_playerStatus;
+
+	m_playerInfoTextRenderer->SetText(woss.str());
+
+	m_playerStatus.evadeIntervalTimer += MyTime::DeltaTime();
+	if (m_playerStatus.evadeIntervalTimer > m_playerStat.evadeInterval)
+	{
+		m_playerStatus.evadeIntervalTimer = m_playerStat.evadeInterval;
+	}
 }
 
 void Player::SetDirectionInput(Vector2 input)
@@ -112,12 +133,27 @@ void Player::DashKeyPressed()
 {
 	m_fsmContext.boolParams[L"Dash"] = true;
 
-	m_fsmContext.triggerParams[L"Dodge"] = true;
+	m_fsmContext.triggerParams[L"Evade"] = true;
 }
 
 void Player::DashKeyReleased()
 {
 	m_fsmContext.boolParams[L"Dash"] = false;
+}
+
+const PlayerStat& Player::GetPlayerStat() const
+{
+	return m_playerStat;
+}
+
+PlayerStatus& Player::GetPlayerStatus()
+{
+	return m_playerStatus;
+}
+
+void Player::SetPlayerInfoTextRenderer(TextRenderer* textRenderer)
+{
+	m_playerInfoTextRenderer = textRenderer;
 }
 
 Vector2 Player::CalculateDirectionVector(PlayerDirection direction)
@@ -128,4 +164,33 @@ Vector2 Player::CalculateDirectionVector(PlayerDirection direction)
 Vector2 Player::CalculateDirectionVector(int direction)
 {
 	return s_directionVectors[direction];
+}
+
+inline std::wostringstream& operator<<(std::wostringstream& woss, const PlayerStat& playerStat)
+{
+	woss << L"MaxHp: " << playerStat.maxhp << L"\nMaxStamina: " << playerStat.maxStamina
+		<< L"\nStaminaRestoreAmountPerSecond: " << playerStat.staminaRestoreAmountPerSecond
+		<< L"\nAttackPowerMin: " << playerStat.attackPowerMin << L"\nAttackPowerMax: " << playerStat.attackPowerMax
+		<< L"\nAttackStaminaCost: " << playerStat.attackStaminaCost << L"\nHeavyAttackStaminaCost: "
+		<< playerStat.heavyAttackStaminaCost << L"\nAttackInterval: " << playerStat.attackInterval
+		<< L"\nKnockbackResist: " << playerStat.knockbackResist << L"\nKnockdownResist: " << playerStat.knockdownResist
+		<< L"\nKnockdownResetTime: " << playerStat.knockdownResetTime << L"MoveSpeed: " << playerStat.moveSpeed
+		<< L"\nDashSpeed: " << playerStat.dashSpeed << L"\nDashStaminaPerSec: " << playerStat.dashStaminaPerSec
+		<< L"\nEvadeDistance: " << playerStat.evadeDistance << L"\nEvadeDuration: " << playerStat.evadeDuration
+		<< L"\nEvadeAvailableTime: " << playerStat.evadeAvailableTime << L"\nEvadeInterval: " << playerStat.evadeInterval
+		<< L"\nEvadeStamina: " << playerStat.evadeStamina;
+
+	return woss;
+}
+
+inline std::wostringstream& operator<<(std::wostringstream& woss, const PlayerStatus& playerStatus)
+{
+	woss << L"CurrentHp: " << playerStatus.currentHp << L"\nCurrentStamina: " << playerStatus.currentStamina
+		<< L"\nAttackIntervalTimer: " << playerStatus.attackIntervalTimer << L"\nCurrentKnockback: "
+		<< playerStatus.currentKnockback << L"\nCurrentKnockdown: " << playerStatus.currentKnockdown
+		<< L"\nKnockdownResetTimer: " << playerStatus.knockdownResetTimer << L"\nEvadeDurationTimer: "
+		<< playerStatus.evadeDurationTimer << L"\nEvadeAvailalbeTimer: " << playerStatus.evadeAvailalbeTimer
+		<< L"\nEvadeIntervalTimer: " << playerStatus.evadeIntervalTimer;
+
+	return woss;
 }

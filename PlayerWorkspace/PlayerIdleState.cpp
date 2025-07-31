@@ -4,6 +4,13 @@
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/RigidBody2D.h"
 
+#include "Player.h"
+
+PlayerIdleState::PlayerIdleState(Player* player)
+	: PlayerStateBase(player)
+{
+}
+
 void PlayerIdleState::Enter(FSMContext& context)
 {
 	int direction = context.intParams[L"PlayerDirection"];
@@ -25,6 +32,12 @@ void PlayerIdleState::Update(FSMContext& context)
 		context.shouldChangeState = true;
 
 		return;
+	}
+
+	m_player->GetPlayerStatus().currentStamina += m_player->GetPlayerStat().staminaRestoreAmountPerSecond * MyTime::FixedDeltaTime();
+	if (m_player->GetPlayerStatus().currentStamina > m_player->GetPlayerStat().maxStamina)
+	{
+		m_player->GetPlayerStatus().currentStamina = m_player->GetPlayerStat().maxStamina;
 	}
 }
 

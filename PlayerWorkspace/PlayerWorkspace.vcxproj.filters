@@ -30,13 +30,16 @@
     <ClCompile Include="PlayerDashState.cpp">
       <Filter>02_Script\State</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerDodgeState.cpp">
+    <ClCompile Include="PlayerEvadeState.cpp">
       <Filter>02_Script\State</Filter>
     </ClCompile>
     <ClCompile Include="PlayerIdleState.cpp">
       <Filter>02_Script\State</Filter>
     </ClCompile>
     <ClCompile Include="PlayerWalkState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateBase.cpp">
       <Filter>02_Script\State</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +56,16 @@
     <ClInclude Include="PlayerDashState.h">
       <Filter>02_Script\State</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerDodgeState.h">
+    <ClInclude Include="PlayerEvadeState.h">
       <Filter>02_Script\State</Filter>
     </ClInclude>
     <ClInclude Include="PlayerIdleState.h">
       <Filter>02_Script\State</Filter>
     </ClInclude>
     <ClInclude Include="PlayerWalkState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateBase.h">
       <Filter>02_Script\State</Filter>
     </ClInclude>
   </ItemGroup>
