@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Debug.h"
 
-#include "DebugSystem.h"
-
 void Debug::CreateConsole()
 {
 #ifdef _DEBUG

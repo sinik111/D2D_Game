@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <sstream>
 
 using Clock = std::chrono::high_resolution_clock;
 using TimePoint = std::chrono::time_point<Clock>;
@@ -51,6 +52,30 @@ public:
 
     void Log(const std::string& log);
     void Log(const std::wstring& log);
+
+    template<typename...Args>
+    void Log(Args...args)
+    {
+        std::wostringstream woss;
+
+        Log(woss, args...);
+
+        Log(woss.str());
+    }
+
+    template<typename T>
+    void Log(std::wostringstream& woss, T arg)
+    {
+        woss << arg;
+    }
+
+    template<typename T, typename...Args>
+    void Log(std::wostringstream& woss, T arg, Args...args)
+    {
+        woss << arg;
+
+        Log(woss, args...);
+    }
 
     void SetVRAMCurrentUsage(UINT64 usage);
     void SetDRAMCurrentUsage(size_t usage);

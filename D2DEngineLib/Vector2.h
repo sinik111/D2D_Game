@@ -2,6 +2,7 @@
 
 #include <d2d1_1.h>
 #include <cassert>
+#include <sstream>
 
 #include "MyMath.h"
 
@@ -216,4 +217,11 @@ public:
 inline Vector2 operator*(float scalar, const Vector2& v)
 {
 	return Vector2(v.x * scalar, v.y * scalar);
+}
+
+inline std::wostringstream& operator<<(std::wostringstream& woss, const Vector2& v)
+{
+	woss << L"{ " << v.x << L", " << v.y << L" }";
+
+	return woss;
 }

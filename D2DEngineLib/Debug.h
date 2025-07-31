@@ -5,6 +5,8 @@
 #include <crtdbg.h>
 #endif // _DEBUG
 
+#include "DebugSystem.h"
+
 // Release 모드에서는 대부분 작동안함
 class Debug
 {
@@ -30,6 +32,13 @@ public:
 
     static void Log(const std::string& log);
     static void Log(const std::wstring& log);
+    template<typename...Args>
+    static void Log(Args...args)
+    {
+#ifdef _DEBUG
+        DebugSystem::Get().Log(args...);
+#endif // _DEBUG
+    }
 
     static UINT64 GetVRAMCurrentUsage();
     static size_t GetDRAMCurrentUsage();
