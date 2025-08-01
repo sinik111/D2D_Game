@@ -48,6 +48,7 @@ public:
 
 public:
 	void SetBitmap(const std::wstring& filePath);
+	void SetBitmap(std::shared_ptr<BitmapResource> bitmapResource);
 	void SetSortOrder(int sortOrder);
 	void SetFlipX(bool doFlip);
 	void SetSpaceType(SpaceType spaceType);

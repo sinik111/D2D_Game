@@ -30,16 +30,13 @@ void PlayerEvadeState::Enter(FSMContext& context)
 
 void PlayerEvadeState::Update(FSMContext& context)
 {
-	const auto& stat = m_player->GetPlayerStat();
-	auto& status = m_player->GetPlayerStatus();
+	Vector2 dodgeVelocity = (m_endPosition - m_startPosition) * 1.0f / m_player->GetPlayerStat().evadeDuration;
 
-	Vector2 dodgeVelocity = (m_endPosition - m_startPosition) * 1.0f / stat.evadeDuration;
+	m_player->GetPlayerStatus().evadeDurationTimer += MyTime::FixedDeltaTime();
 
-	status.evadeDurationTimer += MyTime::FixedDeltaTime();
-
-	if (status.evadeDurationTimer >= stat.evadeDuration)
+	if (m_player->GetPlayerStatus().evadeDurationTimer >= m_player->GetPlayerStat().evadeDuration)
 	{
-		status.evadeDurationTimer = 0.0f;
+		m_player->GetPlayerStatus().evadeDurationTimer = 0.0f;
 
 		float horizontalInput = context.floatParams[L"HorizontalInput"];
 		float verticalInput = context.floatParams[L"VerticalInput"];

@@ -139,13 +139,12 @@
   <ItemGroup>
     <ClCompile Include="DummyIdle.cpp" />
     <ClCompile Include="DummyP.cpp" />
-    <ClCompile Include="EnemyBaseAttackOne.cpp" />
-    <ClCompile Include="EnemyBaseDamaged.cpp" />
-    <ClCompile Include="EnemyBaseDash.cpp" />
-    <ClCompile Include="EnemyBaseDead.cpp" />
     <ClCompile Include="EnemyBaseIdle.cpp" />
     <ClCompile Include="EnemyBaseMove.cpp" />
+    <ClCompile Include="EnemyEngage.cpp" />
     <ClCompile Include="EnemyInArea.cpp" />
+    <ClCompile Include="EnemyOnAttack.cpp" />
+    <ClCompile Include="EnemyReturn.cpp" />
     <ClCompile Include="EnemyState.cpp" />
     <ClCompile Include="EnemyTestScene.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
@@ -153,6 +152,7 @@
     <ClCompile Include="JC_DemoGameApp.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="EnemyOutOfArea.cpp" />
+    <ClCompile Include="TempEnemyAttackCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\D2DEngineLib\D2DEngineLib.vcxproj">
@@ -165,19 +165,19 @@
   <ItemGroup>
     <ClInclude Include="DummyIdle.h" />
     <ClInclude Include="DummyP.h" />
-    <ClInclude Include="EnemyBaseAttackOne.h" />
-    <ClInclude Include="EnemyBaseDamaged.h" />
-    <ClInclude Include="EnemyBaseDash.h" />
-    <ClInclude Include="EnemyBaseDead.h" />
     <ClInclude Include="EnemyBaseIdle.h" />
     <ClInclude Include="EnemyBaseMove.h" />
+    <ClInclude Include="EnemyEngage.h" />
     <ClInclude Include="EnemyInArea.h" />
+    <ClInclude Include="EnemyOnAttack.h" />
+    <ClInclude Include="EnemyReturn.h" />
     <ClInclude Include="EnemyState.h" />
     <ClInclude Include="EnemyTestScene.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="FollowCameraController.h" />
     <ClInclude Include="JC_DemoGameApp.h" />
     <ClInclude Include="EnemyOutOfArea.h" />
+    <ClInclude Include="TempEnemyAttackCollider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

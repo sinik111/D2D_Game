@@ -1,18 +1,18 @@
 #include "../D2DEngineLib/framework.h"
-#include "Maps.h"
 #include "../D2DEngineLib/GameObject.h"
 #include "../D2DEngineLib/D2DRenderer.h"
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/PlayerInputSystem.h"
 #include "../D2DEngineLib/Input.h"
 #include "../D2DEngineLib/Camera.h"
-#include "CameraController.h"
-#include <fstream>
 #include "../D2DEngineLib/json.hpp"
-#include <iostream>
 #include "../D2DEngineLib/Screen.h"
 #include "../D2DEngineLib/LineSegment.h"
 #include "../D2DEngineLib/LineCollider.h"
+#include <fstream>
+#include <iostream>
+#include "CameraController.h"
+#include "Maps.h"
 
 using json = nlohmann::json;
 
@@ -59,13 +59,18 @@ void Maps::Update()
 
 		Vector2 pos{ worldx, worldy};
 		m_Positions.push_back(pos);
+		
+		//Float2Imgui* imgui = GetGameObject()->AddComponent<Float2Imgui>();
+		//imgui->SetImGui("pos", &m_Positions[m_Positions.size() - 1].x);
+		//imgui->Add();
+
 		std::cout << "x : " << pos.x << ", y : " << pos.y << std::endl;
 	}
 	
 	if (Input::IsKeyPressed(VK_RETURN))
 	{
 		ExportJsontoPath("Resource/points.json");
-		AddtoImgui();
+		//AddtoImgui(&m_ImGui);
 	}
 	
 	if (Input::IsKeyPressed(VK_DELETE))
@@ -131,6 +136,7 @@ std::string Maps::ConvertPositiontoJSON()
 			j["end"] = { {"x", relativeEnd.x}, {"y", relativeEnd.y} };
 			jarr.push_back(j);
 		}
+		
 	}
 	json j;
 	j["lines"] = jarr;
@@ -165,15 +171,12 @@ void Maps::CreateLineCollider()
 		//json파일의 라인의 개수만큼 크기 조정
 		for (auto& line : j["lines"])
 		{
-			GameObject* gameobject = CreateGameObject();
-			//Float2Imgui* imgui = gameobject->AddComponent<Float2Imgui>();
-			//imgui->SetImGui()
+			GameObject* gameobject = CreateGameObject(L"LineCollider");
 
 			Vector2 position;
 			position.x = line["center"]["x"];
 			position.y = line["center"]["y"];
 			gameobject->GetTransform()->SetLocalPosition(position);
-
 
 			LineCollider* linecollider = gameobject->AddComponent<LineCollider>();
 			Vector2 startPoint;
@@ -183,17 +186,10 @@ void Maps::CreateLineCollider()
 			Vector2 endPoint;
 			endPoint.x = line["end"]["x"];
 			endPoint.y = line["end"]["y"];
-			std::cout << "startPoint : " << startPoint.x <<", " << startPoint.y <<"\nendPoint : " << endPoint.x <<", " << endPoint.y << std::endl;
+			//std::cout << "startPoint : " << startPoint.x <<", " << startPoint.y <<"\nendPoint : " << endPoint.x <<", " << endPoint.y << std::endl;
 			linecollider->SetLine(startPoint, endPoint);
+			
+			std::cout << "x : " << gameobject->GetTransform()->GetLocalPosition().x <<", y :" << gameobject->GetTransform()->GetLocalPosition(). y<< std::endl;
 		}
 	}
-}
-
-void Maps::AddtoImgui()
-{
-	//for(auto& it : m_Positions)
-	//{
-		m_ImGui.SetImGui(std::string("example"), &(m_Positions[0].x));
-		m_ImGui.Add();
-	//}
 }

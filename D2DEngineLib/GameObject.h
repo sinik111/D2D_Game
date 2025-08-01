@@ -5,7 +5,7 @@
 #include "Component.h"
 
 class Script;
-
+class Maps;
 class GameObject :
     public Object
 {
@@ -56,13 +56,15 @@ public:
     }
 
     template<typename T>
-    T* GetComponent()
+    T* GetComponent() const
     {
         for (const auto& comp : m_components)
         {
-            if (typeid(*(comp.get())) == typeid(T))
+            auto component = dynamic_cast<T*>(comp.get());
+
+            if (component)
             {
-                return static_cast<T*>(comp.get());
+                return component;
             }
         }
 
@@ -70,15 +72,17 @@ public:
     }
 
     template<typename T>
-    std::vector<T*> GetComponents()
+    std::vector<T*> GetComponents() const
     {
         std::vector<T*> components;
 
         for (const auto& comp : m_components)
         {
-            if (typeid(*(comp.get())) == typeid(T))
+            auto component = dynamic_cast<T*>(comp.get());
+
+            if (component)
             {
-                components.push_back(static_cast<T*>(comp.get()));
+                components.push_back(component);
             }
         }
 
@@ -87,4 +91,6 @@ public:
 
 public:
     static GameObject* Find(const std::wstring name);
+
+    //friend class Maps;
 };

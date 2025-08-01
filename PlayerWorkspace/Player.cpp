@@ -7,11 +7,13 @@
 #include "../D2DEngineLib/PlayerInput.h"
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/TextRenderer.h"
+#include "../D2DEngineLib/Animator.h"
 
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
 #include "PlayerDashState.h"
 #include "PlayerEvadeState.h"
+#include "PlayerNormalAttackState.h"
 
 constexpr static PlayerDirection s_directionEnums[3][3]{
 	{ 
@@ -54,10 +56,6 @@ void Player::Initialize()
 
 void Player::Start()
 {
-	auto bitmapRenderer = GetGameObject()->GetComponent<BitmapRenderer>();
-	bitmapRenderer->SetSortOrder(1);
-	//bitmapRenderer->SetPivot({ 0.5f, 1.0f });
-
 	auto textRenderer = GetGameObject()->GetComponent<TextRenderer>();
 	textRenderer->SetSortOrder(2);
 	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
@@ -70,20 +68,28 @@ void Player::Start()
 	playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &Player::SetDirectionInput);
 	playerInput->RegisterActionOnKey(VK_LSHIFT, KeyState::Pressed, this, &Player::DashKeyPressed);
 	playerInput->RegisterActionOnKey(VK_LSHIFT, KeyState::Released, this, &Player::DashKeyReleased);
+	playerInput->RegisterActionOnKey('Z', KeyState::Pressed, this, &Player::NormalAttackKeyPressed);
 
 	m_fsmContext.gameObject = GetGameObject();
 	m_fsmContext.rigidBody2d = m_rigidBody2d;
 	m_fsmContext.textRenderer = textRenderer;
+	m_fsmContext.animator = GetGameObject()->GetComponent<Animator>();
 	m_fsmContext.floatParams[L"HorizontalInput"] = 0.0f;
 	m_fsmContext.floatParams[L"VerticalInput"] = 0.0f;
 	m_fsmContext.intParams[L"PlayerDirection"] = static_cast<int>(PlayerDirection::Down);
+	m_fsmContext.intParams[L"PrevPlayerDirection"] = static_cast<int>(PlayerDirection::Max);
 	m_fsmContext.boolParams[L"Dash"] = false;
 	m_fsmContext.triggerParams[L"Evade"] = false;
+	m_fsmContext.triggerParams[L"NormalAttack"] = false;
+
+	m_fsmContext.animator->Play(L"runs_S_001");
+	m_fsmContext.animator->SetPlaySpeed(2.0f);
 
 	m_playerFSM.AddState<PlayerIdleState>(L"Idle", false, this);
 	m_playerFSM.AddState<PlayerWalkState>(L"Walk", false, this);
 	m_playerFSM.AddState<PlayerDashState>(L"Dash", false, this);
 	m_playerFSM.AddState<PlayerEvadeState>(L"Evade", false, this);
+	m_playerFSM.AddState<PlayerNormalAttackState>(L"NormalAttack", false, this);
 
 	m_playerFSM.SetState(L"Idle", m_fsmContext);
 
@@ -106,11 +112,7 @@ void Player::Update()
 
 	m_playerInfoTextRenderer->SetText(woss.str());
 
-	m_playerStatus.evadeIntervalTimer += MyTime::DeltaTime();
-	if (m_playerStatus.evadeIntervalTimer > m_playerStat.evadeInterval)
-	{
-		m_playerStatus.evadeIntervalTimer = m_playerStat.evadeInterval;
-	}
+	UpdateTimers();
 }
 
 void Player::SetDirectionInput(Vector2 input)
@@ -139,6 +141,26 @@ void Player::DashKeyPressed()
 void Player::DashKeyReleased()
 {
 	m_fsmContext.boolParams[L"Dash"] = false;
+}
+
+void Player::NormalAttackKeyPressed()
+{
+	m_fsmContext.triggerParams[L"NormalAttack"] = true;
+}
+
+void Player::UpdateTimers()
+{
+	m_playerStatus.evadeIntervalTimer += MyTime::DeltaTime();
+	if (m_playerStatus.evadeIntervalTimer >= m_playerStat.evadeInterval)
+	{
+		m_playerStatus.evadeIntervalTimer = m_playerStat.evadeInterval;
+	}
+
+	m_playerStatus.attackIntervalTimer += MyTime::DeltaTime();
+	if (m_playerStatus.attackIntervalTimer >= m_playerStat.attackInterval)
+	{
+		m_playerStatus.attackIntervalTimer = m_playerStat.attackInterval;
+	}
 }
 
 const PlayerStat& Player::GetPlayerStat() const
@@ -174,7 +196,7 @@ inline std::wostringstream& operator<<(std::wostringstream& woss, const PlayerSt
 		<< L"\nAttackStaminaCost: " << playerStat.attackStaminaCost << L"\nHeavyAttackStaminaCost: "
 		<< playerStat.heavyAttackStaminaCost << L"\nAttackInterval: " << playerStat.attackInterval
 		<< L"\nKnockbackResist: " << playerStat.knockbackResist << L"\nKnockdownResist: " << playerStat.knockdownResist
-		<< L"\nKnockdownResetTime: " << playerStat.knockdownResetTime << L"MoveSpeed: " << playerStat.moveSpeed
+		<< L"\nKnockdownResetTime: " << playerStat.knockdownResetTime << L"\nMoveSpeed: " << playerStat.moveSpeed
 		<< L"\nDashSpeed: " << playerStat.dashSpeed << L"\nDashStaminaPerSec: " << playerStat.dashStaminaPerSec
 		<< L"\nEvadeDistance: " << playerStat.evadeDistance << L"\nEvadeDuration: " << playerStat.evadeDuration
 		<< L"\nEvadeAvailableTime: " << playerStat.evadeAvailableTime << L"\nEvadeInterval: " << playerStat.evadeInterval

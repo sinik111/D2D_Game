@@ -81,14 +81,13 @@ CollisionLayer Collider::GetLayer() const
 	return m_layer;
 }
 
+const Vector2& Collider::GetOffset() const
+{
+	return m_offset;
+}
 std::vector<QuadtreeNode*>& Collider::GetBelongingNode()
 {
 	return m_belongingNodes;
-}
-
-Vector2 Collider::GetOffset() const
-{
-	return m_offset;
 }
 
 void Collider::Update()

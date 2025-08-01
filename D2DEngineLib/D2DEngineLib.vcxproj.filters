@@ -263,8 +263,8 @@
     </ClInclude>
     <ClInclude Include="Quadtree.h">
       <Filter>99_Module\Physics</Filter>
-	</ClInclude>
-	<ClInclude Include="imconfig.h">
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
       <Filter>99_Module\System\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui.h">
@@ -288,15 +288,10 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>99_Module\System\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Float2Imgui.h">
-      <Filter>99_Module\MyImgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Float3Imgui.h">
-      <Filter>99_Module\MyImgui</Filter>
-    </ClInclude>
     <ClInclude Include="MyImGui.h">
       <Filter>99_Module\MyImgui</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuiSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -461,14 +456,9 @@
     <ClCompile Include="imgui_widgets.cpp">
       <Filter>99_Module\System\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Float2Imgui.cpp">
-      <Filter>99_Module\MyImgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Float3Imgui.cpp">
-      <Filter>99_Module\MyImgui</Filter>
-    </ClCompile>
     <ClCompile Include="MyImGui.cpp">
       <Filter>99_Module\MyImgui</Filter>
     </ClCompile>
+    <ClCompile Include="ImGuiSystem.cpp" />
   </ItemGroup>
 </Project>

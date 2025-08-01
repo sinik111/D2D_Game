@@ -25,7 +25,7 @@ void PlayerWorkspaceApp::Initialize()
 	ComponentSystem::Get().Physics().SetupQuadtree(bounds, 5, 10);
 
 	ResourceManager::Get().Initialize(m_d2dRenderer.GetDeviceContext(),
-		m_modulePath, L"x64", L"PlayerWorkspace");
+		m_modulePath, L"x64", L"PlayerWorkspace/Resource");
 
 	SceneManager::Get().CreateScene<Scene1>(L"Scene1");
 

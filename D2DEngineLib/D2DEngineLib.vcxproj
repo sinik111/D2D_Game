@@ -163,14 +163,13 @@
     <ClInclude Include="DebugSystem.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="Enum.h" />
-    <ClInclude Include="Float2Imgui.h" />
-    <ClInclude Include="Float3Imgui.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="FSMContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
+    <ClInclude Include="ImGuiSystem.h" />
     <ClInclude Include="imgui_impl_dx11.h" />
     <ClInclude Include="imgui_impl_win32.h" />
     <ClInclude Include="imgui_internal.h" />
@@ -234,14 +233,13 @@
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugSystem.cpp" />
-    <ClCompile Include="Float2Imgui.cpp" />
-    <ClCompile Include="Float3Imgui.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="imgui.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ImGuiSystem.cpp" />
     <ClCompile Include="imgui_draw.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

@@ -42,6 +42,18 @@
     <ClCompile Include="PlayerStateBase.cpp">
       <Filter>02_Script\State</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerNormalAttackState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyEnemy.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNormalAttack.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyEnemyAttack.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWorkspaceApp.h">
@@ -67,6 +79,21 @@
     </ClInclude>
     <ClInclude Include="PlayerStateBase.h">
       <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttackState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyEnemy.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttack.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyEnemyAttack.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackStateEnum.h">
+      <Filter>02_Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

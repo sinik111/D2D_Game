@@ -15,6 +15,7 @@
 #include "Screen.h"
 #include "Camera.h"
 #include "imgui_impl_win32.h"
+#include "ImGuiSystem.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -91,7 +92,8 @@ void WinApp::Shutdown()
 
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
-	m_d2dRenderer.UnInitImGui();
+
+	m_d2dRenderer.ShutDown();
 }
 
 void WinApp::Run()
@@ -161,6 +163,10 @@ void WinApp::Update()
 	ComponentSystem::Get().Particle().Update();
 
 	ComponentSystem::Get().Script().CallLateUpdate();
+
+	ImGuiSystem::Get().BeginDrawImGui();
+
+	ImGuiSystem::Get().DrawImGui();
 
 	Object::UpdateDelayDestroy();
 

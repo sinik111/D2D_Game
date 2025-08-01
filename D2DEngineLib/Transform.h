@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.h"
-
+class Maps;
 class Transform :
 	public Component
 {
@@ -63,4 +63,6 @@ private:
 	void MarkDirty();
 	void AddChild(Transform* child);
 	void RemoveChild(Transform* child);
+
+	friend class Maps;
 };

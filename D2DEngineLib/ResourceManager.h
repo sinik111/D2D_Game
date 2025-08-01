@@ -45,11 +45,11 @@ public:
 	std::shared_ptr<BitmapResource> CreateBitmapResource(const std::wstring& filePath);
 	std::shared_ptr<SpriteSheet> CreateSpriteSheet(const std::wstring& filePath);
 	std::shared_ptr<AnimationClip> CreateAnimationClip(const std::wstring& filePath,
-		std::shared_ptr<SpriteSheet>& spriteSheet);
+		std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets);
 
 private:
 	HRESULT LoadSpriteSheet(const std::wstring& filePath, std::shared_ptr<SpriteSheet>& spriteSheet);
 	HRESULT LoadAnimationClip(const std::wstring& filePath,
 		std::shared_ptr<AnimationClip>& animationClip,
-		std::shared_ptr<SpriteSheet>& spriteSheet);
+		std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets);
 };

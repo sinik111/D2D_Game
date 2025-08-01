@@ -123,21 +123,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DummyEnemy.cpp" />
+    <ClCompile Include="DummyEnemyAttack.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerDashState.cpp" />
     <ClCompile Include="PlayerEvadeState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerNormalAttack.cpp" />
+    <ClCompile Include="PlayerNormalAttackState.cpp" />
     <ClCompile Include="PlayerStateBase.cpp" />
     <ClCompile Include="PlayerWalkState.cpp" />
     <ClCompile Include="PlayerWorkspaceApp.cpp" />
     <ClCompile Include="Scene1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackStateEnum.h" />
+    <ClInclude Include="DummyEnemy.h" />
+    <ClInclude Include="DummyEnemyAttack.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerDashState.h" />
     <ClInclude Include="PlayerEvadeState.h" />
     <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerNormalAttack.h" />
+    <ClInclude Include="PlayerNormalAttackState.h" />
     <ClInclude Include="PlayerStateBase.h" />
     <ClInclude Include="PlayerWalkState.h" />
     <ClInclude Include="PlayerWorkspaceApp.h" />

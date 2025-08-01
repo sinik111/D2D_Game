@@ -175,6 +175,20 @@ void BitmapRenderer::SetBitmap(const std::wstring& filePath)
 	m_isBitmapDirty = true;
 }
 
+void BitmapRenderer::SetBitmap(std::shared_ptr<BitmapResource> bitmapResource)
+{
+	if (m_bitmapResource == bitmapResource)
+	{
+		return;
+	}
+
+	m_bitmapResource = bitmapResource;
+
+	m_sourceRect = { 0.0f, 0.0f, m_bitmapResource->GetSize().width, m_bitmapResource->GetSize().height };
+
+	m_isBitmapDirty = true;
+}
+
 void BitmapRenderer::SetSortOrder(int sortOrder)
 {
 	m_sortOrder = sortOrder;

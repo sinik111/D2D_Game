@@ -22,6 +22,19 @@ void PlayerIdleState::Enter(FSMContext& context)
 
 void PlayerIdleState::Update(FSMContext& context)
 {
+	if (context.triggerParams[L"NormalAttack"])
+	{
+		if (m_player->GetPlayerStatus().currentStamina >= m_player->GetPlayerStat().attackStaminaCost &&
+			m_player->GetPlayerStatus().attackIntervalTimer >= m_player->GetPlayerStat().attackInterval)
+		{
+			context.nextStateName = L"NormalAttack";
+
+			context.shouldChangeState = true;
+
+			return;
+		}
+	}
+
 	float horizontalInput = context.floatParams[L"HorizontalInput"];
 	float verticalInput = context.floatParams[L"VerticalInput"];
 
@@ -43,4 +56,5 @@ void PlayerIdleState::Update(FSMContext& context)
 
 void PlayerIdleState::Exit(FSMContext& context)
 {
+
 }

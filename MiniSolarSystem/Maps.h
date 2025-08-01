@@ -1,13 +1,12 @@
 #pragma once
 #include "../D2DEngineLib/Script.h"
 #include "../D2DEngineLib/json.hpp"
-#include "../D2DEngineLib/Float3Imgui.h"
-#include "../D2DEngineLib/Float2Imgui.h"
+#include "../D2DEngineLib/MyImGui.h"
 class Maps : public Script
 {
 	std::vector<GameObject*> m_GameObjects;
 	std::vector<Vector2> m_Positions;
-	Float2Imgui m_ImGui;
+	//Float2Imgui m_ImGui;
 
 public :
 	void Initialize() override;
@@ -27,6 +26,5 @@ public :
 	std::string ConvertPositiontoJSON();
 	void ExportJsontoPath(std::string filepath);
 	void CreateLineCollider();
-	void AddtoImgui();
 };
 

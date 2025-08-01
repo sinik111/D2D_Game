@@ -30,7 +30,7 @@ protected:
 
 	Vector2 m_offset;
 
-	CollisionLayer m_layer;
+	CollisionLayer m_layer = CollisionLayer::None;
 
 	std::vector<QuadtreeNode*> m_belongingNodes;
 
@@ -58,7 +58,7 @@ public:
 	Bounds GetSpatialBounds() const;
 	CollisionLayer GetLayer() const;
 	std::vector<QuadtreeNode*>& GetBelongingNode();
-	Vector2 GetOffset() const;
+	const Vector2& GetOffset() const;
 
 	void Update();
 	virtual void UpdateCollider() = 0;

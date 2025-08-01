@@ -31,6 +31,9 @@
     <Filter Include="GameObject\EnemyBase\StateScript">
       <UniqueIdentifier>{8e821758-9808-4e6e-8e9a-2c184cbc465f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\EnemyBase\AttackCollider">
+      <UniqueIdentifier>{9e1dbbbc-2b98-451c-942b-ced997e3ad59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JC_DemoGameApp.cpp">
@@ -51,18 +54,6 @@
     <ClCompile Include="EnemyBaseMove.cpp">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBaseAttackOne.cpp">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBaseDamaged.cpp">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBaseDead.cpp">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBaseDash.cpp">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClCompile>
     <ClCompile Include="FollowCameraController.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -79,6 +70,18 @@
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
     <ClCompile Include="EnemyInArea.cpp">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEngage.cpp">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnAttack.cpp">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="TempEnemyAttackCollider.cpp">
+      <Filter>GameObject\EnemyBase\AttackCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyReturn.cpp">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,18 +101,6 @@
     <ClInclude Include="EnemyBaseMove.h">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBaseAttackOne.h">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBaseDamaged.h">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBaseDead.h">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBaseDash.h">
-      <Filter>GameObject\EnemyBase\StateScript</Filter>
-    </ClInclude>
     <ClInclude Include="FollowCameraController.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -126,6 +117,18 @@
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
     <ClInclude Include="EnemyInArea.h">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEngage.h">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnAttack.h">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="TempEnemyAttackCollider.h">
+      <Filter>GameObject\EnemyBase\AttackCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyReturn.h">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
   </ItemGroup>

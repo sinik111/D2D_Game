@@ -22,10 +22,10 @@ void Physics::SetupCollisionMatrix()
 		static_cast<unsigned int>(CollisionLayer::PlayerAttack);
 
 	s_collisionMasks[CollisionLayer::PlayerAttack] =
-		static_cast<unsigned int>(CollisionLayer::EnemyHitBox);
+		static_cast<unsigned int>(CollisionLayer::EnemyHitBox | CollisionLayer::EnemyAttack);
 
 	s_collisionMasks[CollisionLayer::EnemyAttack] =
-		static_cast<unsigned int>(CollisionLayer::PlayerHitBox);
+		static_cast<unsigned int>(CollisionLayer::PlayerHitBox | CollisionLayer::PlayerAttack);
 
 	s_collisionMasks[CollisionLayer::Building] =
 		static_cast<unsigned int>(CollisionLayer::PlayerMove | CollisionLayer::EnemyMove);

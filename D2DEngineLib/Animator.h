@@ -4,6 +4,7 @@
 #include "AnimationData.h"
 #include "Delegate.h"
 #include "SpriteData.h"
+#include "BitmapResource.h"
 
 class BitmapRenderer;
 
@@ -14,8 +15,9 @@ private:
 	BitmapRenderer* m_bitmapRenderer = nullptr;
 	AnimationClip* m_currentClip = nullptr;
 
-	std::shared_ptr<SpriteSheet> m_spriteSheet;
+	std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>> m_spriteSheets;
 	std::unordered_map<std::wstring, std::shared_ptr<AnimationClip>> m_animationClips;
+	std::unordered_map<std::wstring, std::shared_ptr<BitmapResource>> m_bitmapResources;
 
 	std::unordered_map<std::wstring, Delegate<>> m_eventDelegates;
 
@@ -31,7 +33,7 @@ public:
 	void UnregisterFromSystem() override;
 
 public:
-	void SetSpriteSheet(const std::wstring& filePath);
+	void AddSpriteSheet(const std::wstring& filePath);
 	void AddAnimationClip(const std::wstring& filePath);
 
 	template<typename T>
@@ -40,10 +42,11 @@ public:
 		m_eventDelegates[eventName].Add(instance, func);
 	}
 
-	void Play(const std::wstring& clipName);
+	void Play(const std::wstring& clipName, size_t startFrame = 0);
 	const std::wstring& GetCurrentClipName() const;
 	bool IsFinished() const;
 	void SetPlaySpeed(float playSpeed); // πË¿≤
+	size_t GetCurrentFrame() const;
 
 private:
 	void Update();

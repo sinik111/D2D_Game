@@ -1,0 +1,9 @@
+#pragma once
+#include "../D2DEngineLib/WinApp.h"
+class DemoGameApp : public WinApp
+{
+public :
+	void Initialize() override;
+	void MessageProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
+};
+

@@ -14,13 +14,14 @@
 #include "EnemyBase.h"
 #include "DummyP.h"
 #include "FollowCameraController.h"
+#include "TempEnemyAttackCollider.h"
 
 
 void EnemyTestScene::Enter()
 {
 	GameObject* camera = CreateGameObject(L"Camera");
 	camera->AddComponent<Camera>();
-	//auto controller = camera->AddComponent<FollowCameraController>();
+	auto controller = camera->AddComponent<FollowCameraController>();
 
 	GameObject* go = CreateGameObject(L"DummyPlayer");
 	go->AddComponent<PlayerInput>();
@@ -29,7 +30,10 @@ void EnemyTestScene::Enter()
 	go->AddComponent<DummyP>();
 	go->AddComponent<BitmapRenderer>(L"Ramiel.png");
 	go->AddComponent<RigidBody2D>();
-	go->AddComponent<BoxCollider2D>();
+	//go->AddComponent<BoxCollider2D>();
+	go->GetComponent<DummyP>()->SetCamera(camera);
+
+	controller->SetTarget(go->GetTransform());
 
 
 	go = CreateGameObject(L"EnemyBase");
@@ -39,11 +43,9 @@ void EnemyTestScene::Enter()
 	go->AddComponent<TextRenderer>();	
 	go->AddComponent<EnemyBase>();
 	go->AddComponent<RigidBody2D>();
-	go->AddComponent<BoxCollider2D>();
+	//go->AddComponent<BoxCollider2D>();
 	go->GetComponent<EnemyBase>()->SetTargetPlayerAndCamera(Find(L"DummyPlayer"), camera);
-
-	
-	//controller->SetTarget(go->GetTransform());
+		
 
 }
 

@@ -82,6 +82,9 @@ private:
 	void SetDirectionInput(Vector2 input);
 	void DashKeyPressed();
 	void DashKeyReleased();
+	void NormalAttackKeyPressed();
+
+	void UpdateTimers();
 
 public:
 	const PlayerStat& GetPlayerStat() const;

@@ -266,13 +266,13 @@ std::shared_ptr<SpriteSheet> ResourceManager::CreateSpriteSheet(const std::wstri
 		return nullptr;
 	}
 
-	m_spriteSheets[filePath] = newSpriteSheet;
+	m_spriteSheets[newSpriteSheet->name] = newSpriteSheet;
 
 	return newSpriteSheet;
 }
 
 std::shared_ptr<AnimationClip> ResourceManager::CreateAnimationClip(const std::wstring& filePath,
-	std::shared_ptr<SpriteSheet>& spriteSheet)
+	std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets)
 {
 	const auto& iter = m_animationClips.find(filePath);
 	if (iter != m_animationClips.end())
@@ -284,7 +284,7 @@ std::shared_ptr<AnimationClip> ResourceManager::CreateAnimationClip(const std::w
 	}
 
 	std::shared_ptr<AnimationClip> newAnimationClip = std::make_shared<AnimationClip>();
-	HRESULT hr = LoadAnimationClip(filePath, newAnimationClip, spriteSheet);
+	HRESULT hr = LoadAnimationClip(filePath, newAnimationClip, spriteSheets);
 	if (FAILED(hr))
 	{
 		return nullptr;
@@ -326,7 +326,7 @@ HRESULT ResourceManager::LoadSpriteSheet(const std::wstring& filePath, std::shar
 
 HRESULT ResourceManager::LoadAnimationClip(const std::wstring& filePath,
 	std::shared_ptr<AnimationClip>& animationClip,
-	std::shared_ptr<SpriteSheet>& spriteSheet)
+	std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets)
 {
 	std::ifstream inFile(m_resourcePath + filePath);
 	if (inFile.is_open())
@@ -344,7 +344,8 @@ HRESULT ResourceManager::LoadAnimationClip(const std::wstring& filePath,
 
 		for (auto& frame : animationClip->frames)
 		{
-			const auto& iter = spriteSheet->spriteIndexMap.find(frame.spriteName);
+			const auto& spriteSheet = spriteSheets[animationClip->filePath];
+			const auto& iter = spriteSheets[animationClip->filePath]->spriteIndexMap.find(frame.spriteName);
 			if (iter != spriteSheet->spriteIndexMap.end())
 			{
 				frame.spriteIndex = iter->second;

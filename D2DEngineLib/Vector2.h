@@ -97,6 +97,19 @@ public: // 연산자 오버로딩
 	
 		return *this;
 	}
+
+	//비교연산자 추가 오버로딩. 
+	bool operator==(const Vector2& rhs) const
+	{
+		return std::abs(x - rhs.x) <= MyMath::EPSILON &&
+			std::abs(y - rhs.y) <= MyMath::EPSILON;
+	}
+
+	
+	bool operator!=(const Vector2& rhs) const
+	{
+		return !(*this == rhs); // == 연산자를 활용하여 구현
+	}
 	
 public: // 유틸리티 함수
 	Vector2 Normalized() const

@@ -41,7 +41,7 @@ private:
 
 public:
 	HRESULT Initialize(HWND hWnd, UINT width, UINT height);
-
+	void ShutDown();
 	UINT GetWidth() const;
 	UINT GetHeight() const;
 
@@ -75,11 +75,7 @@ private:
 	//ImGui 그리기 시작, 그리기, 
 public:
 	void InitImGui();
-	void BeginDrawImGui();
-	void DrawImGui();
-	void EndDrawImGui();
 	void UnInitImGui();
-	void AddImGui(MyImGui* imgui);
 
 	static D2DRenderer* Get() { return m_Instance; };
 	static void Set(D2DRenderer* instance) { m_Instance = instance; }
