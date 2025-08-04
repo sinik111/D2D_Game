@@ -35,7 +35,7 @@ void TestScene1::Enter()
 	float width = Screen::Get().GetWidth() * 0.5f;
 	float height = Screen::Get().GetHeight() * 0.5f;
 
-	for (int i = 0; i < 1000; ++i)
+	for (int i = 0; i < 7000; ++i)
 	{
 		GameObject* floor = CreateGameObject(L"Floor");
 		auto boxCollider = floor->AddComponent<BoxCollider2D>();

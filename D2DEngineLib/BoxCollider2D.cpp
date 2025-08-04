@@ -47,6 +47,8 @@ void BoxCollider2D::UpdateCollider()
 	else
 	{
 		m_box.center = m_transform->GetWorldPosition() + m_offset;
+
+		m_isColliderDirty = false;
 	}
 }
 
