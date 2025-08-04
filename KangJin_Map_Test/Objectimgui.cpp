@@ -4,7 +4,7 @@
 #include "../D2DEngineLib/BitmapRenderer.h"
 #include "../D2DEngineLib/Circle.h"
 #include "../D2DEngineLib/CircleCollider.h"
-#include "Structure.h"
+#include "Building08.h"
 #include "Objectimgui.h"
 
 void Objectimgui::DrawImgui()

@@ -44,7 +44,11 @@ void Quadtree::InsertObjectRecursive(QuadtreeNode* node, Collider* object)
 
     if (node->isLeaf || node->depth >= maxDepth)
     {
-        node->objects.push_back(object);
+        if (node->objectsLookup.find(object) == node->objectsLookup.end())
+        {
+            node->objects.push_back(object);
+            node->objectsLookup.insert(object);
+        }
         
         if (object->GetRigidBody2D() != nullptr)
         {
@@ -84,6 +88,7 @@ void Quadtree::Subdivide(QuadtreeNode* node)
 
     std::vector<Collider*> oldObjects = std::move(node->objects);
     node->objects.clear();
+    node->objectsLookup.clear();
 
     for (Collider* obj : oldObjects)
     {
@@ -91,7 +96,11 @@ void Quadtree::Subdivide(QuadtreeNode* node)
         {
             if (Bounds::IsOverlap(node->children[i]->bounds, obj->GetSpatialBounds()))
             {
-                node->children[i]->objects.push_back(obj);
+                if (node->objectsLookup.find(obj) == node->objectsLookup.end())
+                {
+                    node->objects.push_back(obj);
+                    node->objectsLookup.insert(obj);
+                }
 
                 if (obj->GetRigidBody2D() != nullptr)
                 {
@@ -131,6 +140,7 @@ void Quadtree::Relocate(Collider* object)
                     std::swap(*iter, node->objects.back());
 
                     node->objects.pop_back();
+                    node->objectsLookup.erase(object);
 
                     break;
                 }
@@ -143,52 +153,6 @@ void Quadtree::Relocate(Collider* object)
     Insert(object);
 }
 
-void Quadtree::Update()
-{
-    std::vector<Collider*> dirtyObjectsToReinsert;
-
-    // 모든 노드를 순회하며 dirty 객체를 찾고 제거
-    std::function<void(QuadtreeNode*)> findAndRemoveDirty =
-        [&](QuadtreeNode* node) {
-            if (!node)
-            {
-                return;
-            }
-
-            // 현재 노드의 객체 목록에서 dirty 객체들을 찾습니다.
-            node->objects.erase(
-                std::remove_if(node->objects.begin(), node->objects.end(),
-                    [&](Collider* obj) {
-                        if (obj->GetTransform()->IsDirtyThisFrame())
-                        {
-                            dirtyObjectsToReinsert.push_back(obj);
-
-                            return true; // 제거할 객체임을 표시
-                        }
-
-                        return false;
-                    }),
-                node->objects.end()
-            );
-
-            // 자식 노드 순회
-            if (!node->isLeaf)
-            {
-                for (int i = 0; i < 4; ++i)
-                {
-                    findAndRemoveDirty(node->children[i].get());
-                }
-            }
-        };
-
-    findAndRemoveDirty(root.get());
-
-    for (Collider* obj : dirtyObjectsToReinsert)
-    {
-        InsertObjectRecursive(root.get(), obj); // 변경된 바운드를 기준으로 다시 삽입
-    }
-}
-
 bool Quadtree::RemoveObjectRecursive(QuadtreeNode* node, Collider* object)
 {
     // 객체가 현재 노드의 영역 내에 있는지 확인 (최적화)
@@ -197,13 +161,17 @@ bool Quadtree::RemoveObjectRecursive(QuadtreeNode* node, Collider* object)
         return false;
     }
 
-    // 현재 노드의 객체 목록에서 제거
-    auto it = std::remove(node->objects.begin(), node->objects.end(), object);
-    if (it != node->objects.end())
+    for (auto iter = node->objects.begin(); iter != node->objects.end(); ++iter)
     {
-        node->objects.erase(it, node->objects.end());
+        if (*iter == object)
+        {
+            std::swap(*iter, node->objects.back());
 
-        return true; // 현재 노드에서 객체를 찾고 제거했음
+            node->objects.pop_back();
+            node->objectsLookup.erase(object);
+
+            break;
+        }
     }
 
     // 리프 노드가 아니면 자식 노드에서 탐색 및 제거 시도
@@ -288,6 +256,7 @@ std::vector<Bounds> Quadtree::GetAllNodeBounds() const
 void Quadtree::ClearRecursiveObjects(QuadtreeNode* node)
 {
     node->objects.clear();
+    node->objectsLookup.clear();
 
     if (!node->isLeaf)
     {

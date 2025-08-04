@@ -3,8 +3,11 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Physics.h"
+#include "../D2DEngineLib/BatchRenderer.h"
+#include "../D2DEngineLib/Particle.h"
 
 #include "DummyEnemyAttack.h"
+#include "PlayerHeavyAttack.h"
 
 void PlayerNormalAttack::Start()
 {
@@ -31,6 +34,48 @@ void PlayerNormalAttack::Update()
 				m_attackState = AttackState::Parrying;
 
 				m_debugTextObject->GetComponent<TextRenderer>()->SetText(L"Parrying");
+
+				Vector2 position = GetTransform()->GetLocalPosition();
+
+				auto effectGo = CreateGameObject(L"ParryingEffect");
+				effectGo->GetTransform()->SetLocalPosition(position + m_debugTextDirection * 100.0f);
+				auto batchRenderer = effectGo->AddComponent<BatchRenderer>();
+				batchRenderer->SetLocalRect({ -100.0f, -100.0f, 100.0f, 100.0f });
+				batchRenderer->SetSortOrder(4);
+				auto particle = effectGo->AddComponent<Particle>();
+				particle->SetBitmap(L"ParryingEffectTest.png");
+				particle->SetSpriteSheet(L"ParryingEffectTest_sprites.json");
+				particle->SetDuration(0.2f);
+
+				for (int i = 0; i < 6; ++i)
+				{
+					ParticleUnit particleUnit;
+
+					particleUnit.batchUnits.push_back(
+						{
+							0,
+							{ 0.0f, 0.0f },
+							{ 0.3f, 0.3f },
+							-i * 60.0f,
+							{ 1.0f, 1.0f, 1.0f, 1.0f }
+						}
+					);
+
+					particleUnit.batchUnits.push_back(
+						{
+							0,
+							{ Vector2::RotateVector(Vector2::Right, i * 60.0f) * 50.0f },
+							{ 0.5f, 0.5f },
+							-i * 60.0f,
+							{ 1.0f, 1.0f, 1.0f, 1.0f }
+						}
+					);
+
+					particleUnit.duration = 0.2f;
+					particleUnit.startTime = 0.0f;
+
+					particle->AddParticleUnit(particleUnit);
+				}
 			}
 			else
 			{
@@ -69,6 +114,16 @@ void PlayerNormalAttack::OnTriggerEnter(const Collision& collision)
 AttackState PlayerNormalAttack::GetAttackState() const
 {
 	return m_attackState;
+}
+
+Player* PlayerNormalAttack::GetPlayer() const
+{
+	return m_player;
+}
+
+void PlayerNormalAttack::SetPlayer(Player* player)
+{
+	m_player = player;
 }
 
 void PlayerNormalAttack::SetDirection(const Vector2& direction)

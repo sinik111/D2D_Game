@@ -24,7 +24,7 @@ protected:
 	Transform* m_transform = nullptr;
 	RigidBody2D* m_rigidBody2d = nullptr;
 
-	std::vector<Script*> m_scriptsForCallBack;
+	std::unordered_set<Script*> m_scriptsForCallBack;
 
 	Bounds m_spatialBounds; // 쿼드트리 공간 분할용 AABB
 

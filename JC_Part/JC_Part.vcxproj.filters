@@ -78,11 +78,20 @@
     <ClCompile Include="EnemyOnAttack.cpp">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClCompile>
-    <ClCompile Include="TempEnemyAttackCollider.cpp">
+    <ClCompile Include="TempEnemyAttack.cpp">
       <Filter>GameObject\EnemyBase\AttackCollider</Filter>
     </ClCompile>
     <ClCompile Include="EnemyReturn.cpp">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyPlayerAttack.cpp">
+      <Filter>GameObject\DummyPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnEvade.cpp">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInteract.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,11 +134,23 @@
     <ClInclude Include="EnemyOnAttack.h">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
     </ClInclude>
-    <ClInclude Include="TempEnemyAttackCollider.h">
+    <ClInclude Include="TempEnemyAttack.h">
       <Filter>GameObject\EnemyBase\AttackCollider</Filter>
     </ClInclude>
     <ClInclude Include="EnemyReturn.h">
       <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackStateEnum.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyPlayerAttack.h">
+      <Filter>GameObject\DummyPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnEvade.h">
+      <Filter>GameObject\EnemyBase\StateScript</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInteract.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -28,6 +28,12 @@
     <Filter Include="04_Component">
       <UniqueIdentifier>{c9537e95-b113-4ad8-a2f8-fcbc85641d3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Script\Structure">
+      <UniqueIdentifier>{b63f1059-07d1-425d-b16f-72b97f4a406f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Structure\Buildings">
+      <UniqueIdentifier>{cb8c77e4-3218-4978-b6ce-bec8eb1e2e2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DemoGameApp.h">
@@ -54,8 +60,44 @@
     <ClInclude Include="Objectimgui.h">
       <Filter>02_Script</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building08.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building01.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
     <ClInclude Include="Structure.h">
-      <Filter>02_Script</Filter>
+      <Filter>02_Script\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Building02.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building06.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building07.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building09.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building11.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building03.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building04.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building05.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building10.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,8 +119,44 @@
     <ClCompile Include="Objectimgui.cpp">
       <Filter>02_Script</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building08.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building01.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
     <ClCompile Include="Structure.cpp">
-      <Filter>02_Script</Filter>
+      <Filter>02_Script\Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="Building02.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building06.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building07.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building09.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building11.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building03.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building04.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building05.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building10.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ using Microsoft::WRL::ComPtr;
 using nlohmann::json;
 
 // UTF-8 std::string을 std::wstring으로 변환 (Windows API 기반)
-std::wstring utf8_to_wide(const std::string& utf8_str)
+static std::wstring utf8_to_wide(const std::string& utf8_str)
 {
 	if (utf8_str.empty())
 	{
@@ -41,7 +41,7 @@ std::wstring utf8_to_wide(const std::string& utf8_str)
 }
 
 // std::wstring을 UTF-8 std::string으로 변환 (Windows API 기반)
-std::string wide_to_utf8(const std::wstring& wide_str)
+static std::string wide_to_utf8(const std::wstring& wide_str)
 {
 	if (wide_str.empty())
 	{
@@ -182,15 +182,15 @@ void ResourceManager::Update()
 {
 	m_resourceTimer += MyTime::DeltaTime();
 
-	//while (!m_shortCachedBitmapResources.empty())
-	//{
-	//	if (m_shortCachedBitmapResources.front().first > m_resourceTimer)
-	//	{
-	//		break;
-	//	}
+	while (!m_shortCachedBitmapResources.empty())
+	{
+		if (m_shortCachedBitmapResources.front().first > m_resourceTimer)
+		{
+			break;
+		}
 
-	//	m_shortCachedBitmapResources.pop();
-	//}
+		m_shortCachedBitmapResources.pop();
+	}
 
 
 	// Debug::Log(std::to_string(m_shortCachedBitmapResources.size()));
@@ -206,11 +206,16 @@ void ResourceManager::Release()
 
 void ResourceManager::ReleaseResources()
 {
-	//m_shortCachedBitmapResources = {};
+	m_shortCachedBitmapResources = {};
 
 	m_bitmapResources.clear();
 	m_spriteSheets.clear();
 	m_animationClips.clear();
+}
+
+std::wstring ResourceManager::GetResourcePath() const
+{
+	return m_resourcePath;
 }
 
 std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std::wstring& filePath)
@@ -220,7 +225,7 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 	{
 		if (!iter->second.expired()) // 만료되지 않았을 경우
 		{
-			//m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, iter->second.lock() });
+			m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, iter->second.lock() });
 
 			return iter->second.lock(); // shared_ptr로 return
 		}
@@ -243,7 +248,7 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 
 	m_bitmapResources[filePath] = newBitmapResource;
 
-	//m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, newBitmapResource });
+	m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, newBitmapResource });
 
 	return newBitmapResource;
 }

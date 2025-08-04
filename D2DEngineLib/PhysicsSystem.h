@@ -49,6 +49,8 @@ public:
 
 	void ClearCollisionPairs();
 
+	std::vector<Collider*> DetectCollisions(Collider* collider);
+
 private:
 	void CallCollisionEvent();
 	void CallTriggerEvent();

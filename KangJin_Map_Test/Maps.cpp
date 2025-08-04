@@ -18,23 +18,6 @@ using json = nlohmann::json;
 
 void Maps::Initialize()
 {
-	//GameObject* gameobject = CreateGameObject(L"Map");
-	//gameobject->AddComponent<BitmapRenderer>(L"map01_ver1_colision.jpg");
-	//gameobject->GetTransform()->SetLocalPosition({ 0,0});
-
-	//gameobject = CreateGameObject(L"Map2");
-	//gameobject->AddComponent<BitmapRenderer>(L"background.png");
-	//gameobject->GetTransform()->SetLocalPosition({ 500,-300 });
-
-	//gameobject = CreateGameObject(L"Map3");
-	//gameobject->AddComponent<BitmapRenderer>(L"background.png");
-	//gameobject->GetTransform()->SetLocalPosition({ -500,300 });
-
-	//gameobject = CreateGameObject(L"Map4");
-	//gameobject->AddComponent<BitmapRenderer>(L"background.png");
-	//gameobject->GetTransform()->SetLocalPosition({ 500,300 });
-
-	//m_GameObjects.push_back(gameobject);
 }
 
 void Maps::Start()
@@ -54,8 +37,6 @@ void Maps::Update()
 		float height = Screen::Get().GetHeight() * 0.5f;
 
 		Transform* camera = GetGameObject()->GetComponent<CameraController>()->GetTransform();
-		//float worldx = camera->GetLocalPosition().x + ((float)Input::GetCursorPoint().x - width);
-		//float worldy = camera->GetLocalPosition().y - ((float)Input::GetCursorPoint().y - height);
 
 		float pointX = (float)Input::GetCursorPoint().x - width;
 		float pointY = (float)Input::GetCursorPoint().y - height;
@@ -64,36 +45,102 @@ void Maps::Update()
 
 		Matrix3x2 renderMatrix = Matrix3x2::Scale(1.0f, -1.0f);
 		Matrix3x2 viewMatrix = Camera::s_mainCamera->GetViewMatrix().Inverse();
-
 		Matrix3x2 finalMatrix = renderMatrix * viewMatrix;
 
 		clickPoint = finalMatrix.TransformPoint(clickPoint);
 
-		//clickPoint.x -= width;
-		//clickPoint.y -= height;
-
-		//Vector2 pos{ worldx, worldy };
 		m_Positions.push_back(clickPoint);
 
 		std::cout << "x : " << clickPoint.x << ", y : " << clickPoint.y << std::endl;
 	}
 
-	if (Input::IsKeyPressed(VK_RETURN))
+	//1번 키로 원하는 도형 콜라이더 생성
+	if (Input::IsKeyPressed('1'))
 	{
-		ExportJsontoPath("Resource/points.json");
-		//AddtoImgui(&m_ImGui);
+		if (!m_Positions.empty())
+		{
+			Vector2 firstStart = m_Positions[0];
+
+			for (int i = 0; i < m_Positions.size(); ++i)
+			{
+				if (i + 1 < m_Positions.size())
+				{
+					Vector2 vecdistance = (m_Positions[i + 1] - m_Positions[i]) / 2;
+					Vector2 centerPos = m_Positions[i] + vecdistance;
+					Vector2 relativeStart = -vecdistance;
+					Vector2 relativeEnd = vecdistance;
+
+					m_lineDatas.push_back(LineData{
+						vecdistance,
+						centerPos,
+						relativeStart,
+						relativeEnd
+					});
+				}
+			}
+
+			Vector2 lastPoint = m_Positions[m_Positions.size() - 1];
+			Vector2 vecdistance = (firstStart - lastPoint) / 2;
+			Vector2 centerPos = lastPoint + vecdistance;
+			Vector2 relativeStart = -vecdistance;
+			Vector2 relativeEnd = vecdistance;
+
+			m_lineDatas.push_back(LineData{
+				vecdistance,
+				centerPos,
+				relativeStart,
+				relativeEnd
+			});
+
+			m_Positions.clear();
+		}
 	}
 
-	if (Input::IsKeyPressed(VK_DELETE))
+	//2번키로 json파일 export
+	if (Input::IsKeyPressed('2'))
+	{
+		json jarr = json::array();
+		for (auto data : m_lineDatas)
+		{
+			json j;
+			j["center"] = { {"x",data.centerPos.x},{"y", data.centerPos.y} };
+			j["start"] = { {"x", data.relativeStart.x} ,{"y", data.relativeStart.y} };
+			j["end"] = { {"x", data.relativeEnd.x}, {"y", data.relativeEnd.y} };
+			jarr.push_back(j);
+		}
+		json j;
+		j["lines"] = jarr;
+		std::string jsonstring = j.dump(4);
+
+		std::ofstream outfile("Resource/points.json");
+		if (outfile.is_open())
+		{
+			outfile << jsonstring;
+			outfile.close();
+		}
+	}
+
+	//엔터 눌렀을 때에 라인콜라이더 생성
+	if (Input::IsKeyPressed(VK_RETURN))
+	{
+		CreateLineCollider();
+	}
+
+	//백스페이스로 삭제
+	if (Input::IsKeyPressed(VK_BACK))
 	{
 		if (m_Positions.size() >= 1) { m_Positions.pop_back(); }
 
 		ExportJsontoPath("Resource/points.json");
 	}
 
-	if (Input::IsKeyPressed(VK_BACK))
+	//Delete 키로 도형 하나 삭제
+	if (Input::IsKeyPressed(VK_DELETE))
 	{
-		CreateLineCollider();
+		if (!m_lineDatas.empty())
+		{
+			m_lineDatas.pop_back();
+		}
 	}
 }
 
@@ -147,7 +194,6 @@ std::string Maps::ConvertPositiontoJSON()
 			j["end"] = { {"x", relativeEnd.x}, {"y", relativeEnd.y} };
 			jarr.push_back(j);
 		}
-
 	}
 	json j;
 	j["lines"] = jarr;
@@ -168,7 +214,6 @@ void Maps::ExportJsontoPath(std::string filepath)
 
 void Maps::CreateLineCollider()
 {
-
 	// [TODO] : AddComponent<LineCollider>를 json에 있는 개수만큼 for문 돌면서 해주어야 함
 	// gameObject->AddComponent<LineCollider>();
 	//std::vector<LineSegment> lines;
@@ -200,9 +245,6 @@ void Maps::CreateLineCollider()
 			//std::cout << "startPoint : " << startPoint.x <<", " << startPoint.y <<"\nendPoint : " << endPoint.x <<", " << endPoint.y << std::endl;
 			linecollider->SetLine(startPoint, endPoint);
 
-			//Float2Imgui* imgui = gameobject->AddComponent<Float2Imgui>();
-			//imgui->SetImGui("LineCollider", &gameobject->GetTransform()->m_localPosition.x);
-			//imgui->Add();
 			std::cout << "x : " << gameobject->GetTransform()->GetLocalPosition().x << ", y :" << gameobject->GetTransform()->GetLocalPosition().y << std::endl;
 		}
 	}

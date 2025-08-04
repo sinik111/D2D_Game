@@ -100,6 +100,7 @@ void Scene1::Enter()
 	dummyEnemy->AddComponent<DummyEnemy>();
 	auto dummyRb = dummyEnemy->AddComponent<RigidBody2D>();
 	dummyRb->SetGravityScale(0.0f);
+	dummyRb->SetMass(100000.0f);
 
 	auto dummyCircleCol = dummyEnemy->AddComponent<CircleCollider>();
 	dummyCircleCol->SetOffset({ 0.0f, -50.0f });

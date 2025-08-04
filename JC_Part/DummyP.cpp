@@ -1,6 +1,7 @@
 #include "../D2DEngineLib/framework.h"
 #include "DummyP.h"
 #include "DummyIdle.h"
+#include "DummyPlayerAttack.h"
 
 #include <limits>
 #include <iostream>
@@ -14,6 +15,9 @@
 #include "../D2DEngineLib/BoxCollider2D.h"
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/FSMContext.h"
+
+#include "../D2DEngineLib/ConeCollider2D.h"
+
 
 
 
@@ -89,15 +93,33 @@ void DummyP::Update()
 
 void DummyP::Attack()
 {
-	std::cout << "어택" << std::endl;
+	auto dpAttack = CreateGameObject(L"DummyPlayerAttack");
+
+	Vector2 playerPos = GetGameObject()->GetTransform()->GetLocalPosition();	
+
+	auto attackColliderPosition = playerPos + (m_inputDirection * 60.0f);
+
+	dpAttack->GetTransform()->SetLocalPosition(attackColliderPosition);
+
+	auto comp = dpAttack->AddComponent<DummyPlayerAttack>(this);
+	comp->SetTextDirection(Vector2::EllipseLeftDown);
+
+	auto collider = dpAttack->AddComponent<ConeCollider2D>();
+	collider->SetLayer(CollisionLayer::EnemyAttack);
+	collider->SetCone(200.0f * Vector2::EllipseLeftDown.Length(), m_inputDirection, 100.0f);
+	collider->SetTrigger(true);
+	collider->SetLayer(CollisionLayer::PlayerAttack);
+
+	auto rb = dpAttack->AddComponent<RigidBody2D>();
+	rb->SetGravityScale(0.0f);
 }
+
 
 void DummyP::ArrowInput(Vector2 input)
 {
 	m_context.floatParams[L"HorizontalInput"] = input.x;
 	m_context.floatParams[L"VerticalInput"] = input.y;
 }
-
 
 
 void DummyP::MoveByArrowInput()
@@ -107,23 +129,22 @@ void DummyP::MoveByArrowInput()
 	float horizontalInput = m_context.floatParams[L"HorizontalInput"];
 	float verticalInput = m_context.floatParams[L"VerticalInput"];
 
-	Vector2 inputDirection(horizontalInput, verticalInput);
+	Vector2 dir(horizontalInput, verticalInput);
 
-	// 방향 벡터가 없으면 이동하지 않습니다. (정지)
-	if (inputDirection == Vector2::Zero) // Vector2의 == 연산자를 사용 (EPSILON 비교 포함)
+	
+	if (dir == Vector2::Zero) 
 	{
-		m_rigidBody->SetVelocity(Vector2::Zero); // 속도를 0으로 설정하여 정지
+		m_rigidBody->SetVelocity(Vector2::Zero); 
 		return;
 	}
 
-	inputDirection.Normalize();
-	
-	// 속도 벡터를 계산합니다. (단위 방향 * 속도)
-	Vector2 velocity = inputDirection * m_moveSpeed;
-
-	// m_rigidBody의 velocity 값을 직접 세팅하여 이동시킵니다.
+	dir.Normalize();
+			
+	Vector2 velocity = dir * m_moveSpeed;
+		
 	m_rigidBody->SetVelocity(velocity);
 
+	m_inputDirection = dir;
 }
 
 

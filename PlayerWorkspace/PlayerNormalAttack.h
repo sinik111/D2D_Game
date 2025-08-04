@@ -4,10 +4,13 @@
 
 #include "AttackStateEnum.h"
 
+class Player;
+
 class PlayerNormalAttack :
 	public Script
 {
 private:
+	Player* m_player = nullptr;
 	GameObject* m_debugTextObject = nullptr;
 	AttackState m_attackState = AttackState::Searching;
 	float m_dummyAttackTimer = 0.0f;
@@ -25,6 +28,8 @@ private:
 
 public:
 	AttackState GetAttackState() const;
+	Player* GetPlayer() const;
 
+	void SetPlayer(Player* player);
 	void SetDirection(const Vector2& direction); // 디버그 텍스트 출력용
 };

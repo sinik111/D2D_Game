@@ -51,6 +51,15 @@ private:
 
 	GameObject* m_camera;
 
+	Vector2 m_inputDirection;
+
+
+private:
+	int m_attackKnockBackPower = 100;
+public:
+	inline const int& GetKnockBackPow()	{ return m_attackKnockBackPower; }
+
+
 private:
 	void ArrowInput(Vector2 input);
 

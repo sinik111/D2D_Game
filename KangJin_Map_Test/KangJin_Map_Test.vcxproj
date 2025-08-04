@@ -127,23 +127,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Building01.h" />
+    <ClInclude Include="Building02.h" />
+    <ClInclude Include="Building03.h" />
+    <ClInclude Include="Building04.h" />
+    <ClInclude Include="Building05.h" />
+    <ClInclude Include="Building06.h" />
+    <ClInclude Include="Building07.h" />
+    <ClInclude Include="Building09.h" />
+    <ClInclude Include="Building10.h" />
+    <ClInclude Include="Building11.h" />
     <ClInclude Include="CameraController.h" />
     <ClInclude Include="DemoGameApp.h" />
     <ClInclude Include="KangJinTestScene.h" />
     <ClInclude Include="KangJin_Map_Test.h" />
     <ClInclude Include="Maps.h" />
     <ClInclude Include="Objectimgui.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Building08.h" />
     <ClInclude Include="Structure.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Building01.cpp" />
+    <ClCompile Include="Building02.cpp" />
+    <ClCompile Include="Building03.cpp" />
+    <ClCompile Include="Building04.cpp" />
+    <ClCompile Include="Building05.cpp" />
+    <ClCompile Include="Building06.cpp" />
+    <ClCompile Include="Building07.cpp" />
+    <ClCompile Include="Building09.cpp" />
+    <ClCompile Include="Building10.cpp" />
+    <ClCompile Include="Building11.cpp" />
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="DemoGameApp.cpp" />
     <ClCompile Include="KangJinTestScene.cpp" />
     <ClCompile Include="KangJin_Map_Test.cpp" />
     <ClCompile Include="Maps.cpp" />
     <ClCompile Include="Objectimgui.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="Building08.cpp" />
     <ClCompile Include="Structure.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -565,7 +565,7 @@ CollisionInfo Physics::DetectCollisionCircleLine(const CircleCollider* a, const 
 	{
 		info.isCollide = true;
 
-		info.normal = segment.normal;
+		info.normal = -segment.normal;
 
 		float signedDistanceFromLine = Vector2::Dot((circle.center - segment.startPoint), segment.normal);
 

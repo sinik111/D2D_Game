@@ -23,15 +23,19 @@ enum class PlayerDirection
 
 struct PlayerStat
 {
-	int maxhp = 40;
+	int maxHp = 40;
 	float maxStamina = 50.0f;
 	float staminaRestoreAmountPerSecond = 16.7f;
 	int attackPowerMin = 9;
 	int attackPowerMax = 11;
+	int heavyAttackPowerMin = 11;
+	int heavyAttackPowerMax = 13;
+	int grabAttackPowerMin = 13;
+	int grabAttackPowerMax = 15;
 	float attackStaminaCost = 11.9f;
 	float heavyAttackStaminaCost = 20.0f;
 	int attackKnockdownPower = 3;
-	int heabyAttackKnockdownPower = 4;
+	int heavyAttackKnockdownPower = 4;
 	float attackInterval = 0.4f;
 	int knockbackResist = 6;
 	int knockdownResist = 10;
@@ -51,8 +55,7 @@ struct PlayerStatus
 	int currentHp = 40;
 	float currentStamina = 50.0f;
 	float attackIntervalTimer = 0.0f;
-	int currentKnockback = 0;
-	int currentKnockdown = 0;
+	int currentKnockdownAmount = 0;
 	float knockdownResetTimer = 0.0f;
 	float evadeDurationTimer = 0.0f;
 	float evadeAvailalbeTimer = 0.0f;
@@ -78,11 +81,16 @@ private:
 	void FixedUpdate() override;
 	void Update() override;
 
+	void OnTriggerStay(const Collision& collision) override;
+
 private:
 	void SetDirectionInput(Vector2 input);
 	void DashKeyPressed();
 	void DashKeyReleased();
 	void NormalAttackKeyPressed();
+	void HeavyAttackKeyPressed();
+	void HeavyAttackKeyHeld();
+	void HeavyAttackKeyReleased();
 
 	void UpdateTimers();
 

@@ -38,6 +38,7 @@ void PlayerNormalAttackState::Enter(FSMContext& context)
 	coneCollider->SetLayer(CollisionLayer::PlayerAttack);
 	auto comp = normalAttackGo->AddComponent<PlayerNormalAttack>();
 	comp->SetDirection(direction);
+	comp->SetPlayer(m_player);
 }
 
 void PlayerNormalAttackState::Update(FSMContext& context)

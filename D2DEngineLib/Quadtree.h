@@ -8,6 +8,7 @@ struct QuadtreeNode
 {
 	Bounds bounds;
 	std::vector<Collider*> objects;
+    std::unordered_set<Collider*> objectsLookup;
 	std::unique_ptr<QuadtreeNode> children[4];
 
 	int depth;
@@ -28,9 +29,6 @@ public:
     void Remove(Collider* object);
 
     void Relocate(Collider* object);
-
-    // 이전에 삽입된 모든 객체 중 dirty 상태인 객체를 업데이트합니다.
-    void Update();
 
     std::vector<Collider*> Query(const Bounds& queryBounds);
     std::vector<Collider*> GetPotentialCollisions(Collider* object);

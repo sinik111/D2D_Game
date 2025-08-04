@@ -112,65 +112,6 @@ void PhysicsSystem::ProcessPhysics()
 	m_currentCollisions.clear();
 	m_currentTriggers.clear();
 
-	//for (auto collider : m_rigidBodyColliders) // no quadtree
-	//{
-	//	//auto candidates = m_quadtree->GetPotentialCollisions(collider);
-
-	//	//for (auto candidate : candidates)
-	//	for (auto candidate : m_colliders)
-	//	{
-	//		if (collider == candidate)
-	//		{
-	//			continue;
-	//		}
-
-	//		bool isInteractable = (Physics::GetCollisionMask(collider->GetLayer())
-	//			& static_cast<unsigned int>(candidate->GetLayer())) != 0;
-
-	//		if (isInteractable)
-	//		{
-	//			Collider* colliderA;
-	//			Collider* colliderB;
-
-	//			CollisionInfo info;
-
-	//			if (collider < candidate)
-	//			{
-	//				colliderA = collider;
-	//				colliderB = candidate;
-
-	//				info = colliderB->DetectCollision(colliderA);
-	//			}
-	//			else
-	//			{
-	//				colliderA = candidate;
-	//				colliderB = collider;
-
-	//				info = colliderA->DetectCollision(colliderB);
-	//			}
-
-	//			if (info.isCollide)
-	//			{
-	//				colliderA->SetIsCollide(true);
-	//				colliderB->SetIsCollide(true);
-
-	//				CollisionPair pair{ colliderA, colliderB };
-
-	//				if (colliderA->GetTrigger() || colliderB->GetTrigger())
-	//				{
-	//					m_currentTriggers.emplace(pair, info);
-	//				}
-	//				else
-	//				{
-	//					m_currentCollisions.emplace(pair, info);
-
-	//					Physics::ResolveCollision(info);
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
-
 	for (auto collider : m_rigidBodyColliders)
 	{
 		auto candidates = m_quadtree->GetPotentialCollisions(collider);
@@ -190,22 +131,18 @@ void PhysicsSystem::ProcessPhysics()
 				Collider* colliderA;
 				Collider* colliderB;
 
-				CollisionInfo info;
-
 				if (collider < candidate)
 				{
 					colliderA = collider;
 					colliderB = candidate;
-
-					info = colliderB->DetectCollision(colliderA);
 				}
 				else
 				{
 					colliderA = candidate;
 					colliderB = collider;
-
-					info = colliderA->DetectCollision(colliderB);
 				}
+
+				CollisionInfo info = colliderA->DetectCollision(colliderB);
 
 				if (info.isCollide)
 				{
@@ -304,6 +241,36 @@ void PhysicsSystem::ClearCollisionPairs()
 	m_previousCollisions.clear();
 }
 
+std::vector<Collider*> PhysicsSystem::DetectCollisions(Collider* collider)
+{
+	std::vector<Collider*> detected;
+
+	auto candidates = m_quadtree->GetPotentialCollisions(collider);
+
+	for (auto candidate : candidates)
+	{
+		if (collider == candidate)
+		{
+			continue;
+		}
+
+		bool isInteractable = (Physics::GetCollisionMask(collider->GetLayer())
+			& static_cast<unsigned int>(candidate->GetLayer())) != 0;
+
+		if (isInteractable)
+		{
+			CollisionInfo info = collider->DetectCollision(candidate);
+
+			if (info.isCollide)
+			{
+				detected.push_back(candidate);
+			}
+		}
+	}
+
+	return detected;
+}
+
 void PhysicsSystem::CallCollisionEvent()
 {
 	for (const auto& pair : m_currentCollisions)
@@ -326,13 +293,13 @@ void PhysicsSystem::CallCollisionEvent()
 
 		if (m_previousCollisions.find(pair.first) == m_previousCollisions.end())
 		{
-			pair.first.first->CallOnCollisionEnter(collisionB);
-			pair.first.second->CallOnCollisionEnter(collisionA);
+			pair.first.first->CallOnCollisionEnter(collisionA);
+			pair.first.second->CallOnCollisionEnter(collisionB);
 		}
 		else
 		{
-			pair.first.first->CallOnCollisionStay(collisionB);
-			pair.first.second->CallOnCollisionStay(collisionA);
+			pair.first.first->CallOnCollisionStay(collisionA);
+			pair.first.second->CallOnCollisionStay(collisionB);
 		}
 	}
 
@@ -361,8 +328,8 @@ void PhysicsSystem::CallCollisionEvent()
 					pair.second.contactPoint
 				};
 
-				pair.first.second->CallOnCollisionExit(collisionA);
-				pair.first.first->CallOnCollisionExit(collisionB);
+				pair.first.first->CallOnCollisionExit(collisionA);
+				pair.first.second->CallOnCollisionExit(collisionB);
 			}
 			else if (validA)
 			{
@@ -416,13 +383,13 @@ void PhysicsSystem::CallTriggerEvent()
 
 		if (m_previousTriggers.find(pair.first) == m_previousTriggers.end())
 		{
-			pair.first.first->CallOnTriggerEnter(collisionB);
-			pair.first.second->CallOnTriggerEnter(collisionA);
+			pair.first.first->CallOnTriggerEnter(collisionA);
+			pair.first.second->CallOnTriggerEnter(collisionB);
 		}
 		else
 		{
-			pair.first.first->CallOnTriggerStay(collisionB);
-			pair.first.second->CallOnTriggerStay(collisionA);
+			pair.first.first->CallOnTriggerStay(collisionA);
+			pair.first.second->CallOnTriggerStay(collisionB);
 		}
 	}
 
@@ -451,8 +418,8 @@ void PhysicsSystem::CallTriggerEvent()
 					pair.second.contactPoint
 				};
 
-				pair.first.second->CallOnTriggerExit(collisionA);
-				pair.first.first->CallOnTriggerExit(collisionB);
+				pair.first.first->CallOnTriggerExit(collisionA);
+				pair.first.second->CallOnTriggerExit(collisionB);
 			}
 			else if (validA)
 			{

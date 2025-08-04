@@ -211,6 +211,16 @@ public: // 유틸리티 함수
 		return Vector2(std::abs(v.x), std::abs(v.y));
 	}
 
+	static Vector2 RotateVector(Vector2 v, float degree)
+	{
+		float radian = degree * MyMath::DegToRad;
+
+		Vector2 rotated;
+		rotated.x = v.x * std::cos(radian) - v.y * std::sin(radian);
+		rotated.y = v.x * std::sin(radian) + v.y * std::cos(radian);
+		return rotated;
+	}
+
 	std::string ToString() const;
 	
 public:

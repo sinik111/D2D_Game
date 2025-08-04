@@ -13,6 +13,7 @@ public:
 	const Circle& GetCircle() const;
 
 	void SetRadius(float radius);
+	void SetCircle(const Circle& circle); // 직접 비교할 때 세팅용
 
 public:
 	void Render() override;

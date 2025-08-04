@@ -14,7 +14,7 @@ private:
 	std::unordered_map<std::wstring, std::weak_ptr<SpriteSheet>> m_spriteSheets;
 	std::unordered_map<std::wstring, std::weak_ptr<AnimationClip>> m_animationClips;
 
-	//std::queue<std::pair<float, std::shared_ptr<BitmapResource>>> m_shortCachedBitmapResources;
+	std::queue<std::pair<float, std::shared_ptr<BitmapResource>>> m_shortCachedBitmapResources;
 
 	std::wstring m_resourcePath;
 
@@ -40,6 +40,8 @@ public:
 	void Update();
 	void Release();
 	void ReleaseResources();
+
+	std::wstring GetResourcePath() const;
 
 public:
 	std::shared_ptr<BitmapResource> CreateBitmapResource(const std::wstring& filePath);

@@ -17,21 +17,35 @@ void Collider::Initialize()
 void Collider::RegisterToSystem()
 {
 	ComponentSystem::Get().Physics().RegisterCollider(this);
+
+	auto components = GetGameObject()->GetComponents<Script>();
+
+	for (const auto& script : components)
+	{
+		RegisterScript(script);
+	}
 }
 
 void Collider::UnregisterFromSystem()
 {
 	ComponentSystem::Get().Physics().UnregisterCollider(this);
+
+	auto components = GetGameObject()->GetComponents<Script>();
+
+	for (const auto& script : components)
+	{
+		RegisterScript(script);
+	}
 }
 
 void Collider::RegisterScript(Script* script)
 {
-	m_scriptsForCallBack.push_back(script);
+	m_scriptsForCallBack.insert(script);
 }
 
 void Collider::UnregisterScript(Script* script)
 {
-	Util::OptimizedErase(m_scriptsForCallBack, script);
+	m_scriptsForCallBack.erase(script);
 }
 
 RigidBody2D* Collider::GetRigidBody2D() const

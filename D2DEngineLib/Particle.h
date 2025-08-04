@@ -26,6 +26,7 @@ private:
 	float m_duration = 0.0f;
 	float m_timer = 0.0f;
 	bool m_isLoop = false;
+	bool m_isDestroyOnFinish = true;
 	bool m_isFinished = false;
 
 public:
@@ -45,6 +46,9 @@ public:
 	void SetLoop(bool isLoop);
 	void SetBitmap(const std::wstring& filePath);
 	void SetSpriteSheet(const std::wstring& filePath);
+
+	// true로 설정시 파티클 재생 끝나면 Particle이 붙어있는 GameObject가 삭제됨
+	void SetDestroyOnFinish(bool isDestroyOnFinish);
 
 	void AddParticleUnit(const ParticleUnit& particleUnit);
 };

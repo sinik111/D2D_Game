@@ -10,24 +10,20 @@ class RigidBody2D;
 class TextRenderer;
 class BoxCollider2D;
 
-class TempEnemyAttackCollider;
 
 class EnemyBase :public Script
 {
 private:
-	PlayerInput* m_playerInput;
+	//PlayerInput* m_playerInput;
+
 	Animator* m_animator;
 	RigidBody2D* m_rigidBody;
 	TextRenderer* m_textRenderer;
-	//BoxCollider2D* m_collider;
+	BoxCollider2D* m_collider;
 
 	FSM m_fsm;
 	FSMContext m_context;
-
-	GameObject* m_atkCollider = nullptr;
-
-	std::wstring m_tempLabel = L"EnemyAttackCollider_1";
-
+		
 	float m_debugLogTimer = 1.0f;
 	float m_dTimer = 0.0f;
 
@@ -86,7 +82,11 @@ public:
 		INAREA,			//카메라 범위 안
 		ENGAGE,			//이동 가능한 위치에 있는 플레이어 발견
 		ONATTACK,
+		ONATTACK2,
+		ONATTACK3,
 		RETURN,
+		ONEVADE,
+		KNOCKDOWN,
 	};
 
 	//---------------------------------------------------------------------------------
@@ -97,16 +97,7 @@ public:
 	//int Attack3PowerMin;
 	//int Attack3PowerMax;
 	//int AttackKnockdownPower;	
-
-	//int KnockbackResist;
-	//int KnockdownResist;
-	//float KnockdownPointResetTime;
-
-	//float EvadeDistance;
-	//float EvadeProbability;
-	//float Attack1Probability;
-	//float Attack2Probability;
-	//float Attack3Probability;
+	
 	//---------------------------------------------------------------------------------
 
 	bool m_isDead = false;
@@ -131,8 +122,10 @@ public:
 	float m_originAngle;
 
 	bool m_toDoMove = false;
+	float m_distanceToMoveSq = 0.0f;
 	Vector2 m_movingDestPos;
-	Vector2 m_moveDirection;
+	Vector2 m_departurePos;
+	Vector2 m_aheadDirection;
 
 	float m_rotationSpeed = 300.0f;
 	float m_acceleration = 0.0f;
@@ -148,12 +141,15 @@ public:
 	bool m_isTargetInChaseDist = false;
 	bool m_isTargetInRoamDist = false;
 	bool m_isTargetInAtkRange = false;
+	bool m_isTargetInMaxAtkRange = false;
+
 
 	float m_atkAngle = 10.0f;
 	bool m_isTargetInAtkAngle = false;
 
-	float m_attackInterval = 1.5f;
+	float m_attackInterval = 3.0f;
 	float m_attackTimer = 0.0f;
+
 	bool m_isAttackReady = true;
 
 	float m_AttackEffectTime = 0.4f;
@@ -163,7 +159,29 @@ public:
 	float m_underAttackValidTime = 0.2f;
 	float m_underAttackTimer = 0.0f;
 
+	bool m_isKnockback = false;
+	int m_knockbackResist = 10;
+	int m_knockbackAccumlated = 0;
+
+	float m_knockbackAcceleration = 0.0f;
+	float m_knockbackDuration = 0.5f;
+	float m_knockbackCurrentTimer = 0.0f;
+
+	Vector2 m_knockbackDirection;
+	float m_knockbackSpeed = 0.0f;
+	
+	bool m_isKnockdown = false;
+	int m_knockdownResist;
+	int m_knockdownAccumlated;
+	float m_knockdownPointResetTime;
+
 	bool m_isFindPlayer = false;
+
+	float m_evadeDistance = 300.0f;
+	float m_evadeProbability = 0.2f;
+	float m_attack1Probability = 0.8f;
+	float m_attack2Probability = 0.0f;
+	float m_attack3Probability = 0.0f;
 
 
 
@@ -179,6 +197,8 @@ public:
 
 	void MoveTo(const Vector2& destination);
 
+	void Evade();
+
 	void StopMoving();
 
 	void SetAnimDirection();
@@ -193,14 +213,21 @@ public:
 
 	void SetAngleByDirection(int n);
 
-	void FakeAttack();
-
-	void AtkColliderLifeManage();
+	void SetAngleByAheadDirection(const Vector2& adir);
 
 	void AttackCoolCheck();
 
+	void FakeAttack();
+
 	void UnderAttackManage();
 
+	void AheadToTarget();
+
+	void KnockBack(const float& dist, const float& speed);
+
+	void UpdateKnockBack();
+
+	void EnemyUnderAttack(const Collision& collision);
 
 
 	//void SetMovingDestPos();
@@ -217,7 +244,7 @@ public:
 	//void AttackTypeB();
 	//void AttackTypeC();
 
-	//void ReturnToOrigin();
+	
 
 
 public:
@@ -230,13 +257,21 @@ public:
 
 	inline float& RotationAngle() { return m_rotationAngle; }
 
-	inline int& PrevDir() { return m_prevDir; }
 
+
+
+	inline int& PrevDir() { return m_prevDir; }
 	inline int& CurrDir() { return m_currDir; }
+
+	inline Vector2& DepaturePos() { return m_departurePos; }
+
+	inline float& DistanceToMoveSq() { return m_distanceToMoveSq; }
 
 	inline float& OriginAngle() { return m_originAngle; }
 
 	inline float& MoveSpeed() { return m_moveSpeed; }
+
+	inline float& Acceleration() { return m_acceleration; }
 
 	inline float& MaxSightDistance() { return m_maxSightDistance; }
 
@@ -270,7 +305,13 @@ public:
 
 	inline bool& IsTargetInAtkRange() { return m_isTargetInAtkRange; }
 
+	inline bool& IsTargetInMaxAtkRange() { return m_isTargetInMaxAtkRange; }
+
 	inline float& AtkAngle() { return m_atkAngle; }
+
+	inline float& AttackTimer() { return m_attackTimer; }
+
+	inline float& AttackInterval() { return m_attackInterval; }
 
 	inline bool& IsTargetInAtkAngle() { return m_isTargetInAtkAngle; }
 
@@ -279,6 +320,21 @@ public:
 	inline bool& IsUnderAttack() { return m_isUnderAttack; }
 
 	inline bool& IsFindPlayer() { return m_isFindPlayer; }
+
+	inline const float& EvadeProbability() { return m_evadeProbability;	}
+	
+	inline bool& IsKnockBack() { return m_isKnockback; }
+
+	inline const int& KnockBackResist() { return m_knockbackResist; }
+	
+	inline int& KnockBackAccumulated() { return m_knockbackAccumlated; }
+
+
+	inline bool& IsKnockDown() { return m_isKnockdown; }
+
+	inline Vector2& AheadDirection() { return m_aheadDirection; }
+
+	
 
 	inline const bool& IsPlayerDead()
 	{
@@ -297,6 +353,7 @@ public:
 	RigidBody2D* RigidBody();
 
 	const Vector2& Pos();
+	
 
 };
 

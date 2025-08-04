@@ -72,6 +72,8 @@ public:
 
 	inline bool& IsTargetInAtkRange() { return m_Script->IsTargetInAtkRange(); }
 
+	inline bool& IsTargetInMaxAtkRange() { return m_Script->IsTargetInMaxAtkRange(); }
+
 	inline float& AtkAngle() { return m_Script->AtkAngle(); }
 
 	inline bool& IsTargetInAtkAngle() { return m_Script->IsTargetInAtkAngle(); }
@@ -85,24 +87,27 @@ public:
 	RigidBody2D* RigidBody(); 
 	
 	inline const bool IsPlayerNull() { return m_Script->IsPlayerNull(); }
+
+	inline bool& IsKnockBack() { return m_Script->IsKnockBack(); }
+	
+	inline bool& IsKnockDown() { return m_Script->IsKnockDown(); }
 	
 	
 
-	const bool& IsPlayerDead(FSMContext& context);	
-
-	void SetEnemyDirectionByInput(FSMContext& context);
+	const bool& IsPlayerDead(FSMContext& context);		
 		
-	void CheckTargetDistance();
-
-	void CheckChasable();	
+	void CheckTargetDistance();	
 
 	void MoveToPlayer();
 
-	void CheckTargetInAR();
-
-	void RotateToTarget();
+	void CheckTargetInAtkRange();
 
 	void CheckTargetInAtkAngle();
+	
+	void RotateToTarget();
+
+	//void SetEnemyDirectionByInput(FSMContext& context);
+	
 
 
 public:	

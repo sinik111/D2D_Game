@@ -157,10 +157,6 @@ void Maps::ExportJsontoPath(std::string filepath)
 
 void Maps::CreateLineCollider()
 {
-	
-	// [TODO] : AddComponent<LineCollider>를 json에 있는 개수만큼 for문 돌면서 해주어야 함
-	// gameObject->AddComponent<LineCollider>();
-	//std::vector<LineSegment> lines;
 	std::ifstream infile("Resource/points.json");
 	if (infile.is_open())
 	{
@@ -186,7 +182,6 @@ void Maps::CreateLineCollider()
 			Vector2 endPoint;
 			endPoint.x = line["end"]["x"];
 			endPoint.y = line["end"]["y"];
-			//std::cout << "startPoint : " << startPoint.x <<", " << startPoint.y <<"\nendPoint : " << endPoint.x <<", " << endPoint.y << std::endl;
 			linecollider->SetLine(startPoint, endPoint);
 			
 			std::cout << "x : " << gameobject->GetTransform()->GetLocalPosition().x <<", y :" << gameobject->GetTransform()->GetLocalPosition(). y<< std::endl;

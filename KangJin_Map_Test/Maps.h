@@ -2,10 +2,19 @@
 #include "../D2DEngineLib/Script.h"
 #include "../D2DEngineLib/json.hpp"
 
+struct LineData
+{
+	Vector2 vecdistance;
+	Vector2 centerPos;
+	Vector2 relativeStart;
+	Vector2 relativeEnd;
+};
+
 class Maps : public Script
 {
 	std::vector<GameObject*> m_GameObjects;
 	std::vector<Vector2> m_Positions;
+	std::vector<LineData> m_lineDatas;
 
 public:
 	void Initialize() override;
@@ -14,13 +23,6 @@ public:
 	void Update()override;
 	void LateUpdate()override;
 	void OnDestroy()override;
-
-	//void OnCollisionEnter(const Collision& collision)override;
-	//void OnCollisionStay(const Collision& collision)override;
-	//void OnCollisionExit(const Collision& collision)override;
-	//void OnTriggerEnter(const Collision& collision)override;
-	//void OnTriggerStay(const Collision& collision)override;
-	//void OnTriggerExit(const Collision& collision)override;
 
 	std::string ConvertPositiontoJSON();
 	void ExportJsontoPath(std::string filepath);
