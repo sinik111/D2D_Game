@@ -18,6 +18,11 @@ void ImGuiSystem::EnableImGuiSystem()
 	isUsingImGui = true;
 }
 
+void ImGuiSystem::DisableImGuiSystem()
+{
+	isUsingImGui = false;
+}
+
 void ImGuiSystem::BeginDrawImGui()
 {
 	if(isUsingImGui == true)
@@ -48,6 +53,5 @@ void ImGuiSystem::EndDrawImGui()
 
 void ImGuiSystem::AddImGui(MyImGui* imgui)
 {
-	m_ImGuiVector.push_back(imgui);
-	
+	if (isUsingImGui == true) {m_ImGuiVector.push_back(imgui);}
 }

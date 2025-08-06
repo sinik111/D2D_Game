@@ -31,6 +31,12 @@
     <Filter Include="02_Script\Enemy\DummyEnemy">
       <UniqueIdentifier>{a031f923-5054-46ed-8379-eddcd1433b64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Script\Enemy\Attack">
+      <UniqueIdentifier>{077ff054-3ad6-4e66-8ddf-dba69b3ac376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Player\Script">
+      <UniqueIdentifier>{13ec91df-7bc5-497c-a7e5-a405d1ac9886}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -81,12 +87,6 @@
     <ClCompile Include="EnemyBase.cpp">
       <Filter>02_Script\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBaseIdle.cpp">
-      <Filter>02_Script\Enemy\EnemyState</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBaseMove.cpp">
-      <Filter>02_Script\Enemy\EnemyState</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyEngage.cpp">
       <Filter>02_Script\Enemy\EnemyState</Filter>
     </ClCompile>
@@ -132,11 +132,38 @@
     <ClCompile Include="PlayerKnockdownState.cpp">
       <Filter>02_Script\Player\PlayerState</Filter>
     </ClCompile>
-    <ClCompile Include="TempEnemyAttack.cpp">
-      <Filter>02_Script\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyKnockdown.cpp">
       <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySlowTurn.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHitAndRun.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnAttackSecond.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnAttackThird.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseAttack.cpp">
+      <Filter>02_Script\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="TempEnemyAttack.cpp">
+      <Filter>02_Script\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="HitStopController.cpp">
+      <Filter>02_Script\Player\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraController.cpp">
+      <Filter>02_Script\Player\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGrabState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,12 +215,6 @@
     <ClInclude Include="EnemyBase.h">
       <Filter>02_Script\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBaseIdle.h">
-      <Filter>02_Script\Enemy\EnemyState</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBaseMove.h">
-      <Filter>02_Script\Enemy\EnemyState</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyEngage.h">
       <Filter>02_Script\Enemy\EnemyState</Filter>
     </ClInclude>
@@ -239,11 +260,38 @@
     <ClInclude Include="PlayerKnockdownState.h">
       <Filter>02_Script\Player\PlayerState</Filter>
     </ClInclude>
-    <ClInclude Include="TempEnemyAttack.h">
-      <Filter>02_Script\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyKnockdown.h">
       <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySlowTurn.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHitAndRun.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnAttackSecond.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnAttackThird.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseAttack.h">
+      <Filter>02_Script\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="TempEnemyAttack.h">
+      <Filter>02_Script\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="HitStopController.h">
+      <Filter>02_Script\Player\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraController.h">
+      <Filter>02_Script\Player\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGrabState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

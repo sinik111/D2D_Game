@@ -26,7 +26,12 @@ float MyTimeSystem::DeltaTime() const
 
 float MyTimeSystem::FixedDeltaTime() const
 {
-    return m_fixedDeltaTime * m_timeScale;
+    return m_fixedDeltaTime/* * m_timeScale*/;
+}
+
+float MyTimeSystem::UnscaledDeltaTime() const
+{
+    return m_deltaTime;
 }
 
 void MyTimeSystem::SetTimeScale(float timeScale)

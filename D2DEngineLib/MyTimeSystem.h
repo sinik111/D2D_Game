@@ -32,6 +32,7 @@ public:
 
     float DeltaTime() const;
     float FixedDeltaTime() const;
+    float UnscaledDeltaTime() const;
 
     void SetTimeScale(float timeScale);
     void SetFixedDeltaTime(float fixedDeltaTime);

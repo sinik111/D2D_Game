@@ -7,13 +7,13 @@ using json = nlohmann::json;
 
 void Structure::Start()
 {
-
+	ImportfromJson();
 }
 
 void Structure::Update()
 {
 	//3번 키로 collider.json 파일 export
-	if (Input::IsKeyPressed('3'))
+	if (Input::IsKeyPressed('E'))
 	{
 		this->ExporttoJson();
 	}
@@ -40,18 +40,43 @@ void Structure::OnTriggerStay(const Collision& collision)
 
 void Structure::ImportfromJson()
 {
-	//std::ifstream infile(jsonfilepath);
-	//if (infile.is_open())
-	//{
-	//	json j;
-	//	infile >> j;
-	//	infile.close();
+	CircleCollider* circlecollider;
+	std::ifstream infile(jsonfilepath);
+	if (infile.is_open())
+	{
+		json j;
+		infile >> j;
+		infile.close();
+		
+		Vector2 pivot = { j["pivot"]["x"], j["pivot"]["y"] };
+		GetGameObject()->GetComponent<BitmapRenderer>()->SetPivot(pivot);
+		
+		for (auto& circle : j["circles"])
+		{
+			Vector2 circleoffset = { circle["offset"]["x"], circle["offset"]["y"] };
+			float circleradius = circle["radius"];
+			circlecollider = GetGameObject()->AddComponent<CircleCollider>();
+			circlecollider->SetLayer(CollisionLayer::Building);
+			circlecollider->SetTrigger(true);
+			circlecollider->SetOffset(circleoffset);
+			circlecollider->SetRadius(circleradius);
+			
+			m_Colliders.push_back(circlecollider);
+		}
+	}
+	else
+	{
+		for(int i = 0;i<index;++i)
+		{
+			GetGameObject()->GetComponent<BitmapRenderer>()->SetPivot({ 0.5,0.5 });
+			circlecollider = GetGameObject()->AddComponent<CircleCollider>();
+			circlecollider->SetLayer(CollisionLayer::Building);
+			circlecollider->SetTrigger(true);
+			circlecollider->SetOffset({ 0.5f, 0.5f });
 
-	//	for (auto& circle : j["circles"])
-	//	{
-	//		
-	//	}
-	//}
+			m_Colliders.push_back(circlecollider);
+		}
+	}
 }
 
 void Structure::ExporttoJson()
@@ -66,6 +91,8 @@ void Structure::ExporttoJson()
 	}
 
 	json jarr;
+	Vector2 pivot = GetGameObject()->GetComponent<BitmapRenderer>()->GetPivot();
+	jarr["pivot"] = { {"x", pivot.x}, {"y", pivot.y} };
 	jarr["circles"] = arr;
 	std::string jsonstring = jarr.dump(4);
 

@@ -13,15 +13,27 @@
 
 void EnemyInArea::Enter(FSMContext& context)
 {
-
+	IsFindPlayer() = false;
 }
 
 void EnemyInArea::Update(FSMContext& context)
 {
 	if (!m_Script) return;
-	
+
 	if (!IsInCamera()) {
 		context.intParams[L"NextEnemyState"] = EnemyBase::OUTOFAREA;
+		return;
+	}
+
+	if (m_Script->IsUnderAttack())
+	{
+		context.intParams[L"NextEnemyState"] = EnemyBase::SLOWTURN;
+		return;
+	}
+
+	if ((OriginPos() - Pos()).LengthSq() > MaxRoamDistance() * MaxRoamDistance())
+	{
+		context.intParams[L"NextEnemyState"] = EnemyBase::RETURN;
 		return;
 	}
 
@@ -32,7 +44,7 @@ void EnemyInArea::Update(FSMContext& context)
 		CheckTargetDistance();
 	}
 
-	if (IsTargetInChaseDist()) 
+	if (IsTargetInChaseDist())
 	{
 		context.intParams[L"NextEnemyState"] = EnemyBase::ENGAGE;
 		return;
@@ -44,6 +56,9 @@ void EnemyInArea::Update(FSMContext& context)
 
 void EnemyInArea::Exit(FSMContext& context)
 {
+	m_isWaitingToRoam = false;
+	m_roamWaitTimer = 0.0f;
+	m_isRoaming = false;
 
 }
 
@@ -61,7 +76,7 @@ void EnemyInArea::SetRoam(FSMContext& context)
 		if (m_roamWaitTimer >= 3.0f) // 3초 대기
 		{
 			m_isWaitingToRoam = false;
-			m_roamWaitTimer = 0.0f;			
+			m_roamWaitTimer = 0.0f;
 		}
 		else
 		{
@@ -126,13 +141,13 @@ bool EnemyInArea::SightCheck(const Vector2& playerPos, const Vector2& enemyPos)
 
 	// 플레이어가 시야 거리 내에 있는지 1차 확인. 거리 밖이면 시야각 체크 불필요
 	if (distanceToPlayer > maxSightDistance)
-	{		
+	{
 		return false;
 	}
 
-	float currentEnemyAngleRad = RotationAngle() *(3.141592f / 180.0f); // 도로 라디안 변환
+	float currentEnemyAngleRad = RotationAngle() * (3.141592f / 180.0f); // 도로 라디안 변환
 	Vector2 enemyForward = Vector2(cosf(currentEnemyAngleRad), sinf(currentEnemyAngleRad));
-		
+
 	toPlayer.Normalize();
 
 	float targetAngleRadians = atan2f(toPlayer.y, toPlayer.x);
@@ -144,9 +159,9 @@ bool EnemyInArea::SightCheck(const Vector2& playerPos, const Vector2& enemyPos)
 
 	// 내적을 사용하여 두 벡터 간의 각도 계산 (코사인 값)
 	float dotProduct = Vector2::Dot(enemyForward, toPlayer);
-	
+
 	float angleBetween = acosf(dotProduct) * (180.0f / 3.141592f); // 라디안을 도로 변환
-		
+
 
 	// 시야각 절반보다 각도가 크면 바깥임
 	if (angleBetween > (sightAngle / 2.0f))
@@ -157,8 +172,6 @@ bool EnemyInArea::SightCheck(const Vector2& playerPos, const Vector2& enemyPos)
 	// 여기까지 도달했다면, 플레이어 발견
 	return true;
 
-
-	
 }
 
 

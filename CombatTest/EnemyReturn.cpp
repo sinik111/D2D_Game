@@ -32,11 +32,12 @@ void EnemyReturn::Update(FSMContext& context)
 
 	if (!ToDoMove())
 	{
-		if (IsPlayerNull())
+		if (!IsPlayerNull())
 		{
 			m_Script->AheadToTarget();
 		}
 		context.intParams[L"NextEnemyState"] = EnemyBase::INAREA;
+		return;
 	}	
 
 	

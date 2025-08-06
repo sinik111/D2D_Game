@@ -13,7 +13,8 @@ PlayerKnockbackState::PlayerKnockbackState(Player* player)
 
 bool PlayerKnockbackState::CheckCondition(FSMContext& context)
 {
-	return context.triggerParams[L"Knockback"];
+	return m_player->GetPlayerStatus().currentHp > 0 && 
+		context.triggerParams[L"Knockback"] && !context.boolParams[L"Invincibility"];
 }
 
 void PlayerKnockbackState::Enter(FSMContext& context)

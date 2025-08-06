@@ -118,6 +118,9 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Vendor\FMOD\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -137,6 +140,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Vendor\FMOD\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
@@ -207,7 +213,9 @@
     <ClInclude Include="ScriptSystem.h" />
     <ClInclude Include="Cone2D.h" />
     <ClInclude Include="ConeCollider2D.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteData.h" />
+    <ClInclude Include="StringUtility.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="RendererSystem.h" />
     <ClInclude Include="Transform.h" />
@@ -290,6 +298,7 @@
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptSystem.cpp" />
     <ClCompile Include="ConeCollider2D.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="RendererSystem.cpp" />
     <ClCompile Include="Transform.cpp" />

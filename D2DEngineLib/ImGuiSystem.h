@@ -7,7 +7,7 @@ class ImGuiSystem
 public :
 	static ImGuiSystem& Get();
 	void EnableImGuiSystem();
-
+	void DisableImGuiSystem();
 	bool IsUsingImGui() { return isUsingImGui; }
 
 	void BeginDrawImGui();

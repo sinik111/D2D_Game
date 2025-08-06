@@ -6,6 +6,7 @@ class PlayerWalkState :
 	public PlayerStateBase
 {
 private:
+	float m_dummyGrabDistance = 200.0f;
 	bool m_canDodge = false;
 
 public:

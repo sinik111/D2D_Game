@@ -104,7 +104,6 @@ public:
 
 	void CheckTargetInAtkAngle();
 	
-	void RotateToTarget();
 
 	//void SetEnemyDirectionByInput(FSMContext& context);
 	

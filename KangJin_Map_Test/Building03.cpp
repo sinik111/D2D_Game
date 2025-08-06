@@ -38,8 +38,3 @@ void Building03::Start()
 	}
 }
 
-void Building03::ExporttoJson()
-{
-	jsonfilepath = "Resource/building_circles3.json";
-	Structure::ExporttoJson();
-}

@@ -53,8 +53,6 @@ void ConeCollider2D::UpdateCollider()
     else
     {
         m_cone.center = m_transform->GetWorldPosition() + m_offset;
-
-        m_isColliderDirty = false;
     }
 }
 

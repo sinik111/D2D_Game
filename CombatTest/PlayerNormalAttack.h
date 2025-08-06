@@ -5,16 +5,12 @@
 #include "AttackStateEnum.h"
 
 class Player;
+class EnemyBase;
+class EnemyBaseAttack;
 
 class PlayerNormalAttack :
 	public Script
 {
-public:
-	PlayerNormalAttack() {}
-	PlayerNormalAttack(Player* player)
-	{
-		m_player = player;
-	}
 private:
 	Player* m_player = nullptr;
 	GameObject* m_debugTextObject = nullptr;
@@ -24,6 +20,9 @@ private:
 	float m_dummyAttackDuration = 0.2f;
 	Vector2 m_debugTextDirection;
 	bool m_foundEnemyAttack = false;
+
+	bool m_enemyHitChecked = false;
+	EnemyBase* m_enemyBase = nullptr;	
 
 private:
 	void Start() override;

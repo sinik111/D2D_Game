@@ -17,6 +17,7 @@ private:
 	std::queue<std::pair<float, std::shared_ptr<BitmapResource>>> m_shortCachedBitmapResources;
 
 	std::wstring m_resourcePath;
+	std::string m_resourcePathA;
 
 	float m_resourceTimer = 0.0f;
 
@@ -42,6 +43,7 @@ public:
 	void ReleaseResources();
 
 	std::wstring GetResourcePath() const;
+	std::string GetResourcePathA() const;
 
 public:
 	std::shared_ptr<BitmapResource> CreateBitmapResource(const std::wstring& filePath);

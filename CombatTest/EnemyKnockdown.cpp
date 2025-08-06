@@ -13,7 +13,7 @@
 
 void EnemyKnockdown::Enter(FSMContext& context)
 {
-	Debug::Log("³Ë´Ù¿î");
+	Debug::Log("³Ë´Ù¿î--!!");
 	m_Script->StopMoving();
 	m_KnockdownTimer = 0.0f;
 
@@ -28,11 +28,17 @@ void EnemyKnockdown::Update(FSMContext& context)
 {
 	m_KnockdownTimer += MyTime::DeltaTime();
 
-	if (m_KnockdownTimer >= 2.0f)
+	if (m_KnockdownTimer >= 3.0f)
 	{
-		Debug::Log("³Ë´Ù¿îÇ®¸²");				
+		Debug::Log("³Ë´Ù¿îÇ®¸²--!!");	
+		m_KnockdownTimer = 0.0f;
+		IsKnockdown() = false;
 		m_Script->AheadToTarget();
-		context.intParams[L"NextEnemyState"] = EnemyBase::ENGAGE;		
+		if (context.intParams[L"CurrEnemyState"] != EnemyBase::ENGAGE)
+		{
+			context.intParams[L"NextEnemyState"] = EnemyBase::ENGAGE;
+		}
+		return;
 	}
 }
 

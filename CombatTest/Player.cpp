@@ -2,6 +2,7 @@
 #include "Player.h"
 
 #include <sstream>
+#include <fstream>
 
 #include "../D2DEngineLib/RigidBody2D.h"
 #include "../D2DEngineLib/PlayerInput.h"
@@ -9,19 +10,25 @@
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/Physics.h"
+#include "../D2DEngineLib/json.hpp"
+#include "../D2DEngineLib/ResourceManager.h"
+#include "../D2DEngineLib/Camera.h"
 
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
 #include "PlayerDashState.h"
 #include "PlayerEvadeState.h"
 #include "PlayerNormalAttackState.h"
-
-#include "DummyEnemyAttack.h"
-#include "TempEnemyAttack.h"
-
+#include "EnemyBaseAttack.h"
 #include "PlayerKnockbackState.h"
 #include "PlayerKnockdownState.h"
 #include "PlayerHeavyAttackState.h"
+#include "PlayerGrabState.h"
+#include "PlayerDeadState.h"
+#include "PlayerCameraController.h"
+#include "HitStopController.h"
+
+using nlohmann::json;
 
 constexpr static PlayerDirection s_directionEnums[3][3]{
 	{ 
@@ -58,9 +65,79 @@ const wchar_t* keyInfo{ L"이동: 방향키\n"
 	L"대시 : 회피 후 L - Shift 유지\n"
 	L"공격 : Z\n" };
 
+static void from_json(const json& j, PlayerStat& playerStat)
+{
+	j.at("MaxHp").get_to(playerStat.maxHp);
+	j.at("MaxStamina").get_to(playerStat.maxStamina);
+	j.at("StaminaRestoreAmountPerSecond").get_to(playerStat.staminaRestoreAmountPerSecond);
+	j.at("AttackPowerMin").get_to(playerStat.attackPowerMin);
+	j.at("AttackPowerMax").get_to(playerStat.attackPowerMax);
+	j.at("HeavyAttackPowerMin").get_to(playerStat.heavyAttackPowerMin);
+	j.at("HeavyAttackPowerMax").get_to(playerStat.heavyAttackPowerMax);
+	j.at("GrabAttackPowerMin").get_to(playerStat.grabAttackPowerMin);
+	j.at("GrabAttackPowerMax").get_to(playerStat.grabAttackPowerMax);
+	j.at("AttackStaminaCost").get_to(playerStat.attackStaminaCost);
+	j.at("HeavyAttackStaminaCost").get_to(playerStat.heavyAttackStaminaCost);
+	j.at("AttackKnockdownPower").get_to(playerStat.attackKnockdownPower);
+	j.at("HeavyAttackKnockdownPower").get_to(playerStat.heavyAttackKnockdownPower);
+	j.at("AttackInterval").get_to(playerStat.attackInterval);
+	j.at("KnockbackResist").get_to(playerStat.knockbackResist);
+	j.at("KnockdownResist").get_to(playerStat.knockdownResist);
+	j.at("KnockdownResetTime").get_to(playerStat.knockdownResetTime);
+	j.at("MoveSpeed").get_to(playerStat.moveSpeed);
+	j.at("DashSpeed").get_to(playerStat.dashSpeed);
+	j.at("DashStaminaPerSec").get_to(playerStat.dashStaminaPerSec);
+	j.at("EvadeDistance").get_to(playerStat.evadeDistance);
+	j.at("EvadeDuration").get_to(playerStat.evadeDuration);
+	j.at("EvadeAvailableTime").get_to(playerStat.evadeAvailableTime);
+	j.at("EvadeInterval").get_to(playerStat.evadeInterval);
+	j.at("EvadeStamina").get_to(playerStat.evadeStamina);
+}
+
 void Player::Initialize()
 {
 	m_rigidBody2d = GetGameObject()->GetComponent<RigidBody2D>();
+
+	std::ifstream inFile(ResourceManager::Get().GetResourcePath() + L"PlayerStat.json");
+	if (inFile.is_open())
+	{
+		json j;
+		inFile >> j;
+		inFile.close();
+
+		m_playerStat.maxHp = j["MaxHp"];
+		m_playerStat.maxStamina = j["MaxStamina"];
+		m_playerStat.staminaRestoreAmountPerSecond = j["StaminaRestoreAmountPerSecond"];
+		m_playerStat.attackPowerMin = j["AttackPowerMin"];
+		m_playerStat.attackPowerMax = j["AttackPowerMax"];
+		m_playerStat.heavyAttackPowerMin = j["HeavyAttackPowerMin"];
+		m_playerStat.heavyAttackPowerMax = j["HeavyAttackPowerMax"];
+		m_playerStat.grabAttackPowerMin = j["GrabAttackPowerMin"];
+		m_playerStat.grabAttackPowerMax = j["GrabAttackPowerMax"];
+		m_playerStat.attackStaminaCost = j["AttackStaminaCost"];
+		m_playerStat.heavyAttackStaminaCost = j["HeavyAttackStaminaCost"];
+		m_playerStat.attackKnockdownPower = j["AttackKnockdownPower"];
+		m_playerStat.heavyAttackKnockdownPower = j["HeavyAttackKnockdownPower"];
+		m_playerStat.attackInterval = j["AttackInterval"];
+		m_playerStat.knockbackResist = j["KnockbackResist"];
+		m_playerStat.knockdownResist = j["KnockdownResist"];
+		m_playerStat.knockdownResetTime = j["KnockdownResetTime"];
+		m_playerStat.moveSpeed = j["MoveSpeed"];
+		m_playerStat.dashSpeed = j["DashSpeed"];
+		m_playerStat.dashStaminaPerSec = j["DashStaminaPerSec"];
+		m_playerStat.evadeDistance = j["EvadeDistance"];
+		m_playerStat.evadeDuration = j["EvadeDuration"];
+		m_playerStat.evadeAvailableTime = j["EvadeAvailableTime"];
+		m_playerStat.evadeInterval = j["EvadeInterval"];
+		m_playerStat.evadeStamina = j["EvadeStamina"];
+	}
+	else
+	{
+		assert(false && L"json 파일 열기 실패");
+	}
+
+	m_playerStatus.currentHp = m_playerStat.maxHp;
+	m_playerStatus.currentStamina = m_playerStat.maxStamina;
 }
 
 void Player::Start()
@@ -70,6 +147,7 @@ void Player::Start()
 	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
 	textRenderer->SetVerticalAlignment(VerticalAlignment::Center);
 	textRenderer->SetSpaceType(SpaceType::World);
+	textRenderer->SetColor(D2D1::ColorF(D2D1::ColorF::Red));
 
 	m_rigidBody2d->SetGravityScale(0.0f);
 
@@ -97,6 +175,7 @@ void Player::Start()
 	m_fsmContext.boolParams[L"ContinueHeavyAttack"] = false;
 	m_fsmContext.triggerParams[L"Knockback"] = false;
 	m_fsmContext.triggerParams[L"Knockdown"] = false;
+	m_fsmContext.boolParams[L"Invincibility"] = false;
 
 	m_fsmContext.animator->Play(L"runs_S_001");
 	m_fsmContext.animator->SetPlaySpeed(2.0f);
@@ -109,6 +188,8 @@ void Player::Start()
 	m_playerFSM.AddState<PlayerHeavyAttackState>(L"HeavyAttack", false, this);
 	m_playerFSM.AddState<PlayerKnockbackState>(L"Knockback", true, this);
 	m_playerFSM.AddState<PlayerKnockdownState>(L"Knockdown", true, this);
+	m_playerFSM.AddState<PlayerGrabState>(L"Grab", false, this);
+	m_playerFSM.AddState<PlayerDeadState>(L"Dead", true, this);
 
 	m_playerFSM.SetState(L"Idle", m_fsmContext);
 
@@ -119,19 +200,35 @@ void Player::Start()
 void Player::FixedUpdate()
 {
 	m_playerFSM.Update(m_fsmContext);
-
-
-	m_dTimer += MyTime::FixedDeltaTime();
-	
-	if (m_dTimer >= 1.0f)
-	{
-		Debug::Log("플레이어 벨로시티 매그니튜드: ", m_rigidBody2d->GetVelocity().Length());
-		m_dTimer = 0;
-	}
 }
 
 void Player::Update()
 {
+	if (Input::IsKeyPressed('1'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<PlayerCameraController>();
+		controller->ShakeCamera(CameraShakeType::LeftRight, 20.0f, 1.0f, 2, true);
+	}
+
+	if (Input::IsKeyPressed('2'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<PlayerCameraController>();
+		controller->ShakeCamera(CameraShakeType::UpDown, 20.0f, 1.0f, 10, true);
+	}
+
+	if (Input::IsKeyPressed('3'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<PlayerCameraController>();
+		controller->ShakeCamera(CameraShakeType::Random, 20.0f, 3.0f, 1000, true);
+	}
+
+	if (Input::IsKeyPressed('4'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<HitStopController>();
+		controller->DoHitStop(0.01f, 0.5f);
+	}
+
+
 	std::wostringstream woss;
 
 	woss << keyInfo << L"\n\n";
@@ -145,9 +242,10 @@ void Player::Update()
 
 void Player::OnTriggerStay(const Collision& collision)
 {
-	if (collision.otherGameObject->GetName() == L"TempEnemyAttack")
+	if (collision.otherGameObject->GetName() == L"EnemyBaseAttack")
 	{
-		auto comp = collision.otherGameObject->GetComponent<TempEnemyAttack>();
+		auto comp = collision.otherGameObject->GetComponent<EnemyBaseAttack>();
+
 		if (comp->GetAttackState() == AttackState::Dealing)
 		{
 			comp->SetAttackState(AttackState::Safety);
@@ -155,7 +253,7 @@ void Player::OnTriggerStay(const Collision& collision)
 			int enemyAttackPowerMin = 5; // EnemyAttackPower 임시 수치
 			int enemyAttackPowerMax = 7;
 
-			m_playerStatus.currentHp -= Random::Int(enemyAttackPowerMin, enemyAttackPowerMax);
+			//m_playerStatus.currentHp -= Random::Int(enemyAttackPowerMin, enemyAttackPowerMax);
 
 			if (m_playerStatus.currentHp <= 0)
 			{
@@ -169,7 +267,7 @@ void Player::OnTriggerStay(const Collision& collision)
 
 			int enemyAttackKnockdownPower = 10; // EnemyAttackKnockdownPower 임시 수치
 
-			m_playerStatus.currentKnockdownAmount += enemyAttackKnockdownPower;
+			//m_playerStatus.currentKnockdownAmount += enemyAttackKnockdownPower;
 			
 			if (m_playerStatus.currentKnockdownAmount > m_playerStat.knockdownResist)
 			{
@@ -287,7 +385,7 @@ inline std::wostringstream& operator<<(std::wostringstream& woss, const PlayerSt
 		<< L"\nHeavyAttackPowerMin: " << playerStat.heavyAttackPowerMin << L"\nHeavyAttackPowerMax: " << playerStat.heavyAttackPowerMax
 		<< L"\nGrabAttackPowerMin: " << playerStat.grabAttackPowerMin << L"\nGrabAttackPowerMax: " << playerStat.grabAttackPowerMax
 		<< L"\nAttackStaminaCost: " << playerStat.attackStaminaCost << L"\nHeavyAttackStaminaCost: " << playerStat.heavyAttackStaminaCost 
-		<< L"\nAttackKnockdownPower" << playerStat.attackKnockdownPower << L"\nHeavyAttackKnockdownPower" << playerStat.heavyAttackKnockdownPower
+		<< L"\nAttackKnockdownPower: " << playerStat.attackKnockdownPower << L"\nHeavyAttackKnockdownPower: " << playerStat.heavyAttackKnockdownPower
 		<< L"\nAttackInterval: " << playerStat.attackInterval
 		<< L"\nKnockbackResist: " << playerStat.knockbackResist << L"\nKnockdownResist: " << playerStat.knockdownResist
 		<< L"\nKnockdownResetTime: " << playerStat.knockdownResetTime << L"\nMoveSpeed: " << playerStat.moveSpeed

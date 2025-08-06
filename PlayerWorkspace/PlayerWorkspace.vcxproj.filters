@@ -13,8 +13,8 @@
     <Filter Include="02_Script\State">
       <UniqueIdentifier>{0f5a7d6a-45c0-4222-b838-3dac874bca25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Script\Effect">
-      <UniqueIdentifier>{47d71bfd-01e6-4893-814f-add3d3de7c2a}</UniqueIdentifier>
+    <Filter Include="02_Script\Camera">
+      <UniqueIdentifier>{e1268db1-decd-448a-801c-3b5681807689}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +72,15 @@
     <ClCompile Include="PlayerGrabState.cpp">
       <Filter>02_Script\State</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerDeadState.cpp" />
+    <ClCompile Include="PlayerDeadState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraController.cpp">
+      <Filter>02_Script\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="HitStopController.cpp">
+      <Filter>02_Script\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWorkspaceApp.h">
@@ -129,6 +137,14 @@
     <ClInclude Include="PlayerGrabState.h">
       <Filter>02_Script\State</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerDeadState.h" />
+    <ClInclude Include="PlayerDeadState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraController.h">
+      <Filter>02_Script\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="HitStopController.h">
+      <Filter>02_Script\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

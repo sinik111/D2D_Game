@@ -23,8 +23,8 @@ void EnemyOnEvade::Enter(FSMContext& context)
 		return;
 	}
 	
-	m_Script->StopMoving();
-	Debug::Log("스탑무빙");
+	m_Script->StopMoving();	
+	m_isEvadeStart = false;
 
 	MoveSpeed() = 300.0f;
 
@@ -34,6 +34,14 @@ void EnemyOnEvade::Enter(FSMContext& context)
 
 void EnemyOnEvade::Update(FSMContext& context)
 {
+
+	if (IsPlayerDead(context))
+	{
+		IsLockOnTarget() = false;
+		context.intParams[L"NextEnemyState"] = EnemyBase::RETURN;
+		return;
+	}
+
 	if (!m_isEvadeStart)
 	{
 		Debug::Log("회피발동");
@@ -42,27 +50,19 @@ void EnemyOnEvade::Update(FSMContext& context)
 		return;
 	}
 
-	if (IsPlayerDead(context) || (!IsTargetInChaseDist() && !IsTargetInMaxAtkRange()))
-	{
-		IsLockOnTarget() = false;
-		context.intParams[L"NextEnemyState"] = EnemyBase::RETURN; 
-		return;
-	}
-
-	//if (m_Script->m_evadeDistance < Vector2::Distance(Pos(), TargetPos()))
-	//{
-	//	m_Script->StopMoving();
-	//}
-
 	if (!ToDoMove() && m_isEvadeStart)
 	{
-		m_Script->AheadToTarget();
-		context.intParams[L"NextEnemyState"] = EnemyBase::ENGAGE; 
+		if (context.intParams[L"CurrEnemyState"] != EnemyBase::RETURN)
+		{
+			m_Script->AheadToTarget();			
+			IsLockOnTarget() = false;
+			context.intParams[L"NextEnemyState"] = EnemyBase::RETURN;
+			return;
+		}
 	}
 }
 
 void EnemyOnEvade::Exit(FSMContext& context)
-{
-	MoveSpeed() = 200.0f;
-	m_isEvadeStart = false;
+{	
+	MoveSpeed() = 200.0f;	
 }

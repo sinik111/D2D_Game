@@ -17,11 +17,10 @@ public:
 
 	void Exit(FSMContext& context) override;
 
-	void AttackTest();
+private:
 
-
-	//void AttackTest(FSMContext& context);
-
-	
+	float m_attackTime = 0.0f;
+	float m_attackComboProb = 0.0f;
+	bool m_didAttack = false;
 
 };

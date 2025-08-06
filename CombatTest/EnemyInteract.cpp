@@ -5,8 +5,13 @@
 
 #include "../D2DEngineLib/SceneManager.h"
 #include "../D2DEngineLib/Physics.h"
+#include "../D2DEngineLib/ConeCollider2D.h"
+#include "../D2DEngineLib/RigidBody2D.h"
 #include "../D2DEngineLib/BoxCollider2D.h"
-#include "../D2DEngineLib/FSMContext.h"
+#include "../D2DEngineLib/Animator.h"
+#include "../D2DEngineLib/TextRenderer.h"
+
+#include "../D2DEngineLib/Script.h"
 
 #include "../D2DEngineLib/Random.h"
 
@@ -22,16 +27,18 @@
 #include "EnemyReturn.h"
 #include "EnemyOnEvade.h"
 
+#include "TempEnemyAttack.h"
+
 #include "Player.h"
 #include "EnemyBase.h"
 #include "EnemyInteract.h"
 
 
 
-void EnemyInteract::HitEnemy(const Collision& collision, const Player* pPlayer, const std::wstring& objName)
+void EnemyInteract::HitEnemy( const Player* pPlayer, const std::wstring& objName)
 {
 	
-	Debug::Log("HitEnemy");
+	Debug::Log("HitEnemy--!!");
 
 	int knockdownPow;
 	int dmg;
@@ -52,9 +59,12 @@ void EnemyInteract::HitEnemy(const Collision& collision, const Player* pPlayer, 
 		
 	EnemyUnderAttack();
 
-	AddKnockdownValue(knockdownPow);
-
-	CheckKnock();
+	if (!(m_owner->IsKnockdown()))
+	{
+		Debug::Log("히트 녹다운 누적");
+		AddKnockdownValue(knockdownPow);
+		CheckKnock();
+	}
 
 	//DealDmg(dmg);
 
@@ -63,9 +73,9 @@ void EnemyInteract::HitEnemy(const Collision& collision, const Player* pPlayer, 
 
 //현재 Parried함수의 사양은 HitEnemy와 완전 동일. 충돌 대상이 공격 오브젝트냐 Enemy오브젝트냐 구분하는 기능만 다름.
 
-void EnemyInteract::Parried(const Collision& collision, const Player* pPlayer, const std::wstring& objName)
+void EnemyInteract::Parried(const Player* pPlayer, const std::wstring& objName)
 {
-	Debug::Log("Parried");
+	Debug::Log("Parried--!!");
 
 	int knockdownPow;
 	int dmg;
@@ -86,8 +96,9 @@ void EnemyInteract::Parried(const Collision& collision, const Player* pPlayer, c
 
 	EnemyUnderAttack();
 
-	if (!m_owner->IsKnockdown())
+	if (!(m_owner->IsKnockdown()))
 	{
+		Debug::Log("패링 녹다운 누적");
 		AddKnockdownValue(knockdownPow);
 		CheckKnock();
 	}
@@ -101,8 +112,7 @@ void EnemyInteract::EnemyUnderAttack()
 {	
 	m_owner->KdPointResetTimer() = 0.0f;
 	m_owner->IsUnderAttack() = true;
-	m_owner->UnderAttackTimer() = 0.0f;
-	m_owner->AheadToTarget();
+	m_owner->UnderAttackTimer() = 0.0f;	
 }
 
 
@@ -153,4 +163,6 @@ void EnemyInteract::DealDmg(const int& value)
 {
 	m_owner->Hp() -= value;
 }
+
+
 

@@ -16,6 +16,7 @@
 #include "Camera.h"
 #include "imgui_impl_win32.h"
 #include "ImGuiSystem.h"
+#include "SoundManager.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -92,6 +93,7 @@ void WinApp::Shutdown()
 
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
+	SoundManager::Get().Shutdown();
 
 	m_d2dRenderer.ShutDown();
 }
@@ -161,6 +163,8 @@ void WinApp::Update()
 	ComponentSystem::Get().Animator().Update();
 
 	ComponentSystem::Get().Particle().Update();
+
+	SoundManager::Get().Update();
 
 	ComponentSystem::Get().Script().CallLateUpdate();
 

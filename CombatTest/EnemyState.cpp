@@ -105,78 +105,12 @@ void EnemyState::CheckTargetInAtkRange()
 
 }
 
-
-void EnemyState::RotateToTarget()
-{
-	if (!m_Script) return;
-
-	const Vector2 enemyPos = Pos();
-	const Vector2 targetPos = TargetPos(); // Get target's position
-
-	Vector2 toTarget = targetPos - enemyPos;
-
-
-	if (toTarget.LengthSq() < MyMath::EPSILON)
-	{
-		return;
-	}
-
-	float targetAngleRadians = atan2f(toTarget.y, toTarget.x);
-
-	float targetAngleDegrees = targetAngleRadians * (180.0f / 3.141592f);
-	if (targetAngleDegrees < 0.0f) {
-		targetAngleDegrees += 360.0f; // Normalize to 0-360 if necessary
-	}
-
-	float currentAngleDegrees = RotationAngle(); // Get current rotation angle
-
-	float rotationSpeed = 360.0f; // degrees per second
-	float deltaRotation = rotationSpeed * MyTime::DeltaTime();
-
-	float newAngle = LerpAngle(currentAngleDegrees, targetAngleDegrees, deltaRotation / 360.0f); // t should be 0-1
-	// A simpler approach for "360 degrees per second" for delta rotation:
-	// newAngle = LerpAngle(currentAngleDegrees, targetAngleDegrees, deltaRotation); // The 't' parameter here works differently based on your LerpAngle logic.
-	// If your LerpAngle 't' is a direct angle to add/subtract, this is fine.
-	// If 't' is a ratio (0.0 to 1.0), you need to calculate a ratio of how much of the remaining angle to turn.
-
-	// Let's refine the LerpAngle usage for direct speed control:
-	// Calculate the difference between current and target angle (shortest path)
-	float angleDiff = fmod(targetAngleDegrees - currentAngleDegrees, 360.0f);
-	if (angleDiff > 180.0f) angleDiff -= 360.0f;
-	if (angleDiff < -180.0f) angleDiff += 360.0f;
-
-	// Determine how much to rotate this frame
-	float rotationThisFrame = rotationSpeed * MyTime::DeltaTime();
-
-	if (std::abs(angleDiff) <= rotationThisFrame) {
-		// If the remaining angle is less than or equal to what we can rotate this frame,
-		// just snap to the target angle to avoid overshooting.
-		RotationAngle() = targetAngleDegrees;
-	}
-	else {
-		// Rotate by `rotationThisFrame` in the correct direction
-		if (angleDiff > 0) {
-			RotationAngle() += rotationThisFrame;
-		}
-		else {
-			RotationAngle() -= rotationThisFrame;
-		}
-		// Ensure the angle stays within 0-360 range after rotation
-		float& currentRotAngle = RotationAngle(); // Get ref to modify directly
-		if (currentRotAngle < 0.0f) currentRotAngle += 360.0f;
-		if (currentRotAngle >= 360.0f) currentRotAngle -= 360.0f;
-	}
-
-	// After changing RotationAngle(), it's a good practice to update the Direction if needed
-
-}
-
 void EnemyState::CheckTargetInAtkAngle()
 {
 	if (!m_Script) return;
 
 	const Vector2 enemyPos = Pos();
-	const Vector2 targetPos = TargetPos(); // Get target's position
+	const Vector2 targetPos = TargetPos();
 
 	Vector2 toTarget = targetPos - enemyPos;
 
@@ -208,22 +142,3 @@ void EnemyState::CheckTargetInAtkAngle()
 		IsTargetInAtkAngle() = true;
 	}
 }
-
-
-
-	//void EnemyState::SetEnemyDirectionByInput(FSMContext & context)
-	//{
-	//	float horizontalInput = context.floatParams[L"HorizontalInput"];
-	//	float verticalInput = context.floatParams[L"VerticalInput"];
-
-	//	// 방향 벡터가 없으면 0 (중립)
-	//	if (horizontalInput == 0.0f && verticalInput == 0.0f)
-	//	{
-	//		return;
-	//	}
-
-	//	// atan2는 y 먼저, x 나중	
-	//	float tAngle = std::atan2(horizontalInput, verticalInput) * 180.0f / 3.14159265f;
-
-	//	m_Script->SetRotationAngle(tAngle);
-	//}

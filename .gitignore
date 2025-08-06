@@ -56,3 +56,5 @@ dkms.conf
 
 # My Extra
 /.vs
+!fmod_vc.lib
+!fmod.dll

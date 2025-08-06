@@ -40,8 +40,8 @@ struct PlayerStat
 	int knockbackResist = 6;
 	int knockdownResist = 10;
 	float knockdownResetTime = 5.0f;
-	float moveSpeed = 4.0f;
-	float dashSpeed = 6.0f;
+	float moveSpeed = 200.0f;
+	float dashSpeed = 400.0f;
 	float dashStaminaPerSec = 9.0f;
 	float evadeDistance = 300.0f;
 	float evadeDuration = 0.3f;
@@ -104,14 +104,6 @@ public:
 public:
 	static Vector2 CalculateDirectionVector(PlayerDirection direction);
 	static Vector2 CalculateDirectionVector(int direction);
-		
-
-private:
-	float m_dTimer = 0.0f;
-	float m_baseSpeed = 100.0f;
-
-public:
-	inline const float GetBaseSpeed() { return m_baseSpeed; }
 };
 
 inline std::wostringstream& operator<<(std::wostringstream& woss, const PlayerStat& playerStat);

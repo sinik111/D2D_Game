@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00_App">
+      <UniqueIdentifier>{6ac6dafc-f8a0-4bdb-83c2-c4c1e7d10c21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene">
+      <UniqueIdentifier>{6763907c-1507-46e6-a729-dd0dba791f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script">
+      <UniqueIdentifier>{b462139d-db46-47c7-90d2-b69336361f0e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="UITestApp.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene1.cpp">
+      <Filter>01_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapFillTest.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UITestApp.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene1.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapFillTest.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

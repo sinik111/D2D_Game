@@ -12,6 +12,7 @@
 #include "../D2DEngineLib/Physics.h"
 #include "../D2DEngineLib/json.hpp"
 #include "../D2DEngineLib/ResourceManager.h"
+#include "../D2DEngineLib/Camera.h"
 
 #include "PlayerIdleState.h"
 #include "PlayerWalkState.h"
@@ -24,6 +25,8 @@
 #include "PlayerHeavyAttackState.h"
 #include "PlayerGrabState.h"
 #include "PlayerDeadState.h"
+#include "PlayerCameraController.h"
+#include "HitStopController.h"
 
 using nlohmann::json;
 
@@ -201,6 +204,31 @@ void Player::FixedUpdate()
 
 void Player::Update()
 {
+	if (Input::IsKeyPressed('1'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<PlayerCameraController>();
+		controller->ShakeCamera(CameraShakeType::LeftRight, 20.0f, 1.0f, 2, true);
+	}
+
+	if (Input::IsKeyPressed('2'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<PlayerCameraController>();
+		controller->ShakeCamera(CameraShakeType::UpDown, 20.0f, 1.0f, 10, true);
+	}
+
+	if (Input::IsKeyPressed('3'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<PlayerCameraController>();
+		controller->ShakeCamera(CameraShakeType::Random, 20.0f, 3.0f, 1000, true);
+	}
+
+	if (Input::IsKeyPressed('4'))
+	{
+		auto controller = Camera::s_mainCamera->GetGameObject()->GetComponent<HitStopController>();
+		controller->DoHitStop(0.01f, 0.5f);
+	}
+
+
 	std::wostringstream woss;
 
 	woss << keyInfo << L"\n\n";

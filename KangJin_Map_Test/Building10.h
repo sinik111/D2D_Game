@@ -3,7 +3,7 @@
 class Building10 : public Structure
 {
 	void Start() override;
-	void ExporttoJson() override;
-
+public:
+	Building10() { jsonfilepath = "Resource/building_circles10.json"; }
 };
 

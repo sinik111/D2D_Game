@@ -5,6 +5,8 @@
 #include "../D2DEngineLib/SceneManager.h"
 #include "../D2DEngineLib/ImGuiSystem.h"
 #include "../D2DEngineLib/ComponentSystem.h"
+#include "../D2DEngineLib/SoundManager.h"
+
 #include "KangJinTestScene.h"
 
 void DemoGameApp::Initialize()
@@ -18,15 +20,18 @@ void DemoGameApp::Initialize()
 	m_height = 1080;
 
 	ImGuiSystem::Get().EnableImGuiSystem();
+	//ImGuiSystem::Get().DisableImGuiSystem();
 
 	WinApp::Initialize();
 
-	Bounds bounds{ Vector2(0.0f, 0.0f), Vector2(m_width * 0.5f, m_height * 0.5f) };
+	Bounds bounds{ Vector2(0.0f, 0.0f), Vector2(3000, 4000) };
 
 	ComponentSystem::Get().Physics().SetupQuadtree(bounds, 5, 10);
 
 	ResourceManager::Get().Initialize(m_d2dRenderer.GetDeviceContext(),
-		m_modulePath, L"x64", L"KangJin_Map_Test/Resource");
+		m_modulePath, L"Bin", L"KangJin_Map_Test/Resource");
+
+	SoundManager::Get().Initialize(ResourceManager::Get().GetResourcePathA());
 
 	SceneManager::Get().CreateScene<KangJinTestScene>(L"KangJinTestScene");
 	SceneManager::Get().ChangeScene(L"KangJinTestScene");

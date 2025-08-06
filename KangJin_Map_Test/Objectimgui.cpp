@@ -9,7 +9,8 @@
 
 void Objectimgui::DrawImgui()
 {
-	ImGui::Begin("Structure Setting");
+	ImGui::Begin(Name.c_str());
+	//ImGui::Begin("Object Settings");
 	Vector2 objectPosition = m_GameObject->GetTransform()->GetLocalPosition();
 	Vector2 objectPivot = m_GameObject->GetComponent<BitmapRenderer>()->GetPivot();
 	
@@ -17,7 +18,7 @@ void Objectimgui::DrawImgui()
 	ImGui::DragFloat2("Object Pivot", &objectPivot.x, 0.001f, 0, 1);
 	ImGui::NewLine();
 	Structure* structure = m_GameObject->GetComponent<Structure>();
-	for (int i = 0; i < structure->index; ++i)
+	for (int i = 0; i < structure->GetSize(); ++i)
 	{
 		std::string offsetname = "CircleColliderOffset" + std::to_string(i);
 		std::string Radiusname = "CircleColliderRadius" + std::to_string(i);

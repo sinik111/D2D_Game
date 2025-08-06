@@ -113,6 +113,8 @@ void Collider::Update()
 			UpdateCollider();
 
 			CalculateSpatialBounds();
+
+			m_isColliderDirty = false;
 		}
 	}
 	else

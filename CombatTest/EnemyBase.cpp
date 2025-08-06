@@ -13,19 +13,23 @@
 #include "../D2DEngineLib/BoxCollider2D.h"
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/FSMContext.h"
-
-#include "EnemyBaseMove.h"
-#include "EnemyBaseIdle.h"
+#include "../D2DEngineLib/ConeCollider2D.h"
+#include "../D2DEngineLib/CircleCollider.h"
 
 #include "EnemyOutOfArea.h"
 #include "EnemyInArea.h"
 #include "EnemyEngage.h"
-#include "EnemyOnAttack.h"
 #include "EnemyReturn.h"
 #include "EnemyOnEvade.h"
 #include "EnemyKnockdown.h"
+#include "EnemyHitAndRun.h"
+#include "EnemySlowTurn.h"
 
-#include "TempEnemyAttack.h"
+#include "EnemyOnAttack.h"
+#include "EnemyOnAttackSecond.h"
+#include "EnemyOnAttackThird.h"
+
+#include "EnemyBaseAttack.h"
 
 void EnemyBase::Initialize()
 {
@@ -51,7 +55,7 @@ void EnemyBase::Initialize()
 	//인터랙션 객체
 	m_enemyIA = std::make_unique<EnemyInteract>(this);
 
-	vSetting();
+	
 }
 
 void EnemyBase::Start()
@@ -107,17 +111,20 @@ void EnemyBase::Start()
 		m_context.gameObject->GetTransform()->GetLocalPosition().y };
 
 	PositionInit(tPosition.x, tPosition.y, -90.0f);
-
-	m_maxRoamDistance = 800.0f;
-	m_maxChaseDistance = 900.0f;
-
+	
 	m_fsm.AddState<EnemyOutOfArea>(L"OutOfArea", false, this);
 	m_fsm.AddState<EnemyInArea>(L"InArea", false, this);
 	m_fsm.AddState<EnemyEngage>(L"Engage", false, this);
+	
 	m_fsm.AddState<EnemyOnAttack>(L"OnAttack", false, this);
+	m_fsm.AddState<EnemyOnAttackSecond>(L"OnAttack2", false, this);
+	m_fsm.AddState<EnemyOnAttackThird>(L"OnAttack3", false, this);
+	
 	m_fsm.AddState<EnemyReturn>(L"Return", false, this);
 	m_fsm.AddState<EnemyOnEvade>(L"OnEvade", false, this);
 	m_fsm.AddState<EnemyKnockdown>(L"Knockdown", false, this);
+	m_fsm.AddState<EnemyHitAndRun>(L"HitAndRun", false, this);
+	m_fsm.AddState<EnemySlowTurn>(L"SlowTurn", false, this);
 
 	m_fsm.SetState(L"OutOfArea", m_context);
 
@@ -132,6 +139,12 @@ void EnemyBase::Start()
 	m_collider->SetTrigger(false);
 	m_collider->SetLayer(CollisionLayer::EnemyHitBox);
 
+	auto cc = m_context.gameObject->AddComponent<CircleCollider>();
+	cc->SetOffset({ 0.0f, -50.0f });
+	cc->SetRadius(40.0f);
+	cc->SetLayer(CollisionLayer::EnemyMove);
+
+	vSetting();
 
 }
 void EnemyBase::FixedUpdate()
@@ -141,7 +154,7 @@ void EnemyBase::FixedUpdate()
 
 void EnemyBase::Update()
 {	
-	CheckKnockdown();	
+	CheckKnockdown();
 
 	CheckAndTransitState();
 
@@ -153,21 +166,19 @@ void EnemyBase::Update()
 
 	if (!IsKnockdown())
 	{
-
 		if (!IsAttackReady()) { AttackCoolCheck(); }
-
-
-		UnderAttackManage();		
-
+		
 		if (IsKnockback())
 		{
 			UpdateKnockback();
 
 			return;
-		}
-
-		CheckStopMoving();
+		}		
 	}
+
+	UnderAttackManage();
+
+	CheckStopMoving();
 
 }
 
@@ -210,11 +221,7 @@ void EnemyBase::CheckAndTransitState()
 
 	case ENGAGE:
 		m_context.nextStateName = L"Engage";
-		break;
-
-	case ONATTACK:
-		m_context.nextStateName = L"OnAttack";
-		break;
+		break;	
 
 	case RETURN:
 		m_context.nextStateName = L"Return";
@@ -227,6 +234,28 @@ void EnemyBase::CheckAndTransitState()
 	case KNOCKDOWN:		
 		m_context.nextStateName = L"Knockdown";
 		break;
+
+	case HITANDRUN:
+		m_context.nextStateName = L"HitAndRun";
+		break;
+
+	case SLOWTURN:
+		m_context.nextStateName = L"SlowTurn";
+		break;
+
+
+	case ONATTACK:
+		m_context.nextStateName = L"OnAttack";
+		break;
+
+	case ONATTACK2:
+		m_context.nextStateName = L"OnAttack2";
+		break;
+
+	case ONATTACK3:
+		m_context.nextStateName = L"OnAttack3";
+		break;
+
 	}
 
 	m_context.shouldChangeState = true;
@@ -292,11 +321,6 @@ void EnemyBase::RigidBodyUpdate()
 
 	m_debugLogTimer += MyTime::FixedDeltaTime();
 
-	if (m_debugLogTimer >= 1.0f)
-	{
-		Debug::Log(L"Enemy Velocity Magnitude: ", (m_rigidBody->GetVelocity()).Length());
-		m_debugLogTimer = 0.0f;
-	}
 }
 
 ////---------------------------------------------------------------------------------------------------------------------------
@@ -489,21 +513,26 @@ void EnemyBase::UnderAttackManage()
 void EnemyBase::CheckKnockdown()
 {
 	if (m_isKnockdown)
-	{
-		Debug::Log("넉다운 걸려서 0됨");
-		m_knockdownAccumulated = 0;
-		m_isKnockdown = false;
-		m_context.intParams[L"NextEnemyState"] = EnemyBase::KNOCKDOWN;
+	{		
+		m_knockdownAccumulated = 0;	
+		
+		if (m_currEnemyState != EnemyBase::KNOCKDOWN)
+		{
+			m_context.intParams[L"NextEnemyState"] = EnemyBase::KNOCKDOWN;
+		}
+		return;
 	}
 
 	m_kdPointResetTimer += MyTime::DeltaTime();
 
 	if (m_kdPointResetTimer >= m_knockdownPointResetTime)
-	{
-		Debug::Log("시간지나서 0됨");
+	{		
 		m_knockdownAccumulated = 0;
 	}
 }
+
+
+
 
 void EnemyBase::StopKnockback()
 {	
@@ -590,6 +619,121 @@ void EnemyBase::OnTriggerExit(const Collision& collision)
 }
 
 
+void EnemyBase::SetAttackType(bool& isOnKnockback)
+{
+	m_attackType = 0;
+	float tProb = 0;
+
+	if (!isOnKnockback)
+	{
+		tProb = Random::Float(1.0f, 100.0f);
+		if (tProb <= m_evadeProbability)		{ m_attackType = 4;	}
+		else if (tProb <= m_attack3Probability)	{ m_attackType = 3;	}
+		else if (tProb <= m_attack2Probability) { m_attackType = 2; }
+		else	{ m_attackType = 1; }
+	}
+	else
+	{
+		tProb = Random::Float(1.0f, 80.0f);	
+		if (tProb <= m_attack3Probability)		{ m_attackType = 3;	}
+		else if (tProb <= m_attack2Probability)	{ m_attackType = 2;	}
+		else { m_attackType = 1; }
+	}
+}
+
+
+void EnemyBase::EnemyAttackTypeA_A()
+{
+	auto enemyAttack = this->CreateGameObject(L"EnemyBaseAttack");
+	auto attackColliderPosition = this->GetGameObject()->GetTransform()->GetLocalPosition();
+	attackColliderPosition += (this->m_aheadDirection * 60.0f);
+
+	enemyAttack->GetTransform()->SetLocalPosition(attackColliderPosition);
+
+	auto comp = enemyAttack->AddComponent<EnemyBaseAttack>(this);
+	comp->SetDirection(Vector2::EllipseLeftDown);
+
+	auto collider = enemyAttack->AddComponent<ConeCollider2D>();
+	collider->SetLayer(CollisionLayer::EnemyAttack);
+	collider->SetCone(150.0f * Vector2::EllipseLeftDown.Length(), this->m_aheadDirection, 30.0f);
+	collider->SetTrigger(true);
+
+	auto rb = enemyAttack->AddComponent<RigidBody2D>();
+	rb->SetGravityScale(0.0f);
+}
+
+void EnemyBase::EnemyAttackTypeA_B()
+{
+	auto enemyAttack = this->CreateGameObject(L"EnemyBaseAttack");
+	auto attackColliderPosition = this->GetGameObject()->GetTransform()->GetLocalPosition();
+	attackColliderPosition += (this->m_aheadDirection * 60.0f);
+
+	enemyAttack->GetTransform()->SetLocalPosition(attackColliderPosition);
+
+	auto comp = enemyAttack->AddComponent<EnemyBaseAttack>(this);
+	comp->SetDirection(Vector2::EllipseLeftDown);
+
+	auto collider = enemyAttack->AddComponent<ConeCollider2D>();
+	collider->SetLayer(CollisionLayer::EnemyAttack);
+	collider->SetCone(200.0f * Vector2::EllipseLeftDown.Length(), this->m_aheadDirection, 30.0f);
+	collider->SetTrigger(true);
+
+	auto rb = enemyAttack->AddComponent<RigidBody2D>();
+	rb->SetGravityScale(0.0f);
+}
+
+
+void EnemyBase::EnemyAttackTypeA_C()
+{
+	auto enemyAttack = this->CreateGameObject(L"EnemyBaseAttack");
+	auto attackColliderPosition = this->GetGameObject()->GetTransform()->GetLocalPosition();
+	attackColliderPosition += (this->m_aheadDirection * 60.0f);
+
+	enemyAttack->GetTransform()->SetLocalPosition(attackColliderPosition);
+
+	auto comp = enemyAttack->AddComponent<EnemyBaseAttack>(this);
+	comp->SetDirection(Vector2::EllipseLeftDown);
+
+	auto collider = enemyAttack->AddComponent<ConeCollider2D>();
+	collider->SetLayer(CollisionLayer::EnemyAttack);
+	collider->SetCone(250.0f * Vector2::EllipseLeftDown.Length(), this->m_aheadDirection, 50.0f);
+	collider->SetTrigger(true);
+
+	auto rb = enemyAttack->AddComponent<RigidBody2D>();
+	rb->SetGravityScale(0.0f);
+}
+
+void EnemyBase::EnemyAttackTypeB_A()
+{
+
+}
+
+void EnemyBase::EnemyAttackTypeB_B()
+{
+
+}
+
+void EnemyBase::EnemyAttackTypeB_C()
+{
+
+}
+
+void EnemyBase::EnemyAttackTypeC_A()
+{
+
+}
+
+void EnemyBase::EnemyAttackTypeC_B()
+{
+
+}
+
+void EnemyBase::EnemyAttackTypeC_C()
+{
+
+}
+
+
 void EnemyBase::vSetting()
 {
 	m_isDead = false;
@@ -608,14 +752,14 @@ void EnemyBase::vSetting()
 	//m_movingDestPos;
 	//m_moveDirection;
 
-	m_rotationSpeed = 300.0f;
+	m_slowRotationSpeed = 300.0f;
 	m_acceleration = 0.0f;
 
 	m_moveSpeed = 200.0f;
-	m_maxSightDistance = 700.0f;
+	m_maxSightDistance = 300.0f;
 	m_sightAngle = 90.0f;
-	m_maxRoamDistance = 1000.0f;
-	m_maxChaseDistance = 1200.0f;
+	m_maxRoamDistance = 500.0f;
+	m_maxChaseDistance = 600.0f;
 	m_AttackRange = 200.0f;
 
 	m_isLockOnTarget = false;
@@ -639,7 +783,8 @@ void EnemyBase::vSetting()
 
 	m_evadeDistance = 300.0f;
 	m_evadeProbability = 0.2f;
-	m_attack1Probability = 0.8f;
+
+	m_attack1Probability = 100.0f;	//공격 타입의 확률은, 회피확률을 더해서 계산. 
 	m_attack2Probability = 0.0f;
 	m_attack3Probability = 0.0f;
 

@@ -3,7 +3,8 @@
 #include "Objectimgui.h"
 class KangJinTestScene : public Scene
 {
-	Objectimgui imgui;
+	Objectimgui im1;
+	//Objectimgui im2;
 public:
 	void Enter() override;
 

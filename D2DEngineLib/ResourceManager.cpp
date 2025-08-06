@@ -5,75 +5,10 @@
 #include <fstream>
 
 #include "json.hpp"
+#include "StringUtility.h"
 
 using Microsoft::WRL::ComPtr;
 using nlohmann::json;
-
-// UTF-8 std::string을 std::wstring으로 변환 (Windows API 기반)
-static std::wstring utf8_to_wide(const std::string& utf8_str)
-{
-	if (utf8_str.empty())
-	{
-		return L"";
-	}
-
-	int count = MultiByteToWideChar(
-		CP_UTF8,
-		0,
-		utf8_str.c_str(),
-		(int)utf8_str.length(),
-		nullptr,
-		0
-	);
-
-	std::vector<wchar_t> wide_buf(count);
-
-	MultiByteToWideChar(
-		CP_UTF8,
-		0,
-		utf8_str.c_str(),
-		(int)utf8_str.length(),
-		wide_buf.data(),
-		count
-	);
-
-	return std::wstring(wide_buf.data(), wide_buf.size());
-}
-
-// std::wstring을 UTF-8 std::string으로 변환 (Windows API 기반)
-static std::string wide_to_utf8(const std::wstring& wide_str)
-{
-	if (wide_str.empty())
-	{
-		return "";
-	}
-	
-	int count = WideCharToMultiByte(
-		CP_UTF8,
-		0,
-		wide_str.c_str(),
-		(int)wide_str.length(),
-		nullptr,
-		0,
-		nullptr,
-		nullptr
-	);
-
-	std::vector<char> utf8_buf(count);
-
-	WideCharToMultiByte(
-		CP_UTF8,
-		0,
-		wide_str.c_str(),
-		(int)wide_str.length(),
-		utf8_buf.data(),
-		count,
-		nullptr,
-		nullptr
-	);
-
-	return std::string(utf8_buf.data(), utf8_buf.size());
-}
 
 namespace nlohmann
 {
@@ -82,12 +17,12 @@ namespace nlohmann
 	{
 		static void to_json(json& j, const std::wstring& str)
 		{
-			j = wide_to_utf8(str);
+			j = Util::WideCharStringToMultiByteString(str);
 		}
 
 		static void from_json(const json& j, std::wstring& str)
 		{
-			str = utf8_to_wide(j.get<std::string>());
+			str = Util::MultiByteStringToWideCharString(j.get<std::string>());
 		}
 	};
 } // namespace nlohmann
@@ -174,6 +109,7 @@ HRESULT ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 	}
 
 	m_resourcePath += std::wstring(L"\\" + resourceFolderName + L"\\");
+	m_resourcePathA = Util::WideCharStringToMultiByteString(m_resourcePath);
 
 	return S_OK;
 }
@@ -216,6 +152,11 @@ void ResourceManager::ReleaseResources()
 std::wstring ResourceManager::GetResourcePath() const
 {
 	return m_resourcePath;
+}
+
+std::string ResourceManager::GetResourcePathA() const
+{
+	return m_resourcePathA;
 }
 
 std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std::wstring& filePath)

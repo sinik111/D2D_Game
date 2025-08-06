@@ -15,6 +15,8 @@ void PlayerHeavyAttack::Start()
 	auto textRenderer = m_debugTextObject->AddComponent<TextRenderer>();
 	textRenderer->SetText(L"Searching");
 	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
+	textRenderer->SetSpaceType(SpaceType::World);
+	textRenderer->SetSortOrder(4);
 }
 
 void PlayerHeavyAttack::Update()

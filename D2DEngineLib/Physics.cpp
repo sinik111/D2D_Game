@@ -440,7 +440,7 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 			}
 			else
 			{
-				info.normal = (circle.center - aabbCenter).Normalized();
+				info.normal = -(circle.center - aabbCenter).Normalized();
 			}
 		}
 		else
@@ -451,7 +451,7 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 			}
 			else
 			{
-				info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
+				info.normal = -displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
 			}
 		}
 
@@ -759,7 +759,7 @@ CollisionInfo Physics::DetectCollisionConeBox(const ConeCollider2D* a, const Box
 
 	info.isCollide = true;
 	info.penetrationDepth = minOverlap;
-	info.normal = collisionNormal.Normalized();
+	info.normal = -collisionNormal.Normalized();
 
 	Vector2 centerBox = { (min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f };
 	info.contactPoint = centerBox + info.normal * (minOverlap);

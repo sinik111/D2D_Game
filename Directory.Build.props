@@ -1,0 +1,12 @@
+<Project>
+	<PropertyGroup>
+		<OutDir>$(SolutionDir)Bin\$(Configuration)\</OutDir>
+		<AdditionalLibraryDirectories>$(SolutionDir)Vendor\FMOD\;$(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+	</PropertyGroup>
+	
+	<ItemDefinitionGroup>
+		<Link>
+			<AdditionalLibraryDirectories>$(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+		</Link>
+	</ItemDefinitionGroup>
+</Project>

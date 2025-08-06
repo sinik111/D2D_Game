@@ -13,6 +13,11 @@ float MyTime::FixedDeltaTime()
     return MyTimeSystem::Get().FixedDeltaTime();
 }
 
+float MyTime::UnscaledDeltaTime()
+{
+    return MyTimeSystem::Get().UnscaledDeltaTime();
+}
+
 TimePoint MyTime::GetTimestamp()
 {
     return Clock::now();

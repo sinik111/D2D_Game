@@ -278,7 +278,7 @@ void PhysicsSystem::CallCollisionEvent()
 		Collision collisionA{
 			pair.second.colliderB->GetGameObject(),
 			pair.second.colliderB,
-			-pair.second.normal,
+			pair.second.normal,
 			pair.second.penetrationDepth,
 			pair.second.contactPoint
 		};
@@ -286,7 +286,7 @@ void PhysicsSystem::CallCollisionEvent()
 		Collision collisionB{
 			pair.second.colliderA->GetGameObject(),
 			pair.second.colliderA,
-			pair.second.normal,
+			-pair.second.normal,
 			pair.second.penetrationDepth,
 			pair.second.contactPoint
 		};
@@ -315,7 +315,7 @@ void PhysicsSystem::CallCollisionEvent()
 				Collision collisionA{
 					pair.second.colliderB->GetGameObject(),
 					pair.second.colliderB,
-					-pair.second.normal,
+					pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};
@@ -323,7 +323,7 @@ void PhysicsSystem::CallCollisionEvent()
 				Collision collisionB{
 					pair.second.colliderA->GetGameObject(),
 					pair.second.colliderA,
-					pair.second.normal,
+					-pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};
@@ -336,7 +336,7 @@ void PhysicsSystem::CallCollisionEvent()
 				Collision collisionA{
 					nullptr,
 					nullptr,
-					-pair.second.normal,
+					pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};
@@ -348,7 +348,7 @@ void PhysicsSystem::CallCollisionEvent()
 				Collision collisionB{
 					nullptr,
 					nullptr,
-					pair.second.normal,
+					-pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};
@@ -368,7 +368,7 @@ void PhysicsSystem::CallTriggerEvent()
 		Collision collisionA{
 			pair.second.colliderB->GetGameObject(),
 			pair.second.colliderB,
-			-pair.second.normal,
+			pair.second.normal,
 			pair.second.penetrationDepth,
 			pair.second.contactPoint
 		};
@@ -376,7 +376,7 @@ void PhysicsSystem::CallTriggerEvent()
 		Collision collisionB{
 			pair.second.colliderA->GetGameObject(),
 			pair.second.colliderA,
-			pair.second.normal,
+			-pair.second.normal,
 			pair.second.penetrationDepth,
 			pair.second.contactPoint
 		};
@@ -405,7 +405,7 @@ void PhysicsSystem::CallTriggerEvent()
 				Collision collisionA{
 					pair.second.colliderB->GetGameObject(),
 					pair.second.colliderB,
-					-pair.second.normal,
+					pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};
@@ -413,7 +413,7 @@ void PhysicsSystem::CallTriggerEvent()
 				Collision collisionB{
 					pair.second.colliderA->GetGameObject(),
 					pair.second.colliderA,
-					pair.second.normal,
+					-pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};
@@ -426,7 +426,7 @@ void PhysicsSystem::CallTriggerEvent()
 				Collision collisionA{
 					nullptr,
 					nullptr,
-					-pair.second.normal,
+					pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};
@@ -438,7 +438,7 @@ void PhysicsSystem::CallTriggerEvent()
 				Collision collisionB{
 					nullptr,
 					nullptr,
-					pair.second.normal,
+					-pair.second.normal,
 					pair.second.penetrationDepth,
 					pair.second.contactPoint
 				};

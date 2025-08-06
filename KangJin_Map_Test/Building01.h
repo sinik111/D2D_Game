@@ -2,7 +2,7 @@
 #include "Structure.h"
 class Building01 : public Structure
 {
-	void Start() override;
-	void ExporttoJson() override;
+public:
+	Building01() { jsonfilepath = "Resource/building_circles1.json"; }
 };
 

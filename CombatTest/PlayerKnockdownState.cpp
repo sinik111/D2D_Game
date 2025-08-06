@@ -13,7 +13,8 @@ PlayerKnockdownState::PlayerKnockdownState(Player* player)
 
 bool PlayerKnockdownState::CheckCondition(FSMContext& context)
 {
-	return context.triggerParams[L"Knockdown"];
+	return  m_player->GetPlayerStatus().currentHp > 0 && 
+		context.triggerParams[L"Knockdown"] && !context.boolParams[L"Invincibility"];
 }
 
 void PlayerKnockdownState::Enter(FSMContext& context)
@@ -93,4 +94,5 @@ void PlayerKnockdownState::Update(FSMContext& context)
 
 void PlayerKnockdownState::Exit(FSMContext& context)
 {
+	context.rigidBody2d->SetVelocity({ 0.0f, 0.0f });
 }

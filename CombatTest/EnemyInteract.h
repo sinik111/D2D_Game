@@ -43,8 +43,8 @@ public:
 	//	}
 
 public:
-	void HitEnemy(const Collision& collision, const Player* pPlayer, const std::wstring& objName);
-	void Parried(const Collision& collision, const Player* pPlayer, const std::wstring& objName);
+	void HitEnemy(const Player* pPlayer, const std::wstring& objName);
+	void Parried(const Player* pPlayer, const std::wstring& objName);
 
 
 private:
@@ -62,6 +62,8 @@ private:
 
 	//데미지 전달
 	void DealDmg(const int& value);
+
+
 
 };
 

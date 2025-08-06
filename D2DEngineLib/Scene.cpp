@@ -3,12 +3,14 @@
 
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "SoundManager.h"
 
 void Scene::Exit()
 {
 	Clear();
 
 	ResourceManager::Get().ReleaseResources();
+	SoundManager::Get().ReleaseSounds();
 }
 
 void Scene::InitializeObjects()

@@ -64,6 +64,9 @@
     <Filter Include="99_Module\MyImgui">
       <UniqueIdentifier>{d879f06d-3ebe-4386-9d77-b6505d4aa2b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99_Module\Sound">
+      <UniqueIdentifier>{f0306835-62c0-4add-964d-dc220a7e9014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoInitializer.h">
@@ -291,7 +294,15 @@
     <ClInclude Include="MyImGui.h">
       <Filter>99_Module\MyImgui</Filter>
     </ClInclude>
-    <ClInclude Include="ImGuiSystem.h" />
+    <ClInclude Include="ImGuiSystem.h">
+      <Filter>99_Module\MyImgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>99_Module\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtility.h">
+      <Filter>99_Module\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentSystem.cpp">
@@ -459,6 +470,11 @@
     <ClCompile Include="MyImGui.cpp">
       <Filter>99_Module\MyImgui</Filter>
     </ClCompile>
-    <ClCompile Include="ImGuiSystem.cpp" />
+    <ClCompile Include="ImGuiSystem.cpp">
+      <Filter>99_Module\MyImgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>99_Module\Sound</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

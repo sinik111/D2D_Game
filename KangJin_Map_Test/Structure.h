@@ -10,18 +10,21 @@ protected :
 	bool isTransparent = false;
 	std::vector<Vector2> m_colliderPoints;
 	float scale = 1.0f;
+	int index = 1;
 public :
 	std::vector<CircleCollider*> m_Colliders;
-	int index = 1;
 
 	void Start() override;
 	void Update() override;
 	void FixedUpdate() override;
 	
 	void SetSize(int size) { index = size ; }
-
+	const int& GetSize() { return index; }
+	
 	void OnTriggerStay(const Collision& collision) override;
 
-	virtual void ImportfromJson();
+	std::string GetJsonFilePath() { return jsonfilepath; }
+	void SetJsonFilePath(std::string filepath) { jsonfilepath = filepath; }
+	void ImportfromJson();
 	virtual void ExporttoJson();
 };

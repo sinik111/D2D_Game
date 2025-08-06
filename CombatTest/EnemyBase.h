@@ -30,6 +30,7 @@ private:
 	TextRenderer* m_textRenderer;
 	BoxCollider2D* m_collider;
 
+
 	FSM m_fsm;
 	FSMContext m_context;
 
@@ -98,6 +99,16 @@ public:
 		RETURN,
 		ONEVADE,
 		KNOCKDOWN,
+		HITANDRUN,
+		SLOWTURN,		//뒤에서 공격당했을 때, 또는 넉다운에서 회복했을때
+	};
+
+	enum TypeOfEnemy
+	{
+		BASE,
+		ZAKO,
+		ELITE,
+		BOSS,
 	};
 
 	//---------------------------------------------------------------------------------
@@ -111,9 +122,10 @@ public:
 
 	//---------------------------------------------------------------------------------
 
+	int m_enemyType = BASE;	
+
 	bool m_isDead = false;
-	int m_hp = 30;
-	float m_baseSpeed = 100.0f;
+	int m_hp = 30;	
 
 	GameObject* m_camera;
 	bool m_isInCamera = false;
@@ -139,8 +151,7 @@ public:
 	Vector2 m_movingDestPos;
 	Vector2 m_departurePos;
 	Vector2 m_aheadDirection;
-
-	float m_rotationSpeed = 300.0f;
+	
 	float m_acceleration = 0.0f;
 
 	float m_moveSpeed = 200.0f;
@@ -163,6 +174,7 @@ public:
 	float m_attackTimer = 0.0f;
 
 	bool m_isAttackReady = true;
+	int m_attackType = 0;
 
 	float m_AttackEffectTime = 0.4f;
 	float m_atkColTimer = 0.0f;
@@ -192,6 +204,38 @@ public:
 	float m_attack1Probability = 0.8f;
 	float m_attack2Probability = 0.0f;
 	float m_attack3Probability = 0.0f;
+
+	bool m_isInCombo = false;
+
+	float m_baseSpeed = 100.0f;
+	float m_targetSlowRotationAngle = 0.0f;
+	float m_slowRotationSpeed = 100.0f;
+	float m_recorveryTime = 1.5f;
+
+
+
+public:
+	float m_attackA_BProb = 0.6f;
+	float m_attackA_CProb = 0.4f;
+	
+	float m_attackB_BProb = 0.5f;
+	float m_attackB_CProb = 0.5f;
+	
+	float m_attackC_BProb = 0.5f;
+	float m_attackC_CProb = 0.5f;
+
+	float m_attackA_ATime = 1.0f;
+	float m_attackA_BTime = 1.0f;
+	float m_attackA_CTime = 1.0f;
+
+	float m_attackB_ATime = 1.0f;
+	float m_attackB_BTime = 1.0f;
+	float m_attackB_CTime = 1.0f;
+
+	float m_attackC_ATime = 1.0f;
+	float m_attackC_BTime = 1.0f;
+	float m_attackC_CTime = 1.0f;
+
 
 
 
@@ -236,6 +280,24 @@ public:
 	void EnemyUnderAttack(const Collision& collision);
 
 	void CheckKnockdown();
+
+	void SetAttackType(bool& isOnKnockback);
+
+	virtual void EnemyAttackTypeA_A();
+	virtual void EnemyAttackTypeA_B();
+	virtual void EnemyAttackTypeA_C();
+
+	virtual void EnemyAttackTypeB_A();
+	virtual void EnemyAttackTypeB_B();
+	virtual void EnemyAttackTypeB_C();
+
+	virtual void EnemyAttackTypeC_A();
+	virtual void EnemyAttackTypeC_B();
+	virtual void EnemyAttackTypeC_C();
+
+
+
+
 
 	//void KnockBack(const float& dist, const float& speed);
 
@@ -333,6 +395,11 @@ public:
 
 	inline bool& IsAttackReady() { return m_isAttackReady; }
 
+	inline bool& IsInCombo() { return m_isInCombo; }
+		
+	
+	inline const int& AttackType() { return m_attackType; }
+
 	inline bool& IsFindPlayer() { return m_isFindPlayer; }
 
 
@@ -365,8 +432,19 @@ public:
 	inline float& KdPointResetTimer() { return m_kdPointResetTimer; }
 
 
-	inline EnemyInteract* EnemyIA() { return m_enemyIA.get(); }
+	inline const float& BaseSpeed() { return m_baseSpeed; }
 
+	inline const float& SlowRotationSpeed() { return m_slowRotationSpeed; }
+
+	inline float& TargetSlowRotationAngle() { return m_targetSlowRotationAngle; }
+
+	inline const float& RecorveryTime() { return m_recorveryTime; }
+
+	inline const int& EnemyType() { return m_enemyType; }
+	
+	
+
+	inline EnemyInteract* EnemyIA() { return m_enemyIA.get(); }
 
 
 	inline const bool& IsPlayerDead()

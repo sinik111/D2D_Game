@@ -3,14 +3,11 @@
 
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Physics.h"
+#include "../D2DEngineLib/BatchRenderer.h"
+#include "../D2DEngineLib/Particle.h"
 
 #include "EnemyBase.h"
-#include "EnemyInteract.h"
-
-#include "DummyEnemyAttack.h"
-
-#include "TempEnemyAttack.h"
-
+#include "EnemyBaseAttack.h"
 #include "PlayerHeavyAttack.h"
 
 void PlayerNormalAttack::Start()
@@ -22,6 +19,8 @@ void PlayerNormalAttack::Start()
 	auto textRenderer = m_debugTextObject->AddComponent<TextRenderer>();
 	textRenderer->SetText(L"Searching");
 	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
+	textRenderer->SetSpaceType(SpaceType::World);
+	textRenderer->SetSortOrder(4);
 }
 
 void PlayerNormalAttack::Update()
@@ -37,11 +36,60 @@ void PlayerNormalAttack::Update()
 			{
 				m_attackState = AttackState::Parrying;
 
+				m_enemyBase->EnemyIA()->Parried(this->GetPlayer(), this->GetGameObject()->GetName());
+
 				m_debugTextObject->GetComponent<TextRenderer>()->SetText(L"Parrying");
+
+				Vector2 position = GetTransform()->GetLocalPosition();
+
+				auto effectGo = CreateGameObject(L"ParryingEffect");
+				effectGo->GetTransform()->SetLocalPosition(position + m_debugTextDirection * 100.0f);
+				auto batchRenderer = effectGo->AddComponent<BatchRenderer>();
+				batchRenderer->SetLocalRect({ -100.0f, -100.0f, 100.0f, 100.0f });
+				batchRenderer->SetSortOrder(4);
+				auto particle = effectGo->AddComponent<Particle>();
+				particle->SetBitmap(L"ParryingEffectTest.png");
+				particle->SetSpriteSheet(L"ParryingEffectTest_sprites.json");
+				particle->SetDuration(0.2f);
+
+				for (int i = 0; i < 6; ++i)
+				{
+					ParticleUnit particleUnit;
+
+					particleUnit.batchUnits.push_back(
+						{
+							0,
+							{ 0.0f, 0.0f },
+							{ 0.3f, 0.3f },
+							-i * 60.0f,
+							{ 1.0f, 1.0f, 1.0f, 1.0f }
+						}
+					);
+
+					particleUnit.batchUnits.push_back(
+						{
+							0,
+							{ Vector2::RotateVector(Vector2::Right, i * 60.0f) * 50.0f },
+							{ 0.5f, 0.5f },
+							-i * 60.0f,
+							{ 1.0f, 1.0f, 1.0f, 1.0f }
+						}
+					);
+
+					particleUnit.duration = 0.2f;
+					particleUnit.startTime = 0.0f;
+
+					particle->AddParticleUnit(particleUnit);
+				}
 			}
 			else
 			{
 				m_attackState = AttackState::Dealing;
+				
+				if (m_enemyHitChecked)
+				{
+					m_enemyBase->EnemyIA()->HitEnemy(this->GetPlayer(), this->GetGameObject()->GetName());
+				}
 
 				m_debugTextObject->GetComponent<TextRenderer>()->SetText(L"Dealing");
 			}
@@ -63,29 +111,24 @@ void PlayerNormalAttack::Update()
 
 void PlayerNormalAttack::OnTriggerEnter(const Collision& collision)
 {
-	
-
-	if (collision.otherGameObject->GetName() == L"EnemyAttackTest")
+	if (collision.otherGameObject->GetName() == L"EnemyBaseAttack")
 	{
-		auto comp = collision.otherGameObject->GetComponent<TempEnemyAttack>();		
-		
-		auto enemyComp = comp->GetEnemyBase();
+		auto comp = collision.otherGameObject->GetComponent<EnemyBaseAttack>();
+		m_enemyBase = comp->GetEnemyBase();
 
 		if (comp->GetAttackState() == AttackState::Searching)
 		{			
-			m_foundEnemyAttack = true;			
-			enemyComp->EnemyIA()->Parried(collision, m_player, this->GetGameObject()->GetName());
-		}
-
-		return;
+			m_foundEnemyAttack = true;
+			return;
+		}		
 	}
 
 	if (collision.otherGameObject->GetName() == L"EnemyBase")
-	{			
-		auto enemyComp = collision.otherGameObject->GetComponent<EnemyBase>();
-
-		enemyComp->EnemyIA()->HitEnemy(collision, m_player, this->GetGameObject()->GetName());		
-	}
+	{
+		m_enemyBase = collision.otherGameObject->GetComponent<EnemyBase>();
+		m_enemyHitChecked = true;
+		return;
+	}	
 }
 
 AttackState PlayerNormalAttack::GetAttackState() const

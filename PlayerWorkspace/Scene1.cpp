@@ -14,17 +14,24 @@
 
 #include "Player.h"
 #include "DummyEnemy.h"
+#include "PlayerCameraController.h"
+#include "HitStopController.h"
 
 void Scene1::Enter()
 {
 	GameObject* camera = CreateGameObject(L"Camera");
 	camera->AddComponent<Camera>();
+	auto cameraController = camera->AddComponent<PlayerCameraController>();
+	camera->AddComponent<HitStopController>();
 
 	GameObject* map = CreateGameObject(L"Map");
 	auto mapBitmapRenderer = map->AddComponent<BitmapRenderer>(L"map01_ver1.jpg");
 	mapBitmapRenderer->SetSortOrder(0);
 
 	GameObject* player = CreateGameObject(L"Player");
+
+	cameraController->SetTarget(player->GetTransform());
+
 	auto playerBr = player->AddComponent<BitmapRenderer>();
 	playerBr->SetSortOrder(1);
 	auto playerAnimator = player->AddComponent<Animator>();

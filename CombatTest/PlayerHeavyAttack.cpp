@@ -4,8 +4,8 @@
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/Physics.h"
 
-#include "DummyEnemyAttack.h"
-#include "TempEnemyAttack.h"
+#include "EnemyBase.h"
+#include "EnemyBaseAttack.h"
 
 void PlayerHeavyAttack::Start()
 {
@@ -16,6 +16,8 @@ void PlayerHeavyAttack::Start()
 	auto textRenderer = m_debugTextObject->AddComponent<TextRenderer>();
 	textRenderer->SetText(L"Searching");
 	textRenderer->SetHorizontalAlignment(HorizontalAlignment::Center);
+	textRenderer->SetSpaceType(SpaceType::World);
+	textRenderer->SetSortOrder(4);
 }
 
 void PlayerHeavyAttack::Update()
@@ -57,13 +59,23 @@ void PlayerHeavyAttack::Update()
 
 void PlayerHeavyAttack::OnTriggerEnter(const Collision& collision)
 {
-	if (collision.otherGameObject->GetName() == L"TempEnemyAttack")
+	if (collision.otherGameObject->GetName() == L"EnemyBaseAttack")
 	{
-		auto comp = collision.otherGameObject->GetComponent<TempEnemyAttack>();
+		auto comp = collision.otherGameObject->GetComponent<EnemyBaseAttack>();
+		auto enemyBase = comp->GetEnemyBase();
+
 		if (comp->GetAttackState() == AttackState::Searching)
 		{
 			m_foundEnemyAttack = true;
+			enemyBase->EnemyIA()->Parried(this->m_player, this->GetGameObject()->GetName());
+			return;
 		}
+	}
+
+	if (collision.otherGameObject->GetName() == L"EnemyBase")
+	{
+		auto comp = collision.otherGameObject->GetComponent<EnemyBase>();
+		comp->EnemyIA()->HitEnemy(this->m_player, this->GetGameObject()->GetName());
 	}
 }
 

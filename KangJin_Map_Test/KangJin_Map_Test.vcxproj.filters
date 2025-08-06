@@ -75,18 +75,6 @@
     <ClInclude Include="Building02.h">
       <Filter>02_Script\Structure\Buildings</Filter>
     </ClInclude>
-    <ClInclude Include="Building06.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Building07.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Building09.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Building11.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Building03.h">
       <Filter>02_Script\Structure\Buildings</Filter>
     </ClInclude>
@@ -98,6 +86,57 @@
     </ClInclude>
     <ClInclude Include="Building10.h">
       <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building02_01.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building02_02.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building02_03.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building06.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building07.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building09.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building11.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building12.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building02_04.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building051.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building052.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building071.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building072.h">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Building13_01.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building13_02.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building14_01.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Building14_02.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,18 +173,6 @@
     <ClCompile Include="Building02.cpp">
       <Filter>02_Script\Structure\Buildings</Filter>
     </ClCompile>
-    <ClCompile Include="Building06.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Building07.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Building09.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Building11.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Building03.cpp">
       <Filter>02_Script\Structure\Buildings</Filter>
     </ClCompile>
@@ -157,6 +184,57 @@
     </ClCompile>
     <ClCompile Include="Building10.cpp">
       <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building02_01.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building02_02.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building02_03.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building06.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building07.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building09.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building11.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building12.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building02_04.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building051.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building052.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building071.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building072.cpp">
+      <Filter>02_Script\Structure\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Building13_01.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building13_02.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building14_01.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Building14_02.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

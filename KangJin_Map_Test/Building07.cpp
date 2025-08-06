@@ -37,9 +37,3 @@ void Building07::Start()
 		m_Colliders.push_back(circlecollider);
 	}
 }
-
-void Building07::ExporttoJson()
-{
-	jsonfilepath = "Resource/building_circles7.json";
-	Structure::ExporttoJson();
-}
