@@ -7,6 +7,7 @@ class Scene
 protected:
 	std::vector<std::unique_ptr<GameObject>> m_gameObjects;
 	std::vector<GameObject*> m_createdGameObjects;
+	std::wstring m_name;
 
 public:
 	virtual ~Scene() = default;
@@ -18,6 +19,8 @@ public:
 public:
 	void InitializeObjects();
 	void CleanupDestroyedObjects();
+	void SetName(const std::wstring& name);
+	const std::wstring& GetName() const;
 
 private:
 	void Clear();

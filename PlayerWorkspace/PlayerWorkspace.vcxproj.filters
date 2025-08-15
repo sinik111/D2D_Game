@@ -13,6 +13,9 @@
     <Filter Include="02_Script\State">
       <UniqueIdentifier>{0f5a7d6a-45c0-4222-b838-3dac874bca25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Script\Camera">
+      <UniqueIdentifier>{e1268db1-decd-448a-801c-3b5681807689}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -42,6 +45,42 @@
     <ClCompile Include="PlayerStateBase.cpp">
       <Filter>02_Script\State</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerNormalAttackState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyEnemy.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNormalAttack.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyEnemyAttack.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockbackState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockdownState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHeavyAttackState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHeavyAttack.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGrabState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadState.cpp">
+      <Filter>02_Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraController.cpp">
+      <Filter>02_Script\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="HitStopController.cpp">
+      <Filter>02_Script\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWorkspaceApp.h">
@@ -67,6 +106,45 @@
     </ClInclude>
     <ClInclude Include="PlayerStateBase.h">
       <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttackState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyEnemy.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttack.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyEnemyAttack.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackStateEnum.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockbackState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockdownState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHeavyAttackState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHeavyAttack.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGrabState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadState.h">
+      <Filter>02_Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraController.h">
+      <Filter>02_Script\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="HitStopController.h">
+      <Filter>02_Script\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

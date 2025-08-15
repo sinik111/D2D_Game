@@ -1,0 +1,121 @@
+{
+    "name": "runrun.001_SW_001",
+    "isLoop": true,
+    "filePath": "runrun.001_SW_001.png",
+    "duration": 2.3333332538604738,
+    "frames": [
+        {
+            "sprite": "runrun.001_SW_001_0",
+            "time": 0.0
+        },
+        {
+            "sprite": "runrun.001_SW_001_1",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "runrun.001_SW_001_2",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "runrun.001_SW_001_3",
+            "time": 0.25
+        },
+        {
+            "sprite": "runrun.001_SW_001_4",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "runrun.001_SW_001_5",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "runrun.001_SW_001_6",
+            "time": 0.5
+        },
+        {
+            "sprite": "runrun.001_SW_001_7",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "runrun.001_SW_001_8",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "runrun.001_SW_001_9",
+            "time": 0.75
+        },
+        {
+            "sprite": "runrun.001_SW_001_10",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "runrun.001_SW_001_11",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "runrun.001_SW_001_12",
+            "time": 1.0
+        },
+        {
+            "sprite": "runrun.001_SW_001_13",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "runrun.001_SW_001_14",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "runrun.001_SW_001_15",
+            "time": 1.25
+        },
+        {
+            "sprite": "runrun.001_SW_001_16",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "runrun.001_SW_001_17",
+            "time": 1.4166667461395264
+        },
+        {
+            "sprite": "runrun.001_SW_001_18",
+            "time": 1.5
+        },
+        {
+            "sprite": "runrun.001_SW_001_19",
+            "time": 1.5833333730697632
+        },
+        {
+            "sprite": "runrun.001_SW_001_20",
+            "time": 1.6666667461395264
+        },
+        {
+            "sprite": "runrun.001_SW_001_21",
+            "time": 1.75
+        },
+        {
+            "sprite": "runrun.001_SW_001_22",
+            "time": 1.8333333730697632
+        },
+        {
+            "sprite": "runrun.001_SW_001_23",
+            "time": 1.9166667461395264
+        },
+        {
+            "sprite": "runrun.001_SW_001_24",
+            "time": 2.0
+        },
+        {
+            "sprite": "runrun.001_SW_001_25",
+            "time": 2.0833334922790529
+        },
+        {
+            "sprite": "runrun.001_SW_001_26",
+            "time": 2.1666667461395265
+        },
+        {
+            "sprite": "runrun.001_SW_001_27",
+            "time": 2.25
+        }
+    ],
+    "events": []
+}

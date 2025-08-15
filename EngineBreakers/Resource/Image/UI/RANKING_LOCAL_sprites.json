@@ -1,0 +1,484 @@
+{
+    "name": "RANKING_LOCAL.png",
+    "width": 1461,
+    "height": 111,
+    "sprites": [
+        {
+            "name": "RANKING_LOCAL_0",
+            "x": 11.0,
+            "y": 10.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_1",
+            "x": 64.0,
+            "y": 11.0,
+            "width": 37.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_2",
+            "x": 117.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_3",
+            "x": 172.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_4",
+            "x": 228.0,
+            "y": 11.0,
+            "width": 34.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_5",
+            "x": 283.0,
+            "y": 11.0,
+            "width": 34.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_6",
+            "x": 334.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_7",
+            "x": 388.0,
+            "y": 11.0,
+            "width": 37.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_8",
+            "x": 456.0,
+            "y": 11.0,
+            "width": 8.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_9",
+            "x": 495.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_10",
+            "x": 551.0,
+            "y": 11.0,
+            "width": 35.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_11",
+            "x": 605.0,
+            "y": 10.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_12",
+            "x": 655.0,
+            "y": 10.0,
+            "width": 41.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_13",
+            "x": 712.0,
+            "y": 10.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_14",
+            "x": 766.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_15",
+            "x": 820.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_16",
+            "x": 872.0,
+            "y": 11.0,
+            "width": 40.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_17",
+            "x": 928.0,
+            "y": 10.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_18",
+            "x": 981.0,
+            "y": 10.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_19",
+            "x": 1036.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_20",
+            "x": 1090.0,
+            "y": 10.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_21",
+            "x": 1139.0,
+            "y": 10.0,
+            "width": 47.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_22",
+            "x": 1189.0,
+            "y": 11.0,
+            "width": 54.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_23",
+            "x": 1253.0,
+            "y": 11.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_24",
+            "x": 1305.0,
+            "y": 10.0,
+            "width": 39.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_25",
+            "x": 1360.0,
+            "y": 10.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_26",
+            "x": 11.0,
+            "y": 64.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_27",
+            "x": 72.0,
+            "y": 64.0,
+            "width": 19.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_28",
+            "x": 118.0,
+            "y": 64.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_29",
+            "x": 174.0,
+            "y": 64.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_30",
+            "x": 227.0,
+            "y": 64.0,
+            "width": 35.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_31",
+            "x": 281.0,
+            "y": 64.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_32",
+            "x": 335.0,
+            "y": 64.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_33",
+            "x": 391.0,
+            "y": 64.0,
+            "width": 30.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_34",
+            "x": 442.0,
+            "y": 64.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_35",
+            "x": 496.0,
+            "y": 64.0,
+            "width": 36.0,
+            "height": 36.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_36",
+            "x": 600.0,
+            "y": 66.0,
+            "width": 45.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.4399999976158142
+        },
+        {
+            "name": "RANKING_LOCAL_37",
+            "x": 1418.0,
+            "y": 7.0,
+            "width": 31.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_38",
+            "x": 650.0,
+            "y": 67.0,
+            "width": 53.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.4399999976158142
+        },
+        {
+            "name": "RANKING_LOCAL_39",
+            "x": 708.0,
+            "y": 67.0,
+            "width": 46.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.4399999976158142
+        },
+        {
+            "name": "RANKING_LOCAL_40",
+            "x": 762.0,
+            "y": 67.0,
+            "width": 44.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.4399999976158142
+        },
+        {
+            "name": "RANKING_LOCAL_42",
+            "x": 818.0,
+            "y": 61.0,
+            "width": 42.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_43",
+            "x": 881.0,
+            "y": 61.0,
+            "width": 22.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_44",
+            "x": 925.0,
+            "y": 62.0,
+            "width": 42.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_45",
+            "x": 980.0,
+            "y": 62.0,
+            "width": 42.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_46",
+            "x": 1034.0,
+            "y": 62.0,
+            "width": 41.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_47",
+            "x": 1088.0,
+            "y": 62.0,
+            "width": 42.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_48",
+            "x": 1142.0,
+            "y": 62.0,
+            "width": 42.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_49",
+            "x": 1198.0,
+            "y": 62.0,
+            "width": 36.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_50",
+            "x": 1250.0,
+            "y": 62.0,
+            "width": 42.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_51",
+            "x": 1304.0,
+            "y": 61.0,
+            "width": 42.0,
+            "height": 42.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_52",
+            "x": 1365.0,
+            "y": 66.0,
+            "width": 26.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LOCAL_53",
+            "x": 1420.0,
+            "y": 66.0,
+            "width": 26.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "name": "PlayerAnimation/NormalAttackOnce/NormalAttackOnce_SW.png",
+    "width": 2152,
+    "height": 244,
+    "sprites": [
+        {
+            "name": "NormalAttackOnce_225_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        },
+        {
+            "name": "NormalAttackOnce_225_001",
+            "x": 269.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        },
+        {
+            "name": "NormalAttackOnce_225_002",
+            "x": 538.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        },
+        {
+            "name": "NormalAttackOnce_225_003",
+            "x": 807.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        },
+        {
+            "name": "NormalAttackOnce_225_004",
+            "x": 1076.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        },
+        {
+            "name": "NormalAttackOnce_225_005",
+            "x": 1345.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        },
+        {
+            "name": "NormalAttackOnce_225_006",
+            "x": 1614.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        },
+        {
+            "name": "NormalAttackOnce_225_007",
+            "x": 1883.0,
+            "y": 0.0,
+            "width": 269.0,
+            "height": 244.0,
+            "pivotX": 0.6840000152587891,
+            "pivotY": 0.6516000032424927
+        }
+    ]
+}

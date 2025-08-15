@@ -1,0 +1,223 @@
+{
+    "name": "NormalEnemy/NormalEnemyDie/NormalEnemyDie_SE.png",
+    "width": 6264,
+    "height": 225,
+    "sprites": [
+        {
+            "name": "NormalEnemyDie_315_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_001",
+            "x": 261.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_002",
+            "x": 522.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_003",
+            "x": 783.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_004",
+            "x": 1044.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_005",
+            "x": 1305.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_006",
+            "x": 1566.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_007",
+            "x": 1827.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_008",
+            "x": 2088.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_009",
+            "x": 2349.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_010",
+            "x": 2610.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_011",
+            "x": 2871.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_012",
+            "x": 3132.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_013",
+            "x": 3393.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_014",
+            "x": 3654.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_015",
+            "x": 3915.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_016",
+            "x": 4176.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_017",
+            "x": 4437.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_018",
+            "x": 4698.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_019",
+            "x": 4959.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_020",
+            "x": 5220.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_021",
+            "x": 5481.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_022",
+            "x": 5742.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        },
+        {
+            "name": "NormalEnemyDie_315_023",
+            "x": 6003.0,
+            "y": 0.0,
+            "width": 261.0,
+            "height": 225.0,
+            "pivotX": 0.4253000020980835,
+            "pivotY": 0.7732999920845032
+        }
+    ]
+}

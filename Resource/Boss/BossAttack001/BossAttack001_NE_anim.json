@@ -1,0 +1,241 @@
+{
+    "name": "BossAttack001_NE",
+    "isLoop": false,
+    "filePath": "Boss/BossAttack001/BossAttack001.png",
+    "duration": 4.500000476837158,
+    "frames": [
+        {
+            "sprite": "BossAttack001_NE_109",
+            "time": 0.0
+        },
+        {
+            "sprite": "BossAttack001_NE_110",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "BossAttack001_NE_111",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "BossAttack001_NE_112",
+            "time": 0.25
+        },
+        {
+            "sprite": "BossAttack001_NE_113",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "BossAttack001_NE_114",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "BossAttack001_NE_115",
+            "time": 0.5
+        },
+        {
+            "sprite": "BossAttack001_NE_116",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "BossAttack001_NE_117",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "BossAttack001_NE_118",
+            "time": 0.75
+        },
+        {
+            "sprite": "BossAttack001_NE_119",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "BossAttack001_NE_120",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "BossAttack001_NE_121",
+            "time": 1.0
+        },
+        {
+            "sprite": "BossAttack001_NE_122",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "BossAttack001_NE_123",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "BossAttack001_NE_124",
+            "time": 1.25
+        },
+        {
+            "sprite": "BossAttack001_NE_125",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "BossAttack001_NE_126",
+            "time": 1.4166667461395264
+        },
+        {
+            "sprite": "BossAttack001_NE_127",
+            "time": 1.5
+        },
+        {
+            "sprite": "BossAttack001_NE_128",
+            "time": 1.5833333730697632
+        },
+        {
+            "sprite": "BossAttack001_NE_129",
+            "time": 1.6666667461395264
+        },
+        {
+            "sprite": "BossAttack001_NE_130",
+            "time": 1.75
+        },
+        {
+            "sprite": "BossAttack001_NE_131",
+            "time": 1.8333333730697632
+        },
+        {
+            "sprite": "BossAttack001_NE_132",
+            "time": 1.9166667461395264
+        },
+        {
+            "sprite": "BossAttack001_NE_133",
+            "time": 2.0
+        },
+        {
+            "sprite": "BossAttack001_NE_134",
+            "time": 2.0833334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_135",
+            "time": 2.1666667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_136",
+            "time": 2.25
+        },
+        {
+            "sprite": "BossAttack001_NE_137",
+            "time": 2.3333334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_138",
+            "time": 2.4166667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_139",
+            "time": 2.5
+        },
+        {
+            "sprite": "BossAttack001_NE_140",
+            "time": 2.5833334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_141",
+            "time": 2.6666667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_142",
+            "time": 2.75
+        },
+        {
+            "sprite": "BossAttack001_NE_143",
+            "time": 2.8333334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_144",
+            "time": 2.9166667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_145",
+            "time": 3.0
+        },
+        {
+            "sprite": "BossAttack001_NE_146",
+            "time": 3.0833334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_147",
+            "time": 3.1666667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_148",
+            "time": 3.25
+        },
+        {
+            "sprite": "BossAttack001_NE_149",
+            "time": 3.3333334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_150",
+            "time": 3.4166667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_151",
+            "time": 3.5
+        },
+        {
+            "sprite": "BossAttack001_NE_152",
+            "time": 3.5833334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_153",
+            "time": 3.6666667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_154",
+            "time": 3.75
+        },
+        {
+            "sprite": "BossAttack001_NE_155",
+            "time": 3.8333334922790529
+        },
+        {
+            "sprite": "BossAttack001_NE_156",
+            "time": 3.9166667461395265
+        },
+        {
+            "sprite": "BossAttack001_NE_157",
+            "time": 4.0
+        },
+        {
+            "sprite": "BossAttack001_NE_158",
+            "time": 4.083333492279053
+        },
+        {
+            "sprite": "BossAttack001_NE_159",
+            "time": 4.1666669845581059
+        },
+        {
+            "sprite": "BossAttack001_NE_160",
+            "time": 4.25
+        },
+        {
+            "sprite": "BossAttack001_NE_161",
+            "time": 4.333333492279053
+        },
+        {
+            "sprite": "BossAttack001_NE_162",
+            "time": 4.4166669845581059
+        }
+    ],
+        "events": [
+        {
+            "name": "HorizontalAttack1",
+            "parameter": "",
+            "time": 0.9166666865348816
+        },
+        {
+            "name": "HorizontalAttack2",
+            "parameter": "",
+            "time": 2.0
+        },
+        {
+            "name": "HorizontalAttack3",
+            "parameter": "",
+            "time": 3.5833334922790529
+        }
+    ]
+}

@@ -150,9 +150,20 @@ HRESULT D2DRenderer::Initialize(HWND hWnd, UINT width, UINT height)
 	D2D1_MATRIX_3X2_F c = a * b;
 
 	//ImGui 초기화
-	InitImGui();
+	if(ImGuiSystem::Get().IsUsingImGui())
+	{
+		InitImGui();
+	}
 
 	return S_OK;
+}
+
+void D2DRenderer::ShutDown()
+{
+	if (ImGuiSystem::Get().IsUsingImGui())
+	{
+		UnInitImGui();
+	}
 }
 
 UINT D2DRenderer::GetWidth() const
@@ -167,9 +178,6 @@ UINT D2DRenderer::GetHeight() const
 
 void D2DRenderer::BeginDraw(const D2D1_COLOR_F& color) const
 {
-	ImGui_ImplWin32_NewFrame();
-	ImGui_ImplDX11_NewFrame();
-	ImGui::NewFrame();
 	m_d2dDeviceContext->BeginDraw();
 	m_d2dDeviceContext->Clear(color);
 }
@@ -177,8 +185,11 @@ void D2DRenderer::BeginDraw(const D2D1_COLOR_F& color) const
 void D2DRenderer::EndDraw() const
 {
 	m_d2dDeviceContext->EndDraw();
-	m_d3dDeviceContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	if(ImGuiSystem::Get().IsUsingImGui())
+	{
+		m_d3dDeviceContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);
+		ImGuiSystem::Get().EndDrawImGui();
+	}
 	m_dxgiSwapChain->Present(1, 0);
 
 	DXGI_QUERY_VIDEO_MEMORY_INFO memInfo{};
@@ -259,11 +270,7 @@ void D2DRenderer::ExecuteRenderQueue()
 			}
 		}
 	}
-
 	ClearQueue();
-	BeginDrawImGui();
-	DrawImGui();
-	EndDrawImGui();
 }
 
 void D2DRenderer::Trim()
@@ -297,6 +304,25 @@ void D2DRenderer::DrawTriangle(const D2D1_POINT_2F& p1, const D2D1_POINT_2F& p2,
 	m_d2dDeviceContext->DrawLine(p3, p1, m_d2dSolidColorBrush.Get());
 }
 
+void D2DRenderer::SetFullscreen()
+{
+	m_dxgiSwapChain->SetFullscreenState(TRUE, nullptr);
+}
+
+void D2DRenderer::SetWindowed()
+{
+	m_dxgiSwapChain->SetFullscreenState(FALSE, nullptr);
+}
+
+bool D2DRenderer::IsFullscreen()
+{
+	BOOL isFullscreen = FALSE;
+
+	m_dxgiSwapChain->GetFullscreenState(&isFullscreen, nullptr);
+
+	return isFullscreen;
+}
+
 void D2DRenderer::ClearQueue()
 {
 	for (auto& spaceTypeGroup : m_renderQueues)
@@ -319,30 +345,6 @@ void D2DRenderer::InitImGui()
 	ImGui_ImplDX11_Init(m_d3d11Device.Get(), m_d3dDeviceContext.Get());
 }
 
-void D2DRenderer::BeginDrawImGui()
-{
-	//ImGui::ShowMetricsWindow();
-	ImGui::Begin("Settings"); // 창 제목
-}
-
-void D2DRenderer::DrawImGui()
-{
-	ImGui::Text("it is just an example.");
-	ImGui::NewLine();
-	for (auto& it : m_ImGuiVector)
-	{
-		it->DrawImgui();
-	}
-	
-}
-
-void D2DRenderer::EndDrawImGui()
-{
-	ImGui::End();
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-}
-
 void D2DRenderer::UnInitImGui()
 {
 	ImGui_ImplDX11_Shutdown();
@@ -350,7 +352,7 @@ void D2DRenderer::UnInitImGui()
 	ImGui::DestroyContext();
 }
 
-void D2DRenderer::AddImGui(MyImGui* imgui)
-{
-	m_ImGuiVector.push_back(imgui);
-}
+//void D2DRenderer::AddImGui(MyImGui* imgui)
+//{
+//	m_ImGuiVector.push_back(imgui);
+//}

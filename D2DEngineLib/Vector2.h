@@ -97,6 +97,19 @@ public: // 연산자 오버로딩
 	
 		return *this;
 	}
+
+	//비교연산자 추가 오버로딩. 
+	bool operator==(const Vector2& rhs) const
+	{
+		return std::abs(x - rhs.x) <= MyMath::EPSILON &&
+			std::abs(y - rhs.y) <= MyMath::EPSILON;
+	}
+
+	
+	bool operator!=(const Vector2& rhs) const
+	{
+		return !(*this == rhs); // == 연산자를 활용하여 구현
+	}
 	
 public: // 유틸리티 함수
 	Vector2 Normalized() const
@@ -197,6 +210,43 @@ public: // 유틸리티 함수
 	{
 		return Vector2(std::abs(v.x), std::abs(v.y));
 	}
+
+	static Vector2 RotateVector(Vector2 v, float degree)
+	{
+		float radian = degree * MyMath::DegToRad;
+
+		Vector2 rotated;
+		rotated.x = v.x * std::cos(radian) - v.y * std::sin(radian);
+		rotated.y = v.x * std::sin(radian) + v.y * std::cos(radian);
+		return rotated;
+	}
+
+	static float AngleBetween(const Vector2& a, const Vector2& b)
+	{
+		float dot = Dot(a, b);
+		float lenA = a.Length();
+		float lenB = b.Length();
+
+		if (lenA == 0 || lenB == 0)
+		{
+			return 0.0f; // 제로 벡터 처리
+		}
+
+		float cosTheta = dot / (lenA * lenB);
+
+		// 부동소수 오차 보정
+		if (cosTheta > 1.0f)
+		{
+			cosTheta = 1.0f;
+		}
+		if (cosTheta < -1.0f)
+		{
+			cosTheta = -1.0f;
+		}
+
+		return std::acos(cosTheta) * MyMath::RadToDeg; // degree 반환
+	}
+
 
 	std::string ToString() const;
 	

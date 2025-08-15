@@ -1,0 +1,105 @@
+{
+    "name": "Boss Idle_NW",
+    "isLoop": true,
+    "filePath": "Boss/Boss Idle/Boss Idle.png",
+    "duration": 2.0,
+    "frames": [
+        {
+            "sprite": "Boss Idle_NW_073",
+            "time": 0.0
+        },
+        {
+            "sprite": "Boss Idle_NW_074",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "Boss Idle_NW_075",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "Boss Idle_NW_076",
+            "time": 0.25
+        },
+        {
+            "sprite": "Boss Idle_NW_077",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "Boss Idle_NW_078",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "Boss Idle_NW_079",
+            "time": 0.5
+        },
+        {
+            "sprite": "Boss Idle_NW_080",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "Boss Idle_NW_081",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "Boss Idle_NW_082",
+            "time": 0.75
+        },
+        {
+            "sprite": "Boss Idle_NW_083",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "Boss Idle_NW_084",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "Boss Idle_NW_085",
+            "time": 1.0
+        },
+        {
+            "sprite": "Boss Idle_NW_086",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "Boss Idle_NW_087",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "Boss Idle_NW_088",
+            "time": 1.25
+        },
+        {
+            "sprite": "Boss Idle_NW_089",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "Boss Idle_NW_090",
+            "time": 1.4166667461395264
+        },
+        {
+            "sprite": "Boss Idle_NW_091",
+            "time": 1.5
+        },
+        {
+            "sprite": "Boss Idle_NW_092",
+            "time": 1.5833333730697632
+        },
+        {
+            "sprite": "Boss Idle_NW_093",
+            "time": 1.6666667461395264
+        },
+        {
+            "sprite": "Boss Idle_NW_094",
+            "time": 1.75
+        },
+        {
+            "sprite": "Boss Idle_NW_095",
+            "time": 1.8333333730697632
+        },
+        {
+            "sprite": "Boss Idle_NW_096",
+            "time": 1.9166667461395264
+        }
+    ],
+    "events": []
+}

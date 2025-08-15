@@ -26,8 +26,7 @@ private:
 	void OnTriggerExit(const Collision& collision) override;
 
 
-private:
-		
+private:	
 	
 	PlayerInput* m_playerInput;
 	
@@ -42,8 +41,27 @@ private:
 	FSM m_fsm;
 	FSMContext m_context;	
 
-	float rotationAngle = 0.0f;
-	int direction = DOWN;
+	float m_rotationAngle = 0.0f;
+	int m_direction = DOWN;
+
+	float m_moveSpeed = 500.0f; 
+
+	float m_debugPrintInterval = 1.0f;
+	float m_timer = 0.0f;
+
+	GameObject* m_camera;
+
+	Vector2 m_inputDirection;
+
+
+private:
+	int m_attackKnockBackPower = 100;
+public:
+	inline const int& GetKnockBackPow()	{ return m_attackKnockBackPower; }
+
+
+private:
+	void ArrowInput(Vector2 input);
 
 
 public:
@@ -60,10 +78,17 @@ public:
 		UP,				//8
 		RIGHT_UP,		//9	
 	};
+
+	void MoveByArrowInput();
 		
 	void SetDirectionByRotation(float angle);
 
 	void Attack();
+
+	void SetCamera(GameObject* camera)
+	{		
+		m_camera = camera;
+	}
 	
 
 };

@@ -1,0 +1,34 @@
+{
+    "name": "PlayerAnimation/WalkIn/WalkIn_W.png",
+    "width": 696,
+    "height": 177,
+    "sprites": [
+        {
+            "name": "WalkIn_180_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 232.0,
+            "height": 177.0,
+            "pivotX": 0.7197999358177185,
+            "pivotY": 0.8531000018119812
+        },
+        {
+            "name": "WalkIn_180_001",
+            "x": 232.0,
+            "y": 0.0,
+            "width": 232.0,
+            "height": 177.0,
+            "pivotX": 0.7197999358177185,
+            "pivotY": 0.8531000018119812
+        },
+        {
+            "name": "WalkIn_180_002",
+            "x": 464.0,
+            "y": 0.0,
+            "width": 232.0,
+            "height": 177.0,
+            "pivotX": 0.7197999358177185,
+            "pivotY": 0.8531000018119812
+        }
+    ]
+}

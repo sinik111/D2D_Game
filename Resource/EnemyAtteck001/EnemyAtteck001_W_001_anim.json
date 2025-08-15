@@ -1,0 +1,105 @@
+{
+    "name": "EnemyAtteck001_W_001",
+    "isLoop": true,
+    "filePath": "EnemyAtteck001_W_001.png",
+    "duration": 1.0,
+    "frames": [
+        {
+            "sprite": "EnemyAtteck001_W_001_0",
+            "time": 0.0
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_1",
+            "time": 0.0416666679084301
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_2",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_3",
+            "time": 0.125
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_4",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_5",
+            "time": 0.2083333283662796
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_6",
+            "time": 0.25
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_7",
+            "time": 0.2916666567325592
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_8",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_9",
+            "time": 0.375
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_10",
+            "time": 0.4166666567325592
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_11",
+            "time": 0.4583333432674408
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_12",
+            "time": 0.5
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_13",
+            "time": 0.5416666865348816
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_14",
+            "time": 0.5833333134651184
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_15",
+            "time": 0.625
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_16",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_17",
+            "time": 0.7083333134651184
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_18",
+            "time": 0.75
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_19",
+            "time": 0.7916666865348816
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_20",
+            "time": 0.8333333134651184
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_21",
+            "time": 0.875
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_22",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "EnemyAtteck001_W_001_23",
+            "time": 0.9583333134651184
+        }
+    ],
+    "events": []
+}

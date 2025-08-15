@@ -1,0 +1,17 @@
+{
+    "name": "DashEnd_NW",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/DashEnd/DashEnd_NW.png",
+    "duration": 0.1666666716337204,
+    "frames": [
+        {
+            "sprite": "DashEnd_135_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "DashEnd_135_001",
+            "time": 0.0833333358168602
+        }
+    ],
+    "events": []
+}

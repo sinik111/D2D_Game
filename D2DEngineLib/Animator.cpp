@@ -25,19 +25,23 @@ void Animator::UnregisterFromSystem()
 	ComponentSystem::Get().Animator().Unregister(this);
 }
 
-void Animator::SetSpriteSheet(const std::wstring& filePath)
+void Animator::AddSpriteSheet(const std::wstring& filePath)
 {
-	m_spriteSheet = ResourceManager::Get().CreateSpriteSheet(filePath);
+	auto sheet = ResourceManager::Get().CreateSpriteSheet(filePath);
+
+	m_spriteSheets[sheet->name] = sheet;
+
+	m_bitmapResources[sheet->name] = ResourceManager::Get().CreateBitmapResource(sheet->name);
 }
 
 void Animator::AddAnimationClip(const std::wstring& filePath)
 {
-	std::shared_ptr<AnimationClip> clip = ResourceManager::Get().CreateAnimationClip(filePath, m_spriteSheet);
+	std::shared_ptr<AnimationClip> clip = ResourceManager::Get().CreateAnimationClip(filePath, m_spriteSheets);
 
 	m_animationClips[clip->name] = clip;
 }
 
-void Animator::Play(const std::wstring& clipName)
+void Animator::Play(const std::wstring& clipName, size_t startFrame)
 {
 	const auto& iter = m_animationClips.find(clipName);
 	if (iter == m_animationClips.end())
@@ -49,15 +53,39 @@ void Animator::Play(const std::wstring& clipName)
 
 	m_currentClip = iter->second.get();
 
-	m_bitmapRenderer->SetBitmap(m_currentClip->filePath);
+	m_bitmapRenderer->SetBitmap(m_bitmapResources[m_currentClip->filePath]);
 
-	m_timer = 0.0f;
-	m_frameCounter = 0;
-	m_eventCounter = 0;
+	if (startFrame > m_currentClip->frames.size() - 1)
+	{
+		startFrame = 0;
+	}
+
+	m_timer = m_currentClip->frames[startFrame].time;
+	m_frameCounter = startFrame;
+
+	size_t eventCount = 0;
+	for (auto& event : m_currentClip->events)
+	{
+		if (event.time <= m_timer)
+		{
+			++eventCount;
+		}
+	}
+
+	m_eventCounter = eventCount;
 
 	SetSpriteData();
 
-	// 0 sec event call
+	if (!m_currentClip->events.empty() && m_currentClip->events[0].time <= 0.0f)
+	{
+		const auto& iter = m_eventDelegates.find(m_currentClip->events[0].name);
+		if (iter != m_eventDelegates.end())
+		{
+			iter->second.Invoke();
+		}
+
+		++m_eventCounter;
+	}
 
 	m_isFinished = false;
 }
@@ -75,6 +103,11 @@ bool Animator::IsFinished() const
 void Animator::SetPlaySpeed(float playSpeed)
 {
 	m_playSpeed = playSpeed;
+}
+
+size_t Animator::GetCurrentFrame() const
+{
+	return m_frameCounter;
 }
 
 void Animator::Update()
@@ -138,7 +171,7 @@ void Animator::Update()
 void Animator::SetSpriteData()
 {
 	// 혹시 모를 인덱스 초과를 대비해서 % 연산자로 나눠줌
-	const Sprite& sprite = m_spriteSheet->
+	const Sprite& sprite = m_spriteSheets[m_currentClip->filePath]->
 		sprites[m_currentClip->frames[m_frameCounter % m_currentClip->frames.size()].spriteIndex];
 
 	// rect, pivot 설정 및 window -> unity 좌표계 변경으로 인한 좌표 조정

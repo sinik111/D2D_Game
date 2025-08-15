@@ -1,25 +1,38 @@
 #pragma once
 #include <string>
 #include "imgui.h"
-#include "D2DRenderer.h"
-class MyImGui /*: public Component*/
+#include "imgui_impl_dx11.h"
+#include "ImGuiSystem.h"
+#include "GameObject.h"
+
+class MyImGui 
 {
 protected:
-	std::string name;
-	float* m_value;
+	std::vector<GameObject*> m_GameObjectlist;
+	GameObject* m_GameObject;
+	std::string Name;
 public:
-	virtual void DrawImgui() = 0;
-	void SetName(const std::string& _name) { name = _name; }
-	void SetName(const char* _name) { name = std::string{ _name }; }
-	void SetValuePointer(float* _value) { m_value = _value; }
-	void SetImGui(const std::string& _name, float* _value)
+	virtual void DrawImgui() {}
+
+	void SetObject(GameObject* object) 
 	{
-		SetName(_name);
-		SetValuePointer(_value);
+		if(ImGuiSystem::Get().IsUsingImGui())
+		{
+			m_GameObject = object;
+			m_GameObjectlist.push_back(object);
+		}
 	}
-	void Add()
+	void SetName(const std::string name) 
+	{ 
+		if (ImGuiSystem::Get().IsUsingImGui())
+		{
+			Name = name;
+		}
+	}
+	std::string GetName() { return Name; }
+	void FinishDrawImgui()
 	{
-		D2DRenderer::Get()->AddImGui(this);
+		ImGui::Render();
 	}
 };
 

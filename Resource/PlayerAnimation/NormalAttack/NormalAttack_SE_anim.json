@@ -1,0 +1,49 @@
+{
+    "name": "NormalAttack_SE",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/NormalAttack/NormalAttack_SE.png",
+    "duration": 0.8333333134651184,
+    "frames": [
+        {
+            "sprite": "NormalAttack_315_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "NormalAttack_315_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "NormalAttack_315_002",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "NormalAttack_315_003",
+            "time": 0.25
+        },
+        {
+            "sprite": "NormalAttack_315_004",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "NormalAttack_315_005",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "NormalAttack_315_006",
+            "time": 0.5
+        },
+        {
+            "sprite": "NormalAttack_315_007",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "NormalAttack_315_008",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "NormalAttack_315_009",
+            "time": 0.75
+        }
+    ],
+    "events": []
+}

@@ -30,8 +30,8 @@ void Sun::Start()
 
     PlayerInput* playerInput = GetGameObject()->AddComponent<PlayerInput>();
 
-    //playerInput->RegisterActionOnKey('A', KeyState::Held, this, &Sun::CreateEarth);
-    //playerInput->RegisterActionOnKey('S', KeyState::Held, this, &Sun::DeleteEarth);
+    playerInput->RegisterActionOnKey('A', KeyState::Held, this, &Sun::CreateEarth);
+    playerInput->RegisterActionOnKey('S', KeyState::Held, this, &Sun::DeleteEarth);
     playerInput->RegisterActionOnKey('D', KeyState::Pressed, this, &Sun::DestroySelf);
 
     m_speed = 45.0f;
@@ -46,57 +46,57 @@ void Sun::Update()
 {
     GetTransform()->Rotate(m_speed * MyTime::DeltaTime());
 
-    if (Input::IsKeyHeld('A'))
-    {
-        // [Tip] BatchRenderer 사용법
-        // BatchRenderer는 하나의 이미지 시트 내에서 원하는 이미지를 골라 여러개 출력할 수 있게 해주는 Component.
-        // DrawSpriteBatch를 사용해서 그리기 때문에 빠르게 그릴 수 있음.
+    //if (Input::IsKeyHeld('A'))
+    //{
+    //    // [Tip] BatchRenderer 사용법
+    //    // BatchRenderer는 하나의 이미지 시트 내에서 원하는 이미지를 골라 여러개 출력할 수 있게 해주는 Component.
+    //    // DrawSpriteBatch를 사용해서 그리기 때문에 빠르게 그릴 수 있음.
 
-        auto batchRenderer = m_batchTest->GetComponent<BatchRenderer>();
+    //    auto batchRenderer = m_batchTest->GetComponent<BatchRenderer>();
 
-        for (int i = 0; i < 100; ++i)
-        {
-            BatchUnit unit;
+    //    for (int i = 0; i < 100; ++i)
+    //    {
+    //        BatchUnit unit;
 
-            // BatchUnit
-            // 
-            // size_t index = 0;
-            // Vector2 position{ 0.0f, 0.0f };
-            // Vector2 scale{ 1.0f, 1.0f };
-            // float rotation = 0.0f;
-            // D2D1_COLOR_F color{ 1.0f, 1.0f, 1.0f, 1.0f };
-            // Matrix3x2 world;
-            // bool isFollowing = true;
-            // 
-            // index - 스프라이트 시트에서 출력할 이미지 인덱스. 좌측 상단부터 순서대로 0, 1, 2 ...임
-            // position - 이미지를 출력할 위치. pivot은 Unity의 Sprite Editor에서 설정한 대로 적용됨.
-            // scale - 이미지 스케일.
-            // rotation - 이미지 회전.
-            // color - 이미지 색상. {1, 1, 1, 1}으로 설정하면 기본 색상이 나옴.
-            // world - isFollowing이 false일때 적용할 world transform
-            // isFollowing - true로 설정하면 출력할 때의 GameObject의 world transform을 사용해서 출력함.
-            //               false로 설정하면 BatchUnit이 멤버로 가진 world를 사용해서 출력함.
+    //        // BatchUnit
+    //        // 
+    //        // size_t index = 0;
+    //        // Vector2 position{ 0.0f, 0.0f };
+    //        // Vector2 scale{ 1.0f, 1.0f };
+    //        // float rotation = 0.0f;
+    //        // D2D1_COLOR_F color{ 1.0f, 1.0f, 1.0f, 1.0f };
+    //        // Matrix3x2 world;
+    //        // bool isFollowing = true;
+    //        // 
+    //        // index - 스프라이트 시트에서 출력할 이미지 인덱스. 좌측 상단부터 순서대로 0, 1, 2 ...임
+    //        // position - 이미지를 출력할 위치. pivot은 Unity의 Sprite Editor에서 설정한 대로 적용됨.
+    //        // scale - 이미지 스케일.
+    //        // rotation - 이미지 회전.
+    //        // color - 이미지 색상. {1, 1, 1, 1}으로 설정하면 기본 색상이 나옴.
+    //        // world - isFollowing이 false일때 적용할 world transform
+    //        // isFollowing - true로 설정하면 출력할 때의 GameObject의 world transform을 사용해서 출력함.
+    //        //               false로 설정하면 BatchUnit이 멤버로 가진 world를 사용해서 출력함.
 
 
-            unit.index = Random::Int(0, 470);
-            unit.position = { Random::Float(-1920.0f, 1920.0f) * 4, Random::Float(-1080.0f, 1080.0f) * 4 };
-            unit.color = {
-                Random::Float(0.0f, 1.0f),
-                Random::Float(0.0f, 1.0f),
-                Random::Float(0.0f, 1.0f),
-                Random::Float(0.5f, 0.8f)
-            };
+    //        unit.index = Random::Int(0, 470);
+    //        unit.position = { Random::Float(-1920.0f, 1920.0f) * 4, Random::Float(-1080.0f, 1080.0f) * 4 };
+    //        unit.color = {
+    //            Random::Float(0.0f, 1.0f),
+    //            Random::Float(0.0f, 1.0f),
+    //            Random::Float(0.0f, 1.0f),
+    //            Random::Float(0.5f, 0.8f)
+    //        };
 
-            batchRenderer->AddBatchUnit(unit); // BatchRenderer에 BatchUnit 추가
-        }
-    }
+    //        batchRenderer->AddBatchUnit(unit); // BatchRenderer에 BatchUnit 추가
+    //    }
+    //}
 
-    if (Input::IsKeyPressed('S'))
-    {
-        // BatchRenderer는 BatchUnit들을 비울 수 있음.
+    //if (Input::IsKeyPressed('S'))
+    //{
+    //    // BatchRenderer는 BatchUnit들을 비울 수 있음.
 
-        m_batchTest->GetComponent<BatchRenderer>()->ClearBatchUnitList();
-    }
+    //    m_batchTest->GetComponent<BatchRenderer>()->ClearBatchUnitList();
+    //}
 }
 
 void Sun::OnDestroy()

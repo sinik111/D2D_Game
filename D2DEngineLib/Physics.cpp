@@ -22,10 +22,10 @@ void Physics::SetupCollisionMatrix()
 		static_cast<unsigned int>(CollisionLayer::PlayerAttack);
 
 	s_collisionMasks[CollisionLayer::PlayerAttack] =
-		static_cast<unsigned int>(CollisionLayer::EnemyHitBox);
+		static_cast<unsigned int>(CollisionLayer::EnemyHitBox | CollisionLayer::EnemyAttack);
 
 	s_collisionMasks[CollisionLayer::EnemyAttack] =
-		static_cast<unsigned int>(CollisionLayer::PlayerHitBox);
+		static_cast<unsigned int>(CollisionLayer::PlayerHitBox | CollisionLayer::PlayerAttack);
 
 	s_collisionMasks[CollisionLayer::Building] =
 		static_cast<unsigned int>(CollisionLayer::PlayerMove | CollisionLayer::EnemyMove);
@@ -34,7 +34,7 @@ void Physics::SetupCollisionMatrix()
 		static_cast<unsigned int>(CollisionLayer::PlayerMove | CollisionLayer::EnemyMove);
 
 	s_collisionMasks[CollisionLayer::PlayerMove] =
-		static_cast<unsigned int>(CollisionLayer::Building | CollisionLayer::Wall | CollisionLayer::EnemyMove);
+		static_cast<unsigned int>(CollisionLayer::Building | CollisionLayer::Wall | CollisionLayer::EnemyMove | CollisionLayer::Sensor);
 
 	s_collisionMasks[CollisionLayer::EnemyMove] =
 		static_cast<unsigned int>(CollisionLayer::Building | CollisionLayer::Wall | CollisionLayer::PlayerMove);
@@ -275,7 +275,13 @@ CollisionInfo Physics::DetectCollisionConeCone(const ConeCollider2D* a, const Co
 		// 모서리에 수직인 벡터(법선)를 계산합니다.
 		// 투영 축으로 사용하기 위해 정규화합니다.
 		Vector2 axis{ -edgeVec.y, edgeVec.x }; // 시계 반대 방향으로 90도 회전
-		axis = axis.Normalized(); // 단위 벡터로 정규화
+
+		if (axis.LengthSq() < MyMath::EPSILON)
+		{
+			continue;
+		}
+
+		axis = axis.Normalized(); // 단위 벡터로 정규화	//zeroDivide 발생한 적 있음
 
 		// 두 삼각형을 현재 축에 투영합니다.
 		Projection projA = ProjectPolygon(verticesA, 3, axis);
@@ -440,7 +446,7 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 			}
 			else
 			{
-				info.normal = (circle.center - aabbCenter).Normalized();
+				info.normal = -(circle.center - aabbCenter).Normalized();
 			}
 		}
 		else
@@ -451,7 +457,7 @@ CollisionInfo Physics::DetectCollisionCircleBox(const CircleCollider* a, const B
 			}
 			else
 			{
-				info.normal = displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
+				info.normal = -displacement.Normalized(); // 원 중심에서 closestPoint로 향하는 벡터의 정규화
 			}
 		}
 
@@ -485,17 +491,16 @@ CollisionInfo Physics::DetectCollisionLineCircle(const LineCollider* a, const Ci
 	// 거리가 반지름보다 작으면 충돌
 	if (distanceSq < radiusSq)
 	{
-		float projDistance = Vector2::Dot(distVec, segment.normal);
-
 		info.isCollide = true;
 
+		//info.normal = distanceSq <= MyMath::EPSILON ? segment.normal : distVec.Normalized();
 		info.normal = segment.normal;
 
-		float signedDistanceFromLine = Vector2::Dot((circle.center - segment.startPoint), segment.normal);
+		//float signedDistanceFromLine = Vector2::Dot((circle.center - segment.startPoint), segment.normal);
 
-		info.penetrationDepth = circle.radius - signedDistanceFromLine;
+		info.penetrationDepth = circle.radius - distVec.Length();
 
-		info.contactPoint = circle.center - segment.normal * circle.radius;
+		//info.contactPoint = circle.center - segment.normal * circle.radius;
 
 		info.colliderA = a;
 		info.colliderB = b;
@@ -565,13 +570,14 @@ CollisionInfo Physics::DetectCollisionCircleLine(const CircleCollider* a, const 
 	{
 		info.isCollide = true;
 
-		info.normal = segment.normal;
+		//info.normal = distanceSq <= MyMath::EPSILON ? -segment.normal : -distVec.Normalized();
+		info.normal = -segment.normal;
 
-		float signedDistanceFromLine = Vector2::Dot((circle.center - segment.startPoint), segment.normal);
+		//float signedDistanceFromLine = Vector2::Dot((circle.center - segment.startPoint), segment.normal);
 
-		info.penetrationDepth = circle.radius - signedDistanceFromLine;
+		info.penetrationDepth = circle.radius - distVec.Length();
 
-		info.contactPoint = circle.center - segment.normal * circle.radius;
+		//info.contactPoint = circle.center - segment.normal * circle.radius;
 
 		info.colliderA = a;
 		info.colliderB = b;
@@ -583,8 +589,8 @@ CollisionInfo Physics::DetectCollisionCircleLine(const CircleCollider* a, const 
 	auto rb = a->GetRigidBody2D();
 	if (rb)
 	{
-		Vector2 lastPosition = rb->GetLastFramePosition();
-		Vector2 estimatePosition = rb->GetPosition();
+		Vector2 lastPosition = rb->GetLastFramePosition() + a->GetOffset();
+		Vector2 estimatePosition = rb->GetPosition() + a->GetOffset();
 
 		Vector2 sweepLine = estimatePosition - lastPosition;
 		Vector2 segmentLine = segment.endPoint - segment.startPoint;
@@ -601,7 +607,7 @@ CollisionInfo Physics::DetectCollisionCircleLine(const CircleCollider* a, const 
 			{
 				info.isCollide = true;
 
-				info.normal = segment.normal;
+				info.normal = -segment.normal;
 
 				float signedDistanceFromLine = Vector2::Dot((estimatePosition - segment.startPoint), segment.normal);
 
@@ -759,7 +765,7 @@ CollisionInfo Physics::DetectCollisionConeBox(const ConeCollider2D* a, const Box
 
 	info.isCollide = true;
 	info.penetrationDepth = minOverlap;
-	info.normal = collisionNormal.Normalized();
+	info.normal = -collisionNormal.Normalized();
 
 	Vector2 centerBox = { (min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f };
 	info.contactPoint = centerBox + info.normal * (minOverlap);

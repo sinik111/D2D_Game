@@ -5,6 +5,9 @@
 class PlayerIdleState :
 	public PlayerStateBase
 {
+private:
+	float m_dummyGrabDistance = 200.0f;
+
 public:
 	PlayerIdleState(Player* player);
 

@@ -1,0 +1,33 @@
+{
+    "name": "Dust_SPRITE",
+    "isLoop": false,
+    "filePath": "PlayerEffect/Dust_SPRITE.png",
+    "duration": 0.5,
+    "frames": [
+        {
+            "sprite": "Dust_SPRITE_0",
+            "time": 0.0
+        },
+        {
+            "sprite": "Dust_SPRITE_1",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "Dust_SPRITE_2",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "Dust_SPRITE_3",
+            "time": 0.25
+        },
+        {
+            "sprite": "Dust_SPRITE_4",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "Dust_SPRITE_5",
+            "time": 0.4166666865348816
+        }
+    ],
+    "events": []
+}

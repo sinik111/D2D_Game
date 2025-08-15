@@ -1,0 +1,34 @@
+{
+    "name": "PlayerAnimation/DashIn/DashIn_S.png",
+    "width": 405,
+    "height": 225,
+    "sprites": [
+        {
+            "name": "DashIn_270_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 135.0,
+            "height": 225.0,
+            "pivotX": 0.6370000243186951,
+            "pivotY": 0.648900032043457
+        },
+        {
+            "name": "DashIn_270_001",
+            "x": 135.0,
+            "y": 0.0,
+            "width": 135.0,
+            "height": 225.0,
+            "pivotX": 0.6370000243186951,
+            "pivotY": 0.648900032043457
+        },
+        {
+            "name": "DashIn_270_002",
+            "x": 270.0,
+            "y": 0.0,
+            "width": 135.0,
+            "height": 225.0,
+            "pivotX": 0.6370000243186951,
+            "pivotY": 0.648900032043457
+        }
+    ]
+}

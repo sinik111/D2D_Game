@@ -22,11 +22,19 @@ void PlayerInputSystem::SetWindow(HWND hWnd)
 void PlayerInputSystem::Update()
 {
     m_previousKeyState = m_currentKeyState;
+    m_previousAnyKeyState = m_currentAnyKeyState;
 
     for (int i = 0; i < 256; ++i)
     {
+        if (i == VK_HANGEUL)
+        {
+            continue;
+        }
+
         m_currentKeyState[i] = (GetAsyncKeyState(i) & 0x8000) != 0;
     }
+
+    m_currentAnyKeyState = m_currentKeyState.any();
 
     GetCursorPos(&m_mousePoint);
 
@@ -48,6 +56,21 @@ bool PlayerInputSystem::IsKeyReleased(int vkey) const
     return m_previousKeyState[vkey] && !m_currentKeyState[vkey];
 }
 
+bool PlayerInputSystem::IsAnyKeyHeld() const
+{
+    return m_currentAnyKeyState;
+}
+
+bool PlayerInputSystem::IsAnyKeyPressed() const
+{
+    return !m_previousAnyKeyState && m_currentAnyKeyState;
+}
+
+bool PlayerInputSystem::IsAnyKeyReleased() const
+{
+    return m_previousAnyKeyState && !m_currentAnyKeyState;
+}
+
 POINT PlayerInputSystem::GetCursorPoint() const
 {
     return m_mousePoint;
@@ -60,6 +83,9 @@ void PlayerInputSystem::ProcessInput() const
         playerInput->SetMousePosition((float)m_mousePoint.x, (float)m_mousePoint.y);
     }
     
+    // UI Ã¢ ¶ç¿üÀ» ¶§ Input ¾È¹Þµµ·Ï
+    if (GetIsStopped()) return;
+
     ProcessArrowInput();
     ProcessWASDInput();
 
@@ -129,4 +155,14 @@ void PlayerInputSystem::ProcessWASDInput() const
     {
         playerInput->CallWASDAction(horizontal, vertical);
     }
+}
+
+void PlayerInputSystem::SetIsStopped(bool value)
+{
+    m_IsStopped = value;
+}
+
+bool PlayerInputSystem::GetIsStopped() const
+{
+    return m_IsStopped;
 }

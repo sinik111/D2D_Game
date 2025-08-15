@@ -1,0 +1,79 @@
+{
+    "name": "PlayerAnimation/NormalAttackOnce/NormalAttackOnce_N.png",
+    "width": 1384,
+    "height": 211,
+    "sprites": [
+        {
+            "name": "NormalAttackOnce_90_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackOnce_90_001",
+            "x": 173.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackOnce_90_002",
+            "x": 346.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackOnce_90_003",
+            "x": 519.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackOnce_90_004",
+            "x": 692.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackOnce_90_005",
+            "x": 865.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackOnce_90_006",
+            "x": 1038.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackOnce_90_007",
+            "x": 1211.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        }
+    ]
+}

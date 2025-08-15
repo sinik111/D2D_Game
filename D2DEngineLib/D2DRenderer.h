@@ -41,7 +41,7 @@ private:
 
 public:
 	HRESULT Initialize(HWND hWnd, UINT width, UINT height);
-
+	void ShutDown();
 	UINT GetWidth() const;
 	UINT GetHeight() const;
 
@@ -68,6 +68,10 @@ public:
 	void DrawTriangle(const D2D1_POINT_2F& p1, const D2D1_POINT_2F& p2, const D2D1_POINT_2F& p3,
 		const D2D1_COLOR_F& color = { 1.0f, 0.0f, 0.0f, 1.0f });
 
+	void SetFullscreen();
+	void SetWindowed();
+	bool IsFullscreen();
+
 private:
 	void PrepareRenderQueue();
 	void ClearQueue();
@@ -75,11 +79,7 @@ private:
 	//ImGui 그리기 시작, 그리기, 
 public:
 	void InitImGui();
-	void BeginDrawImGui();
-	void DrawImGui();
-	void EndDrawImGui();
 	void UnInitImGui();
-	void AddImGui(MyImGui* imgui);
 
 	static D2DRenderer* Get() { return m_Instance; };
 	static void Set(D2DRenderer* instance) { m_Instance = instance; }

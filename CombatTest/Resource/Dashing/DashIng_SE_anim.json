@@ -1,0 +1,13 @@
+{
+    "name": "DashIng_SE",
+    "isLoop": true,
+    "filePath": "DashIng_SE.png",
+    "duration": 0.0833333358168602,
+    "frames": [
+        {
+            "sprite": "DashIng_315_000",
+            "time": 0.0
+        }
+    ],
+    "events": []
+}

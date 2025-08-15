@@ -1,0 +1,31 @@
+{
+    "name": "DashIn_NW",    "isLoop": false,
+    "filePath": "PlayerAnimation/DashIn/DashIn_NW.png",
+    "duration": 0.25,
+    "frames": [
+        {
+            "sprite": "DashIn_135_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "DashIn_135_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "DashIn_135_002",
+            "time": 0.1666666716337204
+        }
+    ],
+        "events": [
+        {
+            "name": "DashIn",
+            "parameter": "",
+            "time": 0.0
+        },
+        {
+            "name": "DashIng",
+            "parameter": "",
+            "time": 0.1666666716337204
+        }
+    ]
+}

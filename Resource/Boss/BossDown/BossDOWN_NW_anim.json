@@ -1,0 +1,205 @@
+{
+    "name": "BossDOWN_NW",
+    "isLoop": false,
+    "filePath": "Boss/BossDown/BossDOWN.png",
+    "duration": 4.083333492279053,
+    "frames": [
+        {
+            "sprite": "BossDOWN_NW_148",
+            "time": 0.0
+        },
+        {
+            "sprite": "BossDOWN_NW_149",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "BossDOWN_NW_150",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "BossDOWN_NW_151",
+            "time": 0.25
+        },
+        {
+            "sprite": "BossDOWN_NW_152",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "BossDOWN_NW_153",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "BossDOWN_NW_154",
+            "time": 0.5
+        },
+        {
+            "sprite": "BossDOWN_NW_155",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "BossDOWN_NW_156",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "BossDOWN_NW_157",
+            "time": 0.75
+        },
+        {
+            "sprite": "BossDOWN_NW_158",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "BossDOWN_NW_159",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "BossDOWN_NW_160",
+            "time": 1.0
+        },
+        {
+            "sprite": "BossDOWN_NW_161",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "BossDOWN_NW_162",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "BossDOWN_NW_163",
+            "time": 1.25
+        },
+        {
+            "sprite": "BossDOWN_NW_164",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "BossDOWN_NW_165",
+            "time": 1.4166667461395264
+        },
+        {
+            "sprite": "BossDOWN_NW_166",
+            "time": 1.5
+        },
+        {
+            "sprite": "BossDOWN_NW_167",
+            "time": 1.5833333730697632
+        },
+        {
+            "sprite": "BossDOWN_NW_168",
+            "time": 1.6666667461395264
+        },
+        {
+            "sprite": "BossDOWN_NW_169",
+            "time": 1.75
+        },
+        {
+            "sprite": "BossDOWN_NW_170",
+            "time": 1.8333333730697632
+        },
+        {
+            "sprite": "BossDOWN_NW_171",
+            "time": 1.9166667461395264
+        },
+        {
+            "sprite": "BossDOWN_NW_172",
+            "time": 2.0
+        },
+        {
+            "sprite": "BossDOWN_NW_173",
+            "time": 2.0833334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_174",
+            "time": 2.1666667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_175",
+            "time": 2.25
+        },
+        {
+            "sprite": "BossDOWN_NW_176",
+            "time": 2.3333334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_177",
+            "time": 2.4166667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_178",
+            "time": 2.5
+        },
+        {
+            "sprite": "BossDOWN_NW_179",
+            "time": 2.5833334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_180",
+            "time": 2.6666667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_181",
+            "time": 2.75
+        },
+        {
+            "sprite": "BossDOWN_NW_182",
+            "time": 2.8333334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_183",
+            "time": 2.9166667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_184",
+            "time": 3.0
+        },
+        {
+            "sprite": "BossDOWN_NW_185",
+            "time": 3.0833334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_186",
+            "time": 3.1666667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_187",
+            "time": 3.25
+        },
+        {
+            "sprite": "BossDOWN_NW_188",
+            "time": 3.3333334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_189",
+            "time": 3.4166667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_190",
+            "time": 3.5
+        },
+        {
+            "sprite": "BossDOWN_NW_191",
+            "time": 3.5833334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_192",
+            "time": 3.6666667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_193",
+            "time": 3.75
+        },
+        {
+            "sprite": "BossDOWN_NW_194",
+            "time": 3.8333334922790529
+        },
+        {
+            "sprite": "BossDOWN_NW_195",
+            "time": 3.9166667461395265
+        },
+        {
+            "sprite": "BossDOWN_NW_196",
+            "time": 4.0
+        }
+    ],
+    "events": []
+}

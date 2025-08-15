@@ -1,0 +1,25 @@
+{
+    "name": "Particle1.png",
+    "width": 128,
+    "height": 64,
+    "sprites": [
+        {
+            "name": "Particle1_p_0",
+            "x": 12.0,
+            "y": 25.0,
+            "width": 41.0,
+            "height": 15.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "Particle1_p_1",
+            "x": 84.0,
+            "y": 20.0,
+            "width": 24.0,
+            "height": 24.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

@@ -15,6 +15,8 @@
 #include "Screen.h"
 #include "Camera.h"
 #include "imgui_impl_win32.h"
+#include "ImGuiSystem.h"
+#include "SoundManager.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -91,7 +93,9 @@ void WinApp::Shutdown()
 
 	SceneManager::Get().Shutdown();
 	ResourceManager::Get().Release();
-	m_d2dRenderer.UnInitImGui();
+	SoundManager::Get().Shutdown();
+
+	m_d2dRenderer.ShutDown();
 }
 
 void WinApp::Run()
@@ -128,6 +132,7 @@ void WinApp::Update()
 
 	SceneManager::Get().CheckSceneChanged();
 
+	SoundManager::Get().Update();
 	// [Tip] Scene Enter/이전 프레임에 생성된 오브젝트(GameObject, Component)들 초기화
 	SceneManager::Get().InitializeObjects();
 
@@ -162,6 +167,10 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Script().CallLateUpdate();
 
+	ImGuiSystem::Get().BeginDrawImGui();
+
+	ImGuiSystem::Get().DrawImGui();
+
 	Object::UpdateDelayDestroy();
 
 	// [Tip] 이번 프레임에 파괴된 오브젝트(GameObject, Component)들 정리
@@ -180,9 +189,13 @@ void WinApp::Render()
 
 	m_d2dRenderer.ExecuteRenderQueue();
 
-//#ifdef _DEBUG
-	ComponentSystem::Get().Physics().RenderColliders();
-//#endif // _DEBUG
+#ifdef _DEBUG
+	
+	ComponentSystem::Get().Script().CallOnRender();//
+
+	ComponentSystem::Get().Physics().RenderColliders();//
+
+#endif // _DEBUG
 
 	m_d2dRenderer.EndDraw();
 }

@@ -14,9 +14,10 @@ private:
 	std::unordered_map<std::wstring, std::weak_ptr<SpriteSheet>> m_spriteSheets;
 	std::unordered_map<std::wstring, std::weak_ptr<AnimationClip>> m_animationClips;
 
-	//std::queue<std::pair<float, std::shared_ptr<BitmapResource>>> m_shortCachedBitmapResources;
+	std::queue<std::pair<float, std::shared_ptr<BitmapResource>>> m_shortCachedBitmapResources;
 
 	std::wstring m_resourcePath;
+	std::string m_resourcePathA;
 
 	float m_resourceTimer = 0.0f;
 
@@ -41,15 +42,18 @@ public:
 	void Release();
 	void ReleaseResources();
 
+	std::wstring GetResourcePath() const;
+	std::string GetResourcePathA() const;
+
 public:
 	std::shared_ptr<BitmapResource> CreateBitmapResource(const std::wstring& filePath);
 	std::shared_ptr<SpriteSheet> CreateSpriteSheet(const std::wstring& filePath);
 	std::shared_ptr<AnimationClip> CreateAnimationClip(const std::wstring& filePath,
-		std::shared_ptr<SpriteSheet>& spriteSheet);
+		std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets);
 
 private:
 	HRESULT LoadSpriteSheet(const std::wstring& filePath, std::shared_ptr<SpriteSheet>& spriteSheet);
 	HRESULT LoadAnimationClip(const std::wstring& filePath,
 		std::shared_ptr<AnimationClip>& animationClip,
-		std::shared_ptr<SpriteSheet>& spriteSheet);
+		std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets);
 };

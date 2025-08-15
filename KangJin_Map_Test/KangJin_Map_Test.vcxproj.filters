@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="00_App">
+      <UniqueIdentifier>{8878a767-094b-44e1-8f6b-d1dca7c3c82a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene">
+      <UniqueIdentifier>{915674e6-e84a-4c1a-95d2-7e3a698a280b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script">
+      <UniqueIdentifier>{ee4f8d63-b36b-4d19-981a-64afcb3440d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04_Component">
+      <UniqueIdentifier>{c9537e95-b113-4ad8-a2f8-fcbc85641d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Structure">
+      <UniqueIdentifier>{b63f1059-07d1-425d-b16f-72b97f4a406f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Structure\Buildings">
+      <UniqueIdentifier>{cb8c77e4-3218-4978-b6ce-bec8eb1e2e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Manager">
+      <UniqueIdentifier>{3d3d6839-5779-4777-83b9-59b6de0df1b6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DemoGameApp.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="KangJin_Map_Test.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="KangJinTestScene.h">
+      <Filter>01_Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Objectimgui.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Structure.h">
+      <Filter>02_Script\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="StructureCreater.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDataManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthGaugeController.h">
+      <Filter>03_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IngameGaugeController.h">
+      <Filter>03_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnergyGaugeController.h">
+      <Filter>03_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EngineBreakers\EnergyGaugeController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps.h">
+      <Filter>02_Script</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DemoGameApp.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="KangJin_Map_Test.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="KangJinTestScene.cpp">
+      <Filter>01_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Objectimgui.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Structure.cpp">
+      <Filter>02_Script\Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="StructureCreater.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthGaugeController.cpp">
+      <Filter>03_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="IngameGaugeController.cpp">
+      <Filter>03_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="EnergyGaugeController.cpp">
+      <Filter>03_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Maps.cpp">
+      <Filter>02_Script</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="KangJin_Map_Test.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="KangJin_Map_Test.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

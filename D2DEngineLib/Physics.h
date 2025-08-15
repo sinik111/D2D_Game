@@ -88,6 +88,25 @@ public:
 
 	static Projection ProjectPolygon(const Vector2* vertices, int numVertices, const Vector2& axis);
 	static Vector2 GetClosestPointOnLineSegment(const Vector2& point, const LineSegment& segment, float& t_out);
+	static Vector2 GetClosestPointOnLineSegment(const Vector2& point, const Vector2& start, const Vector2& end)
+	{
+		Vector2 segmentVector = end - start;
+		Vector2 pointToStart = point - start;
+
+		float segmentLengthSq = segmentVector.LengthSq();
+
+		if (segmentLengthSq < 0.000001f)
+		{
+			return start;
+		}
+
+		float t = Vector2::Dot(pointToStart, segmentVector) / segmentLengthSq;
+
+		if (t < 0.0f) t = 0.0f;
+		else if (t > 1.0f) t = 1.0f;
+
+		return start + segmentVector * t;
+	}
 
 	static void ResolveCollision(const CollisionInfo& info);
 };

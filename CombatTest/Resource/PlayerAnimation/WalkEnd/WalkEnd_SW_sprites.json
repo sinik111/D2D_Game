@@ -1,0 +1,43 @@
+{
+    "name": "PlayerAnimation/WalkEnd/WalkEnd_SW.png",
+    "width": 840,
+    "height": 203,
+    "sprites": [
+        {
+            "name": "WalkEnd_225_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 210.0,
+            "height": 203.0,
+            "pivotX": 0.718999981880188,
+            "pivotY": 0.7585999965667725
+        },
+        {
+            "name": "WalkEnd_225_001",
+            "x": 210.0,
+            "y": 0.0,
+            "width": 210.0,
+            "height": 203.0,
+            "pivotX": 0.718999981880188,
+            "pivotY": 0.7585999965667725
+        },
+        {
+            "name": "WalkEnd_225_002",
+            "x": 420.0,
+            "y": 0.0,
+            "width": 210.0,
+            "height": 203.0,
+            "pivotX": 0.718999981880188,
+            "pivotY": 0.7585999965667725
+        },
+        {
+            "name": "WalkEnd_225_003",
+            "x": 630.0,
+            "y": 0.0,
+            "width": 210.0,
+            "height": 203.0,
+            "pivotX": 0.718999981880188,
+            "pivotY": 0.7585999965667725
+        }
+    ]
+}

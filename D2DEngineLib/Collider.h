@@ -24,13 +24,13 @@ protected:
 	Transform* m_transform = nullptr;
 	RigidBody2D* m_rigidBody2d = nullptr;
 
-	std::vector<Script*> m_scriptsForCallBack;
+	std::unordered_set<Script*> m_scriptsForCallBack;
 
 	Bounds m_spatialBounds; // 쿼드트리 공간 분할용 AABB
 
 	Vector2 m_offset;
 
-	CollisionLayer m_layer;
+	CollisionLayer m_layer = CollisionLayer::None;
 
 	std::vector<QuadtreeNode*> m_belongingNodes;
 
@@ -58,7 +58,7 @@ public:
 	Bounds GetSpatialBounds() const;
 	CollisionLayer GetLayer() const;
 	std::vector<QuadtreeNode*>& GetBelongingNode();
-	Vector2 GetOffset() const;
+	const Vector2& GetOffset() const;
 
 	void Update();
 	virtual void UpdateCollider() = 0;

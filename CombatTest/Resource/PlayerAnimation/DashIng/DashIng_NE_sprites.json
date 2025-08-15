@@ -1,0 +1,16 @@
+{
+    "name": "PlayerAnimation/DashIng/DashIng_NE.png",
+    "width": 193,
+    "height": 186,
+    "sprites": [
+        {
+            "name": "DashIng_45_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 193.0,
+            "height": 186.0,
+            "pivotX": 0.42489999532699585,
+            "pivotY": 0.7634000182151794
+        }
+    ]
+}

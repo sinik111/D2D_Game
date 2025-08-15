@@ -1,0 +1,115 @@
+{
+    "name": "EliteEnemy/EliteEnemyHorizontalAttack001/EliteEnemyHorizontalAttack001_SW.png",
+    "width": 3684,
+    "height": 253,
+    "sprites": [
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_001",
+            "x": 307.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_002",
+            "x": 614.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_003",
+            "x": 921.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_004",
+            "x": 1228.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_005",
+            "x": 1535.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_006",
+            "x": 1842.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_007",
+            "x": 2149.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_008",
+            "x": 2456.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_009",
+            "x": 2763.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_010",
+            "x": 3070.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        },
+        {
+            "name": "EliteEnemyHorizontalAttack001_225_011",
+            "x": 3377.0,
+            "y": 0.0,
+            "width": 307.0,
+            "height": 253.0,
+            "pivotX": 0.5960999727249146,
+            "pivotY": 0.6916999816894531
+        }
+    ]
+}

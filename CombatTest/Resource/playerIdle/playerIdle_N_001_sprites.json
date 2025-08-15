@@ -1,0 +1,547 @@
+{
+    "name": "playerIdle_N_001.png",
+    "width": 16128,
+    "height": 2304,
+    "sprites": [
+        {
+            "name": "playerIdle_N_001_0",
+            "x": 328.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_1",
+            "x": 1096.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_2",
+            "x": 1864.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_3",
+            "x": 2632.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_4",
+            "x": 3400.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_5",
+            "x": 4168.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_6",
+            "x": 4936.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_7",
+            "x": 5704.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_8",
+            "x": 6472.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_9",
+            "x": 7240.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_10",
+            "x": 8008.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_11",
+            "x": 8776.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_12",
+            "x": 9544.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_13",
+            "x": 10312.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_14",
+            "x": 11080.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_15",
+            "x": 11848.0,
+            "y": 220.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_16",
+            "x": 12615.0,
+            "y": 220.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_17",
+            "x": 13383.0,
+            "y": 219.0,
+            "width": 121.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_18",
+            "x": 14151.0,
+            "y": 219.0,
+            "width": 121.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_19",
+            "x": 14919.0,
+            "y": 219.0,
+            "width": 121.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_20",
+            "x": 15687.0,
+            "y": 219.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_21",
+            "x": 327.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_22",
+            "x": 1095.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_23",
+            "x": 1863.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_24",
+            "x": 2631.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_25",
+            "x": 3399.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_26",
+            "x": 4167.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_27",
+            "x": 4935.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_28",
+            "x": 5703.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_29",
+            "x": 6471.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_30",
+            "x": 7239.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_31",
+            "x": 8007.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_32",
+            "x": 8775.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_33",
+            "x": 9543.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_34",
+            "x": 10311.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_35",
+            "x": 11079.0,
+            "y": 987.0,
+            "width": 120.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_36",
+            "x": 11848.0,
+            "y": 987.0,
+            "width": 119.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_37",
+            "x": 12616.0,
+            "y": 987.0,
+            "width": 119.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_38",
+            "x": 13384.0,
+            "y": 987.0,
+            "width": 119.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_39",
+            "x": 14152.0,
+            "y": 987.0,
+            "width": 119.0,
+            "height": 189.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_40",
+            "x": 14920.0,
+            "y": 988.0,
+            "width": 119.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_41",
+            "x": 15688.0,
+            "y": 988.0,
+            "width": 119.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_42",
+            "x": 328.0,
+            "y": 1756.0,
+            "width": 119.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_43",
+            "x": 1096.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_44",
+            "x": 1864.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_45",
+            "x": 2632.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_46",
+            "x": 3400.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_47",
+            "x": 4168.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_48",
+            "x": 4936.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_49",
+            "x": 5704.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_50",
+            "x": 6472.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_51",
+            "x": 7240.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_52",
+            "x": 8008.0,
+            "y": 1756.0,
+            "width": 120.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_53",
+            "x": 8776.0,
+            "y": 1756.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_54",
+            "x": 9544.0,
+            "y": 1756.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_55",
+            "x": 10312.0,
+            "y": 1756.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_56",
+            "x": 11080.0,
+            "y": 1756.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_57",
+            "x": 11848.0,
+            "y": 1756.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_58",
+            "x": 12616.0,
+            "y": 1756.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "playerIdle_N_001_59",
+            "x": 13384.0,
+            "y": 1756.0,
+            "width": 121.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

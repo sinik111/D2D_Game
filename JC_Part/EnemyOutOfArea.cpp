@@ -2,20 +2,30 @@
 #include "../D2DEngineLib/Animator.h"
 #include "../D2DEngineLib/TextRenderer.h"
 
+#include <iostream>
+
 #include "EnemyOutOfArea.h"
 
 
 void EnemyOutOfArea::Enter(FSMContext& context)
 {
-	
+	m_Script->StopMoving();
+	m_Script->SetAngleByDirection(Direction());
 }
 
 void EnemyOutOfArea::Update(FSMContext& context) 
-{	
-	CheckCameraArea();
+{		
+	
+	if (IsInCamera())
+	{ 
+		context.intParams[L"NextEnemyState"] = EnemyBase::INAREA; 
+	}
 
-	if (IsInCamera())	{ context.intParams[L"NextEnemyState"] = EnemyBase::INAREA; }
 
+	if (Vector2::Distance(Pos(), OriginPos()) > MaxRoamDistance())
+	{
+		context.intParams[L"NextEnemyState"] = EnemyBase::RETURN;
+	}
 
 }
 

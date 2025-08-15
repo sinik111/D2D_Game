@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00_App">
+      <UniqueIdentifier>{5426d14e-4cb1-42d7-b13e-a18af874fc40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene">
+      <UniqueIdentifier>{ecb0079d-03bd-41ee-b900-aae3acd39290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script">
+      <UniqueIdentifier>{d5b40705-0c9c-4dab-a322-60b7715f3140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\Main">
+      <UniqueIdentifier>{5fd4b2bc-4551-4987-ae63-6228e649ebcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Shared">
+      <UniqueIdentifier>{910e61ef-a616-4779-bb90-5ea394bafd75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Manager">
+      <UniqueIdentifier>{d03d6807-6be1-414e-bf58-03c3ca2c44c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI">
+      <UniqueIdentifier>{04099ce5-c0bd-4031-a496-223408216300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\MainMenu">
+      <UniqueIdentifier>{f19526bf-cee9-4a63-af7c-d6c79d850690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\MainTitle">
+      <UniqueIdentifier>{77aa885b-cdba-46d2-8467-c4d0b4fb406e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\Guide">
+      <UniqueIdentifier>{cb46450e-357e-4840-b0d9-5cfc38d5387b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\Ranking">
+      <UniqueIdentifier>{4a1925cb-4179-4db7-a4ca-39318d58b739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\Setting">
+      <UniqueIdentifier>{d124299b-0bde-4b93-9fb2-ef1c9c6a22c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\RecordScore">
+      <UniqueIdentifier>{47952cdb-8ea8-46e6-8ca9-3dd406423505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\RecordScoreUI">
+      <UniqueIdentifier>{f850141a-95c5-470c-9a6a-748b7197d979}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWorkspaceApp.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTitle.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenCurtainController.cpp">
+      <Filter>02_Script\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTitleSceneChanger.cpp">
+      <Filter>02_Script\MainUI\MainTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuSceneController.cpp">
+      <Filter>02_Script\MainUI\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Ranking.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RankingViewer.cpp">
+      <Filter>02_Script\MainUI\Ranking</Filter>
+    </ClCompile>
+    <ClCompile Include="Setting.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SFXVolumeController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterVolumeController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="BGMVolumeController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuSettingController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="GameDataManager.cpp">
+      <Filter>03_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GuideSceneController.cpp">
+      <Filter>02_Script\MainUI\Guide</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeControllerBase.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="Guide.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordScore.cpp">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultRanking.cpp">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultScoreViewer.cpp">
+      <Filter>02_Script\RecordScoreUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordNameInputController.cpp">
+      <Filter>02_Script\RecordScoreUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultRankingViewer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UIWorkspaceApp.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTitle.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenCurtainController.h">
+      <Filter>02_Script\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTitleSceneChanger.h">
+      <Filter>02_Script\MainUI\MainTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuSceneController.h">
+      <Filter>02_Script\MainUI\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Ranking.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RankingViewer.h">
+      <Filter>02_Script\MainUI\Ranking</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="SFXVolumeController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterVolumeController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="BGMVolumeController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuSettingController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDataManager.h">
+      <Filter>03_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GuideSceneController.h">
+      <Filter>02_Script\MainUI\Guide</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumeControllerBase.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="Guide.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordScore.h">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultRanking.h">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultScoreViewer.h">
+      <Filter>02_Script\RecordScoreUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RankingUtility.h">
+      <Filter>02_Script\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordNameInputController.h">
+      <Filter>02_Script\RecordScoreUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultRankingViewer.h" />
+  </ItemGroup>
+</Project>

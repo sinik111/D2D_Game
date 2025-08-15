@@ -1,0 +1,68 @@
+{
+    "name": "HeavyAttack 1_S",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/HeavyAttack/HeavyAttack 1.png",
+    "duration": 1.0,
+    "frames": [
+        {
+            "sprite": "HeavyAttack 1_S_049",
+            "time": 0.0
+        },
+        {
+            "sprite": "HeavyAttack 1_S_050",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "HeavyAttack 1_S_051",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "HeavyAttack 1_S_052",
+            "time": 0.25
+        },
+        {
+            "sprite": "HeavyAttack 1_S_053",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "HeavyAttack 1_S_054",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "HeavyAttack 1_S_055",
+            "time": 0.5
+        },
+        {
+            "sprite": "HeavyAttack 1_S_056",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "HeavyAttack 1_S_057",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "HeavyAttack 1_S_058",
+            "time": 0.75
+        },
+        {
+            "sprite": "HeavyAttack 1_S_059",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "HeavyAttack 1_S_060",
+            "time": 0.9166666865348816
+        }
+    ],
+        "events": [
+        {
+            "name": "AttackTry1st",
+            "parameter": "",
+            "time": 0.5
+        },
+        {
+            "name": "AttackTry2nd3rd",
+            "parameter": "",
+            "time": 0.6666666865348816
+        }
+    ]
+}

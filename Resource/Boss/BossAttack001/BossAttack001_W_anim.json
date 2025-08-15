@@ -1,0 +1,241 @@
+{
+    "name": "BossAttack001_W",
+    "isLoop": false,
+    "filePath": "Boss/BossAttack001/BossAttack001.png",
+    "duration": 4.500000476837158,
+    "frames": [
+        {
+            "sprite": "BossAttack001_W_379",
+            "time": 0.0
+        },
+        {
+            "sprite": "BossAttack001_W_380",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "BossAttack001_W_381",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "BossAttack001_W_382",
+            "time": 0.25
+        },
+        {
+            "sprite": "BossAttack001_W_383",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "BossAttack001_W_384",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "BossAttack001_W_385",
+            "time": 0.5
+        },
+        {
+            "sprite": "BossAttack001_W_386",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "BossAttack001_W_387",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "BossAttack001_W_388",
+            "time": 0.75
+        },
+        {
+            "sprite": "BossAttack001_W_389",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "BossAttack001_W_390",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "BossAttack001_W_391",
+            "time": 1.0
+        },
+        {
+            "sprite": "BossAttack001_W_392",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "BossAttack001_W_393",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "BossAttack001_W_394",
+            "time": 1.25
+        },
+        {
+            "sprite": "BossAttack001_W_395",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "BossAttack001_W_396",
+            "time": 1.4166667461395264
+        },
+        {
+            "sprite": "BossAttack001_W_397",
+            "time": 1.5
+        },
+        {
+            "sprite": "BossAttack001_W_398",
+            "time": 1.5833333730697632
+        },
+        {
+            "sprite": "BossAttack001_W_399",
+            "time": 1.6666667461395264
+        },
+        {
+            "sprite": "BossAttack001_W_400",
+            "time": 1.75
+        },
+        {
+            "sprite": "BossAttack001_W_401",
+            "time": 1.8333333730697632
+        },
+        {
+            "sprite": "BossAttack001_W_402",
+            "time": 1.9166667461395264
+        },
+        {
+            "sprite": "BossAttack001_W_403",
+            "time": 2.0
+        },
+        {
+            "sprite": "BossAttack001_W_404",
+            "time": 2.0833334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_405",
+            "time": 2.1666667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_406",
+            "time": 2.25
+        },
+        {
+            "sprite": "BossAttack001_W_407",
+            "time": 2.3333334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_408",
+            "time": 2.4166667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_409",
+            "time": 2.5
+        },
+        {
+            "sprite": "BossAttack001_W_410",
+            "time": 2.5833334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_411",
+            "time": 2.6666667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_412",
+            "time": 2.75
+        },
+        {
+            "sprite": "BossAttack001_W_413",
+            "time": 2.8333334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_414",
+            "time": 2.9166667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_415",
+            "time": 3.0
+        },
+        {
+            "sprite": "BossAttack001_W_416",
+            "time": 3.0833334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_417",
+            "time": 3.1666667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_418",
+            "time": 3.25
+        },
+        {
+            "sprite": "BossAttack001_W_419",
+            "time": 3.3333334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_420",
+            "time": 3.4166667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_421",
+            "time": 3.5
+        },
+        {
+            "sprite": "BossAttack001_W_422",
+            "time": 3.5833334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_423",
+            "time": 3.6666667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_424",
+            "time": 3.75
+        },
+        {
+            "sprite": "BossAttack001_W_425",
+            "time": 3.8333334922790529
+        },
+        {
+            "sprite": "BossAttack001_W_426",
+            "time": 3.9166667461395265
+        },
+        {
+            "sprite": "BossAttack001_W_427",
+            "time": 4.0
+        },
+        {
+            "sprite": "BossAttack001_W_428",
+            "time": 4.083333492279053
+        },
+        {
+            "sprite": "BossAttack001_W_429",
+            "time": 4.1666669845581059
+        },
+        {
+            "sprite": "BossAttack001_W_430",
+            "time": 4.25
+        },
+        {
+            "sprite": "BossAttack001_W_431",
+            "time": 4.333333492279053
+        },
+        {
+            "sprite": "BossAttack001_W_432",
+            "time": 4.4166669845581059
+        }
+    ],
+        "events": [
+        {
+            "name": "HorizontalAttack1",
+            "parameter": "",
+            "time": 0.9166666865348816
+        },
+        {
+            "name": "HorizontalAttack2",
+            "parameter": "",
+            "time": 2.0
+        },
+        {
+            "name": "HorizontalAttack3",
+            "parameter": "",
+            "time": 3.5833334922790529
+        }
+    ]
+}

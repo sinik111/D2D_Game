@@ -22,6 +22,7 @@ private:
 	virtual void FixedUpdate();
 	virtual void Update();
 	virtual void LateUpdate();
+	virtual void OnRender();
 	virtual void OnDestroy();
 
 	virtual void OnCollisionEnter(const Collision& collision);

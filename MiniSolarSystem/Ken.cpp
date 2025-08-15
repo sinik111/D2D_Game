@@ -46,7 +46,7 @@ void Ken::Start()
 
 	// [Tip] Animator Component »ç¿ë¹ý
 
-	m_animator->SetSpriteSheet(L"ken_sprites.json");
+	m_animator->AddSpriteSheet(L"ken_sprites.json");
 	m_animator->AddAnimationClip(L"ken_idle_anim.json");
 	m_animator->AddAnimationClip(L"ken_front_dash_anim.json");
 	m_animator->AddAnimationClip(L"ken_back_dash_anim.json");

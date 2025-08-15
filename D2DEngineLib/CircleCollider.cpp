@@ -17,6 +17,11 @@ void CircleCollider::SetRadius(float radius)
     m_isColliderDirty = true;
 }
 
+void CircleCollider::SetCircle(const Circle& circle)
+{
+    m_circle = circle;
+}
+
 void CircleCollider::Render()
 {
     D2D1_COLOR_F color;

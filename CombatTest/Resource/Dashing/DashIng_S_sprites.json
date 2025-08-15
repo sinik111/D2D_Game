@@ -1,0 +1,16 @@
+{
+    "name": "DashIng_S.png",
+    "width": 134,
+    "height": 215,
+    "sprites": [
+        {
+            "name": "DashIng_270_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 134.0,
+            "height": 215.0,
+            "pivotX": 0.6342999935150147,
+            "pivotY": 0.6186000108718872
+        }
+    ]
+}

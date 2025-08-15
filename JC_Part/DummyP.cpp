@@ -1,6 +1,7 @@
 #include "../D2DEngineLib/framework.h"
 #include "DummyP.h"
 #include "DummyIdle.h"
+#include "DummyPlayerAttack.h"
 
 #include <limits>
 #include <iostream>
@@ -15,10 +16,13 @@
 #include "../D2DEngineLib/TextRenderer.h"
 #include "../D2DEngineLib/FSMContext.h"
 
+#include "../D2DEngineLib/ConeCollider2D.h"
+
+
 
 
 void DummyP::Initialize()
-{
+{	
 	m_playerInput = GetGameObject()->GetComponent<PlayerInput>();
 	
 	//m_animator = GetGameObject()->GetComponent<Animator>();
@@ -26,8 +30,6 @@ void DummyP::Initialize()
 
 	m_rigidBody = GetGameObject()->GetComponent<RigidBody2D>();
 	m_text = GetGameObject()->GetComponent<TextRenderer>();
-	
-
 	
 	m_text->SetFontSize(15.f);
 	m_text->SetHorizontalAlignment(HorizontalAlignment::Center);
@@ -41,30 +43,18 @@ void DummyP::Initialize()
 	//콜라이더
 	//m_collider = GetGameObject()->GetComponent<BoxCollider2D>();
 
+	m_moveSpeed = 500.0f;
+
 }
 
 void DummyP::Start()
 {
+	m_playerInput->RegisterDirectionAction(DirectionInputType::Arrow, this, &DummyP::ArrowInput);
 
 	m_playerInput->RegisterActionOnKey('U', KeyState::Pressed, this, &DummyP::Attack);
-
-	//m_playerInput->RegisterActionOnKey('I', KeyState::Pressed, this, &DummyP::Evade);
-	//m_playerInput->RegisterActionOnKey('O', KeyState::Pressed, this, &DummyP::Fatality);
-	//m_playerInput->RegisterActionOnKey('P', KeyState::Pressed, this, &DummyP::Parried);
-
-	//m_animator->SetSpriteSheet(L"EnemyBase_sprites.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_UP_anim.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_DOWN_anim.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_LEFT_anim.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_RIGHT_anim.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_RIGHT_UP_anim.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_RIGHT_DOWN_anim.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_LEFT_UP_anim.json");
-	//m_animator->AddAnimationClip(L"EnemyBase_Move_LEFT_DOWN_anim.json");
-
-	m_context.gameObject = GetGameObject();
 	
-	//m_context.animator = m_animator;
+	m_context.gameObject = GetGameObject();	
+	
 	m_context.bitmapRenderer = m_bitmapRenderer;
 
 	m_context.transform = GetTransform();
@@ -72,16 +62,17 @@ void DummyP::Start()
 	m_context.rigidBody2d = m_rigidBody;
 	m_context.textRenderer = m_text;
 	
+	m_context.floatParams[L"HorizontalInput"] = 0.0f;
+	m_context.floatParams[L"VerticalInput"] = 0.0f;
+
 	m_context.intParams[L"Direction"] = 2;	
 	m_rigidBody->SetGravityScale(0.0f);
 
 	m_text->SetText(L"[Dummy Player]");
-	//m_rigidBody->SetPosition({ 500.0f, 200.0f });
-	
 
+	m_rigidBody->SetPosition({ 0.0f, 0.0f });	
 
-	m_fsm.AddState<DummyIdle>(L"Idle", false);
-	
+	m_fsm.AddState<DummyIdle>(L"Idle", false);	
 	m_fsm.SetState(L"Idle", m_context);
 
 
@@ -97,12 +88,63 @@ void DummyP::FixedUpdate()
 
 void DummyP::Update()
 {
-	
+	MoveByArrowInput();	
 }
 
 void DummyP::Attack()
 {
-	std::cout << "어택" << std::endl;
+	auto dpAttack = CreateGameObject(L"DummyPlayerAttack");
+
+	Vector2 playerPos = GetGameObject()->GetTransform()->GetLocalPosition();	
+
+	auto attackColliderPosition = playerPos + (m_inputDirection * 60.0f);
+
+	dpAttack->GetTransform()->SetLocalPosition(attackColliderPosition);
+
+	auto comp = dpAttack->AddComponent<DummyPlayerAttack>(this);
+	comp->SetTextDirection(Vector2::EllipseLeftDown);
+
+	auto collider = dpAttack->AddComponent<ConeCollider2D>();
+	collider->SetLayer(CollisionLayer::EnemyAttack);
+	collider->SetCone(200.0f * Vector2::EllipseLeftDown.Length(), m_inputDirection, 100.0f);
+	collider->SetTrigger(true);
+	collider->SetLayer(CollisionLayer::PlayerAttack);
+
+	auto rb = dpAttack->AddComponent<RigidBody2D>();
+	rb->SetGravityScale(0.0f);
+}
+
+
+void DummyP::ArrowInput(Vector2 input)
+{
+	m_context.floatParams[L"HorizontalInput"] = input.x;
+	m_context.floatParams[L"VerticalInput"] = input.y;
+}
+
+
+void DummyP::MoveByArrowInput()
+{
+	if (!m_rigidBody || !m_context.floatParams.count(L"HorizontalInput")) return;
+
+	float horizontalInput = m_context.floatParams[L"HorizontalInput"];
+	float verticalInput = m_context.floatParams[L"VerticalInput"];
+
+	Vector2 dir(horizontalInput, verticalInput);
+
+	
+	if (dir == Vector2::Zero) 
+	{
+		m_rigidBody->SetVelocity(Vector2::Zero); 
+		return;
+	}
+
+	dir.Normalize();
+			
+	Vector2 velocity = dir * m_moveSpeed;
+		
+	m_rigidBody->SetVelocity(velocity);
+
+	m_inputDirection = dir;
 }
 
 
@@ -110,25 +152,23 @@ void DummyP::Attack()
 void DummyP::SetDirectionByRotation(float angle)
 {
 	// atan2는 y 먼저, x 나중	
-	rotationAngle = angle;
+	m_rotationAngle = angle;	
 
-	std::cout << angle << std::endl;
+	if (m_rotationAngle < 0.0f) m_rotationAngle += 360.0f;
 
-	if (rotationAngle < 0.0f) rotationAngle += 360.0f;
-
-	float& degree = rotationAngle;
+	float& degree = m_rotationAngle;
 
 	// 시계방향으로 8방향 판정. 0도가 UP, 180도가 DOWN
-	if (degree >= 337.5 || degree < 22.5)  direction = Dir::UP; // ↑
-	if (degree >= 22.5 && degree < 67.5) direction = Dir::RIGHT_UP; // ↗
-	if (degree >= 67.5 && degree < 112.5)  direction = Dir::RIGHT; // →
-	if (degree >= 112.5 && degree < 157.5)   direction = Dir::RIGHT_DOWN; // ↘
-	if (degree >= 157.5 && degree < 202.5)  direction = Dir::DOWN; // ↓
-	if (degree >= 202.5 && degree < 247.5)  direction = Dir::LEFT_DOWN; // ↙
-	if (degree >= 247.5 && degree < 292.5) direction = Dir::LEFT; // ←
-	if (degree >= 292.5 && degree < 337.5) direction = Dir::LEFT_UP; // ↖
+	if (degree >= 337.5 || degree < 22.5)  m_direction = Dir::UP; // ↑
+	if (degree >= 22.5 && degree < 67.5) m_direction = Dir::RIGHT_UP; // ↗
+	if (degree >= 67.5 && degree < 112.5)  m_direction = Dir::RIGHT; // →
+	if (degree >= 112.5 && degree < 157.5)   m_direction = Dir::RIGHT_DOWN; // ↘
+	if (degree >= 157.5 && degree < 202.5)  m_direction = Dir::DOWN; // ↓
+	if (degree >= 202.5 && degree < 247.5)  m_direction = Dir::LEFT_DOWN; // ↙
+	if (degree >= 247.5 && degree < 292.5) m_direction = Dir::LEFT; // ←
+	if (degree >= 292.5 && degree < 337.5) m_direction = Dir::LEFT_UP; // ↖
 
-	m_context.intParams[L"Direction"] = direction;
+	m_context.intParams[L"Direction"] = m_direction;
 }
 
 

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{1a284bc7-e47d-45f6-91e1-5b51afb1089e}</ProjectGuid>
+    <RootNamespace>EngineBreakers</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="BGMVolumeController.cpp" />
+    <ClCompile Include="Credit.cpp" />
+    <ClCompile Include="CreditSceneController.cpp" />
+    <ClCompile Include="EnemyBoss.cpp" />
+    <ClCompile Include="EnemyCreater.cpp" />
+    <ClCompile Include="EnemyElite.cpp" />
+    <ClCompile Include="EventChecker.cpp" />
+    <ClCompile Include="GameOverController.cpp" />
+    <ClCompile Include="InGameUIInfoController.cpp" />
+    <ClCompile Include="PauseController.cpp" />
+    <ClCompile Include="PlayerAttackExplosionEffect.cpp" />
+    <ClCompile Include="PlayerDashDustEffect.cpp" />
+    <ClCompile Include="PlayerJumpDownState.cpp" />
+    <ClCompile Include="StaminaGaugeController.cpp" />
+    <ClCompile Include="EnemyBase.cpp" />
+    <ClCompile Include="EnemyBaseAttack.cpp" />
+    <ClCompile Include="EnemyDead.cpp" />
+    <ClCompile Include="EnemyEngage.cpp" />
+    <ClCompile Include="EnemyEvadeAndRun.cpp" />
+    <ClCompile Include="EnemyGrabbed.cpp" />
+    <ClCompile Include="EnemyHitAndRun.cpp" />
+    <ClCompile Include="EnemyInArea.cpp" />
+    <ClCompile Include="EnemyInteract.cpp" />
+    <ClCompile Include="EnemyKnockdown.cpp" />
+    <ClCompile Include="EnemyOnAttack.cpp" />
+    <ClCompile Include="EnemyOnAttackSecond.cpp" />
+    <ClCompile Include="EnemyOnAttackThird.cpp" />
+    <ClCompile Include="EnemyOnEvade.cpp" />
+    <ClCompile Include="EnemyOutOfArea.cpp" />
+    <ClCompile Include="EnemyReturn.cpp" />
+    <ClCompile Include="EnemySlowTurn.cpp" />
+    <ClCompile Include="EnemyState.cpp" />
+    <ClCompile Include="EnemyZako.cpp" />
+    <ClCompile Include="EngineBreakers.cpp" />
+    <ClCompile Include="FollowCameraController.cpp" />
+    <ClCompile Include="GameDataManager.cpp" />
+    <ClCompile Include="GamePlayScene.cpp" />
+    <ClCompile Include="Guide.cpp" />
+    <ClCompile Include="GuideSceneController.cpp" />
+    <ClCompile Include="HealthGaugeController.cpp" />
+    <ClCompile Include="IngameGaugeController.cpp" />
+    <ClCompile Include="HitStopController.cpp" />
+    <ClCompile Include="ImageDrawer.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MainMenuSceneController.cpp" />
+    <ClCompile Include="MainMenuSettingController.cpp" />
+    <ClCompile Include="MainTitle.cpp" />
+    <ClCompile Include="MainTitleSceneChanger.cpp" />
+    <ClCompile Include="Maps.cpp" />
+    <ClCompile Include="MasterVolumeController.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCameraController.cpp" />
+    <ClCompile Include="PlayerDashState.cpp" />
+    <ClCompile Include="PlayerDeadState.cpp" />
+    <ClCompile Include="PlayerEvadeState.cpp" />
+    <ClCompile Include="PlayerKnockdownCheck.cpp" />
+    <ClCompile Include="PlayerGrabAttackState.cpp" />
+    <ClCompile Include="PlayerHeavyAttack.cpp" />
+    <ClCompile Include="PlayerHeavyAttackState.cpp" />
+    <ClCompile Include="PlayerHeavyAttackTwiceState.cpp" />
+    <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerJumpState.cpp" />
+    <ClCompile Include="PlayerKnockbackState.cpp" />
+    <ClCompile Include="PlayerKnockdownState.cpp" />
+    <ClCompile Include="PlayerNormalAttack.cpp" />
+    <ClCompile Include="PlayerNormalAttackOnceState.cpp" />
+    <ClCompile Include="PlayerNormalAttackThreeTimesState.cpp" />
+    <ClCompile Include="PlayerNormalAttackTwiceState.cpp" />
+    <ClCompile Include="PlayerStateBase.cpp" />
+    <ClCompile Include="PlayerWalkState.cpp" />
+    <ClCompile Include="Ranking.cpp" />
+    <ClCompile Include="RankingViewer.cpp" />
+    <ClCompile Include="RecordNameInputController.cpp" />
+    <ClCompile Include="RecordScore.cpp" />
+    <ClCompile Include="RecordScorePopup.cpp" />
+    <ClCompile Include="ResultRanking.cpp" />
+    <ClCompile Include="ResultRankingViewer.cpp" />
+    <ClCompile Include="ResultScoreViewer.cpp" />
+    <ClCompile Include="ScreenCurtainController.cpp" />
+    <ClCompile Include="Setting.cpp" />
+    <ClCompile Include="SFXVolumeController.cpp" />
+    <ClCompile Include="Structure.cpp" />
+    <ClCompile Include="VolumeControllerBase.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AttackStateEnum.h" />
+    <ClInclude Include="BGMVolumeController.h" />
+    <ClInclude Include="Credit.h" />
+    <ClInclude Include="CreditSceneController.h" />
+    <ClInclude Include="EnemyBoss.h" />
+    <ClInclude Include="EnemyCreater.h" />
+    <ClInclude Include="EnemyElite.h" />
+    <ClInclude Include="EventChecker.h" />
+    <ClInclude Include="GameOverController.h" />
+    <ClInclude Include="InGameUIInfoController.h" />
+    <ClInclude Include="PauseController.h" />
+    <ClInclude Include="PlayerAttackExplosionEffect.h" />
+    <ClInclude Include="PlayerDashDustEffect.h" />
+    <ClInclude Include="PlayerJumpDownState.h" />
+    <ClInclude Include="StaminaGaugeController.h" />
+    <ClInclude Include="EnemyBase.h" />
+    <ClInclude Include="EnemyBaseAttack.h" />
+    <ClInclude Include="EnemyDead.h" />
+    <ClInclude Include="EnemyEngage.h" />
+    <ClInclude Include="EnemyEvadeAndRun.h" />
+    <ClInclude Include="EnemyGrabbed.h" />
+    <ClInclude Include="EnemyHitAndRun.h" />
+    <ClInclude Include="EnemyInArea.h" />
+    <ClInclude Include="EnemyInteract.h" />
+    <ClInclude Include="EnemyKnockdown.h" />
+    <ClInclude Include="EnemyOnAttack.h" />
+    <ClInclude Include="EnemyOnAttackSecond.h" />
+    <ClInclude Include="EnemyOnAttackThird.h" />
+    <ClInclude Include="EnemyOnEvade.h" />
+    <ClInclude Include="EnemyOutOfArea.h" />
+    <ClInclude Include="EnemyReturn.h" />
+    <ClInclude Include="EnemySlowTurn.h" />
+    <ClInclude Include="EnemyState.h" />
+    <ClInclude Include="EnemyZako.h" />
+    <ClInclude Include="EngineBreakers.h" />
+    <ClInclude Include="FollowCameraController.h" />
+    <ClInclude Include="GameDataManager.h" />
+    <ClInclude Include="GamePlayScene.h" />
+    <ClInclude Include="Guide.h" />
+    <ClInclude Include="GuideSceneController.h" />
+    <ClInclude Include="HealthGaugeController.h" />
+    <ClInclude Include="IngameGaugeController.h" />
+    <ClInclude Include="HitStopController.h" />
+    <ClInclude Include="ImageDrawer.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MainMenuSceneController.h" />
+    <ClInclude Include="MainMenuSettingController.h" />
+    <ClInclude Include="MainTitle.h" />
+    <ClInclude Include="MainTitleSceneChanger.h" />
+    <ClInclude Include="Maps.h" />
+    <ClInclude Include="MasterVolumeController.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCameraController.h" />
+    <ClInclude Include="PlayerDashState.h" />
+    <ClInclude Include="PlayerDeadState.h" />
+    <ClInclude Include="PlayerEvadeState.h" />
+    <ClInclude Include="PlayerKnockdownCheck.h" />
+    <ClInclude Include="PlayerGrabAttackState.h" />
+    <ClInclude Include="PlayerHeavyAttack.h" />
+    <ClInclude Include="PlayerHeavyAttackState.h" />
+    <ClInclude Include="PlayerHeavyAttackTwiceState.h" />
+    <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerJumpState.h" />
+    <ClInclude Include="PlayerKnockbackState.h" />
+    <ClInclude Include="PlayerKnockdownState.h" />
+    <ClInclude Include="PlayerNormalAttack.h" />
+    <ClInclude Include="PlayerNormalAttackOnceState.h" />
+    <ClInclude Include="PlayerNormalAttackThreeTimesState.h" />
+    <ClInclude Include="PlayerNormalAttackTwiceState.h" />
+    <ClInclude Include="PlayerStateBase.h" />
+    <ClInclude Include="PlayerWalkState.h" />
+    <ClInclude Include="Ranking.h" />
+    <ClInclude Include="RankingUtility.h" />
+    <ClInclude Include="RankingViewer.h" />
+    <ClInclude Include="RecordNameInputController.h" />
+    <ClInclude Include="RecordScore.h" />
+    <ClInclude Include="RecordScorePopup.h" />
+    <ClInclude Include="ResultRanking.h" />
+    <ClInclude Include="ResultRankingViewer.h" />
+    <ClInclude Include="ResultScoreViewer.h" />
+    <ClInclude Include="ScreenCurtainController.h" />
+    <ClInclude Include="Setting.h" />
+    <ClInclude Include="SFXVolumeController.h" />
+    <ClInclude Include="Structure.h" />
+    <ClInclude Include="VolumeControllerBase.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\D2DEngineLib\D2DEngineLib.vcxproj">
+      <Project>{640bb9b3-1086-4b8a-9b9c-c72dbee91c55}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

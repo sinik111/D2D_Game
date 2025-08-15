@@ -51,6 +51,11 @@ Scene* SceneManager::GetCurrentScene()
 	return m_currentScene;
 }
 
+const std::wstring& SceneManager::GetPreviousSceneName() const
+{
+	return m_previousSceneName;
+}
+
 void SceneManager::CheckSceneChanged()
 {
 	if (m_nextScene != nullptr)
@@ -62,6 +67,8 @@ void SceneManager::CheckSceneChanged()
 			ComponentSystem::Get().Physics().ClearCollisionPairs();
 
 			m_d2dRenderer->Trim();
+
+			m_previousSceneName = m_currentScene->GetName();
 		}
 		
 		m_currentScene = m_nextScene;

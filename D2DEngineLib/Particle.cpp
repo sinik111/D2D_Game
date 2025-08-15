@@ -40,6 +40,11 @@ void Particle::Update()
 			{
 				m_isFinished = true;
 
+				if (m_isDestroyOnFinish)
+				{
+					Destroy(GetGameObject());
+				}
+
 				return;
 			}
 
@@ -146,6 +151,11 @@ void Particle::SetBitmap(const std::wstring& filePath)
 void Particle::SetSpriteSheet(const std::wstring& filePath)
 {
 	m_sheetPath = filePath;
+}
+
+void Particle::SetDestroyOnFinish(bool isDestroyOnFinish)
+{
+	m_isDestroyOnFinish = isDestroyOnFinish;
 }
 
 void Particle::AddParticleUnit(const ParticleUnit& particleUnit)

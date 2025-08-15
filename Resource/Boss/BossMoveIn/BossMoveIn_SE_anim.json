@@ -1,0 +1,33 @@
+{
+    "name": "BossMoveIn_SE",
+    "isLoop": false,
+    "filePath": "Boss/BossMoveIn/BossMoveIn.png",
+    "duration": 0.5,
+    "frames": [
+        {
+            "sprite": "BossMoveIn_SE_031",
+            "time": 0.0
+        },
+        {
+            "sprite": "BossMoveIn_SE_032",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "BossMoveIn_SE_033",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "BossMoveIn_SE_034",
+            "time": 0.25
+        },
+        {
+            "sprite": "BossMoveIn_SE_035",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "BossMoveIn_SE_036",
+            "time": 0.4166666865348816
+        }
+    ],
+    "events": []
+}

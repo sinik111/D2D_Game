@@ -1,0 +1,97 @@
+{
+    "name": "PlayerAnimation/NormalAttack/NormalAttack_W.png",
+    "width": 2980,
+    "height": 189,
+    "sprites": [
+        {
+            "name": "NormalAttack_180_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_001",
+            "x": 298.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_002",
+            "x": 596.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_003",
+            "x": 894.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_004",
+            "x": 1192.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_005",
+            "x": 1490.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_006",
+            "x": 1788.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_007",
+            "x": 2086.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_008",
+            "x": 2384.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        },
+        {
+            "name": "NormalAttack_180_009",
+            "x": 2682.0,
+            "y": 0.0,
+            "width": 298.0,
+            "height": 189.0,
+            "pivotX": 0.7684999704360962,
+            "pivotY": 0.8253999948501587
+        }
+    ]
+}

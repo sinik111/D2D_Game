@@ -2,6 +2,7 @@
 
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/SceneManager.h"
+#include "../D2DEngineLib/SoundManager.h"
 
 #include "JC_DemoGameApp.h"
 #include "EnemyTestScene.h"
@@ -35,11 +36,13 @@ void JC_DemoGameApp::Initialize()
 	// | (동일위치)
 	// |---> MiniSolarSystem ---> Resource
 	// 
-	// .exe 에서 상위 폴더를 타고 나오면서 L"x64"를 만나면 멈춤.
+	// .exe 에서 상위 폴더를 타고 나오면서 L"Bin"를 만나면 멈춤.
 	// 그리고 거기서 L"MiniSolarSystem/Resource" 안으로 타고 들어감.
 
 	ResourceManager::Get().Initialize(m_d2dRenderer.GetDeviceContext(),
-		m_modulePath, L"x64", L"JC_Part/Resource");
+		m_modulePath, L"Bin", L"JC_Part/Resource");
+
+	SoundManager::Get().Initialize();
 
 	// [Tip] Scene 생성하기. 인자의 name은 SceneChange할 때 쓰이는 key
 	SceneManager::Get().CreateScene<EnemyTestScene>(L"Test");

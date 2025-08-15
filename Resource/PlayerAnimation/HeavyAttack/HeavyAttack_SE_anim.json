@@ -1,0 +1,57 @@
+{
+    "name": "HeavyAttack_SE",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/HeavyAttack/HeavyAttack_SE.png",
+    "duration": 1.0,
+    "frames": [
+        {
+            "sprite": "HeavyAttack_315_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "HeavyAttack_315_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "HeavyAttack_315_002",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "HeavyAttack_315_003",
+            "time": 0.25
+        },
+        {
+            "sprite": "HeavyAttack_315_004",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "HeavyAttack_315_005",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "HeavyAttack_315_006",
+            "time": 0.5
+        },
+        {
+            "sprite": "HeavyAttack_315_007",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "HeavyAttack_315_008",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "HeavyAttack_315_009",
+            "time": 0.75
+        },
+        {
+            "sprite": "HeavyAttack_315_010",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "HeavyAttack_315_011",
+            "time": 0.9166666865348816
+        }
+    ],
+    "events": []
+}

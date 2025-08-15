@@ -151,9 +151,9 @@ void TextRenderer::Update()
 
 		D2D1_RECT_F localRect{
 			-m_rectSize.width * m_pivot.x,
-			m_rectSize.height * (1.0f - m_pivot.y),
+			m_rectSize.height * m_pivot.y,
 			m_rectSize.width * (1.0f - m_pivot.x),
-			-m_rectSize.height * m_pivot.y
+			-m_rectSize.height * (1.0f - m_pivot.y)
 		};
 
 		m_bounds = Bounds::RectToWorldBounds(localRect, worldMatrix);

@@ -1,0 +1,367 @@
+{
+    "name": "PlayerAnimation/NormalAttackTwice/NormalAttackTwice.png",
+    "width": 16082,
+    "height": 624,
+    "sprites": [
+        {
+            "name": "NormalAttackTwice_E_001",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_E_002",
+            "x": 473.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_E_003",
+            "x": 946.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_E_004",
+            "x": 1419.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_E_005",
+            "x": 1892.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_N_006",
+            "x": 2365.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_N_007",
+            "x": 2838.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_N_008",
+            "x": 3311.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_N_009",
+            "x": 3784.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_N_010",
+            "x": 4257.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NE_011",
+            "x": 4730.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NE_012",
+            "x": 5203.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NE_013",
+            "x": 5676.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NE_014",
+            "x": 6149.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NE_015",
+            "x": 6622.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NW_016",
+            "x": 7095.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NW_017",
+            "x": 7568.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NW_018",
+            "x": 8041.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NW_019",
+            "x": 8514.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_NW_020",
+            "x": 8987.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_S_021",
+            "x": 9460.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_S_022",
+            "x": 9933.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_S_023",
+            "x": 10406.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_S_024",
+            "x": 10879.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_S_025",
+            "x": 11352.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SE_026",
+            "x": 11825.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SE_027",
+            "x": 12298.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SE_028",
+            "x": 12771.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SE_029",
+            "x": 13244.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SE_030",
+            "x": 13717.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SW_031",
+            "x": 14190.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SW_032",
+            "x": 14663.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SW_033",
+            "x": 15136.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SW_034",
+            "x": 15609.0,
+            "y": 0.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_SW_035",
+            "x": 0.0,
+            "y": 312.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_W_036",
+            "x": 473.0,
+            "y": 312.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_W_037",
+            "x": 946.0,
+            "y": 312.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_W_038",
+            "x": 1419.0,
+            "y": 312.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_W_039",
+            "x": 1892.0,
+            "y": 312.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        },
+        {
+            "name": "NormalAttackTwice_W_040",
+            "x": 2365.0,
+            "y": 312.0,
+            "width": 473.0,
+            "height": 312.0,
+            "pivotX": 0.49050000309944153,
+            "pivotY": 0.5737000107765198
+        }
+    ]
+}

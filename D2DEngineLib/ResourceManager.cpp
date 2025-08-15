@@ -5,75 +5,10 @@
 #include <fstream>
 
 #include "json.hpp"
+#include "StringUtility.h"
 
 using Microsoft::WRL::ComPtr;
 using nlohmann::json;
-
-// UTF-8 std::string을 std::wstring으로 변환 (Windows API 기반)
-std::wstring utf8_to_wide(const std::string& utf8_str)
-{
-	if (utf8_str.empty())
-	{
-		return L"";
-	}
-
-	int count = MultiByteToWideChar(
-		CP_UTF8,
-		0,
-		utf8_str.c_str(),
-		(int)utf8_str.length(),
-		nullptr,
-		0
-	);
-
-	std::vector<wchar_t> wide_buf(count);
-
-	MultiByteToWideChar(
-		CP_UTF8,
-		0,
-		utf8_str.c_str(),
-		(int)utf8_str.length(),
-		wide_buf.data(),
-		count
-	);
-
-	return std::wstring(wide_buf.data(), wide_buf.size());
-}
-
-// std::wstring을 UTF-8 std::string으로 변환 (Windows API 기반)
-std::string wide_to_utf8(const std::wstring& wide_str)
-{
-	if (wide_str.empty())
-	{
-		return "";
-	}
-	
-	int count = WideCharToMultiByte(
-		CP_UTF8,
-		0,
-		wide_str.c_str(),
-		(int)wide_str.length(),
-		nullptr,
-		0,
-		nullptr,
-		nullptr
-	);
-
-	std::vector<char> utf8_buf(count);
-
-	WideCharToMultiByte(
-		CP_UTF8,
-		0,
-		wide_str.c_str(),
-		(int)wide_str.length(),
-		utf8_buf.data(),
-		count,
-		nullptr,
-		nullptr
-	);
-
-	return std::string(utf8_buf.data(), utf8_buf.size());
-}
 
 namespace nlohmann
 {
@@ -82,12 +17,12 @@ namespace nlohmann
 	{
 		static void to_json(json& j, const std::wstring& str)
 		{
-			j = wide_to_utf8(str);
+			j = Util::WideCharStringToMultiByteString(str);
 		}
 
 		static void from_json(const json& j, std::wstring& str)
 		{
-			str = utf8_to_wide(j.get<std::string>());
+			str = Util::MultiByteStringToWideCharString(j.get<std::string>());
 		}
 	};
 } // namespace nlohmann
@@ -174,6 +109,7 @@ HRESULT ResourceManager::Initialize(ComPtr<ID2D1DeviceContext7> deviceContext,
 	}
 
 	m_resourcePath += std::wstring(L"\\" + resourceFolderName + L"\\");
+	m_resourcePathA = Util::WideCharStringToMultiByteString(m_resourcePath);
 
 	return S_OK;
 }
@@ -182,15 +118,15 @@ void ResourceManager::Update()
 {
 	m_resourceTimer += MyTime::DeltaTime();
 
-	//while (!m_shortCachedBitmapResources.empty())
-	//{
-	//	if (m_shortCachedBitmapResources.front().first > m_resourceTimer)
-	//	{
-	//		break;
-	//	}
+	while (!m_shortCachedBitmapResources.empty())
+	{
+		if (m_shortCachedBitmapResources.front().first > m_resourceTimer)
+		{
+			break;
+		}
 
-	//	m_shortCachedBitmapResources.pop();
-	//}
+		m_shortCachedBitmapResources.pop();
+	}
 
 
 	// Debug::Log(std::to_string(m_shortCachedBitmapResources.size()));
@@ -206,11 +142,21 @@ void ResourceManager::Release()
 
 void ResourceManager::ReleaseResources()
 {
-	//m_shortCachedBitmapResources = {};
+	m_shortCachedBitmapResources = {};
 
 	m_bitmapResources.clear();
 	m_spriteSheets.clear();
 	m_animationClips.clear();
+}
+
+std::wstring ResourceManager::GetResourcePath() const
+{
+	return m_resourcePath;
+}
+
+std::string ResourceManager::GetResourcePathA() const
+{
+	return m_resourcePathA;
 }
 
 std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std::wstring& filePath)
@@ -220,7 +166,7 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 	{
 		if (!iter->second.expired()) // 만료되지 않았을 경우
 		{
-			//m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, iter->second.lock() });
+			m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, iter->second.lock() });
 
 			return iter->second.lock(); // shared_ptr로 return
 		}
@@ -243,7 +189,7 @@ std::shared_ptr<BitmapResource> ResourceManager::CreateBitmapResource(const std:
 
 	m_bitmapResources[filePath] = newBitmapResource;
 
-	//m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, newBitmapResource });
+	m_shortCachedBitmapResources.push({ m_resourceTimer + 60.0f, newBitmapResource });
 
 	return newBitmapResource;
 }
@@ -266,13 +212,13 @@ std::shared_ptr<SpriteSheet> ResourceManager::CreateSpriteSheet(const std::wstri
 		return nullptr;
 	}
 
-	m_spriteSheets[filePath] = newSpriteSheet;
+	m_spriteSheets[newSpriteSheet->name] = newSpriteSheet;
 
 	return newSpriteSheet;
 }
 
 std::shared_ptr<AnimationClip> ResourceManager::CreateAnimationClip(const std::wstring& filePath,
-	std::shared_ptr<SpriteSheet>& spriteSheet)
+	std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets)
 {
 	const auto& iter = m_animationClips.find(filePath);
 	if (iter != m_animationClips.end())
@@ -284,7 +230,7 @@ std::shared_ptr<AnimationClip> ResourceManager::CreateAnimationClip(const std::w
 	}
 
 	std::shared_ptr<AnimationClip> newAnimationClip = std::make_shared<AnimationClip>();
-	HRESULT hr = LoadAnimationClip(filePath, newAnimationClip, spriteSheet);
+	HRESULT hr = LoadAnimationClip(filePath, newAnimationClip, spriteSheets);
 	if (FAILED(hr))
 	{
 		return nullptr;
@@ -326,7 +272,7 @@ HRESULT ResourceManager::LoadSpriteSheet(const std::wstring& filePath, std::shar
 
 HRESULT ResourceManager::LoadAnimationClip(const std::wstring& filePath,
 	std::shared_ptr<AnimationClip>& animationClip,
-	std::shared_ptr<SpriteSheet>& spriteSheet)
+	std::unordered_map<std::wstring, std::shared_ptr<SpriteSheet>>& spriteSheets)
 {
 	std::ifstream inFile(m_resourcePath + filePath);
 	if (inFile.is_open())
@@ -344,7 +290,8 @@ HRESULT ResourceManager::LoadAnimationClip(const std::wstring& filePath,
 
 		for (auto& frame : animationClip->frames)
 		{
-			const auto& iter = spriteSheet->spriteIndexMap.find(frame.spriteName);
+			const auto& spriteSheet = spriteSheets[animationClip->filePath];
+			const auto& iter = spriteSheets[animationClip->filePath]->spriteIndexMap.find(frame.spriteName);
 			if (iter != spriteSheet->spriteIndexMap.end())
 			{
 				frame.spriteIndex = iter->second;

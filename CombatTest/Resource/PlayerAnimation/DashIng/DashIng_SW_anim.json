@@ -1,0 +1,13 @@
+{
+    "name": "DashIng_SW",
+    "isLoop": true,
+    "filePath": "PlayerAnimation/DashIng/DashIng_SW.png",
+    "duration": 0.0833333358168602,
+    "frames": [
+        {
+            "sprite": "DashIng_225_000",
+            "time": 0.0
+        }
+    ],
+    "events": []
+}

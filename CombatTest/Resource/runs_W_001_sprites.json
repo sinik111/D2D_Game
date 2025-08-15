@@ -1,0 +1,259 @@
+{
+    "name": "runs_W_001.png",
+    "width": 16128,
+    "height": 1536,
+    "sprites": [
+        {
+            "name": "runs_W_001_0",
+            "x": 305.0,
+            "y": 239.0,
+            "width": 137.0,
+            "height": 173.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_1",
+            "x": 1073.0,
+            "y": 239.0,
+            "width": 137.0,
+            "height": 173.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_2",
+            "x": 1838.0,
+            "y": 234.0,
+            "width": 147.0,
+            "height": 166.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_3",
+            "x": 2606.0,
+            "y": 232.0,
+            "width": 151.0,
+            "height": 166.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_4",
+            "x": 3372.0,
+            "y": 230.0,
+            "width": 155.0,
+            "height": 165.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_5",
+            "x": 4140.0,
+            "y": 227.0,
+            "width": 158.0,
+            "height": 167.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_6",
+            "x": 4909.0,
+            "y": 225.0,
+            "width": 156.0,
+            "height": 174.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_7",
+            "x": 5683.0,
+            "y": 226.0,
+            "width": 149.0,
+            "height": 179.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_8",
+            "x": 6458.0,
+            "y": 227.0,
+            "width": 142.0,
+            "height": 184.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_9",
+            "x": 7235.0,
+            "y": 229.0,
+            "width": 131.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_10",
+            "x": 8006.0,
+            "y": 230.0,
+            "width": 123.0,
+            "height": 191.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_11",
+            "x": 8775.0,
+            "y": 231.0,
+            "width": 115.0,
+            "height": 187.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_12",
+            "x": 9542.0,
+            "y": 231.0,
+            "width": 107.0,
+            "height": 174.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_13",
+            "x": 10294.0,
+            "y": 229.0,
+            "width": 122.0,
+            "height": 174.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_14",
+            "x": 11053.0,
+            "y": 226.0,
+            "width": 145.0,
+            "height": 176.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_15",
+            "x": 11814.0,
+            "y": 224.0,
+            "width": 163.0,
+            "height": 179.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_16",
+            "x": 12576.0,
+            "y": 222.0,
+            "width": 176.0,
+            "height": 182.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_17",
+            "x": 13340.0,
+            "y": 220.0,
+            "width": 183.0,
+            "height": 185.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_18",
+            "x": 14106.0,
+            "y": 218.0,
+            "width": 186.0,
+            "height": 190.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_19",
+            "x": 14873.0,
+            "y": 217.0,
+            "width": 186.0,
+            "height": 188.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_20",
+            "x": 15643.0,
+            "y": 217.0,
+            "width": 180.0,
+            "height": 181.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_21",
+            "x": 288.0,
+            "y": 988.0,
+            "width": 168.0,
+            "height": 175.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_22",
+            "x": 1065.0,
+            "y": 993.0,
+            "width": 157.0,
+            "height": 172.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_23",
+            "x": 1844.0,
+            "y": 999.0,
+            "width": 143.0,
+            "height": 167.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_24",
+            "x": 2624.0,
+            "y": 1006.0,
+            "width": 124.0,
+            "height": 159.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_25",
+            "x": 3396.0,
+            "y": 1012.0,
+            "width": 109.0,
+            "height": 166.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_26",
+            "x": 4162.0,
+            "y": 1014.0,
+            "width": 101.0,
+            "height": 175.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "runs_W_001_27",
+            "x": 4926.0,
+            "y": 1012.0,
+            "width": 115.0,
+            "height": 177.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

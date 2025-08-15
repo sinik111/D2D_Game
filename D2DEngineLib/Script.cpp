@@ -3,7 +3,7 @@
 
 #include "ComponentSystem.h"
 #include "SceneManager.h"
-#include "BoxCollider2D.h"
+#include "Collider.h"
 
 GameObject* Script::CreateGameObject(const std::wstring& name)
 {
@@ -14,7 +14,7 @@ void Script::RegisterToSystem()
 {
 	ComponentSystem::Get().Script().Register(this);
 
-	auto components = GetGameObject()->GetComponents<BoxCollider2D>();
+	auto components = GetGameObject()->GetComponents<Collider>();
 
 	for (const auto& collider : components)
 	{
@@ -26,7 +26,7 @@ void Script::UnregisterFromSystem()
 {
 	ComponentSystem::Get().Script().Unregister(this);
 
-	auto components = GetGameObject()->GetComponents<BoxCollider2D>();
+	auto components = GetGameObject()->GetComponents<Collider>();
 
 	for (const auto& collider : components)
 	{
@@ -59,6 +59,11 @@ void Script::LateUpdate()
 {
 	// 자식에서 LateUpdate()가 override되지 않았을 경우 LateUpdate 리스트에서 제거함
 	ComponentSystem::Get().Script().UnregisterLateUpdate(this);
+}
+
+void Script::OnRender()
+{
+	ComponentSystem::Get().Script().UnregisterOnRender(this);
 }
 
 void Script::OnDestroy()

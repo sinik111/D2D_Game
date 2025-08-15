@@ -2,6 +2,8 @@
 #include "../D2DEngineLib/IState.h"
 #include "EnemyBase.h"
 
+using namespace std;
+
 
 class EnemyState
 	: public IState
@@ -10,7 +12,7 @@ public:
 
 	EnemyState() {}	
 
-	EnemyBase* m_Script;
+	EnemyBase* m_Script = nullptr;
 
 	void SetScript(EnemyBase* script)
 	{
@@ -22,9 +24,9 @@ public:
 	void Update(FSMContext& context) override;
 
 	void Exit(FSMContext& context) override;	
-		
 
-	inline bool& IsMove() { return m_Script->IsMove(); }
+	float m_dTime = 0.0f;
+	
 
 	inline const Vector2& Pos() { return m_Script->Pos(); }
 
@@ -46,6 +48,8 @@ public:
 
 	inline float& MaxChaseDistance() { return m_Script->MaxChaseDistance(); }
 
+	inline float& AttackRange() { return m_Script->AttackRange(); }
+
 	inline int& Direction() { return m_Script->Direction(); }
 
 	inline const Vector2& CameraPos() { return m_Script->CameraPos(); }
@@ -60,24 +64,53 @@ public:
 
 	inline bool& ToDoMove() { return m_Script->ToDoMove(); }
 
+	inline bool& IsLockOnTarget() { return m_Script->IsLockOnTarget(); }
+
+	inline bool& IsTargetInChaseDist() { return m_Script->IsTargetInChaseDist(); }
+
+	inline bool& IsTargetInRoamDist() { return m_Script->IsTargetInRoamDist(); }	
+
+	inline bool& IsTargetInAtkRange() { return m_Script->IsTargetInAtkRange(); }
+
+	inline bool& IsTargetInMaxAtkRange() { return m_Script->IsTargetInMaxAtkRange(); }
+
+	inline float& AtkAngle() { return m_Script->AtkAngle(); }
+
+	inline bool& IsTargetInAtkAngle() { return m_Script->IsTargetInAtkAngle(); }
+
+	inline bool& IsAttackReady() { return m_Script->IsAttackReady(); }
+
+	inline bool& IsUnderAttack() { return m_Script->IsUnderAttack(); }
+
+	inline bool& IsFindPlayer() { return m_Script->IsFindPlayer(); }
+		
 	RigidBody2D* RigidBody(); 
 	
+	inline const bool IsPlayerNull() { return m_Script->IsPlayerNull(); }
 
-	void CheckCameraArea();
+	inline bool& IsKnockBack() { return m_Script->IsKnockBack(); }
+	
+	inline bool& IsKnockDown() { return m_Script->IsKnockDown(); }
+	
+	
 
-	void SetEnemyDirectionByInput(FSMContext& context);
+	const bool& IsPlayerDead(FSMContext& context);		
+		
+	void CheckTargetDistance();	
 
-	void StopMoving();
+	void MoveToPlayer();
 
-	void UpdateDirection();
+	void CheckTargetInAtkRange();
 
-	void SetAngle(float angle);
+	void CheckTargetInAtkAngle();
+	
+	void RotateToTarget();
 
-	void SetDirection(int n);
+	//void SetEnemyDirectionByInput(FSMContext& context);
+	
 
 
-	virtual void UpdateMovement(FSMContext& context);
-
+public:	
 
 	inline float LerpAngle(float a, float b, float t)
 	{
@@ -88,32 +121,5 @@ public:
 		if (delta < -180.0f) delta += 360.0f;
 		return a + delta * t;
 	}
-
-	enum Dir	//Num키 기준으로 배열. 0은 랜덤(나중에 쓰게 된다면..), 5는 NONE(값 없음)
-	{
-		RANDOM,			//0
-		LEFT_DOWN,		//1
-		DOWN,			//2
-		RIGHT_DOWN,		//3
-		LEFT,			//4
-		NONE,			//5
-		RIGHT,			//6
-		LEFT_UP,		//7	
-		UP,				//8
-		RIGHT_UP,		//9	
-	};
-
-
-	enum State
-	{
-		OUTOFAREA,		//카메라 범위 밖	
-		INAREA,			//카메라 범위 안
-		ENGAGE,			//이동 가능한 위치에 있는 플레이어 발견
-		ONATTACK,
-		RETURN,
-	};
+	
 };
-
-
-
-

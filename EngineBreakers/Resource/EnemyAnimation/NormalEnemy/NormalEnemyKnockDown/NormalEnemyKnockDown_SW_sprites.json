@@ -1,0 +1,223 @@
+{
+    "name": "NormalEnemy/NormalEnemyKnockDown/NormalEnemyKnockDown_SW.png",
+    "width": 4248,
+    "height": 157,
+    "sprites": [
+        {
+            "name": "NormalEnemyKnockDown_225_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_001",
+            "x": 177.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_002",
+            "x": 354.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_003",
+            "x": 531.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_004",
+            "x": 708.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_005",
+            "x": 885.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_006",
+            "x": 1062.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_007",
+            "x": 1239.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_008",
+            "x": 1416.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_009",
+            "x": 1593.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_010",
+            "x": 1770.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_011",
+            "x": 1947.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_012",
+            "x": 2124.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_013",
+            "x": 2301.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_014",
+            "x": 2478.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_015",
+            "x": 2655.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_016",
+            "x": 2832.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_017",
+            "x": 3009.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_018",
+            "x": 3186.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_019",
+            "x": 3363.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_020",
+            "x": 3540.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_021",
+            "x": 3717.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_022",
+            "x": 3894.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        },
+        {
+            "name": "NormalEnemyKnockDown_225_023",
+            "x": 4071.0,
+            "y": 0.0,
+            "width": 177.0,
+            "height": 157.0,
+            "pivotX": 0.6948999762535095,
+            "pivotY": 0.7897999882698059
+        }
+    ]
+}

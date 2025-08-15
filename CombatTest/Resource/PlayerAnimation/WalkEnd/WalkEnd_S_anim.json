@@ -1,0 +1,25 @@
+{
+    "name": "WalkEnd_S",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/WalkEnd/WalkEnd_S.png",
+    "duration": 0.3333333432674408,
+    "frames": [
+        {
+            "sprite": "WalkEnd_270_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "WalkEnd_270_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "WalkEnd_270_002",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "WalkEnd_270_003",
+            "time": 0.25
+        }
+    ],
+    "events": []
+}

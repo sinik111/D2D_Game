@@ -1,0 +1,29 @@
+{
+    "name": "BossMoveOut_E",
+    "isLoop": false,
+    "filePath": "Boss/BossMoveOut/BossMoveOut.png",
+    "duration": 0.4166666865348816,
+    "frames": [
+        {
+            "sprite": "BossMoveOut_E_001",
+            "time": 0.0
+        },
+        {
+            "sprite": "BossMoveOut_E_002",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "BossMoveOut_E_003",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "BossMoveOut_E_004",
+            "time": 0.25
+        },
+        {
+            "sprite": "BossMoveOut_E_005",
+            "time": 0.3333333432674408
+        }
+    ],
+    "events": []
+}

@@ -1,0 +1,520 @@
+{
+    "name": "RANKING_LETTER.png",
+    "width": 1535,
+    "height": 191,
+    "sprites": [
+        {
+            "name": "RANKING_LETTER_0",
+            "x": 12.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_1",
+            "x": 72.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_2",
+            "x": 131.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_3",
+            "x": 189.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_4",
+            "x": 250.0,
+            "y": 12.0,
+            "width": 33.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_5",
+            "x": 310.0,
+            "y": 12.0,
+            "width": 33.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_6",
+            "x": 367.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_7",
+            "x": 425.0,
+            "y": 12.0,
+            "width": 37.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_8",
+            "x": 499.0,
+            "y": 12.0,
+            "width": 8.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_9",
+            "x": 542.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_10",
+            "x": 605.0,
+            "y": 12.0,
+            "width": 35.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_11",
+            "x": 663.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_12",
+            "x": 718.0,
+            "y": 12.0,
+            "width": 40.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_13",
+            "x": 779.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_14",
+            "x": 839.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_15",
+            "x": 898.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_16",
+            "x": 956.0,
+            "y": 12.0,
+            "width": 40.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_17",
+            "x": 1018.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_18",
+            "x": 1075.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_19",
+            "x": 1136.0,
+            "y": 12.0,
+            "width": 35.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_20",
+            "x": 1193.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_21",
+            "x": 1247.0,
+            "y": 12.0,
+            "width": 46.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_22",
+            "x": 1302.0,
+            "y": 12.0,
+            "width": 54.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_23",
+            "x": 1371.0,
+            "y": 12.0,
+            "width": 35.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_24",
+            "x": 1427.0,
+            "y": 12.0,
+            "width": 39.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_25",
+            "x": 1488.0,
+            "y": 12.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_26",
+            "x": 12.0,
+            "y": 71.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_27",
+            "x": 80.0,
+            "y": 71.0,
+            "width": 18.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_28",
+            "x": 131.0,
+            "y": 71.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_29",
+            "x": 190.0,
+            "y": 71.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_30",
+            "x": 248.0,
+            "y": 71.0,
+            "width": 34.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_31",
+            "x": 307.0,
+            "y": 71.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_32",
+            "x": 367.0,
+            "y": 71.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_33",
+            "x": 428.0,
+            "y": 71.0,
+            "width": 30.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_34",
+            "x": 484.0,
+            "y": 71.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_35",
+            "x": 543.0,
+            "y": 71.0,
+            "width": 36.0,
+            "height": 35.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_36",
+            "x": 5.0,
+            "y": 123.0,
+            "width": 27.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_37",
+            "x": 48.0,
+            "y": 123.0,
+            "width": 12.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_38",
+            "x": 77.0,
+            "y": 123.0,
+            "width": 27.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_39",
+            "x": 114.0,
+            "y": 123.0,
+            "width": 27.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_40",
+            "x": 150.0,
+            "y": 123.0,
+            "width": 25.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_41",
+            "x": 185.0,
+            "y": 123.0,
+            "width": 27.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_42",
+            "x": 222.0,
+            "y": 123.0,
+            "width": 27.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_43",
+            "x": 259.0,
+            "y": 123.0,
+            "width": 22.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_44",
+            "x": 293.0,
+            "y": 123.0,
+            "width": 27.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_45",
+            "x": 330.0,
+            "y": 123.0,
+            "width": 27.0,
+            "height": 26.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_46",
+            "x": 5.0,
+            "y": 160.0,
+            "width": 26.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_47",
+            "x": 48.0,
+            "y": 160.0,
+            "width": 13.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_48",
+            "x": 79.0,
+            "y": 160.0,
+            "width": 26.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_49",
+            "x": 115.0,
+            "y": 160.0,
+            "width": 26.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_50",
+            "x": 151.0,
+            "y": 160.0,
+            "width": 25.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_51",
+            "x": 187.0,
+            "y": 160.0,
+            "width": 26.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_52",
+            "x": 223.0,
+            "y": 160.0,
+            "width": 26.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_53",
+            "x": 261.0,
+            "y": 160.0,
+            "width": 22.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_54",
+            "x": 295.0,
+            "y": 160.0,
+            "width": 26.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_55",
+            "x": 330.0,
+            "y": 160.0,
+            "width": 27.0,
+            "height": 25.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "RANKING_LETTER_56",
+            "x": 375.0,
+            "y": 127.0,
+            "width": 6.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

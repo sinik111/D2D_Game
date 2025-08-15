@@ -45,7 +45,9 @@ void KinematicTest::Enter()
 		BoxCollider2D* moonCollider = go->AddComponent<BoxCollider2D>();
 		moonCollider->SetTrigger(true);
 		moonCollider->SetSize({ 20.0f, 20.f });
-		go->AddComponent<BitmapRenderer>(L"Moon.png")->SetSortOrder(1);
+		auto bitmapRenderer = go->AddComponent<BitmapRenderer>(L"Moon.png");
+		bitmapRenderer->SetSortOrder(1);
+		bitmapRenderer->SetPivot({ 0.0f, 0.0f });
 		go->GetTransform()->SetLocalPosition(Random::Float(-500, 500), Random::Float(-400, 400));
 	}
 

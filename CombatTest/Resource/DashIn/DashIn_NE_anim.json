@@ -1,0 +1,21 @@
+{
+    "name": "DashIn_NE",
+    "isLoop": false,
+    "filePath": "DashIn_NE.png",
+    "duration": 0.25,
+    "frames": [
+        {
+            "sprite": "DashIn_45_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "DashIn_45_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "DashIn_45_002",
+            "time": 0.1666666716337204
+        }
+    ],
+    "events": []
+}

@@ -5,9 +5,26 @@
 #include "BitmapResource.h"
 #include "IRenderer.h"
 
+enum class BitmapDirectionType
+{
+	LeftToRight,
+	RightToLeft,
+	TopToBottom,
+	BottomToTop
+};
+
 class BitmapRenderer :
 	public Component, public IRenderer
 {
+private:
+	enum RenderFlag
+	{
+		NORMAL			= 0,
+		COLORED			= 1 << 0,
+		FILLING			= 1 << 1,
+		FLOATING		= 1 << 2
+	};
+
 private:
 	std::shared_ptr<BitmapResource> m_bitmapResource;
 	std::wstring m_filePath;
@@ -15,14 +32,19 @@ private:
 	Matrix3x2 m_cachedRenderWorldMatrix;
 	SpaceType m_spaceType = SpaceType::World;
 	D2D1_RECT_F m_sourceRect{};
-	D2D1_COLOR_F m_color{ D2D1::ColorF::White };
+	D2D1_COLOR_F m_color{ D2D1::ColorF(D2D1::ColorF::White) };
 	Bounds m_bounds;
 	Vector2 m_pivot{ 0.5f, 0.5f };
 	int m_sortOrder = 0;
 	float m_opacity = 1.0f;
+
+	BitmapDirectionType m_fillDirectionType{};
+	BitmapDirectionType m_floatingDirectionType{};
+	float m_fillRatio = 1.0f;
+	float m_floatingPosition = 0.0f;
 	bool m_doFlipX = false;
 	bool m_isBitmapDirty = true;
-	bool m_isColored = false;
+	unsigned int m_renderFlag = RenderFlag::NORMAL;
 
 public:
 	BitmapRenderer() = default;
@@ -48,6 +70,7 @@ public:
 
 public:
 	void SetBitmap(const std::wstring& filePath);
+	void SetBitmap(std::shared_ptr<BitmapResource> bitmapResource);
 	void SetSortOrder(int sortOrder);
 	void SetFlipX(bool doFlip);
 	void SetSpaceType(SpaceType spaceType);
@@ -55,6 +78,8 @@ public:
 	void SetPivot(const Vector2& pivot);
 	void SetOpacity(float opacity);
 	void SetColor(const D2D1_COLOR_F& color);
+	void SetFill(BitmapDirectionType type, float ratio);
+	void SetFloating(BitmapDirectionType type, float position);
 	void ResetColor();
 
 private:

@@ -123,21 +123,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DummyEnemy.cpp" />
+    <ClCompile Include="DummyEnemyAttack.cpp" />
+    <ClCompile Include="HitStopController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCameraController.cpp" />
     <ClCompile Include="PlayerDashState.cpp" />
+    <ClCompile Include="PlayerDeadState.cpp" />
     <ClCompile Include="PlayerEvadeState.cpp" />
+    <ClCompile Include="PlayerGrabState.cpp" />
+    <ClCompile Include="PlayerHeavyAttack.cpp" />
+    <ClCompile Include="PlayerHeavyAttackState.cpp" />
     <ClCompile Include="PlayerIdleState.cpp" />
+    <ClCompile Include="PlayerKnockbackState.cpp" />
+    <ClCompile Include="PlayerKnockdownState.cpp" />
+    <ClCompile Include="PlayerNormalAttack.cpp" />
+    <ClCompile Include="PlayerNormalAttackState.cpp" />
     <ClCompile Include="PlayerStateBase.cpp" />
     <ClCompile Include="PlayerWalkState.cpp" />
     <ClCompile Include="PlayerWorkspaceApp.cpp" />
     <ClCompile Include="Scene1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackStateEnum.h" />
+    <ClInclude Include="DummyEnemy.h" />
+    <ClInclude Include="DummyEnemyAttack.h" />
+    <ClInclude Include="HitStopController.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCameraController.h" />
     <ClInclude Include="PlayerDashState.h" />
+    <ClInclude Include="PlayerDeadState.h" />
     <ClInclude Include="PlayerEvadeState.h" />
+    <ClInclude Include="PlayerGrabState.h" />
+    <ClInclude Include="PlayerHeavyAttack.h" />
+    <ClInclude Include="PlayerHeavyAttackState.h" />
     <ClInclude Include="PlayerIdleState.h" />
+    <ClInclude Include="PlayerKnockbackState.h" />
+    <ClInclude Include="PlayerKnockdownState.h" />
+    <ClInclude Include="PlayerNormalAttack.h" />
+    <ClInclude Include="PlayerNormalAttackState.h" />
     <ClInclude Include="PlayerStateBase.h" />
     <ClInclude Include="PlayerWalkState.h" />
     <ClInclude Include="PlayerWorkspaceApp.h" />

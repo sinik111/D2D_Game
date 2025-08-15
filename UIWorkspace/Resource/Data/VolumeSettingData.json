@@ -1,0 +1,24 @@
+{
+<<<<<<< .mine
+    "CurrentBGMVolume": 1.0,
+    "CurrentMasterVolume": 1.0,
+    "CurrentSFXVolume": 1.0,
+    "DefaultBGMVolume": 1.0,
+    "DefaultMasterVolume": 1.0,
+    "DefaultSFXVolume": 1.0
+||||||| .r844
+	"DefaultMasterVolume": 1.0,
+	"DefaultBGMVolume": 1.0,
+	"DefaultSFXVolume": 1.0,
+	"CurrentMasterVolume": 1.0,
+	"CurrentBGMVolume": 1.0,
+	"CurrentSFXVolume": 1.0
+=======
+    "CurrentBGMVolume": 0.6000000238418579,
+    "CurrentMasterVolume": 0.4000000059604645,
+    "CurrentSFXVolume": 0.6000000238418579,
+    "DefaultBGMVolume": 0.5,
+    "DefaultMasterVolume": 0.5,
+    "DefaultSFXVolume": 0.5
+>>>>>>> .r887
+}

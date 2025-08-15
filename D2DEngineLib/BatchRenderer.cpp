@@ -8,7 +8,7 @@
 BatchRenderer::BatchRenderer(const std::wstring& bitmapPath, const std::wstring& sheetPath)
 {
     m_bitmapResource = ResourceManager::Get().CreateBitmapResource(bitmapPath);
-    m_spriteSheet = ResourceManager::Get().CreateSpriteSheet(sheetPath);
+    m_spriteSheets = ResourceManager::Get().CreateSpriteSheet(sheetPath);
 }
 
 void BatchRenderer::RegisterToSystem()
@@ -43,7 +43,7 @@ void BatchRenderer::Render(const RenderContext& context) const
 
 		for (const auto& batchUnit : m_batchUnitList)
 		{
-			const Sprite& sprite = m_spriteSheet->sprites[batchUnit.index];
+			const Sprite& sprite = m_spriteSheets->sprites[batchUnit.index];
 
 			D2D1_RECT_U sourceRectU{
 				static_cast<UINT32>(sprite.x),
@@ -56,7 +56,7 @@ void BatchRenderer::Render(const RenderContext& context) const
 				0.0f,
 				0.0f,
 				sprite.width,
-				sprite.width
+				sprite.height
 			};
 
 			Matrix3x2 finalMatrix;
@@ -151,7 +151,7 @@ void BatchRenderer::SetBitmap(const std::wstring& filePath)
 void BatchRenderer::SetSpriteSheet(const std::wstring& filePath)
 {
 
-    m_spriteSheet = ResourceManager::Get().CreateSpriteSheet(filePath);
+    m_spriteSheets = ResourceManager::Get().CreateSpriteSheet(filePath);
 }
 
 void BatchRenderer::SetSpaceType(SpaceType spaceType)

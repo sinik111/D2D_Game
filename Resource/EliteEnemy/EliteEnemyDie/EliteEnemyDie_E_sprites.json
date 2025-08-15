@@ -1,0 +1,223 @@
+{
+    "name": "EliteEnemy/EliteEnemyDie/EliteEnemyDie_E.png",
+    "width": 7176,
+    "height": 287,
+    "sprites": [
+        {
+            "name": "EliteEnemyDie_0_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_001",
+            "x": 299.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_002",
+            "x": 598.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_003",
+            "x": 897.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_004",
+            "x": 1196.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_005",
+            "x": 1495.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_006",
+            "x": 1794.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_007",
+            "x": 2093.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_008",
+            "x": 2392.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_009",
+            "x": 2691.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_010",
+            "x": 2990.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_011",
+            "x": 3289.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_012",
+            "x": 3588.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_013",
+            "x": 3887.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_014",
+            "x": 4186.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_015",
+            "x": 4485.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_016",
+            "x": 4784.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_017",
+            "x": 5083.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_018",
+            "x": 5382.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_019",
+            "x": 5681.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_020",
+            "x": 5980.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_021",
+            "x": 6279.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_022",
+            "x": 6578.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        },
+        {
+            "name": "EliteEnemyDie_0_023",
+            "x": 6877.0,
+            "y": 0.0,
+            "width": 299.0,
+            "height": 287.0,
+            "pivotX": 0.5016999840736389,
+            "pivotY": 0.7560999989509583
+        }
+    ]
+}

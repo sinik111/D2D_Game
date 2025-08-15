@@ -1,0 +1,97 @@
+{
+    "name": "COUNTDOWN_NUMBER.png",
+    "width": 2641,
+    "height": 121,
+    "sprites": [
+        {
+            "name": "COUNTDOWN_NUMBER_0",
+            "x": 15.0,
+            "y": 11.0,
+            "width": 99.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_3",
+            "x": 389.0,
+            "y": 11.0,
+            "width": 49.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_5",
+            "x": 607.0,
+            "y": 11.0,
+            "width": 99.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_7",
+            "x": 847.0,
+            "y": 11.0,
+            "width": 99.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_9",
+            "x": 1087.0,
+            "y": 11.0,
+            "width": 95.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_11",
+            "x": 1327.0,
+            "y": 11.0,
+            "width": 99.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_13",
+            "x": 1568.0,
+            "y": 11.0,
+            "width": 99.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_15",
+            "x": 1812.0,
+            "y": 11.0,
+            "width": 83.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_17",
+            "x": 2047.0,
+            "y": 11.0,
+            "width": 99.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "COUNTDOWN_NUMBER_19",
+            "x": 2288.0,
+            "y": 11.0,
+            "width": 99.0,
+            "height": 99.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

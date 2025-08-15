@@ -3,12 +3,14 @@
 
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "SoundManager.h"
 
 void Scene::Exit()
 {
 	Clear();
 
 	ResourceManager::Get().ReleaseResources();
+	SoundManager::Get().ReleaseSounds();
 }
 
 void Scene::InitializeObjects()
@@ -56,6 +58,16 @@ void Scene::CleanupDestroyedObjects()
 
 		++i;
 	}
+}
+
+void Scene::SetName(const std::wstring& name)
+{
+	m_name = name;
+}
+
+const std::wstring& Scene::GetName() const
+{
+	return m_name;
 }
 
 void Scene::Clear()

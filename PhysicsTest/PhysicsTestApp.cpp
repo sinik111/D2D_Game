@@ -4,6 +4,7 @@
 #include "../D2DEngineLib/ResourceManager.h"
 #include "../D2DEngineLib/SceneManager.h"
 #include "../D2DEngineLib/ComponentSystem.h"
+#include "../D2DEngineLib/SoundManager.h"
 
 #include "TestScene1.h"
 
@@ -25,7 +26,9 @@ void PhysicsTestApp::Initialize()
 	ComponentSystem::Get().Physics().SetupQuadtree(bounds, 5, 10);
 
 	ResourceManager::Get().Initialize(m_d2dRenderer.GetDeviceContext(),
-		m_modulePath, L"x64", L"PhysicsTest");
+		m_modulePath, L"Bin", L"PhysicsTest");
+
+	SoundManager::Get().Initialize();
 
 	SceneManager::Get().CreateScene<TestScene1>(L"TestScene1");
 

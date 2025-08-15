@@ -1,0 +1,35 @@
+{
+    "name": "NormalAttackTwice_NW",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/NormalAttackTwice/NormalAttackTwice.png",
+    "duration": 0.5,
+    "frames": [
+        {
+            "sprite": "NormalAttackTwice_NW_016",
+            "time": 0.0
+        },
+        {
+            "sprite": "NormalAttackTwice_NW_017",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "NormalAttackTwice_NW_018",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "NormalAttackTwice_NW_019",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "NormalAttackTwice_NW_020",
+            "time": 0.4166666567325592
+        }
+    ],
+        "events": [
+        {
+            "name": "AttackTry2nd3rd",
+            "parameter": "",
+            "time": 0.0833333358168602
+        }
+    ]
+}

@@ -1,0 +1,178 @@
+{
+    "name": "PlayerAnimation/NormalAttackThreeTimes/NormalAttackThreeTimes_NE.png",
+    "width": 4655,
+    "height": 188,
+    "sprites": [
+        {
+            "name": "NormalAttackThreeTimes_45_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_001",
+            "x": 245.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_002",
+            "x": 490.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_003",
+            "x": 735.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_004",
+            "x": 980.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_005",
+            "x": 1225.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_006",
+            "x": 1470.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_007",
+            "x": 1715.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_008",
+            "x": 1960.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_009",
+            "x": 2205.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_010",
+            "x": 2450.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_011",
+            "x": 2695.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_012",
+            "x": 2940.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_013",
+            "x": 3185.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_014",
+            "x": 3430.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_015",
+            "x": 3675.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_016",
+            "x": 3920.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_017",
+            "x": 4165.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        },
+        {
+            "name": "NormalAttackThreeTimes_45_018",
+            "x": 4410.0,
+            "y": 0.0,
+            "width": 245.0,
+            "height": 188.0,
+            "pivotX": 0.4449000060558319,
+            "pivotY": 0.7766000032424927
+        }
+    ]
+}

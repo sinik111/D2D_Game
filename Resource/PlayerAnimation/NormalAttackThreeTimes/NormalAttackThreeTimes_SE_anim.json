@@ -1,0 +1,29 @@
+{
+    "name": "NormalAttackThreeTimes_SE",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/NormalAttackThreeTimes/NormalAttackThreeTimes_SE.png",
+    "duration": 0.43,
+    "frames": [
+        {
+            "sprite": "NormalAttackThreeTimes_315_014",
+            "time": 0.0
+        },
+        {
+            "sprite": "NormalAttackThreeTimes_315_015",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "NormalAttackThreeTimes_315_016",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "NormalAttackThreeTimes_315_017",
+            "time": 0.25
+        },
+        {
+            "sprite": "NormalAttackThreeTimes_315_018",
+            "time": 0.3333333432674408
+        }
+    ],
+    "events": []
+}

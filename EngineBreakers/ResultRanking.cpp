@@ -1,0 +1,38 @@
+#include "../D2DEngineLib/framework.h"
+#include "ResultRanking.h"
+
+#include "../D2DEngineLib/Camera.h"
+#include "../D2DEngineLib/BitmapRenderer.h"
+#include "../D2DEngineLib/BatchRenderer.h"
+
+#include "ScreenCurtainController.h"
+#include "ResultRankingViewer.h"
+#include "GameDataManager.h"
+
+void ResultRanking::Enter()
+{
+	GameObject* camera = CreateGameObject(L"Camera");
+	camera->AddComponent<Camera>();
+
+
+	GameObject* resultRankingBackground = CreateGameObject(L"ResultRankingBackground");
+	auto br = resultRankingBackground->AddComponent<BitmapRenderer>(L"Image/UI/RANKING_BACKGROUND.png");
+	br->SetSortOrder(0);
+	br->SetSpaceType(SpaceType::Screen);
+
+
+	GameObject* resultRankingViewer = CreateGameObject(L"ResultRankingViewer");
+	resultRankingViewer->AddComponent<ResultRankingViewer>();
+	resultRankingViewer->AddComponent<BatchRenderer>();
+
+
+	GameObject* continueNotice = CreateGameObject(L"ContinueNotice");
+	continueNotice->GetTransform()->SetLocalPosition({ 0.0f, -450.0f });
+	br = continueNotice->AddComponent<BitmapRenderer>(L"Image/UI/PRESS_ZX.png");
+	br->SetSortOrder(2);
+	br->SetSpaceType(SpaceType::Screen);
+
+
+	GameObject* screenCurtainController = CreateGameObject(L"ScreenCurtainController");
+	screenCurtainController->AddComponent<ScreenCurtainController>(true, GameDataManager::Get().GetFadeDuration());
+}

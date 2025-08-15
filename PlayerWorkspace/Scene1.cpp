@@ -9,20 +9,51 @@
 #include "../D2DEngineLib/Screen.h"
 #include "../D2DEngineLib/CircleCollider.h"
 #include "../D2DEngineLib/LineCollider.h"
+#include "../D2DEngineLib/BoxCollider2D.h"
+#include "../D2DEngineLib/Animator.h"
 
 #include "Player.h"
+#include "DummyEnemy.h"
+#include "PlayerCameraController.h"
+#include "HitStopController.h"
 
 void Scene1::Enter()
 {
 	GameObject* camera = CreateGameObject(L"Camera");
 	camera->AddComponent<Camera>();
+	auto cameraController = camera->AddComponent<PlayerCameraController>();
+	camera->AddComponent<HitStopController>();
 
 	GameObject* map = CreateGameObject(L"Map");
-	auto mapBitmapRenderer = map->AddComponent<BitmapRenderer>(L"TempMap.png");
+	auto mapBitmapRenderer = map->AddComponent<BitmapRenderer>(L"map01_ver1.jpg");
 	mapBitmapRenderer->SetSortOrder(0);
 
 	GameObject* player = CreateGameObject(L"Player");
-	player->AddComponent<BitmapRenderer>(L"TempPlayer.bmp");
+
+	cameraController->SetTarget(player->GetTransform());
+
+	auto playerBr = player->AddComponent<BitmapRenderer>();
+	playerBr->SetSortOrder(1);
+	auto playerAnimator = player->AddComponent<Animator>();
+
+	playerAnimator->AddSpriteSheet(L"runs_E_001_sprites.json");
+	playerAnimator->AddSpriteSheet(L"runs_N_001_sprites.json");
+	playerAnimator->AddSpriteSheet(L"runs_NE_001_sprites.json");
+	playerAnimator->AddSpriteSheet(L"runs_NW_001_sprites.json");
+	playerAnimator->AddSpriteSheet(L"runs_S_001_sprites.json");
+	playerAnimator->AddSpriteSheet(L"runs_SE_001_sprites.json");
+	playerAnimator->AddSpriteSheet(L"runs_SW_001_sprites.json");
+	playerAnimator->AddSpriteSheet(L"runs_W_001_sprites.json");
+
+	playerAnimator->AddAnimationClip(L"runs_E_001_anim.json");
+	playerAnimator->AddAnimationClip(L"runs_N_001_anim.json");
+	playerAnimator->AddAnimationClip(L"runs_NE_001_anim.json");
+	playerAnimator->AddAnimationClip(L"runs_NW_001_anim.json");
+	playerAnimator->AddAnimationClip(L"runs_S_001_anim.json");
+	playerAnimator->AddAnimationClip(L"runs_SE_001_anim.json");
+	playerAnimator->AddAnimationClip(L"runs_SW_001_anim.json");
+	playerAnimator->AddAnimationClip(L"runs_W_001_anim.json");
+
 	player->AddComponent<TextRenderer>();
 	player->AddComponent<RigidBody2D>();
 	player->AddComponent<PlayerInput>();
@@ -31,6 +62,10 @@ void Scene1::Enter()
 	cc->SetOffset({ 0.0f, -50.0f });
 	cc->SetRadius(40.0f);
 	cc->SetLayer(CollisionLayer::PlayerMove);
+	auto bc = player->AddComponent<BoxCollider2D>();
+	bc->SetLayer(CollisionLayer::PlayerHitBox);
+	bc->SetSize({ 35.0f, 75.0f });
+	bc->SetTrigger(true);
 
 	// temp map colider
 
@@ -62,4 +97,25 @@ void Scene1::Enter()
 	auto playerInfoTextRenderer = playerInfo->AddComponent<TextRenderer>();
 
 	playerComp->SetPlayerInfoTextRenderer(playerInfoTextRenderer);
+
+
+	GameObject* dummyEnemy = CreateGameObject(L"DummyEnemy");
+	dummyEnemy->GetTransform()->SetLocalPosition(250.0f, 250.0f);
+
+	auto enemyBr = dummyEnemy->AddComponent<BitmapRenderer>(L"TempEnemy.bmp");
+	enemyBr->SetSortOrder(1);
+	dummyEnemy->AddComponent<DummyEnemy>();
+	auto dummyRb = dummyEnemy->AddComponent<RigidBody2D>();
+	dummyRb->SetGravityScale(0.0f);
+	dummyRb->SetMass(100000.0f);
+
+	auto dummyCircleCol = dummyEnemy->AddComponent<CircleCollider>();
+	dummyCircleCol->SetOffset({ 0.0f, -50.0f });
+	dummyCircleCol->SetRadius(40.0f);
+	dummyCircleCol->SetLayer(CollisionLayer::EnemyMove);
+	
+	auto dummyBoxCol = dummyEnemy->AddComponent<BoxCollider2D>();
+	dummyBoxCol->SetSize({ 35.0f, 75.0f });
+	dummyBoxCol->SetTrigger(true);
+	dummyBoxCol->SetLayer(CollisionLayer::EnemyHitBox);
 }

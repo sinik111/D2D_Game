@@ -1,0 +1,367 @@
+{
+    "name": "Image/TextSpriteTest.png",
+    "width": 1280,
+    "height": 72,
+    "sprites": [
+        {
+            "name": "text_font_0",
+            "x": 1.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_1",
+            "x": 46.0,
+            "y": 0.0,
+            "width": 18.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_2",
+            "x": 88.0,
+            "y": 0.0,
+            "width": 19.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_3",
+            "x": 131.0,
+            "y": 0.0,
+            "width": 19.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_4",
+            "x": 173.0,
+            "y": 0.0,
+            "width": 21.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_5",
+            "x": 218.0,
+            "y": 0.0,
+            "width": 19.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_6",
+            "x": 261.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_7",
+            "x": 304.0,
+            "y": 0.0,
+            "width": 19.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_8",
+            "x": 348.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_9",
+            "x": 391.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_10",
+            "x": 432.0,
+            "y": 0.0,
+            "width": 23.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_11",
+            "x": 478.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_12",
+            "x": 521.0,
+            "y": 0.0,
+            "width": 19.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_13",
+            "x": 565.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_14",
+            "x": 609.0,
+            "y": 0.0,
+            "width": 19.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_15",
+            "x": 653.0,
+            "y": 0.0,
+            "width": 18.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_16",
+            "x": 694.0,
+            "y": 0.0,
+            "width": 21.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_17",
+            "x": 738.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_18",
+            "x": 782.0,
+            "y": 0.0,
+            "width": 18.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_19",
+            "x": 824.0,
+            "y": 0.0,
+            "width": 18.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_20",
+            "x": 868.0,
+            "y": 0.0,
+            "width": 22.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_21",
+            "x": 912.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_22",
+            "x": 954.0,
+            "y": 0.0,
+            "width": 22.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_23",
+            "x": 998.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_24",
+            "x": 1041.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_25",
+            "x": 1086.0,
+            "y": 0.0,
+            "width": 19.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_26",
+            "x": 1128.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 33.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_27",
+            "x": 1171.0,
+            "y": 0.0,
+            "width": 22.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_28",
+            "x": 1215.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_29",
+            "x": 1256.0,
+            "y": 0.0,
+            "width": 23.0,
+            "height": 28.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_30",
+            "x": 1.0,
+            "y": 43.0,
+            "width": 20.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_31",
+            "x": 43.0,
+            "y": 43.0,
+            "width": 22.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_32",
+            "x": 86.0,
+            "y": 43.0,
+            "width": 24.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_33",
+            "x": 129.0,
+            "y": 43.0,
+            "width": 24.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_34",
+            "x": 172.0,
+            "y": 43.0,
+            "width": 23.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_35",
+            "x": 218.0,
+            "y": 43.0,
+            "width": 21.0,
+            "height": 29.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_36",
+            "x": 258.0,
+            "y": 51.0,
+            "width": 23.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_38",
+            "x": 302.0,
+            "y": 49.0,
+            "width": 22.0,
+            "height": 23.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_39",
+            "x": 345.0,
+            "y": 48.0,
+            "width": 19.0,
+            "height": 24.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "text_font_40",
+            "x": 388.0,
+            "y": 48.0,
+            "width": 23.0,
+            "height": 23.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

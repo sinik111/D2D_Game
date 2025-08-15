@@ -1,0 +1,47 @@
+{
+    "name": "NormalAttackOnce_S",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/NormalAttackOnce/NormalAttackOnce.png",
+    "duration": 0.6666666865348816,
+    "frames": [
+        {
+            "sprite": "NormalAttackOnce_S_033",
+            "time": 0.0
+        },
+        {
+            "sprite": "NormalAttackOnce_S_034",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "NormalAttackOnce_S_035",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "NormalAttackOnce_S_036",
+            "time": 0.25
+        },
+        {
+            "sprite": "NormalAttackOnce_S_037",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "NormalAttackOnce_S_038",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "NormalAttackOnce_S_039",
+            "time": 0.5
+        },
+        {
+            "sprite": "NormalAttackOnce_S_040",
+            "time": 0.5833333730697632
+        }
+    ],
+        "events": [
+        {
+            "name": "AttackTry1st",
+            "parameter": "",
+            "time": 0.25
+        }
+    ]
+}

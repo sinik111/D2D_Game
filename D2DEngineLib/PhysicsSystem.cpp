@@ -74,6 +74,32 @@ void PhysicsSystem::UnregisterCollider(Collider* collider)
 	}
 
 	Util::OptimizedErase(m_colliders, collider);
+
+	for (auto& pair : m_previousCollisions)
+	{
+		if (pair.second.colliderA == collider)
+		{
+			pair.second.colliderA = nullptr;
+		}
+
+		if (pair.second.colliderB == collider)
+		{
+			pair.second.colliderB = nullptr;
+		}
+	}
+
+	for (auto& pair : m_previousTriggers)
+	{
+		if (pair.second.colliderA == collider)
+		{
+			pair.second.colliderA = nullptr;
+		}
+
+		if (pair.second.colliderB == collider)
+		{
+			pair.second.colliderB = nullptr;
+		}
+	}
 }
 
 void PhysicsSystem::SetupQuadtree(const Bounds& worldBounds, int maxDepth, int maxObjectsPerNode)
@@ -112,65 +138,6 @@ void PhysicsSystem::ProcessPhysics()
 	m_currentCollisions.clear();
 	m_currentTriggers.clear();
 
-	//for (auto collider : m_rigidBodyColliders) // no quadtree
-	//{
-	//	//auto candidates = m_quadtree->GetPotentialCollisions(collider);
-
-	//	//for (auto candidate : candidates)
-	//	for (auto candidate : m_colliders)
-	//	{
-	//		if (collider == candidate)
-	//		{
-	//			continue;
-	//		}
-
-	//		bool isInteractable = (Physics::GetCollisionMask(collider->GetLayer())
-	//			& static_cast<unsigned int>(candidate->GetLayer())) != 0;
-
-	//		if (isInteractable)
-	//		{
-	//			Collider* colliderA;
-	//			Collider* colliderB;
-
-	//			CollisionInfo info;
-
-	//			if (collider < candidate)
-	//			{
-	//				colliderA = collider;
-	//				colliderB = candidate;
-
-	//				info = colliderB->DetectCollision(colliderA);
-	//			}
-	//			else
-	//			{
-	//				colliderA = candidate;
-	//				colliderB = collider;
-
-	//				info = colliderA->DetectCollision(colliderB);
-	//			}
-
-	//			if (info.isCollide)
-	//			{
-	//				colliderA->SetIsCollide(true);
-	//				colliderB->SetIsCollide(true);
-
-	//				CollisionPair pair{ colliderA, colliderB };
-
-	//				if (colliderA->GetTrigger() || colliderB->GetTrigger())
-	//				{
-	//					m_currentTriggers.emplace(pair, info);
-	//				}
-	//				else
-	//				{
-	//					m_currentCollisions.emplace(pair, info);
-
-	//					Physics::ResolveCollision(info);
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
-
 	for (auto collider : m_rigidBodyColliders)
 	{
 		auto candidates = m_quadtree->GetPotentialCollisions(collider);
@@ -190,22 +157,18 @@ void PhysicsSystem::ProcessPhysics()
 				Collider* colliderA;
 				Collider* colliderB;
 
-				CollisionInfo info;
-
 				if (collider < candidate)
 				{
 					colliderA = collider;
 					colliderB = candidate;
-
-					info = colliderB->DetectCollision(colliderA);
 				}
 				else
 				{
 					colliderA = candidate;
 					colliderB = collider;
-
-					info = colliderA->DetectCollision(colliderB);
 				}
+
+				CollisionInfo info = colliderA->DetectCollision(colliderB);
 
 				if (info.isCollide)
 				{
@@ -304,6 +267,36 @@ void PhysicsSystem::ClearCollisionPairs()
 	m_previousCollisions.clear();
 }
 
+std::vector<Collider*> PhysicsSystem::DetectCollisions(Collider* collider)
+{
+	std::vector<Collider*> detected;
+
+	auto candidates = m_quadtree->GetPotentialCollisions(collider);
+
+	for (auto candidate : candidates)
+	{
+		if (collider == candidate)
+		{
+			continue;
+		}
+
+		bool isInteractable = (Physics::GetCollisionMask(collider->GetLayer())
+			& static_cast<unsigned int>(candidate->GetLayer())) != 0;
+
+		if (isInteractable)
+		{
+			CollisionInfo info = collider->DetectCollision(candidate);
+
+			if (info.isCollide)
+			{
+				detected.push_back(candidate);
+			}
+		}
+	}
+
+	return detected;
+}
+
 void PhysicsSystem::CallCollisionEvent()
 {
 	for (const auto& pair : m_currentCollisions)
@@ -340,8 +333,8 @@ void PhysicsSystem::CallCollisionEvent()
 	{
 		if (m_currentCollisions.find(pair.first) == m_currentCollisions.end())
 		{
-			bool validA = Object::IsValid(pair.first.first);
-			bool validB = Object::IsValid(pair.first.second);
+			bool validA = pair.second.colliderA != nullptr;
+			bool validB = pair.second.colliderB != nullptr;
 
 			if (validA && validB)
 			{
@@ -353,8 +346,6 @@ void PhysicsSystem::CallCollisionEvent()
 					pair.second.contactPoint
 				};
 
-				pair.first.first->CallOnCollisionExit(collisionA);
-
 				Collision collisionB{
 					pair.second.colliderA->GetGameObject(),
 					pair.second.colliderA,
@@ -363,6 +354,7 @@ void PhysicsSystem::CallCollisionEvent()
 					pair.second.contactPoint
 				};
 
+				pair.first.first->CallOnCollisionExit(collisionA);
 				pair.first.second->CallOnCollisionExit(collisionB);
 			}
 			else if (validA)
@@ -431,8 +423,8 @@ void PhysicsSystem::CallTriggerEvent()
 	{
 		if (m_currentTriggers.find(pair.first) == m_currentTriggers.end())
 		{
-			bool validA = Object::IsValid(pair.first.first);
-			bool validB = Object::IsValid(pair.first.second);
+			bool validA = pair.second.colliderA != nullptr;
+			bool validB = pair.second.colliderB != nullptr;
 
 			if (validA && validB)
 			{
@@ -444,8 +436,6 @@ void PhysicsSystem::CallTriggerEvent()
 					pair.second.contactPoint
 				};
 
-				pair.first.first->CallOnTriggerExit(collisionA);
-
 				Collision collisionB{
 					pair.second.colliderA->GetGameObject(),
 					pair.second.colliderA,
@@ -454,6 +444,7 @@ void PhysicsSystem::CallTriggerEvent()
 					pair.second.contactPoint
 				};
 
+				pair.first.first->CallOnTriggerExit(collisionA);
 				pair.first.second->CallOnTriggerExit(collisionB);
 			}
 			else if (validA)

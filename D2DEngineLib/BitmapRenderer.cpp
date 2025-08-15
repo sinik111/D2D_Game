@@ -47,13 +47,13 @@ void BitmapRenderer::Update()
 		m_cachedRenderWorldMatrix = m_cachedRenderMatrix * worldMatrix;
 
 		const float bitmapWidth = m_sourceRect.right - m_sourceRect.left;
-		const float bitmapHeight = std::abs(m_sourceRect.bottom - m_sourceRect.top);
+		const float bitmapHeight = m_sourceRect.bottom - m_sourceRect.top;
 
 		D2D1_RECT_F localRect{
 			-bitmapWidth * m_pivot.x,
-			bitmapHeight * (1.0f - m_pivot.y),
+			bitmapHeight * m_pivot.y,
 			bitmapWidth * (1.0f - m_pivot.x),
-			-bitmapHeight * m_pivot.y
+			-bitmapHeight * (1.0f - m_pivot.y)
 		};
 
 		m_bounds = Bounds::RectToWorldBounds(localRect, worldMatrix);
@@ -62,7 +62,7 @@ void BitmapRenderer::Update()
 	}
 }
 
-void BitmapRenderer::Render(const RenderContext& context) const
+void BitmapRenderer::Render(const RenderContext& context) const // todo : renderFlag 처리 함수로 빼기
 {
 	Matrix3x2 finalMatrix;
 
@@ -78,24 +78,228 @@ void BitmapRenderer::Render(const RenderContext& context) const
 		break;
 	}
 
-	if (m_isColored)
+	D2D1_RECT_F destinationRect{
+		0.0f,
+		0.0f,
+		m_sourceRect.right - m_sourceRect.left,
+		m_sourceRect.bottom - m_sourceRect.top
+	};
+
+	D2D1_RECT_F sourceRect = m_sourceRect;
+
+	if (m_renderFlag & RenderFlag::FLOATING)
+	{
+		D2D1_RECT_F firstSourceRect = sourceRect;
+		D2D1_RECT_F secondSourceRect = sourceRect;
+		D2D1_RECT_F firstDestinationRect = destinationRect;
+		D2D1_RECT_F secondDestinationRect = destinationRect;
+
+		if (m_renderFlag & RenderFlag::FILLING)
+		{
+			switch (m_floatingDirectionType)
+			{
+			case BitmapDirectionType::LeftToRight:
+			{
+				float width = m_sourceRect.right - m_sourceRect.left;
+				float floatingWidth = width * m_floatingPosition;
+
+				firstSourceRect.left = firstSourceRect.left + floatingWidth;
+				firstDestinationRect.right = firstDestinationRect.right - floatingWidth;
+				secondSourceRect.right = secondSourceRect.right - (width - floatingWidth);
+				secondDestinationRect.left = secondDestinationRect.left + (width - floatingWidth);
+			}
+				break;
+
+			case BitmapDirectionType::RightToLeft:
+				// todo : 나머지 방향들도 구현 필요
+				break;
+
+			case BitmapDirectionType::TopToBottom:
+			{
+				float height = m_sourceRect.bottom - m_sourceRect.top;
+				float floatingHeight = height * m_floatingPosition;
+
+				firstSourceRect.top = firstSourceRect.top + floatingHeight;
+				firstDestinationRect.bottom = firstDestinationRect.bottom - floatingHeight;
+				secondSourceRect.bottom = secondSourceRect.bottom - (height - floatingHeight);
+				secondDestinationRect.top = secondDestinationRect.top + (height - floatingHeight);
+			}
+				break;
+
+			case BitmapDirectionType::BottomToTop:
+				break;
+			}
+
+			switch (m_fillDirectionType)
+			{
+			case BitmapDirectionType::LeftToRight:
+			{
+				float width = m_sourceRect.right - m_sourceRect.left;
+				float fillWidth = width * m_fillRatio;
+				float floatingWidth = width * m_floatingPosition;
+
+				if (secondDestinationRect.left <= fillWidth)
+				{
+					secondDestinationRect.right -= (width - fillWidth);
+					secondSourceRect.right -= (width - fillWidth);
+				}
+				else if (secondDestinationRect.left > fillWidth)
+				{
+					secondDestinationRect.left = 0.0f;
+					secondDestinationRect.right = 0.0f;
+					secondSourceRect.left = 0.0f;
+					secondSourceRect.right = 0.0f;
+
+					firstDestinationRect.right = fillWidth;
+					firstSourceRect.right -= ((width - floatingWidth) - fillWidth);
+				}
+			}
+				break;
+
+			case BitmapDirectionType::RightToLeft:
+				
+				break;
+
+			case BitmapDirectionType::TopToBottom:
+			{
+				float height = m_sourceRect.bottom - m_sourceRect.top;
+				float fillheight = height * m_fillRatio;
+				float floatingHeight = height * m_floatingPosition;
+
+				if (secondDestinationRect.top <= fillheight)
+				{
+					secondDestinationRect.bottom -= (height - fillheight);
+					secondSourceRect.bottom -= (height - fillheight);
+				}
+				else if (secondDestinationRect.top > fillheight)
+				{
+					secondDestinationRect.top = 0.0f;
+					secondDestinationRect.bottom = 0.0f;
+					secondSourceRect.top = 0.0f;
+					secondSourceRect.bottom = 0.0f;
+
+					firstDestinationRect.bottom = fillheight;
+					firstSourceRect.bottom -= ((height - floatingHeight) - fillheight);
+				}
+			}
+				break;
+
+			case BitmapDirectionType::BottomToTop:
+				
+				break;
+			}
+		}
+		else
+		{
+			switch (m_floatingDirectionType)
+			{
+			case BitmapDirectionType::LeftToRight:
+			{
+				float width = m_sourceRect.right - m_sourceRect.left;
+				float floatingWidth = width * m_floatingPosition;
+
+				firstSourceRect.left = firstSourceRect.left + floatingWidth;
+				firstDestinationRect.right = firstDestinationRect.right - floatingWidth;
+				secondSourceRect.right = secondSourceRect.right - (width - floatingWidth);
+				secondDestinationRect.left = secondDestinationRect.left + (width - floatingWidth);
+			}
+				break;
+
+			case BitmapDirectionType::RightToLeft:
+				break;
+
+			case BitmapDirectionType::TopToBottom:
+			{
+				float height = m_sourceRect.bottom - m_sourceRect.top;
+				float floatingHeight = height * m_floatingPosition;
+
+				firstSourceRect.top = firstSourceRect.top + floatingHeight;
+				firstDestinationRect.bottom = firstDestinationRect.bottom - floatingHeight;
+				secondSourceRect.bottom = secondSourceRect.bottom - (height - floatingHeight);
+				secondDestinationRect.top = secondDestinationRect.top + (height - floatingHeight);
+			}
+				break;
+
+			case BitmapDirectionType::BottomToTop:
+				break;
+			}
+		}
+
+		context.deviceContext->SetTransform(Matrix3x2::Identity());
+		context.deviceContext->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+		context.spriteBatch->Clear();
+
+		D2D1_RECT_U firstSourceRectU{
+			static_cast<UINT32>(firstSourceRect.left),
+			static_cast<UINT32>(firstSourceRect.top),
+			static_cast<UINT32>(firstSourceRect.right),
+			static_cast<UINT32>(firstSourceRect.bottom),
+		};
+
+		D2D1_RECT_U secondSourceRectU{
+			static_cast<UINT32>(secondSourceRect.left),
+			static_cast<UINT32>(secondSourceRect.top),
+			static_cast<UINT32>(secondSourceRect.right),
+			static_cast<UINT32>(secondSourceRect.bottom),
+		};
+
+		context.spriteBatch->AddSprites(1, &firstDestinationRect, &firstSourceRectU, &m_color, &finalMatrix);
+		context.spriteBatch->AddSprites(1, &secondDestinationRect, &secondSourceRectU, &m_color, &finalMatrix);
+		context.deviceContext->DrawSpriteBatch(
+			context.spriteBatch.Get(),
+			m_bitmapResource->GetBitmap().Get()
+		);
+
+		context.deviceContext->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
+	}
+	else if (m_renderFlag & RenderFlag::FILLING)
+	{
+		switch (m_fillDirectionType)
+		{
+		case BitmapDirectionType::LeftToRight:
+			destinationRect.right *= m_fillRatio;
+			sourceRect.right *= m_fillRatio;
+			break;
+
+		case BitmapDirectionType::RightToLeft:
+			destinationRect.left = destinationRect.right * (1.0f - m_fillRatio);
+			sourceRect.left = sourceRect.right * (1.0f - m_fillRatio);
+			break;
+
+		case BitmapDirectionType::TopToBottom:
+			destinationRect.bottom *= m_fillRatio;
+			sourceRect.bottom *= m_fillRatio;
+			break;
+
+		case BitmapDirectionType::BottomToTop:
+			destinationRect.top = destinationRect.bottom * (1.0f - m_fillRatio);
+			sourceRect.top = sourceRect.bottom * (1.0f - m_fillRatio);
+			break;
+		}
+	}
+
+	if ((m_renderFlag & (RenderFlag::COLORED | RenderFlag::FLOATING)) == 0)
+	{
+		context.deviceContext->SetTransform(finalMatrix);
+		context.deviceContext->DrawBitmap(
+			m_bitmapResource->GetBitmap().Get(),
+			&destinationRect,
+			m_opacity,
+			D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+			&sourceRect
+		);
+	}
+	else if ((m_renderFlag & RenderFlag::FLOATING) == 0)
 	{
 		context.deviceContext->SetTransform(Matrix3x2::Identity());
 		context.deviceContext->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
 		context.spriteBatch->Clear();
 
-		D2D1_RECT_F destinationRect{
-			0.0f,
-			0.0f,
-			m_sourceRect.right - m_sourceRect.left,
-			m_sourceRect.bottom - m_sourceRect.top
-		};
-
 		D2D1_RECT_U sourceRectU{
-			static_cast<UINT32>(m_sourceRect.left),
-			static_cast<UINT32>(m_sourceRect.top),
-			static_cast<UINT32>(m_sourceRect.right),
-			static_cast<UINT32>(m_sourceRect.bottom),
+			static_cast<UINT32>(sourceRect.left),
+			static_cast<UINT32>(sourceRect.top),
+			static_cast<UINT32>(sourceRect.right),
+			static_cast<UINT32>(sourceRect.bottom),
 		};
 
 		context.spriteBatch->AddSprites(1, &destinationRect, &sourceRectU, &m_color, &finalMatrix);
@@ -105,17 +309,6 @@ void BitmapRenderer::Render(const RenderContext& context) const
 		);
 
 		context.deviceContext->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
-	}
-	else
-	{
-		context.deviceContext->SetTransform(finalMatrix);
-		context.deviceContext->DrawBitmap(
-			m_bitmapResource->GetBitmap().Get(),
-			nullptr,
-			m_opacity,
-			D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
-			&m_sourceRect
-		);
 	}
 }
 
@@ -175,6 +368,20 @@ void BitmapRenderer::SetBitmap(const std::wstring& filePath)
 	m_isBitmapDirty = true;
 }
 
+void BitmapRenderer::SetBitmap(std::shared_ptr<BitmapResource> bitmapResource)
+{
+	if (m_bitmapResource == bitmapResource)
+	{
+		return;
+	}
+
+	m_bitmapResource = bitmapResource;
+
+	m_sourceRect = { 0.0f, 0.0f, m_bitmapResource->GetSize().width, m_bitmapResource->GetSize().height };
+
+	m_isBitmapDirty = true;
+}
+
 void BitmapRenderer::SetSortOrder(int sortOrder)
 {
 	m_sortOrder = sortOrder;
@@ -215,14 +422,30 @@ void BitmapRenderer::SetColor(const D2D1_COLOR_F& color)
 {
 	m_color = color;
 
-	m_isColored = true;
+	m_renderFlag |= RenderFlag::COLORED;
+}
+
+void BitmapRenderer::SetFill(BitmapDirectionType type, float ratio)
+{
+	m_fillDirectionType = type;
+	m_fillRatio = MyMath::Clamp(ratio, 0.0f, 1.0f);
+
+	m_renderFlag |= RenderFlag::FILLING;
+}
+
+void BitmapRenderer::SetFloating(BitmapDirectionType type, float position)
+{
+	m_floatingDirectionType = type;
+	m_floatingPosition = MyMath::Clamp(position, 0.0f, 1.0f);
+
+	m_renderFlag |= RenderFlag::FLOATING;
 }
 
 void BitmapRenderer::ResetColor()
 {
-	m_color = { D2D1::ColorF::White };
+	m_color = D2D1::ColorF(D2D1::ColorF::White);
 
-	m_isColored = false;
+	m_renderFlag &= ~RenderFlag::COLORED;
 }
 
 void BitmapRenderer::MakeRenderMatrix()

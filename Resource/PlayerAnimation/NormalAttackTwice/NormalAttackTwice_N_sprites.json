@@ -1,0 +1,61 @@
+{
+    "name": "PlayerAnimation/NormalAttackTwice/NormalAttackTwice_N.png",
+    "width": 2422,
+    "height": 211,
+    "sprites": [
+        {
+            "name": "NormalAttackTwice_90_008",
+            "x": 1384.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackTwice_90_009",
+            "x": 1557.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackTwice_90_010",
+            "x": 1730.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackTwice_90_011",
+            "x": 1903.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackTwice_90_012",
+            "x": 2076.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        },
+        {
+            "name": "NormalAttackTwice_90_013",
+            "x": 2249.0,
+            "y": 0.0,
+            "width": 173.0,
+            "height": 211.0,
+            "pivotX": 0.6011999845504761,
+            "pivotY": 0.7488000392913818
+        }
+    ]
+}

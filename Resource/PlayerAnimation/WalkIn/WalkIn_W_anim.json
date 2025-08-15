@@ -1,0 +1,21 @@
+{
+    "name": "WalkIn_W",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/WalkIn/WalkIn_W.png",
+    "duration": 0.25,
+    "frames": [
+        {
+            "sprite": "WalkIn_180_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "WalkIn_180_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "WalkIn_180_002",
+            "time": 0.1666666716337204
+        }
+    ],
+    "events": []
+}

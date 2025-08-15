@@ -18,6 +18,21 @@ bool Input::IsKeyReleased(int vKey)
 	return ComponentSystem::Get().PlayerInput().IsKeyReleased(vKey);
 }
 
+bool Input::IsAnyKeyHeld()
+{
+	return ComponentSystem::Get().PlayerInput().IsAnyKeyHeld();
+}
+
+bool Input::IsAnyKeyPressed()
+{
+	return ComponentSystem::Get().PlayerInput().IsAnyKeyPressed();
+}
+
+bool Input::IsAnyKeyReleased()
+{
+	return ComponentSystem::Get().PlayerInput().IsAnyKeyReleased();
+}
+
 POINT Input::GetCursorPoint()
 {
 	return ComponentSystem::Get().PlayerInput().GetCursorPoint();

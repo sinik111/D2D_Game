@@ -1,0 +1,106 @@
+{
+    "name": "SCORE&DEATH_NUMBER.png",
+    "width": 271,
+    "height": 56,
+    "sprites": [
+        {
+            "name": "SCORE&DEATH_NUMBER_0",
+            "x": 3.0,
+            "y": 4.0,
+            "width": 21.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_1",
+            "x": 35.0,
+            "y": 4.0,
+            "width": 11.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_2",
+            "x": 57.0,
+            "y": 4.0,
+            "width": 21.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_3",
+            "x": 85.0,
+            "y": 4.0,
+            "width": 21.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_4",
+            "x": 112.0,
+            "y": 4.0,
+            "width": 20.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_5",
+            "x": 139.0,
+            "y": 4.0,
+            "width": 21.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_6",
+            "x": 166.0,
+            "y": 4.0,
+            "width": 21.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_7",
+            "x": 193.0,
+            "y": 4.0,
+            "width": 18.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_8",
+            "x": 219.0,
+            "y": 4.0,
+            "width": 21.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_9",
+            "x": 247.0,
+            "y": 4.0,
+            "width": 21.0,
+            "height": 21.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "SCORE&DEATH_NUMBER_10",
+            "x": 11.0,
+            "y": 35.0,
+            "width": 6.0,
+            "height": 18.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+    "name": "PlayerEffect/Dust_SPRITE.png",
+    "width": 2400,
+    "height": 400,
+    "sprites": [
+        {
+            "name": "Dust_SPRITE_0",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 400.0,
+            "height": 400.0,
+            "pivotX": 0.5362712740898132,
+            "pivotY": 0.5072542428970337
+        },
+        {
+            "name": "Dust_SPRITE_1",
+            "x": 400.0,
+            "y": 0.0,
+            "width": 400.0,
+            "height": 400.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "Dust_SPRITE_2",
+            "x": 800.0,
+            "y": 0.0,
+            "width": 400.0,
+            "height": 400.0,
+            "pivotX": 0.5580341815948486,
+            "pivotY": 0.4963728189468384
+        },
+        {
+            "name": "Dust_SPRITE_3",
+            "x": 1200.0,
+            "y": 0.0,
+            "width": 400.0,
+            "height": 400.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "Dust_SPRITE_4",
+            "x": 1600.0,
+            "y": 0.0,
+            "width": 400.0,
+            "height": 400.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "Dust_SPRITE_5",
+            "x": 2000.0,
+            "y": 0.0,
+            "width": 400.0,
+            "height": 400.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

@@ -45,7 +45,7 @@ class BatchRenderer :
 {
 private:
 	std::shared_ptr<BitmapResource> m_bitmapResource;
-	std::shared_ptr<SpriteSheet> m_spriteSheet;
+	std::shared_ptr<SpriteSheet> m_spriteSheets;
 	std::vector<BatchUnit> m_batchUnitList;
 
 	D2D1_RECT_F m_localRect{ -50.0f, -50.0f, 50.0f, 50.0f };

@@ -1,0 +1,79 @@
+{
+    "name": "PlayerAnimation/NormalAttackOnce/NormalAttackOnce_SE.png",
+    "width": 2168,
+    "height": 238,
+    "sprites": [
+        {
+            "name": "NormalAttackOnce_315_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        },
+        {
+            "name": "NormalAttackOnce_315_001",
+            "x": 271.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        },
+        {
+            "name": "NormalAttackOnce_315_002",
+            "x": 542.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        },
+        {
+            "name": "NormalAttackOnce_315_003",
+            "x": 813.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        },
+        {
+            "name": "NormalAttackOnce_315_004",
+            "x": 1084.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        },
+        {
+            "name": "NormalAttackOnce_315_005",
+            "x": 1355.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        },
+        {
+            "name": "NormalAttackOnce_315_006",
+            "x": 1626.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        },
+        {
+            "name": "NormalAttackOnce_315_007",
+            "x": 1897.0,
+            "y": 0.0,
+            "width": 271.0,
+            "height": 238.0,
+            "pivotX": 0.3837999999523163,
+            "pivotY": 0.6345000267028809
+        }
+    ]
+}

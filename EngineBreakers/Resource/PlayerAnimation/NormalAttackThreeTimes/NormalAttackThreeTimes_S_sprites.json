@@ -1,0 +1,52 @@
+{
+    "name": "PlayerAnimation/NormalAttackThreeTimes/NormalAttackThreeTimes_S.png",
+    "width": 3097,
+    "height": 281,
+    "sprites": [
+        {
+            "name": "NormalAttackThreeTimes_270_014",
+            "x": 2282.0,
+            "y": 0.0,
+            "width": 163.0,
+            "height": 281.0,
+            "pivotX": 0.5521000027656555,
+            "pivotY": 0.5516000390052795
+        },
+        {
+            "name": "NormalAttackThreeTimes_270_015",
+            "x": 2445.0,
+            "y": 0.0,
+            "width": 163.0,
+            "height": 281.0,
+            "pivotX": 0.5521000027656555,
+            "pivotY": 0.5516000390052795
+        },
+        {
+            "name": "NormalAttackThreeTimes_270_016",
+            "x": 2608.0,
+            "y": 0.0,
+            "width": 163.0,
+            "height": 281.0,
+            "pivotX": 0.5521000027656555,
+            "pivotY": 0.5516000390052795
+        },
+        {
+            "name": "NormalAttackThreeTimes_270_017",
+            "x": 2771.0,
+            "y": 0.0,
+            "width": 163.0,
+            "height": 281.0,
+            "pivotX": 0.5521000027656555,
+            "pivotY": 0.5516000390052795
+        },
+        {
+            "name": "NormalAttackThreeTimes_270_018",
+            "x": 2934.0,
+            "y": 0.0,
+            "width": 163.0,
+            "height": 281.0,
+            "pivotX": 0.5521000027656555,
+            "pivotY": 0.5516000390052795
+        }
+    ]
+}

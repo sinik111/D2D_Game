@@ -1,0 +1,87 @@
+{
+    "name": "BossDead_SE",
+    "isLoop": false,
+    "filePath": "Boss/BossDead/BossDead.png",
+    "duration": 1.5000001192092896,
+    "frames": [
+        {
+            "sprite": "BossDead_SE_091",
+            "time": 0.0
+        },
+        {
+            "sprite": "BossDead_SE_092",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "BossDead_SE_093",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "BossDead_SE_094",
+            "time": 0.25
+        },
+        {
+            "sprite": "BossDead_SE_095",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "BossDead_SE_096",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "BossDead_SE_097",
+            "time": 0.5
+        },
+        {
+            "sprite": "BossDead_SE_098",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "BossDead_SE_099",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "BossDead_SE_100",
+            "time": 0.75
+        },
+        {
+            "sprite": "BossDead_SE_101",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "BossDead_SE_102",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "BossDead_SE_103",
+            "time": 1.0
+        },
+        {
+            "sprite": "BossDead_SE_104",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "BossDead_SE_105",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "BossDead_SE_106",
+            "time": 1.25
+        },
+        {
+            "sprite": "BossDead_SE_107",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "BossDead_SE_108",
+            "time": 1.4166667461395264
+        }
+    ],
+    "events": [
+        {
+            "name": "Dead",
+            "parameter": "",
+            "time": 0.0
+        }
+    ]
+}

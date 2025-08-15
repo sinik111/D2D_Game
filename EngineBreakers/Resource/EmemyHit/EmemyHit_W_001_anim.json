@@ -1,0 +1,105 @@
+{
+    "name": "EmemyHit_W_001",
+    "isLoop": true,
+    "filePath": "EmemyHit_W_001.png",
+    "duration": 2.0,
+    "frames": [
+        {
+            "sprite": "EmemyHit_W_001_0",
+            "time": 0.0
+        },
+        {
+            "sprite": "EmemyHit_W_001_1",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "EmemyHit_W_001_2",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "EmemyHit_W_001_3",
+            "time": 0.25
+        },
+        {
+            "sprite": "EmemyHit_W_001_4",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "EmemyHit_W_001_5",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "EmemyHit_W_001_6",
+            "time": 0.5
+        },
+        {
+            "sprite": "EmemyHit_W_001_7",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "EmemyHit_W_001_8",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "EmemyHit_W_001_9",
+            "time": 0.75
+        },
+        {
+            "sprite": "EmemyHit_W_001_10",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "EmemyHit_W_001_11",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "EmemyHit_W_001_12",
+            "time": 1.0
+        },
+        {
+            "sprite": "EmemyHit_W_001_13",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "EmemyHit_W_001_14",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "EmemyHit_W_001_15",
+            "time": 1.25
+        },
+        {
+            "sprite": "EmemyHit_W_001_16",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "EmemyHit_W_001_17",
+            "time": 1.4166667461395264
+        },
+        {
+            "sprite": "EmemyHit_W_001_18",
+            "time": 1.5
+        },
+        {
+            "sprite": "EmemyHit_W_001_19",
+            "time": 1.5833333730697632
+        },
+        {
+            "sprite": "EmemyHit_W_001_20",
+            "time": 1.6666667461395264
+        },
+        {
+            "sprite": "EmemyHit_W_001_21",
+            "time": 1.75
+        },
+        {
+            "sprite": "EmemyHit_W_001_22",
+            "time": 1.8333333730697632
+        },
+        {
+            "sprite": "EmemyHit_W_001_23",
+            "time": 1.9166667461395264
+        }
+    ],
+    "events": []
+}

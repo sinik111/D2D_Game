@@ -1,0 +1,13 @@
+{
+    "name": "EnemyBase_IDLE_UP",
+    "isLoop": false,
+    "filePath": "EnemyBase_IDLE.png",
+    "duration": 0.0833333358168602,
+    "frames": [
+        {
+            "sprite": "EnemyBase_IDLE_UP_0",
+            "time": 0.0
+        }
+    ],
+    "events": []
+}

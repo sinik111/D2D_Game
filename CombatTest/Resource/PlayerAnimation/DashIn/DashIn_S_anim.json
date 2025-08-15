@@ -1,0 +1,21 @@
+{
+    "name": "DashIn_S",
+    "isLoop": false,
+    "filePath": "PlayerAnimation/DashIn/DashIn_S.png",
+    "duration": 0.25,
+    "frames": [
+        {
+            "sprite": "DashIn_270_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "DashIn_270_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "DashIn_270_002",
+            "time": 0.1666666716337204
+        }
+    ],
+    "events": []
+}

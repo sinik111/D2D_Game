@@ -1,0 +1,79 @@
+{
+    "name": "EnemyBase_IDLE.png",
+    "width": 1915,
+    "height": 2048,
+    "sprites": [
+        {
+            "name": "EnemyBase_IDLE_UP_0",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 123.0,
+            "height": 257.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "EnemyBase_IDLE_RIGHT_UP_1",
+            "x": 0.0,
+            "y": 282.0,
+            "width": 194.0,
+            "height": 233.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "EnemyBase_IDLE_RIGHT_2",
+            "x": 0.0,
+            "y": 540.0,
+            "width": 253.0,
+            "height": 217.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "EnemyBase_IDLE_RIGHT_DOWN_3",
+            "x": 0.0,
+            "y": 788.0,
+            "width": 198.0,
+            "height": 251.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "EnemyBase_IDLE_DOWN_4",
+            "x": 0.0,
+            "y": 1036.0,
+            "width": 123.0,
+            "height": 234.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "EnemyBase_IDLE_LEFT_DOWN_5",
+            "x": 0.0,
+            "y": 1296.0,
+            "width": 203.0,
+            "height": 227.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "EnemyBase_IDLE_LEFT_6",
+            "x": 0.0,
+            "y": 1549.0,
+            "width": 253.0,
+            "height": 200.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        },
+        {
+            "name": "EnemyBase_IDLE_LEFT_UP_7",
+            "x": 0.0,
+            "y": 1781.0,
+            "width": 180.0,
+            "height": 228.0,
+            "pivotX": 0.5,
+            "pivotY": 0.5
+        }
+    ]
+}

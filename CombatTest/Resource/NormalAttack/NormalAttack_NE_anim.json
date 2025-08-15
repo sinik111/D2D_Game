@@ -1,0 +1,49 @@
+{
+    "name": "NormalAttack_NE",
+    "isLoop": false,
+    "filePath": "NormalAttack_NE.png",
+    "duration": 0.8333333134651184,
+    "frames": [
+        {
+            "sprite": "NormalAttack_45_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "NormalAttack_45_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "NormalAttack_45_002",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "NormalAttack_45_003",
+            "time": 0.25
+        },
+        {
+            "sprite": "NormalAttack_45_004",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "NormalAttack_45_005",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "NormalAttack_45_006",
+            "time": 0.5
+        },
+        {
+            "sprite": "NormalAttack_45_007",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "NormalAttack_45_008",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "NormalAttack_45_009",
+            "time": 0.75
+        }
+    ],
+    "events": []
+}

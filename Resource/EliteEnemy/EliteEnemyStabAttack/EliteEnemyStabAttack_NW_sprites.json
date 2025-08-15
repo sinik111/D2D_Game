@@ -1,0 +1,115 @@
+{
+    "name": "EliteEnemy/EliteEnemyStabAttack/EliteEnemyStabAttack_NW.png",
+    "width": 2964,
+    "height": 213,
+    "sprites": [
+        {
+            "name": "EliteEnemyStabAttack_135_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_001",
+            "x": 247.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_002",
+            "x": 494.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_003",
+            "x": 741.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_004",
+            "x": 988.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_005",
+            "x": 1235.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_006",
+            "x": 1482.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_007",
+            "x": 1729.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_008",
+            "x": 1976.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_009",
+            "x": 2223.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_010",
+            "x": 2470.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        },
+        {
+            "name": "EliteEnemyStabAttack_135_011",
+            "x": 2717.0,
+            "y": 0.0,
+            "width": 247.0,
+            "height": 213.0,
+            "pivotX": 0.5547000169754028,
+            "pivotY": 0.7745999693870544
+        }
+    ]
+}

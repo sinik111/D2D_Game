@@ -13,7 +13,10 @@ private:
 	std::bitset<256> m_currentKeyState;
 	std::bitset<256> m_previousKeyState;
 	POINT m_mousePoint{};
+	bool m_currentAnyKeyState = false;
+	bool m_previousAnyKeyState = false;
 
+	bool m_IsStopped = false;
 public:
 	void Register(PlayerInput* playerInput);
 	void Unregister(PlayerInput* playerInput);
@@ -24,14 +27,13 @@ public:
 	// 매 루프마다 호출 필요
 	void Update();
 
-	// 키가 눌려진 상태인지 확인
 	bool IsKeyHeld(int vkey) const;
-
-	// 이번 루프에 키가 눌려졌는지 확인
 	bool IsKeyPressed(int vkey) const;
-
-	// 이번 루프에 키가 놓아졌는지 확인
 	bool IsKeyReleased(int vkey) const;
+
+	bool IsAnyKeyHeld() const;
+	bool IsAnyKeyPressed() const;
+	bool IsAnyKeyReleased() const;
 
 	POINT GetCursorPoint() const;
 
@@ -41,4 +43,8 @@ public:
 private:
 	void ProcessArrowInput() const;
 	void ProcessWASDInput() const;
+
+public:
+	void SetIsStopped(bool value);
+	bool GetIsStopped() const;
 };

@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "BoxCollider2D.h"
-
+#include <d2d1.h>
 #include "Transform.h"
 #include "D2DRenderer.h"
 #include "RigidBody2D.h"
@@ -47,8 +47,6 @@ void BoxCollider2D::UpdateCollider()
 	else
 	{
 		m_box.center = m_transform->GetWorldPosition() + m_offset;
-
-		m_isColliderDirty = false;
 	}
 }
 

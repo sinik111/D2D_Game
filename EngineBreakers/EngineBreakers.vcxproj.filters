@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00_App">
+      <UniqueIdentifier>{21925482-64d4-4429-816d-94bd490f7f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene">
+      <UniqueIdentifier>{e31c4899-c9f0-47f4-b03a-a33ebc56727b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script">
+      <UniqueIdentifier>{eb48e6d9-dd26-42e5-a9e6-2d13feafabcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_Manager">
+      <UniqueIdentifier>{66ad3ac6-4945-4453-9918-4a32a43f1c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\Main">
+      <UniqueIdentifier>{0af775b6-f649-4682-89b7-34f4f02911bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\RecordScore">
+      <UniqueIdentifier>{f2e7d19a-53b6-49ac-a693-ee98e6e2b006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI">
+      <UniqueIdentifier>{2030d4d2-a2e6-4ac5-b1da-afe65b68468d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\Guide">
+      <UniqueIdentifier>{e44d86b2-21dd-4b47-b750-89662eeba211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\MainMenu">
+      <UniqueIdentifier>{8391b583-39b5-4666-9393-bfc65722457c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\MainTitle">
+      <UniqueIdentifier>{9e2be98c-6da7-4747-bb15-51e5a98eb198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\Ranking">
+      <UniqueIdentifier>{c1d47785-e5c7-42b2-8d64-b4d9e9df12f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04_Utility">
+      <UniqueIdentifier>{c0687644-2c09-494f-9da9-710a96683553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\Setting">
+      <UniqueIdentifier>{7c09f7dd-48a6-4287-8f7f-e355dbf1d70a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Shared">
+      <UniqueIdentifier>{2772fba5-cf7e-48cc-bc41-f3e0606af947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\ResultUI">
+      <UniqueIdentifier>{3db3b77f-3434-40e7-8920-bdb9f880c0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\InGameUI">
+      <UniqueIdentifier>{5d06b9fe-fc86-460f-a8ec-24d1277dbbb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Map">
+      <UniqueIdentifier>{95dc9b16-d002-457f-8505-1b26130ae9d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Scene\InGame">
+      <UniqueIdentifier>{ba64faf2-537b-49b9-897a-e3d584fdce8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Player">
+      <UniqueIdentifier>{8e14fe10-c8b2-48e8-86ec-24d7245cf415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Player\PlayerState">
+      <UniqueIdentifier>{f3ca2f95-9e73-49d1-bdc8-3018e5eb3ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\CombatUtil">
+      <UniqueIdentifier>{6a50a04c-b356-4efe-b9a0-21cf55a0783d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\CombatUtil\ImageDrawer">
+      <UniqueIdentifier>{997cb6c6-c536-41fc-af87-5a93ec384a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Enemy">
+      <UniqueIdentifier>{d32ca409-38c0-4b17-8186-15de8eae0c8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Enemy\EnemyState">
+      <UniqueIdentifier>{24af08a8-cb4e-4e7d-bd35-1e27aca5b0cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\InGameUI\Play">
+      <UniqueIdentifier>{c81221a3-7c95-42ad-84e0-3b274747e237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\InGameUI\Pause">
+      <UniqueIdentifier>{7e4f1d29-f27f-4a45-a520-91f034037f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\Player\Effect">
+      <UniqueIdentifier>{02d42288-334e-43d3-a3e6-bbc29cde2dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\InGameUI\Gameover">
+      <UniqueIdentifier>{b74816f5-fb86-49c6-b161-04c7663ef139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Script\MainUI\Credit">
+      <UniqueIdentifier>{cf305bc7-926b-42d7-9d8f-f8b8da24d9cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBreakers.cpp">
+      <Filter>00_App</Filter>
+    </ClCompile>
+    <ClCompile Include="Guide.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTitle.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Ranking.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Setting.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordScore.cpp">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultRanking.cpp">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClCompile>
+    <ClCompile Include="GuideSceneController.cpp">
+      <Filter>02_Script\MainUI\Guide</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuSceneController.cpp">
+      <Filter>02_Script\MainUI\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTitleSceneChanger.cpp">
+      <Filter>02_Script\MainUI\MainTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="RankingViewer.cpp">
+      <Filter>02_Script\MainUI\Ranking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameDataManager.cpp">
+      <Filter>03_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="BGMVolumeController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuSettingController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterVolumeController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="SFXVolumeController.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeControllerBase.cpp">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenCurtainController.cpp">
+      <Filter>02_Script\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordNameInputController.cpp">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultScoreViewer.cpp">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultRankingViewer.cpp">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClCompile>
+    <ClCompile Include="StaminaGaugeController.cpp">
+      <Filter>02_Script\InGameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthGaugeController.cpp">
+      <Filter>02_Script\InGameUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Maps.cpp">
+      <Filter>02_Script\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Structure.cpp">
+      <Filter>02_Script\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlayScene.cpp">
+      <Filter>01_Scene\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDashState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDeadState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEvadeState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGrabAttackState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHeavyAttackState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHeavyAttackTwiceState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockbackState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockdownState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNormalAttackOnceState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNormalAttackThreeTimesState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNormalAttackTwiceState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStateBase.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWalkState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02_Script\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHeavyAttack.cpp">
+      <Filter>02_Script\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNormalAttack.cpp">
+      <Filter>02_Script\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="HitStopController.cpp">
+      <Filter>02_Script\CombatUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCameraController.cpp">
+      <Filter>02_Script\CombatUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCameraController.cpp">
+      <Filter>02_Script\CombatUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageDrawer.cpp">
+      <Filter>02_Script\CombatUtil\ImageDrawer</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDead.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEngage.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEvadeAndRun.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGrabbed.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHitAndRun.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInArea.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyKnockdown.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnAttack.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnAttackSecond.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnAttackThird.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOnEvade.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyOutOfArea.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyReturn.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySlowTurn.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyState.cpp">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBase.cpp">
+      <Filter>02_Script\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyZako.cpp">
+      <Filter>02_Script\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInteract.cpp">
+      <Filter>02_Script\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBaseAttack.cpp">
+      <Filter>02_Script\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerKnockdownCheck.cpp">
+      <Filter>02_Script\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordScorePopup.cpp">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthGaugeController.cpp">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="IngameGaugeController.cpp">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameUIInfoController.cpp">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="StaminaGaugeController.cpp">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseController.cpp">
+      <Filter>02_Script\InGameUI\Pause</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyElite.cpp" />
+    <ClCompile Include="EventChecker.cpp">
+      <Filter>02_Script\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyElite.cpp">
+      <Filter>02_Script\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBoss.cpp">
+      <Filter>02_Script\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDashDustEffect.cpp">
+      <Filter>02_Script\Player\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpDownState.cpp">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyCreater.cpp">
+      <Filter>02_Script\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverController.cpp">
+      <Filter>02_Script\InGameUI\Gameover</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackExplosionEffect.cpp">
+      <Filter>02_Script\Player\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit.cpp">
+      <Filter>01_Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditSceneController.cpp">
+      <Filter>02_Script\MainUI\Credit</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EngineBreakers.h">
+      <Filter>00_App</Filter>
+    </ClInclude>
+    <ClInclude Include="Guide.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTitle.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Ranking.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordScore.h">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultRanking.h">
+      <Filter>01_Scene\RecordScore</Filter>
+    </ClInclude>
+    <ClInclude Include="GuideSceneController.h">
+      <Filter>02_Script\MainUI\Guide</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuSceneController.h">
+      <Filter>02_Script\MainUI\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTitleSceneChanger.h">
+      <Filter>02_Script\MainUI\MainTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="RankingViewer.h">
+      <Filter>02_Script\MainUI\Ranking</Filter>
+    </ClInclude>
+    <ClInclude Include="RankingUtility.h">
+      <Filter>04_Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDataManager.h">
+      <Filter>03_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BGMVolumeController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuSettingController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterVolumeController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="SFXVolumeController.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="VolumeControllerBase.h">
+      <Filter>02_Script\MainUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenCurtainController.h">
+      <Filter>02_Script\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordNameInputController.h">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultScoreViewer.h">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultRankingViewer.h">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClInclude>
+    <ClInclude Include="StaminaGaugeController.h">
+      <Filter>02_Script\InGameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthGaugeController.h">
+      <Filter>02_Script\InGameUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps.h">
+      <Filter>02_Script\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Structure.h">
+      <Filter>02_Script\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlayScene.h">
+      <Filter>01_Scene\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDashState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDeadState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEvadeState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGrabAttackState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHeavyAttackState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHeavyAttackTwiceState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockbackState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockdownState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttackOnceState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttackThreeTimesState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttackTwiceState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateBase.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWalkState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02_Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHeavyAttack.h">
+      <Filter>02_Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNormalAttack.h">
+      <Filter>02_Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="HitStopController.h">
+      <Filter>02_Script\CombatUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCameraController.h">
+      <Filter>02_Script\CombatUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackStateEnum.h">
+      <Filter>02_Script\CombatUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCameraController.h">
+      <Filter>02_Script\CombatUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageDrawer.h">
+      <Filter>02_Script\CombatUtil\ImageDrawer</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDead.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEngage.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEvadeAndRun.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGrabbed.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHitAndRun.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInArea.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyKnockdown.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnAttack.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnAttackSecond.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnAttackThird.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOnEvade.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyOutOfArea.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyReturn.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySlowTurn.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyState.h">
+      <Filter>02_Script\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBase.h">
+      <Filter>02_Script\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyZako.h">
+      <Filter>02_Script\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInteract.h">
+      <Filter>02_Script\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBaseAttack.h">
+      <Filter>02_Script\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerKnockdownCheck.h">
+      <Filter>02_Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordScorePopup.h">
+      <Filter>02_Script\ResultUI</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthGaugeController.h">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="IngameGaugeController.h">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameUIInfoController.h">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="StaminaGaugeController.h">
+      <Filter>02_Script\InGameUI\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseController.h">
+      <Filter>02_Script\InGameUI\Pause</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyElite.h" />
+    <ClInclude Include="EventChecker.h">
+      <Filter>02_Script\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyElite.h">
+      <Filter>02_Script\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBoss.h">
+      <Filter>02_Script\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDashDustEffect.h">
+      <Filter>02_Script\Player\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpDownState.h">
+      <Filter>02_Script\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyCreater.h">
+      <Filter>02_Script\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverController.h">
+      <Filter>02_Script\InGameUI\Gameover</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackExplosionEffect.h">
+      <Filter>02_Script\Player\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit.h">
+      <Filter>01_Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditSceneController.h">
+      <Filter>02_Script\MainUI\Credit</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

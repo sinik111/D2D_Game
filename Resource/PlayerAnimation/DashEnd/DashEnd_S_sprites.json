@@ -1,0 +1,25 @@
+{
+    "name": "PlayerAnimation/DashEnd/DashEnd_S.png",
+    "width": 270,
+    "height": 228,
+    "sprites": [
+        {
+            "name": "DashEnd_270_000",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 135.0,
+            "height": 228.0,
+            "pivotX": 0.6370000243186951,
+            "pivotY": 0.6403999924659729
+        },
+        {
+            "name": "DashEnd_270_001",
+            "x": 135.0,
+            "y": 0.0,
+            "width": 135.0,
+            "height": 228.0,
+            "pivotX": 0.6370000243186951,
+            "pivotY": 0.6403999924659729
+        }
+    ]
+}

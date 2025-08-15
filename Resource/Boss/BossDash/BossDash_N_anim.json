@@ -1,0 +1,65 @@
+{
+    "name": "BossDash_N",
+    "isLoop": false,
+    "filePath": "Boss/BossDash/BossDash.png",
+    "duration": 1.1666667461395264,
+    "frames": [
+        {
+            "sprite": "BossDash_N_015",
+            "time": 0.0
+        },
+        {
+            "sprite": "BossDash_N_016",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "BossDash_N_017",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "BossDash_N_018",
+            "time": 0.25
+        },
+        {
+            "sprite": "BossDash_N_019",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "BossDash_N_020",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "BossDash_N_021",
+            "time": 0.5
+        },
+        {
+            "sprite": "BossDash_N_022",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "BossDash_N_023",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "BossDash_N_024",
+            "time": 0.75
+        },
+        {
+            "sprite": "BossDash_N_025",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "BossDash_N_026",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "BossDash_N_027",
+            "time": 1.0
+        },
+        {
+            "sprite": "BossDash_N_028",
+            "time": 1.0833333730697632
+        }
+    ],
+    "events": []
+}

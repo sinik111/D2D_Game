@@ -1,0 +1,105 @@
+{
+    "name": "EliteEnemyKnockDown_SE",
+    "isLoop": false,
+    "filePath": "EliteEnemy/EliteEnemyKnockDown/EliteEnemyKnockDown_SE.png",
+    "duration": 2.0,
+    "frames": [
+        {
+            "sprite": "EliteEnemyKnockDown_315_000",
+            "time": 0.0
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_001",
+            "time": 0.0833333358168602
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_002",
+            "time": 0.1666666716337204
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_003",
+            "time": 0.25
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_004",
+            "time": 0.3333333432674408
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_005",
+            "time": 0.4166666865348816
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_006",
+            "time": 0.5
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_007",
+            "time": 0.5833333730697632
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_008",
+            "time": 0.6666666865348816
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_009",
+            "time": 0.75
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_010",
+            "time": 0.8333333730697632
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_011",
+            "time": 0.9166666865348816
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_012",
+            "time": 1.0
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_013",
+            "time": 1.0833333730697632
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_014",
+            "time": 1.1666667461395264
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_015",
+            "time": 1.25
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_016",
+            "time": 1.3333333730697632
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_017",
+            "time": 1.4166667461395264
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_018",
+            "time": 1.5
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_019",
+            "time": 1.5833333730697632
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_020",
+            "time": 1.6666667461395264
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_021",
+            "time": 1.75
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_022",
+            "time": 1.8333333730697632
+        },
+        {
+            "sprite": "EliteEnemyKnockDown_315_023",
+            "time": 1.9166667461395264
+        }
+    ],
+    "events": []
+}
