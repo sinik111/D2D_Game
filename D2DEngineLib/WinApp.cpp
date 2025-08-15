@@ -165,6 +165,8 @@ void WinApp::Update()
 
 	ComponentSystem::Get().Particle().Update();
 
+	SoundManager::Get().Update();
+
 	ComponentSystem::Get().Script().CallLateUpdate();
 
 	ImGuiSystem::Get().BeginDrawImGui();
